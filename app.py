@@ -1,0 +1,470 @@
+import streamlit as st
+
+# Configurazione della pagina
+st.set_page_config(
+    page_title="LUMIA Studio - BDI Framework",
+    page_icon="✨",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Inizializza il session state per il tema
+if 'dark_mode' not in st.session_state:
+    st.session_state.dark_mode = False
+
+# Toggle button per il tema
+col_theme1, col_theme2, col_theme3 = st.columns([6, 1, 1])
+with col_theme3:
+    theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
+    theme_text = "Dark" if not st.session_state.dark_mode else "Light"
+    if st.button(f"{theme_icon} {theme_text}", key="theme_toggle", use_container_width=True):
+        st.session_state.dark_mode = not st.session_state.dark_mode
+        st.rerun()
+
+# Genera CSS dinamico in base al tema
+theme_colors = {
+    'light': {
+        'bg_gradient': 'linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe)',
+        'container_bg': 'rgba(255, 255, 255, 0.95)',
+        'text_primary': '#333',
+        'text_secondary': '#666',
+        'text_tertiary': '#888',
+        'card_bg': 'white',
+        'workflow_bg': 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        'workflow_step_bg': 'white',
+        'workflow_text': '#555',
+        'border_color': '#eee',
+        'shadow': 'rgba(0,0,0,0.1)',
+        'shadow_hover': 'rgba(102, 126, 234, 0.4)',
+        'footer_border': '#eee',
+        'footer_text': '#888',
+    },
+    'dark': {
+        'bg_gradient': 'linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483)',
+        'container_bg': 'rgba(26, 26, 46, 0.95)',
+        'text_primary': '#e0e0e0',
+        'text_secondary': '#b0b0b0',
+        'text_tertiary': '#888',
+        'card_bg': '#1e1e2e',
+        'workflow_bg': 'linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%)',
+        'workflow_step_bg': '#2a2a3e',
+        'workflow_text': '#b0b0b0',
+        'border_color': '#333',
+        'shadow': 'rgba(0,0,0,0.5)',
+        'shadow_hover': 'rgba(102, 126, 234, 0.6)',
+        'footer_border': '#333',
+        'footer_text': '#666',
+    }
+}
+
+current_theme = 'dark' if st.session_state.dark_mode else 'light'
+colors = theme_colors[current_theme]
+
+# CSS personalizzato avanzato
+st.markdown(f"""
+<style>
+    /* Importa font Google */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    /* Reset e font base */
+    * {{
+        font-family: 'Poppins', sans-serif;
+    }}
+
+    /* Nascondi elementi Streamlit non necessari */
+    #MainMenu {{visibility: hidden;}}
+    footer {{visibility: hidden;}}
+    header {{visibility: hidden;}}
+
+    /* Background gradiente animato */
+    .main {{
+        background: {colors['bg_gradient']};
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        transition: background 0.5s ease;
+    }}
+
+    @keyframes gradientBG {{
+        0% {{ background-position: 0% 50%; }}
+        50% {{ background-position: 100% 50%; }}
+        100% {{ background-position: 0% 50%; }}
+    }}
+
+    /* Container principale */
+    .block-container {{
+        background: {colors['container_bg']};
+        border-radius: 30px;
+        padding: 3rem 2rem !important;
+        box-shadow: 0 20px 60px {colors['shadow']};
+        backdrop-filter: blur(10px);
+        transition: all 0.5s ease;
+    }}
+
+    /* Header con animazione */
+    .main-header {{
+        text-align: center;
+        margin-bottom: 3rem;
+        animation: fadeInDown 1s ease;
+    }}
+
+    @keyframes fadeInDown {{
+        from {{
+            opacity: 0;
+            transform: translateY(-30px);
+        }}
+        to {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+    }}
+
+    .main-title {{
+        font-size: 4rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+    }}
+
+    .main-subtitle {{
+        font-size: 1.3rem;
+        color: {colors['text_secondary']};
+        font-weight: 300;
+        margin-bottom: 1rem;
+    }}
+
+    .main-description {{
+        font-size: 1rem;
+        color: {colors['text_tertiary']};
+        max-width: 600px;
+        margin: 0 auto 2rem auto;
+        line-height: 1.6;
+    }}
+
+    /* Sezione workflow */
+    .workflow-section {{
+        background: {colors['workflow_bg']};
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+    }}
+
+    .workflow-title {{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: {colors['text_primary']};
+        margin-bottom: 1rem;
+    }}
+
+    .workflow-steps {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }}
+
+    .workflow-step {{
+        background: {colors['workflow_step_bg']};
+        border-radius: 15px;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 4px 6px {colors['shadow']};
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: {colors['workflow_text']};
+        transition: all 0.3s ease;
+    }}
+
+    .workflow-step:hover {{
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px {colors['shadow']};
+    }}
+
+    .workflow-arrow {{
+        font-size: 1.5rem;
+        color: #667eea;
+    }}
+
+    /* Cards per le features - MIGLIORATO ALLINEAMENTO */
+    .feature-card {{
+        background: {colors['card_bg']};
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px {colors['shadow']};
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+        height: 100%;
+        min-height: 320px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }}
+
+    .feature-card::before {{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }}
+
+    .feature-card:hover::before {{
+        opacity: 0.1;
+    }}
+
+    .feature-card:hover {{
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px {colors['shadow_hover']};
+        border-color: #667eea;
+    }}
+
+    /* EMOJI SENZA ANIMAZIONI */
+    .feature-emoji {{
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        display: block;
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease;
+    }}
+
+    .feature-card:hover .feature-emoji {{
+        transform: scale(1.1);
+    }}
+
+    .feature-title {{
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: {colors['text_primary']};
+        margin-bottom: 0.8rem;
+        position: relative;
+        z-index: 1;
+    }}
+
+    .feature-description {{
+        font-size: 0.95rem;
+        color: {colors['text_secondary']};
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+    }}
+
+    .feature-status {{
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        position: relative;
+        z-index: 1;
+    }}
+
+    .status-active {{
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+    }}
+
+    .status-dev {{
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }}
+
+    /* Footer */
+    .custom-footer {{
+        text-align: center;
+        padding: 2rem 0 1rem 0;
+        color: {colors['footer_text']};
+        font-size: 0.9rem;
+        border-top: 1px solid {colors['footer_border']};
+        margin-top: 3rem;
+    }}
+
+    /* Stats badges */
+    .stats-container {{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+    }}
+
+    .stat-badge {{
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        text-align: center;
+        min-width: 150px;
+    }}
+
+    .stat-number {{
+        font-size: 2rem;
+        font-weight: 700;
+        display: block;
+    }}
+
+    .stat-label {{
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }}
+
+    /* Responsive */
+    @media (max-width: 768px) {{
+        .main-title {{ font-size: 2.5rem; }}
+        .main-subtitle {{ font-size: 1rem; }}
+        .feature-card {{ padding: 1.5rem; min-height: 280px; }}
+        .workflow-steps {{ flex-direction: column; }}
+    }}
+</style>
+""", unsafe_allow_html=True)
+
+# Header principale con animazione
+st.markdown(f"""
+<div class='main-header'>
+    <div class='main-title'>🧠 BDI Framework</div>
+    <div class='main-subtitle'>Belief · Desire · Intention System</div>
+    <div class='main-description'>
+        Trasforma la conoscenza in azione. Un framework intelligente per definire obiettivi,
+        identificare credenze e pianificare azioni attraverso agenti AI conversazionali.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Stats badges
+st.markdown("""
+<div class='stats-container'>
+    <div class='stat-badge'>
+        <span class='stat-number'>3</span>
+        <span class='stat-label'>Agenti AI</span>
+    </div>
+    <div class='stat-badge'>
+        <span class='stat-number'>5</span>
+        <span class='stat-label'>Moduli</span>
+    </div>
+    <div class='stat-badge'>
+        <span class='stat-number'>∞</span>
+        <span class='stat-label'>Possibilità</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Workflow section
+st.markdown("""
+<div class='workflow-section'>
+    <div class='workflow-title'>🚀 Workflow Consigliato</div>
+    <div class='workflow-steps'>
+        <div class='workflow-step'>📚 <strong>1. Contextual</strong> - Carica documenti</div>
+        <div class='workflow-arrow'>→</div>
+        <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Definisci Desire</div>
+        <div class='workflow-arrow'>→</div>
+        <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identifica Belief</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Definizione delle funzionalità
+features = [
+    {
+        "name": "Contextual",
+        "emoji": "📚",
+        "description": "Carica e gestisci documenti PDF, pagine web, file di testo o markdown per costruire una base di conoscenza ricca e strutturata con tecniche RAG avanzate.",
+        "page": "pages/1_Contextual.py",
+        "status": "active",
+    },
+    {
+        "name": "Alì",
+        "emoji": "🎯",
+        "description": "Conversa con Alì, l'agente AI specializzato nell'aiutarti a identificare e definire i tuoi Desire (obiettivi) in modo chiaro e strutturato.",
+        "page": "pages/2_Ali.py",
+        "status": "active",
+    },
+    {
+        "name": "Believer",
+        "emoji": "💡",
+        "description": "Believer ti guida nell'identificazione dei Belief (credenze, fatti, principi) che supportano i tuoi Desire, collegandoli alla tua base di conoscenza.",
+        "page": "pages/3_Believer.py",
+        "status": "active",
+    },
+    {
+        "name": "Cuma",
+        "emoji": "🔮",
+        "description": "Modulo avanzato per analisi predittiva e scenario planning. Utilizza i tuoi Belief e Desire per simulare possibili outcome futuri.",
+        "page": "pages/4_Cuma.py",
+        "status": "dev",
+    },
+    {
+        "name": "Genius",
+        "emoji": "⚡",
+        "description": "Sistema intelligente di ottimizzazione che analizza il tuo framework BDI completo e suggerisce miglioramenti e strategie innovative.",
+        "page": "pages/5_Genius.py",
+        "status": "dev",
+    }
+]
+
+# Sezione moduli
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='text-align: center; color: {colors['text_primary']}; font-weight: 600; margin-bottom: 2rem;'>🎨 Esplora i Moduli</h2>", unsafe_allow_html=True)
+
+# Creazione delle feature cards con HTML personalizzato - 3 per riga
+for idx in range(0, len(features), 3):
+    cols = st.columns(3)
+    for col_idx, col in enumerate(cols):
+        if idx + col_idx < len(features):
+            feature = features[idx + col_idx]
+            with col:
+                # Card HTML personalizzata
+                status_class = "status-active" if feature["status"] == "active" else "status-dev"
+                status_text = "✓ Attivo" if feature["status"] == "active" else "🚧 In Sviluppo"
+
+                card_html = f"""
+                <div class='feature-card'>
+                    <div>
+                        <span class='feature-emoji'>{feature['emoji']}</span>
+                        <div class='feature-title'>{feature['name']}</div>
+                        <div class='feature-description'>{feature['description']}</div>
+                    </div>
+                    <span class='feature-status {status_class}'>{status_text}</span>
+                </div>
+                """
+                st.markdown(card_html, unsafe_allow_html=True)
+
+                # Bottone per la navigazione
+                if st.button(
+                    f"Apri {feature['name']}",
+                    key=f"btn_{feature['name']}",
+                    use_container_width=True,
+                    type="primary"
+                ):
+                    st.switch_page(feature['page'])
+
+                st.markdown("<br>", unsafe_allow_html=True)
+
+# Footer
+st.markdown(f"""
+<div class='custom-footer'>
+    <p style='color: {colors['text_primary']};'><strong>🧠 BDI Framework</strong> - Belief · Desire · Intention System</p>
+    <p style='font-size: 0.85rem; color: {colors['text_tertiary']}; margin-top: 0.5rem;'>
+        Powered by AI • Streamlit • ChromaDB • LangChain
+    </p>
+    <p style='font-size: 0.8rem; color: {colors['text_tertiary']}; margin-top: 0.5rem;'>
+        Versione 1.0 • Tema: {theme_text}
+    </p>
+</div>
+""", unsafe_allow_html=True)
