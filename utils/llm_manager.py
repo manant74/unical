@@ -13,19 +13,27 @@ class LLMManager:
 
     MODELS = {
         "Gemini": {
-            "gemini-1.5-pro": "Gemini 1.5 Pro",
-            "gemini-1.5-flash": "Gemini 1.5 Flash",
-            "gemini-pro": "Gemini Pro"
+            "gemini-2.5-flash-lite": "Gemini 2.5 Flash Lite",
+            "gemini-2.5-flash": "Gemini 2.5 Flash",
+            "gemini-2.5-pro": "Gemini 2.5 Pro"
         },
         "Claude": {
-            "claude-3-5-sonnet-20241022": "Claude 3.5 Sonnet",
-            "claude-3-opus-20240229": "Claude 3 Opus",
-            "claude-3-haiku-20240307": "Claude 3 Haiku"
-        },
+            "claude-3.7-sonnet": "Claude 3.7 Sonnet",
+            "claude-4-sonnet": "Claude 4 Sonnet",
+            "claude-4-opus": "Claude 4 Opus",
+             "claude-4.5-sonnet": "Claude 4.5 Sonnet"
+       },
         "OpenAI": {
-            "gpt-4-turbo-preview": "GPT-4 Turbo",
-            "gpt-4": "GPT-4",
-            "gpt-3.5-turbo": "GPT-3.5 Turbo"
+            "gpt-4o": "GPT-4o",
+            "gpt-4o-mini": "GPT-4o Mini",
+            "gpt-4.1": "GPT-4.1",
+            "gpt-4-turbo": "GPT-4 Turbo",
+            "gpt-5": "GPT-5",
+            "gpt-5-nano": "GPT-5 Nano",
+            "gpt-5-mini": "GPT-5 Mini",
+            "o1-mini": "o1 Mini",
+            "o1-pro": "o1 Pro",
+            "03-mini": "03 Mini"
         }
     }
 
