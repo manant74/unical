@@ -1,6 +1,6 @@
-# 🚀 Nuove Funzionalità e Miglioramenti - BDI Framework
+# 🚀 Nuove Funzionalità e Miglioramenti - LUMIA Studio
 
-Questo documento traccia le funzionalità proposte per migliorare l'applicazione BDI Framework, con lo stato di implementazione di ciascuna.
+Questo documento traccia le funzionalità proposte per migliorare l'applicazione LUMIA Studio, con lo stato di implementazione di ciascuna.
 
 ## Legenda Stati
 

@@ -76,6 +76,9 @@ st.markdown(f"""
     footer {{visibility: hidden;}}
     header {{visibility: hidden;}}
 
+    /* Nascondi solo il menu di navigazione automatico di Streamlit */
+    [data-testid="stSidebarNav"] {{display: none;}}
+
     /* Background gradiente animato */
     .main {{
         background: {colors['bg_gradient']};
@@ -338,7 +341,7 @@ st.markdown(f"""
 # Header principale con animazione
 st.markdown(f"""
 <div class='main-header'>
-    <div class='main-title'>🧠 BDI Framework</div>
+    <div class='main-title'>✨ LUMIA Studio</div>
     <div class='main-subtitle'>Belief · Desire · Intention System</div>
     <div class='main-description'>
         Trasforma la conoscenza in azione. Un framework intelligente per definire obiettivi,
@@ -391,7 +394,7 @@ features = [
     {
         "name": "Alì",
         "emoji": "🎯",
-        "description": "Conversa con Alì, l'agente AI specializzato nell'aiutarti a identificare e definire i tuoi Desire (obiettivi) in modo chiaro e strutturato.",
+        "description": "Conversa con Alì, l'agente AI specializzato nell'aiutarti a identificare e definire i Desire (obiettivi) associati al tuo dominio in modo chiaro e strutturato.",
         "page": "pages/2_Ali.py",
         "status": "active",
     },
@@ -459,7 +462,7 @@ for idx in range(0, len(features), 3):
 # Footer
 st.markdown(f"""
 <div class='custom-footer'>
-    <p style='color: {colors['text_primary']};'><strong>🧠 BDI Framework</strong> - Belief · Desire · Intention System</p>
+    <p style='color: {colors['text_primary']};'><strong>✨ LUMIA Studio</strong> - Belief · Desire · Intention System</p>
     <p style='font-size: 0.85rem; color: {colors['text_tertiary']}; margin-top: 0.5rem;'>
         Powered by AI • Streamlit • ChromaDB • LangChain
     </p>

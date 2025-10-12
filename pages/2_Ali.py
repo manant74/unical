@@ -12,7 +12,7 @@ from utils.llm_manager import LLMManager
 from utils.prompts import get_prompt
 
 st.set_page_config(
-    page_title="Alì - BDI Framework",
+    page_title="Alì - LUMIA Studio",
     page_icon="🎯",
     layout="wide"
 )
@@ -35,10 +35,18 @@ if 'desires' not in st.session_state:
 # Carica il system prompt da file
 ALI_SYSTEM_PROMPT = get_prompt('ali')
 
+# CSS per nascondere menu Streamlit
+st.markdown("""
+<style>
+    [data-testid="stSidebarNav"] {display: none;}
+    
+</style>
+""", unsafe_allow_html=True)
+
 # Sidebar per configurazione
 with st.sidebar:
     # Pulsante Home in alto
-    st.markdown("### 🧠 BDI Framework")
+    st.markdown("### ✨ LUMIA Studio")
     if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
         st.switch_page("app.py")
 

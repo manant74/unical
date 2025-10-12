@@ -12,7 +12,7 @@ from utils.llm_manager import LLMManager
 from utils.prompts import get_prompt
 
 st.set_page_config(
-    page_title="Believer - BDI Framework",
+    page_title="Believer - LUMIA Studio",
     page_icon="💡",
     layout="wide"
 )
@@ -53,7 +53,7 @@ def load_desires():
 # Sidebar per configurazione
 with st.sidebar:
     # Pulsante Home in alto
-    st.markdown("### 🧠 BDI Framework")
+    st.markdown("### 🧠 LUMIA Studio")
     if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
         st.switch_page("app.py")
 

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for:*)",
+      "Bash(do sed -i '/^# Header/i # CSS per nascondere menu Streamlit\\nst.markdown(\"\"\"\"\"\"\\n<style>\\n    [data-testid=\"\"stSidebarNav\"\"] {display: none;}\\n    section[data-testid=\"\"stSidebar\"\"] > div:first-child {display: none;}\\n</style>\\n\"\"\"\"\"\", unsafe_allow_html=True)\\n' \"$file\")",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

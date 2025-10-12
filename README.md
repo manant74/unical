@@ -1,6 +1,8 @@
-# BDI Framework Application
+# ✨ LUMIA Studio
 
-Applicazione web basata su Streamlit per creare e gestire Belief, Desire e Intention secondo l'approccio BDI (Belief-Desire-Intention) applicato a un dominio di conoscenza specifico.
+**LUMIA Studio** è un'applicazione web basata su Streamlit per creare e gestire Belief, Desire e Intention secondo l'approccio BDI (Belief-Desire-Intention) applicato a un dominio di conoscenza specifico.
+
+> **LUMIA** = **L**earning **U**nified **M**odel for **I**ntelligent **A**gents
 
 ## Caratteristiche
 

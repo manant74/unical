@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils.document_processor import DocumentProcessor
 
 st.set_page_config(
-    page_title="Contextual - BDI Framework",
+    page_title="Contextual - LUMIA Studio",
     page_icon="📚",
     layout="wide"
 )
@@ -20,6 +20,14 @@ if 'doc_processor' not in st.session_state:
 
 if 'uploaded_files_info' not in st.session_state:
     st.session_state.uploaded_files_info = []
+
+# CSS per nascondere menu Streamlit
+st.markdown("""
+<style>
+    [data-testid="stSidebarNav"] {display: none;}
+    
+</style>
+""", unsafe_allow_html=True)
 
 # Header con pulsante Home
 col_title, col_home = st.columns([5, 1])

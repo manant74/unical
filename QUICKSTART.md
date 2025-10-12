@@ -1,6 +1,6 @@
-# 🚀 Quick Start - BDI Framework
+# 🚀 Quick Start - LUMIA Studio
 
-Guida rapida per iniziare ad usare l'applicazione BDI Framework in pochi minuti.
+Guida rapida per iniziare ad usare l'applicazione LUMIA Studio in pochi minuti.
 
 ## ⚡ Setup Veloce
 
@@ -236,4 +236,4 @@ Dopo aver completato il tuo primo framework BDI:
 3. Consulta [NewFeatures.md](NewFeatures.md) per funzionalità avanzate
 4. Personalizza i prompts per il tuo dominio specifico
 
-**Buon lavoro con il BDI Framework! 🚀**
+**Buon lavoro con il LUMIA Studio! 🚀**
