@@ -63,18 +63,24 @@ with st.sidebar:
         st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
         provider = None
     else:
+        # Imposta Gemini come default se disponibile
+        default_provider = "Gemini" if "Gemini" in available_providers else available_providers[0]
         provider = st.selectbox(
             "Provider LLM",
             available_providers,
+            index=available_providers.index(default_provider),
             key="ali_provider"
         )
 
         if provider:
             models = st.session_state.llm_manager.get_models_for_provider(provider)
+            # Imposta Gemini 2.5 Pro come default se disponibile
+            default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
             model = st.selectbox(
                 "Modello",
                 options=list(models.keys()),
                 format_func=lambda x: models[x],
+                index=list(models.keys()).index(default_model),
                 key="ali_model"
             )
 
@@ -107,10 +113,29 @@ with st.sidebar:
             with open("./data/current_desires.json", 'w', encoding='utf-8') as f:
                 json.dump(desires_data, f, ensure_ascii=False, indent=2)
 
-            st.success(f"✅ Sessione completata! Desires salvati in:\n{filename}")
+            st.success(f"✅ Sessione completata! {len(st.session_state.desires)} Desires salvati in:\n{filename}")
             st.balloons()
+        elif len(st.session_state.ali_chat_history) > 1:
+            # Se ci sono messaggi ma nessun desire estratto, salva comunque la chat
+            chat_only_data = {
+                "timestamp": datetime.now().isoformat(),
+                "desires": [],
+                "chat_history": st.session_state.ali_chat_history
+            }
+
+            os.makedirs("./data/sessions", exist_ok=True)
+            filename = f"./data/sessions/desires_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(chat_only_data, f, ensure_ascii=False, indent=2)
+
+            with open("./data/current_desires.json", 'w', encoding='utf-8') as f:
+                json.dump(chat_only_data, f, ensure_ascii=False, indent=2)
+
+            st.warning("⚠️ Nessun desire identificato, ma la conversazione è stata salvata.")
+            st.info("💡 Suggerimento: Chiedi ad Alì di generare il report finale con i desires identificati.")
         else:
-            st.warning("⚠️ Nessun desire identificato ancora!")
+            st.warning("⚠️ Nessuna conversazione da salvare!")
 
     st.divider()
 
@@ -121,9 +146,6 @@ with st.sidebar:
             with st.expander(f"#{desire['id']}: {desire['description'][:30]}..."):
                 st.json(desire)
 
-    # Spacer per spingere le statistiche in basso
-    st.markdown("<br>" * 5, unsafe_allow_html=True)
-
     # Statistiche in basso
     st.divider()
     st.subheader("📊 Statistiche")
@@ -131,7 +153,7 @@ with st.sidebar:
     st.metric("Desire Identificati", len(st.session_state.desires))
 
     stats = st.session_state.doc_processor.get_stats()
-    st.metric("Documenti in KB", stats['document_count'])
+    st.metric("Contenuti in KB", stats['document_count'])
 
 # Main content
 st.title("🎯 Alì - Agent for Desires")
@@ -204,8 +226,46 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
             with st.chat_message("assistant"):
                 st.markdown(response)
 
+            # --- NUOVA LOGICA PER PARSARE IL JSON ---
+            if response.strip().startswith("```json"):
+                try:
+                    # Estrai il contenuto JSON dal blocco di codice
+                    json_content_str = response.strip().replace("```json", "").replace("```", "").strip()
+                    
+                    # Parsa il JSON
+                    parsed_json = json.loads(json_content_str)
+
+                    # Estrai i desires dal report
+                    extracted_desires = []
+                    if "personas" in parsed_json and isinstance(parsed_json["personas"], list):
+                        for persona in parsed_json["personas"]:
+                            if "desires" in persona and isinstance(persona["desires"], list):
+                                for desire in persona["desires"]:
+                                    extracted_desires.append({
+                                        "id": desire.get("desire_id", len(st.session_state.desires) + len(extracted_desires) + 1),
+                                        "description": desire.get("desire_statement", "N/A"),
+                                        "priority": "medium",  # Default priority
+                                        "context": f"Persona: {persona.get('persona_name', 'N/A')}",
+                                        "success_criteria": "\n".join(desire.get("success_metrics", [])),
+                                        "timestamp": datetime.now().isoformat()
+                                    })
+                    
+                    if extracted_desires:
+                        st.session_state.desires = extracted_desires
+                        st.success(f"✅ Report finale rilevato! {len(extracted_desires)} desires sono stati estratti e caricati nella sessione.")
+                        st.info("Puoi ora completare la sessione o aggiungere altri desires manualmente.")
+                        st.rerun()
+                    else:
+                        st.warning("⚠️ Il report JSON è stato rilevato ma non contiene desires nel formato atteso.")
+
+                except json.JSONDecodeError:
+                    st.error("❌ Il report finale JSON generato dall'agente non è valido e non può essere parsato.")
+                except Exception as e:
+                    st.error(f"An unexpected error occurred while parsing the report: {e}")
+            # --- FINE NUOVA LOGICA ---
+
             # Check if a desire was mentioned (simple heuristic)
-            if any(keyword in response.lower() for keyword in ["desire identificato", "registriamo", "aggiungiamo questo desire"]):
+            elif any(keyword in response.lower() for keyword in ["desire identificato", "registriamo", "aggiungiamo questo desire"]):
                 st.info("💡 Sembra che abbiamo identificato un desire! Puoi confermarlo usando il pannello laterale.")
 
         except Exception as e:

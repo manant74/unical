@@ -60,6 +60,20 @@ theme_colors = {
 current_theme = 'dark' if st.session_state.dark_mode else 'light'
 colors = theme_colors[current_theme]
 
+bg_gradient = colors['bg_gradient']
+container_bg = colors['container_bg']
+text_primary = colors['text_primary']
+text_secondary = colors['text_secondary']
+text_tertiary = colors['text_tertiary']
+card_bg = colors['card_bg']
+workflow_bg = colors['workflow_bg']
+workflow_step_bg = colors['workflow_step_bg']
+workflow_text = colors['workflow_text']
+shadow = colors['shadow']
+shadow_hover = colors['shadow_hover']
+footer_text = colors['footer_text']
+footer_border = colors['footer_border']
+
 # CSS personalizzato avanzato
 st.markdown(f"""
 <style>
@@ -67,9 +81,9 @@ st.markdown(f"""
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
     /* Reset e font base */
-    * {{
+    * {{{{ 
         font-family: 'Poppins', sans-serif;
-    }}
+    }}}}
 
     /* Nascondi elementi Streamlit non necessari */
     #MainMenu {{visibility: hidden;}}
@@ -81,24 +95,24 @@ st.markdown(f"""
 
     /* Background gradiente animato */
     .main {{
-        background: {colors['bg_gradient']};
+        background: {bg_gradient};
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
         transition: background 0.5s ease;
     }}
 
-    @keyframes gradientBG {{
+    @keyframes gradientBG {{{{ 
         0% {{ background-position: 0% 50%; }}
         50% {{ background-position: 100% 50%; }}
         100% {{ background-position: 0% 50%; }}
-    }}
+    }}}}
 
     /* Container principale */
     .block-container {{
-        background: {colors['container_bg']};
+        background: {container_bg};
         border-radius: 30px;
         padding: 3rem 2rem !important;
-        box-shadow: 0 20px 60px {colors['shadow']};
+        box-shadow: 0 20px 60px {shadow};
         backdrop-filter: blur(10px);
         transition: all 0.5s ease;
     }}
@@ -110,7 +124,7 @@ st.markdown(f"""
         animation: fadeInDown 1s ease;
     }}
 
-    @keyframes fadeInDown {{
+    @keyframes fadeInDown {{{{ 
         from {{
             opacity: 0;
             transform: translateY(-30px);
@@ -119,7 +133,7 @@ st.markdown(f"""
             opacity: 1;
             transform: translateY(0);
         }}
-    }}
+    }}}}
 
     .main-title {{
         font-size: 4rem;
@@ -133,14 +147,14 @@ st.markdown(f"""
 
     .main-subtitle {{
         font-size: 1.3rem;
-        color: {colors['text_secondary']};
+        color: {text_secondary};
         font-weight: 300;
         margin-bottom: 1rem;
     }}
 
     .main-description {{
         font-size: 1rem;
-        color: {colors['text_tertiary']};
+        color: {text_tertiary};
         max-width: 600px;
         margin: 0 auto 2rem auto;
         line-height: 1.6;
@@ -148,7 +162,7 @@ st.markdown(f"""
 
     /* Sezione workflow */
     .workflow-section {{
-        background: {colors['workflow_bg']};
+        background: {workflow_bg};
         border-radius: 20px;
         padding: 2rem;
         margin: 2rem 0;
@@ -158,7 +172,7 @@ st.markdown(f"""
     .workflow-title {{
         font-size: 1.5rem;
         font-weight: 600;
-        color: {colors['text_primary']};
+        color: {text_primary};
         margin-bottom: 1rem;
     }}
 
@@ -172,21 +186,21 @@ st.markdown(f"""
     }}
 
     .workflow-step {{
-        background: {colors['workflow_step_bg']};
+        background: {workflow_step_bg};
         border-radius: 15px;
         padding: 1rem 1.5rem;
-        box-shadow: 0 4px 6px {colors['shadow']};
+        box-shadow: 0 4px 6px {shadow};
         display: flex;
         align-items: center;
         gap: 0.5rem;
         font-size: 0.9rem;
-        color: {colors['workflow_text']};
+        color: {workflow_text};
         transition: all 0.3s ease;
     }}
 
     .workflow-step:hover {{
         transform: translateY(-3px);
-        box-shadow: 0 6px 12px {colors['shadow']};
+        box-shadow: 0 6px 12px {shadow};
     }}
 
     .workflow-arrow {{
@@ -196,15 +210,14 @@ st.markdown(f"""
 
     /* Cards per le features - MIGLIORATO ALLINEAMENTO */
     .feature-card {{
-        background: {colors['card_bg']};
+        background: {card_bg};
         border-radius: 20px;
         padding: 2rem;
-        box-shadow: 0 10px 30px {colors['shadow']};
+        box-shadow: 0 10px 30px {shadow};
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 2px solid transparent;
         height: 100%;
         min-height: 320px;
-        cursor: pointer;
         position: relative;
         overflow: hidden;
         display: flex;
@@ -231,14 +244,19 @@ st.markdown(f"""
 
     .feature-card:hover {{
         transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 20px 40px {colors['shadow_hover']};
+        box-shadow: 0 20px 40px {shadow_hover};
         border-color: #667eea;
     }}
 
-    /* EMOJI SENZA ANIMAZIONI */
-    .feature-emoji {{
-        font-size: 4rem;
+    .feature-title-container {{
+        display: flex;
+        align-items: center;
         margin-bottom: 1rem;
+    }}
+
+    .feature-emoji {{
+        font-size: 2.5rem;
+        margin-right: 1rem;
         display: block;
         position: relative;
         z-index: 1;
@@ -250,31 +268,31 @@ st.markdown(f"""
     }}
 
     .feature-title {{
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 600;
-        color: {colors['text_primary']};
-        margin-bottom: 0.8rem;
+        color: {text_primary};
         position: relative;
         z-index: 1;
     }}
 
     .feature-description {{
         font-size: 0.95rem;
-        color: {colors['text_secondary']};
+        color: {text_secondary};
         line-height: 1.6;
         position: relative;
         z-index: 1;
         flex-grow: 1;
+        margin-bottom: 1.5rem;
     }}
 
     .feature-status {{
-        display: inline-block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
         padding: 0.3rem 0.8rem;
         border-radius: 20px;
         font-size: 0.75rem;
         font-weight: 600;
-        margin-top: 1rem;
-        position: relative;
         z-index: 1;
     }}
 
@@ -288,13 +306,34 @@ st.markdown(f"""
         color: white;
     }}
 
+    .feature-button {{
+        display: inline-block;
+        text-decoration: none;
+        background: linear-gradient(135deg, #4facfe 0%, #667eea 100%);
+        color: white !important;
+        padding: 0.75rem 1.5rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+        z-index: 1;
+        border: none;
+    }}
+
+    .feature-button:hover {{
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        color: white !important;
+        text-decoration: none;
+    }}
+
     /* Footer */
     .custom-footer {{
         text-align: center;
         padding: 2rem 0 1rem 0;
-        color: {colors['footer_text']};
+        color: {footer_text};
         font-size: 0.9rem;
-        border-top: 1px solid {colors['footer_border']};
+        border-top: 1px solid {footer_border};
         margin-top: 3rem;
     }}
 
@@ -329,12 +368,12 @@ st.markdown(f"""
     }}
 
     /* Responsive */
-    @media (max-width: 768px) {{
+    @media (max-width: 768px) {{{{ 
         .main-title {{ font-size: 2.5rem; }}
         .main-subtitle {{ font-size: 1rem; }}
         .feature-card {{ padding: 1.5rem; min-height: 280px; }}
         .workflow-steps {{ flex-direction: column; }}
-    }}
+    }}}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -378,6 +417,8 @@ st.markdown("""
         <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Definisci Desire</div>
         <div class='workflow-arrow'>→</div>
         <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identifica Belief</div>
+        <div class='workflow-arrow'>→</div>
+        <div class='workflow-step'>✅ <strong>4. Validator</strong> - Valida BDI</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -387,7 +428,7 @@ features = [
     {
         "name": "Contextual",
         "emoji": "📚",
-        "description": "Carica e gestisci documenti PDF, pagine web, file di testo o markdown per costruire una base di conoscenza ricca e strutturata con tecniche RAG avanzate.",
+        "description": "Carica e gestisci documenti PDF, pagine web, file di testo o markdown per costruire una base di conoscenza ricca e strutturata del tuo dominio.",
         "page": "pages/1_Contextual.py",
         "status": "active",
     },
@@ -406,24 +447,31 @@ features = [
         "status": "active",
     },
     {
+        "name": "Validator",
+        "emoji": "✅",
+        "description": "Valida e modifica il framework BDI (Belief-Desire-Intention) generato, assicurando che la struttura JSON sia corretta e pronta per l'uso.",
+        "page": "pages/4_Validator.py",
+        "status": "active",
+    },
+    {
         "name": "Cuma",
         "emoji": "🔮",
         "description": "Modulo avanzato per analisi predittiva e scenario planning. Utilizza i tuoi Belief e Desire per simulare possibili outcome futuri.",
-        "page": "pages/4_Cuma.py",
+        "page": "pages/5_Cuma.py",
         "status": "dev",
     },
     {
         "name": "Genius",
         "emoji": "⚡",
         "description": "Sistema intelligente di ottimizzazione che analizza il tuo framework BDI completo e suggerisce miglioramenti e strategie innovative.",
-        "page": "pages/5_Genius.py",
+        "page": "pages/6_Genius.py",
         "status": "dev",
     }
 ]
 
 # Sezione moduli
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown(f"<h2 style='text-align: center; color: {colors['text_primary']}; font-weight: 600; margin-bottom: 2rem;'>🎨 Esplora i Moduli</h2>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 2rem;'>🎨 Esplora i Moduli</h2>", unsafe_allow_html=True)
 
 # Creazione delle feature cards con HTML personalizzato - 3 per riga
 for idx in range(0, len(features), 3):
@@ -435,39 +483,36 @@ for idx in range(0, len(features), 3):
                 # Card HTML personalizzata
                 status_class = "status-active" if feature["status"] == "active" else "status-dev"
                 status_text = "✓ Attivo" if feature["status"] == "active" else "🚧 In Sviluppo"
+                
+                # Ottieni il nome della pagina dall'URL per il link
+                page_link = feature['page'].split('/')[-1].split('.')[0].split('_', 1)[-1]
 
                 card_html = f"""
                 <div class='feature-card'>
+                    <span class='feature-status {status_class}'>{status_text}</span>
                     <div>
-                        <span class='feature-emoji'>{feature['emoji']}</span>
-                        <div class='feature-title'>{feature['name']}</div>
+                        <div class='feature-title-container'>
+                            <span class='feature-emoji'>{feature['emoji']}</span>
+                            <div class='feature-title'>{feature['name']}</div>
+                        </div>
                         <div class='feature-description'>{feature['description']}</div>
                     </div>
-                    <span class='feature-status {status_class}'>{status_text}</span>
+                    <a href='/{page_link}' target='_self' class='feature-button'>Apri {feature['name']}</a>
                 </div>
                 """
                 st.markdown(card_html, unsafe_allow_html=True)
-
-                # Bottone per la navigazione
-                if st.button(
-                    f"Apri {feature['name']}",
-                    key=f"btn_{feature['name']}",
-                    use_container_width=True,
-                    type="primary"
-                ):
-                    st.switch_page(feature['page'])
-
                 st.markdown("<br>", unsafe_allow_html=True)
 
 # Footer
 st.markdown(f"""
 <div class='custom-footer'>
-    <p style='color: {colors['text_primary']};'><strong>✨ LUMIA Studio</strong> - Belief · Desire · Intention System</p>
-    <p style='font-size: 0.85rem; color: {colors['text_tertiary']}; margin-top: 0.5rem;'>
+    <p style='color: {text_primary};'><strong>✨ LUMIA Studio</strong> - Belief · Desire · Intention System</p>
+    <p style='font-size: 0.85rem; color: {text_tertiary}; margin-top: 0.5rem;'>
         Powered by AI • Streamlit • ChromaDB • LangChain
     </p>
-    <p style='font-size: 0.8rem; color: {colors['text_tertiary']}; margin-top: 0.5rem;'>
+    <p style='font-size: 0.8rem; color: {text_tertiary}; margin-top: 0.5rem;'>
         Versione 1.0 • Tema: {theme_text}
     </p>
 </div>
 """, unsafe_allow_html=True)
+

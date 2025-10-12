@@ -1,0 +1,409 @@
+{
+  "desires": [
+    {
+      "id": "P1-D1",
+      "description": "Desidera poter partecipare attivamente e comprendere le lezioni tenute in lingua inglese durante il suo percorso di studi o in future esperienze accademiche.",
+      "priority": "medium"
+    },
+    {
+      "id": "P1-D2",
+      "description": "Desidera essere in grado di leggere e comprendere testi accademici, articoli scientifici, libri di testo e altre risorse in lingua inglese in modo autonomo.",
+      "priority": "medium"
+    }
+  ],
+  "beliefs": [
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comprendere conversazioni complesse in ambito personale e lavorativo",
+      "fonte": "Sei in grado di comprendere conversazioni complesse in ambito personale e lavorativo. Comprendi i discorsi i discorsi tecnici.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Ascolto"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Il Desire P1-D1 richiede la comprensione di lezioni accademiche in inglese. Il livello B2 descrive la capacità di comprendere discorsi tecnici, che è direttamente applicabile alla comprensione di lezioni."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comprendere la maggior parte dei programmi radio e TV specialmente se di attualità",
+      "fonte": "Sei in grado di comprendere la maggior parte dei programmi radio e TV specialmente se di attualità.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Ascolto"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Sebbene non direttamente accademiche, la capacità di comprendere programmi radio/TV in inglese (Desire P1-D1) suggerisce una buona comprensione generale dell'inglese parlato, utile anche in contesti di lezione."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "cogliere il significato di articoli",
+      "fonte": "Cogli il significato di articoli di",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Lettura"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Il Desire P1-D2 si concentra sulla lettura autonoma di testi accademici. La capacità di 'cogliere il significato di articoli' a livello B2 è un prerequisito fondamentale."
+    },
+    {
+      "soggetto": "Livello Pre-intermedio (B1)",
+      "relazione": "fornisce_conoscenze_per",
+      "oggetto": "comprendere idee principali di testi complessi su argomenti sia concreti che astratti",
+      "fonte": "comprendere le idee principali di testi complessi su argomenti sia concreti che astratti",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Comprensione Scritta"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Questo belief è direttamente collegato al Desire P1-D2, in quanto descrive la capacità di comprendere testi complessi, un requisito fondamentale per leggere autonomamente risorse accademiche."
+    },
+    {
+      "soggetto": "Livello Pre-intermedio (B1)",
+      "relazione": "permette_di",
+      "oggetto": "comprendere discussioni tecniche sul proprio campo di specializzazione",
+      "fonte": "comprendere le discussioni tecniche sul proprio campo di specializzazione",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Ascolto"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Cruciale per il Desire P1-D1, poiché le lezioni accademiche spesso includono discussioni tecniche nel campo di specializzazione dello studente."
+    },
+    {
+      "soggetto": "Livello Pre-intermedio (B1)",
+      "relazione": "permette_di",
+      "oggetto": "interagire con una certa scioltezza e spontaneità",
+      "fonte": "interagire con una certa scioltezza e spontaneità",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Interazione Orale"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Supporta il Desire P1-D1 indicando la capacità di partecipare attivamente alle lezioni attraverso interazioni spontanee."
+    },
+    {
+      "soggetto": "Livello Pre-intermedio (B1)",
+      "relazione": "permette_di",
+      "oggetto": "produrre testi e report dettagliati contenenti informazioni approfondite",
+      "fonte": "produrre testi e report dettagliati contenenti informazioni approfondite. La struttura dei tuoi testi è intuitiva, il lettore memorizza i passi più importanti.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Scrittura"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Questo belief è rilevante per entrambi i Desires. Per P1-D1, la capacità di produrre testi approfonditi può tradursi nell'intervenire in discussioni accademiche. Per P1-D2, dimostra una padronanza della lingua sufficiente per elaborare e comunicare informazioni scritte."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "ha_punteggio_IELTS",
+      "oggetto": "5.5-6.5",
+      "fonte": "Certificazioni IELTS 5.5-6.5",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Certificazione Linguistica"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Fornisce un benchmark quantificabile per il livello B2, collegando le abilità descritte ai Desire P1-D1 e P1-D2 a uno standard di certificazione riconosciuto."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "ha_punteggio_TOEFL iBT",
+      "oggetto": "72",
+      "fonte": "Certificazioni TOEFL iBT 72",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Certificazione Linguistica"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Fornisce un benchmark quantificabile per il livello B2, collegando le abilità descritte ai Desire P1-D1 e P1-D2 a uno standard di certificazione riconosciuto."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "ha_punteggio_TOEIC",
+      "oggetto": "785-944",
+      "fonte": "Certificazioni TOEIC 785-944",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Certificazione Linguistica"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Fornisce un benchmark quantificabile per il livello B2, collegando le abilità descritte ai Desire P1-D1 e P1-D2 a uno standard di certificazione riconosciuto."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "corrisponde_a",
+      "oggetto": "CAMBRIDGE FCE",
+      "fonte": "Certificazioni CAMBRIDGE FCE",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Certificazione Linguistica"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Correlazione diretta tra il livello B2 e una certificazione specifica (FCE), utile per definire ulteriormente gli obiettivi legati ai Desire P1-D1 e P1-D2."
+    },
+    {
+      "soggetto": "Studenti",
+      "relazione": "saranno_in_grado_di",
+      "oggetto": "compiere ricerche documentali specialistiche",
+      "fonte": "differenti registri linguistici, lo studente sarà in grado di compiere ricerche documentali specialistiche",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità di Ricerca"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Questo belief è molto pertinente per il Desire P1-D2, poiché la capacità di condurre ricerche documentali specialistiche è una componente chiave della lettura autonoma di testi accademici."
+    },
+    {
+      "soggetto": "Studenti",
+      "relazione": "saranno_in_grado_di",
+      "oggetto": "analizzare testi di varia natura",
+      "fonte": "Attraverso l’esposizione alla varietà di testi di varia natura proposta gli studenti saranno messi in grado di migliorare sempre più le proprie capacità di giudizio.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità Analitica"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Supporta il Desire P1-D2, in quanto l'analisi di testi è fondamentale per la comprensione autonoma, specialmente quando si tratta di risorse accademiche."
+    },
+    {
+      "soggetto": "Studenti",
+      "relazione": "saranno_in_grado_di",
+      "oggetto": "analizzare testi non solo culturali o riconducibili al vissuto quotidiano ma anche ai settori economico e giuridico",
+      "fonte": "analizzare testi non solo di natura culturale o riconducibili al vissuto quotidiano ma anche ai settori economico e giuridico",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità Analitica Settoriale"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Molto rilevante per il Desire P1-D2, poiché specifica che la capacità di analisi si estende a settori accademici specifici (economico, giuridico), migliorando la preparazione alla lettura di testi specialistici."
+    },
+    {
+      "soggetto": "Livello A1 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comprendere frasi ed espressioni usate frequentemente relative ad ambiti di immediata rilevanza (es. informazioni personali e familiari di base, fare la spesa, la geografia locale, l'occupazione)",
+      "fonte": "comprendere frasi ed espressioni usate di immediata rilevanza (es. informazioni personali e familiari di base, fare la spesa, la geografia locale, l'occupazione)",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Ascolto/Comprensione"
+      },
+      "desires_correlati": [],
+      "rilevanza": "Questo belief non è direttamente rilevante per i Desire P1-D1 e P1-D2, in quanto descrive abilità linguistiche di base che non sono sufficienti per la partecipazione a lezioni accademiche o la lettura di testi specialistici."
+    },
+    {
+      "soggetto": "Livello A1 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comunicare in attività semplici e di routine che richiedano un semplice scambio di informazioni su argomenti comuni",
+      "fonte": "comunicare in attività semplici e di routine che richiedano un semplice scambio di informazioni su argomenti comuni",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Interazione Orale"
+      },
+      "desires_correlati": [],
+      "rilevanza": "Questo belief non è direttamente rilevante per i Desire P1-D1 e P1-D2, in quanto descrive capacità comunicative molto basilari, inadeguate per il contesto accademico."
+    },
+    {
+      "soggetto": "Livello A1 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "descrivere in termini semplici aspetti del proprio background e dell'ambiente circostante",
+      "fonte": "descrivere in termini semplici aspetti del proprio background e dell'ambiente circostante",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Espressione Orale"
+      },
+      "desires_correlati": [],
+      "rilevanza": "Questo belief non è direttamente rilevante per i Desire P1-D1 e P1-D2, in quanto riguarda capacità descrittive basilari e non la comprensione o partecipazione in contesti accademici."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comprendere ogni tipo di discorso senza alcuno sforzo",
+      "fonte": "Comprendi ogni tipo di discorso senza alcuno sforzo.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Ascolto"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Questo belief, pur descrivendo un livello linguistico molto avanzato (C2), è rilevante per il Desire P1-D1 in quanto rappresenta l'obiettivo ideale di comprensione delle lezioni accademiche."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "comprendere il significato dal contesto anche se non si comprendono alcune parole specifiche",
+      "fonte": "anche se non comprendi alcune parole specifiche sei in grado di capire tutto il significato dal contesto.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Comprensione Scritta/Orale"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Indica una capacità avanzata di inferenza e comprensione contestuale, molto utile sia per seguire lezioni (P1-D1) che per leggere testi accademici complessi (P1-D2)."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "leggere e capire gli articoli complessi legati anche ai temi non familiari",
+      "fonte": "Leggi e capisci gli articoli complessi legati anche ai temi non familiari.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Lettura"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Direttamente pertinente al Desire P1-D2, poiché descrive la capacità di comprendere testi complessi anche in ambiti non familiari, fondamentale per risorse accademiche."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "partecipare alle conversazioni, anche con interlocutori madrelingua, in maniera completamente fluida",
+      "fonte": "Partecipi alle conversazioni, anche con interlocutori madrelingua, in maniera completamente fluida capendo ed utilizzando espressioni idiomatiche.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Interazione Orale"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "Molto rilevante per il Desire P1-D1, in quanto la fluidità e la capacità di interagire con madrelingua sono essenziali per partecipare attivamente alle lezioni accademiche."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "scrivere in maniera chiara e scorrevole mantenendo uno stile appropriato",
+      "fonte": "Scrivi in maniera chiara e scorrevole mantenendo uno stile appropriato,",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Scrittura"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Rilevante per entrambi i Desires. Per P1-D1, supporta la partecipazione attiva in discussioni o lavori di gruppo. Per P1-D2, indica una padronanza della scrittura che supporta la comprensione e l'elaborazione di testi complessi."
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "ha_descrizione_CEFR",
+      "oggetto": "VANTAGE",
+      "fonte": "CEFR B2 (VANTAGE)",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Standard CEFR"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Collega il livello B2 alla sua denominazione ufficiale nel quadro CEFR (Vantage), fornendo un riferimento standardizzato per le abilità discusse in relazione ai Desire."
+    },
+    {
+      "soggetto": "Corso Pre-intermedio",
+      "relazione": "fa_riferimento_a",
+      "oggetto": "Livello B1 del Portafolio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello B1 del Portfoio Europeo delle Lingue.",
+      "metadati": {
+        "tipo_soggetto": "Corso di Lingua",
+        "tipo_oggetto": "Livello Linguistico"
+      },
+      "desires_correlati": [
+        "P1-D1",
+        "P1-D2"
+      ],
+      "rilevanza": "Stabilisce un collegamento tra un corso specifico e il livello B1 del CEFR, rendendo i Belief associati al B1 direttamente applicabili agli obiettivi dei Desire."
+    },
+    {
+      "soggetto": "Corso Pre-intermedio",
+      "relazione": "è_rivolto_a",
+      "oggetto": "coloro che già posseggono conoscenze della lingua a livello elementare",
+      "fonte": "Il corso è rivolto a coloro che già posseggono le conoscenze della lingua a livello elementare.",
+      "metadati": {
+        "tipo_soggetto": "Corso di Lingua",
+        "tipo_oggetto": "Requisito di Accesso"
+      },
+      "desires_correlati": [],
+      "rilevanza": "Questo belief riguarda i prerequisiti per un corso specifico e non è direttamente collegato ai Desire di partecipazione a lezioni accademiche o lettura di testi specialistici, che presuppongono un livello più avanzato."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "fare speech e presentazioni",
+      "fonte": "La tua espressione orale è appropriata e in linea con il contesto in cui ti trovi. La struttura del tuo discorso è logica e articolata.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità di Espressione Orale"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "La capacità di fare speech e presentazioni, tipica del livello C2, è molto utile per il Desire P1-D1, in quanto implica la capacità di intervenire attivamente e strutturare il proprio pensiero in inglese durante lezioni o seminari."
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "consente_di",
+      "oggetto": "utilizzare espressioni idiomatiche",
+      "fonte": "capendo ed utilizzando espressioni idiomatiche.",
+      "metadati": {
+        "tipo_soggetto": "Livello Linguistico",
+        "tipo_oggetto": "Abilità Linguistica Avanzata"
+      },
+      "desires_correlati": [
+        "P1-D1"
+      ],
+      "rilevanza": "L'uso di espressioni idiomatiche contribuisce a una comunicazione più naturale e fluida, aumentando la capacità di partecipare attivamente alle conversazioni accademiche (Desire P1-D1)."
+    },
+    {
+      "soggetto": "Studenti",
+      "relazione": "miglioreranno",
+      "oggetto": "capacità di giudizio",
+      "fonte": "gli studenti saranno messi in grado di migliorare sempre più le proprie capacità di giudizio.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità Cognitiva"
+      },
+      "desires_correlati": [
+        "P1-D2"
+      ],
+      "rilevanza": "Il miglioramento delle capacità di giudizio, ottenuto attraverso l'esposizione a testi di varia natura, è un beneficio secondario ma pertinente per il Desire P1-D2, in quanto una migliore capacità critica facilita la comprensione profonda dei testi."
+    }
+  ]
+}

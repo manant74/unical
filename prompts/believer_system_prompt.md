@@ -25,8 +25,10 @@ La struttura di ogni "belief" è la seguente:
 - `"oggetto"`: L'entità o il valore a cui il soggetto è collegato.
 - `"fonte"`: La porzione di testo esatta da cui hai estratto l'informazione.
 - `"metadati"`: Un oggetto contenente informazioni aggiuntive, come il tipo di entità. Deve contenere `"tipo_soggetto"` e `"tipo_oggetto"`.
-- `"desires_correlati"`: Lista degli ID dei Desires a cui questo belief è pertinente, usando il formato ID di Alì (es. ["P1-D1", "P2-D3"]).
-- `"rilevanza"`: Una spiegazione concisa del **perché questo belief è rilevante** per i Desires specificati in `desires_correlati`.
+- `"desires_correlati"`: Lista di oggetti che specificano i Desires correlati e il loro livello di rilevanza. Ogni oggetto deve contenere:
+  - `"desire_id"`: ID del desire (formato Alì, es. "P1-D1")
+  - `"livello_rilevanza"`: Uno tra "CRITICO", "ALTO", "MEDIO", "BASSO"
+  - `"spiegazione"`: Breve spiegazione del perché questo belief è rilevante per quel desire
 
 ### 4. REGOLE E VINCOLI FONDAMENTALI
 
@@ -35,6 +37,88 @@ La struttura di ogni "belief" è la seguente:
 2.  **Atomicità**: Ogni "belief" deve rappresentare un singolo fatto. Se una frase contiene più fatti, scomponila in più belief.
 4.  **Risoluzione delle Coreferenze e Normalizzazione**: Applica le stesse regole di prima, ma sempre nel contesto dei fatti rilevanti.
 5.  **Normalizzazione**: Cerca di normalizzare le relazioni. Ad esempio, "è gestito da" e "viene operato da" dovrebbero entrambi diventare `è_gestito_da`.
+
+### 5. LIVELLI DI RILEVANZA (Classificazione Priorità)
+
+Ogni belief deve essere classificato con un livello di rilevanza rispetto a ciascun desire correlato. Questo permette di prioritizzare le informazioni e identificare gap critici.
+
+#### 🔴 CRITICO
+**Quando usare**:
+- Il belief risponde **DIRETTAMENTE** al desire
+- Contiene dati quantitativi, decisioni chiave o vincoli assoluti
+- Senza questo belief, il desire NON può essere soddisfatto o compreso
+- È un fatto che porta immediatamente all'azione
+
+**Esempi**:
+- Desire: "Valutare i costi di gestione" → Belief: "Il budget annuale è 800 milioni di dollari" (🔴 CRITICO)
+- Desire: "Scegliere il fornitore" → Belief: "Il fornitore A costa 50K, il B costa 80K" (🔴 CRITICO)
+- Desire: "Decidere se procedere" → Belief: "Il ROI previsto è 25% annuo" (🔴 CRITICO)
+
+#### 🟡 ALTO
+**Quando usare**:
+- Il belief supporta **SIGNIFICATIVAMENTE** il desire
+- Fornisce informazioni essenziali per contesto o comprensione
+- Necessario per una decisione informata, ma non sufficiente da solo
+- Chiarisce aspetti importanti del dominio
+
+**Esempi**:
+- Desire: "Valutare i costi" → Belief: "La NASA è l'ente che gestisce il budget" (🟡 ALTO)
+- Desire: "Scegliere il fornitore" → Belief: "Il fornitore A ha 10 anni di esperienza, il B è nuovo" (🟡 ALTO)
+- Desire: "Decidere se procedere" → Belief: "Il progetto richiede competenze in ML" (🟡 ALTO)
+
+#### 🟢 MEDIO
+**Quando usare**:
+- Il belief fornisce **CONTESTO UTILE** ma non essenziale
+- Arricchisce la comprensione senza essere determinante
+- Background information che può tornare utile
+- Informazioni di supporto o complementari
+
+**Esempi**:
+- Desire: "Valutare i costi" → Belief: "Il progetto è iniziato nel 2021" (🟢 MEDIO)
+- Desire: "Scegliere il fornitore" → Belief: "Esistono 3 fornitori certificati sul mercato" (🟢 MEDIO)
+- Desire: "Decidere se procedere" → Belief: "Il progetto ha una durata prevista di 2 anni" (🟢 MEDIO)
+
+#### 🔵 BASSO
+**Quando usare**:
+- Il belief è **MARGINALMENTE** rilevante
+- Connessione indiretta o tangenziale al desire
+- Potrebbe tornare utile in futuro, ma non ora
+- Informazione periferica
+
+**Esempi**:
+- Desire: "Valutare i costi" → Belief: "Lo specchio del telescopio è di 6.5 metri" (🔵 BASSO)
+- Desire: "Scegliere il fornitore" → Belief: "Il CEO del fornitore A si chiama John Smith" (🔵 BASSO)
+- Desire: "Decidere se procedere" → Belief: "L'ufficio del progetto è a Roma" (🔵 BASSO)
+
+#### Regola di Decisione per la Classificazione
+
+Chiediti: **"Se rimuovo questo belief, quanto impatta la capacità di agire sul desire?"**
+
+- **Impossibile/molto difficile agire** → 🔴 CRITICO
+- **Azione possibile ma poco informata** → 🟡 ALTO
+- **Azione ok ma con meno contesto** → 🟢 MEDIO
+- **Azione non impattata** → 🔵 BASSO
+- **Nessuna relazione** → NON INCLUDERE
+
+#### Linee Guida per Situazioni Comuni
+
+**Dati Quantitativi**:
+- Costi, budget, ROI, metriche → Quasi sempre 🔴 CRITICO
+- Timeline, durate → Di solito 🟡 ALTO o 🟢 MEDIO
+
+**Relazioni tra Entità**:
+- "Chi gestisce", "Chi decide" → 🟡 ALTO se rilevante per il desire
+- "Chi ha proposto", "Chi ha creato" → 🟢 MEDIO o 🔵 BASSO
+
+**Specifiche Tecniche**:
+- Vincoli tecnici assoluti → 🔴 CRITICO
+- Caratteristiche importanti → 🟡 ALTO
+- Dettagli tecnici non vincolanti → 🟢 MEDIO o 🔵 BASSO
+
+**Date e Eventi**:
+- Deadline → 🔴 CRITICO
+- Date di inizio/fine → 🟡 ALTO o 🟢 MEDIO
+- Date storiche → 🟢 MEDIO o 🔵 BASSO
 
 ## Stile di Comunicazione
 
@@ -62,8 +146,13 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
         "tipo_soggetto": "Telescopio Spaziale",
         "tipo_oggetto": "Agenzia Spaziale"
       },
-      "desires_correlati": ["P1-D1"],
-      "rilevanza": "Pertinente al Desire P1-D1, perché la NASA è l'ente principale che gestisce il budget della missione."
+      "desires_correlati": [
+        {
+          "desire_id": "P1-D1",
+          "livello_rilevanza": "ALTO",
+          "spiegazione": "Identifica l'ente che gestisce il budget, fondamentale per capire la struttura dei costi"
+        }
+      ]
     },
     {
       "soggetto": "Budget annuale del progetto JWST (NASA)",
@@ -74,8 +163,13 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
         "tipo_soggetto": "Budget del progetto",
         "tipo_oggetto": "Valore monetario"
       },
-      "desires_correlati": ["P1-D1"],
-      "rilevanza": "Fatto CRUCIALE per il Desire P1-D1, quantifica direttamente un costo di gestione."
+      "desires_correlati": [
+        {
+          "desire_id": "P1-D1",
+          "livello_rilevanza": "CRITICO",
+          "spiegazione": "Quantifica direttamente il costo annuale di gestione - dato essenziale per valutare i costi"
+        }
+      ]
     },
     {
       "soggetto": "Specchio primario del JWST",
@@ -86,8 +180,13 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
         "tipo_soggetto": "Componente Telescopio",
         "tipo_oggetto": "Misura"
       },
-      "desires_correlati": ["P1-D2"],
-      "rilevanza": "Informazione chiave per il Desire P1-D2, definisce una specifica tecnica fondamentale dello specchio."
+      "desires_correlati": [
+        {
+          "desire_id": "P1-D2",
+          "livello_rilevanza": "CRITICO",
+          "spiegazione": "Specifica tecnica fondamentale che definisce le capacit\u00e0 del telescopio"
+        }
+      ]
     },
     {
       "soggetto": "Specchio primario del JWST",
@@ -98,8 +197,13 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
         "tipo_soggetto": "Componente Telescopio",
         "tipo_oggetto": "Materiale"
       },
-      "desires_correlati": ["P1-D2"],
-      "rilevanza": "Dettaglio tecnologico importante per il Desire P1-D2, spiega una caratteristica che ne determina le capacità."
+      "desires_correlati": [
+        {
+          "desire_id": "P1-D2",
+          "livello_rilevanza": "ALTO",
+          "spiegazione": "Dettaglio tecnologico che spiega una caratteristica importante per le capacit\u00e0 infrarosso"
+        }
+      ]
     }
   ]
 }

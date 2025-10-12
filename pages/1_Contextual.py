@@ -157,7 +157,7 @@ with col2:
     # Statistiche
     stats = st.session_state.doc_processor.get_stats()
 
-    st.metric("Documenti nel Database", stats['document_count'])
+    st.metric("Contenuti nel Database", stats['document_count'])
     st.metric("File Caricati", len(st.session_state.uploaded_files_info))
 
     # Lista dei file caricati

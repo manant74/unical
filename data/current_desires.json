@@ -1,0 +1,30 @@
+{
+  "domain_summary": "Costruzione di corsi di inglese focalizzati sulle esigenze specifiche degli studenti universitari.",
+  "personas": [
+    {
+      "persona_name": "Lo Studente Universitario",
+      "persona_description": "Uno studente che necessita di migliorare le proprie competenze in lingua inglese per il suo percorso accademico, per l'accesso a risorse internazionali e per prepararsi alle future opportunità professionali o di studio all'estero.",
+      "desires": [
+        {
+          "desire_id": "P1-D1",
+          "desire_statement": "Desidera poter partecipare attivamente e comprendere le lezioni tenute in lingua inglese durante il suo percorso di studi o in future esperienze accademiche.",
+          "motivation": "La necessità di seguire con profitto i corsi, contribuire alle discussioni, non sentirsi escluso e massimizzare l'apprendimento accademico.",
+          "success_metrics": [
+            "Sentirsi a proprio agio in aula.",
+            "Porre domande pertinenti.",
+            "Capire le spiegazioni dei docenti senza difficoltà."
+          ]
+        },
+        {
+          "desire_id": "P1-D2",
+          "desire_statement": "Desidera essere in grado di leggere e comprendere testi accademici, articoli scientifici, libri di testo e altre risorse in lingua inglese in modo autonomo.",
+          "motivation": "Accedere a una più ampia gamma di conoscenze, approfondire argomenti specifici, prepararsi per esami o ricerche che richiedono l'uso di letteratura internazionale.",
+          "success_metrics": [
+            "Concludere la lettura di un articolo accademico o di un capitolo di libro comprendendone i punti chiave.",
+            "Essere in grado di citare fonti in inglese."
+          ]
+        }
+      ]
+    }
+  ]
+}

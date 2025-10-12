@@ -4,6 +4,16 @@
 
 > **LUMIA** = **L**earning **U**nified **M**odel for **I**ntelligent **A**gents
 
+## 🆕 Versione Corrente: v2.2.0
+
+**Novità della v2.2** (2025-01-15):
+- 🎯 **Sistema di Livelli di Rilevanza** per Believer con classificazione prioritaria (CRITICO/ALTO/MEDIO/BASSO)
+- 📊 **Struttura JSON migliorata** per belief con prioritizzazione automatica
+- 🔍 **Gap analysis** facilitata per identificare informazioni critiche mancanti
+- 📚 **Documentazione completa** del nuovo sistema di priorità
+
+> Vedi [CHANGELOG.md](CHANGELOG.md) per lo storico completo delle versioni e [docs/UPDATES_v2.2.md](docs/UPDATES_v2.2.md) per dettagli sulla v2.2
+
 ## Caratteristiche
 
 ### Funzionalità Implementate
@@ -182,19 +192,35 @@ Per modificare un prompt:
 }
 ```
 
-### Belief JSON Structure
+### Belief JSON Structure (v2.2 - Con Livelli di Rilevanza)
 
 ```json
 {
-  "id": 1,
-  "description": "Descrizione del belief",
-  "type": "fact|assumption|principle|constraint",
-  "confidence": "high|medium|low",
-  "related_desires": [1, 2, 3],
-  "evidence": "Evidenze dalla KB",
-  "timestamp": "2025-01-01T12:00:00"
+  "soggetto": "Entità principale del fatto",
+  "relazione": "Verbo o proprietà che lega soggetto e oggetto",
+  "oggetto": "Entità o valore collegato",
+  "fonte": "Testo esatto da cui è estratta l'informazione",
+  "metadati": {
+    "tipo_soggetto": "Tipo dell'entità soggetto",
+    "tipo_oggetto": "Tipo dell'entità oggetto"
+  },
+  "desires_correlati": [
+    {
+      "desire_id": "P1-D1",
+      "livello_rilevanza": "CRITICO|ALTO|MEDIO|BASSO",
+      "spiegazione": "Perché questo belief è rilevante per il desire"
+    }
+  ]
 }
 ```
+
+**Livelli di Rilevanza**:
+- 🔴 **CRITICO**: Risponde direttamente al desire, dati quantitativi o vincoli assoluti
+- 🟡 **ALTO**: Supporta significativamente il desire, informazioni essenziali
+- 🟢 **MEDIO**: Fornisce contesto utile, background information
+- 🔵 **BASSO**: Marginalmente rilevante, connessione indiretta
+
+> Per dettagli completi sul sistema di priorità, vedi [docs/UPDATES_v2.2.md](docs/UPDATES_v2.2.md)
 
 ### BDI Complete JSON
 
@@ -216,13 +242,31 @@ Per modificare un prompt:
 - **Document Processing**: PyPDF2, BeautifulSoup4
 - **Text Splitting**: LangChain RecursiveCharacterTextSplitter
 
+## Documentazione Aggiuntiva
+
+### Release e Aggiornamenti
+- **[CHANGELOG.md](CHANGELOG.md)** - Storico completo delle versioni
+- **[RELEASE_NOTES_v2.2.md](RELEASE_NOTES_v2.2.md)** - Note di rilascio v2.2.0
+- **[docs/UPDATES_v2.2.md](docs/UPDATES_v2.2.md)** - Documentazione dettagliata sistema livelli di rilevanza
+
+### Guide Tecniche
+- **[docs/AGENTS_GUIDE.md](docs/AGENTS_GUIDE.md)** - Guida agli agenti
+- **[docs/PROMPT_ANALYSIS.md](docs/PROMPT_ANALYSIS.md)** - Analisi dei system prompts
+- **[NewFeatures.md](NewFeatures.md)** - Proposte di nuove funzionalità
+
 ## Roadmap
 
-- [ ] Implementazione funzionalità Cuma
-- [ ] Implementazione funzionalità Genius
-- [ ] Sistema di gestione Intentions
-- [ ] Export in formati multipli (CSV, XML)
-- [ ] Dashboard analitica per visualizzazione BDI
+### v2.3+ (In Pianificazione)
+- [ ] Dashboard di Coverage per visualizzazione livelli di rilevanza
+- [ ] Auto-recommendation per colmare gap critici
+- [ ] Quality Score per completezza desires
+
+### Funzionalità Future
+- [ ] Implementazione funzionalità Cuma (scenario planning)
+- [ ] Implementazione funzionalità Genius (ottimizzazione BDI)
+- [ ] Sistema di gestione Intentions completo
+- [ ] Export in formati multipli (CSV, XML, PDF)
+- [ ] Dashboard analitica con grafici interattivi
 - [ ] Sistema di versioning per sessioni multiple
 - [ ] Integrazione con altri provider LLM
 

@@ -38,17 +38,71 @@ if 'loaded_desires' not in st.session_state:
 # Carica il system prompt da file
 BELIEVER_SYSTEM_PROMPT = get_prompt('believer')
 
-# Carica i desires se disponibili
+# CSS per nascondere solo il menu di navigazione Streamlit
+st.markdown("""
+<style>
+    [data-testid="stSidebarNav"] {display: none;}
+</style>
+""", unsafe_allow_html=True)
+
 def load_desires():
-    """Carica i desires dal file salvato"""
+    """Carica i desires dal file salvato, gestendo sia la struttura semplice che quella complessa."""
+    file_path = "./data/current_desires.json"
+    absolute_path = os.path.abspath(file_path)
+
+    if not os.path.exists(file_path):
+        st.error(fr"""**File Non Trovato!**
+
+        Impossibile trovare il file `current_desires.json`.
+
+        **Percorso Controllato:** `{absolute_path}`
+
+        **Possibili Soluzioni:**
+        1.  **Verifica la Directory di Lavoro:** Assicurati di eseguire il comando `streamlit run app.py` dalla directory principale del progetto (`C:\Users\anton\workspace\unical`).
+        2.  **Controlla il Nome del File:** Verifica che il file si chiami esattamente `current_desires.json` (tutto minuscolo) e si trovi nella cartella `data`.
+        """)
+        return None
+
     try:
-        if os.path.exists("./data/current_desires.json"):
-            with open("./data/current_desires.json", 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                return data.get('desires', [])
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        if not data:
+            st.warning(f"Il file `{file_path}` è vuoto.")
+            return []
+
+        # Controlla la struttura semplice (usata da versioni precedenti o manualmente)
+        if 'desires' in data and isinstance(data['desires'], list):
+            return data['desires']
+
+        # Controlla la struttura complessa (output dell'agente Alì)
+        elif 'personas' in data and isinstance(data['personas'], list):
+            extracted_desires = []
+            for persona in data["personas"]:
+                if "desires" in persona and isinstance(persona["desires"], list):
+                    for desire in persona["desires"]:
+                        extracted_desires.append({
+                            "id": desire.get("desire_id", f"gen_{len(extracted_desires) + 1}"),
+                            "description": desire.get("desire_statement", "N/A"),
+                            "priority": "medium",
+                            "context": f"Persona: {persona.get('persona_name', 'N/A')}",
+                            "success_criteria": "\n".join(desire.get("success_metrics", [])),
+                            "timestamp": datetime.now().isoformat()
+                        })
+            if not extracted_desires:
+                 st.warning(f"Il file `{file_path}` ha una struttura a 'personas' ma non sono stati trovati desires al suo interno.")
+            return extracted_desires
+
+        else:
+            st.error(f"**Struttura JSON Non Riconosciuta!**\n\nIl file `{file_path}` non sembra contenere né una chiave 'desires' né una chiave 'personas'.")
+            return None
+
+    except json.JSONDecodeError as e:
+        st.error(f"**Errore di Formato JSON!**\n\nIl file `{file_path}` contiene un errore e non può essere letto.\n\n**Dettagli:** {e}")
+        return None
     except Exception as e:
-        st.error(f"Errore nel caricamento dei desires: {str(e)}")
-    return None
+        st.error(f"**Errore Inaspettato!**\n\nSi è verificato un errore durante la lettura del file: {e}")
+        return None
 
 # Sidebar per configurazione
 with st.sidebar:
@@ -70,18 +124,24 @@ with st.sidebar:
         st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
         provider = None
     else:
+        # Imposta Gemini come default se disponibile
+        default_provider = "Gemini" if "Gemini" in available_providers else available_providers[0]
         provider = st.selectbox(
             "Provider LLM",
             available_providers,
+            index=available_providers.index(default_provider),
             key="believer_provider"
         )
 
         if provider:
             models = st.session_state.llm_manager.get_models_for_provider(provider)
+            # Imposta Gemini 2.5 Pro come default se disponibile
+            default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
             model = st.selectbox(
                 "Modello",
                 options=list(models.keys()),
                 format_func=lambda x: models[x],
+                index=list(models.keys()).index(default_model),
                 key="believer_model"
             )
 
@@ -98,7 +158,8 @@ with st.sidebar:
             for desire in st.session_state.loaded_desires:
                 st.markdown(f"**#{desire['id']}**: {desire['description']}")
     else:
-        st.warning("⚠️ Nessun desire trovato!")
+        # Il messaggio di errore/warning viene già mostrato da load_desires()
+        pass
 
     st.divider()
 
@@ -108,6 +169,7 @@ with st.sidebar:
     if st.button("🔄 Nuova Conversazione", use_container_width=True):
         st.session_state.believer_chat_history = []
         st.session_state.believer_greeted = False
+        st.session_state.loaded_desires = None # Forza il ricaricamento
         st.rerun()
 
     if st.button("✅ Completa Sessione", type="primary", use_container_width=True):
@@ -130,10 +192,30 @@ with st.sidebar:
             with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
                 json.dump(final_data, f, ensure_ascii=False, indent=2)
 
-            st.success(f"✅ Sessione completata! BDI salvato in:\n{filename}")
+            st.success(f"✅ Sessione completata! {len(st.session_state.beliefs)} Beliefs salvati in:\n{filename}")
             st.balloons()
+        elif len(st.session_state.believer_chat_history) > 1:
+            # Se ci sono messaggi ma nessun belief estratto, salva comunque la chat
+            chat_only_data = {
+                "timestamp": datetime.now().isoformat(),
+                "desires": st.session_state.loaded_desires or [],
+                "beliefs": [],
+                "chat_history": st.session_state.believer_chat_history
+            }
+
+            os.makedirs("./data/sessions", exist_ok=True)
+            filename = f"./data/sessions/bdi_complete_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(chat_only_data, f, ensure_ascii=False, indent=2)
+
+            with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
+                json.dump(chat_only_data, f, ensure_ascii=False, indent=2)
+
+            st.warning("⚠️ Nessun belief identificato, ma la conversazione è stata salvata.")
+            st.info("💡 Suggerimento: Chiedi a Believer di generare il report finale con i beliefs identificati.")
         else:
-            st.warning("⚠️ Nessun belief identificato ancora!")
+            st.warning("⚠️ Nessuna conversazione da salvare!")
 
     st.divider()
 
@@ -144,9 +226,6 @@ with st.sidebar:
             with st.expander(f"#{belief['id']}: {belief['description'][:30]}..."):
                 st.json(belief)
 
-    # Spacer per spingere le statistiche in basso
-    st.markdown("<br>" * 5, unsafe_allow_html=True)
-
     # Statistiche in basso
     st.divider()
     st.subheader("📊 Statistiche")
@@ -154,7 +233,7 @@ with st.sidebar:
     st.metric("Belief Identificati", len(st.session_state.beliefs))
 
     stats = st.session_state.doc_processor.get_stats()
-    st.metric("Documenti in KB", stats['document_count'])
+    st.metric("Contenuti in KB", stats['document_count'])
 
 # Main content
 st.title("💡 Believer - Agent for Beliefs")
@@ -170,7 +249,8 @@ if kb_stats['document_count'] == 0:
     st.stop()
 
 if not st.session_state.loaded_desires:
-    st.warning("⚠️ Nessun desire trovato! Completa prima la sessione con Alì.")
+    # La funzione load_desires() viene chiamata nella sidebar e mostra già un errore se necessario
+    st.warning("⚠️ Nessun desire trovato o il file non è valido. Controlla i messaggi nella sidebar.")
     if st.button("🎯 Vai ad Alì"):
         st.switch_page("pages/2_Ali.py")
     st.stop()
