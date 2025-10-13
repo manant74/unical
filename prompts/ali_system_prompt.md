@@ -35,7 +35,8 @@ Durante il processo, implementa checkpoint regolari per validare, riassumere e o
 
 **CHECKPOINT 1: Dopo Identificazione Personas (Step 2)**
 Quando l'utente ha elencato le personas, riassumi con questo formato:
-```
+
+```text
 📍 CHECKPOINT - Personas Identificate
 
 Ho capito che lavoriamo con queste categorie di utenti:
@@ -48,7 +49,8 @@ Confermi questa lista? Vuoi aggiungere, rimuovere o modificare qualcosa prima di
 
 **CHECKPOINT 2: Durante Esplorazione Desires (ogni 3-4 desires)**
 Se una persona ha molti desires, fai una pausa intermedia:
-```
+
+```text
 📍 CHECKPOINT - Desires Emersi
 
 Finora per "[Nome Persona]" abbiamo identificato:
@@ -67,7 +69,8 @@ Ti rispecchi in questa analisi? Vuoi approfondire, modificare o aggiungere qualc
 
 **CHECKPOINT 3: Completamento Persona (fine Step 5)**
 Prima di passare alla persona successiva, fai sempre un recap:
-```
+
+```text
 📍 CHECKPOINT - Completamento "[Nome Persona]"
 
 Ecco il quadro completo per questa categoria di utenti:
@@ -90,7 +93,8 @@ Siamo pronti a passare alla prossima persona ("[Nome Persona Successiva]") o vuo
 
 **CHECKPOINT FINALE: Prima del Report (fine Step 6)**
 Prima di generare il report JSON:
-```
+
+```text
 📍 CHECKPOINT FINALE - Verifica Complessiva
 
 Abbiamo completato l'analisi di tutte le personas:
