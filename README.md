@@ -66,6 +66,7 @@ Il **primo passo** nel workflow LUMIA. Contextual trasforma documenti non strutt
 - **Database vettoriale persistente**: ChromaDB memorizza gli embeddings per ricerche semantiche veloci
 - **Test della KB**: Interfaccia per interrogare la base di conoscenza e verificare la qualità dell'indicizzazione
 - **Gestione contesto**: Possibilità di reset completo del database per iniziare nuove sessioni
+- **Auto-generazione contesto**: Analizza automaticamente i documenti caricati per generare una descrizione del contesto (salvata in `current_context.json`)
 
 **Tecnologia RAG**: Implementa Retrieval Augmented Generation, permettendo agli agenti di accedere a informazioni rilevanti contestualizzate durante le conversazioni.
 
@@ -86,9 +87,11 @@ Il **primo passo** nel workflow LUMIA. Contextual trasforma documenti non strutt
 
 - Supporto multi-LLM (Gemini, Claude, OpenAI) con selezione modello
 - Accesso RAG alla knowledge base per contestualizzare i desires nel dominio
+- **Saluto contestualizzato**: Al primo accesso, carica automaticamente la descrizione del contesto generata da Contextual per personalizzare l'approccio
 - Parsing automatico del report JSON finale per estrarre desires strutturati
-- Possibilità di aggiunta manuale di desires con metadati (priorità, contesto, criteri di successo)
+- **Aggiunta manuale desires**: Interfaccia nella sidebar per creare desires manualmente con metadati completi
 - Salvataggio sessioni con timestamp e storico conversazioni
+- **UI ottimizzata**: Chat pulita con form di gestione nella sidebar
 
 **Output**: File JSON con struttura `personas → desires → metrics` salvato in `data/current_desires.json`
 
@@ -119,8 +122,9 @@ Il **primo passo** nel workflow LUMIA. Contextual trasforma documenti non strutt
 - Metadati arricchiti (tipo entità, fonte testuale esatta)
 - Correlazione esplicita belief-desire con spiegazione
 - Gap analysis facilitata per identificare informazioni mancanti
-- Possibilità di aggiunta manuale di beliefs
+- **Aggiunta manuale beliefs**: Interfaccia nella sidebar per creare beliefs manualmente con correlazione ai desires
 - Export completo del framework BDI
+- **UI ottimizzata**: Chat pulita con form di gestione nella sidebar
 
 **Output**: File JSON completo con desires + beliefs + chat history salvato in `data/current_bdi.json`
 
@@ -278,9 +282,19 @@ LUMIA Studio segue un workflow sequenziale ben definito:
 
 ### Funzionalità Avanzate
 
+#### Saluto Contestualizzato (Alì)
+
+Al primo accesso ad Alì, l'agente:
+
+- Legge automaticamente il file `current_context.json` generato da Contextual
+- Personalizza il messaggio di benvenuto includendo la descrizione del contesto
+- Se il file non esiste, lo genera analizzando i titoli dei documenti nella KB usando l'LLM
+
+Questo permette ad Alì di avere immediatamente il contesto del dominio su cui lavorare.
+
 #### Aggiunta Manuale di Desires (Alì)
 
-Espandi "➕ Aggiungi Desire Manualmente" e compila:
+Nella sidebar di Alì, espandi "➕ Aggiungi Desire Manualmente" e compila:
 
 - Descrizione del desire
 - Priorità (high/medium/low)
@@ -289,7 +303,7 @@ Espandi "➕ Aggiungi Desire Manualmente" e compila:
 
 #### Aggiunta Manuale di Beliefs (Believer)
 
-Espandi "➕ Aggiungi Belief Manualmente" e compila:
+Nella sidebar di Believer, espandi "➕ Aggiungi Belief Manualmente" e compila:
 
 - Descrizione del belief
 - Tipo (fact/assumption/principle/constraint)
@@ -327,8 +341,9 @@ unical/
 ├── data/
 │   ├── chroma_db/         # Database vettoriale
 │   ├── sessions/          # Sessioni salvate
-│   ├── current_desires.json
-│   └── current_bdi.json
+│   ├── current_context.json   # Contesto generato automaticamente
+│   ├── current_desires.json   # Desires estratti da Alì
+│   └── current_bdi.json       # Framework BDI completo
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
