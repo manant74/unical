@@ -174,6 +174,15 @@ with col2:
         if st.session_state.uploaded_files_info:
             st.session_state.doc_processor.clear_database()
             st.session_state.uploaded_files_info = []
+
+            # Cancella anche il file current_context.json se esiste
+            context_file = "./data/current_context.json"
+            if os.path.exists(context_file):
+                try:
+                    os.remove(context_file)
+                except Exception as e:
+                    st.warning(f"⚠️ Impossibile cancellare current_context.json: {e}")
+
             st.success("✅ Contesto cancellato con successo!")
             st.rerun()
         else:

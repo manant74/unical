@@ -124,3 +124,24 @@ class DocumentProcessor:
             "document_count": count,
             "status": "active" if count > 0 else "empty"
         }
+
+    def get_all_sources(self) -> List[str]:
+        """Restituisce tutti i nomi delle fonti (documenti) presenti nel database"""
+        if not self.collection:
+            self.initialize_db()
+
+        count = self.collection.count()
+        if count == 0:
+            return []
+
+        # Recupera tutti i documenti con i loro metadati
+        results = self.collection.get()
+
+        # Estrai le fonti uniche dai metadati
+        sources = set()
+        if results and 'metadatas' in results:
+            for metadata in results['metadatas']:
+                if metadata and 'source' in metadata:
+                    sources.add(metadata['source'])
+
+        return list(sources)

@@ -219,6 +219,45 @@ with st.sidebar:
 
     st.divider()
 
+    # Quick action: Add belief manually
+    with st.expander("➕ Aggiungi Belief Manualmente"):
+        st.markdown("Compila i campi per aggiungere un belief manualmente")
+
+        belief_desc = st.text_area("Descrizione", key="manual_belief_desc")
+        belief_type = st.selectbox("Tipo", ["fact", "assumption", "principle", "constraint"], key="manual_belief_type")
+        belief_confidence = st.selectbox("Confidenza", ["high", "medium", "low"], key="manual_belief_confidence")
+
+        # Multi-select per desires correlati
+        if st.session_state.loaded_desires:
+            desire_options = {d['id']: f"#{d['id']}: {d['description'][:50]}" for d in st.session_state.loaded_desires}
+            selected_desires = st.multiselect(
+                "Desires Correlati",
+                options=list(desire_options.keys()),
+                format_func=lambda x: desire_options[x],
+                key="manual_belief_desires"
+            )
+        else:
+            selected_desires = []
+
+        belief_evidence = st.text_area("Evidenze", key="manual_belief_evidence")
+
+        if st.button("Aggiungi Belief"):
+            if belief_desc:
+                new_belief = {
+                    "id": len(st.session_state.beliefs) + 1,
+                    "description": belief_desc,
+                    "type": belief_type,
+                    "confidence": belief_confidence,
+                    "related_desires": selected_desires,
+                    "evidence": belief_evidence,
+                    "timestamp": datetime.now().isoformat()
+                }
+                st.session_state.beliefs.append(new_belief)
+                st.success("✅ Belief aggiunto!")
+                st.rerun()
+            else:
+                st.warning("⚠️ Inserisci almeno una descrizione")
+
     # Visualizza beliefs
     if st.session_state.beliefs:
         st.subheader("💡 Belief Identificati")
@@ -335,59 +374,17 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
         except Exception as e:
             st.error(f"❌ Errore: {str(e)}")
 
-# Sezione di aiuto ed export
+# Export button
 st.markdown("---")
-col1, col2 = st.columns([3, 1])
-
-with col1:
-    st.markdown("💡 **Suggerimento**: Usa la sidebar per configurare il provider LLM, gestire la sessione e visualizzare le statistiche.")
-
-with col2:
-    if st.session_state.beliefs:
-        export_data = {
-            "desires": st.session_state.loaded_desires,
-            "beliefs": st.session_state.beliefs
-        }
-        st.download_button(
-            "📊 Esporta BDI",
-            data=json.dumps(export_data, ensure_ascii=False, indent=2),
-            file_name=f"bdi_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-            mime="application/json",
-            use_container_width=True
-        )
-
-# Quick action: Add belief manually
-with st.expander("➕ Aggiungi Belief Manualmente"):
-    st.markdown("Compila i campi per aggiungere un belief manualmente")
-
-    belief_desc = st.text_area("Descrizione", key="manual_belief_desc")
-    belief_type = st.selectbox("Tipo", ["fact", "assumption", "principle", "constraint"], key="manual_belief_type")
-    belief_confidence = st.selectbox("Confidenza", ["high", "medium", "low"], key="manual_belief_confidence")
-
-    # Multi-select per desires correlati
-    desire_options = {d['id']: f"#{d['id']}: {d['description'][:50]}" for d in st.session_state.loaded_desires}
-    selected_desires = st.multiselect(
-        "Desires Correlati",
-        options=list(desire_options.keys()),
-        format_func=lambda x: desire_options[x],
-        key="manual_belief_desires"
+if st.session_state.beliefs:
+    export_data = {
+        "desires": st.session_state.loaded_desires,
+        "beliefs": st.session_state.beliefs
+    }
+    st.download_button(
+        "📊 Esporta BDI",
+        data=json.dumps(export_data, ensure_ascii=False, indent=2),
+        file_name=f"bdi_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+        mime="application/json",
+        use_container_width=False
     )
-
-    belief_evidence = st.text_area("Evidenze", key="manual_belief_evidence")
-
-    if st.button("Aggiungi Belief"):
-        if belief_desc:
-            new_belief = {
-                "id": len(st.session_state.beliefs) + 1,
-                "description": belief_desc,
-                "type": belief_type,
-                "confidence": belief_confidence,
-                "related_desires": selected_desires,
-                "evidence": belief_evidence,
-                "timestamp": datetime.now().isoformat()
-            }
-            st.session_state.beliefs.append(new_belief)
-            st.success("✅ Belief aggiunto!")
-            st.rerun()
-        else:
-            st.warning("⚠️ Inserisci almeno una descrizione")

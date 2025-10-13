@@ -35,6 +35,77 @@ if 'desires' not in st.session_state:
 # Carica il system prompt da file
 ALI_SYSTEM_PROMPT = get_prompt('ali')
 
+def load_or_generate_context():
+    """Carica o genera il file current_context.json basato sulla KB"""
+    context_file = "./data/current_context.json"
+
+    # Se il file esiste, caricalo
+    if os.path.exists(context_file):
+        try:
+            with open(context_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            st.warning(f"⚠️ Errore nel caricamento del context.json: {e}")
+            # Se c'è un errore, procedi a rigenerarlo
+
+    # Altrimenti, generalo
+    sources = st.session_state.doc_processor.get_all_sources()
+
+    if not sources:
+        return None
+
+    # Prepara il prompt per l'LLM
+    sources_list = "\n".join([f"- {source}" for source in sources])
+
+    analysis_prompt = f"""Analizza i seguenti titoli/nomi di documenti caricati nella knowledge base e genera:
+1. Un "contesto" generale (1-3 parole che identificano l'argomento principale, es: "Intelligenza Artificiale", "Marketing Digitale", "Sviluppo Software")
+2. Una "descrizione" del contesto in esattamente 20 parole che sintetizza il tema principale
+
+Documenti:
+{sources_list}
+
+Rispondi SOLO con un JSON nel seguente formato:
+{{
+  "contesto": "argomento principale",
+  "descrizione": "descrizione in 20 parole esatte"
+}}"""
+
+    try:
+        # Usa il provider selezionato per generare il contesto
+        available_providers = st.session_state.llm_manager.get_available_providers()
+        if not available_providers:
+            return None
+
+        provider = available_providers[0] if "Gemini" not in available_providers else "Gemini"
+        models = st.session_state.llm_manager.get_models_for_provider(provider)
+        model = list(models.keys())[0]
+
+        # Chiamata all'LLM
+        response = st.session_state.llm_manager.chat(
+            provider=provider,
+            model=model,
+            messages=[{"role": "user", "content": analysis_prompt}],
+            system_prompt="Sei un assistente che analizza documenti e genera metadati. Rispondi sempre e solo con JSON valido."
+        )
+
+        # Estrai il JSON dalla risposta
+        response_clean = response.strip()
+        if response_clean.startswith("```json"):
+            response_clean = response_clean.replace("```json", "").replace("```", "").strip()
+
+        context_data = json.loads(response_clean)
+
+        # Salva il file
+        os.makedirs("./data", exist_ok=True)
+        with open(context_file, 'w', encoding='utf-8') as f:
+            json.dump(context_data, f, ensure_ascii=False, indent=2)
+
+        return context_data
+
+    except Exception as e:
+        st.warning(f"⚠️ Errore nella generazione del contesto: {e}")
+        return None
+
 # CSS per nascondere menu Streamlit
 st.markdown("""
 <style>
@@ -139,6 +210,31 @@ with st.sidebar:
 
     st.divider()
 
+    # Quick action: Add desire manually
+    with st.expander("➕ Aggiungi Desire Manualmente"):
+        st.markdown("Compila i campi per aggiungere un desire manualmente")
+
+        desire_desc = st.text_area("Descrizione", key="manual_desire_desc")
+        desire_priority = st.selectbox("Priorità", ["high", "medium", "low"], key="manual_desire_priority")
+        desire_context = st.text_area("Contesto", key="manual_desire_context")
+        desire_criteria = st.text_area("Criteri di Successo", key="manual_desire_criteria")
+
+        if st.button("Aggiungi Desire"):
+            if desire_desc:
+                new_desire = {
+                    "id": len(st.session_state.desires) + 1,
+                    "description": desire_desc,
+                    "priority": desire_priority,
+                    "context": desire_context,
+                    "success_criteria": desire_criteria,
+                    "timestamp": datetime.now().isoformat()
+                }
+                st.session_state.desires.append(new_desire)
+                st.success("✅ Desire aggiunto!")
+                st.rerun()
+            else:
+                st.warning("⚠️ Inserisci almeno una descrizione")
+
     # Visualizza desires
     if st.session_state.desires:
         st.subheader("🎯 Desire Identificati")
@@ -175,7 +271,15 @@ if not available_providers or provider is None:
 
 # Saluto iniziale
 if not st.session_state.ali_greeted:
-    greeting = "Ciao! Sono Alì e sono qui per aiutarti a trovare i tuoi Desire. 🎯\n\nHo accesso alla tua base di conoscenza e posso aiutarti a identificare obiettivi chiari e raggiungibili nel tuo dominio. Dimmi, cosa vuoi ottenere?"
+    # Carica o genera il contesto
+    context_data = load_or_generate_context()
+
+    # Costruisci il messaggio di saluto
+    if context_data and 'descrizione' in context_data:
+        greeting = f"Ciao! Sono Alì e sono qui per aiutarti a trovare i tuoi Desire. 🎯\n\nHai creato un contesto che parla di {context_data['descrizione']}\n\nOra posso aiutarti a identificare obiettivi chiari e raggiungibili nel tuo dominio. Dimmi, cosa vuoi ottenere?"
+    else:
+        greeting = "Ciao! Sono Alì e sono qui per aiutarti a trovare i tuoi Desire. 🎯\n\nHo accesso alla tua base di conoscenza e posso aiutarti a identificare obiettivi chiari e raggiungibili nel tuo dominio. Dimmi, cosa vuoi ottenere?"
+
     st.session_state.ali_chat_history.append({
         "role": "assistant",
         "content": greeting
@@ -270,32 +374,3 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
 
         except Exception as e:
             st.error(f"❌ Errore: {str(e)}")
-
-# Sezione di aiuto
-st.markdown("---")
-st.markdown("💡 **Suggerimento**: Usa la sidebar per configurare il provider LLM, gestire la sessione e visualizzare le statistiche.")
-
-# Quick action: Add desire manually
-with st.expander("➕ Aggiungi Desire Manualmente"):
-    st.markdown("Compila i campi per aggiungere un desire manualmente")
-
-    desire_desc = st.text_area("Descrizione", key="manual_desire_desc")
-    desire_priority = st.selectbox("Priorità", ["high", "medium", "low"], key="manual_desire_priority")
-    desire_context = st.text_area("Contesto", key="manual_desire_context")
-    desire_criteria = st.text_area("Criteri di Successo", key="manual_desire_criteria")
-
-    if st.button("Aggiungi Desire"):
-        if desire_desc:
-            new_desire = {
-                "id": len(st.session_state.desires) + 1,
-                "description": desire_desc,
-                "priority": desire_priority,
-                "context": desire_context,
-                "success_criteria": desire_criteria,
-                "timestamp": datetime.now().isoformat()
-            }
-            st.session_state.desires.append(new_desire)
-            st.success("✅ Desire aggiunto!")
-            st.rerun()
-        else:
-            st.warning("⚠️ Inserisci almeno una descrizione")
