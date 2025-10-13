@@ -1,27 +1,28 @@
 {
-  "domain_summary": "Costruzione di corsi di inglese focalizzati sulle esigenze specifiche degli studenti universitari.",
+  "domain_summary": "Analisi strategica per la creazione di un corso di lingua inglese di livello B1, specificamente mirato a soddisfare le esigenze di studenti liceali che si preparano per un viaggio.",
   "personas": [
     {
-      "persona_name": "Lo Studente Universitario",
-      "persona_description": "Uno studente che necessita di migliorare le proprie competenze in lingua inglese per il suo percorso accademico, per l'accesso a risorse internazionali e per prepararsi alle future opportunità professionali o di studio all'estero.",
+      "persona_name": "Il Liceale in Partenza",
+      "persona_description": "Studente di liceo, tipicamente tra i 16 e i 18 anni, motivato a imparare l'inglese non per obbligo scolastico, ma in preparazione a un'esperienza di viaggio a Londra. Il suo obiettivo primario è l'indipendenza e la sicurezza nelle interazioni sociali reali.",
       "desires": [
         {
           "desire_id": "P1-D1",
-          "desire_statement": "Desidera poter partecipare attivamente e comprendere le lezioni tenute in lingua inglese durante il suo percorso di studi o in future esperienze accademiche.",
-          "motivation": "La necessità di seguire con profitto i corsi, contribuire alle discussioni, non sentirsi escluso e massimizzare l'apprendimento accademico.",
+          "desire_statement": "Sentirsi sicuro e disinvolto nelle interazioni sociali informali, come ordinare in un pub o chiacchierare con coetanei, per godersi appieno l'esperienza del viaggio.",
+          "motivation": "Paura dell'imbarazzo e del giudizio sociale. Forte bisogno di autostima, di essere accettato e di vivere un'esperienza di viaggio autentica e senza ansie, sentendosi parte del contesto e non un turista goffo.",
           "success_metrics": [
-            "Sentirsi a proprio agio in aula.",
-            "Porre domande pertinenti.",
-            "Capire le spiegazioni dei docenti senza difficoltà."
+            "Riuscire a ordinare da bere e scambiare qualche battuta senza bloccarsi.",
+            "Intraprendere una breve conversazione con un coetaneo senza sentirsi a disagio.",
+            "Tornare a casa dal viaggio con la sensazione di essersela cavata brillantemente nelle situazioni sociali."
           ]
         },
         {
           "desire_id": "P1-D2",
-          "desire_statement": "Desidera essere in grado di leggere e comprendere testi accademici, articoli scientifici, libri di testo e altre risorse in lingua inglese in modo autonomo.",
-          "motivation": "Accedere a una più ampia gamma di conoscenze, approfondire argomenti specifici, prepararsi per esami o ricerche che richiedono l'uso di letteratura internazionale.",
+          "desire_statement": "Avere una pronuncia abbastanza chiara e naturale da non diventare un ostacolo alla comunicazione o una fonte di imbarazzo.",
+          "motivation": "La paura di essere giudicato o deriso per il proprio accento. Il bisogno di essere compreso facilmente per avere conversazioni fluide e non sentirsi 'lo straniero che parla male'.",
           "success_metrics": [
-            "Concludere la lettura di un articolo accademico o di un capitolo di libro comprendendone i punti chiave.",
-            "Essere in grado di citare fonti in inglese."
+            "Non dover ripetere più volte una frase perché non viene capito.",
+            "Vedere che l'interlocutore capisce al primo colpo.",
+            "Notare che la conversazione prosegue senza intoppi legati alla pronuncia."
           ]
         }
       ]
