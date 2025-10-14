@@ -3,7 +3,7 @@ import os
 import sys
 import json
 from datetime import datetime
-
+import re
 # Aggiungi la directory parent al path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -331,12 +331,18 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
                 st.markdown(response)
 
             # --- NUOVA LOGICA PER PARSARE IL JSON ---
-            if response.strip().startswith("```json"):
+            json_content_str = None
+            if "```" in response:
+                json_block = re.search(r"```json\s*(.*?)\s*```", response, re.IGNORECASE | re.DOTALL)
+                if not json_block:
+                    json_block = re.search(r"```[^{]*({.*?})\s*```", response, re.DOTALL)
+                if json_block:
+                    json_content_str = json_block.group(1).strip()
+            elif response.strip().startswith("{"):
+                json_content_str = response.strip()
+
+            if json_content_str:
                 try:
-                    # Estrai il contenuto JSON dal blocco di codice
-                    json_content_str = response.strip().replace("```json", "").replace("```", "").strip()
-                    
-                    # Parsa il JSON
                     parsed_json = json.loads(json_content_str)
 
                     # Estrai i desires dal report

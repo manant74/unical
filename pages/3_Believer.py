@@ -3,7 +3,7 @@ import os
 import sys
 import json
 from datetime import datetime
-
+import re
 # Aggiungi la directory parent al path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -370,6 +370,65 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
 
             with st.chat_message("assistant"):
                 st.markdown(response)
+            json_match = re.search(r'```json(.*?)```', response, re.DOTALL) or re.search(r'\{[\s\S]*\}', response)
+            if json_match:
+                try:
+                    json_str = json_match.group(1).strip() if '```' in json_match.group(0) else json_match.group(0).strip()
+                    parsed_json = json.loads(json_str)
+
+                    extracted_beliefs = []
+
+                    if "beliefs" in parsed_json and isinstance(parsed_json["beliefs"], list):
+                        for b in parsed_json["beliefs"]:
+                            description_parts = []
+                            soggetto = b.get("soggetto", "")
+                            relazione = b.get("relazione", "")
+                            oggetto = b.get("oggetto", "")
+                            if soggetto or relazione or oggetto:
+                                description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
+                            else:
+                                description_parts.append("N/A")
+
+                            extracted_beliefs.append({
+                                "id": len(st.session_state.beliefs) + len(extracted_beliefs) + 1,
+                                "description": " ".join(description_parts),
+                                "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
+                                "confidence": "medium",
+                                "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
+                                "evidence": b.get("fonte", ""),
+                                "timestamp": datetime.now().isoformat()
+                            })
+
+                    elif "personas" in parsed_json and isinstance(parsed_json["personas"], list):
+                        for persona in parsed_json["personas"]:
+                            if "beliefs" in persona and isinstance(persona["beliefs"], list):
+                                for b in persona["beliefs"]:
+                                    soggetto = b.get("soggetto", "")
+                                    relazione = b.get("relazione", "")
+                                    oggetto = b.get("oggetto", "")
+                                    description = f"{soggetto} {relazione} {oggetto}".strip() or "N/A"
+
+                                    extracted_beliefs.append({
+                                        "id": len(st.session_state.beliefs) + len(extracted_beliefs) + 1,
+                                        "description": description,
+                                        "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
+                                        "confidence": "medium",
+                                        "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
+                                        "evidence": b.get("fonte", ""),
+                                        "timestamp": datetime.now().isoformat()
+                                    })
+
+                    if extracted_beliefs:
+                        st.session_state.beliefs = extracted_beliefs
+                        st.success(f"✅ {len(extracted_beliefs)} beliefs estratti correttamente dal report JSON!")
+                        st.rerun()
+                    else:
+                        st.warning("⚠️ JSON rilevato, ma nessun belief valido trovato.")
+
+                except json.JSONDecodeError:
+                    st.error("❌ Il JSON rilevato non è valido.")
+                except Exception as e:
+                    st.error(f"❌ Errore durante il parsing del report JSON: {e}")
 
         except Exception as e:
             st.error(f"❌ Errore: {str(e)}")
