@@ -14,7 +14,8 @@ from utils.prompts import get_prompt
 st.set_page_config(
     page_title="Alì - LUMIA Studio",
     page_icon="🎯",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Inizializza il session state
@@ -110,7 +111,7 @@ Rispondi SOLO con un JSON nel seguente formato:
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {display: none;}
-    
+
 </style>
 """, unsafe_allow_html=True)
 

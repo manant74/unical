@@ -90,8 +90,9 @@ st.markdown(f"""
     footer {{visibility: hidden;}}
     header {{visibility: hidden;}}
 
-    /* Nascondi solo il menu di navigazione automatico di Streamlit */
+    /* Nascondi completamente la sidebar nella homepage */
     [data-testid="stSidebarNav"] {{display: none;}}
+    section[data-testid="stSidebar"] {{display: none;}}
 
     /* Background gradiente animato */
     .main {{
@@ -383,8 +384,8 @@ st.markdown(f"""
     <div class='main-title'>✨ LUMIA Studio</div>
     <div class='main-subtitle'>Belief · Desire · Intention System</div>
     <div class='main-description'>
-        Trasforma la conoscenza in azione. Un framework intelligente per definire obiettivi,
-        identificare credenze e pianificare azioni attraverso agenti AI conversazionali.
+        Transform knowledge into action. An intelligent framework to define goals,
+        identify beliefs, and plan actions through conversational AI agents.
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -394,15 +395,15 @@ st.markdown("""
 <div class='stats-container'>
     <div class='stat-badge'>
         <span class='stat-number'>3</span>
-        <span class='stat-label'>Agenti AI</span>
+        <span class='stat-label'>AI Agents</span>
     </div>
     <div class='stat-badge'>
         <span class='stat-number'>5</span>
-        <span class='stat-label'>Moduli</span>
+        <span class='stat-label'>Modules</span>
     </div>
     <div class='stat-badge'>
         <span class='stat-number'>∞</span>
-        <span class='stat-label'>Possibilità</span>
+        <span class='stat-label'>Possibilities</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -410,15 +411,15 @@ st.markdown("""
 # Workflow section
 st.markdown("""
 <div class='workflow-section'>
-    <div class='workflow-title'>🚀 Workflow Consigliato</div>
+    <div class='workflow-title'>🚀 Recommended Workflow</div>
     <div class='workflow-steps'>
-        <div class='workflow-step'>📚 <strong>1. Contextual</strong> - Carica documenti</div>
+        <div class='workflow-step'>📚 <strong>1. Contextual</strong> - Load documents</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Definisci Desire</div>
+        <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Define Desire</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identifica Belief</div>
+        <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identify Belief</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>✅ <strong>4. Validator</strong> - Valida BDI</div>
+        <div class='workflow-step'>✅ <strong>4. Validator</strong> - Validate BDI</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -428,42 +429,42 @@ features = [
     {
         "name": "Contextual",
         "emoji": "📚",
-        "description": "Carica e gestisci documenti PDF, pagine web, file di testo o markdown per costruire una base di conoscenza ricca e strutturata del tuo dominio.",
+        "description": "Load and manage PDF documents, web pages, text or markdown files to build a rich and structured knowledge base of your domain.",
         "page": "pages/1_Contextual.py",
         "status": "active",
     },
     {
         "name": "Alì",
         "emoji": "🎯",
-        "description": "Conversa con Alì, l'agente AI specializzato nell'aiutarti a identificare e definire i Desire (obiettivi) associati al tuo dominio in modo chiaro e strutturato.",
+        "description": "Chat with Alì, the AI agent specialized in helping you identify and define Desires (goals) associated with your domain in a clear and structured way.",
         "page": "pages/2_Ali.py",
         "status": "active",
     },
     {
         "name": "Believer",
         "emoji": "💡",
-        "description": "Believer ti guida nell'identificazione dei Belief (credenze, fatti, principi) che supportano i tuoi Desire, collegandoli alla tua base di conoscenza.",
+        "description": "Believer guides you in identifying Beliefs (convictions, facts, principles) that support your Desires, connecting them to your knowledge base.",
         "page": "pages/3_Believer.py",
         "status": "active",
     },
     {
         "name": "Validator",
         "emoji": "✅",
-        "description": "Valida e modifica il framework BDI (Belief-Desire-Intention) generato, assicurando che la struttura JSON sia corretta e pronta per l'uso.",
+        "description": "Validate and modify the generated BDI (Belief-Desire-Intention) framework, ensuring that the JSON structure is correct and ready to use.",
         "page": "pages/4_Validator.py",
         "status": "active",
     },
     {
         "name": "Cuma",
         "emoji": "🔮",
-        "description": "Modulo avanzato per analisi predittiva e scenario planning. Utilizza i tuoi Belief e Desire per simulare possibili outcome futuri.",
+        "description": "Advanced module for predictive analysis and scenario planning. Uses your Beliefs and Desires to simulate possible future outcomes.",
         "page": "pages/5_Cuma.py",
         "status": "dev",
     },
     {
         "name": "Genius",
         "emoji": "⚡",
-        "description": "Sistema intelligente di ottimizzazione che analizza il tuo framework BDI completo e suggerisce miglioramenti e strategie innovative.",
+        "description": "Intelligent optimization system that analyzes your complete BDI framework and suggests improvements and innovative strategies.",
         "page": "pages/6_Genius.py",
         "status": "dev",
     }
@@ -471,7 +472,7 @@ features = [
 
 # Sezione moduli
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 2rem;'>🎨 Esplora i Moduli</h2>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 2rem;'>🎨 Explore Modules</h2>", unsafe_allow_html=True)
 
 # Creazione delle feature cards con HTML personalizzato - 3 per riga
 for idx in range(0, len(features), 3):
@@ -482,7 +483,7 @@ for idx in range(0, len(features), 3):
             with col:
                 # Card HTML personalizzata
                 status_class = "status-active" if feature["status"] == "active" else "status-dev"
-                status_text = "✓ Attivo" if feature["status"] == "active" else "🚧 In Sviluppo"
+                status_text = "✓ Active" if feature["status"] == "active" else "🚧 In Development"
                 
                 # Ottieni il nome della pagina dall'URL per il link
                 page_link = feature['page'].split('/')[-1].split('.')[0].split('_', 1)[-1]
@@ -497,7 +498,7 @@ for idx in range(0, len(features), 3):
                         </div>
                         <div class='feature-description'>{feature['description']}</div>
                     </div>
-                    <a href='/{page_link}' target='_self' class='feature-button'>Apri {feature['name']}</a>
+                    <a href='/{page_link}' target='_self' class='feature-button'>Open {feature['name']}</a>
                 </div>
                 """
                 st.markdown(card_html, unsafe_allow_html=True)
@@ -511,7 +512,7 @@ st.markdown(f"""
         Powered by AI • Streamlit • ChromaDB • LangChain
     </p>
     <p style='font-size: 0.8rem; color: {text_tertiary}; margin-top: 0.5rem;'>
-        Versione 1.0 • Tema: {theme_text}
+        Version 1.0 • Theme: {theme_text}
     </p>
 </div>
 """, unsafe_allow_html=True)

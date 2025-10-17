@@ -107,7 +107,7 @@ def load_desires():
 # Sidebar per configurazione
 with st.sidebar:
     # Pulsante Home in alto
-    st.markdown("### 🧠 LUMIA Studio")
+    st.markdown("### ✨ LUMIA Studio")
     if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
         st.switch_page("app.py")
 

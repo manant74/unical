@@ -9,7 +9,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 st.set_page_config(
     page_title="Validator - LUMIA Studio",
     page_icon="✅",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # CSS per nascondere menu Streamlit e applicare font monospazio

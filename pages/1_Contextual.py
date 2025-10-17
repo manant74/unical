@@ -10,7 +10,8 @@ from utils.document_processor import DocumentProcessor
 st.set_page_config(
     page_title="Contextual - LUMIA Studio",
     page_icon="📚",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Inizializza il session state
@@ -25,18 +26,22 @@ if 'uploaded_files_info' not in st.session_state:
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {display: none;}
-    
+
 </style>
 """, unsafe_allow_html=True)
 
-# Header con pulsante Home
-col_title, col_home = st.columns([5, 1])
-with col_title:
-    st.title("📚 Contextual")
-    st.markdown("**Crea la tua base di conoscenza caricando documenti, pagine web e file di testo**")
-with col_home:
-    if st.button("🏠 Home", use_container_width=True):
+# Sidebar
+with st.sidebar:
+    # Pulsante Home in alto
+    st.markdown("### ✨ LUMIA Studio")
+    if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
         st.switch_page("app.py")
+
+    st.divider()
+
+# Header
+st.title("📚 Contextual")
+st.markdown("**Crea la tua base di conoscenza caricando documenti, pagine web e file di testo**")
 
 st.divider()
 
@@ -47,7 +52,7 @@ with col1:
     st.subheader("📤 Carica Documenti")
 
     # Tabs per diversi tipi di input
-    tab1, tab2, tab3, tab4 = st.tabs(["📄 PDF", "🌐 Pagine Web", "📝 File di Testo", "📋 Markdown"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📕 PDF", "🌐 Pagine Web", "📑 File di Testo", "📋 Markdown"])
 
     with tab1:
         st.markdown("Carica file PDF per estrarre il contenuto testuale")
@@ -151,25 +156,81 @@ with col1:
                     except Exception as e:
                         st.error(f"❌ Errore durante l'elaborazione di {md_file.name}: {str(e)}")
 
-with col2:
-    st.subheader("📊 Stato della Base di Conoscenza")
-
-    # Statistiche
-    stats = st.session_state.doc_processor.get_stats()
-
-    st.metric("Contenuti nel Database", stats['document_count'])
-    st.metric("File Caricati", len(st.session_state.uploaded_files_info))
-
-    # Lista dei file caricati
-    if st.session_state.uploaded_files_info:
-        st.markdown("---")
-        st.markdown("**File Caricati:**")
-        for idx, file_info in enumerate(st.session_state.uploaded_files_info, 1):
-            with st.expander(f"{file_info['type']}: {file_info['name']}"):
-                st.write(f"Chunks: {file_info['chunks']}")
-
-    # Pulsante per cancellare tutto
+    # Test della ricerca
     st.markdown("---")
+    st.markdown(" ")
+    st.subheader("🔍 Test sulla Knowledge Base")
+
+    col_test1, col_test2 = st.columns([3, 1])
+
+    with col_test1:
+        query = st.text_input(
+            "Prova a cercare qualcosa nella tua Knowledge Base",
+            placeholder="Inserisci una query di test..."
+        )
+
+    with col_test2:
+        n_results = st.number_input("N. risultati", min_value=1, max_value=10, value=3)
+
+    if query and st.button("Cerca", key="search_btn"):
+        if stats['document_count'] > 0:
+            with st.spinner("Ricerca in corso..."):
+                results = st.session_state.doc_processor.query(query, n_results=n_results)
+
+                if results and results['documents'] and results['documents'][0]:
+                    st.markdown("**Risultati trovati:**")
+                    for i, (doc, metadata) in enumerate(zip(results['documents'][0], results['metadatas'][0]), 1):
+                        with st.expander(f"Risultato {i} - {metadata.get('source', 'Unknown')}"):
+                            st.write(doc)
+                else:
+                    st.warning("Nessun risultato trovato")
+        else:
+            st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
+
+with col2:
+    
+    st.markdown("##### 📊 Stato della Knowledge Base")
+
+    # Statistiche su due colonne centrate orizzontalmente
+    stats = st.session_state.doc_processor.get_stats()
+    sources = st.session_state.doc_processor.get_all_sources()
+
+    # Usa colonne con spaziatura per centrare
+    _, metric_col1, metric_col2, _ = st.columns([0.5, 1, 1, 0.5])
+    with metric_col1:
+        st.metric("Contenuti DB", stats['document_count'])
+    with metric_col2:
+        st.metric("Documenti", len(sources))
+
+    # Lista dei contenuti caricati dal database
+    if sources:
+        st.markdown("---")
+        for idx, source in enumerate(sources, 1):
+            # Determina il tipo dal prefisso della source
+            if source.startswith("PDF:"):
+                icon = "📕"
+                source_type = "PDF"
+                name = source.replace("PDF: ", "")
+            elif source.startswith("Web:"):
+                icon = "🌐"
+                source_type = "Web"
+                name = source.replace("Web: ", "")
+            elif source.startswith("TXT:"):
+                icon = "📑"
+                source_type = "Text"
+                name = source.replace("TXT: ", "")
+            elif source.startswith("MD:"):
+                icon = "📋"
+                source_type = "Markdown"
+                name = source.replace("MD: ", "")
+            else:
+                icon = "📄"
+                source_type = "Unknown"
+                name = source
+
+            with st.expander(f"{icon} {source_type}: {name}"):
+                st.caption(f"**Source ID:** {source}")
+    # Pulsante per cancellare tutto in alto
     if st.button("🗑️ Cancella Contesto", type="secondary", use_container_width=True):
         if st.session_state.uploaded_files_info:
             st.session_state.doc_processor.clear_database()
@@ -188,35 +249,6 @@ with col2:
         else:
             st.info("Nessun contesto da cancellare")
 
-# Test della ricerca
-st.markdown("---")
-st.subheader("🔍 Test della Base di Conoscenza")
-
-col_test1, col_test2 = st.columns([3, 1])
-
-with col_test1:
-    query = st.text_input(
-        "Prova a cercare qualcosa nella tua base di conoscenza",
-        placeholder="Inserisci una query di test..."
-    )
-
-with col_test2:
-    n_results = st.number_input("N. risultati", min_value=1, max_value=10, value=3)
-
-if query and st.button("Cerca", key="search_btn"):
-    if stats['document_count'] > 0:
-        with st.spinner("Ricerca in corso..."):
-            results = st.session_state.doc_processor.query(query, n_results=n_results)
-
-            if results and results['documents'] and results['documents'][0]:
-                st.markdown("**Risultati trovati:**")
-                for i, (doc, metadata) in enumerate(zip(results['documents'][0], results['metadatas'][0]), 1):
-                    with st.expander(f"Risultato {i} - {metadata.get('source', 'Unknown')}"):
-                        st.write(doc)
-            else:
-                st.warning("Nessun risultato trovato")
-    else:
-        st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
 
 # Suggerimento
 st.markdown("---")
