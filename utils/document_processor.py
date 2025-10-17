@@ -6,7 +6,13 @@ import requests
 from bs4 import BeautifulSoup
 import chromadb
 from chromadb.config import Settings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# Import text splitter dalla nuova versione
+try:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+except ImportError:
+    # Fallback alla vecchia versione
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Importa dalla nuova versione per evitare deprecation warning
 try:
