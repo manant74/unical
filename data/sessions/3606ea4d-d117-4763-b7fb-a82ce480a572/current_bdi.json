@@ -1,14 +1,35 @@
 {
-  "desires": [
+  "domains": [
     {
-      "desire_id": "P1-D1",
-      "descrizione": "Sentirsi sicuro e disinvolto nelle interazioni sociali informali, come ordinare in un pub o chiacchierare con coetanei, per godersi appieno l'esperienza del viaggio.",
-      "priorità": "medium"
-    },
-    {
-      "desire_id": "P1-D2",
-      "descrizione": "Avere una pronuncia abbastanza chiara e naturale da non diventare un ostacolo alla comunicazione o una fonte di imbarazzo.",
-      "priorità": "medium"
+      "domain_summary": "Analisi strategica per la creazione di un corso di lingua inglese di livello B1, specificamente mirato a soddisfare le esigenze di studenti liceali che si preparano per un viaggio.",
+      "personas": [
+        {
+          "persona_name": "Il Liceale in Partenza",
+          "persona_description": "Studente di liceo, tipicamente tra i 16 e i 18 anni, motivato a imparare l'inglese non per obbligo scolastico, ma in preparazione a un'esperienza di viaggio a Londra. Il suo obiettivo primario è l'indipendenza e la sicurezza nelle interazioni sociali reali.",
+          "desires": [
+            {
+              "desire_id": "P1-D1",
+              "desire_statement": "Sentirsi sicuro e disinvolto nelle interazioni sociali informali, come ordinare in un pub o chiacchierare con coetanei, per godersi appieno l'esperienza del viaggio.",
+              "motivation": "Paura dell'imbarazzo e del giudizio sociale. Forte bisogno di autostima, di essere accettato e di vivere un'esperienza di viaggio autentica e senza ansie, sentendosi parte del contesto e non un turista goffo.",
+              "success_metrics": [
+                "Riuscire a ordinare da bere e scambiare qualche battuta senza bloccarsi.",
+                "Intraprendere una breve conversazione con un coetaneo senza sentirsi a disagio.",
+                "Tornare a casa dal viaggio con la sensazione di essersela cavata brillantemente nelle situazioni sociali."
+              ]
+            },
+            {
+              "desire_id": "P1-D2",
+              "desire_statement": "Avere una pronuncia abbastanza chiara e naturale da non diventare un ostacolo alla comunicazione o una fonte di imbarazzo.",
+              "motivation": "La paura di essere giudicato o deriso per il proprio accento. Il bisogno di essere compreso facilmente per avere conversazioni fluide e non sentirsi 'lo straniero che parla male'.",
+              "success_metrics": [
+                "Non dover ripetere più volte una frase perché non viene capito.",
+                "Vedere che l'interlocutore capisce al primo colpo.",
+                "Notare che la conversazione prosegue senza intoppi legati alla pronuncia."
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "beliefs": [

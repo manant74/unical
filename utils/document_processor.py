@@ -6,26 +6,33 @@ import requests
 from bs4 import BeautifulSoup
 import chromadb
 from chromadb.config import Settings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# Import text splitter dalla nuova versione
-try:
-    from langchain_text_splitters import RecursiveCharacterTextSplitter
-except ImportError:
-    # Fallback alla vecchia versione
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
 
-# Importa dalla nuova versione per evitare deprecation warning
-try:
-    from langchain_huggingface import HuggingFaceEmbeddings
-except ImportError:
-    # Fallback alla vecchia versione se langchain-huggingface non è installato
-    from langchain_community.embeddings import HuggingFaceEmbeddings
 
 class DocumentProcessor:
-    """Gestisce l'elaborazione e l'indicizzazione dei documenti"""
+    """Gestisce l'elaborazione e l'indicizzazione dei documenti per contesti multipli"""
 
-    def __init__(self, persist_directory: str = "./data/chroma_db"):
-        self.persist_directory = persist_directory
+    def __init__(self, context_name: str = None, persist_directory: str = None):
+        """
+        Inizializza il DocumentProcessor per un contesto specifico
+
+        Args:
+            context_name: Nome normalizzato del contesto
+            persist_directory: Directory dove salvare il ChromaDB (opzionale, calcolato dal context_name)
+        """
+        self.context_name = context_name
+
+        # Se non viene fornita una directory specifica, usa quella del contesto
+        if persist_directory:
+            self.persist_directory = persist_directory
+        elif context_name:
+            self.persist_directory = f"./data/contexts/{context_name}/chroma_db"
+        else:
+            # Fallback alla directory predefinita se non viene specificato nulla
+            self.persist_directory = "./data/chroma_db"
+
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=200,
@@ -38,18 +45,36 @@ class DocumentProcessor:
         self.collection = None
 
     def initialize_db(self):
-        """Inizializza il database ChromaDB"""
+        """Inizializza il database ChromaDB per il contesto corrente"""
+        # Crea la directory se non esiste
+        os.makedirs(self.persist_directory, exist_ok=True)
+
         self.client = chromadb.PersistentClient(path=self.persist_directory)
-        self.collection = self.client.get_or_create_collection(
-            name="knowledge_base",
-            metadata={"hnsw:space": "cosine"}
-        )
+
+        # Prova prima a recuperare una collection esistente
+        # Questo è importante per la retrocompatibilità con i dati migrati da v1
+        existing_collections = self.client.list_collections()
+
+        if existing_collections:
+            # Usa la prima collection disponibile (per retrocompatibilità)
+            self.collection = existing_collections[0]
+        else:
+            # Crea una nuova collection con nome specifico per il contesto
+            collection_name = f"knowledge_base_{self.context_name}" if self.context_name else "knowledge_base"
+            # Normalizza il nome della collection (ChromaDB ha restrizioni sui nomi)
+            collection_name = self._normalize_collection_name(collection_name)
+
+            self.collection = self.client.get_or_create_collection(
+                name=collection_name,
+                metadata={"hnsw:space": "cosine", "context": self.context_name or "default"}
+            )
 
     def clear_database(self):
-        """Cancella il database esistente"""
-        if self.client:
+        """Cancella il database esistente per il contesto corrente"""
+        if self.client and self.collection:
             try:
-                self.client.delete_collection("knowledge_base")
+                # Elimina la collection corrente, qualunque sia il suo nome
+                self.client.delete_collection(self.collection.name)
             except:
                 pass
         self.initialize_db()
@@ -88,7 +113,7 @@ class DocumentProcessor:
             raise Exception(f"Errore durante il recupero dell'URL: {str(e)}")
 
     def add_documents(self, chunks: List[str], source: str):
-        """Aggiunge documenti al database vettoriale"""
+        """Aggiunge documenti al database vettoriale del contesto corrente"""
         if not self.collection:
             self.initialize_db()
 
@@ -97,7 +122,7 @@ class DocumentProcessor:
 
         # Aggiungi al database
         ids = [f"{source}_{i}" for i in range(len(chunks))]
-        metadatas = [{"source": source, "chunk_id": i} for i in range(len(chunks))]
+        metadatas = [{"source": source, "chunk_id": i, "context": self.context_name or "default"} for i in range(len(chunks))]
 
         self.collection.add(
             embeddings=embeddings,
@@ -107,7 +132,7 @@ class DocumentProcessor:
         )
 
     def query(self, query_text: str, n_results: int = 5) -> List[Dict]:
-        """Interroga il database vettoriale"""
+        """Interroga il database vettoriale del contesto corrente"""
         if not self.collection:
             self.initialize_db()
 
@@ -121,18 +146,19 @@ class DocumentProcessor:
         return results
 
     def get_stats(self) -> Dict:
-        """Restituisce statistiche sul database"""
+        """Restituisce statistiche sul database del contesto corrente"""
         if not self.collection:
             self.initialize_db()
 
         count = self.collection.count()
         return {
             "document_count": count,
-            "status": "active" if count > 0 else "empty"
+            "status": "active" if count > 0 else "empty",
+            "context": self.context_name or "default"
         }
 
     def get_all_sources(self) -> List[str]:
-        """Restituisce tutti i nomi delle fonti (documenti) presenti nel database"""
+        """Restituisce tutti i nomi delle fonti (documenti) presenti nel database del contesto corrente"""
         if not self.collection:
             self.initialize_db()
 
@@ -151,3 +177,53 @@ class DocumentProcessor:
                     sources.add(metadata['source'])
 
         return list(sources)
+
+    def get_all_documents(self) -> List[Dict]:
+        """
+        Restituisce tutti i documenti del contesto corrente con i loro metadati
+
+        Returns:
+            Lista di dizionari con 'text' e 'metadata' per ogni chunk
+        """
+        if not self.collection:
+            self.initialize_db()
+
+        count = self.collection.count()
+        if count == 0:
+            return []
+
+        # Recupera tutti i documenti
+        results = self.collection.get()
+
+        documents = []
+        if results and 'documents' in results and 'metadatas' in results:
+            for doc, metadata in zip(results['documents'], results['metadatas']):
+                documents.append({
+                    'text': doc,
+                    'metadata': metadata
+                })
+
+        return documents
+
+    @staticmethod
+    def _normalize_collection_name(name: str) -> str:
+        """
+        Normalizza un nome per l'uso come nome di collection ChromaDB
+        ChromaDB richiede nomi di collection di lunghezza 3-63 caratteri,
+        contenenti solo caratteri alfanumerici, underscore e trattini
+
+        Args:
+            name: Nome da normalizzare
+
+        Returns:
+            Nome normalizzato
+        """
+        import re
+        # Sostituisci caratteri non validi con underscore
+        normalized = re.sub(r'[^a-zA-Z0-9_-]', '_', name)
+        # Assicurati che la lunghezza sia tra 3 e 63 caratteri
+        if len(normalized) < 3:
+            normalized = normalized + "_kb"
+        elif len(normalized) > 63:
+            normalized = normalized[:63]
+        return normalized

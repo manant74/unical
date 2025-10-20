@@ -14,7 +14,7 @@ Questo documento traccia le funzionalità proposte per migliorare l'applicazione
 
 ## 1. Sistema di Gestione Sessioni Multiple
 
-**Stato**: 🔴 Pianificato
+**Stato**: 🟢 Implementato
 
 ### Descrizione
 
@@ -22,12 +22,9 @@ Attualmente l'app gestisce una sola sessione alla volta. Questa funzionalità pe
 
 ### Funzionalità Proposte
 
-- [ ] Elenco di tutte le sessioni salvate con preview
-- [ ] Possibilità di riprendere una sessione precedente
-- [ ] Confronto tra sessioni diverse (diff viewer)
-- [ ] Export/import di sessioni complete
-- [ ] Ricerca e filtraggio delle sessioni
-- [ ] Tag e categorizzazione delle sessioni
+- [X] Elenco di tutte le sessioni salvate con preview
+- [X] Possibilità di riprendere una sessione precedente
+- [X] Export/import di sessioni complete
 
 ### Benefici
 
@@ -503,6 +500,20 @@ Documentazione completa e materiale didattico.
 ### Priorità 15
 
 **Media** - Importante per adoption ma non blocca l'uso
+
+---
+
+## 16. Miglioramenti sui Prompt
+
+### Priorità Media (Prossima Iterazione)
+
+1. ⚠️ **Gestione casi edge** in entrambi
+2. ⚠️ **Livelli di rilevanza** in Believer
+3. ⚠️ **Metadati condivisi** per integrazione
+
+4. 💡 **Validazione SMART** automatica in Alì
+5. 💡 **Gestione belief impliciti** in Believer
+6. 💡 **Report di coverage** (mapping desires-beliefs)
 
 ---
 

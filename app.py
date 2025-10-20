@@ -111,7 +111,6 @@ st.markdown(f"""
     /* Container principale */
     .block-container {{
         background: {container_bg};
-        border-radius: 30px;
         padding: 3rem 2rem !important;
         box-shadow: 0 20px 60px {shadow};
         backdrop-filter: blur(10px);
@@ -398,7 +397,7 @@ st.markdown("""
         <span class='stat-label'>AI Agents</span>
     </div>
     <div class='stat-badge'>
-        <span class='stat-number'>5</span>
+        <span class='stat-number'>7</span>
         <span class='stat-label'>Modules</span>
     </div>
     <div class='stat-badge'>
@@ -413,13 +412,13 @@ st.markdown("""
 <div class='workflow-section'>
     <div class='workflow-title'>🚀 Recommended Workflow</div>
     <div class='workflow-steps'>
-        <div class='workflow-step'>📚 <strong>1. Contextual</strong> - Load documents</div>
+        <div class='workflow-step'>🧭 <strong>0. Compass</strong> - Configure Session</div>
+        <div class='workflow-arrow'>→</div>
+        <div class='workflow-step'>📚 <strong>1. Knol</strong> - Load documents</div>
         <div class='workflow-arrow'>→</div>
         <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Define Desire</div>
         <div class='workflow-arrow'>→</div>
         <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identify Belief</div>
-        <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>✅ <strong>4. Validator</strong> - Validate BDI</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -427,10 +426,17 @@ st.markdown("""
 # Definizione delle funzionalità
 features = [
     {
-        "name": "Contextual",
+        "name": "Compass",
+        "emoji": "🧭",
+        "description": "Configure your working session: name it, select context, choose LLM engine and model, review and edit base beliefs before starting your BDI journey.",
+        "page": "pages/0_Compass.py",
+        "status": "active",
+    },
+    {
+        "name": "Knol",
         "emoji": "📚",
         "description": "Load and manage PDF documents, web pages, text or markdown files to build a rich and structured knowledge base of your domain.",
-        "page": "pages/1_Contextual.py",
+        "page": "pages/1_Knol.py",
         "status": "active",
     },
     {
@@ -445,13 +451,6 @@ features = [
         "emoji": "💡",
         "description": "Believer guides you in identifying Beliefs (convictions, facts, principles) that support your Desires, connecting them to your knowledge base.",
         "page": "pages/3_Believer.py",
-        "status": "active",
-    },
-    {
-        "name": "Validator",
-        "emoji": "✅",
-        "description": "Validate and modify the generated BDI (Belief-Desire-Intention) framework, ensuring that the JSON structure is correct and ready to use.",
-        "page": "pages/4_Validator.py",
         "status": "active",
     },
     {

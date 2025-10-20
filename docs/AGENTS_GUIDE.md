@@ -195,7 +195,7 @@ graph TD
 
 #### Fase 2: Estrazione Belief
 
-- Analizza i testi/documenti caricati in Contextual
+- Analizza i testi/documenti caricati in Knol
 - Applica il filtro di rilevanza rispetto ai Desires
 - Estrae solo fatti pertinenti
 
@@ -303,7 +303,7 @@ Ogni belief DEVE includere:
 ### Come Usare Believer
 
 1. **Assicurati di aver completato Alì** (Desires pronti)
-2. **Carica documenti rilevanti** in Contextual
+2. **Carica documenti rilevanti** in Knol
 3. **Avvia Believer** che caricherà automaticamente i Desires
 4. **Fornisci contesto aggiuntivo** se richiesto
 5. **Revisiona i belief** proposti e fornisci feedback
@@ -316,7 +316,7 @@ Ogni belief DEVE includere:
 ### Flusso di Lavoro
 
 ```
-1. [CONTEXTUAL] → Carica documenti del dominio
+1. [Knol] → Carica documenti del dominio
                 ↓
 2. [ALÌ]       → Identifica Desires per Personas
                 ↓ (salva desires.json)
@@ -353,12 +353,12 @@ Ogni belief DEVE includere:
 1. **Completa sempre Alì prima di Believer**
    - Believer ha bisogno dei Desires come filtro
 
-2. **Documenti in Contextual coerenti con i Desires**
+2. **Documenti in Knol coerenti con i Desires**
    - Carica materiale rilevante al dominio discusso con Alì
 
 3. **Itera se necessario**
    - Desires non chiari → Torna ad Alì
-   - Belief mancanti → Aggiungi documenti in Contextual
+   - Belief mancanti → Aggiungi documenti in Knol
 
 4. **Verifica mappatura**
    - Ogni Desire ha almeno alcuni Beliefs di supporto?
@@ -467,8 +467,10 @@ Alì ora implementa **checkpoint strategici** durante la conversazione per migli
 ### I 4 Checkpoint Implementati
 
 #### 📍 Checkpoint 1: Personas Identificate
+
 **Quando**: Dopo Step 2 (Identificazione Personas)
 **Formato**:
+
 ```
 📍 CHECKPOINT - Personas Identificate
 
@@ -481,8 +483,10 @@ Confermi questa lista? Vuoi aggiungere, rimuovere o modificare qualcosa?
 ```
 
 #### 📍 Checkpoint 2: Desires Emersi
+
 **Quando**: Ogni 3-4 desires durante l'esplorazione
 **Formato**:
+
 ```
 📍 CHECKPOINT - Desires Emersi
 
@@ -495,8 +499,10 @@ Ti rispecchi in questa analisi? Vuoi modificare o aggiungere qualcosa?
 ```
 
 #### 📍 Checkpoint 3: Completamento Persona
+
 **Quando**: Alla fine di ogni persona, prima di passare alla successiva
 **Formato**:
+
 ```
 📍 CHECKPOINT - Completamento "[Persona]"
 
@@ -508,8 +514,10 @@ Siamo pronti a passare alla prossima persona o vuoi rivedere qualcosa?
 ```
 
 #### 📍 Checkpoint Finale: Verifica Complessiva
+
 **Quando**: Prima della generazione del report JSON
 **Formato**:
+
 ```
 📍 CHECKPOINT FINALE - Verifica Complessiva
 
@@ -527,4 +535,3 @@ Vuoi: a) Rivedere qualcosa, b) Aggiungere altro, c) Generare report?
 2. **Adattabilità**: L'utente può dire "salta i checkpoint, vai avanti"
 3. **Frequenza intelligente**: Circa ogni 5-8 messaggi, non rigidamente
 4. **Sempre aspettare conferma**: Mai procedere senza validazione dell'utente
-

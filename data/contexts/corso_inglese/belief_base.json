@@ -1,0 +1,2684 @@
+{
+  "beliefs_base": [
+    {
+      "soggetto": "LINGUA INGLESE – livello elementare",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "A2 del Portfolio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello A2 del Portfo lio Europeo delle Lingue.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello elementare",
+      "relazione": "è rivolto a",
+      "oggetto": "coloro che già posseggono alcune semplici conoscenze della lingua (livello principiante)",
+      "fonte": "Il corso è rivolto a coloro che già posseggono alcu ne semplici conoscenze della lingua (livello principiante).",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Persona"
+      }
+    },
+    {
+      "soggetto": "Accesso al corso di Lingua Inglese - livello elementare",
+      "relazione": "è subordinato al",
+      "oggetto": "superamento di un test di ingresso",
+      "fonte": "(Accesso subordinato al sup eramento di un test di ingresso)",
+      "metadati": {
+        "tipo_soggetto": "Processo",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello elementare",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comprendere frasi ed espressioni usate frequentemente relative ad ambiti di immediata rilevanza",
+      "fonte": "Il corso si pone l'obiettivo di fornire le conoscen ze e le capacità necessarie per: comprendere frasi ed espressioni usate frequentemen te relative ad ambiti di immediata rilevanza...",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello elementare",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comunicare in attività semplici e di routine che richiedano un semplice scambio di informazioni",
+      "fonte": "...comunicare in attività semplici e di routine che richiedano un semplice scambio di informazioni su argomenti comuni;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello elementare",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per descrivere in termini semplici aspetti del proprio background e dell'ambiente circostante",
+      "fonte": "...descrivere in termini semplici aspetti del proprio background e dell'ambiente circostante",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Accoglienza: 1 ora",
+      "fonte": "Programma: ore Accoglienza 1",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Ascolto: 15 ore",
+      "fonte": "Ascolto 15",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Lettura: 12 ore",
+      "fonte": "Lettura 12",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione orale: 14 ore",
+      "fonte": "Produzione orale 14",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione scritta: 16 ore",
+      "fonte": "Produzione scritta 16",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello elementare",
+      "relazione": "moduli e ore",
+      "oggetto": "Prova finale: 2 ore",
+      "fonte": "Prova finale 2",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "LINGUA INGLESE – livello pre-intermedio",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "B1 del Portfo lio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello B1 del Portfo lio Europeo delle Lingue.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "è rivolto a",
+      "oggetto": "coloro che già posseggono le conoscenze della lingua a livello elementare",
+      "fonte": "Il corso è rivolto a coloro che già posseggono le c onoscenze della lingua a livello elementare.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Persona"
+      }
+    },
+    {
+      "soggetto": "Accesso al corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "è subordinato al",
+      "oggetto": "superamento di un test di ingresso",
+      "fonte": "(Accesso subordinato al superamento di un test di ingresso)",
+      "metadati": {
+        "tipo_soggetto": "Processo",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comprendere i punti essenziali di un discorso a condizione che venga usata una lingua chiara e standard e che riguardi argomenti di immediata rilevanza",
+      "fonte": "Il corso si pone l'obiettivo di fornire le conoscen ze e le capacità necessarie per: comprendere i punti essenziali di un discorso, a condizione che venga usata una lingua chiara e standard e che riguardi argomenti di immed iata rilevanza...",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per sapersi muovere con disinvoltura in situazioni che possono verificarsi mentre si viaggia nel paese in cui si parla la lingua in oggetto",
+      "fonte": "...sapersi muovere con disinvoltura in situazioni che possono verificarsi mentre si viaggia nel paese in cui si parla la lingua in oggetto;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per produrre un testo semplice relativo ad argomenti che siano familiari o di interesse personale",
+      "fonte": "...produrre un testo semplice relativo ad argomenti che siano familiari o di interesse personale;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per descrivere esperienze ed avvenimenti, ambizioni ed obiettivi e spiegare brevemente le ragioni delle proprie opinioni e dei propri progetti",
+      "fonte": "...descrivere esperienze ed avventi, ambizioni ed obiettivi e spiegare brev emente le ragioni delle proprie opinioni e dei propri progetti.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Accoglienza: 1 ora",
+      "fonte": "Programma: ore Accoglienza 1",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Ascolto: 12 ore",
+      "fonte": "Ascolto 12",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Lettura: 10 ore",
+      "fonte": "Lettura 10",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione orale: 18 ore",
+      "fonte": "Produzione orale 18",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione scritta: 17 ore",
+      "fonte": "Produzione scritta 17",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Prova finale: 2 ore",
+      "fonte": "Prova finale 2",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "LINGUA INGLESE – livello intermedio",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "B2 del Portfo lio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello B2 del Portfo lio Europeo delle Lingue",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello intermedio",
+      "relazione": "requisito didattico",
+      "oggetto": "Precedente conoscenza della lingua inglese base, che necessitano di un avanzamento nel livello di conoscenza della lingua (livello intermedio)",
+      "fonte": "Precedente conoscenza della lingua inglese base, ch e necessitano di un avanzamento nel livello di conoscenza della ling ua (livello intermedio).",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Requisito"
+      }
+    },
+    {
+      "soggetto": "Accesso al corso di Lingua Inglese - livello intermedio",
+      "relazione": "è subordinato al",
+      "oggetto": "superamento di un test di ingresso",
+      "fonte": "(Accesso subordinato al superamento di un test di ingresso).",
+      "metadati": {
+        "tipo_soggetto": "Processo",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comprendere le idee principali di testi complessi su argomenti sia concreti che astratti",
+      "fonte": "Il corso si pone l'obiettivo di fornire le conoscen ze e le capacità necessarie per: Comprendere le idee princi pali di testi complessi su argomenti sia concreti che astratti;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per interagire con una certa scioltezza e spontaneità che rendono possibile un'interazione regolare e senza sforzo per l'interlocutore madrelingua",
+      "fonte": "Interagire con una certa scioltezza e spontaneità che rendono possibile un'interazione regolare e senza sforzo pe r l'interlocutore madrelingua;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per produrre un testo chiaro e dettagliato su un'ampia gamma di argomenti e spiegare un punto di vista su un argomento fornendo i pro e i contro delle varie opzioni",
+      "fonte": "Produrre un testo chiaro e dettagliato su un'ampia gamma di argomenti e spiegare un punto di vista su un argomento fornendo i pro e i contro del le varie opzioni.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Accoglienza: 1 ora",
+      "fonte": "Programma: ore Accoglienza 1",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Ascolto: 12 ore",
+      "fonte": "Ascolto 12",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Lettura: 10 ore",
+      "fonte": "Lettura 10",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione orale: 18 ore",
+      "fonte": "Produzione orale 18",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione scritta: 17 ore",
+      "fonte": "Produzione scritta 17",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Prova finale: 2 ore",
+      "fonte": "Prova finale 2",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "LINGUA INGLESE – livello post intermedio",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "C1 del Portfo lio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello C1 del Portfo lio Europeo delle Lingue",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello post intermedio",
+      "relazione": "requisito didattico",
+      "oggetto": "Conoscenze della lingua straniera di livello intermedio: già in possesso di un'ottima preparazione che desiderano arricchire il proprio patrimonio linguistico con un livello consolidato di competenza sia nel linguaggio generico e sia in quello tecnico professionale",
+      "fonte": "Il corso è rivolto a coloro che già posseggono le cono scenze della lingua straniera di livello intermedio: già in poss esso di un'ottima preparazione che desiderano arricchire il proprio patrimonio linguis tico con un livello consolidato di competenza sia nel linguaggio generico e sia in que l llo tecnico professionale.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Requisito"
+      }
+    },
+    {
+      "soggetto": "Accesso al corso di Lingua Inglese - livello post intermedio",
+      "relazione": "è subordinato al",
+      "oggetto": "superamento di un test di ingresso",
+      "fonte": "(Accesso subordinato al superamento di un test di ingresso).",
+      "metadati": {
+        "tipo_soggetto": "Processo",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello post intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comprendere una vasta gamma di testi complessi e lunghi sapendone riconoscere il significato implicito",
+      "fonte": "Il corso si pone l'obiettivo di fornire le conoscen ze e le capacità necessarie per: Comprendere una vasta gamm a di testi complessi e lunghi sapendone riconoscere il significato implicito;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello post intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per esprimersi con scioltezza, naturalezza e in modo efficace, nella vita sociale, professionale o nell’ambito della propria formazione e studio",
+      "fonte": "Espr imersi con scioltezza, naturalezza e in modo efficace, nella vita sociale, professionale o nell’ambito della propria formazione e studio;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello post intermedio",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per produrre testi chiari, ben costruiti, dettagliati, dimostrando sicurezza a livello di contenuti e di forma",
+      "fonte": "Produrre testi chiari, ben costruiti, det tagliati, dimostrando sicurezza a livello di contenut i e di forma.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Accoglienza: 1 ora",
+      "fonte": "Programma: ore Accoglienza 1",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Ascolto: 8 ore",
+      "fonte": "Ascolto 8",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Lettura: 9 ore",
+      "fonte": "Lettura 9",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione orale: 20 ore",
+      "fonte": "Produzione orale 20",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione scritta: 20 ore",
+      "fonte": "Produzione scritta 20",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
+      "relazione": "moduli e ore",
+      "oggetto": "Prova finale: 2 ore",
+      "fonte": "Prova finale 2",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "LINGUA INGLESE – livello avanzato",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "C2 del Portfo lio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello C2 del Portfo lio Europeo delle Lingue",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello avanzato",
+      "relazione": "requisito",
+      "oggetto": "Conoscenze della lingua straniera di livello intermedio: già in possesso di un'ottima preparazione che desiderano arricchire il proprio patrimonio linguistico con un livello consolidato di competenza sia nel linguaggio generico e sia in quello tecnico professionale.",
+      "fonte": "Il corso è rivolto a coloro che già posseggono le c onoscenze della lingua straniera di livello intermedio: già in possesso di un'ottima preparazione che desiderano arricchire il proprio patrimonio linguistico con un livello consolidato di competenza sia nel linguaggio generico e sia in quello tecnico pro fessionale.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Requisito"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello avanzato",
+      "relazione": "fa riferimento al livello",
+      "oggetto": "C1 del Portfolio Europeo delle Lingue",
+      "fonte": "Il percorso fa riferimento al livello C1 del Portfolio Europeo delle Lingue.(Access o subordinato al superamento di un test di ingresso).",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Accesso al corso di Lingua Inglese - livello avanzato",
+      "relazione": "è subordinato al",
+      "oggetto": "superamento di un test di ingresso",
+      "fonte": "(Accesso subordinato al superamento di un test di ingresso).",
+      "metadati": {
+        "tipo_soggetto": "Processo",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello avanzato",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per comprendere con facilità praticamente tutto quello che si legge o ascolta",
+      "fonte": "Il corso si pone l'obiettivo di fornire le conoscen ze e le capacità necessarie per: Comprendere con facilità praticamente tutto quello che legge o ascolta;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello avanzato",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per riassumere informazioni provenienti da diverse fonti sia parlate che scritte",
+      "fonte": "riassumere informazioni provenienti da div erse fonti sia parlate che scritte;",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese - livello avanzato",
+      "relazione": "obiettivo formativo",
+      "oggetto": "fornire conoscenze e capacità per esprimersi con spontaneità, scorrevolezza e precisione in situazioni complesse, individuando le più sottili sfumature di significato",
+      "fonte": "esprimersi con spontaneità, scorrevolezza e precisi one in situazioni complesse, individuando le più sottili sfumature di significat o.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Accoglienza: 1 ora",
+      "fonte": "Programma: ore Accoglienza 1",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Ascolto: 8 ore",
+      "fonte": "Ascolto 8",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Lettura: 9 ore",
+      "fonte": "Lettura 9",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione orale: 20 ore",
+      "fonte": "Produzione orale 20",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Produzione scritta: 20 ore",
+      "fonte": "Produzione scritta 20",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
+      "relazione": "moduli e ore",
+      "oggetto": "Prova finale: 2 ore",
+      "fonte": "Prova finale 2",
+      "metadati": {
+        "tipo_soggetto": "Programma",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Corso di Lingua Inglese",
+      "relazione": "obiettivo",
+      "oggetto": "far acquisire allo studente competenze linguistiche generali di livello B1/B2 del ‘Quadro Comune Europeo di riferimento delle lingue’",
+      "fonte": "Il corso si propone di far acquisire allo studente competenze linguistiche generali di livello B1/B2 del ‘Quadro Comune Europeo di riferimento delle lingue’.",
+      "metadati": {
+        "tipo_soggetto": "Corso",
+        "tipo_oggetto": "Obiettivo"
+      }
+    },
+    {
+      "soggetto": "Strutture morfo-sintattiche e regole grammaticali del sistema linguistico Inglese",
+      "relazione": "sono introdotte e discusse attraverso",
+      "oggetto": "esemplificazione di argomenti e testi di natura economico-giuridico",
+      "fonte": "Le strutture morfo-sintattiche e le regole grammaticali del sistema linguistico Inglese sono introdotte e discusse attraverso l’esemplificazione di argomenti e testi di natura economico-giuridico...",
+      "metadati": {
+        "tipo_soggetto": "Contenuto didattico",
+        "tipo_oggetto": "Metodo"
+      }
+    },
+    {
+      "soggetto": "Contenuto didattico",
+      "relazione": "connesso agli ambiti operativi delle",
+      "oggetto": "figure professionali previste del CdS",
+      "fonte": "...connesse agli ambiti operativi delle figure professionali previste del CdS.",
+      "metadati": {
+        "tipo_soggetto": "Contenuto didattico",
+        "tipo_oggetto": "Ambito professionale"
+      }
+    },
+    {
+      "soggetto": "Risultati di apprendimento attesi - Conoscenza e capacità di comprensione",
+      "relazione": "permette allo studente di acquisire e praticare",
+      "oggetto": "competenze linguistiche di base, scritte e orali, idonee alla comprensione di testi in lingua Inglese di livello B1/B2",
+      "fonte": "Il corso permette allo studente di acquisire e praticare competenze linguistiche di base, scritte e orali, idonee alla comprensione di testi in lingua Inglese di livello B1/B2.",
+      "metadati": {
+        "tipo_soggetto": "Risultato di apprendimento",
+        "tipo_oggetto": "Competenza"
+      }
+    },
+    {
+      "soggetto": "Acquisizione competenze linguistiche di base tramite testi giuridico-economici",
+      "relazione": "è funzionale all'",
+      "oggetto": "apprendimento dei linguaggi settoriali propri di tali settori",
+      "fonte": "L’acquisizione delle competenze linguistiche di base attraverso il ricorso a testi di natura giuridico-economica è funzionale all’apprendimento dei linguaggi settoriali propri di tali settori.",
+      "metadati": {
+        "tipo_soggetto": "Apprendimento",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Video-lezioni",
+      "relazione": "sono progettate per",
+      "oggetto": "fornire allo studente una solida base per l’apprendimento delle competenze linguistiche di livello BI/B2",
+      "fonte": "Le video-lezioni sono progettate in modo da fornire allo studente una solida base per l’apprendimento delle competenze linguistiche di livello BI/B2...",
+      "metadati": {
+        "tipo_soggetto": "Materiale didattico",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Video-lezioni",
+      "relazione": "rinforzano ed implementano",
+      "oggetto": "conoscenze e abilità già acquisite durante il percorso di studi pregresso",
+      "fonte": "...rinforzando ed implementando conoscenze e abilità già acquisite durante il percorso di studi pregresso.",
+      "metadati": {
+        "tipo_soggetto": "Materiale didattico",
+        "tipo_oggetto": "Effetto"
+      }
+    },
+    {
+      "soggetto": "Molteplici esercitazioni e esemplificazioni",
+      "relazione": "sono atte ad incoraggiare lo studente ad",
+      "oggetto": "applicare gli input teorici a situazioni pratiche",
+      "fonte": "Le molteplici esercitazioni e le esemplificazioni sono atte ad incoraggiare lo studente ad applicare gli input teorici a situazioni pratiche.",
+      "metadati": {
+        "tipo_soggetto": "Attività didattica",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Video-lezioni",
+      "relazione": "sono progettate col fine di fornire agli studenti gli",
+      "oggetto": "strumenti necessari per selezionare il registro linguistico più adatto alle diverse situazioni",
+      "fonte": "Le video-lezioni sono progettate e realizzate col fine di fornire agli studenti gli strumenti necessari per selezionare il registro linguistico più adatto alle diverse situazioni.",
+      "metadati": {
+        "tipo_soggetto": "Materiale didattico",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Acquisendo una più alta sensibilità a differenti registri linguistici",
+      "relazione": "lo studente sarà in grado di",
+      "oggetto": "compiere ricerche documentali specialistiche",
+      "fonte": "Acquisendo una più alta sensibilità a differenti registri linguistici, lo studente sarà in grado di compiere ricerche documentali specialistiche...",
+      "metadati": {
+        "tipo_soggetto": "Competenza acquisita",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Acquisendo una più alta sensibilità a differenti registri linguistici",
+      "relazione": "lo studente sarà in grado di",
+      "oggetto": "analizzare testi non solo di natura culturale o riconducibili al vissuto quotidiano ma anche ai settori economico e giuridico",
+      "fonte": "...e di analizzare testi non solo di natura culturale o riconducibili al vissuto quotidiano ma anche ai settori economico e giuridico...",
+      "metadati": {
+        "tipo_soggetto": "Competenza acquisita",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Esposizione alla varietà di testi",
+      "relazione": "metterà gli studenti in grado di",
+      "oggetto": "migliorare sempre più le proprie capacità di giudizio",
+      "fonte": "Attraverso l’esposizione alla varietà di testi di varia natura proposta gli studenti saranno messi in grado di migliorare sempre più le proprie capacità di giudizio.",
+      "metadati": {
+        "tipo_soggetto": "Metodo didattico",
+        "tipo_oggetto": "Risultato"
+      }
+    },
+    {
+      "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
+      "relazione": "consentono allo studente di",
+      "oggetto": "comprendere le idee principali di testi complessi su argomenti sia concreti che astratti",
+      "fonte": "Lo studio del materiale didattico e l’ascolto delle lezioni consentono allo studente, già al termine del primo anno, di comprendere le idee principali di testi complessi su argomenti sia concreti che astratti...",
+      "metadati": {
+        "tipo_soggetto": "Attività didattica",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
+      "relazione": "consentono allo studente di",
+      "oggetto": "comprendere le discussioni tecniche sul proprio campo di specializzazione",
+      "fonte": "...comprendere le discussioni tecniche sul proprio campo di specializzazione...",
+      "metadati": {
+        "tipo_soggetto": "Attività didattica",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
+      "relazione": "consentono allo studente di",
+      "oggetto": "interagire con una certa scioltezza e spontaneità",
+      "fonte": "...interagire con una certa scioltezza e spontaneità...",
+      "metadati": {
+        "tipo_soggetto": "Attività didattica",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
+      "relazione": "consentono allo studente di",
+      "oggetto": "produrre un testo chiaro e dettagliato su un'ampia gamma di argomenti",
+      "fonte": "...produrre un testo chiaro e dettagliato su un'ampia gamma di argomenti.",
+      "metadati": {
+        "tipo_soggetto": "Attività didattica",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Capacità di apprendimento",
+      "relazione": "è costantemente stimolata dalla",
+      "oggetto": "somministrazione di esercitazioni applicative",
+      "fonte": "La capacità di apprendimento è costantemente stimolata dalla somministrazione di esercitazioni applicative, caricate in piattaforma nella sezione ‘elaborati’",
+      "metadati": {
+        "tipo_soggetto": "Competenza",
+        "tipo_oggetto": "Stimolo"
+      }
+    },
+    {
+      "soggetto": "Sezione ‘elaborati’",
+      "relazione": "è finalizzata a",
+      "oggetto": "verificare l’effettiva comprensione degli argomenti trattati",
+      "fonte": "...una sezione finalizzata anche a verificare l’effettiva comprensione degli argomenti trattati.",
+      "metadati": {
+        "tipo_soggetto": "Piattaforma",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Altri strumenti didattici integrativi online",
+      "relazione": "possono migliorare la",
+      "oggetto": "capacità di apprendimento dello studente",
+      "fonte": "Altri strumenti didattici integrativi online (documenti, articoli, link a siti specialistici,) possono migliorare la capacità di apprendimento dello studente.",
+      "metadati": {
+        "tipo_soggetto": "Strumento didattico",
+        "tipo_oggetto": "Effetto"
+      }
+    },
+    {
+      "soggetto": "Concetti e istituti assimilati tramite video-lezioni",
+      "relazione": "dovranno essere arricchiti e rielaborati dallo studente",
+      "oggetto": "al termine dell’intero percorso di studi",
+      "fonte": "I concetti e gli istituti, assimilati attraverso le video-lezioni, dovranno comunque essere arricchiti e rielaborati dallo studente al termine dell’intero percorso di studi...",
+      "metadati": {
+        "tipo_soggetto": "Apprendimento",
+        "tipo_oggetto": "Tempistica"
+      }
+    },
+    {
+      "soggetto": "Arricchimento e rielaborazione concetti",
+      "relazione": "beneficia",
+      "oggetto": "una più ricca e consapevole acquisizione delle abilità linguistiche studiate",
+      "fonte": "...a beneficio di una più ricca e consapevole acquisizione delle abilità linguistiche studiate.",
+      "metadati": {
+        "tipo_soggetto": "Apprendimento",
+        "tipo_oggetto": "Beneficio"
+      }
+    },
+    {
+      "soggetto": "Testi letti (in teledidattica)",
+      "relazione": "sono letti per la maggior parte da",
+      "oggetto": "insegnanti madrelingua",
+      "fonte": "...per la maggior parte da insegnanti madrelingua...",
+      "metadati": {
+        "tipo_soggetto": "Testo",
+        "tipo_oggetto": "Persona"
+      }
+    },
+    {
+      "soggetto": "Insegnanti madrelingua",
+      "relazione": "renderanno l'apprendente in grado di",
+      "oggetto": "riconoscere i diversi accenti caratterizzanti la lingua inglese",
+      "fonte": "...che renderanno l’apprendente in grado di riconoscere i diversi accenti caratterizzanti la lingua inglese.",
+      "metadati": {
+        "tipo_soggetto": "Insegnante",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "VERBO ESSERE E USI PARTICOLARI",
+      "fonte": "1. VERBO ESSERE E USI PARTICOLARI",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "IL VERBO TO HAVE, SOSTANTIVI, AGGETTIVI E PRONOMI",
+      "fonte": "2. IL VERBO TO HAVE, SOSTANTIVI, AGGETTIVI E PRONOMI",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PRESENT PERFECT, FIRST/SECOND CONDITIONAL, COMPARATIVI, SUPERLATIVI",
+      "fonte": "3. PRESENT PERFECT, FIRST/SECOND CONDITIONAL, COMPARATIVI, SUPERLATIVI",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "I TEMPI DEL PASSATO",
+      "fonte": "4. I TEMPI DEL PASSATO",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: FUTURE",
+      "fonte": "5. USE OF ENGLISH: FUTURE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: PAST TENSES",
+      "fonte": "6. USE OF ENGLISH: PAST TENSES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PUNCTUATION, LINKERS AND CAPITAL LETTERS",
+      "fonte": "7. PUNCTUATION, LINKERS AND CAPITAL LETTERS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "FREQUENT AND COMMON MISTAKES IN LEARNING ENGLISH",
+      "fonte": "8. FREQUENT AND COMMON MISTAKES IN LEARNING ENGLISH",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "VERBS",
+      "fonte": "9. VERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PHRASAL VERBS",
+      "fonte": "10. PHRASAL VERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: VERBI DI PERCEZIONE, SOME ED ANY, WHEN E HOW LONG",
+      "fonte": "11. USE OF ENGLISH: VERBI DI PERCEZIONE, SOME ED ANY, WHEN E HOW LONG",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "MODAL VERBS",
+      "fonte": "12. MODAL VERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "STRATEGIE DI LETTURA, FUTURO E QUESTION TAGS",
+      "fonte": "13. STRATEGIE DI LETTURA, FUTURO E QUESTION TAGS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "ENGLISH CONDITIONALS",
+      "fonte": "14. ENGLISH CONDITIONALS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: ADVERBS",
+      "fonte": "15. USE OF ENGLISH: ADVERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: PRONOUNS",
+      "fonte": "16. USE OF ENGLISH: PRONOUNS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: PREPOSITIONS AND CONJUNCTIONS",
+      "fonte": "17. USE OF ENGLISH: PREPOSITIONS AND CONJUNCTIONS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: MODAL VERBS",
+      "fonte": "18. USE OF ENGLISH: MODAL VERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: TITLES AND VERBS",
+      "fonte": "19. USE OF ENGLISH: TITLES AND VERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: WILL, WOULD, WANT, WISH",
+      "fonte": "20. USE OF ENGLISH: WILL, WOULD, WANT, WISH",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: SHOULD AND WOULD",
+      "fonte": "21. USE OF ENGLISH: SHOULD AND WOULD",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "USE OF ENGLISH: COMPARATIVE AND SUPERLATIVE",
+      "fonte": "22. USE OF ENGLISH: COMPARATIVE AND SUPERLATIVE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "FOCUS ON ADJECTIVES",
+      "fonte": "23. FOCUS ON ADJECTIVES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "FOCUS ON ADVERBS",
+      "fonte": "24. FOCUS ON ADVERBS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "ADVERBS AND USES",
+      "fonte": "25. ADVERBS AND USES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PHRASES AND CLAUSES",
+      "fonte": "26. PHRASES AND CLAUSES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "DIRECT AND INDIRECT SPEECH",
+      "fonte": "27. DIRECT AND INDIRECT SPEECH",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "INFINITIVES AND GERUNDS EXPLAINED",
+      "fonte": "28. INFINITIVES AND GERUNDS EXPLAINED",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "IMPROVING VOCABULARY",
+      "fonte": "29. IMPROVING VOCABULARY",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "IMPROVING READING SKILLS",
+      "fonte": "30. IMPROVING READING SKILLS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "IMPROVING LISTENING SKILLS",
+      "fonte": "31. IMPROVING LISTENING SKILLS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "FOCUS ON WRITING",
+      "fonte": "32. FOCUS ON WRITING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "IMPROVE SPEAKING SKILLS",
+      "fonte": "33. IMPROVE SPEAKING SKILLS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "WHY IDIOMS ARE IMPORTANT IN ENGLISH LANGUAGE",
+      "fonte": "34. WHY IDIOMS ARE IMPORTANT IN ENGLISH LANGUAGE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "COLLOCATIONS",
+      "fonte": "35. COLLOCATIONS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PHONETICS",
+      "fonte": "36. PHONETICS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "PASSIVE AND ACTIVE VOICE",
+      "fonte": "37. PASSIVE AND ACTIVE VOICE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "FOCUS ON SENTENCES",
+      "fonte": "38. FOCUS ON SENTENCES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "SENTENCES IN USE",
+      "fonte": "39. SENTENCES IN USE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "SYNTAX",
+      "fonte": "40. SYNTAX",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "INTEGRATING LANGUAGE LEARNING AND CULTURE",
+      "fonte": "41. INTEGRATING LANGUAGE LEARNING AND CULTURE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "LANGUAGE AND LINGUISTIC DISCRIMINATION",
+      "fonte": "42. LANGUAGE AND LINGUISTIC DISCRIMINATION",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "RELATIONSHIP MARKETING",
+      "fonte": "43. RELATIONSHIP MARKETING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "NEW ECONOMY",
+      "fonte": "44. NEW ECONOMY",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "JOBS OF THE FUTURE",
+      "fonte": "45. JOBS OF THE FUTURE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "BUSINESS ENGLISH",
+      "fonte": "46. BUSINESS ENGLISH",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "BUSINESS WRITING AS COMMUNICATION",
+      "fonte": "47. BUSINESS WRITING AS COMMUNICATION",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "INTERNATIONAL MARKETING",
+      "fonte": "48. INTERNATIONAL MARKETING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "E-MARKETING",
+      "fonte": "49. E-MARKETING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "ROLE OF THE WEB",
+      "fonte": "50. ROLE OF THE WEB",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "SOCIAL MARKETING",
+      "fonte": "51. SOCIAL MARKETING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "GREEN MARKETING",
+      "fonte": "52. GREEN MARKETING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "E-MAIL AND LETTER WRITING",
+      "fonte": "53. E-MAIL AND LETTER WRITING",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "THE ECONOMIC PROBLEM",
+      "fonte": "54. THE ECONOMIC PROBLEM",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "THE MARKET OF MECHANISM",
+      "fonte": "55. THE MARKET OF MECHANISM",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "THE INVISIBLE HAND AND PERFECT COMPETITION",
+      "fonte": "56. THE INVISIBLE HAND AND PERFECT COMPETITION",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "DOES INFLATION MATTER",
+      "fonte": "57. DOES INFLATION MATTER",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "SOLUTION TO THE THREE PROBLEMS",
+      "fonte": "58. SOLUTION TO THE THREE PROBLEMS",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "THE ECONOMIC FUNCTION OF WAGES",
+      "fonte": "59. THE ECONOMIC FUNCTION OF WAGES",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "STRUCTURING YOUR PARTNERSHIP",
+      "fonte": "60. STRUCTURING YOUR PARTNERSHIP",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "WANTS AND THE ECONOMIC SYSTEM",
+      "fonte": "61. WANTS AND THE ECONOMIC SYSTEM",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "SPEAKING OF THE WELFARE STATE",
+      "fonte": "62. SPEAKING OF THE WELFARE STATE",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "WELFARE RE-EXAMINED",
+      "fonte": "63. WELFARE RE-EXAMINED",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "PROGRAMMA DIDATTICO",
+      "relazione": "include modulo",
+      "oggetto": "CERTIFY YOUR ENGLISH",
+      "fonte": "64. CERTIFY YOUR ENGLISH",
+      "metadati": {
+        "tipo_soggetto": "Programma didattico",
+        "tipo_oggetto": "Modulo"
+      }
+    },
+    {
+      "soggetto": "Esame",
+      "relazione": "può essere sostenuto in forma",
+      "oggetto": "scritta",
+      "fonte": "L’esame può essere sostenuto sia in forma scritta che in forma orale.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Modalità"
+      }
+    },
+    {
+      "soggetto": "Esame",
+      "relazione": "può essere sostenuto in forma",
+      "oggetto": "orale",
+      "fonte": "L’esame può essere sostenuto sia in forma scritta che in forma orale.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Modalità"
+      }
+    },
+    {
+      "soggetto": "Appelli orali dell'esame",
+      "relazione": "sono previsti",
+      "oggetto": "nella sola sede centrale di Roma",
+      "fonte": "Gli appelli orali sono previsti nella sola sede centrale di Roma.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Luogo"
+      }
+    },
+    {
+      "soggetto": "Esami scritti",
+      "relazione": "possono essere sostenuti",
+      "oggetto": "sia nelle sede centrale che nelle sedi periferiche",
+      "fonte": "Gli esami scritti, invece, possono essere sostenuti sia nelle sede centrale che nelle sedi periferiche.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Luogo"
+      }
+    },
+    {
+      "soggetto": "Esame orale",
+      "relazione": "consiste in",
+      "oggetto": "un colloquio nel corso del quale il docente formula di solito tre domande",
+      "fonte": "L’esame orale consiste in un colloquio nel corso del quale il docente formula di solito tre domande.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Esame scritto",
+      "relazione": "consiste nello",
+      "oggetto": "svolgimento di un test con 31 domande",
+      "fonte": "L’esame scritto consiste nello svolgimento di un test con 31 domande.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Processo"
+      }
+    },
+    {
+      "soggetto": "Domande dell'esame scritto",
+      "relazione": "richiedono di scegliere",
+      "oggetto": "una di 4 possibili risposte",
+      "fonte": "Per ogni domanda lo studente deve scegliere una di 4 possibili risposte.",
+      "metadati": {
+        "tipo_soggetto": "Test",
+        "tipo_oggetto": "Opzioni"
+      }
+    },
+    {
+      "soggetto": "Domande dell'esame scritto",
+      "relazione": "hanno",
+      "oggetto": "una sola risposta corretta",
+      "fonte": "Solo una risposta è corretta.",
+      "metadati": {
+        "tipo_soggetto": "Test",
+        "tipo_oggetto": "Caratteristica"
+      }
+    },
+    {
+      "soggetto": "Domande orali e scritte",
+      "relazione": "sono formulate per valutare",
+      "oggetto": "grado di comprensione delle nozioni teoriche",
+      "fonte": "Sia le domande orali che le domande scritte sono formulate per valutare sia il grado di comprensione delle nozioni teoriche...",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Domande orali e scritte",
+      "relazione": "sono formulate per valutare",
+      "oggetto": "capacità di ragionare utilizzando tali nozioni",
+      "fonte": "...sia la capacità di ragionare utilizzando tali nozioni.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Domande sulle nozioni teoriche",
+      "relazione": "consentiranno di valutare il",
+      "oggetto": "livello di comprensione",
+      "fonte": "Le domande sulle nozioni teoriche consentiranno di valutare il livello di comprensione.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Domande che richiedono elaborazione di ragionamento",
+      "relazione": "consentiranno di valutare il",
+      "oggetto": "livello di competenza maturato dallo studente",
+      "fonte": "Le domande che richiedono l’elaborazione di un ragionamento consentiranno di valutare il livello di competenza...",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Domande che richiedono elaborazione di ragionamento",
+      "relazione": "consentiranno di valutare l'",
+      "oggetto": "autonomia di giudizio maturata dallo studente",
+      "fonte": "...e l’autonomia di giudizio maturati dallo studente.",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Abilità di comunicazione e capacità di apprendimento",
+      "relazione": "saranno valutate attraverso",
+      "oggetto": "interazioni dirette tra docente e studente",
+      "fonte": "Le abilità di comunicazione e la capacità di apprendimento saranno valutate attraverso le interazioni dirette tra docente e studente...",
+      "metadati": {
+        "tipo_soggetto": "Valutazione",
+        "tipo_oggetto": "Metodo"
+      }
+    },
+    {
+      "soggetto": "Quadro comune europeo di riferimento per la conoscenza delle lingue (CEFR)",
+      "relazione": "è uno strumento per",
+      "oggetto": "descrivere le abilità linguistiche",
+      "fonte": "Il Quadro comune europeo di riferimento per la conoscenza delle lingue (Common European Framework of Reference for Languages, CEFR), è uno strumento per descrivere le abilità linguistiche...",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Scopo"
+      }
+    },
+    {
+      "soggetto": "Quadro comune europeo di riferimento per la conoscenza delle lingue (CEFR)",
+      "relazione": "è spesso utilizzato per",
+      "oggetto": "aiutare gli studenti di lingue a scegliere materiali didattici e corsi di livello adeguato",
+      "fonte": "...ed è spesso utilizzato per aiutare gli studenti di lingue a scegliere materiali didattici e corsi di livello adeguato.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Utilizzo"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "ha",
+      "oggetto": "sei livelli",
+      "fonte": "Il CEFR ha sei livelli, da A1 per principianti, fino a C2 per utenti con un’ottima conoscenza della lingua.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Livello"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "ha livelli divisi in tre blocchi",
+      "oggetto": "A (utente base)",
+      "fonte": "I livelli sono divisi in tre blocchi: A o utente base, B o utente autonomo e C o utente avanzato.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Blocco di livelli"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "ha livelli divisi in tre blocchi",
+      "oggetto": "B (utente autonomo)",
+      "fonte": "I livelli sono divisi in tre blocchi: A o utente base, B o utente autonomo e C o utente avanzato.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Blocco di livelli"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "ha livelli divisi in tre blocchi",
+      "oggetto": "C (utente avanzato)",
+      "fonte": "I livelli sono divisi in tre blocchi: A o utente base, B o utente autonomo e C o utente avanzato.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Blocco di livelli"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "descrive ciò che uno studente può fare",
+      "oggetto": "quando parla",
+      "fonte": "Per ogni livello, il CEFR descrive ciò che uno studente può fare quando parla, legge, ascolta e scrive in inglese.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Abilità descritta"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "descrive ciò che uno studente può fare",
+      "oggetto": "quando legge",
+      "fonte": "Per ogni livello, il CEFR descrive ciò che uno studente può fare quando parla, legge, ascolta e scrive in inglese.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Abilità descritta"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "descrive ciò che uno studente può fare",
+      "oggetto": "quando ascolta",
+      "fonte": "Per ogni livello, il CEFR descrive ciò che uno studente può fare quando parla, legge, ascolta e scrive in inglese.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Abilità descritta"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "descrive ciò che uno studente può fare",
+      "oggetto": "quando scrive in inglese",
+      "fonte": "Per ogni livello, il CEFR descrive ciò che uno studente può fare quando parla, legge, ascolta e scrive in inglese.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Abilità descritta"
+      }
+    },
+    {
+      "soggetto": "CEFR",
+      "relazione": "consente di confrontare i risultati o il livello ottenuto negli esami con",
+      "oggetto": "quelli richiesti da istituzioni educative o altre istituzioni e organizzazioni",
+      "fonte": "Per chi ha bisogno di dimostrare il proprio livello di inglese per motivi di studio, lavoro o trasferimento in un altro paese, il CEFR consente di confrontare i risultati o il livello ottenuto negli esami come IELTS, Aptis ESOL o Cambridge con quelli richiesti da istituzioni educative o altre istituzioni e organizzazioni.",
+      "metadati": {
+        "tipo_soggetto": "Framework",
+        "tipo_oggetto": "Applicazione"
+      }
+    },
+    {
+      "soggetto": "Livello A1 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Elementare – G/T (British Council)",
+      "fonte": "A1 Elementare – G/T — —",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello A2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Pre-intermedio (British Council)",
+      "fonte": "A2 Pre-intermedio 3.5 G/T",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello A2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "3.5 (IELTS)",
+      "fonte": "A2 Pre-intermedio 3.5 G/T",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello B1 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Intermedio (British Council)",
+      "fonte": "B1 Intermedio 4-5 —",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello B1 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "4-5 (IELTS)",
+      "fonte": "B1 Intermedio 4-5 —",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Intermedio superiore (British Council)",
+      "fonte": "B2 Intermedio superiore 5.5-6.5 G/T",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello B2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "5.5-6.5 (IELTS)",
+      "fonte": "B2 Intermedio superiore 5.5-6.5 G/T",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello C1 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Avanzato (British Council)",
+      "fonte": "C1 Avanzato 7-8 G/T / ADV*",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello C1 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "7-8 (IELTS)",
+      "fonte": "C1 Avanzato 7-8 G/T / ADV*",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "Professionale (British Council)",
+      "fonte": "C2 Professionale 8.5-9 ADV",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Livello C2 (CEFR)",
+      "relazione": "corrisponde a",
+      "oggetto": "8.5-9 (IELTS)",
+      "fonte": "C2 Professionale 8.5-9 ADV",
+      "metadati": {
+        "tipo_soggetto": "Livello linguistico",
+        "tipo_oggetto": "Corrispondenza"
+      }
+    },
+    {
+      "soggetto": "Aptis ESOL General e Aptis ESOL for Teachers",
+      "relazione": "certificano fino al livello",
+      "oggetto": "C",
+      "fonte": "Aptis ESOL General e Aptis ESOL for Teachers certificano fino al livello C (il candidato è competente nell’uso dell’inglese)...",
+      "metadati": {
+        "tipo_soggetto": "Certificazione",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Aptis ESOL Advanced",
+      "relazione": "distingue accuratamente tra",
+      "oggetto": "C1 e C2",
+      "fonte": "Aptis ESOL Advanced, tuttavia, distingue accuratamente tra C1 e C2.",
+      "metadati": {
+        "tipo_soggetto": "Certificazione",
+        "tipo_oggetto": "Livello linguistico"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1",
+      "relazione": "sono in grado di",
+      "oggetto": "comunicare utilizzando espressioni quotidiane familiari e frasi molto semplici",
+      "fonte": "Gli studenti che raggiungono il livello A1 sono in grado di comunicare utilizzando espressioni quotidiane familiari e frasi molto semplici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2",
+      "relazione": "sono in grado di",
+      "oggetto": "comunicare utilizzando espressioni usate di frequente nelle situazioni quotidiane",
+      "fonte": "Gli studenti che raggiungono il livello A2 sono in grado di comunicare utilizzando espressioni usate di frequente nelle situazioni quotidiane.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1",
+      "relazione": "sono in grado di",
+      "oggetto": "comprendere informazioni su argomenti familiari",
+      "fonte": "Gli studenti che raggiungono il livello B1 sono in grado di comprendere informazioni su argomenti familiari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2",
+      "relazione": "sono in grado di",
+      "oggetto": "comprendere le idee principali di testi complessi",
+      "fonte": "Gli studenti che raggiungono il livello B2 sono in grado di comprendere le idee principali di testi complessi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2",
+      "relazione": "sono in grado di",
+      "oggetto": "interagire con una certa fluidità e comunicare facilmente",
+      "fonte": "Sono in grado di interagire con una certa fluidità e comunicare facilmente.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1",
+      "relazione": "sono in grado di",
+      "oggetto": "comprendere un’ampia gamma di testi lunghi e complessi",
+      "fonte": "Gli studenti che raggiungono il livello C1 sono in grado di comprendere un’ampia gamma di testi lunghi e complessi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1",
+      "relazione": "sono in grado di",
+      "oggetto": "interagire ed esprimersi in modo fluente e spontaneo",
+      "fonte": "Sono in grado di interagire ed esprimersi in modo fluente e spontaneo.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2",
+      "relazione": "sono in grado di",
+      "oggetto": "comprendere facilmente quasi tutto ciò che sentono o leggono",
+      "fonte": "Gli studenti che raggiungono il livello C2 sono in grado di comprendere facilmente quasi tutto ciò che sentono o leggono.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Ascolto",
+      "relazione": "sono capaci di comprendere",
+      "oggetto": "parole e concetti relativi ad argomenti personali inerenti alla famiglia, al paese di appartenenza o alla casa",
+      "fonte": "Ascolto: Sei capace di comprendere parole e concetti relativi ad argomenti personali inerenti alla tua famiglia, al tuo paese di appartenenza o alla tua casa.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Ascolto",
+      "relazione": "necessitano che l'interlocutore parli",
+      "oggetto": "lentamente per capire il significato",
+      "fonte": "Per capire il significato di ciò che ti viene comunicato hai bisogno che l’interlocutore parli lentamente.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Necessità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Lettura",
+      "relazione": "sono in grado di capire il significato di",
+      "oggetto": "frasi e parole semplici di uso comune",
+      "fonte": "Lettura: Sei in grado di capire il significato di frasi e parole semplici di uso comune.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Lettura",
+      "relazione": "riescono ad intendere il significato di",
+      "oggetto": "brevi notizie, poster, annunci, cataloghi di prodotti, istruzioni composte da frasi semplici relative ad ambiti familiari",
+      "fonte": "Riesci ad intendere il significato di brevi notizie, poster, annunci, cataloghi di prodotti, istruzioni composte da frasi semplici relative ad ambiti a te familiari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Dialogo",
+      "relazione": "sono capaci di interagire con",
+      "oggetto": "persone che parlano lentamente e sono disposte a fornire supporto in caso di incomprensioni",
+      "fonte": "Dialogo: Sei capace di interagire con persone che parlano lentamente e sono disposte a fornire il loro supporto nel caso di eventuali incomprensioni.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Dialogo",
+      "relazione": "comprendono e utilizzano",
+      "oggetto": "espressioni familiari focalizzate su esigenze definite e bisogni imminenti",
+      "fonte": "Comprendi e utilizzi espressioni familiari focalizzate su esigenze definite e bisogni imminenti.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Scrittura",
+      "relazione": "sono capaci di scrivere",
+      "oggetto": "una semplice email o messaggio (es. cartolina dalle vacanze)",
+      "fonte": "Scrittura: Sei capace di scrivere una semplice email o un messaggio, ad esempio mandare una cartolina dalle vacanze.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Scrittura",
+      "relazione": "sono in grado di",
+      "oggetto": "compilare moduli relativi a dettagli personali",
+      "fonte": "Sei in grado di compilare i moduli relativi ai dettagli personali come nome, nazionalità, nome dell’albergo e altri dati semplici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Espressione orale",
+      "relazione": "hanno la capacità di",
+      "oggetto": "presentare se stesso e gli altri in modo semplice ma comprensibile",
+      "fonte": "Espressione orale: Hai la capacità di presentare te stesso e gli altri in modo semplice ma comprensibile.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A1 - Espressione orale",
+      "relazione": "sono in grado di",
+      "oggetto": "descrivere dettagli del luogo in cui vivono e della loro vita utilizzando aggettivi, forme grammaticali e tempi verbali basilari",
+      "fonte": "Sei in grado di descrivere dettagli del luogo in cui vivi e della tua vita utilizzando aggettivi, forme grammaticali e tempi verbali basilari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Ascolto",
+      "relazione": "comprendono frasi e parole usate nelle aree di interesse legate ai",
+      "oggetto": "temi personali e alla vita di tutti i giorni",
+      "fonte": "Ascolto: Comprendi frasi e parole usate nelle aree di interesse legate ai temi personali e alla vita di tutti i giorni (ad esempio: informazioni basilari relative a te stesso e alla tua famiglia, luogo di abitazione, shopping, lavoro).",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Lettura",
+      "relazione": "sono in grado di leggere",
+      "oggetto": "testi molto brevi e semplici",
+      "fonte": "Lettura: Sei in grado di leggere testi molto brevi e semplici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Lettura",
+      "relazione": "sanno trovare le informazioni specifiche incluse nei",
+      "oggetto": "materiali di uso comune",
+      "fonte": "Sai trovare le informazioni specifiche incluse nei materiali di uso comune come ad esempio annunci pubblicitari o orari dei treni.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Lettura",
+      "relazione": "comprendono il significato di",
+      "oggetto": "semplici e brevi lettere personali",
+      "fonte": "Comprendi il significato di semplici e brevi lettere personali.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Dialogo",
+      "relazione": "sono capaci di comunicare durante le attività quotidiane che richiedono",
+      "oggetto": "un veloce e facile interscambio di informazioni",
+      "fonte": "Dialogo: Sei capace di comunicare durante le attività quotidiane che richiedono un veloce e facile interscambio di informazioni.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Dialogo",
+      "relazione": "partecipano alle interazioni sociali",
+      "oggetto": "anche se non sempre sono in grado di seguirle e continuare la conversazione autonomamente",
+      "fonte": "Partecipi alle interazioni sociali, anche se non sempre sei in grado di seguirle e continuare la conversazione autonomamente.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Scrittura",
+      "relazione": "sono capaci di scrivere",
+      "oggetto": "una lettera personale molto semplice, brevi messaggi, appunti e riassunti utilizzando strutture grammaticali basilari",
+      "fonte": "Scrittura: Sei capace di scrivere una lettera personale molto semplice, brevi messaggi, appunti e riassunti utilizzando strutture grammaticali basilari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Scrittura",
+      "relazione": "sanno intraprendere un discorso via chat",
+      "oggetto": "parlando di situazioni familiari",
+      "fonte": "Sai intraprendere un discorso via chat con un amico lontano parlando di situazioni familiari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Espressione orale",
+      "relazione": "riescono a parlare di",
+      "oggetto": "sé stessi, famiglia e amici",
+      "fonte": "Espressione orale: Riesci a parlare di te, della tua famiglia e degli amici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Espressione orale",
+      "relazione": "riescono a parlare del loro",
+      "oggetto": "percorso di studi e lavoro utilizzando espressioni semplici e vocabolario limitato",
+      "fonte": "Riesci a parlare del tuo percorso di studi e del lavoro utilizzando delle espressioni semplici ed un vocabolario limitato.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello A2 - Espressione orale",
+      "relazione": "sanno formulare",
+      "oggetto": "costruzioni grammaticali poco elaborate ma chiare",
+      "fonte": "Sai formulare costruzioni grammaticali poco elaborate ma chiare.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Ascolto",
+      "relazione": "sono in grado di comprendere i più importanti contenuti di un discorso relativo a",
+      "oggetto": "temi familiari",
+      "fonte": "Ascolto: Sei in grado di comprendere i più importanti contenuti di un discorso relativo a temi familiari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Ascolto",
+      "relazione": "capiscono i contenuti più importanti di",
+      "oggetto": "programmi TV, radio, ultime notizie e temi della vita quotidiana",
+      "fonte": "Capisci i contenuti più importanti dei programmi TV e radio, delle ultime notizie e di temi relativi alla vita quotidiana.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Lettura",
+      "relazione": "hanno una buona comprensione di testi che trattano di",
+      "oggetto": "argomento generici e lavorativi",
+      "fonte": "Lettura: Hai una buona comprensione di testi che trattano di argomento generici e lavorativi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Lettura",
+      "relazione": "capiscono le descrizioni di",
+      "oggetto": "eventi, sentimenti e desideri inclusi nelle lettere personali o messaggi",
+      "fonte": "Capisci le descrizioni degli eventi, dei sentimenti e dei desideri inclusi nelle lettere personali o nei messaggi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Dialogo",
+      "relazione": "riescono a gestire la maggior parte delle situazioni della vita quotidiana come ad esempio",
+      "oggetto": "comunicare in un paese dove l'inglese è una lingua locale",
+      "fonte": "Dialogo: Riesci a gestire la maggior parte delle situazioni della vita quotidiana come ad esempio comunicare in un paese dove l’inglese è una lingua locale.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Dialogo",
+      "relazione": "entrano nelle conversazioni relative ai temi quotidiani",
+      "oggetto": "senza una precedente preparazione",
+      "fonte": "Entri nelle conversazioni relative ai temi quotidiani senza una precedente preparazione.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Scrittura",
+      "relazione": "scrivono in modo semplice ma riescono a formulare un discorso relativo ai più importanti temi di",
+      "oggetto": "attualità",
+      "fonte": "Scrittura: Scrivi in modo semplice ma riesci a formulare un discorso relativo ai più importanti temi di attualità.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Scrittura",
+      "relazione": "le loro email riescono a comunicare chiaramente le loro",
+      "oggetto": "esperienze personali e lavorative",
+      "fonte": "Le tue email riescono a comunicare chiaramente le tue esperienze personali e lavorative.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Espressione orale",
+      "relazione": "sanno esprimere chiaramente e con disinvoltura",
+      "oggetto": "situazioni personali e lavorative",
+      "fonte": "Espressione orale: Sai esprimere chiaramente e con disinvoltura situazioni personali e lavorative.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B1 - Espressione orale",
+      "relazione": "sono in grado di esprimersi semplicemente e di descrivere",
+      "oggetto": "sogni, avvenimenti e ambizioni personali dando brevi spiegazioni dei propri progetti",
+      "fonte": "Sei in grado di esprimerti semplicemente e di descrivere sogni, avvenimenti e ambizioni personali dando delle brevi spiegazioni dei tuoi progetti.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Ascolto",
+      "relazione": "sono in grado di comprendere",
+      "oggetto": "conversazioni complesse in ambito personale e lavorativo",
+      "fonte": "Ascolto: Sei in grado di comprendere conversazioni complesse in ambito personale e lavorativo.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Ascolto",
+      "relazione": "comprendono i",
+      "oggetto": "discorsi tecnici",
+      "fonte": "Comprendi i discorsi i discorsi tecnici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Ascolto",
+      "relazione": "sono in grado di capire la maggior parte dei",
+      "oggetto": "programmi radio e TV specialmente se di attualità",
+      "fonte": "Sei in grado di capire la maggior parte dei programmi radio e TV specialmente se di attualità.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Lettura",
+      "relazione": "cologono il significato di",
+      "oggetto": "articoli di giornale relativi a temi contemporanei dove gli autori utilizzano un linguaggio specifico, esprimendo il loro punto di vista",
+      "fonte": "Lettura: Cogli il significato di articoli di giornale relativi a temi contemporanei dove gli autori utilizzano un linguaggio specifico, esprimendo il loro punto di vista.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Lettura",
+      "relazione": "comprendono e rielaborano",
+      "oggetto": "termini complessi relativi ad argomenti tecnici",
+      "fonte": "I termini complessi relativi ad argomenti tecnici vengono compresi e rielaborati.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Dialogo",
+      "relazione": "sanno interagire con",
+      "oggetto": "spontaneità instaurando rapporti con le persone del posto",
+      "fonte": "Dialogo: Sai interagire con spontaneità instaurando rapporti con le persone del posto.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Dialogo",
+      "relazione": "sanno sviluppare un discorso complesso indicando con molta padronanza della lingua",
+      "oggetto": "le proprie opinioni ed i propri bisogni",
+      "fonte": "Sai sviluppare un discorso complesso indicando con molta padronanza della lingua le tue opinioni ed i tuoi bisogni.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Dialogo",
+      "relazione": "sanno",
+      "oggetto": "raccontare avvenimenti di varia natura",
+      "fonte": "Sai raccontare avvenimenti di varia natura.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Scrittura",
+      "relazione": "producono testi complessi contenenti",
+      "oggetto": "molteplici punti di vista e informazioni variegate",
+      "fonte": "Scrittura: Produci testi complessi contenenti molteplici punti di vista e informazioni variegate...",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Scrittura",
+      "relazione": "giustificano i",
+      "oggetto": "pro e contro dei progetti",
+      "fonte": "...giustificando i pro e contro dei progetti...",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Scrittura",
+      "relazione": "forniscono",
+      "oggetto": "pareri diversi",
+      "fonte": "...e sai fornire pareri diversi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Scrittura",
+      "relazione": "compongono testi esprimendo chiaramente",
+      "oggetto": "eventi specifici",
+      "fonte": "Componi testi esprimendo chiaramente eventi specifici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Espressione orale",
+      "relazione": "forniscono",
+      "oggetto": "approfondite e dettagliate descrizioni in merito a temi appartenenti al proprio campo di interesse",
+      "fonte": "Espressione orale: Fornisci approfondite e dettagliate descrizioni in merito a temi appartenenti al tuo campo di interesse.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello B2 - Espressione orale",
+      "relazione": "esprimono il proprio punto di vista",
+      "oggetto": "argomentando i vantaggi e gli svantaggi delle varie opzioni con un linguaggio elaborato e disinvolto",
+      "fonte": "Esprimi il tuo punto di vista argomentando i vantaggi e gli svantaggi delle varie opzioni con un linguaggio elaborato e disinvolto.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Ascolto",
+      "relazione": "comprendono conversazioni complesse anche su",
+      "oggetto": "argomenti a loro poco chiari o non di loro competenza",
+      "fonte": "Ascolto: Comprendi conversazioni complesse anche su argomenti a te poco chiari o non di tua competenza.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Ascolto",
+      "relazione": "capiscono programmi televisivi e film",
+      "oggetto": "senza particolare sforzo",
+      "fonte": "Capisci programmi televisivi e film senza particolare sforzo.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Lettura",
+      "relazione": "sono in grado di capire testi lunghi e complessi legati ad",
+      "oggetto": "avvenimenti ed argomenti specifici",
+      "fonte": "Lettura: Sei in grado di capire testi lunghi e complessi legati ad avvenimenti ed argomenti specifici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Lettura",
+      "relazione": "leggono",
+      "oggetto": "senza problemi libri e manuali",
+      "fonte": "Leggi senza problemi libri e manuali.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Lettura",
+      "relazione": "comprendono, distinguono ed apprezzano",
+      "oggetto": "lo stile di scrittura",
+      "fonte": "Comprendi, distingui ed apprezzi lo stile di scrittura.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Lettura",
+      "relazione": "non hanno problemi ad interpretare",
+      "oggetto": "nozioni tecniche",
+      "fonte": "Non hai problemi ad interpretare nozioni tecniche.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Dialogo",
+      "relazione": "sono capaci di dialogare",
+      "oggetto": "spontaneamente e in maniera fluida senza difficoltà",
+      "fonte": "Dialogo: Sei capace di dialogare spontaneamente e in maniera fluida senza difficoltà.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Dialogo",
+      "relazione": "usano il linguaggio in maniera",
+      "oggetto": "flessibile ed efficace per scopi personali e professionali",
+      "fonte": "Usi il linguaggio in maniera flessibile ed efficace per scopi personali e professionali.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Dialogo",
+      "relazione": "formulano idee ed opinioni",
+      "oggetto": "con precisione e relazionandosi abilmente con l'interlocutore",
+      "fonte": "Formuli idee ed opinioni con precisione e relazionandoti abilmente con il tuo interlocutore.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Scrittura",
+      "relazione": "i loro testi sono",
+      "oggetto": "ben strutturati ed esprimono i punti di vista in maniera dettagliata",
+      "fonte": "Scrittura: I tuoi testi sono ben strutturati ed esprimono i tuoi punti di vista in maniera dettagliata.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Scrittura",
+      "relazione": "nelle lettere includono",
+      "oggetto": "temi complessi, sottolineando aspetti di particolare importanza",
+      "fonte": "Nelle lettere includi temi complessi, sottolineando aspetti di particolare importanza.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Scrittura",
+      "relazione": "sanno modificare il loro stile di scrittura in funzione del",
+      "oggetto": "lettore",
+      "fonte": "Sai modificare il tuo stile di scrittura in funzione del lettore.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Espressione orale",
+      "relazione": "sono in grado di esprimersi su temi ed argomenti complessi",
+      "oggetto": "composti da tanti aspetti specifici",
+      "fonte": "Espressione orale: Sei in grado di esprimerti su temi ed argomenti complessi composti da tanti aspetti specifici.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C1 - Espressione orale",
+      "relazione": "la loro argomentazione è",
+      "oggetto": "chiara, dettagliata e fornisce informazioni di alta qualità che portano a conclusioni concrete e specifiche",
+      "fonte": "La tua argomentazione è chiara, dettagliata e fornisce delle informazioni di alta qualità che portano a conclusioni concrete e specifiche.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Ascolto",
+      "relazione": "comprendono",
+      "oggetto": "ogni tipo di discorso senza alcuno sforzo",
+      "fonte": "Ascolto: Comprendi ogni tipo di discorso senza alcuno sforzo.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Ascolto",
+      "relazione": "capiscono il significato di tutte le frasi e parole",
+      "oggetto": "anche se dette in maniera molto veloce",
+      "fonte": "Indipendentemente dal tipo di discorso (discorso dal vivo o un programma TV) capisci il significato di tutte le frasi e parole anche se dette in maniera molto veloce.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Ascolto",
+      "relazione": "sono in grado di intendere",
+      "oggetto": "l'accento del proprio interlocutore",
+      "fonte": "Sei in grado di intendere l’accento del tuo interlocutore.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Lettura",
+      "relazione": "comprendono ed elaborano",
+      "oggetto": "tutte le possibili forme di scrittura (libri, manuali tecnici, notizie, testi, istruzioni complesse, prosa, poesia)",
+      "fonte": "Lettura: Comprendi ed elabori tutte le possibili forme di scrittura come libri di narrativa, manuali tecnici, notizie, testi e istruzioni complesse, prosa e poesia incluse.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Lettura",
+      "relazione": "leggono e capiscono gli articoli complessi",
+      "oggetto": "anche legati a temi non familiari",
+      "fonte": "Leggi e capisci gli articoli complessi legati anche ai temi non familiari.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Dialogo",
+      "relazione": "partecipano alle conversazioni",
+      "oggetto": "in maniera completamente fluida capendo ed utilizzando espressioni idiomatiche",
+      "fonte": "Dialogo: Partecipi alle conversazioni, anche con interlocutori madrelingua, in maniera completamente fluida capendo ed utilizzando espressioni idiomatiche.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Dialogo",
+      "relazione": "si esprimono",
+      "oggetto": "naturalmente e sono in grado di aggiungere delle sfumature al discorso",
+      "fonte": "Ti esprimi naturalmente e sei in grado di aggiungere delle sfumature al suo discorso.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Scrittura",
+      "relazione": "scrivono",
+      "oggetto": "in maniera chiara e scorrevole mantenendo uno stile appropriato",
+      "fonte": "Scrittura: Scrivi in maniera chiara e scorrevole mantenendo uno stile appropriato...",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Scrittura",
+      "relazione": "producono testi e report",
+      "oggetto": "dettagliati contenenti informazioni approfondite",
+      "fonte": "...produci testi e report dettagliati contenenti informazioni approfondite.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Scrittura",
+      "relazione": "la struttura dei loro testi è",
+      "oggetto": "intuitiva, il lettore memorizza i passi più importanti",
+      "fonte": "La struttura dei tuoi testi è intuitiva, il lettore memorizza i passi più importanti.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Espressione orale",
+      "relazione": "si esprimono",
+      "oggetto": "in maniera fluida e chiara",
+      "fonte": "Espressione orale: Ti esprimi in maniera fluida e chiara...",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Espressione orale",
+      "relazione": "sono in grado di fare",
+      "oggetto": "speech e presentazioni",
+      "fonte": "...e sei in grado di fare speech e presentazioni.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Espressione orale",
+      "relazione": "la loro espressione orale è",
+      "oggetto": "appropriata e in linea con il contesto",
+      "fonte": "La tua espressione orale è appropriata e in linea con il contesto in cui ti trovi.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    },
+    {
+      "soggetto": "Studenti livello C2 - Espressione orale",
+      "relazione": "la struttura del loro discorso è",
+      "oggetto": "logica e articolata",
+      "fonte": "La struttura del tuo discorso è logica e articolata.",
+      "metadati": {
+        "tipo_soggetto": "Persona",
+        "tipo_oggetto": "Abilità"
+      }
+    }
+  ]
+}

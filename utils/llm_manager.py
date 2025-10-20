@@ -43,6 +43,10 @@ class LLMManager:
 
     def _initialize_clients(self):
         """Inizializza i client per i diversi provider"""
+        # OpenAI
+        if os.getenv("OPENAI_API_KEY"):
+            self.clients["OpenAI"] = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
         # Gemini
         if os.getenv("GOOGLE_API_KEY"):
             genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -52,9 +56,6 @@ class LLMManager:
         if os.getenv("ANTHROPIC_API_KEY"):
             self.clients["Claude"] = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-        # OpenAI
-        if os.getenv("OPENAI_API_KEY"):
-            self.clients["OpenAI"] = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     def get_available_providers(self) -> List[str]:
         """Restituisce la lista dei provider disponibili"""
@@ -65,8 +66,26 @@ class LLMManager:
         return self.MODELS.get(provider, {})
 
     def chat(self, provider: str, model: str, messages: List[Dict],
-             system_prompt: Optional[str] = None, context: Optional[str] = None) -> str:
-        """Invia una richiesta di chat al modello selezionato"""
+             system_prompt: Optional[str] = None, context: Optional[str] = None,
+             temperature: float = 0.7, max_tokens: int = 2000, top_p: float = 0.9,
+             stop_sequences: Optional[List[str]] = None) -> str:
+        """
+        Invia una richiesta di chat al modello selezionato
+
+        Args:
+            provider: Provider LLM (Gemini, Claude, OpenAI)
+            model: Nome del modello
+            messages: Lista di messaggi della conversazione
+            system_prompt: Prompt di sistema (opzionale)
+            context: Contesto aggiuntivo da RAG (opzionale)
+            temperature: Controllo creatività (0.0-2.0, default 0.7)
+            max_tokens: Lunghezza massima risposta (default 2000)
+            top_p: Nucleus sampling (0.0-1.0, default 0.9)
+            stop_sequences: Sequenze di stop (opzionale)
+
+        Returns:
+            Risposta del modello LLM
+        """
 
         if provider not in self.clients:
             raise ValueError(f"Provider {provider} non disponibile. Verifica le API keys.")
@@ -78,19 +97,32 @@ class LLMManager:
                 messages[0]["content"] = context_message + messages[0]["content"]
 
         if provider == "Gemini":
-            return self._chat_gemini(model, messages, system_prompt)
+            return self._chat_gemini(model, messages, system_prompt, temperature, max_tokens, top_p, stop_sequences)
         elif provider == "Claude":
-            return self._chat_claude(model, messages, system_prompt)
+            return self._chat_claude(model, messages, system_prompt, temperature, max_tokens, top_p, stop_sequences)
         elif provider == "OpenAI":
-            return self._chat_openai(model, messages, system_prompt)
+            return self._chat_openai(model, messages, system_prompt, temperature, max_tokens, top_p, stop_sequences)
 
         raise ValueError(f"Provider {provider} non supportato")
 
-    def _chat_gemini(self, model: str, messages: List[Dict], system_prompt: Optional[str]) -> str:
+    def _chat_gemini(self, model: str, messages: List[Dict], system_prompt: Optional[str],
+                     temperature: float, max_tokens: int, top_p: float,
+                     stop_sequences: Optional[List[str]]) -> str:
         """Chat con Gemini"""
+        # Configura i parametri di generazione
+        generation_config = {
+            "temperature": temperature,
+            "max_output_tokens": max_tokens,  # Gemini usa "max_output_tokens"
+            "top_p": top_p,
+        }
+
+        if stop_sequences:
+            generation_config["stop_sequences"] = stop_sequences
+
         genai_model = genai.GenerativeModel(
             model_name=model,
-            system_instruction=system_prompt
+            system_instruction=system_prompt,
+            generation_config=generation_config
         )
 
         # Converti messaggi
@@ -104,28 +136,45 @@ class LLMManager:
 
         return response.text
 
-    def _chat_claude(self, model: str, messages: List[Dict], system_prompt: Optional[str]) -> str:
+    def _chat_claude(self, model: str, messages: List[Dict], system_prompt: Optional[str],
+                     temperature: float, max_tokens: int, top_p: float,
+                     stop_sequences: Optional[List[str]]) -> str:
         """Chat con Claude"""
         kwargs = {
             "model": model,
-            "max_tokens": 4096,
-            "messages": messages
+            "max_tokens": max_tokens,
+            "messages": messages,
+            "temperature": temperature,
+            "top_p": top_p,
         }
 
         if system_prompt:
             kwargs["system"] = system_prompt
 
+        if stop_sequences:
+            kwargs["stop_sequences"] = stop_sequences[:4]  # Claude supporta max 4
+
         response = self.clients["Claude"].messages.create(**kwargs)
         return response.content[0].text
 
-    def _chat_openai(self, model: str, messages: List[Dict], system_prompt: Optional[str]) -> str:
+    def _chat_openai(self, model: str, messages: List[Dict], system_prompt: Optional[str],
+                     temperature: float, max_tokens: int, top_p: float,
+                     stop_sequences: Optional[List[str]]) -> str:
         """Chat con OpenAI"""
         if system_prompt:
             messages = [{"role": "system", "content": system_prompt}] + messages
 
-        response = self.clients["OpenAI"].chat.completions.create(
-            model=model,
-            messages=messages
-        )
+        kwargs = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "top_p": top_p,
+        }
+
+        if stop_sequences:
+            kwargs["stop"] = stop_sequences[:4]  # OpenAI supporta max 4
+
+        response = self.clients["OpenAI"].chat.completions.create(**kwargs)
 
         return response.choices[0].message.content

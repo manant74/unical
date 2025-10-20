@@ -1,17 +1,21 @@
 # LUMIA Studio - TODOs
 
+**Legenda:**
+
+- [ ] = Da fare
+- [x] = Completato
+
 ## 🐛 Fix
 
 ### Belief non salvati nel JSON
 
-- [ ] **Verifica perché i nuovi belief generati non compaiono nel JSON**
+- [X] **Verifica perché i nuovi belief generati non compaiono nel JSON**
   - **Problema**: Quando Believer genera nuovi belief durante la conversazione, questi non vengono salvati correttamente nel file `current_bdi.json`
   - **Impatto**: Perdita di dati tra sessioni, i belief generati non persistono
   - **Azioni**:
     - Investigare il flusso di salvataggio dei belief in `pages/3_Believer.py`
     - Verificare la logica di parsing della risposta LLM
     - Controllare se il metodo di salvataggio del JSON viene chiamato correttamente
-    - Testare con diversi provider LLM (Gemini, Claude, OpenAI)
   - **File coinvolti**: `pages/3_Believer.py`, `data/current_bdi.json`
 
 ### Pulsante Home - COMPLETATO
@@ -35,23 +39,19 @@
 
 ### Sistema Multisessione
 
-- [ ] **Gestione multisessione**
-  - **Obiettivo**: Permettere a più utenti di lavorare simultaneamente con sessioni isolate
-  - **Requisiti**:
-    - Separazione dei database ChromaDB per sessione
-    - Gestione dei file JSON (desires, beliefs, BDI) per utente/sessione
-    - Sistema di identificazione utente o sessione
-    - Pulizia automatica delle sessioni vecchie
-  - **Implementazione suggerita**:
-    - Generare session_id univoco all'avvio
-    - Creare directory `./data/sessions/{session_id}/` per ogni utente
-    - Modificare `DocumentProcessor` per accettare session_id
-    - Aggiornare tutti i percorsi dei file JSON per includere session_id
-  - **File da modificare**: Tutte le pagine, `utils/document_processor.py`, struttura directory `data/`
+- [x] **Gestione multisessione - Base implementata** ✅
+  - **Stato**: Sistema base funzionante tramite Compass
+  - **Implementato**:
+    - ✅ Generazione session_id univoco (UUID)
+    - ✅ Directory `./data/sessions/{session_id}/` per ogni sessione
+    - ✅ Gestione file JSON per sessione (metadata, config, beliefs, BDI)
+    - ✅ Isolamento delle sessioni
+    - ✅ Integrazione completa con DocumentProcessor (ChromaDB per sessione)
+  - **File coinvolti**: `utils/session_manager.py`, `pages/0_Compass.py`
 
 ### Belief di Base
 
-- [ ] **Generazione Belief di base**
+- [X] **Generazione Belief di base**
   - **Obiettivo**: Generare automaticamente un set di belief fondamentali dalla knowledge base
   - **Descrizione**: Prima di iniziare la conversazione con Believer, estrarre automaticamente i concetti chiave, fatti principali e principi dal contesto caricato
   - **Funzionalità**:
@@ -69,12 +69,11 @@
     - Log di tutte le chiamate LLM (prompt, risposta, timestamp, token usage)
     - Tracking delle conversazioni per agente (Alì, Believer)
     - Analisi della qualità delle risposte
-    - Metriche di performance 
+    - Metriche di performance
   
-
 ### Integrazione Belief di Base
 
-- [ ] **Integrazione Belief di base all'inizio del Believer**
+- [X] **Integrazione Belief di base all'inizio del Believer**
   - **Obiettivo**: Utilizzare i belief di base generati automaticamente come punto di partenza nella conversazione con Believer
   - **Dipendenze**: Richiede completamento task "Generazione Belief di base"
   - **Funzionalità**:
@@ -108,8 +107,3 @@
   - Esperienza utente coerente tra i vari moduli
 
 ---
-
-**Legenda:**
-
-- [ ] = Da fare
-- [x] = Completato

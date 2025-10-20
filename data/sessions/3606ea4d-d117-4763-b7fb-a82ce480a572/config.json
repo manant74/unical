@@ -1,0 +1,10 @@
+{
+  "context": "corso_inglese",
+  "llm_provider": "OpenAI",
+  "llm_model": "gpt-5",
+  "llm_settings": {
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "top_p": 0.9
+  }
+}
