@@ -69,7 +69,6 @@
     - Log di tutte le chiamate LLM (prompt, risposta, timestamp, token usage)
     - Tracking delle conversazioni per agente (Alì, Believer)
     - Analisi della qualità delle risposte
-    - Metriche di performance
   
 ### Integrazione Belief di Base
 
@@ -92,6 +91,8 @@
     - Flusso Risposte a volte troppo formali o rigide
     - Difficoltà nel mantenere il contesto tra messaggi
     - Gestione delle domande di chiarimento
+    - Gestione di opzioni chiuse per arrivare all'obiettivo più velocemenmte 
+
 
 ## 🎨 UI/UX Improvements
 
