@@ -85,8 +85,8 @@ def render_quick_replies(placeholder, suggestions, pending_state_key, button_pre
 
             for col_idx, col in enumerate(cols):
                 suggestion = row[col_idx]
-                label = suggestion.get("label") or f"Opzione {i + col_idx + 1}"
                 message_text = suggestion.get("message", "").strip()
+                label = suggestion.get("label") or message_text or f"Opzione {i + col_idx + 1}"
                 reason = suggestion.get("why")
 
                 with col:
