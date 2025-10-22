@@ -1,5 +1,5 @@
 {
-  "beliefs": [
+  "beliefs_base": [
     {
       "soggetto": "LINGUA INGLESE – livello elementare",
       "relazione": "fa riferimento al livello",
@@ -8,9 +8,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello elementare",
@@ -20,9 +18,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Persona"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Accesso al corso di Lingua Inglese - livello elementare",
@@ -32,9 +28,7 @@
       "metadati": {
         "tipo_soggetto": "Processo",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello elementare",
@@ -44,9 +38,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello elementare",
@@ -56,9 +48,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello elementare",
@@ -68,9 +58,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -80,9 +68,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -92,9 +78,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -104,9 +88,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -116,9 +98,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -128,9 +108,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello elementare",
@@ -140,9 +118,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "LINGUA INGLESE – livello pre-intermedio",
@@ -152,9 +128,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
@@ -164,9 +138,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Persona"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Accesso al corso di Lingua Inglese - livello pre-intermedio",
@@ -176,9 +148,7 @@
       "metadati": {
         "tipo_soggetto": "Processo",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
@@ -188,9 +158,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
@@ -200,9 +168,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
@@ -212,9 +178,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello pre-intermedio",
@@ -224,9 +188,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -236,9 +198,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -248,9 +208,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -260,9 +218,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -272,9 +228,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -284,9 +238,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello pre-intermedio",
@@ -296,9 +248,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "LINGUA INGLESE – livello intermedio",
@@ -308,9 +258,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello intermedio",
@@ -320,9 +268,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Requisito"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Accesso al corso di Lingua Inglese - livello intermedio",
@@ -332,9 +278,7 @@
       "metadati": {
         "tipo_soggetto": "Processo",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello intermedio",
@@ -344,9 +288,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello intermedio",
@@ -356,9 +298,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello intermedio",
@@ -368,9 +308,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -380,9 +318,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -392,9 +328,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -404,9 +338,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -416,9 +348,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -428,9 +358,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello intermedio",
@@ -440,9 +368,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "LINGUA INGLESE – livello post intermedio",
@@ -452,9 +378,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello post intermedio",
@@ -464,9 +388,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Requisito"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Accesso al corso di Lingua Inglese - livello post intermedio",
@@ -476,9 +398,7 @@
       "metadati": {
         "tipo_soggetto": "Processo",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello post intermedio",
@@ -488,9 +408,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello post intermedio",
@@ -500,9 +418,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello post intermedio",
@@ -512,9 +428,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -524,9 +438,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -536,9 +448,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -548,9 +458,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -560,9 +468,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -572,9 +478,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello post intermedio",
@@ -584,9 +488,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "LINGUA INGLESE – livello avanzato",
@@ -596,9 +498,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello avanzato",
@@ -608,9 +508,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Requisito"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello avanzato",
@@ -620,9 +518,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Accesso al corso di Lingua Inglese - livello avanzato",
@@ -632,9 +528,7 @@
       "metadati": {
         "tipo_soggetto": "Processo",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello avanzato",
@@ -644,9 +538,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello avanzato",
@@ -656,9 +548,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese - livello avanzato",
@@ -668,9 +558,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -680,9 +568,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -692,9 +578,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -704,9 +588,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -716,9 +598,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -728,9 +608,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Programma Corso Lingua Inglese - livello avanzato",
@@ -740,9 +618,7 @@
       "metadati": {
         "tipo_soggetto": "Programma",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Corso di Lingua Inglese",
@@ -752,9 +628,7 @@
       "metadati": {
         "tipo_soggetto": "Corso",
         "tipo_oggetto": "Obiettivo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Strutture morfo-sintattiche e regole grammaticali del sistema linguistico Inglese",
@@ -764,9 +638,7 @@
       "metadati": {
         "tipo_soggetto": "Contenuto didattico",
         "tipo_oggetto": "Metodo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Contenuto didattico",
@@ -776,9 +648,7 @@
       "metadati": {
         "tipo_soggetto": "Contenuto didattico",
         "tipo_oggetto": "Ambito professionale"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Risultati di apprendimento attesi - Conoscenza e capacità di comprensione",
@@ -788,9 +658,7 @@
       "metadati": {
         "tipo_soggetto": "Risultato di apprendimento",
         "tipo_oggetto": "Competenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Acquisizione competenze linguistiche di base tramite testi giuridico-economici",
@@ -800,9 +668,7 @@
       "metadati": {
         "tipo_soggetto": "Apprendimento",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Video-lezioni",
@@ -812,9 +678,7 @@
       "metadati": {
         "tipo_soggetto": "Materiale didattico",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Video-lezioni",
@@ -824,9 +688,7 @@
       "metadati": {
         "tipo_soggetto": "Materiale didattico",
         "tipo_oggetto": "Effetto"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Molteplici esercitazioni e esemplificazioni",
@@ -836,9 +698,7 @@
       "metadati": {
         "tipo_soggetto": "Attività didattica",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Video-lezioni",
@@ -848,9 +708,7 @@
       "metadati": {
         "tipo_soggetto": "Materiale didattico",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Acquisendo una più alta sensibilità a differenti registri linguistici",
@@ -860,9 +718,7 @@
       "metadati": {
         "tipo_soggetto": "Competenza acquisita",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Acquisendo una più alta sensibilità a differenti registri linguistici",
@@ -872,9 +728,7 @@
       "metadati": {
         "tipo_soggetto": "Competenza acquisita",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esposizione alla varietà di testi",
@@ -884,9 +738,7 @@
       "metadati": {
         "tipo_soggetto": "Metodo didattico",
         "tipo_oggetto": "Risultato"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
@@ -896,9 +748,7 @@
       "metadati": {
         "tipo_soggetto": "Attività didattica",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
@@ -908,9 +758,7 @@
       "metadati": {
         "tipo_soggetto": "Attività didattica",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
@@ -920,9 +768,7 @@
       "metadati": {
         "tipo_soggetto": "Attività didattica",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studio del materiale didattico e ascolto delle lezioni",
@@ -932,9 +778,7 @@
       "metadati": {
         "tipo_soggetto": "Attività didattica",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Capacità di apprendimento",
@@ -944,9 +788,7 @@
       "metadati": {
         "tipo_soggetto": "Competenza",
         "tipo_oggetto": "Stimolo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Sezione ‘elaborati’",
@@ -956,9 +798,7 @@
       "metadati": {
         "tipo_soggetto": "Piattaforma",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Altri strumenti didattici integrativi online",
@@ -968,9 +808,7 @@
       "metadati": {
         "tipo_soggetto": "Strumento didattico",
         "tipo_oggetto": "Effetto"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Concetti e istituti assimilati tramite video-lezioni",
@@ -980,9 +818,7 @@
       "metadati": {
         "tipo_soggetto": "Apprendimento",
         "tipo_oggetto": "Tempistica"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Arricchimento e rielaborazione concetti",
@@ -992,9 +828,7 @@
       "metadati": {
         "tipo_soggetto": "Apprendimento",
         "tipo_oggetto": "Beneficio"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Testi letti (in teledidattica)",
@@ -1004,9 +838,7 @@
       "metadati": {
         "tipo_soggetto": "Testo",
         "tipo_oggetto": "Persona"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Insegnanti madrelingua",
@@ -1016,9 +848,7 @@
       "metadati": {
         "tipo_soggetto": "Insegnante",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1028,9 +858,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1040,9 +868,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1052,9 +878,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1064,9 +888,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1076,9 +898,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1088,9 +908,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1100,9 +918,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1112,9 +928,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1124,9 +938,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1136,9 +948,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1148,9 +958,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1160,9 +968,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1172,9 +978,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1184,9 +988,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1196,9 +998,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1208,9 +1008,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1220,9 +1018,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1232,9 +1028,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1244,9 +1038,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1256,9 +1048,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1268,9 +1058,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1280,9 +1068,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1292,9 +1078,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1304,9 +1088,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1316,9 +1098,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1328,9 +1108,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1340,9 +1118,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1352,9 +1128,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1364,9 +1138,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1376,9 +1148,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1388,9 +1158,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1400,9 +1168,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1412,9 +1178,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1424,9 +1188,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1436,9 +1198,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1448,9 +1208,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1460,9 +1218,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1472,9 +1228,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1484,9 +1238,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1496,9 +1248,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1508,9 +1258,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1520,9 +1268,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1532,9 +1278,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1544,9 +1288,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1556,9 +1298,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1568,9 +1308,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1580,9 +1318,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1592,9 +1328,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1604,9 +1338,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1616,9 +1348,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1628,9 +1358,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1640,9 +1368,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1652,9 +1378,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1664,9 +1388,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1676,9 +1398,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1688,9 +1408,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1700,9 +1418,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1712,9 +1428,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1724,9 +1438,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1736,9 +1448,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1748,9 +1458,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1760,9 +1468,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1772,9 +1478,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "PROGRAMMA DIDATTICO",
@@ -1784,9 +1488,7 @@
       "metadati": {
         "tipo_soggetto": "Programma didattico",
         "tipo_oggetto": "Modulo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esame",
@@ -1796,9 +1498,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Modalità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esame",
@@ -1808,9 +1508,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Modalità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Appelli orali dell'esame",
@@ -1820,9 +1518,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Luogo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esami scritti",
@@ -1832,9 +1528,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Luogo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esame orale",
@@ -1844,9 +1538,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Esame scritto",
@@ -1856,9 +1548,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Processo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande dell'esame scritto",
@@ -1868,9 +1558,7 @@
       "metadati": {
         "tipo_soggetto": "Test",
         "tipo_oggetto": "Opzioni"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande dell'esame scritto",
@@ -1880,9 +1568,7 @@
       "metadati": {
         "tipo_soggetto": "Test",
         "tipo_oggetto": "Caratteristica"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande orali e scritte",
@@ -1892,9 +1578,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande orali e scritte",
@@ -1904,9 +1588,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande sulle nozioni teoriche",
@@ -1916,9 +1598,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande che richiedono elaborazione di ragionamento",
@@ -1928,9 +1608,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Domande che richiedono elaborazione di ragionamento",
@@ -1940,9 +1618,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Abilità di comunicazione e capacità di apprendimento",
@@ -1952,9 +1628,7 @@
       "metadati": {
         "tipo_soggetto": "Valutazione",
         "tipo_oggetto": "Metodo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Quadro comune europeo di riferimento per la conoscenza delle lingue (CEFR)",
@@ -1964,9 +1638,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Scopo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Quadro comune europeo di riferimento per la conoscenza delle lingue (CEFR)",
@@ -1976,9 +1648,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Utilizzo"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -1988,9 +1658,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Livello"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2000,9 +1668,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Blocco di livelli"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2012,9 +1678,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Blocco di livelli"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2024,9 +1688,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Blocco di livelli"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2036,9 +1698,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Abilità descritta"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2048,9 +1708,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Abilità descritta"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2060,9 +1718,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Abilità descritta"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2072,9 +1728,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Abilità descritta"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "CEFR",
@@ -2084,9 +1738,7 @@
       "metadati": {
         "tipo_soggetto": "Framework",
         "tipo_oggetto": "Applicazione"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello A1 (CEFR)",
@@ -2096,9 +1748,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello A2 (CEFR)",
@@ -2108,9 +1758,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello A2 (CEFR)",
@@ -2120,9 +1768,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello B1 (CEFR)",
@@ -2132,9 +1778,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello B1 (CEFR)",
@@ -2144,9 +1788,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello B2 (CEFR)",
@@ -2156,9 +1798,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello B2 (CEFR)",
@@ -2168,9 +1808,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello C1 (CEFR)",
@@ -2180,9 +1818,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello C1 (CEFR)",
@@ -2192,9 +1828,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello C2 (CEFR)",
@@ -2204,9 +1838,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Livello C2 (CEFR)",
@@ -2216,9 +1848,7 @@
       "metadati": {
         "tipo_soggetto": "Livello linguistico",
         "tipo_oggetto": "Corrispondenza"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Aptis ESOL General e Aptis ESOL for Teachers",
@@ -2228,9 +1858,7 @@
       "metadati": {
         "tipo_soggetto": "Certificazione",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Aptis ESOL Advanced",
@@ -2240,9 +1868,7 @@
       "metadati": {
         "tipo_soggetto": "Certificazione",
         "tipo_oggetto": "Livello linguistico"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1",
@@ -2252,9 +1878,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2",
@@ -2264,9 +1888,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1",
@@ -2276,9 +1898,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2",
@@ -2288,9 +1908,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2",
@@ -2300,9 +1918,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1",
@@ -2312,9 +1928,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1",
@@ -2324,9 +1938,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2",
@@ -2336,9 +1948,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Ascolto",
@@ -2348,9 +1958,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Ascolto",
@@ -2360,9 +1968,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Necessità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Lettura",
@@ -2372,9 +1978,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Lettura",
@@ -2384,9 +1988,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Dialogo",
@@ -2396,9 +1998,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Dialogo",
@@ -2408,9 +2008,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Scrittura",
@@ -2420,9 +2018,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Scrittura",
@@ -2432,9 +2028,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Espressione orale",
@@ -2444,9 +2038,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A1 - Espressione orale",
@@ -2456,9 +2048,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Ascolto",
@@ -2468,9 +2058,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Lettura",
@@ -2480,9 +2068,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Lettura",
@@ -2492,9 +2078,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Lettura",
@@ -2504,9 +2088,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Dialogo",
@@ -2516,9 +2098,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Dialogo",
@@ -2528,9 +2108,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Scrittura",
@@ -2540,9 +2118,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Scrittura",
@@ -2552,9 +2128,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Espressione orale",
@@ -2564,9 +2138,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Espressione orale",
@@ -2576,9 +2148,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello A2 - Espressione orale",
@@ -2588,9 +2158,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Ascolto",
@@ -2600,9 +2168,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Ascolto",
@@ -2612,9 +2178,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Lettura",
@@ -2624,9 +2188,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Lettura",
@@ -2636,9 +2198,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Dialogo",
@@ -2648,9 +2208,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Dialogo",
@@ -2660,9 +2218,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Scrittura",
@@ -2672,9 +2228,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Scrittura",
@@ -2684,9 +2238,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Espressione orale",
@@ -2696,9 +2248,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B1 - Espressione orale",
@@ -2708,9 +2258,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Ascolto",
@@ -2720,9 +2268,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Ascolto",
@@ -2732,9 +2278,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Ascolto",
@@ -2744,9 +2288,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Lettura",
@@ -2756,9 +2298,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Lettura",
@@ -2768,9 +2308,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Dialogo",
@@ -2780,9 +2318,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Dialogo",
@@ -2792,9 +2328,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Dialogo",
@@ -2804,9 +2338,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Scrittura",
@@ -2816,9 +2348,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Scrittura",
@@ -2828,9 +2358,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Scrittura",
@@ -2840,9 +2368,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Scrittura",
@@ -2852,9 +2378,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Espressione orale",
@@ -2864,9 +2388,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello B2 - Espressione orale",
@@ -2876,9 +2398,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Ascolto",
@@ -2888,9 +2408,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Ascolto",
@@ -2900,9 +2418,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Lettura",
@@ -2912,9 +2428,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Lettura",
@@ -2924,9 +2438,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Lettura",
@@ -2936,9 +2448,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Lettura",
@@ -2948,9 +2458,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Dialogo",
@@ -2960,9 +2468,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Dialogo",
@@ -2972,9 +2478,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Dialogo",
@@ -2984,9 +2488,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Scrittura",
@@ -2996,9 +2498,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Scrittura",
@@ -3008,9 +2508,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Scrittura",
@@ -3020,9 +2518,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Espressione orale",
@@ -3032,9 +2528,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C1 - Espressione orale",
@@ -3044,9 +2538,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Ascolto",
@@ -3056,9 +2548,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Ascolto",
@@ -3068,9 +2558,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Ascolto",
@@ -3080,9 +2568,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Lettura",
@@ -3092,9 +2578,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Lettura",
@@ -3104,9 +2588,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Dialogo",
@@ -3116,9 +2598,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Dialogo",
@@ -3128,9 +2608,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Scrittura",
@@ -3140,9 +2618,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Scrittura",
@@ -3152,9 +2628,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Scrittura",
@@ -3164,9 +2638,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Espressione orale",
@@ -3176,9 +2648,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Espressione orale",
@@ -3188,9 +2658,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Espressione orale",
@@ -3200,9 +2668,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     },
     {
       "soggetto": "Studenti livello C2 - Espressione orale",
@@ -3212,9 +2678,7 @@
       "metadati": {
         "tipo_soggetto": "Persona",
         "tipo_oggetto": "Abilità"
-      },
-      "imported_at": "2025-10-22T14:11:22.895551",
-      "imported_from": "corso_inglese"
+      }
     }
   ]
 }

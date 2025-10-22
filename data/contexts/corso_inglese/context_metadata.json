@@ -3,9 +3,9 @@
   "normalized_name": "corso_inglese",
   "description": "Knowledge base del corso di inglese ",
   "created_at": "2025-10-18T23:41:06.043654",
-  "updated_at": "2025-10-22T14:13:09.592486",
-  "document_count": 0,
-  "belief_count": 0,
+  "updated_at": "2025-10-18T23:41:06.043675",
+  "document_count": 47,
+  "belief_count": 268,
   "migrated_from_v1": true,
   "migration_date": "2025-10-18T23:41:06.043678"
 }
