@@ -88,10 +88,12 @@
 - [ ] **Modifica prompt di Alì per migliorare la gestione della fluidità della conversazione**
   - **Obiettivo**: Rendere le conversazioni con Alì più naturali e fluide
   - **Problemi attuali da risolvere**:
-    - Flusso Risposte a volte troppo formali o rigide
-    - Difficoltà nel mantenere il contesto tra messaggi
+    - Flusso Risposte a volte troppo rigido
+    - Difficoltà nell'ascoltare l'utente
+    - Difficoltà nel raggiungimento degli obbiettivi
     - Gestione delle domande di chiarimento
-    - Gestione di opzioni chiuse per arrivare all'obiettivo più velocemenmte 
+    - Gestione di opzioni chiuse per arrivare all'obiettivo più velocemente
+    - Bottoni dinamici con risposte precompilate per aiutare l'utente a raggiungere obbiettivo velocemente 
 
 
 ## 🎨 UI/UX Improvements
