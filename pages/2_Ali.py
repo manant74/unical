@@ -12,6 +12,16 @@ from utils.llm_manager import LLMManager
 from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
 from utils.context_manager import ContextManager
+from utils.auditor import ConversationAuditor
+
+ALI_MODULE_GOAL = (
+    "Guidare il responsabile di dominio a raccogliere e formalizzare desire concreti, "
+    "motivazioni e metriche di successo per ogni persona rilevante."
+)
+ALI_EXPECTED_OUTCOME = (
+    "Progredire verso la conferma o la creazione di un desire ben formulato, "
+    "mantenendo il dialogo focalizzato e orientato all'azione."
+)
 
 st.set_page_config(
     page_title="Alì - LUMIA Studio",
@@ -36,6 +46,18 @@ if 'ali_chat_history' not in st.session_state:
 
 if 'desires' not in st.session_state:
     st.session_state.desires = []
+
+if 'ali_audit_trail' not in st.session_state:
+    st.session_state.ali_audit_trail = []
+
+if 'ali_suggestions' not in st.session_state:
+    st.session_state.ali_suggestions = []
+
+if 'ali_pending_prompt' not in st.session_state:
+    st.session_state.ali_pending_prompt = None
+
+if 'conversation_auditor' not in st.session_state:
+    st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
 
 # Carica la sessione attiva se presente
 # Se non c'è active_session, prova a caricare l'ultima sessione attiva
@@ -137,6 +159,34 @@ def get_context_description():
         # Non mostrare warning se è solo mancanza di descrizione
         return None
 
+
+def render_quick_replies(placeholder, suggestions, pending_state_key, button_prefix):
+    """Renderizza i suggerimenti rapidi dell'Auditor in un container dedicato."""
+    placeholder.empty()
+
+    if not suggestions:
+        return
+
+    with placeholder:
+        st.markdown("**🎯 Suggerimenti rapidi dell'Auditor**")
+
+        for i in range(0, len(suggestions), 3):
+            row = suggestions[i:i + 3]
+            cols = st.columns(len(row))
+
+            for col_idx, col in enumerate(cols):
+                suggestion = row[col_idx]
+                message_text = suggestion.get("message", "").strip()
+                label = suggestion.get("label") or message_text or f"Opzione {i + col_idx + 1}"
+                reason = suggestion.get("why")
+
+                with col:
+                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", use_container_width=True):
+                        if message_text:
+                            st.session_state[pending_state_key] = message_text
+                    if reason:
+                        st.caption(reason)
+
 # CSS per nascondere menu Streamlit
 st.markdown("""
 <style>
@@ -206,6 +256,7 @@ with st.sidebar:
 
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()
+    model = None
 
     if not available_providers:
         st.error("⚠️ Nessun provider LLM disponibile!")
@@ -253,6 +304,9 @@ with st.sidebar:
     if st.button("🔄 Nuova Conversazione", use_container_width=True):
         st.session_state.ali_chat_history = []
         st.session_state.ali_greeted = False
+        st.session_state.ali_audit_trail = []
+        st.session_state.ali_suggestions = []
+        st.session_state.ali_pending_prompt = None
         st.rerun()
 
     if st.button("✅ Completa Sessione", type="primary", use_container_width=True):
@@ -414,12 +468,69 @@ if not st.session_state.ali_greeted:
     st.session_state.ali_greeted = True
 
 # Display chat history
-for message in st.session_state.ali_chat_history:
+audit_map = {
+    item["message_index"]: item.get("result", {})
+    for item in st.session_state.ali_audit_trail
+    if isinstance(item, dict) and "message_index" in item
+}
+
+for idx, message in enumerate(st.session_state.ali_chat_history):
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Chat input
-if prompt := st.chat_input("Scrivi il tuo messaggio..."):
+    if message.get("role") == "assistant" and idx in audit_map:
+        audit_payload = audit_map[idx] or {}
+        with st.chat_message("system"):
+            status = audit_payload.get("status", "pass")
+            icon = "✅" if status == "pass" else "⚠️"
+            summary = audit_payload.get("summary")
+
+            st.markdown(f"**Auditor {icon}**")
+            if summary:
+                st.markdown(summary)
+
+            issues = audit_payload.get("issues") or []
+            if issues:
+                st.markdown("**Problemi rilevati:**")
+                for issue in issues:
+                    issue_type = issue.get("type", "issue")
+                    severity = issue.get("severity", "low")
+                    message_text = issue.get("message", "")
+                    st.write(f"- ({severity.upper()} · {issue_type}) {message_text}")
+
+            improvements = audit_payload.get("assistant_improvements") or []
+            if improvements:
+                st.markdown("**Suggerimenti per l'agente:**")
+                for idea in improvements:
+                    st.write(f"- {idea}")
+
+            next_focus = audit_payload.get("next_focus")
+            if next_focus:
+                st.caption(f"Prossimo focus: {next_focus}")
+
+            confidence = audit_payload.get("confidence")
+            if confidence:
+                st.caption(f"Sicurezza valutazione: {confidence}")
+
+            if idx == len(st.session_state.ali_chat_history) - 1:
+                quick_reply_placeholder = st.empty()
+                render_quick_replies(
+                    placeholder=quick_reply_placeholder,
+                    suggestions=st.session_state.ali_suggestions,
+                    pending_state_key="ali_pending_prompt",
+                    button_prefix=f"ali_{idx}"
+                )
+
+# Chat input (supporta suggerimenti automatici dell'Auditor)
+auto_prompt = None
+if isinstance(st.session_state.ali_pending_prompt, str):
+    auto_prompt = st.session_state.ali_pending_prompt.strip()
+    st.session_state.ali_pending_prompt = None
+
+user_prompt = st.chat_input("Scrivi il tuo messaggio...")
+prompt = auto_prompt or user_prompt
+
+if prompt:
     # Add user message
     st.session_state.ali_chat_history.append({
         "role": "user",
@@ -468,6 +579,98 @@ if prompt := st.chat_input("Scrivi il tuo messaggio..."):
 
             with st.chat_message("assistant"):
                 st.markdown(response)
+
+            auditor_result = None
+            auditor = st.session_state.get("conversation_auditor")
+            if auditor and provider and model:
+                context_summary = {
+                    "session_name": active_session_data['metadata'].get('name'),
+                    "context_name": active_session_data['config'].get('context'),
+                    "desire_count": len(st.session_state.desires),
+                    "knowledge_documents": st.session_state.doc_processor.get_stats().get('document_count', 0),
+                    "rag_used": bool(context),
+                }
+                context_description = get_context_description()
+                if context_description:
+                    context_summary["domain_description"] = context_description
+
+                try:
+                    auditor_result = auditor.review(
+                        provider=provider,
+                        model=model,
+                        conversation=[msg.copy() for msg in st.session_state.ali_chat_history],
+                        module_name="ali",
+                        module_goal=ALI_MODULE_GOAL,
+                        expected_outcome=ALI_EXPECTED_OUTCOME,
+                        context_summary=context_summary,
+                        last_user_message=prompt,
+                        assistant_message=response,
+                    )
+                except Exception as audit_exc:  # pylint: disable=broad-except
+                    auditor_result = {"error": str(audit_exc)}
+
+            if auditor_result and "error" not in auditor_result:
+                message_index = len(st.session_state.ali_chat_history) - 1
+                existing_entry = next(
+                    (item for item in st.session_state.ali_audit_trail if item.get("message_index") == message_index),
+                    None
+                )
+                audit_record = {
+                    "message_index": message_index,
+                    "result": auditor_result,
+                    "timestamp": datetime.now().isoformat()
+                }
+
+                if existing_entry:
+                    existing_entry.update(audit_record)
+                else:
+                    st.session_state.ali_audit_trail.append(audit_record)
+
+                st.session_state.ali_suggestions = (auditor_result.get("suggested_user_replies") or [])[:3]
+
+                with st.chat_message("system"):
+                    status = auditor_result.get("status", "pass")
+                    icon = "✅" if status == "pass" else "⚠️"
+                    summary = auditor_result.get("summary")
+
+                    st.markdown(f"**Auditor {icon}**")
+                    if summary:
+                        st.markdown(summary)
+
+                    issues = auditor_result.get("issues") or []
+                    if issues:
+                        st.markdown("**Problemi rilevati:**")
+                        for issue in issues:
+                            issue_type = issue.get("type", "issue")
+                            severity = issue.get("severity", "low")
+                            message_text = issue.get("message", "")
+                            st.write(f"- ({severity.upper()} · {issue_type}) {message_text}")
+
+                    improvements = auditor_result.get("assistant_improvements") or []
+                    if improvements:
+                        st.markdown("**Suggerimenti per l'agente:**")
+                        for idea in improvements:
+                            st.write(f"- {idea}")
+
+                    next_focus = auditor_result.get("next_focus")
+                    if next_focus:
+                        st.caption(f"Prossimo focus: {next_focus}")
+
+                    confidence = auditor_result.get("confidence")
+                    if confidence:
+                        st.caption(f"Sicurezza valutazione: {confidence}")
+
+                    quick_reply_placeholder = st.empty()
+                    render_quick_replies(
+                        placeholder=quick_reply_placeholder,
+                        suggestions=st.session_state.ali_suggestions,
+                        pending_state_key="ali_pending_prompt",
+                        button_prefix=f"ali_{message_index}"
+                    )
+
+            elif auditor_result and "error" in auditor_result:
+                st.session_state.ali_suggestions = []
+                st.warning(f"Auditor non disponibile: {auditor_result['error']}")
 
             # --- NUOVA LOGICA PER PARSARE IL JSON ---
             json_content_str = None
