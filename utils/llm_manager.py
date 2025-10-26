@@ -186,6 +186,27 @@ class LLMManager:
             # I modelli o1/o3 potrebbero non supportare stop sequences
             kwargs["stop"] = stop_sequences[:4]  # OpenAI supporta max 4
 
-        response = self.clients["OpenAI"].chat.completions.create(**kwargs)
+        client = self.clients["OpenAI"]
+
+        try:
+            response = client.chat.completions.create(**kwargs)
+        except Exception as exc:  # pylint: disable=broad-except
+            error_text = str(exc)
+            needs_completion_tokens = (
+                "max_tokens" in error_text
+                and "max_completion_tokens" in error_text
+            )
+            needs_output_tokens = (
+                "max_tokens" in error_text
+                and "max_output_tokens" in error_text
+            )
+
+            if needs_completion_tokens or needs_output_tokens:
+                kwargs.pop("max_tokens", None)
+                fallback_key = "max_completion_tokens" if needs_completion_tokens else "max_output_tokens"
+                kwargs[fallback_key] = max_tokens
+                response = client.chat.completions.create(**kwargs)
+            else:
+                raise
 
         return response.choices[0].message.content
