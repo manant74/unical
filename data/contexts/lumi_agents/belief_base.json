@@ -1,0 +1,194 @@
+{
+  "beliefs_base": [
+    {
+      "soggetto": "LUMI",
+      "relazione": "è_introdotto_come",
+      "oggetto": "framework unificato",
+      "fonte": "L'architettura LUMI (Logical Uncertainty Modeling for Intelligent Agents) è stata introdotta come un framework unificato...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Framework"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "integra",
+      "oggetto": "logica fuzzy e Large Language Models (LLM)",
+      "fonte": "LUMI integra la logica fuzzy e i Large Language Models (LLM)...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Tecnologia"
+      }
+    },
+    {
+      "soggetto": "Modelli BDI classici",
+      "relazione": "faticano_a_gestire",
+      "oggetto": "ambiguità e incertezza",
+      "fonte": "I modelli BDI classici faticano a gestire l'ambiguità e l'incertezza in ambienti parzialmente osservabili.",
+      "metadati": {
+        "tipo_soggetto": "Modello",
+        "tipo_oggetto": "Caratteristica"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "supera_limite",
+      "oggetto": "paradigma BDI con logica fuzzy",
+      "fonte": "LUMI supera questo limite estendendo il paradigma BDI con la logica fuzzy...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Tecnologia"
+      }
+    },
+    {
+      "soggetto": "Credenze",
+      "relazione": "rappresentano",
+      "oggetto": "comprensione del mondo tramite teoria degli insiemi fuzzy",
+      "fonte": "Le credenze rappresentano la comprensione del mondo da parte dell'agente utilizzando la teoria degli insiemi fuzzy.",
+      "metadati": {
+        "tipo_soggetto": "Concetto",
+        "tipo_oggetto": "Teoria"
+      }
+    },
+    {
+      "soggetto": "Evaluator",
+      "relazione": "inizializza_e_aggiorna",
+      "oggetto": "base di conoscenza delle credenze",
+      "fonte": "L'agente Evaluator si occupa di inizializzare e aggiornare la base di conoscenza delle credenze...",
+      "metadati": {
+        "tipo_soggetto": "Agente",
+        "tipo_oggetto": "Funzione"
+      }
+    },
+    {
+      "soggetto": "Desideri",
+      "relazione": "sono_espressi_come",
+      "oggetto": "formula fuzzy",
+      "fonte": "I desideri sono espressi come una formula fuzzy...",
+      "metadati": {
+        "tipo_soggetto": "Concetto",
+        "tipo_oggetto": "Formula"
+      }
+    },
+    {
+      "soggetto": "Fuzzy Reasoner",
+      "relazione": "gestisce",
+      "oggetto": "regole e vincoli fuzzy",
+      "fonte": "L'agente Fuzzy Reasoner gestisce regole e vincoli fuzzy...",
+      "metadati": {
+        "tipo_soggetto": "Agente",
+        "tipo_oggetto": "Funzione"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "introduce",
+      "oggetto": "Fuzzy Behavior Trees (FBTs)",
+      "fonte": "LUMI introduce i Fuzzy Behavior Trees (FBTs)...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Concetto"
+      }
+    },
+    {
+      "soggetto": "FBTs",
+      "relazione": "mantengono",
+      "oggetto": "pattern di controllo espressivi dei Behavior Trees",
+      "fonte": "Gli FBTs mantengono i pattern di controllo espressivi dei Behavior Trees...",
+      "metadati": {
+        "tipo_soggetto": "Concetto",
+        "tipo_oggetto": "Caratteristica"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "risolve_problema",
+      "oggetto": "Architettura di Pianificazione a Due Strati",
+      "fonte": "LUMI risolve questo problema con un'Architettura di Pianificazione a Due Strati...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Tecnologia"
+      }
+    },
+    {
+      "soggetto": "Oracle",
+      "relazione": "impiega",
+      "oggetto": "ragionamento assistito da LLM",
+      "fonte": "L'agente Oracle impiega il ragionamento assistito da LLM...",
+      "metadati": {
+        "tipo_soggetto": "Agente",
+        "tipo_oggetto": "Tecnologia"
+      }
+    },
+    {
+      "soggetto": "Crafter",
+      "relazione": "genera",
+      "oggetto": "Fuzzy Behavior Tree (FBT)",
+      "fonte": "Una volta selezionata un'intenzione dall'alto livello, l'agente Crafter genera il corrispondente Fuzzy Behavior Tree (FBT).",
+      "metadati": {
+        "tipo_soggetto": "Agente",
+        "tipo_oggetto": "Concetto"
+      }
+    },
+    {
+      "soggetto": "Evaluator",
+      "relazione": "fornisce",
+      "oggetto": "descrittore in linguaggio naturale",
+      "fonte": "Le credenze simboliche fornite dall'Evaluator includono un descrittore in linguaggio naturale...",
+      "metadati": {
+        "tipo_soggetto": "Agente",
+        "tipo_oggetto": "Funzione"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "unifica",
+      "oggetto": "robustezza strutturale del BDI e trasparenza del ragionamento simbolico",
+      "fonte": "LUMI unifica la robustezza strutturale del BDI e la trasparenza del ragionamento simbolico...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Caratteristica"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "fornisce",
+      "oggetto": "controllo simbolico",
+      "fonte": "Questo approccio ibrido fornisce il controllo simbolico necessario...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Funzione"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "è_progettato_per",
+      "oggetto": "agenti green-aware",
+      "fonte": "...soprattutto per agenti green-aware che devono ragionare sugli impatti a lungo termine...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Applicazione"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "è_un",
+      "oggetto": "work in progress",
+      "fonte": "LUMI is currently a work in progress.",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Stato"
+      }
+    },
+    {
+      "soggetto": "LUMI",
+      "relazione": "ha_caso_di_studio",
+      "oggetto": "eLearning adattivo",
+      "fonte": "Here, we present a preliminary prototype with a use case in the domain of adaptive eLearning...",
+      "metadati": {
+        "tipo_soggetto": "Architettura",
+        "tipo_oggetto": "Applicazione"
+      }
+    }
+  ]
+}

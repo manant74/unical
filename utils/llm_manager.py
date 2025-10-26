@@ -167,12 +167,23 @@ class LLMManager:
         kwargs = {
             "model": model,
             "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-            "top_p": top_p,
         }
 
-        if stop_sequences:
+        # I modelli GPT-5 e o1/o3 hanno restrizioni sui parametri
+        is_new_model = model.startswith(("gpt-5", "o1-", "o3-", "03-"))
+
+        if is_new_model:
+            # Questi modelli richiedono max_completion_tokens e non supportano temperature/top_p personalizzati
+            kwargs["max_completion_tokens"] = max_tokens
+            # Non aggiungere temperature e top_p (usano valori predefiniti)
+        else:
+            # Modelli standard supportano tutti i parametri
+            kwargs["max_tokens"] = max_tokens
+            kwargs["temperature"] = temperature
+            kwargs["top_p"] = top_p
+
+        if stop_sequences and not is_new_model:
+            # I modelli o1/o3 potrebbero non supportare stop sequences
             kwargs["stop"] = stop_sequences[:4]  # OpenAI supporta max 4
 
         response = self.clients["OpenAI"].chat.completions.create(**kwargs)

@@ -10,7 +10,7 @@ L'obiettivo è analizzare tutta la base di conoscenza  che descrive un dominio s
 
 ## 3. FORMATO DI OUTPUT OBBLIGATORIO (JSON)
 
-L'output DEVE essere un singolo blocco di codice JSON. Il JSON deve avere una chiave radice "beliefs", contenente una lista di oggetti. Ogni oggetto rappresenta un singolo "belief" (una singola affermazione atomica) e deve contenere le seguenti chiavi:7
+L'output DEVE essere un singolo blocco di codice JSON. Il JSON deve avere una chiave radice "beliefs_base", contenente una lista di oggetti. Ogni oggetto rappresenta un singolo "belief" (una singola affermazione atomica) e deve contenere le seguenti chiavi:
 
 - `"soggetto"`: L'entità principale del fatto.
 - `"relazione"`: Il verbo o la proprietà che lega il soggetto all'oggetto. Usa un formato normalizzato in snake_case (es. `è_prodotto_da`, `ha_come_caratteristica`).
