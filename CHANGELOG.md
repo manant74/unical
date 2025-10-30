@@ -1,139 +1,138 @@
 # Changelog
 
-Tutte le modifiche rilevanti al progetto LUMIA Studio saranno documentate in questo file.
+Tutte le modifiche significative a questo progetto saranno documentate in questo file.
 
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Non Rilasciato] - 2025-01-20
+## Release - 2025-01-30
 
-### 🎉 Aggiunte
+### Home Page
 
-#### Nuove Pagine e Sistemi Core
+- **Traduzione completa in inglese**
 
-- **`pages/0_Compass.py`**: Nuova pagina di gestione sessioni e configurazione
-  - Crea, modifica e gestisci sessioni di lavoro
-  - Configura provider LLM e modelli per sessione
-  - Visualizza e modifica belief di base per contesti
-  - Gestione stato sessione (attiva/archiviata)
+### 🎯 Nuova Architettura Sessioni
 
-- **`pages/1_Knol.py`**: Nuova pagina di gestione knowledge base (rinominata da Contextual)
-  - Carica documenti (PDF, TXT, MD) in knowledge base specifiche per contesto
-  - Estrai belief di base dai documenti usando LLM
-  - Gestione documenti context-aware
-  - Lista documenti e statistiche
+**SessionManager** - Sistema completo di gestione sessioni multi-utente. La Sessione ora è una area di lavoro  su cui più utenti possono lavorare anche in giorni diversi per arrivare al completamento
 
-- **`utils/session_manager.py`**: Sistema completo di gestione sessioni
-  - Creazione sessioni con ID univoci
-  - Storage dati BDI (Beliefs, Desires, Intentions)
-  - Gestione metadata e configurazione sessione
-  - Gestione belief base per sessione
-  - Stato sessione attiva/archiviata
+- CRUD operations per sessioni (create, read, update, delete)
+- Persistenza su filesystem in formato JSON
+- Metadata tracking: created_at, updated_at, status
+- Gestione sessione attiva e switching tra sessioni
+- Export/Import sessioni complete
 
-- **`utils/context_manager.py`**: Sistema di isolamento contesti
-  - Crea e gestisci contesti multipli isolati
-  - Storage ChromaDB specifico per contesto
-  - File belief base per contesto
-  - Metadata e descrizioni contesto
+Il modulo di Gestione della Sessione ha preso il nome di **Compass** e permette di configurare:
 
-#### Miglioramenti Agente Believer
+- Nome e Descrizione
+- LLM da usare e configuraizone parametri LLM (temperature, max_tokens, top_p)
+- Nome della Knowledge Base da usare con relativi dettagli
 
-- **Integrazione Belief di Base** (`pages/3_Believer.py`)
-  - Rilevamento automatico belief di base esistenti nella sessione
-  - Scelta interattiva all'inizio conversazione: creare belief specializzati o verificare belief di base
-  - Pulsanti visuali per scelta utente (🎯 Crea / 📋 Verifica)
-  - Pulsante "Vai a Compass" condizionale in sidebar (compare solo quando utente sceglie di verificare)
-  - Visualizzazione conteggio belief di base disponibili in sidebar
+Compass permette di tracciare e visualizza tutti i Beliefs e i Desire emersi durante le fasi del workflow
+Permette editing diretto dei desire e dei beliefs emersi
 
-- **Accumulo Incrementale Belief** (`pages/3_Believer.py`)
-  - Bug risolto: belief da risposte JSON multiple ora si accumulano invece di essere sovrascritti
+***Struttura Dati Sessione***
 
-#### Miglioramenti Agente Alì
+```json
+{
+  "metadata": {
+    "name": "Session Name",
+    "description": "...",
+    "created_at": "ISO-8601",
+    "updated_at": "ISO-8601",
+    "status": "active|archived"
+  },
+  "config": {
+    "context": "context_name",
+    "llm_provider": "Claude|Gemini|OpenAI",
+    "llm_model": "model-name",
+    "llm_settings": {
+      "temperature": 0.7,
+      "max_tokens": 2000,
+      "top_p": 0.9
+    }
+  },
+  "belief_base": [...],
+  "current_bdi": {...}
+}
+```
 
-- **Accumulo Incrementale Desire** (`pages/2_Ali.py`)
-  - Bug risolto: desire da risposte JSON multiple ora si accumulano invece di essere sovrascritti
+#### 🗂️ Nuovo Modulo di Gestione del Contesto
 
-### 🔧 Modifiche
+**Knol** - E' il nuovo nome del modulo per la gestione delle knowledge base
 
-#### Miglioramenti Document Processor (`utils/document_processor.py`)
+- Gestione di più Knowledge Base usabili nelle varie sessioni
+- Caricamento di PDF, file di testo, pagine web, file markdown
+- Struttura dati separata per ogni contesto
+- Export/Import contesti in formato ZIP
+- Generazione automatica Vector Store del contesto
+- Estrazione Automatica dei Beliefs di base associabili al contesto
+- Visualizzaizone delle fonti presenti nel contesto
 
-- **Architettura Context-Aware**
-  - Aggiunto parametro `context_name` al costruttore
-  - Path ChromaDB dinamico basato su contesto: `./data/contexts/{context_name}/chroma_db`
-  - Naming collection con informazioni contesto
-  - Arricchimento metadata con campo context
+***Struttura Directory Contesti***
 
-- **Nuovi Metodi**
-  - `get_all_documents()`: Recupera tutti i documenti con metadata
-  - `get_belief_base_path()`: Ottieni path al file belief base del contesto
-  - `_normalize_collection_name()`: Assicura nomi compatibili ChromaDB
+```text
+data/contexts/
+  ├── context_name_1/
+  │   ├── context_metadata.json
+  │   ├── belief_base.json
+  │   └── chroma_db/
+  ├── context_name_2/
+  │   ├── context_metadata.json
+  │   ├── belief_base.json
+  │   └── chroma_db/
+```
 
-#### Aggiornamenti LLM Manager (`utils/llm_manager.py`)
+#### 🎯 Ali & Believer Updates
 
-- Selezione modelli migliorata per tutti i provider
-- Gestione errori e validazione migliorata
-- Supporto migliore per diverse configurazioni modelli
+***Ali (Desires Agent)***
 
-#### Integrazione Sessioni
+- Integrazione con nuovo sistema sessioni
+- Caricamento automatico sessione attiva
+- Accesso al contesto della sessione
+- Salvataggio desires nel BDI della sessione
+- UI ottimizzata con session badge
+- Link rapido a Compass
 
-- **Alì** (`pages/2_Ali.py`)
-  - Inizializzazione document processor session-aware
-  - Lazy initialization del document processor
-  - Contesto caricato da sessione attiva
-  - Desire salvati direttamente nei dati BDI sessione
+***Believer (Beliefs Agent)***
 
-- **Believer** (`pages/3_Believer.py`)
-  - Inizializzazione document processor session-aware
-  - Desire caricati da dati BDI sessione
-  - Belief salvati nei dati BDI sessione
-  - Supporto per struttura domains/personas nei dati BDI
+- Integrazione con sistema sessioni
+- Gestione beliefs BDI separati da belief base
+- Auto-recovery sessione attiva
+- Parsing migliorato per beliefs strutturati
+- UI con session context
 
-#### Aggiornamenti Documentazione
+### 🎯 Auditor System
 
-- **`README.md`**: Riscrittura completa
-  - Panoramica architettura aggiornata
-  - Nuova documentazione workflow (Compass → Knol → Alì → Believer)
-  - Documentazione gestione sessioni e contesti
-  - Istruzioni setup aggiornate
+#### Nuova Feature: Auditor Agent
 
-### 🗑️ Rimozioni
+- **Sistema di auditing automatico** per desires e beliefs
+- Validazione strutturale e semantica delle proposte dell'agente
+- Feedback loop per miglioramento iterativo
+- Parsing JSON automatico delle risposte
+- Gestione errori e retry logic
+- Integrazione in **Ali**: Auditor valida desires prima del salvataggio
+- Integrazione in **Believer**: Auditor valida beliefs estratti
+- UI per visualizzazione feedback auditor
 
-#### Pagine Deprecate
+### 🤖 Miglioramenti Prompts
 
-- **`pages/1_Contextual.py`**: Sostituita da `pages/1_Knol.py`
-  - Rimosso vecchio approccio single-context
-  - Funzionalità migrata a pagina Knol context-aware
+#### Ali System Prompt
 
-- **`pages/4_Validator.py`**: Rimossa pagina validator
-  - Funzionalità da riprogettare in versioni future
+- **Ristrutturazione completa** del prompt per Ali
+- Migliore guida per estrazione desires
+- Istruzioni più chiare per formato JSON
+- Supporto per domini e personas
 
-### 🐛 Correzioni
+#### Belief Base Extraction
 
-#### Bug Critici Risolti
+- Creato prompt dedicato per estrazione beliefs
+- Generazione automatica da knowledge base
+- Formato JSON strutturato
+- Validazione automatica
 
-- **Sovrascrittura Belief/Desire** (Alta Priorità)
-  - Risolto in Alì e Believer: risposte JSON multiple ora si accumulano correttamente
-  - Aggiunto `extend()` invece di assegnazione per preservare dati precedenti
-  - Calcolo ID corretto basato su ID massimo esistente
+#### Suggerimenti Migliorati
 
-- **Gestione Session State**
-  - Risolto caricamento sessione in Alì e Believer
-  - Fallback corretto all'ultima sessione attiva
-  - Inizializzazione corretta session state
-
-### 🔄 Refactoring
-
-#### Cambiamenti Architetturali
-
-- **Da Single Context a Multi-Context**
-  - Migrazione da `data/chroma_db/` centralizzato a `data/contexts/{context}/chroma_db/`
-  - Belief base ora per-contesto invece che globali
-  - Storage dati BDI specifico per sessione
-
-- **Da File-Based a Session-Based**
-  - Desire e belief ora memorizzati in dati BDI sessione
-  - Cronologia chat memorizzata in metadata sessione
-  - Configurazione per sessione invece che globale
-
-### 📝 Note
+- Sistema di suggerimenti contestuali più intelligente
+- Suggerimenti basati su history conversazione
+- Personalizzazione per dominio

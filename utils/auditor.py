@@ -57,8 +57,7 @@ class ConversationAuditor:
             context=None,
             temperature=temperature,
             max_tokens=max_tokens,
-            top_p=top_p,
-            stop_sequences=None,
+            top_p=top_p
         )
 
         parsed = self._extract_json(response)

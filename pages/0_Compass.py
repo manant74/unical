@@ -10,7 +10,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils.session_manager import SessionManager
 from utils.context_manager import ContextManager
 from utils.llm_manager import LLMManager
-from utils.document_processor import DocumentProcessor
 
 st.set_page_config(
     page_title="Compass - LUMIA Studio",
@@ -55,6 +54,10 @@ if 'llm_manager' not in st.session_state:
 if 'editing_session_id' not in st.session_state:
     st.session_state.editing_session_id = None
 
+# Inizializza flag per nuova sessione
+if 'new_session_requested' not in st.session_state:
+    st.session_state.new_session_requested = False
+
 # Header
 st.markdown("<h1 class='compass-header'>🧭 Compass</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #666; margin-bottom: 2rem;'>Configure and manage your working sessions</p>", unsafe_allow_html=True)
@@ -68,6 +71,14 @@ with st.sidebar:
 
     st.markdown("---")
 
+    # New Session button in alto
+    if st.button("➕ New Session", width='stretch', type="primary"):
+        st.session_state.editing_session_id = None
+        st.session_state.new_session_requested = True
+        st.rerun()
+
+    st.markdown("---")
+
     st.markdown("### 👩🏻‍💻 Recent Sessions")
     recent_sessions = st.session_state.session_manager.get_all_sessions(status="active")
 
@@ -77,56 +88,31 @@ with st.sidebar:
             config = session['config']
 
             with st.container():
-                st.markdown(f"**{metadata['name']}**")
-                st.caption(f"🗂️ {config['context']} | 🤖 {config['llm_provider']}")
-                col1, col2 = st.columns(2)
-                with col1:
-                    if st.button("📂 Load", key=f"load_{session['session_id']}", width='stretch'):
+                # Layout compatto: info a sinistra, pulsanti a destra
+                col_info, col_actions = st.columns([3, 1])
+
+                with col_info:
+                    st.markdown(f"**{metadata['name']}**")
+                    st.caption(f"KB: {config['context']}")
+                    st.caption(f"LLM: {config['llm_provider']}")
+
+                with col_actions:
+                    if st.button("📂", key=f"load_{session['session_id']}", help="Load session", use_container_width=True):
                         st.session_state.editing_session_id = session['session_id']
                         st.session_state.active_session = session['session_id']
+                        st.session_state.new_session_requested = False
                         st.success(f"Session '{metadata['name']}' loaded!")
                         st.rerun()
-                with col2:
-                    if st.button("🗑️", key=f"del_{session['session_id']}", width='stretch'):
+
+                    if st.button("🗑️", key=f"del_{session['session_id']}", help="Delete session", use_container_width=True):
                         st.session_state.session_manager.delete_session(session['session_id'])
                         if st.session_state.editing_session_id == session['session_id']:
                             st.session_state.editing_session_id = None
                         st.rerun()
-                st.markdown("---")
+
+                st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
     else:
         st.info("No sessions yet. Create your first one!")
-
-
-    # Quick Actions
-    st.markdown("### ⚡ Quick Actions")
-
-    if st.button("➕ New Session", width='stretch', type="primary"):
-        st.session_state.editing_session_id = None
-        st.rerun()
-
-    if st.button("🚀 Quick Start", width='stretch'):
-        contexts = st.session_state.context_manager.get_all_contexts()
-        providers = st.session_state.llm_manager.get_available_providers()
-
-        if contexts and providers:
-            default_context = contexts[0]['normalized_name']
-            default_provider = providers[0]
-            default_model = list(st.session_state.llm_manager.get_models_for_provider(default_provider).keys())[0]
-
-            session_id = st.session_state.session_manager.create_session(
-                name=f"Quick Session {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-                context=default_context,
-                llm_provider=default_provider,
-                llm_model=default_model,
-                description="Quick start session with default configuration"
-            )
-
-            st.session_state.active_session = session_id
-            st.session_state.editing_session_id = session_id
-            st.success("Quick session created!")
-            st.rerun()
-        else:
-            st.error("Please configure at least one context and LLM provider first!")
 
 # Main content - Tabs
 # Carica i dati della sessione corrente se in editing
@@ -134,27 +120,98 @@ current_session = None
 if st.session_state.editing_session_id:
     current_session = st.session_state.session_manager.get_session(st.session_state.editing_session_id)
 
-# Se non c'è nessuna sessione selezionata, mostra la schermata vuota
+# Se non c'è nessuna sessione selezionata, mostra il form di creazione
 if not current_session:
-    # Empty state - Mostra solo istruzioni
-    st.markdown("")
-    # Centra il contenuto usando colonne
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # Verifica se c'è stata una richiesta esplicita di "New Session"
+    if st.session_state.editing_session_id is None and 'new_session_requested' in st.session_state and st.session_state.new_session_requested:
+        # Form per creare una nuova sessione
+        st.markdown("## ➕ Create New Session")
 
-    with col2:
-        st.info("""
-        ### 🚀 Getting Started
+        contexts = st.session_state.context_manager.get_all_contexts()
+        providers = st.session_state.llm_manager.get_available_providers()
 
-        **To start configuring a session:**
+        if not contexts:
+            st.error("⚠️ No contexts available. Please create a context in Knol first.")
+            if st.button("Go to Knol"):
+                st.switch_page("pages/1_Knol.py")
+            st.stop()
 
-        1. Click **"➕ New Session"** in the sidebar to create a new session
-        2. Or click **"📂 Load"** on an existing session to edit it
-        3. Or use **"🚀 Quick Start"** to create a session with default settings
-        4. After Active the session with Save & Activate
-        """)
+        if not providers:
+            st.error("⚠️ No LLM providers configured. Please add API keys in your .env file.")
+            st.stop()
 
+        with st.form("new_session_form"):
+            session_name = st.text_input(
+                "Session Name *",
+                placeholder="e.g., My Research Project"
+            )
+
+            session_description = st.text_area(
+                "Description",
+                placeholder="Brief description of what you want to achieve...",
+                height=100
+            )
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                selected_context = st.selectbox(
+                    "Context *",
+                    options=[ctx['normalized_name'] for ctx in contexts],
+                    format_func=lambda x: next(ctx['name'] for ctx in contexts if ctx['normalized_name'] == x)
+                )
+
+            with col2:
+                selected_provider = st.selectbox("LLM Provider *", providers)
+
+            models = st.session_state.llm_manager.get_models_for_provider(selected_provider)
+            model_keys = list(models.keys())
+            model_display = list(models.values())
+
+            selected_model_idx = st.selectbox(
+                "Model *",
+                range(len(model_keys)),
+                format_func=lambda i: model_display[i]
+            )
+            selected_model = model_keys[selected_model_idx]
+
+            submitted = st.form_submit_button("Create Session", type="primary", use_container_width=True)
+
+            if submitted:
+                if not session_name:
+                    st.error("Please provide a session name")
+                else:
+                    session_id = st.session_state.session_manager.create_session(
+                        name=session_name,
+                        context=selected_context,
+                        llm_provider=selected_provider,
+                        llm_model=selected_model,
+                        description=session_description
+                    )
+
+                    st.session_state.editing_session_id = session_id
+                    st.session_state.new_session_requested = False
+                    st.success(f"✅ Session '{session_name}' created successfully!")
+                    st.rerun()
+    else:
+        # Empty state - Mostra solo istruzioni
         st.markdown("")
-        st.caption("💡 A session includes: Name, Description, Context, LLM Configuration, and Belief Base")
+        # Centra il contenuto usando colonne
+        col1, col2, col3 = st.columns([1, 2, 1])
+
+        with col2:
+            st.info("""
+            ### 🚀 Getting Started
+
+            **To start configuring a session:**
+
+            1. Click **"➕ New Session"** in the sidebar to create a new session
+            2. Or click **"📂"** on an existing session to load and edit it
+            3. Configure your session and activate it with **"🚀 Activate"**
+            """)
+
+            st.markdown("")
+            st.caption("💡 A session includes: Name, Description, Context, LLM Configuration, and Belief Base")
 else:
     # Sessione selezionata - Mostra le tab di editing
     st.info(f"📝 Session Name Selected: **{current_session['metadata']['name']}**")
@@ -193,7 +250,13 @@ else:
             # Per salvare, serve almeno un contesto
             can_save = new_session_name and (current_session or st.session_state.context_manager.get_all_contexts())
 
-            if st.button("💾 Save", width='stretch', type="primary", disabled=not can_save):
+            if current_session:
+                if st.button("🚀 Activate", width='stretch', type="primary"):
+                    st.session_state.active_session = st.session_state.editing_session_id
+                    st.success(f"🎉 Session '{new_session_name}' is now active!")
+                    st.balloons()
+
+            if st.button("💾 Save", width='stretch', type="secondary", disabled=not can_save):
                 if current_session:
                     # Update existing session (solo metadata)
                     st.session_state.session_manager.update_session_metadata(
@@ -229,12 +292,6 @@ else:
                     else:
                         st.error("Please configure a context first!")
 
-            if current_session:
-                if st.button("🚀 Activate", width='stretch'):
-                    st.session_state.active_session = st.session_state.editing_session_id
-                    st.success(f"🎉 Session '{new_session_name}' is now active!")
-                    st.balloons()
-
         st.markdown("---")
         st.markdown("#### 🤖 LLM Configuration")
 
@@ -253,8 +310,7 @@ else:
                 llm_settings = config.get('llm_settings', {
                     'temperature': 0.7,
                     'max_tokens': 2000,
-                    'top_p': 0.9,
-                    'stop_sequences': []
+                    'top_p': 0.9
                 })
             else:
                 current_provider = available_providers[0]
@@ -262,8 +318,7 @@ else:
                 llm_settings = {
                     'temperature': 0.7,
                     'max_tokens': 2000,
-                    'top_p': 0.9,
-                    'stop_sequences': []
+                    'top_p': 0.9
                 }
 
             with col1:
@@ -326,28 +381,10 @@ else:
                     help="Maximum length of the response"
                 )
 
-            # Stop sequences (fuori dalle colonne per più spazio)
-            st.markdown("---")
-            st.markdown("**Advanced Settings**")
-
-            current_stop_sequences = llm_settings.get('stop_sequences', [])
-            stop_sequences_str = "\n".join(current_stop_sequences) if current_stop_sequences else ""
-
-            stop_sequences_input = st.text_area(
-                "Stop Sequences (one per line, max 4)",
-                value=stop_sequences_str,
-                height=100,
-                help="Sequences that will stop the generation. Max 4 sequences supported. Leave empty for default behavior."
-            )
-
-            # Parse stop sequences
-            stop_sequences = [s.strip() for s in stop_sequences_input.split('\n') if s.strip()][:4]
-
             new_llm_settings = {
                 'temperature': temperature,
                 'max_tokens': max_tokens,
-                'top_p': top_p,
-                'stop_sequences': stop_sequences
+                'top_p': top_p
             }
 
             # Test connection e Save

@@ -64,9 +64,8 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
   - Creazione sessioni con nome, descrizione e tag
   - Selezione del contesto (knowledge base) da utilizzare
   - Configurazione provider LLM (Gemini, Claude, OpenAI) e modello
-  - **Parametri LLM avanzati**: temperature, max_tokens, top_p, stop_sequences
+  - **Parametri LLM avanzati**: temperature, max_tokens, top_p
   - Test connessione LLM con sessione attiva
-  - Quick start con configurazioni default
   - Gestione sessioni recenti (carica, elimina, switch)
 
 - **Gestione BDI Data**:
@@ -138,7 +137,7 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 
 - **Sessione obbligatoria**: Richiede sessione attiva configurata in Compass
 - **Auto-recovery**: Carica automaticamente ultima sessione attiva se session state vuoto
-- Supporto multi-LLM con **parametri configurabili dalla sessione** (temperature, max_tokens, top_p, stop_sequences)
+- Supporto multi-LLM con **parametri configurabili dalla sessione** (temperature, max_tokens, top_p)
 - Accesso RAG alla knowledge base del contesto selezionato
 - **Saluto contestualizzato**: Legge descrizione del contesto dal metadata (generata da Knol)
 - Parsing automatico report JSON per estrazione desires strutturati

@@ -538,26 +538,36 @@ Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati.
     # Logica per cancellare knowledge base del contesto
     if clear_context:
         if stats['document_count'] > 0:
-            st.session_state.doc_processor.clear_database()
+            try:
+                # Rilascia le connessioni e cancella il database
+                st.session_state.doc_processor.clear_database()
 
-            # Cancella anche il file belief base se esiste
-            belief_base_path = st.session_state.context_manager.get_belief_base_path(
-                st.session_state.current_context
-            )
-            if os.path.exists(belief_base_path):
-                try:
-                    os.remove(belief_base_path)
-                except Exception as e:
-                    st.warning(f"⚠️ Impossibile cancellare belief_base.json: {e}")
+                # Cancella anche il file belief base se esiste
+                belief_base_path = st.session_state.context_manager.get_belief_base_path(
+                    st.session_state.current_context
+                )
+                if os.path.exists(belief_base_path):
+                    try:
+                        os.remove(belief_base_path)
+                    except Exception as e:
+                        st.warning(f"⚠️ Impossibile cancellare belief_base.json: {e}")
 
-            # Aggiorna i metadata
-            st.session_state.context_manager.update_context_metadata(
-                st.session_state.current_context,
-                {'document_count': 0, 'belief_count': 0}
-            )
+                # Forza la re-inizializzazione del DocumentProcessor
+                st.session_state.doc_processor = DocumentProcessor(
+                    context_name=st.session_state.current_context
+                )
+                st.session_state.doc_processor.initialize_db()
 
-            st.success("✅ Knowledge Base cancellata con successo!")
-            st.rerun()
+                # Aggiorna i metadata
+                st.session_state.context_manager.update_context_metadata(
+                    st.session_state.current_context,
+                    {'document_count': 0, 'belief_count': 0}
+                )
+
+                st.success("✅ Knowledge Base cancellata con successo!")
+                st.rerun()
+            except Exception as e:
+                st.error(f"❌ Errore durante la cancellazione: {str(e)}")
         else:
             st.info("Nessun contenuto da cancellare")
 

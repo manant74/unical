@@ -567,8 +567,7 @@ if prompt:
                 context=context if context else None,
                 temperature=llm_settings.get('temperature', 0.7),
                 max_tokens=llm_settings.get('max_tokens', 2000),
-                top_p=llm_settings.get('top_p', 0.9),
-                stop_sequences=llm_settings.get('stop_sequences')
+                top_p=llm_settings.get('top_p', 0.9)
             )
 
             # Add assistant response

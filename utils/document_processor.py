@@ -69,14 +69,42 @@ class DocumentProcessor:
                 metadata={"hnsw:space": "cosine", "context": self.context_name or "default"}
             )
 
+    def release_connections(self):
+        """Rilascia tutte le connessioni al database ChromaDB"""
+        try:
+            if self.collection:
+                # Reset della collection
+                self.collection = None
+            if self.client:
+                # Forza la chiusura del client
+                # ChromaDB non ha un metodo close esplicito, ma possiamo resettare il riferimento
+                self.client = None
+        except Exception as e:
+            print(f"Errore durante il rilascio delle connessioni: {e}")
+
     def clear_database(self):
         """Cancella il database esistente per il contesto corrente"""
-        if self.client and self.collection:
-            try:
-                # Elimina la collection corrente, qualunque sia il suo nome
-                self.client.delete_collection(self.collection.name)
-            except:
-                pass
+        # Prima rilascia tutte le connessioni
+        self.release_connections()
+
+        # Crea un nuovo client temporaneo per l'eliminazione
+        try:
+            temp_client = chromadb.PersistentClient(path=self.persist_directory)
+            collections = temp_client.list_collections()
+
+            # Elimina tutte le collections esistenti per questo contesto
+            for collection in collections:
+                try:
+                    temp_client.delete_collection(collection.name)
+                except Exception as e:
+                    print(f"Errore nell'eliminazione della collection {collection.name}: {e}")
+
+            # Reset del client temporaneo
+            temp_client = None
+        except Exception as e:
+            print(f"Errore durante la cancellazione del database: {e}")
+
+        # Re-inizializza il database con un nuovo client
         self.initialize_db()
 
     def process_pdf(self, file) -> List[str]:
