@@ -22,7 +22,7 @@ BELIEVER_EXPECTED_OUTCOME = (
 )
 
 st.set_page_config(
-    page_title="Believer - LUMIA Studio",
+    page_title="Believer - LumIA Studio",
     page_icon="💡",
     layout="wide"
 )
@@ -96,10 +96,29 @@ def render_quick_replies(placeholder, suggestions, pending_state_key, button_pre
                     if reason:
                         st.caption(reason)
 
-# CSS per nascondere solo il menu di navigazione Streamlit
+# CSS per nascondere solo il menu di navigazione Streamlit e styling
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {display: none;}
+
+    /* Riduce spessore delle righe di divisione */
+    hr {
+        margin: 0.5rem 0;
+        border: none;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.2);
+    }
+
+    /* Divider nella sidebar */
+    section[data-testid="stSidebar"] hr {
+        margin: 0.3rem 0;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.15);
+    }
+
+    /* Riduce spazio superiore del titolo della pagina */
+    .block-container {
+        padding-top: 2rem !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -232,10 +251,15 @@ def load_base_beliefs():
 
 # Sidebar per configurazione
 with st.sidebar:
-    # Pulsante Home in alto
-    st.markdown("### ✨ LUMIA Studio")
-    if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
-        st.switch_page("app.py")
+    # Header con logo e pulsante home sulla stessa riga
+    col_logo, col_home = st.columns([3, 1])
+
+    with col_logo:
+        st.markdown("<div style='padding-top: 0px;'><h3>✨ LumIA Studio</h3></div>", unsafe_allow_html=True)
+
+    with col_home:
+        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+            st.switch_page("app.py")
 
     st.divider()
 
@@ -244,16 +268,13 @@ with st.sidebar:
         active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
         if active_session_data:
             st.success(f"📍 Sessione Attiva: **{active_session_data['metadata']['name']}**")
-            st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')}")
             
             # Mostra informazioni sulla base di conoscenza caricata
             kb_stats = st.session_state.doc_processor.get_stats()
             if kb_stats['document_count'] > 0:
-                st.success(f"📚 KB Caricata: {kb_stats['document_count']} documenti")
-                st.caption(f"🎯 Contesto: {kb_stats['context']}")
+                st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')} (KB : {kb_stats['document_count']} chunks)")           
             else:
                 st.warning("⚠️ Base di conoscenza vuota per questo contesto")
-                st.caption(f"🎯 Contesto: {kb_stats['context']}")
 
             # Mostra il pulsante Compass solo se l'utente ha scelto di verificare i belief di base
             if st.session_state.get('show_compass_button', False):
@@ -268,52 +289,6 @@ with st.sidebar:
 
     st.divider()
 
-    # Configurazione
-    st.header("⚙️ Configurazione Believer")
-
-    # Selezione provider e modello (default dalla sessione)
-    available_providers = st.session_state.llm_manager.get_available_providers()
-
-    if not available_providers:
-        st.error("⚠️ Nessun provider LLM disponibile!")
-        st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
-        provider = None
-    else:
-        # Usa il provider della sessione come default
-        session_provider = active_session_data['config'].get('llm_provider')
-        if session_provider and session_provider in available_providers:
-            default_provider = session_provider
-        else:
-            default_provider = "Gemini" if "Gemini" in available_providers else available_providers[0]
-
-        provider = st.selectbox(
-            "Provider LLM",
-            available_providers,
-            index=available_providers.index(default_provider),
-            key="believer_provider",
-            help="Provider configurato dalla sessione attiva"
-        )
-
-        if provider:
-            models = st.session_state.llm_manager.get_models_for_provider(provider)
-            # Usa il modello della sessione come default
-            session_model = active_session_data['config'].get('llm_model')
-            if session_model and session_model in models:
-                default_model = session_model
-            else:
-                default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
-
-            model = st.selectbox(
-                "Modello",
-                options=list(models.keys()),
-                format_func=lambda x: models[x],
-                index=list(models.keys()).index(default_model),
-                key="believer_model",
-                help="Modello configurato dalla sessione attiva"
-            )
-
-    st.divider()
-
     # Carica desires
     if st.session_state.loaded_desires is None:
         st.session_state.loaded_desires = load_desires()
@@ -321,7 +296,7 @@ with st.sidebar:
     if st.session_state.loaded_desires:
         # Determina la fonte dei desires
         source_info = "dalla Sessione Attiva" if st.session_state.loaded_desires[0].get('context') == 'Sessione Attiva' else "dal file globale"
-        st.success(f"✅ {len(st.session_state.loaded_desires)} Desire caricati {source_info}")
+        st.info(f"✅ {len(st.session_state.loaded_desires)} Desire caricati {source_info}")
 
         with st.expander("🎯 Desires Disponibili"):
             for idx, desire in enumerate(st.session_state.loaded_desires, 1):
@@ -341,84 +316,10 @@ with st.sidebar:
         st.info(f"📚 {len(st.session_state.base_beliefs_available)} Belief di Base disponibili nel contesto")
         with st.expander("💡 Belief di Base Disponibili"):
             for idx, belief in enumerate(st.session_state.base_beliefs_available, 1):
-                belief_desc = belief.get('belief_statement', belief.get('description', 'N/A'))
+                belief_desc = belief.get('belief_statement', belief.get('fonte', 'N/A'))
                 st.markdown(f"**{idx}**. {belief_desc[:100]}...")
 
-    st.divider()
-
-    # Controllo sessione
-    st.subheader("🎬 Controllo Sessione")
-
-    if st.button("🔄 Nuova Conversazione", use_container_width=True):
-        st.session_state.believer_chat_history = []
-        st.session_state.believer_greeted = False
-        st.session_state.loaded_desires = None  # Forza il ricaricamento
-        st.session_state.base_beliefs_checked = False  # Reset del check belief di base
-        st.session_state.base_beliefs_available = None  # Forza ricaricamento belief di base
-        st.session_state.show_compass_button = False  # Nascondi il pulsante Compass
-        st.session_state.believer_audit_trail = []
-        st.session_state.believer_suggestions = []
-        st.session_state.believer_pending_prompt = None
-        st.rerun()
-
-    if st.button("✅ Completa Sessione", type="primary", use_container_width=True):
-        # Verifica se c'è una sessione attiva
-        if 'active_session' in st.session_state and st.session_state.active_session:
-            if st.session_state.beliefs:
-                # Salva i beliefs nella sessione corrente usando BDI data
-                st.session_state.session_manager.update_bdi_data(
-                    st.session_state.active_session,
-                    beliefs=st.session_state.beliefs
-                )
-
-                # Salva anche la chat history come metadati della sessione
-                st.session_state.session_manager.update_session_metadata(
-                    st.session_state.active_session,
-                    chat_history_believer=st.session_state.believer_chat_history
-                )
-
-                st.success(f"✅ Sessione completata! {len(st.session_state.beliefs)} Beliefs salvati nella sessione attiva!")
-                st.balloons()
-            elif len(st.session_state.believer_chat_history) > 1:
-                # Se ci sono messaggi ma nessun belief, salva solo la chat
-                st.session_state.session_manager.update_session_metadata(
-                    st.session_state.active_session,
-                    chat_history_believer=st.session_state.believer_chat_history
-                )
-
-                st.warning("⚠️ Nessun belief identificato, ma la conversazione è stata salvata nella sessione.")
-                st.info("💡 Suggerimento: Chiedi a Believer di generare il report finale con i beliefs identificati.")
-            else:
-                st.warning("⚠️ Nessuna conversazione da salvare!")
-        else:
-            # Fallback: salva come prima in file locali se non c'è sessione attiva
-            st.warning("⚠️ Nessuna sessione attiva! Salvataggio in file locali...")
-
-            if st.session_state.beliefs:
-                final_data = {
-                    "timestamp": datetime.now().isoformat(),
-                    "desires": st.session_state.loaded_desires or [],
-                    "beliefs": st.session_state.beliefs,
-                    "chat_history": st.session_state.believer_chat_history
-                }
-
-                os.makedirs("./data/sessions", exist_ok=True)
-                filename = f"./data/sessions/bdi_complete_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-
-                with open(filename, 'w', encoding='utf-8') as f:
-                    json.dump(final_data, f, ensure_ascii=False, indent=2)
-
-                with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
-                    json.dump(final_data, f, ensure_ascii=False, indent=2)
-
-                st.info(f"💾 Beliefs salvati in: {filename}")
-                st.info("💡 Suggerimento: Attiva una sessione in Compass per integrarla nel sistema!")
-            else:
-                st.warning("⚠️ Nessun dato da salvare!")
-
-    st.divider()
-
-    # Quick action: Add belief manually
+   # Quick action: Add belief manually
     with st.expander("➕ Aggiungi Belief Manualmente"):
         st.markdown("Compila i campi per aggiungere un belief manualmente")
 
@@ -463,6 +364,136 @@ with st.sidebar:
             else:
                 st.warning("⚠️ Inserisci almeno una descrizione")
 
+    st.divider()
+
+    # Configurazione
+    st.header("⚙️ Configurazione Believer")
+    
+    # Selezione provider e modello (default dalla sessione)
+    available_providers = st.session_state.llm_manager.get_available_providers()
+
+    if not available_providers:
+        st.error("⚠️ Nessun provider LLM disponibile!")
+        st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
+        provider = None
+    else:
+        # Usa il provider della sessione come default
+        session_provider = active_session_data['config'].get('llm_provider')
+        if session_provider and session_provider in available_providers:
+            default_provider = session_provider
+        else:
+            default_provider = "Gemini" if "Gemini" in available_providers else available_providers[0]
+
+ 
+        col_config1, col_config2 = st.columns(2)
+        with col_config1:
+            # Puoi aggiungere qui i controlli o le impostazioni desiderate per la colonna 2
+            provider = st.selectbox(
+                "Provider LLM",
+                available_providers,
+                index=available_providers.index(default_provider),
+                key="believer_provider",
+                help="Provider configurato dalla sessione attiva"
+            )
+
+        with col_config2:
+            if provider:
+                models = st.session_state.llm_manager.get_models_for_provider(provider)
+                # Usa il modello della sessione come default
+                session_model = active_session_data['config'].get('llm_model')
+                if session_model and session_model in models:
+                    default_model = session_model
+                else:
+                    default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
+
+                model = st.selectbox(
+                    "Modello",
+                    options=list(models.keys()),
+                    format_func=lambda x: models[x],
+                    index=list(models.keys()).index(default_model),
+                    key="believer_model",
+                    help="Modello configurato dalla sessione attiva"
+                )
+
+    st.divider()
+
+
+    # Controllo sessione
+    st.subheader("🎬 Controllo Sessione")
+
+    col_left, col_right = st.columns(2)
+
+    with col_left:
+        if st.button("🔄 Nuova", use_container_width=True):
+            st.session_state.believer_chat_history = []
+            st.session_state.believer_greeted = False
+            st.session_state.loaded_desires = None  # Forza il ricaricamento
+            st.session_state.base_beliefs_checked = False  # Reset del check belief di base
+            st.session_state.base_beliefs_available = None  # Forza ricaricamento belief di base
+            st.session_state.show_compass_button = False  # Nascondi il pulsante Compass
+            st.session_state.believer_audit_trail = []
+            st.session_state.believer_suggestions = []
+            st.session_state.believer_pending_prompt = None
+            st.rerun()
+
+    with col_right:
+        if st.button("✅ Completa", type="primary", use_container_width=True):
+            # Verifica se c'è una sessione attiva
+            if 'active_session' in st.session_state and st.session_state.active_session:
+                if st.session_state.beliefs:
+                    # Salva i beliefs nella sessione corrente usando BDI data
+                    st.session_state.session_manager.update_bdi_data(
+                        st.session_state.active_session,
+                        beliefs=st.session_state.beliefs
+                    )
+
+                    # Salva anche la chat history come metadati della sessione
+                    st.session_state.session_manager.update_session_metadata(
+                        st.session_state.active_session,
+                        chat_history_believer=st.session_state.believer_chat_history
+                    )
+
+                    st.success(f"✅ Sessione completata! {len(st.session_state.beliefs)} Beliefs salvati nella sessione attiva!")
+                    st.balloons()
+                elif len(st.session_state.believer_chat_history) > 1:
+                    # Se ci sono messaggi ma nessun belief, salva solo la chat
+                    st.session_state.session_manager.update_session_metadata(
+                        st.session_state.active_session,
+                        chat_history_believer=st.session_state.believer_chat_history
+                    )
+
+                    st.warning("⚠️ Nessun belief identificato, ma la conversazione è stata salvata nella sessione.")
+                    st.info("💡 Suggerimento: Chiedi a Believer di generare il report finale con i beliefs identificati.")
+                else:
+                    st.warning("⚠️ Nessuna conversazione da salvare!")
+            else:
+                # Fallback: salva come prima in file locali se non c'è sessione attiva
+                st.warning("⚠️ Nessuna sessione attiva! Salvataggio in file locali...")
+
+                if st.session_state.beliefs:
+                    final_data = {
+                        "timestamp": datetime.now().isoformat(),
+                        "desires": st.session_state.loaded_desires or [],
+                        "beliefs": st.session_state.beliefs,
+                        "chat_history": st.session_state.believer_chat_history
+                    }
+
+                    os.makedirs("./data/sessions", exist_ok=True)
+                    filename = f"./data/sessions/bdi_complete_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+
+                    with open(filename, 'w', encoding='utf-8') as f:
+                        json.dump(final_data, f, ensure_ascii=False, indent=2)
+
+                    with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
+                        json.dump(final_data, f, ensure_ascii=False, indent=2)
+
+                    st.info(f"💾 Beliefs salvati in: {filename}")
+                    st.info("💡 Suggerimento: Attiva una sessione in Compass per integrarla nel sistema!")
+                else:
+                    st.warning("⚠️ Nessun dato da salvare!")
+
+    st.divider()
+
     # Visualizza beliefs
     if st.session_state.beliefs:
         st.subheader("💡 Belief Identificati")
@@ -476,11 +507,14 @@ with st.sidebar:
     # Statistiche in basso
     st.divider()
     st.subheader("📊 Statistiche")
-    st.metric("Messaggi", len(st.session_state.believer_chat_history))
-    st.metric("Belief Identificati", len(st.session_state.beliefs))
-
-    stats = st.session_state.doc_processor.get_stats()
-    st.metric("Contenuti in KB", stats['document_count'])
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Messaggi", len(st.session_state.believer_chat_history))
+    with col2:
+        st.metric("Belief Identificati", len(st.session_state.beliefs))
+    with col3:
+        stats = st.session_state.doc_processor.get_stats()
+        st.metric("Contenuti in KB", stats['document_count'])
 
 # Main content
 st.title("💡 Believer - Agent for Beliefs")
@@ -529,15 +563,18 @@ Ho caricato i tuoi Desire:
 
 🔍 **Ho notato che esistono già {len(st.session_state.base_beliefs_available)} Belief di Base configurati nel contesto di questa sessione.**
 
-Puoi scegliere tra due opzioni:
+Puoi scegliere tra tre opzioni:
 
-**1. Creare Belief Specializzati** 🎯
-   Possiamo lavorare insieme per identificare belief più specifici e dettagliati, focalizzati sui tuoi Desire. Questi saranno complementari ai belief di base e più contestualizzati.
+**1. Chat per creare i Belief Specializzati** 🎯
+   Possiamo lavorare insieme in modalità conversazionale per identificare belief più specifici e dettagliati, focalizzati sui tuoi Desire. Questi saranno complementari ai belief di base e più contestualizzati.
 
-**2. Verificare Belief di Base** 📋
+**2. Verificare i Belief di Base** 📋
    Se preferisci prima consultare i belief di base già definiti, puoi visualizzarli in Compass nella sezione del contesto attivo.
 
-**Cosa preferisci fare?** Rispondi "1" per creare nuovi belief specializzati, oppure "2" se vuoi prima verificare i belief di base esistenti."""
+**3. Crea un mix tra Belief di Base e Belief per Desire** 🔄
+   Genererò automaticamente un set completo senza richiedere ulteriori input. Analizzerò i tuoi Desire, genererò Belief specializzati per ciascuno, e selezionerò solo i Belief di Base pertinenti. Il processo è completamente automatico.
+
+**Cosa preferisci fare?** Rispondi "1" per la chat interattiva, "2" per verificare i belief di base, oppure "3" per la generazione automatica completa."""
     else:
         # Nessun belief di base o già controllato - procedi normalmente
         greeting = f"""Ciao! Sono Believer e sono qui per aiutarti a individuare i Belief. 💡
@@ -606,10 +643,10 @@ if st.session_state.base_beliefs_available and not st.session_state.base_beliefs
     st.markdown("---")
 
     # Usa columns per mettere i pulsanti in fila
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("🎯 Creare Belief Specializzati", key="btn_create_beliefs", use_container_width=True):
+        if st.button("🎯 Chat per creare i Belief Specializzati", key="btn_create_beliefs", use_container_width=True):
             # Simula la scelta dell'opzione 1
             st.session_state.believer_chat_history.append({
                 "role": "user",
@@ -617,7 +654,7 @@ if st.session_state.base_beliefs_available and not st.session_state.base_beliefs
             })
             st.session_state.base_beliefs_checked = True
 
-            response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire. 🎯
+            response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire in modalità conversazionale. 🎯
 
 Questi belief saranno più specifici e dettagliati rispetto ai belief di base, e saranno direttamente collegati ai tuoi obiettivi.
 
@@ -630,7 +667,7 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
             st.rerun()
 
     with col2:
-        if st.button("📋 Verificare Belief di Base", key="btn_verify_beliefs", use_container_width=True):
+        if st.button("📋 Verificare i Belief di Base", key="btn_verify_beliefs", use_container_width=True):
             # Simula la scelta dell'opzione 2
             st.session_state.believer_chat_history.append({
                 "role": "user",
@@ -658,6 +695,83 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
 
             # Imposta un flag per mostrare il pulsante Compass
             st.session_state.show_compass_button = True
+            st.rerun()
+
+    with col3:
+        if st.button("🔄 Crea un mix tra Belief di Base e Desire", key="btn_mix_beliefs", use_container_width=True):
+            # Simula la scelta dell'opzione 3
+            st.session_state.believer_chat_history.append({
+                "role": "user",
+                "content": "3"
+            })
+            st.session_state.base_beliefs_checked = True
+
+            # Avvia il processo automatico di mix
+            with st.spinner("Sto analizzando i Desire e selezionando i Belief di Base rilevanti..."):
+                try:
+                    # Prepara il contesto per l'LLM
+                    desires_context = "DESIRES DELL'UTENTE:\n"
+                    for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                        desire_id = desire.get('id', idx)
+                        desire_desc = desire.get('description', desire.get('content', 'N/A'))
+                        desire_priority = desire.get('priority', 'N/A')
+                        desires_context += f"- Desire #{desire_id}: {desire_desc} (Priorità: {desire_priority})\n"
+
+                    # Passa l'intero JSON dei belief di base per un'analisi completa
+                    base_beliefs_json = json.dumps(st.session_state.base_beliefs_available, indent=2, ensure_ascii=False)
+                    base_beliefs_context = f"\n\nBELIEF DI BASE DISPONIBILI (in formato JSON):\n```json\n{base_beliefs_json}\n```"
+
+                    # Carica il prompt template dal file
+                    mix_prompt_template = get_prompt('believer', use_cache=False, prompt_suffix='mix_beliefs_prompt')
+
+                    # Sostituisci i placeholder con i valori effettivi
+                    mix_prompt = mix_prompt_template.replace('{desires_context}', desires_context)
+                    mix_prompt = mix_prompt.replace('{base_beliefs_context}', base_beliefs_context)
+
+                    # Get LLM settings from session
+                    llm_settings = active_session_data['config'].get('llm_settings', {})
+                    use_defaults = llm_settings.get('use_defaults', False)
+
+                    # Prepara i parametri della chiamata
+                    chat_params = {
+                        'provider': provider,
+                        'model': model,
+                        'messages': [{"role": "user", "content": mix_prompt}],
+                        'system_prompt': None  # Nessun system prompt, tutto è nel prompt utente
+                    }
+
+                    # Aggiungi parametri custom solo se use_defaults è False
+                    if not use_defaults:
+                        chat_params['temperature'] = llm_settings.get('temperature', 0.7)
+                        chat_params['max_tokens'] = 8000  # Aumentato per sicurezza
+                        chat_params['top_p'] = llm_settings.get('top_p', 0.9)
+
+                    # Chiama l'LLM per generare il mix
+                    mix_response = st.session_state.llm_manager.chat(**chat_params)
+                    response = f"""Perfetto! Ho completato l'analisi automatica dei tuoi Desire e dei Belief di Base. 🔄
+
+Ho creato un set completo e ottimale che include:
+- ✨ **Belief specializzati**: Generati specificamente per supportare ciascuno dei tuoi Desire
+- 📚 **Belief di Base selezionati**: Solo quelli rilevanti e direttamente collegati ai tuoi obiettivi
+
+Ecco il risultato:
+
+{mix_response}
+
+✅ I belief sono stati generati e salvati automaticamente. Puoi visualizzarli nella sidebar o esportarli usando il pulsante in fondo alla pagina."""
+
+                    st.session_state.believer_chat_history.append({
+                        "role": "assistant",
+                        "content": response
+                    })
+
+                except Exception as e:
+                    response = f"❌ Si è verificato un errore durante la generazione del mix: {str(e)}\n\nPuoi provare a scegliere una delle altre opzioni o contattare il supporto."
+                    st.session_state.believer_chat_history.append({
+                        "role": "assistant",
+                        "content": response
+                    })
+
             st.rerun()
 
     st.markdown("---")
@@ -706,11 +820,11 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
 
             st.stop()
 
-        elif "1" in prompt.strip() or "creare" in prompt.lower() or "nuovi" in prompt.lower() or "specializzati" in prompt.lower():
+        elif "1" in prompt.strip() or "creare" in prompt.lower() or "nuovi" in prompt.lower() or "specializzati" in prompt.lower() or "chat" in prompt.lower():
             # L'utente vuole creare nuovi belief specializzati
             st.session_state.base_beliefs_checked = True
 
-            response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire. 🎯
+            response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire in modalità conversazionale. 🎯
 
 Questi belief saranno più specifici e dettagliati rispetto ai belief di base, e saranno direttamente collegati ai tuoi obiettivi.
 
@@ -726,180 +840,94 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
 
             st.stop()
 
-    # Get context from RAG including desires
-    with st.spinner("Sto analizzando..."):
-        try:
-            # Query the knowledge base
-            rag_results = st.session_state.doc_processor.query(prompt, n_results=3)
+        elif "3" in prompt.strip() or "mix" in prompt.lower() or "automatico" in prompt.lower():
+            # L'utente vuole creare il mix automatico
+            st.session_state.base_beliefs_checked = True
 
-            # Build context with KB results and desires
-            context = ""
-
-            # Add desires to context
-            desires_context = "DESIRES DELL'UTENTE:\n"
-            for idx, desire in enumerate(st.session_state.loaded_desires, 1):
-                desire_id = desire.get('id', idx)
-                desire_desc = desire.get('description', desire.get('content', 'N/A'))
-                desire_priority = desire.get('priority', 'N/A')
-                desires_context += f"- Desire #{desire_id}: {desire_desc} (Priorità: {desire_priority})\n"
-
-            context = desires_context + "\n\n"
-
-            # Add KB results
-            if rag_results and rag_results['documents'] and rag_results['documents'][0]:
-                kb_context = "INFORMAZIONI DALLA BASE DI CONOSCENZA:\n"
-                kb_context += "\n\n".join(rag_results['documents'][0])
-                context += kb_context
-
-            # Get LLM settings from session
-            llm_settings = active_session_data['config'].get('llm_settings', {})
-
-            # Get response from LLM
-            response = st.session_state.llm_manager.chat(
-                provider=provider,
-                model=model,
-                messages=st.session_state.believer_chat_history,
-                system_prompt=BELIEVER_SYSTEM_PROMPT,
-                context=context if context else None,
-                temperature=llm_settings.get('temperature', 0.7),
-                max_tokens=llm_settings.get('max_tokens', 2000),
-                top_p=llm_settings.get('top_p', 0.9)
-            )
-
-            # Add assistant response
-            st.session_state.believer_chat_history.append({
-                "role": "assistant",
-                "content": response
-            })
-
-            with st.chat_message("assistant"):
-                st.markdown(response)
-
-            auditor_result = None
-            auditor = st.session_state.get("conversation_auditor")
-            if auditor and provider and model:
-                context_summary = {
-                    "session_name": active_session_data['metadata'].get('name'),
-                    "context_name": active_session_data['config'].get('context'),
-                    "desire_count": len(st.session_state.loaded_desires or []),
-                    "belief_count": len(st.session_state.beliefs),
-                    "knowledge_documents": st.session_state.doc_processor.get_stats().get('document_count', 0),
-                }
+            # Avvia il processo automatico di mix
+            with st.spinner("Sto analizzando i Desire e selezionando i Belief di Base rilevanti..."):
                 try:
-                    auditor_result = auditor.review(
-                        provider=provider,
-                        model=model,
-                        conversation=[msg.copy() for msg in st.session_state.believer_chat_history],
-                        module_name="believer",
-                        module_goal=BELIEVER_MODULE_GOAL,
-                        expected_outcome=BELIEVER_EXPECTED_OUTCOME,
-                        context_summary=context_summary,
-                        last_user_message=prompt,
-                        assistant_message=response,
-                    )
-                except Exception as audit_exc:  # pylint: disable=broad-except
-                    auditor_result = {"error": str(audit_exc)}
+                    # Prepara il contesto per l'LLM
+                    desires_context = "DESIRES DELL'UTENTE:\n"
+                    for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                        desire_id = desire.get('id', idx)
+                        desire_desc = desire.get('description', desire.get('content', 'N/A'))
+                        desire_priority = desire.get('priority', 'N/A')
+                        desires_context += f"- Desire #{desire_id}: {desire_desc} (Priorità: {desire_priority})\n"
 
-            if auditor_result and "error" not in auditor_result:
-                message_index = len(st.session_state.believer_chat_history) - 1
-                existing_entry = next(
-                    (item for item in st.session_state.believer_audit_trail if item.get("message_index") == message_index),
-                    None
-                )
-                audit_record = {
-                    "message_index": message_index,
-                    "result": auditor_result,
-                    "timestamp": datetime.now().isoformat()
-                }
+                    # Passa l'intero JSON dei belief di base per un'analisi completa
+                    base_beliefs_json = json.dumps(st.session_state.base_beliefs_available, indent=2, ensure_ascii=False)
+                    base_beliefs_context = f"\n\nBELIEF DI BASE DISPONIBILI (in formato JSON):\n```json\n{base_beliefs_json}\n```"
 
-                if existing_entry:
-                    existing_entry.update(audit_record)
-                else:
-                    st.session_state.believer_audit_trail.append(audit_record)
+                    # Carica il prompt template dal file
+                    mix_prompt_template = get_prompt('believer', use_cache=False, prompt_suffix='mix_beliefs_prompt')
 
-                st.session_state.believer_suggestions = (auditor_result.get("suggested_user_replies") or [])[:3]
+                    # Sostituisci i placeholder con i valori effettivi
+                    mix_prompt = mix_prompt_template.replace('{desires_context}', desires_context)
+                    mix_prompt = mix_prompt.replace('{base_beliefs_context}', base_beliefs_context)
 
-                with st.chat_message("system"):
-                    status = auditor_result.get("status", "pass")
-                    icon = "✅" if status == "pass" else "⚠️"
-                    summary = auditor_result.get("summary")
+                    # Get LLM settings from session
+                    llm_settings = active_session_data['config'].get('llm_settings', {})
+                    use_defaults = llm_settings.get('use_defaults', False)
 
-                    st.markdown(f"**Auditor {icon}**")
-                    if summary:
-                        st.markdown(summary)
+                    # Prepara i parametri della chiamata
+                    chat_params = {
+                        'provider': provider,
+                        'model': model,
+                        'messages': [{"role": "user", "content": mix_prompt}],
+                        'system_prompt': None  # Nessun system prompt, tutto è nel prompt utente
+                    }
 
-                    issues = auditor_result.get("issues") or []
-                    if issues:
-                        st.markdown("**Problemi rilevati:**")
-                        for issue in issues:
-                            issue_type = issue.get("type", "issue")
-                            severity = issue.get("severity", "low")
-                            message_text = issue.get("message", "")
-                            st.write(f"- ({severity.upper()} · {issue_type}) {message_text}")
+                    # Aggiungi parametri custom solo se use_defaults è False
+                    if not use_defaults:
+                        chat_params['temperature'] = llm_settings.get('temperature', 0.7)
+                        chat_params['max_tokens'] = 8000  # Aumentato per sicurezza
+                        chat_params['top_p'] = llm_settings.get('top_p', 0.9)
 
-                    improvements = auditor_result.get("assistant_improvements") or []
-                    if improvements:
-                        st.markdown("**Suggerimenti per l'agente:**")
-                        for idea in improvements:
-                            st.write(f"- {idea}")
+                    # Chiama l'LLM per generare il mix
+                    mix_response = st.session_state.llm_manager.chat(**chat_params)
+                    response = f"""Perfetto! Ho completato l'analisi automatica dei tuoi Desire e dei Belief di Base. 🔄
 
-                    next_focus = auditor_result.get("next_focus")
-                    if next_focus:
-                        st.caption(f"Prossimo focus: {next_focus}")
+Ho creato un set completo e ottimale che include:
+- ✨ **Belief specializzati**: Generati specificamente per supportare ciascuno dei tuoi Desire
+- 📚 **Belief di Base selezionati**: Solo quelli rilevanti e direttamente collegati ai tuoi obiettivi
 
-                    confidence = auditor_result.get("confidence")
-                    if confidence:
-                        st.caption(f"Sicurezza valutazione: {confidence}")
+Ecco il risultato:
 
-            elif auditor_result and "error" in auditor_result:
-                st.session_state.believer_suggestions = []
-                st.warning(f"Auditor non disponibile: {auditor_result['error']}")
+{mix_response}
 
-            json_match = re.search(r'```json(.*?)```', response, re.DOTALL) or re.search(r'\{[\s\S]*\}', response)
-            if json_match:
-                try:
-                    json_str = json_match.group(1).strip() if '```' in json_match.group(0) else json_match.group(0).strip()
-                    parsed_json = json.loads(json_str)
+✅ I belief sono stati generati e salvati automaticamente. Puoi visualizzarli nella sidebar o esportarli usando il pulsante in fondo alla pagina."""
 
-                    extracted_beliefs = []
+                    st.session_state.believer_chat_history.append({
+                        "role": "assistant",
+                        "content": response
+                    })
 
-                    # Calcola il prossimo ID basandoti sul massimo ID esistente
-                    existing_ids = [b.get("id", 0) for b in st.session_state.beliefs]
-                    next_id = max(existing_ids) + 1 if existing_ids else 1
+                    # --- LOGICA DI PARSING JSON SPOSTATA QUI ---
+                    json_match = re.search(r'```json(.*?)```', mix_response, re.DOTALL) or re.search(r'\{[\s\S]*\}', mix_response)
+                    if json_match:
+                        try:
+                            json_str = json_match.group(1).strip() if '```' in json_match.group(0) else json_match.group(0).strip()
+                            parsed_json = json.loads(json_str)
 
-                    if "beliefs" in parsed_json and isinstance(parsed_json["beliefs"], list):
-                        for b in parsed_json["beliefs"]:
-                            description_parts = []
-                            soggetto = b.get("soggetto", "")
-                            relazione = b.get("relazione", "")
-                            oggetto = b.get("oggetto", "")
-                            if soggetto or relazione or oggetto:
-                                description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
-                            else:
-                                description_parts.append("N/A")
+                            if "beliefs" in parsed_json and isinstance(parsed_json["beliefs"], list):
+                                extracted_beliefs = []
+                                existing_ids = [b.get("id", 0) for b in st.session_state.beliefs]
+                                next_id = max(existing_ids) + 1 if existing_ids else 1
 
-                            extracted_beliefs.append({
-                                "id": next_id + len(extracted_beliefs),
-                                "description": " ".join(description_parts),
-                                "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
-                                "confidence": "medium",
-                                "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
-                                "evidence": b.get("fonte", ""),
-                                "timestamp": datetime.now().isoformat()
-                            })
-
-                    elif "personas" in parsed_json and isinstance(parsed_json["personas"], list):
-                        for persona in parsed_json["personas"]:
-                            if "beliefs" in persona and isinstance(persona["beliefs"], list):
-                                for b in persona["beliefs"]:
+                                for b in parsed_json["beliefs"]:
+                                    description_parts = []
                                     soggetto = b.get("soggetto", "")
                                     relazione = b.get("relazione", "")
                                     oggetto = b.get("oggetto", "")
-                                    description = f"{soggetto} {relazione} {oggetto}".strip() or "N/A"
+                                    if soggetto or relazione or oggetto:
+                                        description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
+                                    else:
+                                        description_parts.append("N/A")
 
                                     extracted_beliefs.append({
                                         "id": next_id + len(extracted_beliefs),
-                                        "description": description,
+                                        "description": " ".join(description_parts),
                                         "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
                                         "confidence": "medium",
                                         "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
@@ -907,50 +935,78 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
                                         "timestamp": datetime.now().isoformat()
                                     })
 
-                    if extracted_beliefs:
-                        # Aggiungi i nuovi beliefs a quelli esistenti invece di sovrascriverli
-                        st.session_state.beliefs.extend(extracted_beliefs)
+                                if extracted_beliefs:
+                                    st.session_state.beliefs.extend(extracted_beliefs)
+                                    st.session_state.session_manager.update_bdi_data(
+                                        st.session_state.active_session,
+                                        beliefs=st.session_state.beliefs
+                                    )
+                                    st.success(f"✅ Mix automatico completato! {len(extracted_beliefs)} nuovi beliefs aggiunti.")
+                                else:
+                                    st.warning("⚠️ JSON ricevuto, ma nessun belief valido trovato.")
+                        except json.JSONDecodeError:
+                            st.error("❌ Il JSON generato dall'LLM per il mix non è valido.")
+                        except Exception as parse_exc:
+                            st.error(f"❌ Errore durante il parsing del JSON del mix: {parse_exc}")
+                    # --- FINE LOGICA DI PARSING ---
 
-                        # Salva automaticamente i beliefs nella sessione attiva se presente
-                        if 'active_session' in st.session_state and st.session_state.active_session:
-                            st.session_state.session_manager.update_bdi_data(
-                                st.session_state.active_session,
-                                beliefs=st.session_state.beliefs  # Salva la lista completa
-                            )
-                            st.success(f"✅ {len(extracted_beliefs)} nuovi beliefs estratti e aggiunti! Totale: {len(st.session_state.beliefs)}")
-                        else:
-                            st.success(f"✅ {len(extracted_beliefs)} beliefs estratti! Totale: {len(st.session_state.beliefs)}")
+                    with st.chat_message("assistant"):
+                        st.markdown(response)
 
-                        st.rerun()
-                    else:
-                        st.warning("⚠️ JSON rilevato, ma nessun belief valido trovato.")
-
-                except json.JSONDecodeError:
-                    st.error("❌ Il JSON rilevato non è valido.")
                 except Exception as e:
-                    st.error(f"❌ Errore durante il parsing del report JSON: {e}")
+                    response = f"❌ Si è verificato un errore durante la generazione del mix: {str(e)}\n\nPuoi provare a scegliere una delle altre opzioni o contattare il supporto."
+                    st.session_state.believer_chat_history.append({
+                        "role": "assistant",
+                        "content": response
+                    })
 
-        except Exception as e:
-            st.error(f"❌ Errore: {str(e)}")
+                    # --- LOGICA DI PARSING JSON SPOSTATA QUI ---
+                    json_match = re.search(r'```json(.*?)```', mix_response, re.DOTALL) or re.search(r'\{[\s\S]*\}', mix_response)
+                    if json_match:
+                        try:
+                            json_str = json_match.group(1).strip() if '```' in json_match.group(0) else json_match.group(0).strip()
+                            parsed_json = json.loads(json_str)
 
-render_quick_replies(
-    placeholder=believer_suggestions_placeholder,
-    suggestions=st.session_state.believer_suggestions,
-    pending_state_key="believer_pending_prompt",
-    button_prefix="believer"
-)
+                            if "beliefs" in parsed_json and isinstance(parsed_json["beliefs"], list):
+                                extracted_beliefs = []
+                                existing_ids = [b.get("id", 0) for b in st.session_state.beliefs]
+                                next_id = max(existing_ids) + 1 if existing_ids else 1
 
-# Export button
-st.markdown("---")
-if st.session_state.beliefs:
-    export_data = {
-        "desires": st.session_state.loaded_desires,
-        "beliefs": st.session_state.beliefs
-    }
-    st.download_button(
-        "📊 Esporta BDI",
-        data=json.dumps(export_data, ensure_ascii=False, indent=2),
-        file_name=f"bdi_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-        mime="application/json",
-        use_container_width=False
-    )
+                                for b in parsed_json["beliefs"]:
+                                    description_parts = []
+                                    soggetto = b.get("soggetto", "")
+                                    relazione = b.get("relazione", "")
+                                    oggetto = b.get("oggetto", "")
+                                    if soggetto or relazione or oggetto:
+                                        description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
+                                    else:
+                                        description_parts.append("N/A")
+
+                                    extracted_beliefs.append({
+                                        "id": next_id + len(extracted_beliefs),
+                                        "description": " ".join(description_parts),
+                                        "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
+                                        "confidence": "medium",
+                                        "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
+                                        "evidence": b.get("fonte", ""),
+                                        "timestamp": datetime.now().isoformat()
+                                    })
+
+                                if extracted_beliefs:
+                                    st.session_state.beliefs.extend(extracted_beliefs)
+                                    st.session_state.session_manager.update_bdi_data(
+                                        st.session_state.active_session,
+                                        beliefs=st.session_state.beliefs
+                                    )
+                                    st.success(f"✅ Mix automatico completato! {len(extracted_beliefs)} nuovi beliefs aggiunti.")
+                                else:
+                                    st.warning("⚠️ JSON ricevuto, ma nessun belief valido trovato.")
+                        except json.JSONDecodeError:
+                            st.error("❌ Il JSON generato dall'LLM per il mix non è valido.")
+                        except Exception as parse_exc:
+                            st.error(f"❌ Errore durante il parsing del JSON del mix: {parse_exc}")
+                    # --- FINE LOGICA DI PARSING ---
+                    with st.chat_message("assistant"):
+                        st.markdown(response)
+
+            st.stop()

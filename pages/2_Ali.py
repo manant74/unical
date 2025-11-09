@@ -24,7 +24,7 @@ ALI_EXPECTED_OUTCOME = (
 )
 
 st.set_page_config(
-    page_title="Alì - LUMIA Studio",
+    page_title="Alì - LumIA Studio",
     page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -187,10 +187,28 @@ def render_quick_replies(placeholder, suggestions, pending_state_key, button_pre
                     if reason:
                         st.caption(reason)
 
-# CSS per nascondere menu Streamlit
+# CSS per nascondere menu Streamlit e styling
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {display: none;}
+
+    /* Riduce spessore delle righe di divisione */
+    hr {
+        margin: 0.5rem 0;
+        border: none;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.2);
+    }
+
+    /* Divider nella sidebar */
+    section[data-testid="stSidebar"] hr {
+        margin: 0.3rem 0;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.15);
+    }
+
+    /* Riduce spazio superiore del titolo della pagina */
+    .block-container {
+        padding-top: 2rem !important;
+    }
 
 </style>
 """, unsafe_allow_html=True)
@@ -217,10 +235,15 @@ if not active_session_data:
 
 # Sidebar per configurazione
 with st.sidebar:
-    # Pulsante Home in alto
-    st.markdown("### ✨ LUMIA Studio")
-    if st.button("🏠 Torna alla Home", use_container_width=True, type="secondary"):
-        st.switch_page("app.py")
+    # Header con logo e pulsante home sulla stessa riga
+    col_logo, col_home = st.columns([3, 1])
+
+    with col_logo:
+        st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
+
+    with col_home:
+        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+            st.switch_page("app.py")
 
     st.divider()
 
@@ -557,18 +580,34 @@ if prompt:
 
             # Get LLM settings from session
             llm_settings = active_session_data['config'].get('llm_settings', {})
+            use_defaults = llm_settings.get('use_defaults', False)
+
+            # Prepara i parametri della chiamata
+            chat_params = {
+                'provider': provider,
+                'model': model,
+                'messages': st.session_state.ali_chat_history,
+                'system_prompt': ALI_SYSTEM_PROMPT,
+                'context': context if context else None
+            }
+
+            # Aggiungi parametri custom solo se use_defaults è False
+            if not use_defaults:
+                chat_params['temperature'] = llm_settings.get('temperature', 1.0)
+                chat_params['top_p'] = llm_settings.get('top_p', 0.95 if provider == "Gemini" else 1.0)
+
+                # Max tokens - parametro diverso per provider
+                if provider == "Gemini":
+                    chat_params['max_output_tokens'] = llm_settings.get('max_output_tokens', 65536)
+                else:
+                    chat_params['max_tokens'] = llm_settings.get('max_tokens', 4096)
+
+                # Reasoning effort - solo per GPT-5
+                if model.startswith('gpt-5'):
+                    chat_params['reasoning_effort'] = llm_settings.get('reasoning_effort', 'medium')
 
             # Get response from LLM
-            response = st.session_state.llm_manager.chat(
-                provider=provider,
-                model=model,
-                messages=st.session_state.ali_chat_history,
-                system_prompt=ALI_SYSTEM_PROMPT,
-                context=context if context else None,
-                temperature=llm_settings.get('temperature', 0.7),
-                max_tokens=llm_settings.get('max_tokens', 2000),
-                top_p=llm_settings.get('top_p', 0.9)
-            )
+            response = st.session_state.llm_manager.chat(**chat_params)
 
             # Add assistant response
             st.session_state.ali_chat_history.append({

@@ -12,7 +12,7 @@ from utils.context_manager import ContextManager
 from utils.llm_manager import LLMManager
 
 st.set_page_config(
-    page_title="Compass - LUMIA Studio",
+    page_title="Compass - LumIA Studio",
     page_icon="🧭",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -37,6 +37,25 @@ st.markdown("""
         font-size: 14px !important;
         line-height: 1.6 !important;
     }
+
+    /* Riduce spessore delle righe di divisione */
+    hr {
+        margin: 0.5rem 0;
+        border: none;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.2);
+    }
+
+    /* Divider nella sidebar */
+    section[data-testid="stSidebar"] hr {
+        margin: 0.3rem 0;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.15);
+    }
+
+    /* Riduce spazio superiore del titolo della pagina */
+    .block-container {
+        padding-top: 2rem !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -64,10 +83,15 @@ st.markdown("<p style='text-align: center; color: #666; margin-bottom: 2rem;'>Co
 
 # Sidebar
 with st.sidebar:
-    st.markdown("### ✨ LUMIA Studio")
+    # Header con logo e pulsante home sulla stessa riga
+    col_logo, col_home = st.columns([3, 1])
 
-    if st.button("🏠 Torna alla Home", width='stretch', type="secondary"):
-        st.switch_page("app.py")
+    with col_logo:
+        st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
+
+    with col_home:
+        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+            st.switch_page("app.py")
 
     st.markdown("---")
 
@@ -308,17 +332,23 @@ else:
                 current_provider = config.get('llm_provider', available_providers[0])
                 current_model = config.get('llm_model')
                 llm_settings = config.get('llm_settings', {
-                    'temperature': 0.7,
-                    'max_tokens': 2000,
-                    'top_p': 0.9
+                    'use_defaults': True,
+                    'temperature': 1.0,
+                    'top_p': 0.95,  # Default Gemini
+                    'max_output_tokens': 65536,  # Gemini
+                    'max_tokens': 4096,  # OpenAI
+                    'reasoning_effort': 'medium'  # GPT-5
                 })
             else:
                 current_provider = available_providers[0]
                 current_model = None
                 llm_settings = {
-                    'temperature': 0.7,
-                    'max_tokens': 2000,
-                    'top_p': 0.9
+                    'use_defaults': True,
+                    'temperature': 1.0,
+                    'top_p': 0.95,
+                    'max_output_tokens': 65536,
+                    'max_tokens': 4096,
+                    'reasoning_effort': 'medium'
                 }
 
             with col1:
@@ -354,38 +384,90 @@ else:
                 selected_model = model_keys[selected_model_idx]
 
             with col2:
+                # Checkbox per usare i parametri di default
+                use_defaults = st.checkbox(
+                    "Use Default Parameters",
+                    value=llm_settings.get('use_defaults', True),
+                    help="Use LLM provider's default parameters. Uncheck to customize."
+                )
+
+                # Determina i valori di default in base al provider
+                is_gemini = selected_provider == "Gemini"
+                is_gpt5 = selected_model.startswith("gpt-5")
+
+                default_top_p = 0.95 if is_gemini else 1.0
+
+                # Disabilita i parametri se use_defaults è True
                 temperature = st.slider(
                     "Temperature",
                     min_value=0.0,
-                    max_value=1.0,
-                    value=llm_settings.get('temperature', 0.7),
+                    max_value=2.0,
+                    value=llm_settings.get('temperature', 1.0),
                     step=0.1,
-                    help="Controls randomness. Lower = more focused, Higher = more creative"
+                    help="Controls randomness. Default: 1.0 for all providers",
+                    disabled=use_defaults
                 )
 
                 top_p = st.slider(
                     "Top P",
                     min_value=0.0,
                     max_value=1.0,
-                    value=llm_settings.get('top_p', 0.9),
-                    step=0.1,
-                    help="Nucleus sampling threshold"
+                    value=llm_settings.get('top_p', default_top_p),
+                    step=0.05,
+                    help=f"Nucleus sampling. Default: {default_top_p} ({'Gemini' if is_gemini else 'OpenAI'})",
+                    disabled=use_defaults
                 )
 
-                max_tokens = st.number_input(
-                    "Max Tokens",
-                    min_value=100,
-                    max_value=8000,
-                    value=llm_settings.get('max_tokens', 2000),
-                    step=100,
-                    help="Maximum length of the response"
-                )
+                # Max tokens - diverso per provider
+                if is_gemini:
+                    max_output_tokens = st.number_input(
+                        "Max Output Tokens",
+                        min_value=1,
+                        max_value=65536,
+                        value=llm_settings.get('max_output_tokens', 65536),
+                        step=1024,
+                        help="Maximum output tokens for Gemini. Default: 65536",
+                        disabled=use_defaults
+                    )
+                    max_tokens = None
+                else:
+                    max_tokens = st.number_input(
+                        "Max Tokens",
+                        min_value=1,
+                        max_value=16384,
+                        value=llm_settings.get('max_tokens', 4096),
+                        step=512,
+                        help="Maximum tokens for OpenAI. Default: 4096",
+                        disabled=use_defaults
+                    )
+                    max_output_tokens = None
 
+                # Reasoning effort - solo per GPT-5
+                if is_gpt5:
+                    reasoning_effort = st.selectbox(
+                        "Reasoning Effort",
+                        options=['minimal', 'low', 'medium', 'high'],
+                        index=['minimal', 'low', 'medium', 'high'].index(llm_settings.get('reasoning_effort', 'medium')),
+                        help="Controls reasoning depth for GPT-5. Default: medium",
+                        disabled=use_defaults
+                    )
+                else:
+                    reasoning_effort = None
+
+            # Prepara llm_settings
             new_llm_settings = {
+                'use_defaults': use_defaults,
                 'temperature': temperature,
-                'max_tokens': max_tokens,
                 'top_p': top_p
             }
+
+            if is_gemini:
+                new_llm_settings['max_output_tokens'] = max_output_tokens
+            else:
+                new_llm_settings['max_tokens'] = max_tokens
+
+            if is_gpt5:
+                new_llm_settings['reasoning_effort'] = reasoning_effort
 
             # Test connection e Save
             st.markdown("---")
@@ -985,6 +1067,6 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #888; padding: 1rem;'>
     <p><strong>🧭 Compass</strong> - Session Configuration Module</p>
-    <p style='font-size: 0.85rem;'>Configure once, work seamlessly across all LUMIA modules</p>
+    <p style='font-size: 0.85rem;'>Configure once, work seamlessly across all LumIA modules</p>
 </div>
 """, unsafe_allow_html=True)

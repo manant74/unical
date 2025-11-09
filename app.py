@@ -2,7 +2,7 @@ import streamlit as st
 
 # Configurazione della pagina
 st.set_page_config(
-    page_title="LUMIA Studio - BDI Framework",
+    page_title="LumIA Studio - BDI Framework",
     page_icon="✨",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -380,7 +380,7 @@ st.markdown(f"""
 # Header principale con animazione
 st.markdown(f"""
 <div class='main-header'>
-    <div class='main-title'>✨ LUMIA Studio</div>
+    <div class='main-title'>✨ LumIA Studio</div>
     <div class='main-subtitle'>Belief · Desire · Intention System</div>
     <div class='main-description'>
         Transform knowledge into action. An intelligent framework to define goals,
@@ -389,49 +389,24 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Stats badges
-st.markdown("""
-<div class='stats-container'>
-    <div class='stat-badge'>
-        <span class='stat-number'>3</span>
-        <span class='stat-label'>AI Agents</span>
-    </div>
-    <div class='stat-badge'>
-        <span class='stat-number'>7</span>
-        <span class='stat-label'>Modules</span>
-    </div>
-    <div class='stat-badge'>
-        <span class='stat-number'>∞</span>
-        <span class='stat-label'>Possibilities</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# Workflow section
+# Workflow section (aggiornato)
 st.markdown("""
 <div class='workflow-section'>
     <div class='workflow-title'>🚀 Recommended Workflow</div>
     <div class='workflow-steps'>
-        <div class='workflow-step'>🧭 <strong>0. Compass</strong> - Configure Session</div>
+        <div class='workflow-step'>📚 <strong>Knol</strong> - Load & Define Knowledge Base</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>📚 <strong>1. Knol</strong> - Load documents</div>
+        <div class='workflow-step'>🧭 <strong>Compass</strong> - Configure your Working Session</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>🎯 <strong>2. Alì</strong> - Define Desire</div>
+        <div class='workflow-step'>🎯 <strong>Alì</strong> - Define Desire in your session</div>
         <div class='workflow-arrow'>→</div>
-        <div class='workflow-step'>💡 <strong>3. Believer</strong> - Identify Belief</div>
+        <div class='workflow-step'>💡 <strong>Believer</strong> - Define & Review Beliefs in your session</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Definizione delle funzionalità
-features = [
-    {
-        "name": "Compass",
-        "emoji": "🧭",
-        "description": "Configure your working session: name it, select context, choose LLM engine and model, review and edit base beliefs before starting your BDI journey.",
-        "page": "pages/0_Compass.py",
-        "status": "active",
-    },
+# Definizione delle funzionalità (riorganizzate per categoria)
+features_configuration = [
     {
         "name": "Knol",
         "emoji": "📚",
@@ -439,6 +414,16 @@ features = [
         "page": "pages/1_Knol.py",
         "status": "active",
     },
+    {
+        "name": "Compass",
+        "emoji": "🧭",
+        "description": "Configure your working session: name it, select context, choose LLM engine and model, review and edit base beliefs before starting your BDI journey.",
+        "page": "pages/0_Compass.py",
+        "status": "active",
+    }
+]
+
+features_domain = [
     {
         "name": "Alì",
         "emoji": "🎯",
@@ -459,7 +444,10 @@ features = [
         "description": "Advanced module for predictive analysis and scenario planning. Uses your Beliefs and Desires to simulate possible future outcomes.",
         "page": "pages/5_Cuma.py",
         "status": "dev",
-    },
+    }
+]
+
+features_live = [
     {
         "name": "Genius",
         "emoji": "⚡",
@@ -469,44 +457,87 @@ features = [
     }
 ]
 
-# Sezione moduli
+# Funzione helper per creare le card
+def create_feature_card(feature):
+    status_class = "status-active" if feature["status"] == "active" else "status-dev"
+    status_text = "✓ Active" if feature["status"] == "active" else "🚧 In Development"
+    page_link = feature['page'].split('/')[-1].split('.')[0].split('_', 1)[-1]
+
+    return f"""
+    <div class='feature-card'>
+        <span class='feature-status {status_class}'>{status_text}</span>
+        <div>
+            <div class='feature-title-container'>
+                <span class='feature-emoji'>{feature['emoji']}</span>
+                <div class='feature-title'>{feature['name']}</div>
+            </div>
+            <div class='feature-description'>{feature['description']}</div>
+        </div>
+        <a href='/{page_link}' target='_self' class='feature-button'>Open {feature['name']}</a>
+    </div>
+    """
+
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 2rem;'>🎨 Explore Modules</h2>", unsafe_allow_html=True)
 
-# Creazione delle feature cards con HTML personalizzato - 3 per riga
-for idx in range(0, len(features), 3):
-    cols = st.columns(3)
-    for col_idx, col in enumerate(cols):
-        if idx + col_idx < len(features):
-            feature = features[idx + col_idx]
-            with col:
-                # Card HTML personalizzata
-                status_class = "status-active" if feature["status"] == "active" else "status-dev"
-                status_text = "✓ Active" if feature["status"] == "active" else "🚧 In Development"
-                
-                # Ottieni il nome della pagina dall'URL per il link
-                page_link = feature['page'].split('/')[-1].split('.')[0].split('_', 1)[-1]
+# Sezione moduli
+st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 0;'>🎨 Explore Modules</h2>", unsafe_allow_html=True)
 
-                card_html = f"""
-                <div class='feature-card'>
-                    <span class='feature-status {status_class}'>{status_text}</span>
-                    <div>
-                        <div class='feature-title-container'>
-                            <span class='feature-emoji'>{feature['emoji']}</span>
-                            <div class='feature-title'>{feature['name']}</div>
-                        </div>
-                        <div class='feature-description'>{feature['description']}</div>
-                    </div>
-                    <a href='/{page_link}' target='_self' class='feature-button'>Open {feature['name']}</a>
-                </div>
-                """
-                st.markdown(card_html, unsafe_allow_html=True)
-                st.markdown("<br>", unsafe_allow_html=True)
+# CSS per i box raggruppati
+st.markdown(f"""
+<style>
+    .section-divider {{
+        border-top: 3px solid rgba(102, 126, 234, 0.3);
+        margin: 2rem 0 0.5rem 0;
+    }}
+
+    .section-label {{
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1rem;
+        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        margin-bottom: 1rem;
+        display: inline-block;
+    }}
+</style>
+""", unsafe_allow_html=True)
+
+# Configuration Section
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label">⚙️ Configuration</div>', unsafe_allow_html=True)
+cols = st.columns([0.5, 1, 1, 0.5])
+with cols[1]:
+    st.markdown(create_feature_card(features_configuration[0]), unsafe_allow_html=True)
+with cols[2]:
+    st.markdown(create_feature_card(features_configuration[1]), unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Domain Definition Section
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label">🎯 Domain Definition</div>', unsafe_allow_html=True)
+cols = st.columns(3)
+for idx, col in enumerate(cols):
+    with col:
+        st.markdown(create_feature_card(features_domain[idx]), unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Live Sessions Section
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label">⚡ Live Sessions</div>', unsafe_allow_html=True)
+cols = st.columns([1.1, 1.8, 1.1])
+with cols[1]:
+    st.markdown(create_feature_card(features_live[0]), unsafe_allow_html=True)
+
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 # Footer
 st.markdown(f"""
 <div class='custom-footer'>
-    <p style='color: {text_primary};'><strong>✨ LUMIA Studio</strong> - Belief · Desire · Intention System</p>
+    <p style='color: {text_primary};'><strong>✨ LumIA Studio</strong> - Belief · Desire · Intention System</p>
     <p style='font-size: 0.85rem; color: {text_tertiary}; margin-top: 0.5rem;'>
         Powered by AI • Streamlit • ChromaDB • LangChain
     </p>

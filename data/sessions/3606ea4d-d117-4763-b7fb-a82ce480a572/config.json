@@ -1,10 +1,11 @@
 {
   "context": "corso_inglese",
   "llm_provider": "OpenAI",
-  "llm_model": "gpt-5",
+  "llm_model": "gpt-4o",
   "llm_settings": {
-    "temperature": 0.7,
-    "max_tokens": 2000,
-    "top_p": 0.9
+    "use_defaults": true,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "max_tokens": 4096
   }
 }

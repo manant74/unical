@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Genius - LUMIA Studio",
+    page_title="Genius - LumIA Studio",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"

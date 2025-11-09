@@ -10,12 +10,13 @@ from pathlib import Path
 # Cache per i prompts caricati
 _prompts_cache = {}
 
-def _load_prompt_from_file(agent_name: str) -> str:
+def _load_prompt_from_file(agent_name: str, prompt_suffix: str = "system_prompt") -> str:
     """
     Carica un system prompt da file Markdown
 
     Args:
         agent_name: Nome dell'agente (es. 'ali', 'believer')
+        prompt_suffix: Suffisso del file prompt (default: 'system_prompt')
 
     Returns:
         Il contenuto del file markdown come stringa
@@ -25,7 +26,7 @@ def _load_prompt_from_file(agent_name: str) -> str:
     """
     # Costruisci il percorso del file
     current_dir = Path(__file__).parent.parent
-    prompt_file = current_dir / "prompts" / f"{agent_name}_system_prompt.md"
+    prompt_file = current_dir / "prompts" / f"{agent_name}_{prompt_suffix}.md"
 
     if not prompt_file.exists():
         raise FileNotFoundError(f"File prompt non trovato: {prompt_file}")
@@ -34,13 +35,14 @@ def _load_prompt_from_file(agent_name: str) -> str:
     with open(prompt_file, 'r', encoding='utf-8') as f:
         return f.read()
 
-def get_prompt(agent_name: str, use_cache: bool = True) -> str:
+def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "system_prompt") -> str:
     """
     Restituisce il system prompt per un agente specifico
 
     Args:
         agent_name: Nome dell'agente ('ali', 'believer', 'cuma', 'genius')
         use_cache: Se True, usa la cache (default). Se False, ricarica sempre da file.
+        prompt_suffix: Suffisso del file prompt (default: 'system_prompt')
 
     Returns:
         Il system prompt corrispondente
@@ -58,15 +60,18 @@ def get_prompt(agent_name: str, use_cache: bool = True) -> str:
             f"Agenti disponibili: {available_agents}"
         )
 
+    # Crea una chiave di cache che include il suffisso
+    cache_key = f"{agent_name_lower}_{prompt_suffix}"
+
     # Se uso la cache e il prompt è già caricato, restituiscilo
-    if use_cache and agent_name_lower in _prompts_cache:
-        return _prompts_cache[agent_name_lower]
+    if use_cache and cache_key in _prompts_cache:
+        return _prompts_cache[cache_key]
 
     # Carica il prompt dal file
-    prompt = _load_prompt_from_file(agent_name_lower)
+    prompt = _load_prompt_from_file(agent_name_lower, prompt_suffix)
 
     # Memorizza in cache
-    _prompts_cache[agent_name_lower] = prompt
+    _prompts_cache[cache_key] = prompt
 
     return prompt
 

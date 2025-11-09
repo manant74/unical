@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import sys
 import json
+from code_editor import code_editor
 
 # Aggiungi la directory parent al path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -11,7 +12,7 @@ from utils.context_manager import ContextManager
 from utils.llm_manager import LLMManager
 
 st.set_page_config(
-    page_title="Knol - LUMIA Studio",
+    page_title="Knol - LumIA Studio",
     page_icon="📚",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -44,19 +45,230 @@ if 'doc_processor' not in st.session_state or st.session_state.get('context_chan
 if 'llm_manager' not in st.session_state:
     st.session_state.llm_manager = LLMManager()
 
-# CSS per nascondere menu Streamlit
+# Inizializza flag per modale editor
+if 'show_belief_editor' not in st.session_state:
+    st.session_state.show_belief_editor = False
+
+# Funzione dialog per editor beliefs
+@st.dialog("📝 Editor Beliefs", width="large")
+def belief_editor_modal():
+    """Modale per editing dei beliefs in formato JSON"""
+
+    # Carica belief base
+    belief_base_path = st.session_state.context_manager.get_belief_base_path(
+        st.session_state.current_context
+    )
+
+    beliefs = []
+    if os.path.exists(belief_base_path):
+        try:
+            with open(belief_base_path, 'r', encoding='utf-8') as f:
+                belief_data = json.load(f)
+                beliefs = belief_data.get('beliefs_base', belief_data.get('beliefs', []))
+        except Exception as e:
+            st.error(f"Errore nel caricamento dei beliefs: {str(e)}")
+            beliefs = []
+
+    # Prepara JSON per l'editor
+    beliefs_json = json.dumps({"beliefs_base": beliefs}, indent=2, ensure_ascii=False)
+
+    st.markdown("**Modifica i beliefs in formato JSON**")
+    st.caption("💡 Puoi modificare, aggiungere o rimuovere beliefs direttamente nel JSON sottostante")
+
+    # Code editor
+    response = code_editor(
+        code=beliefs_json,
+        lang="json",
+        height=[30, 40],
+        theme="default",
+        shortcuts="vscode",
+        allow_reset=True,
+        options={
+            "wrap": True,
+            "showLineNumbers": True,
+            "highlightActiveLine": True,
+            "fontSize": 14,
+        }
+    )
+
+    # Estrai il testo editato
+    if response and 'text' in response and response['text'].strip():
+        edited_json = response['text']
+    else:
+        edited_json = beliefs_json
+
+    st.divider()
+
+    # Pulsanti di azione
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        if st.button("✅ Valida JSON", use_container_width=True):
+            try:
+                parsed = json.loads(edited_json)
+                if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
+                    st.success(f"✅ JSON valido! {len(parsed['beliefs_base'])} beliefs trovati.")
+                else:
+                    st.error("❌ Il JSON deve contenere un array 'beliefs_base'")
+            except json.JSONDecodeError as e:
+                st.error(f"❌ JSON non valido: {str(e)}")
+
+    with col2:
+        if st.button("💾 Salva", use_container_width=True, type="primary"):
+            try:
+                parsed = json.loads(edited_json)
+                if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
+                    # Salva nel file
+                    with open(belief_base_path, 'w', encoding='utf-8') as f:
+                        json.dump(parsed, f, ensure_ascii=False, indent=2)
+
+                    # Aggiorna metadata
+                    belief_count = len(parsed['beliefs_base'])
+                    st.session_state.context_manager.update_context_metadata(
+                        st.session_state.current_context,
+                        {'belief_count': belief_count}
+                    )
+
+                    st.success(f"✅ Beliefs salvati! ({belief_count} beliefs)")
+                    st.session_state.show_belief_editor = False
+                    st.rerun()
+                else:
+                    st.error("❌ Il JSON deve contenere un array 'beliefs_base'")
+            except json.JSONDecodeError as e:
+                st.error(f"❌ JSON non valido: {str(e)}")
+            except Exception as e:
+                st.error(f"❌ Errore nel salvataggio: {str(e)}")
+
+    with col3:
+        if st.button("🗑️ Cancella Tutto", use_container_width=True):
+            if st.session_state.get('confirm_clear_beliefs_modal', False):
+                # Conferma e cancella
+                empty_data = {"beliefs_base": []}
+                with open(belief_base_path, 'w', encoding='utf-8') as f:
+                    json.dump(empty_data, f, ensure_ascii=False, indent=2)
+
+                st.session_state.context_manager.update_context_metadata(
+                    st.session_state.current_context,
+                    {'belief_count': 0}
+                )
+                st.session_state.confirm_clear_beliefs_modal = False
+                st.success("✅ Tutti i beliefs sono stati cancellati!")
+                st.rerun()
+            else:
+                # Prima richiesta di conferma
+                st.session_state.confirm_clear_beliefs_modal = True
+                st.warning("⚠️ Clicca di nuovo per confermare la cancellazione")
+
+    with col4:
+        if st.button("❌ Chiudi", use_container_width=True):
+            st.session_state.show_belief_editor = False
+            st.session_state.confirm_clear_beliefs_modal = False
+            st.rerun()
+
+    # Info
+    st.divider()
+    st.caption(f"📊 Beliefs attuali: {len(beliefs)}")
+
+# CSS per nascondere menu Streamlit e styling
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {display: none;}
+
+    /* Riduce spessore delle righe di divisione */
+    hr {
+        margin: 0.1 rem 0;
+        border: none;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.2);
+    }
+
+    /* Divider nella sidebar */
+    section[data-testid="stSidebar"] hr {
+        margin: 0.2rem 0;
+        border-top: 0.5px solid rgba(49, 51, 63, 0.15);
+    }
+
+    /* Riduce spazio superiore del titolo della pagina */
+    .block-container {
+        padding-top: 2rem !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
 # ===== SIDEBAR =====
 with st.sidebar:
-    st.markdown("### ✨ LUMIA Studio")
+    # Header con logo e pulsante home sulla stessa riga
+    col_logo, col_home = st.columns([3, 1])
 
-    if st.button("🏠 Torna alla Home", width='stretch', type="secondary"):
-        st.switch_page("app.py")
+    with col_logo:
+        st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
+
+    with col_home:
+        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+            st.switch_page("app.py")
+
+    st.divider()
+
+    # Sezione lista contesti
+    st.markdown("### 📋 Contesti Disponibili")
+
+    contexts = st.session_state.context_manager.get_all_contexts()
+
+    if not contexts:
+        st.info("Nessun contesto disponibile. Creane uno!")
+    else:
+        for idx, ctx in enumerate(contexts):
+            is_active = ctx['normalized_name'] == st.session_state.current_context
+
+            # Container per ogni contesto
+            with st.container():
+                # Prima riga: Nome contesto con pulsanti laterali
+                col_name, col_activate, col_delete = st.columns([4, 1.3, 1.3])
+
+                with col_name:
+                    # Nome del contesto come punto elenco (allineato verticalmente)
+                    icon = "🟢" if is_active else "⚪"
+                    st.markdown(f"<div style='padding-top: 4px;'><strong>{icon} {ctx['name']}</strong></div>",
+                               unsafe_allow_html=True)
+
+                with col_activate:
+                    # Pulsante attiva (usa sempre stessa emoji, disabilitato se attivo)
+                    if st.button("⚡", key=f"activate_{ctx['normalized_name']}",
+                               help="Contesto attivo" if is_active else "Attiva contesto",
+                               disabled=is_active, use_container_width=True):
+                        st.session_state.current_context = ctx['normalized_name']
+                        st.session_state.context_changed = True
+                        st.rerun()
+
+                with col_delete:
+                    # Pulsante elimina
+                    if st.button("🗑️", key=f"delete_{ctx['normalized_name']}",
+                               help="Elimina contesto", use_container_width=True):
+                        if st.session_state.context_manager.delete_context(ctx['normalized_name']):
+                            st.success(f"Contesto '{ctx['name']}' eliminato!")
+                            # Se era il contesto corrente, deselezionalo
+                            if st.session_state.current_context == ctx['normalized_name']:
+                                remaining = st.session_state.context_manager.get_all_contexts()
+                                st.session_state.current_context = remaining[0]['normalized_name'] if remaining else None
+                                st.session_state.context_changed = True
+                            st.rerun()
+                        else:
+                            st.error("Errore nell'eliminazione")
+
+                # Seconda riga: Descrizione del contesto (con spazio ridotto)
+                testo =" "
+                if ctx.get('description'):
+                    testo = f"{ctx['description']}"
+                else:
+                    testo ="Nessuna descrizione"
+
+                testo = (f"{testo} (📦 Chunks: {ctx.get('document_count', 0)} | 🧠 Beliefs: {ctx.get('belief_count', 0)}")
+
+                st.markdown(testo)
+
+            # Riga divisoria tra i contesti (tranne dopo l'ultimo)
+            if idx < len(contexts) - 1:
+                st.markdown("---")
 
     st.divider()
 
@@ -83,59 +295,6 @@ with st.sidebar:
                 st.error(f"❌ {str(e)}")
             except Exception as e:
                 st.error(f"❌ Errore nella creazione: {str(e)}")
-
-    st.divider()
-
-    # Sezione lista contesti
-    st.markdown("### 📋 Contesti Disponibili")
-
-    contexts = st.session_state.context_manager.get_all_contexts()
-
-    if not contexts:
-        st.info("Nessun contesto disponibile. Creane uno!")
-    else:
-        for ctx in contexts:
-            is_active = ctx['normalized_name'] == st.session_state.current_context
-
-            # Container per ogni contesto
-            with st.container():
-                col1, col2 = st.columns([4, 1])
-
-                with col1:
-                    # Indicatore contesto attivo
-                    icon = "🟢" if is_active else "⚪"
-                    if st.button(
-                        f"{icon} {ctx['name']}",
-                        key=f"select_{ctx['normalized_name']}",
-                        use_container_width=True,
-                        type="primary" if is_active else "secondary"
-                    ):
-                        if not is_active:
-                            st.session_state.current_context = ctx['normalized_name']
-                            st.session_state.context_changed = True
-                            st.rerun()
-
-                with col2:
-                    # Pulsante elimina
-                    if st.button("🗑️", key=f"delete_{ctx['normalized_name']}", help="Elimina contesto"):
-                        if st.session_state.context_manager.delete_context(ctx['normalized_name']):
-                            st.success(f"Contesto '{ctx['name']}' eliminato!")
-                            # Se era il contesto corrente, deselezionalo
-                            if st.session_state.current_context == ctx['normalized_name']:
-                                remaining = st.session_state.context_manager.get_all_contexts()
-                                st.session_state.current_context = remaining[0]['normalized_name'] if remaining else None
-                                st.session_state.context_changed = True
-                            st.rerun()
-                        else:
-                            st.error("Errore nell'eliminazione")
-
-                # Mostra info del contesto se attivo
-                if is_active:
-                    st.caption(f"📦 Chunks: {ctx.get('document_count', 0)} | 🧠 Beliefs: {ctx.get('belief_count', 0)}")
-                    if ctx.get('description'):
-                        st.caption(f"📝 {ctx['description']}")
-
-            st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
 
     st.divider()
 
@@ -417,14 +576,17 @@ with col2:
             with st.expander(f"{icon} {source_type}: {name}"):
                 st.caption(f"**Source ID:** {source}")
 
-    # Pulsanti per estrarre belief base e cancellare contesto
+    # Pulsanti per estrarre belief base, editor e cancellare contesto
     st.markdown(" ")
-    btn_col1, btn_col2 = st.columns(2)
+    btn_col1, btn_col2, btn_col3 = st.columns(3)
 
     with btn_col1:
         extract_belief = st.button("🧠 Estrai Belief", use_container_width=True)
 
     with btn_col2:
+        edit_belief = st.button("📝 Modifica Belief", use_container_width=True)
+
+    with btn_col3:
         clear_context = st.button("🗑️ Cancella KB", type="secondary", use_container_width=True)
 
     # Logica per estrazione belief base
@@ -535,6 +697,11 @@ Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati.
         else:
             st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
 
+    # Logica per aprire editor beliefs
+    if edit_belief:
+        st.session_state.show_belief_editor = True
+        st.rerun()
+
     # Logica per cancellare knowledge base del contesto
     if clear_context:
         if stats['document_count'] > 0:
@@ -570,6 +737,10 @@ Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati.
                 st.error(f"❌ Errore durante la cancellazione: {str(e)}")
         else:
             st.info("Nessun contenuto da cancellare")
+
+# Apri modale editor se richiesto
+if st.session_state.show_belief_editor:
+    belief_editor_modal()
 
 # Suggerimento
 st.markdown("---")

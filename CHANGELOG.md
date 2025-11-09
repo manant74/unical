@@ -6,7 +6,45 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
-## Release - 2025-01-30
+## Release - 2025-11-15
+
+### 🎨 Home Page Redesign
+
+- **Rebranding**: "LUMIA" → "LumIA" per evidenziare il riferimento all'Intelligenza Artificiale
+- **Workflow ottimizzato**: Nuovo ordine Knol → Compass → Alì → Believer con descrizioni aggiornate
+- **Riorganizzazione moduli** in 3 sezioni tematiche:
+  - ⚙️ Configuration: Compass, Knol
+  - 🎯 Domain Definition: Alì, Believer, Cuma
+  - ⚡ Live Sessions: Genius
+- **UI migliorata**:
+  - Layout pulito con separatori orizzontali tra sezioni
+  - Titoli sezioni allineati a sinistra con gradient viola
+
+#### Knol Module
+
+- **Editor Beliefs Modale**: Editor per beliefs di base con funzionalità complete
+
+- **Revisione Layout Sidebar**:
+
+#### KBeliever  Module
+
+- Inserita funzionalità per poter chiedere al Believer di generare, senza interazioni in  chat, i Beliefs derivandoli dai desire e individuando quali di quelli di base sono collegati ai Desire individuati
+
+#### LLM Module
+
+- Inserita logica per poter avere parametri di default per gli LLM, e per poter gestire parametri di configuraizone diversi per ogni tipo di LLM
+
+- Inserito parametro per GPT-5 per poter impostare il livello di reasoning
+
+- Eliminato Anthropic tra gli LLM disponibili
+
+#### UI Improvements
+
+- Ottimizzazione Spazi
+
+---
+
+## Release - 2025-10-30
 
 ### Home Page
 
