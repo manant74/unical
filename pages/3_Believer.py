@@ -742,9 +742,18 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
 
                     # Aggiungi parametri custom solo se use_defaults è False
                     if not use_defaults:
-                        chat_params['temperature'] = llm_settings.get('temperature', 0.7)
-                        chat_params['max_tokens'] = 8000  # Aumentato per sicurezza
-                        chat_params['top_p'] = llm_settings.get('top_p', 0.9)
+                        chat_params['temperature'] = llm_settings.get('temperature', 1.0)
+                        chat_params['top_p'] = llm_settings.get('top_p', 0.95 if provider == "Gemini" else 1.0)
+
+                        # Max tokens - parametro diverso per provider (aumentato per il mix)
+                        if provider == "Gemini":
+                            chat_params['max_output_tokens'] = min(llm_settings.get('max_tokens', 65536), 65536)
+                        else:
+                            chat_params['max_tokens'] = min(llm_settings.get('max_tokens', 4096), 8000)
+
+                        # Reasoning effort - solo per GPT-5
+                        if model.startswith('gpt-5'):
+                            chat_params['reasoning_effort'] = llm_settings.get('reasoning_effort', 'medium')
 
                     # Chiama l'LLM per generare il mix
                     mix_response = st.session_state.llm_manager.chat(**chat_params)
@@ -880,9 +889,18 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
 
                     # Aggiungi parametri custom solo se use_defaults è False
                     if not use_defaults:
-                        chat_params['temperature'] = llm_settings.get('temperature', 0.7)
-                        chat_params['max_tokens'] = 8000  # Aumentato per sicurezza
-                        chat_params['top_p'] = llm_settings.get('top_p', 0.9)
+                        chat_params['temperature'] = llm_settings.get('temperature', 1.0)
+                        chat_params['top_p'] = llm_settings.get('top_p', 0.95 if provider == "Gemini" else 1.0)
+
+                        # Max tokens - parametro diverso per provider (aumentato per il mix)
+                        if provider == "Gemini":
+                            chat_params['max_tokens'] = min(llm_settings.get('max_output_tokens', 65536), 65536)
+                        else:
+                            chat_params['max_tokens'] = min(llm_settings.get('max_tokens', 4096), 8000)
+
+                        # Reasoning effort - solo per GPT-5
+                        if model.startswith('gpt-5'):
+                            chat_params['reasoning_effort'] = llm_settings.get('reasoning_effort', 'medium')
 
                     # Chiama l'LLM per generare il mix
                     mix_response = st.session_state.llm_manager.chat(**chat_params)
