@@ -16,7 +16,7 @@ from utils.auditor import ConversationAuditor
 
 ALI_MODULE_GOAL = (
     "Guidare il responsabile di dominio a raccogliere e formalizzare desire concreti, "
-    "motivazioni e metriche di successo per ogni persona rilevante."
+    "motivazioni e metriche di successo per una sola categoria di utenti dedotta dalla conversazione."
 )
 ALI_EXPECTED_OUTCOME = (
     "Progredire verso la conferma o la creazione di un desire ben formulato, "
