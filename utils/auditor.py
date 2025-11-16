@@ -1,4 +1,4 @@
-import json
+﻿import json
 import re
 from typing import Any, Dict, List, Optional
 
@@ -6,52 +6,87 @@ from utils.prompts import get_prompt
 
 
 FINALIZATION_KEYWORDS = [
-    "formalizza",
-    "formalizzare",
-    "formalizzato",
-    "formalizzazione",
-    "formalization",
-    "finalizza",
-    "finalizzare",
-    "finalizzato",
-    "finalizzazione",
-    "finalization",
-    "report",
-    "report finale",
-    "report json",
-    "json finale",
-    "genera il report",
-    "generate the report",
-    "generate report",
-    "genera il json",
-    "generate the json",
-    "produce il report",
-    "produce il json",
-    "produrre il report",
-    "produrre il json",
-    "passiamo al report",
     "procedi con il report",
-    "procedere con il report",
-    "procedi con il json",
+    "procediamo con il report",
+    "passiamo al report",
+    "genera il report",
+    "genera il json",
+    "genera il report json",
+    "produce il report",
+    "produci il report",
+    "produci il json",
     "dammi il report",
     "dammi il json",
+    "mandami il report",
+    "mandami il json",
     "rilascia il json",
     "salva in json",
     "chiudi con il json",
-    "chiudi il modulo",
+    "chiudiamo con il json",
     "concludi con il report",
+    "formalizza il desire",
+    "formalizza il report",
+    "formalizza in json",
+    "formalizza tutto",
+    "finalizza il report",
+    "finalizza in json",
+    "report json finale",
+    "json conclusivo",
     "checkpoint finale",
-    "check finale",
-    "riassunto finale",
-    "json conclusivo"
+    "checkpoint pronto al report",
+    "genera il riepilogo json",
+]
+
+FINALIZATION_VERBS = [
+    "formalizza",
+    "formalizzare",
+    "formalizzi",
+    "finalizza",
+    "finalizzare",
+    "finalizzi",
+    "genera",
+    "generare",
+    "generami",
+    "produci",
+    "produrre",
+    "prepara",
+    "preparami",
+    "procedi",
+    "procediamo",
+    "passiamo",
+    "concludi",
+    "concludiamo",
+    "dammi",
+    "mandami",
+    "rilascia",
+    "rilasciami",
+    "chiudi",
+    "chiudiamo",
+    "completa",
+]
+
+FINALIZATION_OBJECTS = [
+    "report",
+    "json",
+    "desire",
+    "desiderio",
+    "desideri",
+    "desires",
+    "belief",
+    "beliefs",
+    "output",
 ]
 
 EXPECTED_FINALIZATION_KEYWORDS = [
-    "report",
-    "json",
-    "formalizzazione",
-    "finalizzazione",
-    "conclusione",
+    "report json finale",
+    "report finale",
+    "json conclusivo",
+    "produrre il report",
+    "generare il report",
+    "formalizzare in json",
+    "finalizzare in json",
+    "chiudere con il report",
+    "completare il report",
 ]
 
 MODULE_FINALIZATION_LABELS = {
@@ -67,6 +102,33 @@ MODULE_FINALIZATION_LABELS = {
         "object": "output",
         "json_label": "report JSON richiesto",
     }
+}
+
+MODULE_STRUCTURED_MARKERS = {
+    "ali": [
+        "desire:",
+        "desiderio:",
+        "motivazione:",
+        "motivation:",
+        "successo:",
+        "success metrics",
+        "metriche di successo",
+        "criteri di successo",
+    ],
+    "believer": [
+        "belief:",
+        "soggetto:",
+        "relazione:",
+        "oggetto:",
+        "fonte:",
+        "metadati:",
+        "livello di confidenza",
+    ]
+}
+
+MODULE_STRUCTURED_THRESHOLDS = {
+    "ali": 2,
+    "believer": 2,
 }
 
 
@@ -199,17 +261,21 @@ class ConversationAuditor:
         if not user_message and excerpt:
             user_message = self._extract_last_role(excerpt, "user")
 
-        if not user_message:
-            return None
+        user_lower = user_message.lower() if user_message else ""
 
-        user_lower = user_message.lower()
-        finalization_requested = any(keyword in user_lower for keyword in FINALIZATION_KEYWORDS)
+        user_finalization = self._user_requests_finalization(user_lower)
+        structured_finalization = self._detect_structured_finalization(module_name, assistant_message)
+        recent_json = self._assistant_recently_produced_json(excerpt)
 
-        if not finalization_requested and expected_outcome:
-            expected_lower = expected_outcome.lower()
-            finalization_requested = any(keyword in expected_lower for keyword in EXPECTED_FINALIZATION_KEYWORDS)
+        expected_finalization = False
+        if expected_outcome:
+            expected_finalization = self._expected_requests_finalization(expected_outcome)
+            if expected_finalization and recent_json:
+                expected_finalization = False
 
-        if not finalization_requested:
+        finalization_requested = user_finalization or expected_finalization
+
+        if not finalization_requested and not structured_finalization:
             return None
 
         has_json = self._extract_json(assistant_message) is not None
@@ -219,20 +285,38 @@ class ConversationAuditor:
         labels = MODULE_FINALIZATION_LABELS.get(module_name, MODULE_FINALIZATION_LABELS["default"])
         json_label = labels["json_label"]
 
-        summary = (
-            f"L'utente ha richiesto la formalizzazione/generazione del {json_label}, "
-            "ma la risposta non contiene alcun JSON. Il report è necessario prima di proseguire."
-        )
+        if user_finalization:
+            summary = (
+                f"L'utente ha richiesto la formalizzazione/generazione del {json_label}, "
+                "ma la risposta non contiene alcun JSON. Il report e' necessario prima di proseguire."
+            )
+        elif expected_finalization:
+            summary = (
+                f"Il flusso corrente richiede il {json_label}, ma la risposta non contiene alcun JSON. "
+                "Serve fornire il report prima di cambiare argomento."
+            )
+        else:
+            summary = (
+                f"Hai dichiarato una formalizzazione (es. Desire/Motivazione/Successo) senza fornire il {json_label}. "
+                "Il contenuto non puo' essere salvato finche' non invii il JSON completo."
+            )
+
+        if user_finalization or expected_finalization:
+            issue_message = f"Richiesto {json_label} di finalizzazione ma l'assistente ha risposto senza fornire un JSON valido."
+            improvements = [
+                f"Quando l'utente chiede di formalizzare o generare il {json_label}, fornisci subito il JSON completo prima di cambiare argomento."
+            ]
+        else:
+            issue_message = f"Hai indicato Desire/Motivazione/Successo ma non hai prodotto il {json_label}; senza JSON non e' possibile salvare la formalizzazione."
+            improvements = [
+                f"Quando dichiari di aver formalizzato il {labels['object']}, fornisci immediatamente il {json_label}."
+            ]
 
         issues = [{
             "type": "format",
             "severity": "high",
-            "message": f"Richiesto {json_label} di finalizzazione ma l'assistente ha risposto senza fornire un JSON valido."
+            "message": issue_message
         }]
-
-        improvements = [
-            f"Quando l'utente chiede di formalizzare o generare il {json_label}, fornisci subito il JSON completo prima di cambiare argomento."
-        ]
 
         suggested_reply = {
             "message": f"Per favore genera ora il {json_label} completo prima di procedere.",
@@ -250,3 +334,66 @@ class ConversationAuditor:
             "next_focus": next_focus,
             "confidence": "high"
         }
+
+    def _detect_structured_finalization(self, module_name: str, assistant_message: str) -> bool:
+        text = assistant_message.lower()
+        markers = MODULE_STRUCTURED_MARKERS.get(module_name, [])
+        if not markers:
+            return False
+
+        hits = sum(1 for marker in markers if marker in text)
+        threshold = MODULE_STRUCTURED_THRESHOLDS.get(module_name, 3)
+        return hits >= threshold
+
+    @staticmethod
+    def _assistant_recently_produced_json(excerpt: Optional[List[Dict[str, str]]]) -> bool:
+        if not excerpt:
+            return False
+
+        skip_current = True
+        for message in reversed(excerpt):
+            if message.get("role") != "assistant":
+                continue
+
+            if skip_current:
+                skip_current = False
+                continue
+
+            content = message.get("content", "")
+            if content and ConversationAuditor._extract_json(content) is not None:
+                return True
+            break
+
+        return False
+
+    @staticmethod
+    def _user_requests_finalization(text: str) -> bool:
+        if not text:
+            return False
+
+        for phrase in FINALIZATION_KEYWORDS:
+            if phrase in text:
+                return True
+
+        if any(verb in text for verb in FINALIZATION_VERBS):
+            if any(obj in text for obj in FINALIZATION_OBJECTS):
+                return True
+
+        return False
+
+    @staticmethod
+    def _expected_requests_finalization(expected_text: Optional[str]) -> bool:
+        if not expected_text:
+            return False
+
+        text = expected_text.lower()
+        for phrase in FINALIZATION_KEYWORDS + EXPECTED_FINALIZATION_KEYWORDS:
+            if phrase in text:
+                return True
+
+        if any(verb in text for verb in FINALIZATION_VERBS):
+            if any(obj in text for obj in FINALIZATION_OBJECTS):
+                return True
+
+        return False
+
