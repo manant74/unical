@@ -10,20 +10,64 @@ FINALIZATION_KEYWORDS = [
     "formalizzare",
     "formalizzato",
     "formalizzazione",
+    "formalization",
+    "finalizza",
+    "finalizzare",
+    "finalizzato",
+    "finalizzazione",
+    "finalization",
     "report",
     "report finale",
     "report json",
     "json finale",
     "genera il report",
-    "finalizza",
-    "finalizzare",
-    "finalizzazione",
-    "checkpoint finale",
+    "generate the report",
+    "generate report",
+    "genera il json",
+    "generate the json",
+    "produce il report",
+    "produce il json",
+    "produrre il report",
+    "produrre il json",
     "passiamo al report",
     "procedi con il report",
     "procedere con il report",
-    "produrre il report"
+    "procedi con il json",
+    "dammi il report",
+    "dammi il json",
+    "rilascia il json",
+    "salva in json",
+    "chiudi con il json",
+    "chiudi il modulo",
+    "concludi con il report",
+    "checkpoint finale",
+    "check finale",
+    "riassunto finale",
+    "json conclusivo"
 ]
+
+EXPECTED_FINALIZATION_KEYWORDS = [
+    "report",
+    "json",
+    "formalizzazione",
+    "finalizzazione",
+    "conclusione",
+]
+
+MODULE_FINALIZATION_LABELS = {
+    "ali": {
+        "object": "desire",
+        "json_label": "report JSON dei desire",
+    },
+    "believer": {
+        "object": "belief",
+        "json_label": "report JSON dei belief",
+    },
+    "default": {
+        "object": "output",
+        "json_label": "report JSON richiesto",
+    }
+}
 
 
 class ConversationAuditor:
@@ -54,11 +98,17 @@ class ConversationAuditor:
         if not self._llm_manager or not provider or not model:
             return None
 
-        enforcement = self._force_json_if_needed(last_user_message, assistant_message)
+        excerpt = self._trim_history(conversation, history_limit)
+
+        enforcement = self._force_json_if_needed(
+            module_name=module_name,
+            expected_outcome=expected_outcome,
+            last_user_message=last_user_message,
+            assistant_message=assistant_message,
+            excerpt=excerpt,
+        )
         if enforcement:
             return enforcement
-
-        excerpt = self._trim_history(conversation, history_limit)
 
         payload: Dict[str, Any] = {
             "module_name": module_name,
@@ -136,14 +186,28 @@ class ConversationAuditor:
 
     def _force_json_if_needed(
         self,
+        module_name: str,
+        expected_outcome: Optional[str],
         last_user_message: Optional[str],
-        assistant_message: Optional[str]
+        assistant_message: Optional[str],
+        excerpt: Optional[List[Dict[str, str]]]
     ) -> Optional[Dict[str, Any]]:
-        if not last_user_message or not assistant_message:
+        if not assistant_message:
             return None
 
-        user_lower = last_user_message.lower()
+        user_message = last_user_message
+        if not user_message and excerpt:
+            user_message = self._extract_last_role(excerpt, "user")
+
+        if not user_message:
+            return None
+
+        user_lower = user_message.lower()
         finalization_requested = any(keyword in user_lower for keyword in FINALIZATION_KEYWORDS)
+
+        if not finalization_requested and expected_outcome:
+            expected_lower = expected_outcome.lower()
+            finalization_requested = any(keyword in expected_lower for keyword in EXPECTED_FINALIZATION_KEYWORDS)
 
         if not finalization_requested:
             return None
@@ -152,25 +216,30 @@ class ConversationAuditor:
         if has_json:
             return None
 
+        labels = MODULE_FINALIZATION_LABELS.get(module_name, MODULE_FINALIZATION_LABELS["default"])
+        json_label = labels["json_label"]
+
         summary = (
-            "L'utente ha richiesto la formalizzazione/report JSON ma la risposta "
-            "non contiene alcun JSON finalizzante. Serve il report prima di proseguire."
+            f"L'utente ha richiesto la formalizzazione/generazione del {json_label}, "
+            "ma la risposta non contiene alcun JSON. Il report è necessario prima di proseguire."
         )
 
         issues = [{
             "type": "format",
             "severity": "high",
-            "message": "Richiesto report JSON di finalizzazione ma l'assistente ha risposto senza fornire un JSON valido."
+            "message": f"Richiesto {json_label} di finalizzazione ma l'assistente ha risposto senza fornire un JSON valido."
         }]
 
-        improvements = ["Quando l'utente chiede di formalizzare o generare il report, fornisci subito il report JSON completo."]
+        improvements = [
+            f"Quando l'utente chiede di formalizzare o generare il {json_label}, fornisci subito il JSON completo prima di cambiare argomento."
+        ]
 
         suggested_reply = {
-            "message": "Per favore genera ora il report JSON completo con la persona e i desire confermati.",
-            "why": "Senza il JSON finale non possiamo salvare i desire e procedere."
+            "message": f"Per favore genera ora il {json_label} completo prima di procedere.",
+            "why": f"Senza il {json_label} non possiamo salvare e confermare l'output del modulo."
         }
 
-        next_focus = "Produrre il report JSON finale richiesto dall'utente prima di cambiare argomento."
+        next_focus = f"Produrre il {json_label} richiesto dall'utente prima di passare ad altro."
 
         return {
             "status": "revise",
