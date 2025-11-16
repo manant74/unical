@@ -5,6 +5,27 @@ from typing import Any, Dict, List, Optional
 from utils.prompts import get_prompt
 
 
+FINALIZATION_KEYWORDS = [
+    "formalizza",
+    "formalizzare",
+    "formalizzato",
+    "formalizzazione",
+    "report",
+    "report finale",
+    "report json",
+    "json finale",
+    "genera il report",
+    "finalizza",
+    "finalizzare",
+    "finalizzazione",
+    "checkpoint finale",
+    "passiamo al report",
+    "procedi con il report",
+    "procedere con il report",
+    "produrre il report"
+]
+
+
 class ConversationAuditor:
     """Gestisce le chiamate all'agente Auditor per valutare le risposte degli altri agenti."""
 
@@ -32,6 +53,10 @@ class ConversationAuditor:
 
         if not self._llm_manager or not provider or not model:
             return None
+
+        enforcement = self._force_json_if_needed(last_user_message, assistant_message)
+        if enforcement:
+            return enforcement
 
         excerpt = self._trim_history(conversation, history_limit)
 
@@ -108,3 +133,51 @@ class ConversationAuditor:
                 return None
 
         return None
+
+    def _force_json_if_needed(
+        self,
+        last_user_message: Optional[str],
+        assistant_message: Optional[str]
+    ) -> Optional[Dict[str, Any]]:
+        if not last_user_message or not assistant_message:
+            return None
+
+        user_lower = last_user_message.lower()
+        finalization_requested = any(keyword in user_lower for keyword in FINALIZATION_KEYWORDS)
+
+        if not finalization_requested:
+            return None
+
+        has_json = self._extract_json(assistant_message) is not None
+        if has_json:
+            return None
+
+        summary = (
+            "L'utente ha richiesto la formalizzazione/report JSON ma la risposta "
+            "non contiene alcun JSON finalizzante. Serve il report prima di proseguire."
+        )
+
+        issues = [{
+            "type": "format",
+            "severity": "high",
+            "message": "Richiesto report JSON di finalizzazione ma l'assistente ha risposto senza fornire un JSON valido."
+        }]
+
+        improvements = ["Quando l'utente chiede di formalizzare o generare il report, fornisci subito il report JSON completo."]
+
+        suggested_reply = {
+            "message": "Per favore genera ora il report JSON completo con la persona e i desire confermati.",
+            "why": "Senza il JSON finale non possiamo salvare i desire e procedere."
+        }
+
+        next_focus = "Produrre il report JSON finale richiesto dall'utente prima di cambiare argomento."
+
+        return {
+            "status": "revise",
+            "summary": summary,
+            "issues": issues,
+            "assistant_improvements": improvements,
+            "suggested_user_replies": [suggested_reply],
+            "next_focus": next_focus,
+            "confidence": "high"
+        }
