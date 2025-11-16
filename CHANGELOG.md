@@ -26,7 +26,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - **Revisione Layout Sidebar**:
 
-#### KBeliever  Module
+#### Believer  Module
 
 - Inserita funzionalità per poter chiedere al Believer di generare, senza interazioni in  chat, i Beliefs derivandoli dai desire e individuando quali di quelli di base sono collegati ai Desire individuati
 
@@ -37,6 +37,13 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Inserito parametro per GPT-5 per poter impostare il livello di reasoning
 
 - Eliminato Anthropic tra gli LLM disponibili
+
+### 📊 Compass - Analytics Dashboard (WIP)
+
+- **Nuova tab Analytics**: Dashboard completo per analisi BDI in [Compass](pages/0_Compass.py)
+  - **Statistiche aggregate**: Metriche su desires, beliefs, coverage e domains/personas
+  - **Grafici interattivi** (Plotly):
+  - **Grafo delle relazioni**: Visualizzazione interattiva rete Desire-Belief
 
 #### UI Improvements
 

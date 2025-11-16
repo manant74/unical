@@ -25,3 +25,8 @@ python-dotenv>=1.0.0
 pydantic>=2.0.0
 pydantic-settings>=2.0.0
 streamlit-code-editor
+
+# Data visualization and graph analytics
+plotly>=5.18.0
+networkx>=3.2
+pandas>=2.0.0

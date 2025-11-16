@@ -4,6 +4,10 @@ import sys
 import json
 from datetime import datetime
 from code_editor import code_editor
+import plotly.graph_objects as go
+import plotly.express as px
+import networkx as nx
+import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -241,7 +245,7 @@ else:
     st.info(f"📝 Session Name Selected: **{current_session['metadata']['name']}**")
 
     # Tabs principali
-    tab1, tab2, tab3, tab4 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs", "📊 Analytics"])
 
     # ============================================================================
     # TAB 1: Session Info (nome, descrizione, LLM)
@@ -1061,6 +1065,437 @@ else:
 
                     # Stats
                     st.metric("Total BDI Beliefs", len(bdi_beliefs))
+
+    # ============================================================================
+    # TAB 5: Analytics
+    # ============================================================================
+    with tab5:
+        st.markdown("### 📊 Analytics")
+
+        if not current_session:
+            st.warning("⚠️ Please save session info in the first tab before viewing analytics.")
+        else:
+            # Carica i dati BDI
+            try:
+                bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id)
+
+                # Estrai desires e beliefs
+                if bdi_data:
+                    # Nuova struttura: domains -> personas -> desires
+                    if isinstance(bdi_data.get('domains'), list) and bdi_data['domains']:
+                        desires = []
+                        for idx, domain in enumerate(bdi_data['domains']):
+                            # Estrai nome domain: prova 'name', poi le prime 5 parole di 'domain_summary', altrimenti usa indice
+                            domain_name = domain.get('name')
+                            if not domain_name and 'domain_summary' in domain:
+                                # Prendi le prime 5 parole del domain_summary
+                                words = domain['domain_summary'].split()[:5]
+                                domain_name = ' '.join(words) + ('...' if len(domain['domain_summary'].split()) > 5 else '')
+                            if not domain_name:
+                                domain_name = f'Domain {idx + 1}'
+
+                            for persona in domain.get('personas', []) or []:
+                                # Estrai nome persona: prova 'name', poi 'persona_name', altrimenti 'Unknown'
+                                persona_name = persona.get('name') or persona.get('persona_name', 'Unknown')
+
+                                for desire in persona.get('desires', []) or []:
+                                    desire['domain'] = domain_name
+                                    desire['persona'] = persona_name
+                                    desires.append(desire)
+                    # Vecchia struttura: lista piatta
+                    elif isinstance(bdi_data.get('desires'), list):
+                        desires = bdi_data['desires']
+                    else:
+                        desires = []
+
+                    # Beliefs
+                    bdi_beliefs = bdi_data.get('beliefs', [])
+                else:
+                    desires = []
+                    bdi_beliefs = []
+
+            except AttributeError:
+                st.warning("⚠️ SessionManager non aggiornato. Riavvia l'applicazione per caricare le nuove funzionalità.")
+                desires = []
+                bdi_beliefs = []
+
+            # ============================================================================
+            # SEZIONE 1: STATISTICHE AGGREGATE
+            # ============================================================================
+            st.markdown("#### 📈 Aggregate Statistics")
+
+            # Metriche generali
+            col1, col2, col3, col4 = st.columns(4)
+
+            with col1:
+                st.metric("Total Desires", len(desires))
+
+            with col2:
+                st.metric("Total Beliefs", len(bdi_beliefs))
+
+            with col3:
+                # Calcola coverage: desires con almeno un belief collegato
+                desires_with_beliefs = 0
+                if desires and bdi_beliefs:
+                    for desire in desires:
+                        # Supporta sia 'id' che 'desire_id' per compatibilità
+                        desire_id = desire.get('desire_id') or desire.get('id')
+                        for belief in bdi_beliefs:
+                            # Supporta sia 'related_desires' (array semplice) che 'desires_correlati' (array di oggetti)
+                            related = belief.get('related_desires', [])
+                            if not related and 'desires_correlati' in belief:
+                                # Estrai gli ID dagli oggetti desires_correlati
+                                related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
+
+                            if desire_id in related:
+                                desires_with_beliefs += 1
+                                break
+                coverage_pct = (desires_with_beliefs / len(desires) * 100) if desires else 0
+                st.metric("Coverage %", f"{coverage_pct:.1f}%")
+
+            with col4:
+                # Calcola numero di domini e personas
+                domains_count = len(bdi_data.get('domains', [])) if bdi_data else 0
+                personas_count = sum(len(d.get('personas', [])) for d in bdi_data.get('domains', [])) if bdi_data and bdi_data.get('domains') else 0
+                st.metric("Domains/Personas", f"{domains_count}/{personas_count}")
+
+            st.markdown("---")
+
+            # Layout a 2 colonne per i grafici delle statistiche
+            col_left, col_right = st.columns(2)
+
+            with col_left:
+                st.markdown("##### 💭 Desires Analysis")
+
+                # Grafico Success Metrics per Desire
+                if desires:
+                    # Calcola quanti success metrics ha ogni desire
+                    desire_metrics = {}
+                    for desire in desires:
+                        desire_id = desire.get('desire_id') or desire.get('id', 'Unknown')
+                        metrics_count = len(desire.get('success_metrics', []))
+                        # Usa una label più corta per il grafico
+                        short_label = f"{desire_id}"
+                        desire_metrics[short_label] = metrics_count
+
+                    # Crea grafico a barre
+                    fig_metrics = px.bar(
+                        x=list(desire_metrics.keys()),
+                        y=list(desire_metrics.values()),
+                        title="Success Metrics per Desire",
+                        labels={'x': 'Desire ID', 'y': 'Number of Success Metrics'},
+                        color=list(desire_metrics.values()),
+                        color_continuous_scale='Blues',
+                        text=list(desire_metrics.values())
+                    )
+                    fig_metrics.update_traces(textposition='outside')
+                    st.plotly_chart(fig_metrics, use_container_width=True)
+
+                    # Grafico Beliefs per Desire
+                    if bdi_beliefs:
+                        # Conta quanti beliefs sono collegati a ogni desire
+                        beliefs_per_desire = {}
+                        for desire in desires:
+                            desire_id = desire.get('desire_id') or desire.get('id')
+                            beliefs_per_desire[desire_id] = 0
+
+                        # Conta i collegamenti
+                        for belief in bdi_beliefs:
+                            # Supporta sia 'related_desires' che 'desires_correlati'
+                            related = belief.get('related_desires', [])
+                            if not related and 'desires_correlati' in belief:
+                                related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
+
+                            for desire_id in related:
+                                if desire_id in beliefs_per_desire:
+                                    beliefs_per_desire[desire_id] += 1
+
+                        # Crea grafico a barre
+                        fig_beliefs_count = px.bar(
+                            x=list(beliefs_per_desire.keys()),
+                            y=list(beliefs_per_desire.values()),
+                            title="Beliefs per Desire",
+                            labels={'x': 'Desire ID', 'y': 'Number of Beliefs'},
+                            color=list(beliefs_per_desire.values()),
+                            color_continuous_scale='Greens',
+                            text=list(beliefs_per_desire.values())
+                        )
+                        fig_beliefs_count.update_traces(textposition='outside')
+                        st.plotly_chart(fig_beliefs_count, use_container_width=True)
+                else:
+                    st.info("No desires found. Create some desires in Alì to see statistics.")
+
+            with col_right:
+                st.markdown("##### 🧠 Beliefs Analysis")
+
+                # Grafico tipologie di relazioni beliefs
+                if bdi_beliefs:
+                    # Supporta sia 'type' che 'relazione' per compatibilità
+                    belief_relations = {}
+                    for belief in bdi_beliefs:
+                        # Prova prima 'relazione', poi 'type' come fallback
+                        relation = belief.get('relazione') or belief.get('type', 'undefined')
+                        belief_relations[relation] = belief_relations.get(relation, 0) + 1
+
+                    # Mostra solo se ci sono dati significativi (non solo 'undefined')
+                    if len(belief_relations) > 1 or 'undefined' not in belief_relations:
+                        fig_relations = px.pie(
+                            values=list(belief_relations.values()),
+                            names=list(belief_relations.keys()),
+                            title="Beliefs by Relation Type",
+                            color_discrete_sequence=px.colors.sequential.Teal
+                        )
+                        st.plotly_chart(fig_relations, use_container_width=True)
+
+                    # Grafico livelli di confidenza (se disponibile)
+                    confidence_levels = []
+                    for belief in bdi_beliefs:
+                        if 'confidence' in belief:
+                            confidence_levels.append(belief['confidence'])
+
+                    if confidence_levels:
+                        fig_confidence = px.histogram(
+                            x=confidence_levels,
+                            nbins=20,
+                            title="Confidence Levels Distribution",
+                            labels={'x': 'Confidence', 'y': 'Count'},
+                            color_discrete_sequence=['#2E86AB']
+                        )
+                        st.plotly_chart(fig_confidence, use_container_width=True)
+
+                    # Grafico relevance scores (se disponibile)
+                    relevance_scores = []
+                    for belief in bdi_beliefs:
+                        if 'relevance_score' in belief:
+                            relevance_scores.append(belief['relevance_score'])
+
+                    if relevance_scores:
+                        fig_relevance = px.histogram(
+                            x=relevance_scores,
+                            nbins=20,
+                            title="Relevance Scores Distribution",
+                            labels={'x': 'Relevance Score', 'y': 'Count'},
+                            color_discrete_sequence=['#A23B72']
+                        )
+                        st.plotly_chart(fig_relevance, use_container_width=True)
+
+                    # Grafico livelli di rilevanza (se struttura desires_correlati)
+                    relevance_levels = []
+                    for belief in bdi_beliefs:
+                        if 'desires_correlati' in belief:
+                            for dc in belief.get('desires_correlati', []):
+                                if 'livello_rilevanza' in dc:
+                                    relevance_levels.append(dc['livello_rilevanza'])
+
+                    if relevance_levels:
+                        level_counts = {}
+                        for level in relevance_levels:
+                            level_counts[level] = level_counts.get(level, 0) + 1
+
+                        fig_levels = px.bar(
+                            x=list(level_counts.keys()),
+                            y=list(level_counts.values()),
+                            title="Relevance Levels Distribution",
+                            labels={'x': 'Level', 'y': 'Count'},
+                            color=list(level_counts.values()),
+                            color_continuous_scale='Reds'
+                        )
+                        st.plotly_chart(fig_levels, use_container_width=True)
+                else:
+                    st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
+
+            # ============================================================================
+            # SEZIONE 2: GRAFO DELLE RELAZIONI
+            # ============================================================================
+            st.markdown("---")
+            st.markdown("#### 🕸️ Relationship Graph")
+
+            # Selettore layout
+            col_title, col_layout = st.columns([3, 1])
+            with col_layout:
+                layout_type = st.selectbox(
+                    "Layout",
+                    ["Bipartite", "Spring", "Circular", "Kamada-Kawai"],
+                    help="Choose the graph layout algorithm"
+                )
+
+            if desires or bdi_beliefs:
+                # Crea il grafo NetworkX
+                G = nx.Graph()
+
+                # Dizionari per tracciare nodi e colori
+                node_colors = {}
+                node_types = {}
+
+                # Aggiungi nodi Desire
+                for desire in desires:
+                    # Supporta sia 'id' che 'desire_id' per compatibilità
+                    desire_id = desire.get('desire_id') or desire.get('id')
+                    if desire_id:
+                        # Usa 'desire_statement' se disponibile, altrimenti 'description'
+                        desc = desire.get('desire_statement') or desire.get('description', 'No desc')
+                        node_label = f"D{desire_id}: {desc[:30]}..."
+                        G.add_node(node_label)
+                        node_colors[node_label] = '#FF6B6B'  # Rosso per desires
+                        node_types[node_label] = 'Desire'
+
+                # Aggiungi nodi Belief (usa indice come ID se non presente)
+                for idx, belief in enumerate(bdi_beliefs):
+                    belief_id = belief.get('id', f"B{idx+1}")
+                    # Usa diversi campi per il contenuto del belief
+                    content = belief.get('content') or belief.get('soggetto', 'No content')
+                    node_label = f"{belief_id}: {content[:30]}..."
+                    G.add_node(node_label)
+                    node_colors[node_label] = '#4ECDC4'  # Teal per beliefs
+                    node_types[node_label] = 'Belief'
+
+                # Aggiungi edge tra Belief e Desire
+                for idx, belief in enumerate(bdi_beliefs):
+                    belief_id = belief.get('id', f"B{idx+1}")
+                    content = belief.get('content') or belief.get('soggetto', 'No content')
+                    belief_label = f"{belief_id}: {content[:30]}..."
+
+                    # Supporta sia 'related_desires' (array semplice) che 'desires_correlati' (array di oggetti)
+                    related = belief.get('related_desires', [])
+                    if not related and 'desires_correlati' in belief:
+                        # Estrai gli ID dagli oggetti desires_correlati
+                        related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
+
+                    for desire_id in related:
+                        # Trova il desire corrispondente
+                        for desire in desires:
+                            d_id = desire.get('desire_id') or desire.get('id')
+                            if d_id == desire_id:
+                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
+                                desire_label = f"D{desire_id}: {desc[:30]}..."
+                                if belief_label in G.nodes and desire_label in G.nodes:
+                                    G.add_edge(belief_label, desire_label)
+                                break
+
+                # Calcola posizioni dei nodi in base al layout selezionato
+                if len(G.nodes) > 0:
+                    if layout_type == "Bipartite":
+                        # Layout bipartito: Desires a sinistra, Beliefs a destra
+                        pos = {}
+                        desires_nodes = [n for n in G.nodes() if node_types[n] == 'Desire']
+                        beliefs_nodes = [n for n in G.nodes() if node_types[n] == 'Belief']
+
+                        # Posiziona Desires a sinistra (x=0)
+                        for i, node in enumerate(desires_nodes):
+                            pos[node] = (0, i - len(desires_nodes)/2)
+
+                        # Posiziona Beliefs a destra (x=1)
+                        for i, node in enumerate(beliefs_nodes):
+                            pos[node] = (1, i - len(beliefs_nodes)/2)
+
+                    elif layout_type == "Spring":
+                        pos = nx.spring_layout(G, k=1, iterations=50)
+
+                    elif layout_type == "Circular":
+                        pos = nx.circular_layout(G)
+
+                    elif layout_type == "Kamada-Kawai":
+                        pos = nx.kamada_kawai_layout(G)
+
+                    # Prepara edge traces
+                    edge_x = []
+                    edge_y = []
+                    for edge in G.edges():
+                        x0, y0 = pos[edge[0]]
+                        x1, y1 = pos[edge[1]]
+                        edge_x.extend([x0, x1, None])
+                        edge_y.extend([y0, y1, None])
+
+                    edge_trace = go.Scatter(
+                        x=edge_x, y=edge_y,
+                        line=dict(width=1, color='#888'),
+                        hoverinfo='none',
+                        mode='lines'
+                    )
+
+                    # Prepara node traces (separati per tipo per avere colori diversi)
+                    desire_nodes_x = []
+                    desire_nodes_y = []
+                    desire_nodes_text = []
+
+                    belief_nodes_x = []
+                    belief_nodes_y = []
+                    belief_nodes_text = []
+
+                    for node in G.nodes():
+                        x, y = pos[node]
+                        if node_types[node] == 'Desire':
+                            desire_nodes_x.append(x)
+                            desire_nodes_y.append(y)
+                            desire_nodes_text.append(node)
+                        else:
+                            belief_nodes_x.append(x)
+                            belief_nodes_y.append(y)
+                            belief_nodes_text.append(node)
+
+                    desire_trace = go.Scatter(
+                        x=desire_nodes_x, y=desire_nodes_y,
+                        mode='markers+text',
+                        hoverinfo='text',
+                        text=desire_nodes_text,
+                        textposition="top center",
+                        marker=dict(
+                            color='#FF6B6B',
+                            size=20,
+                            line=dict(width=2, color='white')
+                        ),
+                        name='Desires'
+                    )
+
+                    belief_trace = go.Scatter(
+                        x=belief_nodes_x, y=belief_nodes_y,
+                        mode='markers+text',
+                        hoverinfo='text',
+                        text=belief_nodes_text,
+                        textposition="top center",
+                        marker=dict(
+                            color='#4ECDC4',
+                            size=20,
+                            line=dict(width=2, color='white')
+                        ),
+                        name='Beliefs'
+                    )
+
+                    # Crea figura
+                    fig = go.Figure(data=[edge_trace, desire_trace, belief_trace],
+                                    layout=go.Layout(
+                                        title=dict(
+                                            text='Desire-Belief Relationship Graph',
+                                            font=dict(size=16)
+                                        ),
+                                        showlegend=True,
+                                        hovermode='closest',
+                                        margin=dict(b=20, l=5, r=5, t=40),
+                                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                                        height=600
+                                    ))
+
+                    st.plotly_chart(fig, use_container_width=True)
+
+                    # Statistiche del grafo
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        st.metric("Total Nodes", len(G.nodes))
+                    with col2:
+                        st.metric("Total Edges", len(G.edges))
+                    with col3:
+                        # Calcola densità
+                        density = nx.density(G) if len(G.nodes) > 1 else 0
+                        st.metric("Graph Density", f"{density:.2f}")
+                    with col4:
+                        # Calcola componenti connesse
+                        components = nx.number_connected_components(G)
+                        st.metric("Connected Components", components)
+                else:
+                    st.info("No nodes to display. Create desires and beliefs with relationships to see the graph.")
+            else:
+                st.info("No data available for graph visualization. Create desires and beliefs to see the relationship graph.")
 
 # Footer
 st.markdown("---")
