@@ -453,7 +453,7 @@ unical/
 
 ### Struttura del Framework BDI
 
-Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato single-persona: ogni sessione ?? legata a un'unica categoria utente dedotta da Al??.
+Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato single-persona: ogni sessione è legata a un'unica categoria utente dedotta da Alì.
 
 ```json
 {
@@ -473,11 +473,11 @@ Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato s
   ],
   "beliefs": [
     {
-      "soggetto": "Entit?? soggetto",
+      "soggetto": "Entità soggetto",
       "relazione": "Tipo di relazione",
-      "oggetto": "Entit?? oggetto",
+      "oggetto": "Entità oggetto",
       "fonte": "Fonte testuale",
-      "metadati": {"tipo_soggetto": "Tipo di entit??", "tipo_oggetto": "Tipo di entit??"},
+      "metadati": {"tipo_soggetto": "Tipo di entità", "tipo_oggetto": "Tipo di entità"},
       "desires_correlati": [{"desire_id": "D1", "livello_rilevanza": "CRITICO", "spiegazione": "Spiegazione della correlazione"}]
     }
   ],

@@ -182,7 +182,7 @@ def load_desires():
     try:
         bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.active_session)
         if not bdi_data:
-            st.warning("?s???? Nessun BDI disponibile per la sessione attiva.")
+            st.warning("Nessun BDI disponibile per la sessione attiva.")
             return []
 
         persona_name = (bdi_data.get("persona") or {}).get("persona_name", "Persona primaria")
@@ -199,7 +199,7 @@ def load_desires():
                 })
             return converted
 
-        st.warning("?s???? Nessun desire trovato nel BDI della sessione attiva.")
+        st.warning("Nessun desire trovato nel BDI della sessione attiva.")
         return []
     except Exception as e:
         st.error(f"**Errore nel caricamento dei desires dalla sessione:** {e}")
