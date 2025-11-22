@@ -746,14 +746,16 @@ else:
                         # Stats
                         st.metric("Total Beliefs", len(beliefs))
 
+    
+    
     # ============================================================================
     # TAB 3: Desires Management
     # ============================================================================
     with tab3:
-        st.markdown("### 💭 Desires Management")
+        st.markdown("### Desires Management")
 
         if not current_session:
-            st.warning("⚠️ Please save session info in the first tab before managing desires.")
+            st.warning("Please save session info in the first tab before managing desires.")
         else:
             # Toggle per espandere l'editor desires
             if 'desires_editor_expanded' not in st.session_state:
@@ -761,57 +763,34 @@ else:
 
             # Layout: Editor JSON a sinistra, pulsanti a destra (o full width se espanso)
             if st.session_state.desires_editor_expanded:
-                # Modalità espansa: editor a schermo intero
                 col1 = st.container()
                 col2 = None
             else:
-                # Modalità normale: 2 colonne
                 col1, col2 = st.columns([3, 1])
 
             with col1:
-                # Carica desires dal BDI (supporta nuova struttura domains/personas e legacy)
-                try:
-                    bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id)
-                    if bdi_data:
-                        # Nuova struttura: domains -> personas -> desires
-                        if isinstance(bdi_data.get('domains'), list) and bdi_data['domains']:
-                            desires = []
-                            for domain in bdi_data['domains']:
-                                for persona in domain.get('personas', []) or []:
-                                    for desire in persona.get('desires', []) or []:
-                                        desires.append(desire)
-                        # Vecchia struttura: lista piatta
-                        elif isinstance(bdi_data.get('desires'), list):
-                            desires = bdi_data['desires']
-                        else:
-                            desires = []
-                    else:
-                        desires = []
-                except AttributeError:
-                    # Fallback se il metodo non è ancora disponibile
-                    st.warning("⚠️ SessionManager non aggiornato. Riavvia l'applicazione per caricare le nuove funzionalità.")
-                    desires = []
+                # Carica persona e desires dal BDI single-persona
+                bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id) or {}
+                persona_data = bdi_data.get("persona") or {}
+                domain_summary = bdi_data.get("domain_summary", "")
+                desires = bdi_data.get("desires", []) or []
 
-                # JSON editor con syntax highlighting
-                # Mostra solo la collection domains per editing
-                if isinstance(bdi_data, dict) and bdi_data:
-                    # Estrai solo la collection domains per l'editing
-                    domains_data = bdi_data.get('domains', [])
-                    if domains_data:
-                        desires_json = json.dumps({"domains": domains_data}, indent=2, ensure_ascii=False)
-                    else:
-                        # Se non ci sono domains, mostra struttura vuota
-                        desires_json = json.dumps({"domains": []}, indent=2, ensure_ascii=False)
-                else:
-                    # Fallback per struttura legacy o dati vuoti
-                    desires_json = json.dumps({"domains": []}, indent=2, ensure_ascii=False)
+                editor_payload = {
+                    "domain_summary": domain_summary,
+                    "persona": persona_data or {
+                        "persona_name": "",
+                        "persona_description": "",
+                        "persona_inference_notes": []
+                    },
+                    "desires": desires
+                }
+                desires_json = json.dumps(editor_payload, indent=2, ensure_ascii=False)
 
-                # Header con pulsante expand inline
                 col_label, col_spacer, col_btn = st.columns([3, 0.6, 0.4])
                 with col_label:
-                    st.markdown("**Edit domains structure**")
+                    st.markdown("**Edit persona & desires**")
                 with col_btn:
-                    expand_icon = "🔼" if st.session_state.desires_editor_expanded else "🔽"
+                    expand_icon = "[-]" if st.session_state.desires_editor_expanded else "[+]"
                     if st.button(expand_icon, key="toggle_desires_editor", help="Expand/Collapse editor", use_container_width=True):
                         st.session_state.desires_editor_expanded = not st.session_state.desires_editor_expanded
                         st.rerun()
@@ -834,100 +813,75 @@ else:
                     }
                 )
 
-                # Il valore editato è in response['text']
-                # Se il code editor non ha ancora un valore, usa il JSON originale
                 if response and 'text' in response and response['text'].strip():
                     edited_desires_json = response['text']
                 else:
                     edited_desires_json = desires_json
 
-            # Pulsanti laterali (solo se NON espanso)
             if not st.session_state.desires_editor_expanded and col2:
                 with col2:
                     st.markdown("###")
 
-                    # Save Desires
-                    if st.button("💾 Save Desires", width='stretch', type="primary", key="save_desires"):
+                    if st.button("Save Desires", width='stretch', type="primary", key="save_desires"):
                         try:
                             parsed = json.loads(edited_desires_json)
-                            
-                            # Salva solo la collection domains, preservando il resto del BDI
-                            if 'domains' in parsed and isinstance(parsed['domains'], list):
-                                # Carica il BDI esistente per preservare beliefs e altri dati
-                                existing_bdi = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id) or {}
-                                
-                                # Aggiorna solo la collection domains
-                                updated_bdi = {
-                                    **existing_bdi,  # Preserva tutto il contenuto esistente
-                                    "domains": parsed['domains']  # Aggiorna solo domains
-                                }
-                                
-                                # Salva il BDI aggiornato
-                                session_dir = st.session_state.session_manager.base_dir / st.session_state.editing_session_id
-                                bdi_file = session_dir / "current_bdi.json"
-                                with open(bdi_file, 'w', encoding='utf-8') as f:
-                                    json.dump(updated_bdi, f, ensure_ascii=False, indent=2)
-                                
-                                st.success("✅ Domains structure saved!")
+                            if not isinstance(parsed.get("persona"), dict):
+                                st.error("JSON must contain a 'persona' object")
+                            elif not isinstance(parsed.get("desires"), list):
+                                st.error("JSON must contain a 'desires' array")
                             else:
-                                st.error("❌ JSON must contain a 'domains' array")
+                                st.session_state.session_manager.update_bdi_data(
+                                    st.session_state.editing_session_id,
+                                    persona=parsed.get("persona") or {},
+                                    desires=parsed.get("desires") or [],
+                                    domain_summary=parsed.get("domain_summary", "")
+                                )
+                                st.success("Persona e desires salvati!")
                             st.rerun()
                         except AttributeError:
-                            st.error("❌ SessionManager non aggiornato. Riavvia l'applicazione.")
+                            st.error("SessionManager non aggiornato. Riavvia l'applicazione.")
                         except json.JSONDecodeError as e:
-                            st.error(f"❌ Invalid JSON: {str(e)}")
+                            st.error(f"Invalid JSON: {str(e)}")
 
-                    # Clear all domains
                     if 'confirm_clear_desires' not in st.session_state:
                         st.session_state.confirm_clear_desires = False
 
                     if not st.session_state.confirm_clear_desires:
-                        if st.button("🗑️ Clear All", width='stretch', key="clear_desires"):
+                        if st.button("Clear All", width='stretch', key="clear_desires"):
                             st.session_state.confirm_clear_desires = True
                             st.rerun()
                     else:
-                        st.warning("⚠️ Sure?")
-                        if st.button("✅ Yes", width='stretch', key="btn_confirm_clear_desires"):
+                        st.warning("Sure?")
+                        if st.button("Yes", width='stretch', key="btn_confirm_clear_desires"):
                             try:
-                                # Carica il BDI esistente e cancella solo domains
-                                existing_bdi = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id) or {}
-                                updated_bdi = {
-                                    **existing_bdi,  # Preserva tutto il contenuto esistente
-                                    "domains": []  # Cancella solo domains
-                                }
-                                
-                                # Salva il BDI aggiornato
-                                session_dir = st.session_state.session_manager.base_dir / st.session_state.editing_session_id
-                                bdi_file = session_dir / "current_bdi.json"
-                                with open(bdi_file, 'w', encoding='utf-8') as f:
-                                    json.dump(updated_bdi, f, ensure_ascii=False, indent=2)
-                                
+                                st.session_state.session_manager.update_bdi_data(
+                                    st.session_state.editing_session_id,
+                                    persona={},
+                                    desires=[],
+                                    domain_summary=""
+                                )
                                 st.session_state.confirm_clear_desires = False
-                                st.success("✅ Domains cleared!")
+                                st.success("Persona e desires azzerati!")
                                 st.rerun()
                             except AttributeError:
-                                st.error("❌ SessionManager non aggiornato. Riavvia l'applicazione.")
-                        if st.button("❌ No", width='stretch', key="btn_cancel_clear_desires"):
+                                st.error("SessionManager non aggiornato. Riavvia l'applicazione.")
+                        if st.button("No", width='stretch', key="btn_cancel_clear_desires"):
                             st.session_state.confirm_clear_desires = False
                             st.rerun()
 
-                    # Validate JSON
-                    if st.button("✅ Validate JSON", width='stretch', key="validate_desires_json"):
+                    if st.button("Validate JSON", width='stretch', key="validate_desires_json"):
                         try:
                             parsed = json.loads(edited_desires_json)
-                            if 'domains' in parsed and isinstance(parsed['domains'], list):
-                                # Conta desires in domains/personas
-                                total_desires = 0
-                                for domain in parsed['domains']:
-                                    for persona in domain.get('personas', []) or []:
-                                        total_desires += len(persona.get('desires', []) or [])
-                                st.success(f"✅ Valid domains JSON! Found {total_desires} desires across {len(parsed['domains'])} domains.")
+                            if not isinstance(parsed.get("persona"), dict):
+                                st.error("JSON must contain a 'persona' object")
+                            elif not isinstance(parsed.get("desires"), list):
+                                st.error("JSON must contain a 'desires' array")
                             else:
-                                st.error("❌ JSON must contain a 'domains' array")
+                                total_desires = len(parsed.get("desires") or [])
+                                st.success(f"JSON valido! Trovati {total_desires} desires sulla persona primaria.")
                         except json.JSONDecodeError as e:
-                            st.error(f"❌ Invalid JSON: {str(e)}")
+                            st.error(f"Invalid JSON: {str(e)}")
 
-                    # Stats
                     st.metric("Total Desires", len(desires))
 
     # ============================================================================

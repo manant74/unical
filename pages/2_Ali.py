@@ -72,33 +72,21 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 if 'active_session' in st.session_state and st.session_state.active_session:
     active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
     if active_session_data:
-        # Carica i desires dalla sessione (supporto domains/personas e fallback legacy)
+        # Carica i desires dalla sessione (formato single-persona)
         bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.active_session)
         if bdi_data and not st.session_state.desires:
             extracted = []
-            if isinstance(bdi_data.get('domains'), list):
-                for domain in bdi_data['domains']:
-                    domain_name = domain.get('domain_name', 'default')
-                    for persona in domain.get('personas', []) or []:
-                        persona_name = persona.get('persona_name', 'N/A')
-                        for desire in persona.get('desires', []) or []:
-                            extracted.append({
-                                "id": desire.get("desire_id", f"gen_{len(extracted)+1}"),
-                                "description": desire.get("desire_statement") or desire.get("descrizione", "N/A"),
-                                "priority": desire.get("priorità") or desire.get("priority", "medium"),
-                                "context": f"Domain: {domain_name} · Persona: {persona_name}",
-                                "success_criteria": "\n".join(desire.get("success_metrics", [])),
-                                "timestamp": datetime.now().isoformat()
-                            })
-            elif isinstance(bdi_data.get('desires'), list):
-                for desire in bdi_data['desires']:
-                    extracted.append({
-                        "id": desire.get("desire_id", f"gen_{len(extracted)+1}"),
-                        "description": desire.get("descrizione", "N/A"),
-                        "priority": desire.get("priorità", "medium"),
-                        "context": "Sessione Attiva",
-                        "timestamp": datetime.now().isoformat()
-                    })
+            persona = bdi_data.get("persona") or {}
+            persona_name = persona.get("persona_name", "Persona primaria")
+            for desire in bdi_data.get("desires", []) or []:
+                extracted.append({
+                    "id": desire.get("desire_id", f"gen_{len(extracted)+1}"),
+                    "description": desire.get("desire_statement") or desire.get("description", "N/A"),
+                    "priority": desire.get("priority", "medium"),
+                    "context": f"Persona: {persona_name}",
+                    "success_criteria": "\n".join(desire.get("success_metrics", [])),
+                    "timestamp": desire.get("timestamp", datetime.now().isoformat())
+                })
             st.session_state.desires = extracted
         
         # Prepara il DocumentProcessor con il contesto della sessione (lazy initialization)
@@ -332,62 +320,72 @@ with st.sidebar:
         st.session_state.ali_pending_prompt = None
         st.rerun()
 
-    if st.button("✅ Completa Sessione", type="primary", use_container_width=True):
-        # Verifica se c'è una sessione attiva
+    if st.button("Completa Sessione", type="primary", use_container_width=True):
+        # Verifica se c'e' una sessione attiva
         if 'active_session' in st.session_state and st.session_state.active_session:
             if st.session_state.desires:
-                # Salva i desires nella sessione corrente usando BDI data
+                existing_bdi = st.session_state.session_manager.get_bdi_data(st.session_state.active_session) or {}
+                persona_info = existing_bdi.get("persona", {})
+                domain_summary = existing_bdi.get("domain_summary", "")
+
+                bdi_desires = []
+                for i, d in enumerate(st.session_state.desires):
+                    success_metrics = (d.get("success_criteria") or "").splitlines() if d.get("success_criteria") else []
+                    bdi_desires.append({
+                        "desire_id": d.get("id", f"gen_{i+1}"),
+                        "desire_statement": d.get("description", "N/A"),
+                        "priority": d.get("priority", "medium"),
+                        "success_metrics": success_metrics
+                    })
+
                 st.session_state.session_manager.update_bdi_data(
                     st.session_state.active_session,
-                    desires=st.session_state.desires
+                    desires=bdi_desires,
+                    persona=persona_info,
+                    domain_summary=domain_summary
                 )
 
-                # Salva anche la chat history come metadati della sessione
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
                     chat_history=st.session_state.ali_chat_history
                 )
 
-                st.success(f"✅ Sessione completata! {len(st.session_state.desires)} Desires salvati nella sessione attiva!")
+                st.success(f"Sessione completata! {len(st.session_state.desires)} Desires salvati nella sessione attiva.")
                 st.balloons()
             elif len(st.session_state.ali_chat_history) > 1:
-                # Se ci sono messaggi ma nessun desire, salva solo la chat
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
                     chat_history=st.session_state.ali_chat_history
                 )
 
-                st.warning("⚠️ Nessun desire identificato, ma la conversazione è stata salvata nella sessione.")
-                st.info("💡 Suggerimento: Chiedi ad Alì di generare il report finale con i desires identificati.")
+                st.warning("Nessun desire identificato, ma la conversazione e' stata salvata nella sessione.")
+                st.info("Suggerimento: chiedi ad Ali di generare il report finale con i desires identificati.")
             else:
-                st.warning("⚠️ Nessuna conversazione da salvare!")
+                st.warning("Nessuna conversazione da salvare!")
         else:
-            # Fallback: salva come prima in file locali se non c'è sessione attiva
-            st.warning("⚠️ Nessuna sessione attiva! Salvataggio in file locali...")
+            # Fallback: salva su file locali se non c'e' sessione attiva
+            st.warning("Nessuna sessione attiva! Salvataggio in file locali...")
 
             if st.session_state.desires:
-                # Salvataggio fallback in formato BDI domains/personas
                 fallback_bdi = {
                     "timestamp": datetime.now().isoformat(),
-                    "domains": [
+                    "domain_summary": "",
+                    "persona": {
+                        "persona_name": "Utente",
+                        "persona_description": "",
+                        "persona_inference_notes": []
+                    },
+                    "desires": [
                         {
-                            "domain_name": active_session_data['config'].get('context', 'default'),
-                            "personas": [
-                                {
-                                    "persona_name": "Utente",
-                                    "desires": [
-                                        {
-                                            "desire_id": d.get("id", f"gen_{i+1}"),
-                                            "desire_statement": d.get("description", "N/A"),
-                                            "priority": d.get("priority", "medium"),
-                                            "success_metrics": (d.get("success_criteria") or "").split("\n") if d.get("success_criteria") else []
-                                        }
-                                        for i, d in enumerate(st.session_state.desires)
-                                    ]
-                                }
-                            ]
+                            "desire_id": d.get("id", f"gen_{i+1}"),
+                            "desire_statement": d.get("description", "N/A"),
+                            "priority": d.get("priority", "medium"),
+                            "success_metrics": (d.get("success_criteria") or "").splitlines() if d.get("success_criteria") else []
                         }
-                    ]
+                        for i, d in enumerate(st.session_state.desires)
+                    ],
+                    "beliefs": [],
+                    "intentions": []
                 }
 
                 os.makedirs("./data/sessions", exist_ok=True)
@@ -399,10 +397,10 @@ with st.sidebar:
                 with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
                     json.dump(fallback_bdi, f, ensure_ascii=False, indent=2)
 
-                st.info(f"💾 BDI (desires) salvato in: {filename}")
-                st.info("💡 Suggerimento: Attiva una sessione in Compass per integrarla nel sistema!")
+                st.info(f"BDI (desires) salvato in: {filename}")
+                st.info("Suggerimento: Attiva una sessione in Compass per integrarla nel sistema!")
             else:
-                st.warning("⚠️ Nessun dato da salvare!")
+                st.warning("Nessun dato da salvare!")
 
     st.divider()
 
@@ -725,47 +723,59 @@ if prompt:
                 try:
                     parsed_json = json.loads(json_content_str)
 
-                    # Estrai i desires dal report
-                    extracted_desires = []
+                    persona_info = parsed_json.get("persona") or {}
+                    domain_summary = parsed_json.get("domain_summary")
+                    desires_payload = parsed_json.get("desires") if isinstance(parsed_json.get("desires"), list) else []
 
-                    # Calcola il prossimo ID basandoti sul massimo ID esistente
+                    extracted_desires = []
+                    bdi_desires = []
+
                     existing_ids = [d.get("id", 0) for d in st.session_state.desires if isinstance(d.get("id"), int)]
                     next_id = max(existing_ids) + 1 if existing_ids else 1
 
-                    if "personas" in parsed_json and isinstance(parsed_json["personas"], list):
-                        for persona in parsed_json["personas"]:
-                            if "desires" in persona and isinstance(persona["desires"], list):
-                                for desire in persona["desires"]:
-                                    extracted_desires.append({
-                                        "id": next_id + len(extracted_desires),
-                                        "description": desire.get("desire_statement", "N/A"),
-                                        "priority": "medium",  # Default priority
-                                        "context": f"Persona: {persona.get('persona_name', 'N/A')}",
-                                        "success_criteria": "\n".join(desire.get("success_metrics", [])),
-                                        "timestamp": datetime.now().isoformat()
-                                    })
+                    for desire in desires_payload:
+                        bdi_desire = {
+                            "desire_id": desire.get("desire_id", f"gen_{next_id + len(bdi_desires)}"),
+                            "desire_statement": desire.get("desire_statement", "N/A"),
+                            "motivation": desire.get("motivation", ""),
+                            "success_metrics": desire.get("success_metrics", []),
+                            "priority": desire.get("priority", "medium")
+                        }
+                        bdi_desires.append(bdi_desire)
+                        extracted_desires.append({
+                            "id": next_id + len(extracted_desires),
+                            "description": bdi_desire["desire_statement"],
+                            "priority": bdi_desire["priority"],
+                            "context": f"Persona: {persona_info.get('persona_name', 'Persona primaria')}",
+                            "success_criteria": "\\n".join(bdi_desire["success_metrics"]),
+                            "timestamp": datetime.now().isoformat()
+                        })
 
                     if extracted_desires:
-                        # Aggiungi i nuovi desires a quelli esistenti invece di sovrascriverli
                         st.session_state.desires.extend(extracted_desires)
 
-                        # Salva automaticamente i desires nella sessione attiva se presente
                         if 'active_session' in st.session_state and st.session_state.active_session:
+                            existing_bdi = st.session_state.session_manager.get_bdi_data(st.session_state.active_session) or {}
+                            existing_structured_desires = existing_bdi.get("desires", []) if isinstance(existing_bdi.get("desires"), list) else []
+                            combined_desires = existing_structured_desires + bdi_desires
+
                             st.session_state.session_manager.update_bdi_data(
                                 st.session_state.active_session,
-                                desires=st.session_state.desires  # Salva la lista completa
+                                desires=combined_desires,
+                                persona=persona_info or existing_bdi.get("persona") or {},
+                                domain_summary=domain_summary if domain_summary is not None else existing_bdi.get("domain_summary", "")
                             )
-                            st.success(f"✅ Report finale rilevato! {len(extracted_desires)} nuovi desires estratti e aggiunti! Totale: {len(st.session_state.desires)}")
+                            st.success(f"?o. Report finale rilevato! {len(extracted_desires)} nuovi desires estratti e aggiunti! Totale: {len(st.session_state.desires)}")
                         else:
-                            st.success(f"✅ Report finale rilevato! {len(extracted_desires)} desires estratti! Totale: {len(st.session_state.desires)}")
+                            st.success(f"?o. Report finale rilevato! {len(extracted_desires)} desires estratti! Totale: {len(st.session_state.desires)}")
 
                         st.info("Puoi ora completare la sessione o aggiungere altri desires manualmente.")
                         st.rerun()
                     else:
-                        st.warning("⚠️ Il report JSON è stato rilevato ma non contiene desires nel formato atteso.")
+                        st.warning("?s???? Il report JSON ?? stato rilevato ma non contiene desires nel formato atteso.")
 
                 except json.JSONDecodeError:
-                    st.error("❌ Il report finale JSON generato dall'agente non è valido e non può essere parsato.")
+                    st.error("??O Il report finale JSON generato dall'agente non ?? valido e non pu?? essere parsato.")
                 except Exception as e:
                     st.error(f"An unexpected error occurred while parsing the report: {e}")
             # --- FINE NUOVA LOGICA ---

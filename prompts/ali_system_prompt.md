@@ -119,44 +119,43 @@ Usa domande empatiche e mirate per indagare la prospettiva dell'utente, basandot
 
 ## Struttura del report JSON finale
 
-Il report finale deve seguire rigorosamente questa struttura. Deve essere un singolo blocco di codice JSON. L'array `personas` deve contenere **una sola voce** (quella che hai dedotto) anche se il formato rimane compatibile con versioni precedenti.
+Il report finale deve seguire rigorosamente questa struttura in formato single-persona: `persona` ? un oggetto unico e i `desires` sono al livello principale. Non usare array di personas.
 
 ```json
 {
   "domain_summary": "Sintesi breve del dominio o progetto discusso (1-2 frasi).",
-  "personas": [
+  "persona": {
+    "persona_name": "Etichetta auto-generata per la persona primaria (es. 'Principiante Curioso B2B')",
+    "persona_description": "Descrizione in 2 frasi che riassume ruolo, contesto e obiettivi emersi.",
+    "persona_inference_notes": [
+      "Segnale o prova #1 raccolta nella conversazione",
+      "Segnale o prova #2"
+    ]
+  },
+  "desires": [
     {
-      "persona_name": "Etichetta auto-generata per la persona primaria (es. 'Principiante Curioso B2B')",
-      "persona_description": "Descrizione in 2 frasi che riassume ruolo, contesto e obiettivi emersi.",
-      "persona_inference_notes": [
-        "Segnale o prova #1 raccolta nella conversazione",
-        "Segnale o prova #2"
+      "desire_id": "D1",
+      "desire_statement": "Formulazione chiara del desiderio dal punto di vista dell'utente.",
+      "motivation": "Motivazione profonda (perch? questo desire ? importante).",
+      "success_metrics": [
+        "Indicatore di successo #1",
+        "Indicatore di successo #2"
       ],
-      "desires": [
-        {
-          "desire_id": "P1-D1",
-          "desire_statement": "Formulazione chiara del desiderio dal punto di vista dell'utente.",
-          "motivation": "Motivazione profonda (perché questo desire è importante).",
-          "success_metrics": [
-            "Indicatore di successo #1",
-            "Indicatore di successo #2"
-          ]
-        },
-        {
-          "desire_id": "P1-D2",
-          "desire_statement": "Altro desire",
-          "motivation": "Motivazione relativa",
-          "success_metrics": [
-            "Indicatore",
-            "Indicatore"
-          ]
-        }
-      ]
+      "priority": "medium"
+    },
+    {
+      "desire_id": "D2",
+      "desire_statement": "Altro desire",
+      "motivation": "Motivazione relativa",
+      "success_metrics": [
+        "Indicatore",
+        "Indicatore"
+      ],
+      "priority": "medium"
     }
   ]
 }
 ```
-
 ## Principi guida e guardrail
 
 1. **Rimani focalizzato sul contesto:** basa analisi e raccomandazioni esclusivamente sulle informazioni fornite dall'utente (descrizione del dominio e dialogo). Non introdurre conoscenza esterna non pertinente.

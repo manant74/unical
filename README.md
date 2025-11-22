@@ -453,52 +453,37 @@ unical/
 
 ### Struttura del Framework BDI
 
-Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) con la seguente struttura. L'agente Alì popola sempre una **sola** persona dedotta per dominio, ma il campo rimane un array per compatibilità con versioni precedenti:
+Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato single-persona: ogni sessione ?? legata a un'unica categoria utente dedotta da Al??.
 
 ```json
 {
-  "domains": [
+  "domain_summary": "Sintesi del dominio o progetto (1-2 frasi)",
+  "persona": {
+    "persona_name": "Nome della persona primaria",
+    "persona_description": "Breve descrizione del ruolo/contesto",
+    "persona_inference_notes": ["Segnale 1", "Segnale 2"]
+  },
+  "desires": [
     {
-      "domain_name": "Nome del dominio",
-      "personas": [
-        {
-          "persona_name": "Nome della persona",
-          "desires": [
-            {
-              "desire_id": "P1-D1",
-              "desire_statement": "Descrizione del desire",
-              "priority": "medium",
-              "success_metrics": ["Metrica 1", "Metrica 2"]
-            }
-          ]
-        }
-      ]
+      "desire_id": "D1",
+      "desire_statement": "Descrizione del desire",
+      "priority": "medium",
+      "success_metrics": ["Metrica 1", "Metrica 2"]
     }
   ],
   "beliefs": [
     {
-      "soggetto": "Entità soggetto",
+      "soggetto": "Entit?? soggetto",
       "relazione": "Tipo di relazione",
-      "oggetto": "Entità oggetto",
+      "oggetto": "Entit?? oggetto",
       "fonte": "Fonte testuale",
-      "metadati": {
-        "tipo_soggetto": "Tipo di entità",
-        "tipo_oggetto": "Tipo di entità"
-      },
-      "desires_correlati": [
-        {
-          "desire_id": "P1-D1",
-          "livello_rilevanza": "CRITICO",
-          "spiegazione": "Spiegazione della correlazione"
-        }
-      ]
+      "metadati": {"tipo_soggetto": "Tipo di entit??", "tipo_oggetto": "Tipo di entit??"},
+      "desires_correlati": [{"desire_id": "D1", "livello_rilevanza": "CRITICO", "spiegazione": "Spiegazione della correlazione"}]
     }
-  ]
+  ],
+  "intentions": []
 }
 ```
-
-**Compatibilità**: Il sistema mantiene retrocompatibilità con la vecchia struttura piatta `desires` per facilitare la migrazione.
-
 ### Personalizzazione dei System Prompts
 
 I system prompts degli agenti sono memorizzati in file Markdown separati nella directory [prompts/](prompts/). Questo permette di:

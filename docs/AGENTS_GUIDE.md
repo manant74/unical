@@ -78,30 +78,28 @@ graph TD
 
 ### Output JSON
 
-L'array `personas` deve contenere una sola voce (persona primaria dedotta) anche se il campo rimane una lista.
+Il report finale usa il formato single-persona: `persona` ? un oggetto unico e `desires` ? la lista principale.
 
 ```json
 {
   "domain_summary": "Breve sintesi del dominio analizzato",
-  "personas": [
+  "persona": {
+    "persona_name": "Il Principiante Curioso",
+    "persona_description": "Utente alle prime armi con il giardinaggio...",
+    "persona_inference_notes": [
+      "Si sente insicuro quando deve scegliere una pianta",
+      "Cerca indicazioni semplici per la manutenzione"
+    ]
+  },
+  "desires": [
     {
-      "persona_name": "Il Principiante Curioso",
-      "persona_description": "Utente alle prime armi con il giardinaggio...",
-      "persona_inference_notes": [
-        "Si sente insicuro quando deve scegliere una pianta",
-        "Cerca indicazioni semplici per la manutenzione"
-      ],
-      "desires": [
-        {
-          "desire_id": "P1-D1",
-          "desire_statement": "Sentirsi sicuro di poter mantenere in vita la pianta",
-          "motivation": "Paura di sprecare soldi e fallire, bisogno di autostima",
-          "success_metrics": [
-            "La pianta è ancora viva dopo 3 mesi",
-            "Accesso facile a guide chiare",
-            "Ricevere complimenti per le proprie piante"
-          ]
-        }
+      "desire_id": "D1",
+      "desire_statement": "Sentirsi sicuro di poter mantenere in vita la pianta",
+      "motivation": "Paura di sprecare soldi e fallire, bisogno di autostima",
+      "success_metrics": [
+        "La pianta ? ancora viva dopo 3 mesi",
+        "Accesso facile a guide chiare",
+        "Ricevere complimenti per le proprie piante"
       ]
     }
   ]

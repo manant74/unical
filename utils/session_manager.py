@@ -75,6 +75,8 @@ class SessionManager:
         # Inizializza file vuoti
         self._save_json(session_dir / "belief_base.json", {"beliefs": []})
         self._save_json(session_dir / "current_bdi.json", {
+            "domain_summary": "",
+            "persona": {},
             "desires": [],
             "beliefs": [],
             "intentions": []
@@ -232,29 +234,47 @@ class SessionManager:
 
         return self._load_json(bdi_file)
 
-    def update_bdi_data(self, session_id: str, desires: List[Dict[str, Any]] = None, 
-                       beliefs: List[Dict[str, Any]] = None, 
-                       intentions: List[Dict[str, Any]] = None) -> bool:
-        """Aggiorna i dati BDI di una sessione"""
+    def update_bdi_data(
+        self,
+        session_id: str,
+        desires: List[Dict[str, Any]] = None,
+        beliefs: List[Dict[str, Any]] = None,
+        intentions: List[Dict[str, Any]] = None,
+        persona: Dict[str, Any] = None,
+        domain_summary: Optional[str] = None
+    ) -> bool:
+        """
+        Aggiorna i dati BDI di una sessione normalizzandoli sul modello single-persona.
+
+        Qualsiasi struttura legacy (es. domains/personas) viene scartata in favore del
+        nuovo schema: domain_summary, persona, desires, beliefs, intentions.
+        """
         session_dir = self.base_dir / session_id
         bdi_file = session_dir / "current_bdi.json"
 
         # Carica dati esistenti o inizializza
-        current_bdi = self.get_bdi_data(session_id) or {
-            "desires": [],
-            "beliefs": [],
-            "intentions": []
+        current_bdi = self.get_bdi_data(session_id) or {}
+        normalized_bdi = {
+            "domain_summary": current_bdi.get("domain_summary", ""),
+            "persona": current_bdi.get("persona", {}),
+            "desires": current_bdi.get("desires", []),
+            "beliefs": current_bdi.get("beliefs", []),
+            "intentions": current_bdi.get("intentions", [])
         }
 
         # Aggiorna solo i campi forniti
         if desires is not None:
-            current_bdi["desires"] = desires
+            normalized_bdi["desires"] = desires
         if beliefs is not None:
-            current_bdi["beliefs"] = beliefs
+            normalized_bdi["beliefs"] = beliefs
         if intentions is not None:
-            current_bdi["intentions"] = intentions
+            normalized_bdi["intentions"] = intentions
+        if persona is not None:
+            normalized_bdi["persona"] = persona
+        if domain_summary is not None:
+            normalized_bdi["domain_summary"] = domain_summary
 
-        self._save_json(bdi_file, current_bdi)
+        self._save_json(bdi_file, normalized_bdi)
         return True
 
     def get_session_path(self, session_id: str, file_name: str) -> Optional[Path]:

@@ -174,11 +174,7 @@ else:
         st.session_state.doc_processor.initialize_db()
 
 def load_desires():
-    """Carica i desires dalla sessione attiva.
-
-    Supporta la nuova struttura BDI con `domains -> personas -> desires` e mantiene
-    compatibilità con la vecchia struttura piatta `desires` se presente.
-    """
+    """Carica i desires dalla sessione attiva in formato single-persona."""
 
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         return None
@@ -186,41 +182,24 @@ def load_desires():
     try:
         bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.active_session)
         if not bdi_data:
-            st.warning("⚠️ Nessun BDI disponibile per la sessione attiva.")
+            st.warning("?s???? Nessun BDI disponibile per la sessione attiva.")
             return []
 
-        # Nuova struttura: domains -> personas -> desires
-        if isinstance(bdi_data.get('domains'), list) and bdi_data['domains']:
+        persona_name = (bdi_data.get("persona") or {}).get("persona_name", "Persona primaria")
+        desires = bdi_data.get("desires", []) or []
+        if desires:
             converted: list = []
-            for domain in bdi_data['domains']:
-                domain_name = domain.get('domain_name', 'default')
-                for persona in domain.get('personas', []) or []:
-                    persona_name = persona.get('persona_name', 'N/A')
-                    for desire in persona.get('desires', []) or []:
-                        converted.append({
-                            "id": desire.get("desire_id", f"gen_{len(converted) + 1}"),
-                            # Supporta sia desire_statement (nuovo) sia descrizione (vecchio)
-                            "description": desire.get("desire_statement") or desire.get("descrizione", "N/A"),
-                            "priority": desire.get("priorità") or desire.get("priority", "medium"),
-                            "context": f"Domain: {domain_name} · Persona: {persona_name}",
-                            "timestamp": datetime.now().isoformat()
-                        })
-            return converted
-
-        # Vecchia struttura: lista piatta di desires
-        if isinstance(bdi_data.get('desires'), list) and bdi_data['desires']:
-            converted: list = []
-            for desire in bdi_data['desires']:
+            for desire in desires:
                 converted.append({
                     "id": desire.get("desire_id", f"gen_{len(converted) + 1}"),
-                    "description": desire.get("descrizione", "N/A"),
-                    "priority": desire.get("priorità", "medium"),
-                    "context": "Sessione Attiva",
-                    "timestamp": datetime.now().isoformat()
+                    "description": desire.get("desire_statement") or desire.get("description", "N/A"),
+                    "priority": desire.get("priority", "medium"),
+                    "context": f"Persona: {persona_name}",
+                    "timestamp": desire.get("timestamp", datetime.now().isoformat())
                 })
             return converted
 
-        st.warning("⚠️ Nessun desire trovato nel BDI della sessione attiva.")
+        st.warning("?s???? Nessun desire trovato nel BDI della sessione attiva.")
         return []
     except Exception as e:
         st.error(f"**Errore nel caricamento dei desires dalla sessione:** {e}")
