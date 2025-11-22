@@ -74,10 +74,14 @@ if 'active_session' in st.session_state and st.session_state.active_session:
     if active_session_data:
         # Carica i desires dalla sessione (formato single-persona)
         bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.active_session)
+        if bdi_data:
+            st.session_state.active_persona = bdi_data.get("persona") or st.session_state.get("active_persona")
         if bdi_data and not st.session_state.desires:
             extracted = []
             persona = bdi_data.get("persona") or {}
             persona_name = persona.get("persona_name", "Persona primaria")
+            # Memorizza la persona della sessione per riuso automatico
+            st.session_state.active_persona = persona
             for desire in bdi_data.get("desires", []) or []:
                 extracted.append({
                     "id": desire.get("desire_id", f"gen_{len(extracted)+1}"),
@@ -241,6 +245,10 @@ with st.sidebar:
         if active_session_data:
             st.success(f"📍 Sessione Attiva: **{active_session_data['metadata']['name']}**")
             st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')}")
+            if st.session_state.get("active_persona"):
+                persona = st.session_state["active_persona"]
+                persona_desc = persona.get("persona_description", "").strip()
+                st.info(f"Persona corrente: **{persona.get('persona_name', 'N/A')}**" + (f" - {persona_desc}" if persona_desc else ""))
             
             # Mostra informazioni sulla base di conoscenza caricata
             kb_stats = st.session_state.doc_processor.get_stats()
@@ -561,7 +569,7 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Get context from RAG
+    # Get context from RAG + persona corrente
     with st.spinner("Sto pensando..."):
         try:
             # Lazy initialization del database (solo al primo uso)
@@ -572,9 +580,24 @@ if prompt:
             # Query the knowledge base
             rag_results = st.session_state.doc_processor.query(prompt, n_results=3)
 
-            context = ""
+            context_parts = []
+            persona_ctx = ""
+            if st.session_state.get("active_persona"):
+                persona = st.session_state["active_persona"]
+                persona_ctx = "PERSONA CORRENTE (da sessione):\n"
+                persona_ctx += f"- Nome: {persona.get('persona_name', 'N/A')}\n"
+                descr = persona.get("persona_description")
+                if descr:
+                    persona_ctx += f"- Descrizione: {descr}\n"
+                notes = persona.get("persona_inference_notes") or []
+                if notes:
+                    persona_ctx += "- Note: " + "; ".join(notes) + "\n"
+                context_parts.append(persona_ctx.strip())
+
             if rag_results and rag_results['documents'] and rag_results['documents'][0]:
-                context = "\n\n".join(rag_results['documents'][0])
+                context_parts.append("\n\n".join(rag_results['documents'][0]))
+
+            context = "\n\n".join([c for c in context_parts if c])
 
             # Get LLM settings from session
             llm_settings = active_session_data['config'].get('llm_settings', {})
@@ -629,6 +652,8 @@ if prompt:
                 context_description = get_context_description()
                 if context_description:
                     context_summary["domain_description"] = context_description
+                if st.session_state.get("active_persona"):
+                    context_summary["persona_name"] = st.session_state["active_persona"].get("persona_name")
 
                 try:
                     auditor_result = auditor.review(
