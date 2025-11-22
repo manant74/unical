@@ -16,59 +16,47 @@ Questa guida descrive il funzionamento dettagliato degli agenti intelligenti di 
 
 ### Obiettivo
 
-Guidare il responsabile di dominio a **identificare e mappare i Desires** (desideri/obiettivi) delle diverse categorie di utenti (personas), mantenendo sempre la **prospettiva dell'utente finale**.
+Guidare il responsabile di dominio a **identificare e mappare i Desires** (desideri/obiettivi) dell'unica categoria prioritaria di utenti, deducendola progressivamente dal dialogo senza chiedere di elencare personas, e mantenendo sempre la **prospettiva dell'utente finale**.
 
-### Processo in 7 Step
+### Processo in 5 Step
 
 ```mermaid
 graph TD
-    A[1. Identificazione Dominio] --> B[2. Identificazione Personas]
-    B --> C[3. Selezione Persona]
+    A[1. Identificazione Dominio] --> B[2. Segnali Utente Reale]
+    B --> C[3. Persona Primaria Dedotta]
     C --> D[4. Esplorazione Desires]
-    D --> E[5. Sintesi per Persona]
-    E --> F{Altre Personas?}
-    F -->|Sì| C
-    F -->|No| G[7. Report JSON Finale]
+    D --> E[5. Report JSON Finale]
 ```
 
 #### Step 1: Identificazione del Dominio
 
 - Alì chiede di spiegare e raccontare il dominio
 - Aiuta con brainstorming
-- Focalizza il dominio con domande mirate
+- Focalizza il dominio con domande mirate e metriche di riferimento
 
-#### Step 2: Identificazione delle Personas
+#### Step 2: Raccolta di Segnali sull'Utente Reale
 
-- Chiede di identificare le principali categorie di utenti
-- Supporta con brainstorming se necessario
+- Indaga situazioni d'uso, contesti, motivazioni e barriere
+- Usa domande indirette per capire per chi si sta progettando, evitando di chiedere "qual è la persona?"
+- Annotata i segnali utili che emergono dalla narrazione
 
-#### Step 3: Selezione e Immersione
+#### Step 3: Formalizzazione della Persona Primaria
 
-- Analizza una persona alla volta
-- Invita a pensare esclusivamente dal punto di vista di quella persona
+- Formula un'etichetta descrittiva basata sui segnali raccolti
+- Descrive ruolo, bisogni e contesto dell'utente dedotto
+- Spiega quali elementi del dialogo sostengono l'ipotesi e invita a correggere o precisare se necessario
 
 #### Step 4: Esplorazione dei Desires
 
 - Usa domande empatiche e strategiche
-- Indaga bisogni, obiettivi, motivazioni profonde
-- Esempio: "Cosa spera di ottenere un utente di tipo '[Persona]'?"
+- Indaga bisogni, obiettivi, motivazioni profonde e criteri di successo della persona primaria
+- Esempio: "Cosa spera di ottenere questa persona quando affronta [scenario]?"
 
-#### Step 5: Sintesi e Formalizzazione
+#### Step 5: Sintesi e Report Finale
 
-- Propone formulazioni chiare dei desires emersi
-- Verifica comprensione con l'utente
-- Raffina basandosi sul feedback
-
-#### Step 6: Iterazione
-
-- Passa alla persona successiva
-- Ripete il processo per tutte le personas
-
-#### Step 7: Generazione Report Finale
-
-- **SOLO su comando esplicito dell'utente**
-- Esempio: "Ok, abbiamo finito. Puoi generare il report finale?"
-- Produce JSON strutturato con tutti i risultati
+- Propone formulazioni chiare dei desires emersi e verifica la comprensione
+- Mantiene coerente la descrizione della persona primaria durante tutta la conversazione
+- Genera il report JSON **solo su comando esplicito** (es. "Genera il report finale"), includendo un'unica persona con tutti i desire confermati
 
 ### Definizione di "Desire"
 
@@ -81,7 +69,7 @@ graph TD
 - ✅ Include la motivazione profonda
 - ✅ Ha metriche di successo misurabili
 
-**Esempio - Dominio E-commerce di piante:**
+**Esempi di persona primaria - Dominio E-commerce di piante (l'agente ne sceglie una per volta):**
 
 | Persona | Desire | Motivazione |
 |---------|--------|-------------|
@@ -90,24 +78,28 @@ graph TD
 
 ### Output JSON
 
+Il report finale usa il formato single-persona: `persona` ? un oggetto unico e `desires` ? la lista principale.
+
 ```json
 {
   "domain_summary": "Breve sintesi del dominio analizzato",
-  "personas": [
+  "persona": {
+    "persona_name": "Il Principiante Curioso",
+    "persona_description": "Utente alle prime armi con il giardinaggio...",
+    "persona_inference_notes": [
+      "Si sente insicuro quando deve scegliere una pianta",
+      "Cerca indicazioni semplici per la manutenzione"
+    ]
+  },
+  "desires": [
     {
-      "persona_name": "Il Principiante Curioso",
-      "persona_description": "Utente alle prime armi con il giardinaggio...",
-      "desires": [
-        {
-          "desire_id": "P1-D1",
-          "desire_statement": "Sentirsi sicuro di poter mantenere in vita la pianta",
-          "motivation": "Paura di sprecare soldi e fallire, bisogno di autostima",
-          "success_metrics": [
-            "La pianta è ancora viva dopo 3 mesi",
-            "Accesso facile a guide chiare",
-            "Ricevere complimenti per le proprie piante"
-          ]
-        }
+      "desire_id": "D1",
+      "desire_statement": "Sentirsi sicuro di poter mantenere in vita la pianta",
+      "motivation": "Paura di sprecare soldi e fallire, bisogno di autostima",
+      "success_metrics": [
+        "La pianta ? ancora viva dopo 3 mesi",
+        "Accesso facile a guide chiare",
+        "Ricevere complimenti per le proprie piante"
       ]
     }
   ]
@@ -136,7 +128,7 @@ graph TD
 1. **Avvia la conversazione** descrivendo il tuo dominio
 2. **Collabora attivamente** rispondendo alle domande
 3. **Pensa come i tuoi utenti**, non come l'azienda
-4. **Itera** su tutte le personas importanti
+4. **Mantieni il focus** sulla persona primaria dedotta (aggiorna la descrizione solo se emergono nuovi segnali)
 5. **Richiedi il report** quando sei soddisfatto: "Genera il report finale"
 
 ---
@@ -386,20 +378,20 @@ Ogni belief DEVE includere:
 
 **Dominio Complesso?**
 
-- Inizia con macro-categorie di personas
-- Raffina progressivamente
-- Fai checkpoint ogni 2-3 personas
+- Parti da scenari o ruoli macro e raccogli segnali concreti per restringere la persona primaria
+- Tieni nota esplicita delle evidenze che usi per dedurre la categoria
+- Fai checkpoint ogni volta che aggiorni l'ipotesi sulla persona
 
 **Troppi Desires per Persona?**
 
-- Prioritizza i 3-5 più importanti
-- Gli altri possono essere "desires secondari"
+- Prioritizza i 3-5 desires più importanti per la persona primaria
+- Classifica gli altri come "desires secondari" pronti per iterazioni successive
 
 **Utente Bloccato?**
 
-- Proponi esempi concreti
-- "Immagina un utente specifico..."
-- "Descrivi una giornata tipo di questo utente"
+- Proponi esempi concreti e chiedi situazioni d'uso reali
+- Invita a descrivere "una giornata tipo" o "un momento critico" senza parlare di personas
+- Condividi la tua ipotesi sulla persona e chiedi conferma/correzioni
 
 ### Per Believer
 

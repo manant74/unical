@@ -122,16 +122,16 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 
 ### 🎯 Alì - Agent for Desires
 
-**Alì** è un agente conversazionale esperto in product strategy, user research e design thinking. Il suo scopo è guidare l'utente nell'identificazione dei **Desires** (obiettivi strategici) attraverso l'analisi delle personas.
+**Alì** è un agente conversazionale esperto in product strategy, user research e design thinking. Il suo scopo è guidare l'utente nell'identificazione dei **Desires** (obiettivi strategici) dell'unica persona primaria dedotta automaticamente durante la conversazione, senza chiedere di elencare personas.
 
 **Approccio metodologico:**
 
 1. **Identificazione del dominio**: Esplora e definisce il contesto di lavoro
-2. **Mappatura personas**: Identifica le categorie di utenti finali
-3. **Analisi per persona**: Analizza ogni categoria separatamente con focus empatico
-4. **Esplorazione desires**: Usa domande strategiche per far emergere bisogni profondi
-5. **Checkpoint intermedi**: Validazione progressiva per evitare deriva del contesto
-6. **Report finale JSON**: Genera un documento strutturato con tutte le personas e i loro desires
+2. **Segnali sull'utente reale**: Raccoglie esempi, comportamenti e motivazioni per poter inferire la categoria corretta senza domande esplicite
+3. **Formalizzazione della persona primaria**: Formula un'etichetta descrittiva dedotta dal dialogo e la mantiene allineata lungo tutta la sessione
+4. **Esplorazione desires**: Usa domande strategiche per far emergere bisogni profondi della persona dedotta
+5. **Checkpoint intermedi**: Validazione progressiva del dominio, della persona e dei desire per evitare deriva del contesto
+6. **Report finale JSON**: Genera un documento strutturato con la sola persona dedotta e tutti i suoi desires
 
 **Caratteristiche tecniche:**
 
@@ -324,7 +324,7 @@ LUMIA Studio segue un workflow sequenziale ben definito:
 4. **Conversazione con Alì**:
    - Alì ti saluta con descrizione del contesto (letta dal metadata)
    - Rispondi alle domande guidate
-   - Identifica personas e i loro desires
+   - Fai emergere la persona primaria (Alì la deduce) e i suoi desires
 5. Valida checkpoint intermedi
 6. Chiedi: **"Genera il report finale"**
 7. I desires vengono **salvati automaticamente** nella sessione BDI data
@@ -453,26 +453,22 @@ unical/
 
 ### Struttura del Framework BDI
 
-Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) con la seguente struttura:
+Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato single-persona: ogni sessione è legata a un'unica categoria utente dedotta da Alì.
 
 ```json
 {
-  "domains": [
+  "domain_summary": "Sintesi del dominio o progetto (1-2 frasi)",
+  "persona": {
+    "persona_name": "Nome della persona primaria",
+    "persona_description": "Breve descrizione del ruolo/contesto",
+    "persona_inference_notes": ["Segnale 1", "Segnale 2"]
+  },
+  "desires": [
     {
-      "domain_name": "Nome del dominio",
-      "personas": [
-        {
-          "persona_name": "Nome della persona",
-          "desires": [
-            {
-              "desire_id": "P1-D1",
-              "desire_statement": "Descrizione del desire",
-              "priority": "medium",
-              "success_metrics": ["Metrica 1", "Metrica 2"]
-            }
-          ]
-        }
-      ]
+      "desire_id": "D1",
+      "desire_statement": "Descrizione del desire",
+      "priority": "medium",
+      "success_metrics": ["Metrica 1", "Metrica 2"]
     }
   ],
   "beliefs": [
@@ -481,24 +477,13 @@ Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) con la segue
       "relazione": "Tipo di relazione",
       "oggetto": "Entità oggetto",
       "fonte": "Fonte testuale",
-      "metadati": {
-        "tipo_soggetto": "Tipo di entità",
-        "tipo_oggetto": "Tipo di entità"
-      },
-      "desires_correlati": [
-        {
-          "desire_id": "P1-D1",
-          "livello_rilevanza": "CRITICO",
-          "spiegazione": "Spiegazione della correlazione"
-        }
-      ]
+      "metadati": {"tipo_soggetto": "Tipo di entità", "tipo_oggetto": "Tipo di entità"},
+      "desires_correlati": [{"desire_id": "D1", "livello_rilevanza": "CRITICO", "spiegazione": "Spiegazione della correlazione"}]
     }
-  ]
+  ],
+  "intentions": []
 }
 ```
-
-**Compatibilità**: Il sistema mantiene retrocompatibilità con la vecchia struttura piatta `desires` per facilitare la migrazione.
-
 ### Personalizzazione dei System Prompts
 
 I system prompts degli agenti sono memorizzati in file Markdown separati nella directory [prompts/](prompts/). Questo permette di:
@@ -631,7 +616,7 @@ LUMIA Studio è versatile e applicabile a diversi scenari:
 
 ### Product Management e Design
 
-- **User Research**: Identificazione sistematica di personas e loro bisogni
+- **User Research**: Identificazione sistematica della persona primaria e dei suoi bisogni dedotti dal dialogo
 - **Product Strategy**: Definizione di obiettivi allineati agli utenti
 - **Gap Analysis**: Identificazione di informazioni mancanti critiche per decisioni strategiche
 
