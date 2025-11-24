@@ -26,13 +26,17 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - **Revisione Layout Sidebar**:
 
-#### Believer  Module
+#### Alì Agent 
+
+- Modificato il comportamento dell'Agente per indirizzare l'utente a definire una sola personas, con l'Auditor che agisce in retroazione sul Alì per garantire che l'agente guidi l'utente a definire la singola personas  
+
+#### Believer Agent
 
 - Inserita funzionalità per poter chiedere al Believer di generare, senza interazioni in  chat, i Beliefs derivandoli dai desire e individuando quali di quelli di base sono collegati ai Desire individuati
 
 #### LLM Module
 
-- Inserita logica per poter avere parametri di default per gli LLM, e per poter gestire parametri di configuraizone diversi per ogni tipo di LLM
+- Inserita logica per ipoter avere parametri di default per gli LLM, e per poter gestire parametri di configurazone diversi per ogni tipo di LLM
 
 - Inserito parametro per GPT-5 per poter impostare il livello di reasoning
 
