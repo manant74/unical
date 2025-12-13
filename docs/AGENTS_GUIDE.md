@@ -16,14 +16,14 @@ Questa guida descrive il funzionamento dettagliato degli agenti intelligenti di 
 
 ### Obiettivo
 
-Guidare il responsabile di dominio a **identificare e mappare i Desires** (desideri/obiettivi) dell'unica categoria prioritaria di utenti, deducendola progressivamente dal dialogo senza chiedere di elencare personas, e mantenendo sempre la **prospettiva dell'utente finale**.
+Guidare il responsabile di dominio a **identificare e mappare i Desires** (desideri/obiettivi) dell'unica categoria prioritaria di utenti, deducendola progressivamente dal dialogo senza chiedere di elencare beneficiari, e mantenendo sempre la **prospettiva dell'utente finale**.
 
 ### Processo in 5 Step
 
 ```mermaid
 graph TD
     A[1. Identificazione Dominio] --> B[2. Segnali Utente Reale]
-    B --> C[3. Persona Primaria Dedotta]
+    B --> C[3. Beneficiario Primario Dedotto]
     C --> D[4. Esplorazione Desires]
     D --> E[5. Report JSON Finale]
 ```
@@ -37,10 +37,10 @@ graph TD
 #### Step 2: Raccolta di Segnali sull'Utente Reale
 
 - Indaga situazioni d'uso, contesti, motivazioni e barriere
-- Usa domande indirette per capire per chi si sta progettando, evitando di chiedere "qual è la persona?"
+- Usa domande indirette per capire per chi si sta progettando, evitando di chiedere "qual è il beneficiario?"
 - Annotata i segnali utili che emergono dalla narrazione
 
-#### Step 3: Formalizzazione della Persona Primaria
+#### Step 3: Formalizzazione del Beneficiario Primario
 
 - Formula un'etichetta descrittiva basata sui segnali raccolti
 - Descrive ruolo, bisogni e contesto dell'utente dedotto
@@ -49,14 +49,14 @@ graph TD
 #### Step 4: Esplorazione dei Desires
 
 - Usa domande empatiche e strategiche
-- Indaga bisogni, obiettivi, motivazioni profonde e criteri di successo della persona primaria
-- Esempio: "Cosa spera di ottenere questa persona quando affronta [scenario]?"
+- Indaga bisogni, obiettivi, motivazioni profonde e criteri di successo del beneficiario primario
+- Esempio: "Cosa spera di ottenere questo beneficiario quando affronta [scenario]?"
 
 #### Step 5: Sintesi e Report Finale
 
 - Propone formulazioni chiare dei desires emersi e verifica la comprensione
-- Mantiene coerente la descrizione della persona primaria durante tutta la conversazione
-- Genera il report JSON **solo su comando esplicito** (es. "Genera il report finale"), includendo un'unica persona con tutti i desire confermati
+- Mantiene coerente la descrizione del beneficiario primario durante tutta la conversazione
+- Genera il report JSON **solo su comando esplicito** (es. "Genera il report finale"), includendo un'unica beneficiario con tutti i desire confermati
 
 ### Definizione di "Desire"
 
@@ -64,29 +64,29 @@ graph TD
 
 **Caratteristiche di un Desire ben formulato:**
 
-- ✅ Specifico alla persona
+- ✅ Specifico al beneficiario
 - ✅ Espresso dalla prospettiva dell'utente (non dell'azienda)
 - ✅ Include la motivazione profonda
 - ✅ Ha metriche di successo misurabili
 
-**Esempi di persona primaria - Dominio E-commerce di piante (l'agente ne sceglie una per volta):**
+**Esempi di beneficiario primario - Dominio E-commerce di piante (l'agente ne sceglie uno per volta):**
 
-| Persona | Desire | Motivazione |
+| Beneficiario | Desire | Motivazione |
 |---------|--------|-------------|
 | **Principiante Curioso** | "Sentirsi sicuro di poter mantenere in vita la pianta acquistata" | Paura di sprecare soldi e fallire, bisogno di autostima |
 | **Esperto Collezionista** | "Trovare e acquistare rapidamente varietà di piante rare" | Passione per la botanica, desiderio di esclusività |
 
 ### Output JSON
 
-Il report finale usa il formato single-persona: `persona` ? un oggetto unico e `desires` ? la lista principale.
+Il report finale usa il formato single-beneficiario: `beneficiario` ? un oggetto unico e `desires` ? la lista principale.
 
 ```json
 {
   "domain_summary": "Breve sintesi del dominio analizzato",
-  "persona": {
-    "persona_name": "Il Principiante Curioso",
-    "persona_description": "Utente alle prime armi con il giardinaggio...",
-    "persona_inference_notes": [
+  "beneficiario": {
+    "beneficiario_name": "Il Principiante Curioso",
+    "beneficiario_description": "Utente alle prime armi con il giardinaggio...",
+    "beneficiario_inference_notes": [
       "Si sente insicuro quando deve scegliere una pianta",
       "Cerca indicazioni semplici per la manutenzione"
     ]
@@ -128,7 +128,7 @@ Il report finale usa il formato single-persona: `persona` ? un oggetto unico e `
 1. **Avvia la conversazione** descrivendo il tuo dominio
 2. **Collabora attivamente** rispondendo alle domande
 3. **Pensa come i tuoi utenti**, non come l'azienda
-4. **Mantieni il focus** sulla persona primaria dedotta (aggiorna la descrizione solo se emergono nuovi segnali)
+4. **Mantieni il focus** sul beneficiario primario dedotto (aggiorna la descrizione solo se emergono nuovi segnali)
 5. **Richiedi il report** quando sei soddisfatto: "Genera il report finale"
 
 ---
@@ -310,7 +310,7 @@ Ogni belief DEVE includere:
 ```
 1. [Knol] → Carica documenti del dominio
                 ↓
-2. [ALÌ]       → Identifica Desires per Personas
+2. [ALÌ]       → Identifica Desires per Beneficiari
                 ↓ (salva desires.json)
 3. [BELIEVER]  → Estrae Beliefs rilevanti ai Desires
                 ↓ (salva bdi_complete.json)
@@ -378,20 +378,20 @@ Ogni belief DEVE includere:
 
 **Dominio Complesso?**
 
-- Parti da scenari o ruoli macro e raccogli segnali concreti per restringere la persona primaria
+- Parti da scenari o ruoli macro e raccogli segnali concreti per restringere il beneficiario primario
 - Tieni nota esplicita delle evidenze che usi per dedurre la categoria
-- Fai checkpoint ogni volta che aggiorni l'ipotesi sulla persona
+- Fai checkpoint ogni volta che aggiorni l'ipotesi sulil beneficiario
 
-**Troppi Desires per Persona?**
+**Troppi Desires per Beneficiario?**
 
-- Prioritizza i 3-5 desires più importanti per la persona primaria
+- Prioritizza i 3-5 desires più importanti per il beneficiario primario
 - Classifica gli altri come "desires secondari" pronti per iterazioni successive
 
 **Utente Bloccato?**
 
 - Proponi esempi concreti e chiedi situazioni d'uso reali
-- Invita a descrivere "una giornata tipo" o "un momento critico" senza parlare di personas
-- Condividi la tua ipotesi sulla persona e chiedi conferma/correzioni
+- Invita a descrivere "una giornata tipo" o "un momento critico" senza parlare di beneficiari
+- Condividi la tua ipotesi sulil beneficiario e chiedi conferma/correzioni
 
 ### Per Believer
 
@@ -458,18 +458,18 @@ Alì ora implementa **checkpoint strategici** durante la conversazione per migli
 
 ### I 4 Checkpoint Implementati
 
-#### 📍 Checkpoint 1: Personas Identificate
+#### 📍 Checkpoint 1: Beneficiari Identificate
 
-**Quando**: Dopo Step 2 (Identificazione Personas)
+**Quando**: Dopo Step 2 (Identificazione Beneficiari)
 **Formato**:
 
 ```
-📍 CHECKPOINT - Personas Identificate
+📍 CHECKPOINT - Beneficiari Identificate
 
 Ho capito che lavoriamo con queste categorie di utenti:
-1. [Nome Persona 1]
-2. [Nome Persona 2]
-3. [Nome Persona 3]
+1. [Nome Beneficiario 1]
+2. [Nome Beneficiario 2]
+3. [Nome Beneficiario 3]
 
 Confermi questa lista? Vuoi aggiungere, rimuovere o modificare qualcosa?
 ```
@@ -482,7 +482,7 @@ Confermi questa lista? Vuoi aggiungere, rimuovere o modificare qualcosa?
 ```
 📍 CHECKPOINT - Desires Emersi
 
-Finora per "[Persona]" abbiamo identificato:
+Finora per "[Beneficiario]" abbiamo identificato:
 - Desire 1: [statement] | Motivazione: [sintesi]
 - Desire 2: [statement] | Motivazione: [sintesi]
 - Desire 3: [statement] | Motivazione: [sintesi]
@@ -490,19 +490,19 @@ Finora per "[Persona]" abbiamo identificato:
 Ti rispecchi in questa analisi? Vuoi modificare o aggiungere qualcosa?
 ```
 
-#### 📍 Checkpoint 3: Completamento Persona
+#### 📍 Checkpoint 3: Completamento Beneficiario
 
-**Quando**: Alla fine di ogni persona, prima di passare alla successiva
+**Quando**: Alla fine di ogni beneficiario, prima di passare alla successiva
 **Formato**:
 
 ```
-📍 CHECKPOINT - Completamento "[Persona]"
+📍 CHECKPOINT - Completamento "[Beneficiario]"
 
 Quadro completo per questa categoria:
 **Chi è:** [descrizione]
 **Desires**: [lista con motivazioni e metriche]
 
-Siamo pronti a passare alla prossima persona o vuoi rivedere qualcosa?
+Siamo pronti a passare alla prossima beneficiario o vuoi rivedere qualcosa?
 ```
 
 #### 📍 Checkpoint Finale: Verifica Complessiva
@@ -514,9 +514,9 @@ Siamo pronti a passare alla prossima persona o vuoi rivedere qualcosa?
 📍 CHECKPOINT FINALE - Verifica Complessiva
 
 Abbiamo completato:
-- [Persona 1]: [N] desires
-- [Persona 2]: [N] desires
-- [Persona 3]: [N] desires
+- [Beneficiario 1]: [N] desires
+- [Beneficiario 2]: [N] desires
+- [Beneficiario 3]: [N] desires
 
 Vuoi: a) Rivedere qualcosa, b) Aggiungere altro, c) Generare report?
 ```
