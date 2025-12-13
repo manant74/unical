@@ -364,7 +364,7 @@ with st.sidebar:
 
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
-                    chat_history=st.session_state.ali_chat_history
+                    
                 )
 
                 st.success(f"Sessione completata! {len(st.session_state.desires)} Desires salvati nella sessione attiva.")
@@ -372,7 +372,7 @@ with st.sidebar:
             elif len(st.session_state.ali_chat_history) > 1:
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
-                    chat_history=st.session_state.ali_chat_history
+                    
                 )
 
                 st.warning("Nessun desire identificato, ma la conversazione e' stata salvata nella sessione.")
