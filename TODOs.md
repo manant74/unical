@@ -17,7 +17,7 @@
 - In contetsi disponibili chiudere in un box ogni sezione che ciontiene i dati di un contesto
 - al pulsante Estrai Beliefs aggiugni un nuovo pulsante che apre un editor per i beliefs, prendendo spunto da quanto presente anche in Compass
 
-[x] 2. Modificare prompt di Alì per gestire una sola personas
+[x] 2. Modificare prompt di Alì per gestire un solo beneficiario
 
 [ ] 3. Introduzione Griglia di valitazione per l'auditor usando approccio Kubik
 

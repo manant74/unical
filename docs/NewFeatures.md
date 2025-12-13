@@ -24,7 +24,7 @@ Questo documento traccia le funzionalità proposte per migliorare l'applicazione
 - ✅ **Beliefs**: Implementato al 100% (Believer + Compass)
 - ❌ **Intentions**: Non implementato (vedi punto 4)
 
-Struttura dati supporta nuova gerarchia `domains -> personas -> desires` con retrocompatibilità.
+Struttura dati supporta nuova gerarchia `domains -> beneficiari -> desires` con retrocompatibilità.
 
 **File**: [pages/2_Ali.py](../pages/2_Ali.py), [pages/3_Believer.py](../pages/3_Believer.py)
 
@@ -425,7 +425,7 @@ Interfaccia conversazionale per interrogare BDI:
 
 - "Mostrami tutti i belief critici del desire X"
 - "Quali desires non hanno belief di tipo constraint?"
-- "Riassumi i belief per la persona Y"
+- "Riassumi i belief per il beneficiario Y"
 - Powered by LLM + structured output
 - Export risultati query
 
@@ -461,7 +461,7 @@ Sistema di collaborazione tra agenti:
 Repository template pre-configurati:
 
 - Template per domini comuni (e-commerce, healthcare, education)
-- Include: prompt customizzati, belief base iniziale, personas tipiche
+- Include: prompt customizzati, belief base iniziale, beneficiari tipici
 - Community sharing di template
 - One-click project initialization
 

@@ -773,18 +773,18 @@ else:
                 col1, col2 = st.columns([3, 1])
 
             with col1:
-                # Carica persona e desires dal BDI single-persona
+                # Carica beneficiario e desires dal BDI single-beneficiario (compatibile con legacy 'persona')
                 bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id) or {}
-                persona_data = bdi_data.get("persona") or {}
+                beneficiario_data = bdi_data.get("beneficiario") or bdi_data.get("persona") or {}
                 domain_summary = bdi_data.get("domain_summary", "")
                 desires = bdi_data.get("desires", []) or []
 
                 editor_payload = {
                     "domain_summary": domain_summary,
-                    "persona": persona_data or {
-                        "persona_name": "",
-                        "persona_description": "",
-                        "persona_inference_notes": []
+                    "beneficiario": beneficiario_data or {
+                        "beneficiario_name": "",
+                        "beneficiario_description": "",
+                        "beneficiario_inference_notes": []
                     },
                     "desires": desires
                 }
@@ -792,7 +792,7 @@ else:
 
                 col_label, col_spacer, col_btn = st.columns([3, 0.6, 0.4])
                 with col_label:
-                    st.markdown("**Edit persona & desires**")
+                    st.markdown("**Edit beneficiario & desires**")
                 with col_btn:
                     expand_icon = "[-]" if st.session_state.desires_editor_expanded else "[+]"
                     if st.button(expand_icon, key="toggle_desires_editor", help="Expand/Collapse editor", use_container_width=True):
@@ -829,18 +829,19 @@ else:
                     if st.button("Save Desires", width='stretch', type="primary", key="save_desires"):
                         try:
                             parsed = json.loads(edited_desires_json)
-                            if not isinstance(parsed.get("persona"), dict):
-                                st.error("JSON must contain a 'persona' object")
+                            beneficiario_payload = parsed.get("beneficiario") or parsed.get("persona")
+                            if not isinstance(beneficiario_payload, dict):
+                                st.error("JSON must contain a 'beneficiario' object (legacy: 'persona')")
                             elif not isinstance(parsed.get("desires"), list):
                                 st.error("JSON must contain a 'desires' array")
                             else:
                                 st.session_state.session_manager.update_bdi_data(
                                     st.session_state.editing_session_id,
-                                    persona=parsed.get("persona") or {},
+                                    beneficiario=beneficiario_payload or {},
                                     desires=parsed.get("desires") or [],
                                     domain_summary=parsed.get("domain_summary", "")
                                 )
-                                st.success("Persona e desires salvati!")
+                                st.success("Beneficiario e desires salvati!")
                             st.rerun()
                         except AttributeError:
                             st.error("SessionManager non aggiornato. Riavvia l'applicazione.")
@@ -860,12 +861,12 @@ else:
                             try:
                                 st.session_state.session_manager.update_bdi_data(
                                     st.session_state.editing_session_id,
-                                    persona={},
+                                    beneficiario={},
                                     desires=[],
                                     domain_summary=""
                                 )
                                 st.session_state.confirm_clear_desires = False
-                                st.success("Persona e desires azzerati!")
+                                st.success("Beneficiario e desires azzerati!")
                                 st.rerun()
                             except AttributeError:
                                 st.error("SessionManager non aggiornato. Riavvia l'applicazione.")
@@ -876,13 +877,14 @@ else:
                     if st.button("Validate JSON", width='stretch', key="validate_desires_json"):
                         try:
                             parsed = json.loads(edited_desires_json)
-                            if not isinstance(parsed.get("persona"), dict):
-                                st.error("JSON must contain a 'persona' object")
+                            beneficiario_payload = parsed.get("beneficiario") or parsed.get("persona")
+                            if not isinstance(beneficiario_payload, dict):
+                                st.error("JSON must contain a 'beneficiario' object (legacy: 'persona')")
                             elif not isinstance(parsed.get("desires"), list):
                                 st.error("JSON must contain a 'desires' array")
                             else:
                                 total_desires = len(parsed.get("desires") or [])
-                                st.success(f"JSON valido! Trovati {total_desires} desires sulla persona primaria.")
+                                st.success(f"JSON valido! Trovati {total_desires} desires sul beneficiario primario.")
                         except json.JSONDecodeError as e:
                             st.error(f"Invalid JSON: {str(e)}")
 
@@ -1035,7 +1037,7 @@ else:
 
                 # Estrai desires e beliefs
                 if bdi_data:
-                    # Nuova struttura: domains -> personas -> desires
+                    # Nuova struttura: domains -> beneficiari -> desires (compatibile con legacy 'personas')
                     if isinstance(bdi_data.get('domains'), list) and bdi_data['domains']:
                         desires = []
                         for idx, domain in enumerate(bdi_data['domains']):
@@ -1048,13 +1050,17 @@ else:
                             if not domain_name:
                                 domain_name = f'Domain {idx + 1}'
 
-                            for persona in domain.get('personas', []) or []:
-                                # Estrai nome persona: prova 'name', poi 'persona_name', altrimenti 'Unknown'
-                                persona_name = persona.get('name') or persona.get('persona_name', 'Unknown')
+                            for beneficiario in domain.get('beneficiari', []) or domain.get('personas', []) or []:
+                                # Estrai nome beneficiario: prova 'name', poi 'beneficiario_name'/'persona_name', altrimenti 'Unknown'
+                                beneficiario_name = (
+                                    beneficiario.get('name')
+                                    or beneficiario.get('beneficiario_name')
+                                    or beneficiario.get('persona_name', 'Unknown')
+                                )
 
-                                for desire in persona.get('desires', []) or []:
+                                for desire in beneficiario.get('desires', []) or []:
                                     desire['domain'] = domain_name
-                                    desire['persona'] = persona_name
+                                    desire['beneficiario'] = beneficiario_name
                                     desires.append(desire)
                     # Vecchia struttura: lista piatta
                     elif isinstance(bdi_data.get('desires'), list):
@@ -1108,10 +1114,13 @@ else:
                 st.metric("Coverage %", f"{coverage_pct:.1f}%")
 
             with col4:
-                # Calcola numero di domini e personas
+                # Calcola numero di domini e beneficiari
                 domains_count = len(bdi_data.get('domains', [])) if bdi_data else 0
-                personas_count = sum(len(d.get('personas', [])) for d in bdi_data.get('domains', [])) if bdi_data and bdi_data.get('domains') else 0
-                st.metric("Domains/Personas", f"{domains_count}/{personas_count}")
+                beneficiari_count = sum(
+                    len(d.get('beneficiari', []) or d.get('personas', []))
+                    for d in bdi_data.get('domains', [])
+                ) if bdi_data and bdi_data.get('domains') else 0
+                st.metric("Domains/Beneficiari", f"{domains_count}/{beneficiari_count}")
 
             st.markdown("---")
 

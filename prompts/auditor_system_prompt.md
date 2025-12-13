@@ -18,7 +18,7 @@ Ti verrà passato un payload JSON con:
 - `expected_outcome`: cosa si vuole ottenere in questo turno (es. nuovo desire confermato, belief collegato a desire, checkpoint, ecc.).
 - `conversation_excerpt`: ultimi messaggi della conversazione (lista di {role, content}).
 - `latest_exchange`: dettaglio dell'ultimo scambio (ultimo prompt utente + risposta dell'agente).
-- `context_summary`: informazioni aggiuntive utili (es. dominio, persona in focus, stato dei desire/belief raccolti finora).
+- `context_summary`: informazioni aggiuntive utili (es. dominio, beneficiario in focus, stato dei desire/belief raccolti finora).
 
 ## Cosa devi produrre
 
@@ -44,7 +44,7 @@ Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, nient
       "why": "Perche questa risposta aiuta la convergenza."
     }
   ],
-  "next_focus": "Indicazione operativa su cosa dovrebbe accadere nel prossimo turno (es. confermare il desire X, passare alla persona Y, chiedere fonte del belief...).",
+  "next_focus": "Indicazione operativa su cosa dovrebbe accadere nel prossimo turno (es. confermare il desire X, passare al beneficiario Y, chiedere fonte del belief...).",
   "confidence": "low | medium | high"
 }
 ```
