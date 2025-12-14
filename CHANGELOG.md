@@ -28,7 +28,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 #### Alì Agent 
 
-- Modificato il comportamento dell'Agente per indirizzare l'utente a definire una sola personas, con l'Auditor che agisce in retroazione sul Alì per garantire che l'agente guidi l'utente a definire la singola personas  
+- Modificato il comportamento dell'Agente per indirizzare l'utente a definire un solo beneficiario, con l'Auditor che agisce in retroazione su Alì per garantire che l'agente guidi l'utente a definire il beneficiario prioritario  
 
 #### Believer Agent
 
@@ -45,7 +45,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### 📊 Compass - Analytics Dashboard (WIP)
 
 - **Nuova tab Analytics**: Dashboard completo per analisi BDI in [Compass](pages/0_Compass.py)
-  - **Statistiche aggregate**: Metriche su desires, beliefs, coverage e domains/personas
+  - **Statistiche aggregate**: Metriche su desires, beliefs, coverage e domains/beneficiari
   - **Grafici interattivi** (Plotly):
   - **Grafo delle relazioni**: Visualizzazione interattiva rete Desire-Belief
 
@@ -171,7 +171,7 @@ data/contexts/
 - **Ristrutturazione completa** del prompt per Ali
 - Migliore guida per estrazione desires
 - Istruzioni più chiare per formato JSON
-- Supporto per domini e personas
+- Supporto per domini e beneficiari
 
 #### Belief Base Extraction
 

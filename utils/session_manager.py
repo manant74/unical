@@ -76,7 +76,7 @@ class SessionManager:
         self._save_json(session_dir / "belief_base.json", {"beliefs": []})
         self._save_json(session_dir / "current_bdi.json", {
             "domain_summary": "",
-            "persona": {},
+            "beneficiario": {},
             "desires": [],
             "beliefs": [],
             "intentions": []
@@ -240,14 +240,14 @@ class SessionManager:
         desires: List[Dict[str, Any]] = None,
         beliefs: List[Dict[str, Any]] = None,
         intentions: List[Dict[str, Any]] = None,
-        persona: Dict[str, Any] = None,
+        beneficiario: Dict[str, Any] = None,
         domain_summary: Optional[str] = None
     ) -> bool:
         """
-        Aggiorna i dati BDI di una sessione normalizzandoli sul modello single-persona.
+        Aggiorna i dati BDI di una sessione normalizzandoli sul modello single-beneficiario.
 
-        Qualsiasi struttura legacy (es. domains/personas) viene scartata in favore del
-        nuovo schema: domain_summary, persona, desires, beliefs, intentions.
+        Qualsiasi struttura legacy (es. domains/beneficiari) viene scartata in favore del
+        nuovo schema: domain_summary, beneficiario, desires, beliefs, intentions.
         """
         session_dir = self.base_dir / session_id
         bdi_file = session_dir / "current_bdi.json"
@@ -256,7 +256,7 @@ class SessionManager:
         current_bdi = self.get_bdi_data(session_id) or {}
         normalized_bdi = {
             "domain_summary": current_bdi.get("domain_summary", ""),
-            "persona": current_bdi.get("persona", {}),
+            "beneficiario": current_bdi.get("beneficiario") or current_bdi.get("persona", {}),
             "desires": current_bdi.get("desires", []),
             "beliefs": current_bdi.get("beliefs", []),
             "intentions": current_bdi.get("intentions", [])
@@ -269,8 +269,8 @@ class SessionManager:
             normalized_bdi["beliefs"] = beliefs
         if intentions is not None:
             normalized_bdi["intentions"] = intentions
-        if persona is not None:
-            normalized_bdi["persona"] = persona
+        if beneficiario is not None:
+            normalized_bdi["beneficiario"] = beneficiario
         if domain_summary is not None:
             normalized_bdi["domain_summary"] = domain_summary
 

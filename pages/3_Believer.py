@@ -174,7 +174,7 @@ else:
         st.session_state.doc_processor.initialize_db()
 
 def load_desires():
-    """Carica i desires dalla sessione attiva in formato single-persona."""
+    """Carica i desires dalla sessione attiva in formato single-beneficiario."""
 
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         return None
@@ -185,7 +185,8 @@ def load_desires():
             st.warning("Nessun BDI disponibile per la sessione attiva.")
             return []
 
-        persona_name = (bdi_data.get("persona") or {}).get("persona_name", "Persona primaria")
+        beneficiario_info = bdi_data.get("beneficiario") or bdi_data.get("persona") or {}
+        beneficiario_name = beneficiario_info.get("beneficiario_name") or beneficiario_info.get("persona_name", "Beneficiario primario")
         desires = bdi_data.get("desires", []) or []
         if desires:
             converted: list = []
@@ -194,7 +195,7 @@ def load_desires():
                     "id": desire.get("desire_id", f"gen_{len(converted) + 1}"),
                     "description": desire.get("desire_statement") or desire.get("description", "N/A"),
                     "priority": desire.get("priority", "medium"),
-                    "context": f"Persona: {persona_name}",
+                    "context": f"Beneficiario: {beneficiario_name}",
                     "timestamp": desire.get("timestamp", datetime.now().isoformat())
                 })
             return converted

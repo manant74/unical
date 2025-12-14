@@ -72,22 +72,30 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 if 'active_session' in st.session_state and st.session_state.active_session:
     active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
     if active_session_data:
-        # Carica i desires dalla sessione (formato single-persona)
+        # Carica i desires dalla sessione (formato single-beneficiario)
         bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.active_session)
         if bdi_data:
-            st.session_state.active_persona = bdi_data.get("persona") or st.session_state.get("active_persona")
+            st.session_state.active_beneficiario = (
+                bdi_data.get("beneficiario")
+                or bdi_data.get("persona")
+                or st.session_state.get("active_beneficiario")
+            )
         if bdi_data and not st.session_state.desires:
             extracted = []
-            persona = bdi_data.get("persona") or {}
-            persona_name = persona.get("persona_name", "Persona primaria")
-            # Memorizza la persona della sessione per riuso automatico
-            st.session_state.active_persona = persona
+            beneficiario = bdi_data.get("beneficiario") or bdi_data.get("persona") or {}
+            beneficiario_name = (
+                beneficiario.get("beneficiario_name")
+                or beneficiario.get("persona_name")
+                or "Beneficiario primario"
+            )
+            # Memorizza il beneficiario della sessione per riuso automatico
+            st.session_state.active_beneficiario = beneficiario
             for desire in bdi_data.get("desires", []) or []:
                 extracted.append({
                     "id": desire.get("desire_id", f"gen_{len(extracted)+1}"),
                     "description": desire.get("desire_statement") or desire.get("description", "N/A"),
                     "priority": desire.get("priority", "medium"),
-                    "context": f"Persona: {persona_name}",
+                    "context": f"Beneficiario: {beneficiario_name}",
                     "success_criteria": "\n".join(desire.get("success_metrics", [])),
                     "timestamp": desire.get("timestamp", datetime.now().isoformat())
                 })
@@ -245,10 +253,11 @@ with st.sidebar:
         if active_session_data:
             st.success(f"📍 Sessione Attiva: **{active_session_data['metadata']['name']}**")
             st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')}")
-            if st.session_state.get("active_persona"):
-                persona = st.session_state["active_persona"]
-                persona_desc = persona.get("persona_description", "").strip()
-                st.info(f"Persona corrente: **{persona.get('persona_name', 'N/A')}**" + (f" - {persona_desc}" if persona_desc else ""))
+            if st.session_state.get("active_beneficiario"):
+                beneficiario = st.session_state["active_beneficiario"]
+                beneficiario_name = beneficiario.get("beneficiario_name") or beneficiario.get("persona_name", "N/A")
+                beneficiario_desc = (beneficiario.get("beneficiario_description") or beneficiario.get("persona_description", "")).strip()
+                st.info(f"Beneficiario corrente: **{beneficiario_name}**" + (f" - {beneficiario_desc}" if beneficiario_desc else ""))
             
             # Mostra informazioni sulla base di conoscenza caricata
             kb_stats = st.session_state.doc_processor.get_stats()
@@ -333,7 +342,7 @@ with st.sidebar:
         if 'active_session' in st.session_state and st.session_state.active_session:
             if st.session_state.desires:
                 existing_bdi = st.session_state.session_manager.get_bdi_data(st.session_state.active_session) or {}
-                persona_info = existing_bdi.get("persona", {})
+                beneficiario_info = existing_bdi.get("beneficiario") or existing_bdi.get("persona") or {}
                 domain_summary = existing_bdi.get("domain_summary", "")
 
                 bdi_desires = []
@@ -349,13 +358,13 @@ with st.sidebar:
                 st.session_state.session_manager.update_bdi_data(
                     st.session_state.active_session,
                     desires=bdi_desires,
-                    persona=persona_info,
+                    beneficiario=beneficiario_info,
                     domain_summary=domain_summary
                 )
 
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
-                    chat_history=st.session_state.ali_chat_history
+                    
                 )
 
                 st.success(f"Sessione completata! {len(st.session_state.desires)} Desires salvati nella sessione attiva.")
@@ -363,7 +372,7 @@ with st.sidebar:
             elif len(st.session_state.ali_chat_history) > 1:
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
-                    chat_history=st.session_state.ali_chat_history
+                    
                 )
 
                 st.warning("Nessun desire identificato, ma la conversazione e' stata salvata nella sessione.")
@@ -378,10 +387,10 @@ with st.sidebar:
                 fallback_bdi = {
                     "timestamp": datetime.now().isoformat(),
                     "domain_summary": "",
-                    "persona": {
-                        "persona_name": "Utente",
-                        "persona_description": "",
-                        "persona_inference_notes": []
+                    "beneficiario": {
+                        "beneficiario_name": "Utente",
+                        "beneficiario_description": "",
+                        "beneficiario_inference_notes": []
                     },
                     "desires": [
                         {
@@ -569,7 +578,7 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Get context from RAG + persona corrente
+    # Get context from RAG + beneficiario corrente
     with st.spinner("Sto pensando..."):
         try:
             # Lazy initialization del database (solo al primo uso)
@@ -581,18 +590,18 @@ if prompt:
             rag_results = st.session_state.doc_processor.query(prompt, n_results=3)
 
             context_parts = []
-            persona_ctx = ""
-            if st.session_state.get("active_persona"):
-                persona = st.session_state["active_persona"]
-                persona_ctx = "PERSONA CORRENTE (da sessione):\n"
-                persona_ctx += f"- Nome: {persona.get('persona_name', 'N/A')}\n"
-                descr = persona.get("persona_description")
+            beneficiario_ctx = ""
+            if st.session_state.get("active_beneficiario"):
+                beneficiario = st.session_state["active_beneficiario"]
+                beneficiario_ctx = "BENEFICIARIO CORRENTE (da sessione):\n"
+                beneficiario_ctx += f"- Nome: {beneficiario.get('beneficiario_name', beneficiario.get('persona_name', 'N/A'))}\n"
+                descr = beneficiario.get("beneficiario_description") or beneficiario.get("persona_description")
                 if descr:
-                    persona_ctx += f"- Descrizione: {descr}\n"
-                notes = persona.get("persona_inference_notes") or []
+                    beneficiario_ctx += f"- Descrizione: {descr}\n"
+                notes = beneficiario.get("beneficiario_inference_notes") or beneficiario.get("persona_inference_notes") or []
                 if notes:
-                    persona_ctx += "- Note: " + "; ".join(notes) + "\n"
-                context_parts.append(persona_ctx.strip())
+                    beneficiario_ctx += "- Note: " + "; ".join(notes) + "\n"
+                context_parts.append(beneficiario_ctx.strip())
 
             if rag_results and rag_results['documents'] and rag_results['documents'][0]:
                 context_parts.append("\n\n".join(rag_results['documents'][0]))
@@ -652,8 +661,9 @@ if prompt:
                 context_description = get_context_description()
                 if context_description:
                     context_summary["domain_description"] = context_description
-                if st.session_state.get("active_persona"):
-                    context_summary["persona_name"] = st.session_state["active_persona"].get("persona_name")
+                if st.session_state.get("active_beneficiario"):
+                    beneficiario = st.session_state["active_beneficiario"]
+                    context_summary["beneficiario_name"] = beneficiario.get("beneficiario_name") or beneficiario.get("persona_name")
 
                 try:
                     auditor_result = auditor.review(
@@ -748,7 +758,7 @@ if prompt:
                 try:
                     parsed_json = json.loads(json_content_str)
 
-                    persona_info = parsed_json.get("persona") or {}
+                    beneficiario_info = parsed_json.get("beneficiario") or parsed_json.get("persona") or {}
                     domain_summary = parsed_json.get("domain_summary")
                     desires_payload = parsed_json.get("desires") if isinstance(parsed_json.get("desires"), list) else []
 
@@ -771,7 +781,7 @@ if prompt:
                             "id": next_id + len(extracted_desires),
                             "description": bdi_desire["desire_statement"],
                             "priority": bdi_desire["priority"],
-                            "context": f"Persona: {persona_info.get('persona_name', 'Persona primaria')}",
+                            "context": f"Beneficiario: {beneficiario_info.get('beneficiario_name', beneficiario_info.get('persona_name', 'Beneficiario primario'))}",
                             "success_criteria": "\\n".join(bdi_desire["success_metrics"]),
                             "timestamp": datetime.now().isoformat()
                         })
@@ -787,7 +797,7 @@ if prompt:
                             st.session_state.session_manager.update_bdi_data(
                                 st.session_state.active_session,
                                 desires=combined_desires,
-                                persona=persona_info or existing_bdi.get("persona") or {},
+                                beneficiario=beneficiario_info or existing_bdi.get("beneficiario") or existing_bdi.get("persona") or {},
                                 domain_summary=domain_summary if domain_summary is not None else existing_bdi.get("domain_summary", "")
                             )
                             st.success(f"?o. Report finale rilevato! {len(extracted_desires)} nuovi desires estratti e aggiunti! Totale: {len(st.session_state.desires)}")
