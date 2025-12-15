@@ -13,7 +13,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.session_manager import SessionManager
 from utils.context_manager import ContextManager
-from utils.llm_manager import LLMManager
 
 st.set_page_config(
     page_title="Compass - LumIA Studio",
@@ -70,8 +69,7 @@ if 'session_manager' not in st.session_state:
 if 'context_manager' not in st.session_state:
     st.session_state.context_manager = ContextManager()
 
-if 'llm_manager' not in st.session_state:
-    st.session_state.llm_manager = LLMManager()
+# LLMManager non viene inizializzato qui - viene caricato lazy quando serve (New Session, ecc)
 
 # Inizializza editing mode
 if 'editing_session_id' not in st.session_state:
@@ -156,6 +154,12 @@ if not current_session:
         st.markdown("## ➕ Create New Session")
 
         contexts = st.session_state.context_manager.get_all_contexts()
+
+        # Lazy load LLMManager solo quando serve
+        if 'llm_manager' not in st.session_state:
+            from utils.llm_manager import LLMManager
+            st.session_state.llm_manager = LLMManager()
+
         providers = st.session_state.llm_manager.get_available_providers()
 
         if not contexts:
@@ -251,10 +255,15 @@ else:
     # TAB 1: Session Info (nome, descrizione, LLM)
     # ============================================================================
     with tab1:
+        # Lazy load LLMManager per le operazioni di salvataggio e configurazione
+        if 'llm_manager' not in st.session_state:
+            from utils.llm_manager import LLMManager
+            st.session_state.llm_manager = LLMManager()
+
         # Carica dati esistenti se in editing
         session_name = current_session['metadata']['name'] if current_session else ""
         session_description = current_session['metadata']['description'] if current_session else ""
-        
+
         col1, col2 = st.columns([2, 1])
 
         with col1:
@@ -1101,15 +1110,21 @@ else:
                         # Supporta sia 'id' che 'desire_id' per compatibilità
                         desire_id = desire.get('desire_id') or desire.get('id')
                         for belief in bdi_beliefs:
-                            # Supporta sia 'related_desires' (array semplice) che 'desires_correlati' (array di oggetti)
                             related = belief.get('related_desires', [])
-                            if not related and 'desires_correlati' in belief:
-                                # Estrai gli ID dagli oggetti desires_correlati
-                                related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
 
-                            if desire_id in related:
-                                desires_with_beliefs += 1
-                                break
+                            # Supporta sia array semplice che array di oggetti
+                            for item in related:
+                                if isinstance(item, dict):
+                                    related_id = item.get('desire_id')
+                                else:
+                                    related_id = item
+
+                                if desire_id == related_id:
+                                    desires_with_beliefs += 1
+                                    break
+                            else:
+                                continue
+                            break
                 coverage_pct = (desires_with_beliefs / len(desires) * 100) if desires else 0
                 st.metric("Coverage %", f"{coverage_pct:.1f}%")
 
@@ -1164,12 +1179,15 @@ else:
 
                         # Conta i collegamenti
                         for belief in bdi_beliefs:
-                            # Supporta sia 'related_desires' che 'desires_correlati'
                             related = belief.get('related_desires', [])
-                            if not related and 'desires_correlati' in belief:
-                                related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
 
-                            for desire_id in related:
+                            for item in related:
+                                # Supporta sia array semplice di stringhe che array di oggetti
+                                if isinstance(item, dict):
+                                    desire_id = item.get('desire_id')
+                                else:
+                                    desire_id = item
+
                                 if desire_id in beliefs_per_desire:
                                     beliefs_per_desire[desire_id] += 1
 
@@ -1196,8 +1214,8 @@ else:
                     # Supporta sia 'type' che 'relazione' per compatibilità
                     belief_relations = {}
                     for belief in bdi_beliefs:
-                        # Prova prima 'relazione', poi 'type' come fallback
-                        relation = belief.get('relazione') or belief.get('type', 'undefined')
+                        # Prova prima 'semantic_relations', poi 'type' come fallback
+                        relation = belief.get('semantic_relations') or belief.get('type', 'undefined')
                         belief_relations[relation] = belief_relations.get(relation, 0) + 1
 
                     # Mostra solo se ci sono dati significativi (non solo 'undefined')
@@ -1242,13 +1260,13 @@ else:
                         )
                         st.plotly_chart(fig_relevance, use_container_width=True)
 
-                    # Grafico livelli di rilevanza (se struttura desires_correlati)
+                    # Grafico livelli di rilevanza (se struttura related_desires)
                     relevance_levels = []
                     for belief in bdi_beliefs:
-                        if 'desires_correlati' in belief:
-                            for dc in belief.get('desires_correlati', []):
-                                if 'livello_rilevanza' in dc:
-                                    relevance_levels.append(dc['livello_rilevanza'])
+                        if 'related_desires' in belief:
+                            for rd in belief.get('related_desires', []):
+                                if 'relevance_level' in rd:
+                                    relevance_levels.append(rd['relevance_level'])
 
                     if relevance_levels:
                         level_counts = {}
@@ -1305,8 +1323,8 @@ else:
                 # Aggiungi nodi Belief (usa indice come ID se non presente)
                 for idx, belief in enumerate(bdi_beliefs):
                     belief_id = belief.get('id', f"B{idx+1}")
-                    # Usa diversi campi per il contenuto del belief
-                    content = belief.get('content') or belief.get('soggetto', 'No content')
+                    # Usa diversi campi per il contenuto del belief (ordine di priorità)
+                    content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
                     node_label = f"{belief_id}: {content[:30]}..."
                     G.add_node(node_label)
                     node_colors[node_label] = '#4ECDC4'  # Teal per beliefs
@@ -1315,7 +1333,7 @@ else:
                 # Aggiungi edge tra Belief e Desire
                 for idx, belief in enumerate(bdi_beliefs):
                     belief_id = belief.get('id', f"B{idx+1}")
-                    content = belief.get('content') or belief.get('soggetto', 'No content')
+                    content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
                     belief_label = f"{belief_id}: {content[:30]}..."
 
                     # Supporta sia 'related_desires' (array semplice) che 'desires_correlati' (array di oggetti)
@@ -1324,7 +1342,13 @@ else:
                         # Estrai gli ID dagli oggetti desires_correlati
                         related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
 
-                    for desire_id in related:
+                    for item in related:
+                        # Estrai desire_id se è un oggetto, altrimenti usa il valore direttamente
+                        if isinstance(item, dict):
+                            desire_id = item.get('desire_id')
+                        else:
+                            desire_id = item
+
                         # Trova il desire corrispondente
                         for desire in desires:
                             d_id = desire.get('desire_id') or desire.get('id')

@@ -117,12 +117,15 @@ MODULE_STRUCTURED_MARKERS = {
     ],
     "believer": [
         "belief:",
-        "soggetto:",
-        "relazione:",
-        "oggetto:",
-        "fonte:",
-        "metadati:",
-        "livello di confidenza",
+        "subject:",
+        "semantic_relations:",
+        "object:",
+        "source:",
+        "metadata:",
+        "related_desires:",
+        "relevance_level:",
+        "importance:",
+        "confidence:",
     ]
 }
 

@@ -1,193 +1,2288 @@
 {
   "beliefs_base": [
     {
-      "soggetto": "LUMI",
-      "relazione": "è_introdotto_come",
-      "oggetto": "framework unificato",
-      "fonte": "L'architettura LUMI (Logical Uncertainty Modeling for Intelligent Agents) è stata introdotta come un framework unificato...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Framework"
+      "subject": "LUMI",
+      "definition": "LUMI (Logical Uncertainty Modeling for Intelligent Agents) is a unified agent architecture that combines fuzzy reasoning and LLM-assisted planning. It matters because classical BDI agents struggle with uncertainty and predefined plans, while LLM-based agents lack symbolic grounding. LUMI works by grounding LLM reasoning within a fuzzy-symbolic architecture to provide interpretable, robust control.",
+      "semantic_relations": "integra",
+      "object": "ragionamento fuzzy e pianificazione assistita da LLM",
+      "source": "robust execution control. We introduce LUMI (Logical Uncertainty Modeling for Intelligent Agents), a unified\narchitecture that integrates fuzzy reasoning and LLM-assisted planning.",
+      "importance": 0.98,
+      "confidence": 1.0,
+      "prerequisites": [
+        "BDI",
+        "Logica fuzzy",
+        "Large Language Models"
+      ],
+      "related_concepts": [
+        "Ragionamento simbolico",
+        "Pianificazione",
+        "Incertezza"
+      ],
+      "enables": [
+        "Controllo simbolico interpretabile",
+        "Adattamento flessibile"
+      ],
+      "part_of": [
+        "Architettura di agenti intelligenti"
+      ],
+      "sub_concepts": [
+        "Strato cognitivo fuzzy",
+        "Pianificazione a due strati",
+        "Fuzzy Behavior Trees"
+      ],
+      "tags": [
+        "LUMI",
+        "fuzzy",
+        "LLM",
+        "BDI",
+        "architettura"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Caratteristiche integrate"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "integra",
-      "oggetto": "logica fuzzy e Large Language Models (LLM)",
-      "fonte": "LUMI integra la logica fuzzy e i Large Language Models (LLM)...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Tecnologia"
+      "subject": "LUMI",
+      "definition": "LUMI provides symbolic control essential for developing green-aware agents. This is important to reason about long-term impacts and trade-offs in alignment with designer objectives and constraints. It accomplishes this by grounding LLM reasoning within a fuzzy-symbolic architecture.",
+      "semantic_relations": "fornisce",
+      "object": "controllo simbolico essenziale per agenti green-aware",
+      "source": "By grounding LLM reasoning within a\nfuzzy-symbolic architecture, LUMI provides symbolic control essential for developing green-aware agents, which\nmust reason about the long-term impacts and trade-offs of their actions, in alignment with the objectives (and\nconstraints) set by their designers.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Ragionamento simbolico",
+        "Green-aware constraints"
+      ],
+      "related_concepts": [
+        "LLM",
+        "Logica fuzzy",
+        "Vincoli progettuali"
+      ],
+      "enables": [
+        "Ragionamento su impatti a lungo termine",
+        "Aderenze ai vincoli"
+      ],
+      "part_of": [
+        "Obiettivi di LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "green-aware",
+        "controllo",
+        "vincoli"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Proprietà"
       }
     },
     {
-      "soggetto": "Modelli BDI classici",
-      "relazione": "faticano_a_gestire",
-      "oggetto": "ambiguità e incertezza",
-      "fonte": "I modelli BDI classici faticano a gestire l'ambiguità e l'incertezza in ambienti parzialmente osservabili.",
-      "metadati": {
-        "tipo_soggetto": "Modello",
-        "tipo_oggetto": "Caratteristica"
+      "subject": "LUMI",
+      "definition": "LUMI features a modular architecture enabling cognitively grounded symbolic structures, fuzzy uncertainty modeling, and natural language-based task decomposition. Modularity matters for robustness and interpretability. It works by connecting specialized agents and tools within a single decision-making pipeline.",
+      "semantic_relations": "ha_caratteristica",
+      "object": "architettura modulare",
+      "source": "Its modular architecture enables cognitively grounded symbolic structures,\nfuzzy uncertainty modeling, and natural language-based task decomposition within a single decision-making\npipeline.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Architettura software modulare"
+      ],
+      "related_concepts": [
+        "Agenti specializzati",
+        "Pipeline decisionale"
+      ],
+      "enables": [
+        "Robustezza",
+        "Interpretabilità",
+        "Integrazione NLP"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [
+        "Strutture simboliche",
+        "Modellazione fuzzy",
+        "Decomposizione in linguaggio naturale"
+      ],
+      "tags": [
+        "architettura",
+        "modularità",
+        "interpretabilità"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Proprietà"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "supera_limite",
-      "oggetto": "paradigma BDI con logica fuzzy",
-      "fonte": "LUMI supera questo limite estendendo il paradigma BDI con la logica fuzzy...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Tecnologia"
+      "subject": "LUMI",
+      "definition": "The LUMI project is currently a work in progress. This matters for understanding the maturity and feature completeness of the system. It indicates that ongoing development is expanding capabilities such as the fuzzy logic engine.",
+      "semantic_relations": "stato_di_sviluppo",
+      "object": "work in progress",
+      "source": "LUMI is currently a work in progress.",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Ciclo di vita del software"
+      ],
+      "related_concepts": [
+        "Prototipo",
+        "Sviluppo in corso"
+      ],
+      "enables": [
+        "Estensioni future",
+        "Valutazioni preliminari"
+      ],
+      "part_of": [
+        "Roadmap LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "stato",
+        "sviluppo"
+      ],
+      "metadata": {
+        "subject_type": "Progetto",
+        "object_type": "Stato"
       }
     },
     {
-      "soggetto": "Credenze",
-      "relazione": "rappresentano",
-      "oggetto": "comprensione del mondo tramite teoria degli insiemi fuzzy",
-      "fonte": "Le credenze rappresentano la comprensione del mondo da parte dell'agente utilizzando la teoria degli insiemi fuzzy.",
-      "metadati": {
-        "tipo_soggetto": "Concetto",
-        "tipo_oggetto": "Teoria"
+      "subject": "Prototipo LUMI in eLearning adattivo",
+      "definition": "The preliminary prototype of LUMI targets adaptive eLearning. It matters as a practical validation domain where agents assess competencies and adapt content in real time. It works by dynamically evaluating learner states, generating plans, and adjusting exercises.",
+      "semantic_relations": "usa_in",
+      "object": "dominio di eLearning adattivo",
+      "source": "Here, we present a preliminary prototype with a use case in the domain\nof adaptive eLearning, where agents dynamically assess learner competencies, generate personalized learning\nplans, and adapt content in real time.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "eLearning",
+        "Valutazione delle competenze"
+      ],
+      "related_concepts": [
+        "Pianificazione personalizzata",
+        "Adattamento in tempo reale"
+      ],
+      "enables": [
+        "Personalizzazione dell'apprendimento",
+        "Feedback tempestivo"
+      ],
+      "part_of": [
+        "Validazione LUMI"
+      ],
+      "sub_concepts": [
+        "Valutazione competenze",
+        "Piani personalizzati",
+        "Adattamento contenuti"
+      ],
+      "tags": [
+        "eLearning",
+        "prototipo",
+        "adattività"
+      ],
+      "metadata": {
+        "subject_type": "Prototipo",
+        "object_type": "Dominio applicativo"
       }
     },
     {
-      "soggetto": "Evaluator",
-      "relazione": "inizializza_e_aggiorna",
-      "oggetto": "base di conoscenza delle credenze",
-      "fonte": "L'agente Evaluator si occupa di inizializzare e aggiornare la base di conoscenza delle credenze...",
-      "metadati": {
-        "tipo_soggetto": "Agente",
-        "tipo_oggetto": "Funzione"
+      "subject": "LUMI",
+      "definition": "LUMI extends classical BDI models with fuzzy logic to model uncertainty in beliefs and preferences. This is important because it allows agents to operate under imprecision. It works by representing cognitive states with fuzzy sets and utility functions.",
+      "semantic_relations": "estende_con",
+      "object": "logica fuzzy",
+      "source": "LUMI extends classical BDI models with fuzzy logic to model uncertainty in beliefs and preferences,",
+      "importance": 0.93,
+      "confidence": 1.0,
+      "prerequisites": [
+        "BDI",
+        "Fuzzy sets"
+      ],
+      "related_concepts": [
+        "Preferenze graduali",
+        "Incertezza"
+      ],
+      "enables": [
+        "Ragionamento sotto incertezza"
+      ],
+      "part_of": [
+        "Contributi LUMI"
+      ],
+      "sub_concepts": [
+        "Stati cognitivi fuzzy"
+      ],
+      "tags": [
+        "BDI",
+        "fuzzy",
+        "incertezza"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Estensione"
       }
     },
     {
-      "soggetto": "Desideri",
-      "relazione": "sono_espressi_come",
-      "oggetto": "formula fuzzy",
-      "fonte": "I desideri sono espressi come una formula fuzzy...",
-      "metadati": {
-        "tipo_soggetto": "Concetto",
-        "tipo_oggetto": "Formula"
+      "subject": "Pianificazione LUMI",
+      "definition": "LUMI employs a two-layer planning architecture where an LLM-based layer produces milestone-based strategies. This matters for flexible high-level planning while maintaining control. It works by guiding neural planning with symbolic tools and handing off to low-level execution structures.",
+      "semantic_relations": "è_composta_da",
+      "object": "due strati di pianificazione",
+      "source": "•Two-layer planning : anLLM-based planning layer produces milestone-based strategies and\nsuitable supporting agents to implement the low-level execution, guided and grounded by symbolic\ntools such as fuzzy reasoning modules and classical planners; a low-level planning based on a",
+      "importance": 0.9,
+      "confidence": 0.98,
+      "prerequisites": [
+        "Pianificazione",
+        "LLM",
+        "Strumenti simbolici"
+      ],
+      "related_concepts": [
+        "Milestone",
+        "Planner classici",
+        "Moduli fuzzy"
+      ],
+      "enables": [
+        "Pianificazione flessibile",
+        "Aderenza ai vincoli"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [
+        "Strato LLM",
+        "Strato FBT"
+      ],
+      "tags": [
+        "pianificazione",
+        "LLM",
+        "ibrido"
+      ],
+      "metadata": {
+        "subject_type": "Architettura di pianificazione",
+        "object_type": "Strutturazione"
       }
     },
     {
-      "soggetto": "Fuzzy Reasoner",
-      "relazione": "gestisce",
-      "oggetto": "regole e vincoli fuzzy",
-      "fonte": "L'agente Fuzzy Reasoner gestisce regole e vincoli fuzzy...",
-      "metadati": {
-        "tipo_soggetto": "Agente",
-        "tipo_oggetto": "Funzione"
+      "subject": "Fuzzy Behavior Trees",
+      "definition": "Fuzzy Behavior Trees (FBTs) are a novel notion for low-level planning and execution with continuous-valued evaluation. They matter because they allow graded success and real-time adaptation. They work by extending Behavior Trees with fuzzy semantics for node evaluation.",
+      "semantic_relations": "supportano",
+      "object": "esiti d'azione a valore continuo, replanning dinamico, comportamento adattivo",
+      "source": "a novel notion of Fuzzy Behavior Trees (FBTs) , which support continuous-valued action outcomes,\ndynamic replanning, and adaptive behavior.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Behavior Trees",
+        "Logica fuzzy"
+      ],
+      "related_concepts": [
+        "t-norm",
+        "t-conorm"
+      ],
+      "enables": [
+        "Adattamento in tempo reale",
+        "Valutazioni graduali"
+      ],
+      "part_of": [
+        "Pianificazione a basso livello LUMI"
+      ],
+      "sub_concepts": [
+        "Nodi Sequence fuzzy",
+        "Nodi Selector fuzzy"
+      ],
+      "tags": [
+        "FBT",
+        "esecuzione",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Struttura di esecuzione",
+        "object_type": "Capacità"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "introduce",
-      "oggetto": "Fuzzy Behavior Trees (FBTs)",
-      "fonte": "LUMI introduce i Fuzzy Behavior Trees (FBTs)...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Concetto"
+      "subject": "Nodi Sequence negli FBT",
+      "definition": "Sequence nodes in FBTs are evaluated using a t-norm over the fuzzy satisfaction values of their children. This matters because it replaces binary success criteria with graded aggregation. It works by applying operations like product t-norm during evaluation.",
+      "semantic_relations": "sono_valutati_con",
+      "object": "t-norma",
+      "source": "A differenza dei nodi standard di Sequence, che richiedono il successo di tutti i figli, i nodi FBT di Sequence sono valutati utilizzando una t-norma per aggregare i valori di soddisfazione fuzzy dei figli.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "t-norm"
+      ],
+      "related_concepts": [
+        "Product t-norm",
+        "Valutazioni fuzzy"
+      ],
+      "enables": [
+        "Aggregazione graduale del successo"
+      ],
+      "part_of": [
+        "Fuzzy Behavior Trees"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "t-norma",
+        "aggregazione"
+      ],
+      "metadata": {
+        "subject_type": "Regola di valutazione",
+        "object_type": "Operatore fuzzy"
       }
     },
     {
-      "soggetto": "FBTs",
-      "relazione": "mantengono",
-      "oggetto": "pattern di controllo espressivi dei Behavior Trees",
-      "fonte": "Gli FBTs mantengono i pattern di controllo espressivi dei Behavior Trees...",
-      "metadati": {
-        "tipo_soggetto": "Concetto",
-        "tipo_oggetto": "Caratteristica"
+      "subject": "Nodi Selector negli FBT",
+      "definition": "Selector nodes in FBTs are evaluated using t-conorms. This is important to model flexible success when any child partially satisfies the condition. It works by aggregating fuzzy satisfaction values via t-conorm operations.",
+      "semantic_relations": "sono_valutati_con",
+      "object": "t-conorme",
+      "source": "I nodi Selector sono valutati utilizzando t-conorme.",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "t-conorm"
+      ],
+      "related_concepts": [
+        "Valutazioni fuzzy",
+        "Combinazione di soddisfazioni"
+      ],
+      "enables": [
+        "Selezione flessibile"
+      ],
+      "part_of": [
+        "Fuzzy Behavior Trees"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "t-conorma",
+        "aggregazione"
+      ],
+      "metadata": {
+        "subject_type": "Regola di valutazione",
+        "object_type": "Operatore fuzzy"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "risolve_problema",
-      "oggetto": "Architettura di Pianificazione a Due Strati",
-      "fonte": "LUMI risolve questo problema con un'Architettura di Pianificazione a Due Strati...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Tecnologia"
+      "subject": "Stati cognitivi fuzzy in LUMI",
+      "definition": "In LUMI, beliefs and desires are modeled using fuzzy sets and utility functions. This matters because it enables reasoning under uncertainty. It works by assigning graded memberships to linguistic categories and evaluating utilities.",
+      "semantic_relations": "modellano",
+      "object": "credenze e desideri",
+      "source": "•Fuzzy cognitive states : beliefs and desires are modeled using fuzzy sets and utility functions,\nenabling reasoning under uncertainty;",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Fuzzy sets",
+        "Utilità"
+      ],
+      "related_concepts": [
+        "Categorie linguistiche fuzzy",
+        "Incertezza"
+      ],
+      "enables": [
+        "Ragionamento graduale"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [
+        "Credenze fuzzy",
+        "Desideri fuzzy"
+      ],
+      "tags": [
+        "stati cognitivi",
+        "fuzzy",
+        "utilità"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Componenti cognitivi"
       }
     },
     {
-      "soggetto": "Oracle",
-      "relazione": "impiega",
-      "oggetto": "ragionamento assistito da LLM",
-      "fonte": "L'agente Oracle impiega il ragionamento assistito da LLM...",
-      "metadati": {
-        "tipo_soggetto": "Agente",
-        "tipo_oggetto": "Tecnologia"
+      "subject": "Base di conoscenza delle credenze ΣB",
+      "definition": "The beliefs knowledge base ΣB is built and maintained by the Evaluator and contains fuzzy atoms with descriptors and optional witness sets. This structure matters for interpretability and LLM interoperability. It works by attaching natural language descriptions and contexts to each atom.",
+      "semantic_relations": "è_costruita_da",
+      "object": "Evaluator",
+      "source": "the system builds and maintains\nthrough the Evaluator agent a knowledge base Σ𝐵={𝑎1, ..., 𝑎 𝑛}, whose elements are fuzzy atoms,\neach one equipped with a semantic descriptor and an optional witness set.",
+      "importance": 0.87,
+      "confidence": 1.0,
+      "prerequisites": [
+        "KB",
+        "Agente Evaluator"
+      ],
+      "related_concepts": [
+        "Descrittore semantico",
+        "Witness set"
+      ],
+      "enables": [
+        "Interoperabilità con LLM",
+        "Tracciabilità"
+      ],
+      "part_of": [
+        "Strato cognitivo fuzzy"
+      ],
+      "sub_concepts": [
+        "Atomi fuzzy",
+        "Descrizione in linguaggio naturale"
+      ],
+      "tags": [
+        "KB",
+        "credenze",
+        "LLM"
+      ],
+      "metadata": {
+        "subject_type": "Base di conoscenza",
+        "object_type": "Agente"
       }
     },
     {
-      "soggetto": "Crafter",
-      "relazione": "genera",
-      "oggetto": "Fuzzy Behavior Tree (FBT)",
-      "fonte": "Una volta selezionata un'intenzione dall'alto livello, l'agente Crafter genera il corrispondente Fuzzy Behavior Tree (FBT).",
-      "metadati": {
-        "tipo_soggetto": "Agente",
-        "tipo_oggetto": "Concetto"
+      "subject": "Credenze in LUMI",
+      "definition": "Beliefs in LUMI are expressed via fuzzy linguistic categories rather than binary values. This matters for modeling partial or imprecise information. It works by using categories such as sufficient, moderate, or strong.",
+      "semantic_relations": "sono_espresse_con",
+      "object": "categorie linguistiche fuzzy",
+      "source": "At each state, beliefs are not used in rules in terms of binary values, but via fuzzy linguistic categories like\nsufficient ,moderate , orstrong .",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Fuzzy sets",
+        "Linguistica fuzzy"
+      ],
+      "related_concepts": [
+        "Valori graduali",
+        "Appartenenza"
+      ],
+      "enables": [
+        "Modellazione dell'incertezza"
+      ],
+      "part_of": [
+        "Strato cognitivo fuzzy"
+      ],
+      "sub_concepts": [
+        "sufficient",
+        "moderate",
+        "strong"
+      ],
+      "tags": [
+        "credenze",
+        "fuzzy",
+        "categorie"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Rappresentazione"
       }
     },
     {
-      "soggetto": "Evaluator",
-      "relazione": "fornisce",
-      "oggetto": "descrittore in linguaggio naturale",
-      "fonte": "Le credenze simboliche fornite dall'Evaluator includono un descrittore in linguaggio naturale...",
-      "metadati": {
-        "tipo_soggetto": "Agente",
-        "tipo_oggetto": "Funzione"
+      "subject": "Desideri in LUMI",
+      "definition": "Desires are expressed as a fuzzy formula that can be viewed as a utility function to maximize until good enough. This matters for utility-driven goal satisfaction. It works by evaluating how well current beliefs satisfy goals, possibly balancing execution cost.",
+      "semantic_relations": "sono_espressi_come",
+      "object": "formula fuzzy (funzione di utilità)",
+      "source": "Desires are expressed as a fuzzy formula that evaluates how well the current beliefs satisfy the agent\ngoals, possibly balanced against execution cost. Note that this formula can be viewed as a utility function\nthat the agent would like to maximize, until the output fuzzy value is good enough.",
+      "importance": 0.89,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Fuzzy logic",
+        "Funzioni di utilità"
+      ],
+      "related_concepts": [
+        "Selezione obiettivi",
+        "Costo di esecuzione"
+      ],
+      "enables": [
+        "Ottimizzazione orientata agli obiettivi"
+      ],
+      "part_of": [
+        "Strato cognitivo fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "desideri",
+        "utilità",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Formalismo"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "unifica",
-      "oggetto": "robustezza strutturale del BDI e trasparenza del ragionamento simbolico",
-      "fonte": "LUMI unifica la robustezza strutturale del BDI e la trasparenza del ragionamento simbolico...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Caratteristica"
+      "subject": "Fuzzy Reasoner",
+      "definition": "The Fuzzy Reasoner currently handles simple modus-ponens–style rules. This matters because it defines the current inference capability. It works by applying fuzzy rules and constraints to compute truth degrees.",
+      "semantic_relations": "gestisce",
+      "object": "regole semplici in stile modus-ponens",
+      "source": "In the current prototype, the Fuzzy Reasoner module handles only simple\nmodus-ponens–style rules.",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Modus ponens",
+        "Regole fuzzy"
+      ],
+      "related_concepts": [
+        "Inferenza fuzzy",
+        "Vincoli"
+      ],
+      "enables": [
+        "Calcolo gradi di verità"
+      ],
+      "part_of": [
+        "Strato cognitivo fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "reasoner",
+        "inferenza",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Capacità inferenziale"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "fornisce",
-      "oggetto": "controllo simbolico",
-      "fonte": "Questo approccio ibrido fornisce il controllo simbolico necessario...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Funzione"
+      "subject": "Motore logico fuzzy LUMI",
+      "definition": "A more general and expressive fuzzy logic engine is under active development. This matters for extending inference beyond simple rules. It will work by supporting richer forms of inference.",
+      "semantic_relations": "è_in_sviluppo",
+      "object": "motore fuzzy più generale ed espressivo",
+      "source": "However, we are actively developing a more general and expressive fuzzy\nlogic engine capable of supporting richer forms of inference.",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Sistemi di inferenza fuzzy"
+      ],
+      "related_concepts": [
+        "Espressività",
+        "Regole avanzate"
+      ],
+      "enables": [
+        "Inferenze più ricche"
+      ],
+      "part_of": [
+        "Roadmap LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "sviluppo",
+        "motore",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Componente software",
+        "object_type": "Piano di sviluppo"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "è_progettato_per",
-      "oggetto": "agenti green-aware",
-      "fonte": "...soprattutto per agenti green-aware che devono ragionare sugli impatti a lungo termine...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Applicazione"
+      "subject": "Valutazione di regole fuzzy",
+      "definition": "Multiple fuzzy rules can be activated simultaneously due to overlapping membership functions. This matters for concurrent recommendations and nuanced decisions. It works by allowing different linguistic evaluations of belief atoms to co-exist and fire.",
+      "semantic_relations": "consente",
+      "object": "attivazione simultanea di regole",
+      "source": "It is important to note that, in fuzzy logic, multiple rules can be activated simultaneously due to the\noverlapping nature of fuzzy membership functions. This allows different linguistic evaluations of belief\natoms to co-exist and fire concurrently.",
+      "importance": 0.83,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Funzioni di appartenenza",
+        "Regole fuzzy"
+      ],
+      "related_concepts": [
+        "Concorrenza di regole",
+        "Sovrapposizione"
+      ],
+      "enables": [
+        "Decisioni sfumate",
+        "Raccomandazioni multiple"
+      ],
+      "part_of": [
+        "Inferenza fuzzy LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "regole",
+        "fuzzy",
+        "concorrenza"
+      ],
+      "metadata": {
+        "subject_type": "Proprietà del sistema",
+        "object_type": "Comportamento inferenziale"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "è_un",
-      "oggetto": "work in progress",
-      "fonte": "LUMI is currently a work in progress.",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Stato"
+      "subject": "Categoria Low",
+      "definition": "The 'Low' linguistic category is defined as a trapezoidal membership with support [0, 0.3]. This matters as part of the fuzzy set definitions for proficiency. It works by mapping numeric values in this range to non-zero membership.",
+      "semantic_relations": "ha_supporto",
+      "object": "[0,0.3]",
+      "source": "•Low: trapezoidal with support [0,0.3]",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Funzioni di appartenenza trapezoidali"
+      ],
+      "related_concepts": [
+        "Medium",
+        "High"
+      ],
+      "enables": [
+        "Valutazioni di bassa competenza"
+      ],
+      "part_of": [
+        "Definizioni di categorie linguistiche"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "fuzzy",
+        "categorie",
+        "appartenenza"
+      ],
+      "metadata": {
+        "subject_type": "Categoria linguistica",
+        "object_type": "Intervallo numerico"
       }
     },
     {
-      "soggetto": "LUMI",
-      "relazione": "ha_caso_di_studio",
-      "oggetto": "eLearning adattivo",
-      "fonte": "Here, we present a preliminary prototype with a use case in the domain of adaptive eLearning...",
-      "metadati": {
-        "tipo_soggetto": "Architettura",
-        "tipo_oggetto": "Applicazione"
+      "subject": "Categoria Medium",
+      "definition": "The 'Medium' linguistic category is defined as a triangular membership with peak at 0.5 and support [0.3, 0.7]. This matters for mid-level proficiency evaluation. It works via a triangular function centered at 0.5.",
+      "semantic_relations": "ha_supporto",
+      "object": "[0.3,0.7]",
+      "source": "•Medium : triangular with peak at 0.5, support [0.3,0.7]",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Funzioni di appartenenza triangolari"
+      ],
+      "related_concepts": [
+        "Low",
+        "High"
+      ],
+      "enables": [
+        "Valutazioni medie"
+      ],
+      "part_of": [
+        "Definizioni di categorie linguistiche"
+      ],
+      "sub_concepts": [
+        "Picco a 0.5"
+      ],
+      "tags": [
+        "fuzzy",
+        "categorie",
+        "appartenenza"
+      ],
+      "metadata": {
+        "subject_type": "Categoria linguistica",
+        "object_type": "Intervallo numerico"
+      }
+    },
+    {
+      "subject": "Categoria High",
+      "definition": "The 'High' linguistic category is defined as a trapezoidal membership with support [0.6, 1]. This matters for high proficiency assessment. It uses a trapezoidal function to provide sustained high membership.",
+      "semantic_relations": "ha_supporto",
+      "object": "[0.6,1]",
+      "source": "•High : trapezoidal with support [0.6,1]",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Funzioni di appartenenza trapezoidali"
+      ],
+      "related_concepts": [
+        "Low",
+        "Medium"
+      ],
+      "enables": [
+        "Valutazioni alte"
+      ],
+      "part_of": [
+        "Definizioni di categorie linguistiche"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "fuzzy",
+        "categorie",
+        "appartenenza"
+      ],
+      "metadata": {
+        "subject_type": "Categoria linguistica",
+        "object_type": "Intervallo numerico"
+      }
+    },
+    {
+      "subject": "Valutazione di OOP nell'esempio",
+      "definition": "In the example state, the OOP proficiency value is 0.7, yielding memberships of high 0.4 and medium 0.6. This illustrates graded membership across categories. It is computed from the predefined membership functions.",
+      "semantic_relations": "ha_valori_di_appartenenza",
+      "object": "high(0.4), medium(0.6) per μOOP(x)=0.7",
+      "source": "𝜇OOP(𝑥) = 0.7⇒high(0.4),medium (0.6)",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizioni Low/Medium/High"
+      ],
+      "related_concepts": [
+        "Esempio valutazioni EH",
+        "Esempio valutazioni Collections"
+      ],
+      "enables": [
+        "Raccomandazioni derivate"
+      ],
+      "part_of": [
+        "Esempio di valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esempio",
+        "OOP",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Esempio",
+        "object_type": "Valori fuzzy"
+      }
+    },
+    {
+      "subject": "Valutazione di EH nell'esempio",
+      "definition": "In the example state, the EH proficiency value is 0.6, yielding memberships of high 0.2 and medium 0.8. This shows overlapping memberships. It follows from the defined membership functions.",
+      "semantic_relations": "ha_valori_di_appartenenza",
+      "object": "high(0.2), medium(0.8) per μEH(x)=0.6",
+      "source": "𝜇EH(𝑥) = 0.6⇒high(0.2),medium (0.8)",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizioni Low/Medium/High"
+      ],
+      "related_concepts": [
+        "Esempio valutazioni OOP",
+        "Esempio valutazioni Collections"
+      ],
+      "enables": [
+        "Raccomandazioni derivate"
+      ],
+      "part_of": [
+        "Esempio di valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esempio",
+        "EH",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Esempio",
+        "object_type": "Valori fuzzy"
+      }
+    },
+    {
+      "subject": "Valutazione di Collections nell'esempio",
+      "definition": "In the example state, the Collections proficiency value is 0.5, with membership medium 1.0. This indicates full membership in the medium category. It is derived from the medium triangular function.",
+      "semantic_relations": "ha_valori_di_appartenenza",
+      "object": "medium(1.0) per μCollections(x)=0.5",
+      "source": "𝜇Collections (𝑥) = 0.5⇒medium (1.0)",
+      "importance": 0.68,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizioni Low/Medium/High"
+      ],
+      "related_concepts": [
+        "Esempio valutazioni OOP",
+        "Esempio valutazioni EH"
+      ],
+      "enables": [
+        "Raccomandazioni derivate"
+      ],
+      "part_of": [
+        "Esempio di valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esempio",
+        "Collections",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Esempio",
+        "object_type": "Valori fuzzy"
+      }
+    },
+    {
+      "subject": "Regola di raccomandazione SCM",
+      "definition": "A rule states that if OOP is high and EH is medium, then recommend 'Start Concurrency Module'. This matters as a concrete fuzzy control policy. It works by evaluating the antecedents via a t-norm.",
+      "semantic_relations": "raccomanda",
+      "object": "Start Concurrency Module",
+      "source": "If OOP is high and EH is medium , then recommend “Start Concurrency Module”",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Regole fuzzy",
+        "OOP",
+        "EH"
+      ],
+      "related_concepts": [
+        "t-norm",
+        "FBT regole"
+      ],
+      "enables": [
+        "Avvio modulo Concurrency"
+      ],
+      "part_of": [
+        "Politiche di adattamento didattico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "regola",
+        "raccomandazione",
+        "didattica"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Azione raccomandata"
+      }
+    },
+    {
+      "subject": "Valutazione regola SCM nell'esempio",
+      "definition": "For the example values, the recommendation score for 'Start Concurrency Module' is 0.32. This matters as a demonstration of numerical evaluation with product t-norm. It is computed as 0.4 × 0.8.",
+      "semantic_relations": "ha_valutazione",
+      "object": "0.32",
+      "source": "𝜇high(OOP) = 0.4, 𝜇medium (EH) = 0.8⇒ Recc 𝑆𝐶𝑀 = 0.4·0.8 = 0 .32;",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Product t-norm",
+        "Valori di appartenenza"
+      ],
+      "related_concepts": [
+        "Regola SCM",
+        "t-norm"
+      ],
+      "enables": [
+        "Decisione di raccomandazione"
+      ],
+      "part_of": [
+        "Esempio di valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esempio",
+        "valutazione",
+        "t-norm"
+      ],
+      "metadata": {
+        "subject_type": "Esempio",
+        "object_type": "Valore numerico"
+      }
+    },
+    {
+      "subject": "Regola di raccomandazione ACE",
+      "definition": "A rule states that if Collections is medium and EH is high, then recommend 'Advanced Collections Exercises'. This is a policy for targeted practice. It is evaluated via a t-norm over the antecedents.",
+      "semantic_relations": "raccomanda",
+      "object": "Advanced Collections Exercises",
+      "source": "If Collections is medium and EH is high, then recommend “Advanced Collections Exercises” ,",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Regole fuzzy",
+        "Collections",
+        "EH"
+      ],
+      "related_concepts": [
+        "t-norm",
+        "FBT regole"
+      ],
+      "enables": [
+        "Esercizi avanzati di Collections"
+      ],
+      "part_of": [
+        "Politiche di adattamento didattico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "regola",
+        "raccomandazione",
+        "didattica"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Azione raccomandata"
+      }
+    },
+    {
+      "subject": "Valutazione regola ACE nell'esempio",
+      "definition": "For the example values, the recommendation score for 'Advanced Collections Exercises' is 0.2. This numeric outcome demonstrates the graded nature of decisions. It is computed as 1.0 × 0.2.",
+      "semantic_relations": "ha_valutazione",
+      "object": "0.2",
+      "source": "𝜇medium (Collections ) = 1.0, 𝜇high(EH) = 0.2⇒ Recc 𝐴𝐶𝐸= 1.0·0.2 = 0 .2.",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Product t-norm",
+        "Valori di appartenenza"
+      ],
+      "related_concepts": [
+        "Regola ACE",
+        "t-norm"
+      ],
+      "enables": [
+        "Decisione di raccomandazione"
+      ],
+      "part_of": [
+        "Esempio di valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esempio",
+        "valutazione",
+        "t-norm"
+      ],
+      "metadata": {
+        "subject_type": "Esempio",
+        "object_type": "Valore numerico"
+      }
+    },
+    {
+      "subject": "Orchestrator",
+      "definition": "The Orchestrator coordinates all actors and maintains the overall execution flow in LUMI. This role is critical for managing the reasoning cycle. It works by directing specialized agents and sequencing processes.",
+      "semantic_relations": "coordina",
+      "object": "tutti gli attori",
+      "source": "1 Orchestrator Coordinates all actors and maintains the overall execution flow.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Coordinamento di agenti"
+      ],
+      "related_concepts": [
+        "Ciclo di ragionamento",
+        "Controllo di flusso"
+      ],
+      "enables": [
+        "Esecuzione end-to-end"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agente",
+        "coordinamento"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Funzione"
+      }
+    },
+    {
+      "subject": "Evaluator",
+      "definition": "The Evaluator initializes and updates the Belief KB, assigns fuzzy degrees to facts, and evaluates utilities. This role matters for maintaining accurate cognitive state. It works by processing input data and computing memberships and utilities.",
+      "semantic_relations": "inizializza_e_aggiorna",
+      "object": "Belief Knowledge Base (KB)",
+      "source": "2 Evaluator Initializes and updates the Belief Knowledge Base (KB); assigns fuzzy degrees to\nfacts; evaluates utilities.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "KB",
+        "Valutazioni fuzzy",
+        "Utilità"
+      ],
+      "related_concepts": [
+        "Credenze",
+        "Desideri"
+      ],
+      "enables": [
+        "Stato cognitivo aggiornato"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agente",
+        "credenze",
+        "utilità"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Risorsa di conoscenza"
+      }
+    },
+    {
+      "subject": "Fuzzy Reasoner",
+      "definition": "The Fuzzy Reasoner manages fuzzy rules and constraints. This matters for enforcing policies like green-aware constraints. It works by computing truth degrees for rule antecedents and consequents.",
+      "semantic_relations": "gestisce",
+      "object": "regole e vincoli fuzzy",
+      "source": "3 Fuzzy Reasoner Manages fuzzy rules and constraints.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Regole fuzzy",
+        "Vincoli"
+      ],
+      "related_concepts": [
+        "Valutazioni di verità",
+        "Inferenza"
+      ],
+      "enables": [
+        "Controllo fuzzy"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agente",
+        "fuzzy",
+        "vincoli"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Responsabilità"
+      }
+    },
+    {
+      "subject": "Oracle",
+      "definition": "The Oracle generates intention plans based on beliefs and desires using LLM-assisted reasoning. This matters for high-level strategic planning. It works by proposing milestone-based intentions subject to constraints.",
+      "semantic_relations": "genera",
+      "object": "piani di intenzione ad alto livello",
+      "source": "4 Oracle Generates intention plans based on beliefs and desires.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "LLM",
+        "Beliefs",
+        "Desires"
+      ],
+      "related_concepts": [
+        "Oracle Auditor",
+        "Pianificazione a due strati"
+      ],
+      "enables": [
+        "Strategia ad alto livello"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agente",
+        "LLM",
+        "pianificazione"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Piano"
+      }
+    },
+    {
+      "subject": "Oracle Auditor",
+      "definition": "The Oracle Auditor verifies proposed high-level plans for compliance with all specified constraints. This matters to ensure adherence to design policies. It works by auditing the Oracle's outputs.",
+      "semantic_relations": "verifica",
+      "object": "piani ad alto livello",
+      "source": "5 Oracle Auditor Verifies the proposed high-level plans.",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Vincoli",
+        "Validazione di piani"
+      ],
+      "related_concepts": [
+        "Oracle",
+        "Green-aware constraints"
+      ],
+      "enables": [
+        "Conformità ai vincoli"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "auditing",
+        "pianificazione",
+        "vincoli"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Artefatto di piano"
+      }
+    },
+    {
+      "subject": "Crafter",
+      "definition": "The Crafter constructs FBTs for selected intentions and assigns tasks to execution nodes. This matters for translating intentions into executable structures. It works by generating trees with labeled nodes and role assignments.",
+      "semantic_relations": "costruisce",
+      "object": "Fuzzy Behavior Trees per intenzioni selezionate",
+      "source": "6 Crafter Constructs FBTs for the selected intentions, and assigns tasks to execution nodes.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "Intenzioni"
+      ],
+      "related_concepts": [
+        "Crafter Auditor",
+        "Sentinels",
+        "Executors",
+        "Observers"
+      ],
+      "enables": [
+        "Esecuzione a basso livello"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agente",
+        "FBT",
+        "pianificazione"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Struttura di esecuzione"
+      }
+    },
+    {
+      "subject": "Crafter Auditor",
+      "definition": "The Crafter Auditor validates FBTs for semantic and structural correctness. This matters for reliable execution. It works by checking consistency between plans and execution structures.",
+      "semantic_relations": "valida",
+      "object": "FBT",
+      "source": "7 Crafter Auditor Validates FBTs for semantic and structural correctness.",
+      "importance": 0.83,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Validazione strutturale",
+        "Semantica FBT"
+      ],
+      "related_concepts": [
+        "Crafter",
+        "Piani"
+      ],
+      "enables": [
+        "Esecuzione coerente"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "auditing",
+        "FBT",
+        "validazione"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Artefatto di esecuzione"
+      }
+    },
+    {
+      "subject": "Sentinels",
+      "definition": "Sentinels manage logical flow in FBTs and monitor execution progress. This matters for control flow and supervision. They work by directing transitions and overseeing node outcomes.",
+      "semantic_relations": "gestiscono",
+      "object": "flusso logico negli FBT",
+      "source": "8 Sentinels Manage logical flow in FBTs; monitor execution progress.",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "Controllo di flusso"
+      ],
+      "related_concepts": [
+        "Executors",
+        "Observers"
+      ],
+      "enables": [
+        "Supervisione dell'esecuzione"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "controllo",
+        "FBT",
+        "monitoraggio"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Funzione di controllo"
+      }
+    },
+    {
+      "subject": "Executors",
+      "definition": "Executors perform concrete actions via APIs, tools, or internal routines and return fuzzy outcomes. This matters for grounding plans in actions. They work by interfacing with external or internal services and reporting graded results.",
+      "semantic_relations": "eseguono",
+      "object": "azioni concrete con esiti fuzzy",
+      "source": "9 Executors Perform concrete actions via APIs, tools, or internal routines; return fuzzy outcomes.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "API",
+        "Routine interne"
+      ],
+      "related_concepts": [
+        "Sentinels",
+        "Observers"
+      ],
+      "enables": [
+        "Esecuzione operativa"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esecuzione",
+        "API",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Azione"
+      }
+    },
+    {
+      "subject": "Observers",
+      "definition": "Observers sense the environment, evaluate fuzzy conditions, and update the belief base. This matters for closing the perception-action loop. They work by measuring conditions and writing back to ΣB.",
+      "semantic_relations": "aggiornano",
+      "object": "base delle credenze",
+      "source": "10 Observers Sense environment, evaluate fuzzy conditions, and update the belief base accordingly.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Percezione",
+        "Valutazione fuzzy"
+      ],
+      "related_concepts": [
+        "Evaluator",
+        "Beliefs"
+      ],
+      "enables": [
+        "Feedback al ciclo di ragionamento"
+      ],
+      "part_of": [
+        "Ruoli degli agenti LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "osservazione",
+        "fuzzy",
+        "aggiornamento"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Aggiornamento conoscenza"
+      }
+    },
+    {
+      "subject": "Orchestrator",
+      "definition": "In LUMI, the Orchestrator manages the reasoning cycle and coordinates specialized agents. This matters for integrated operation across modules. It works by orchestrating Evaluator, Reasoner, Oracle, Crafter, and Auditors.",
+      "semantic_relations": "gestisce",
+      "object": "ciclo di ragionamento",
+      "source": "Central to LUMI is the Orchestrator, which manages\nthe reasoning cycle and coordinates specialized agents: Evaluator (belief evaluation), Reasoner (fuzzy\ninference), Oracle (LLM-assisted planner), Crafter (execution planner), and co-agents responsible for\nvalidation (Auditors).",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Coordinamento di agenti"
+      ],
+      "related_concepts": [
+        "Evaluator",
+        "Fuzzy Reasoner",
+        "Oracle",
+        "Crafter",
+        "Auditors"
+      ],
+      "enables": [
+        "Integrazione modulare"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "orchestrazione",
+        "ciclo",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Processo"
+      }
+    },
+    {
+      "subject": "Ciclo LUMI",
+      "definition": "LUMI’s cycle proceeds from fuzzy evaluation to intention planning, FBT generation, execution, and feedback. This matters for understanding end-to-end flow. It works by passing information among components in the specified order.",
+      "semantic_relations": "è_composto_da",
+      "object": "valutazione fuzzy → pianificazione intenzioni → generazione FBT → esecuzione → feedback",
+      "source": "LUMI’s cycle proceeds from fuzzy evaluation\n→intention planning →FBT generation→execution→feedback.",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Flusso di lavoro",
+        "Componenti LUMI"
+      ],
+      "related_concepts": [
+        "Figura 3",
+        "Orchestrator"
+      ],
+      "enables": [
+        "Monitoraggio e controllo del processo"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "workflow",
+        "ciclo",
+        "LUMI"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Sequenza"
+      }
+    },
+    {
+      "subject": "Oracle",
+      "definition": "The Oracle employs LLM-assisted reasoning to generate a high-level intention plan. This is important for flexibility and open-ended planning. It works by leveraging LLM capabilities anchored by symbolic tools.",
+      "semantic_relations": "impiega",
+      "object": "ragionamento assistito da LLM",
+      "source": "The Oracle agent employs LLM-assisted reasoning to generate a high-level intention plan, which is\nsubsequently reviewed by the Oracle Auditor to ensure compliance with all specified constraints.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "LLM",
+        "Pianificazione"
+      ],
+      "related_concepts": [
+        "Oracle Auditor",
+        "Vincoli"
+      ],
+      "enables": [
+        "Piano strategico a milestone"
+      ],
+      "part_of": [
+        "Pianificazione ad alto livello"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "LLM",
+        "pianificazione",
+        "strategia"
+      ],
+      "metadata": {
+        "subject_type": "Agente",
+        "object_type": "Tecnica"
+      }
+    },
+    {
+      "subject": "Piano ad alto livello di LUMI",
+      "definition": "The high-level plan satisfies all predefined constraints and guarantees that in any final state beliefs satisfy the fuzzy formula encoding desires. This matters for goal adherence. It works by constraining plan generation and validation.",
+      "semantic_relations": "garantisce",
+      "object": "in ogni stato finale le credenze soddisfano la formula fuzzy dei desideri",
+      "source": "More precisely, the plan satisfies all predefined constraints and guarantees that, in any final state, the\nagent’s beliefs satisfy the fuzzy formula encoding its desires.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Vincoli",
+        "Formule fuzzy"
+      ],
+      "related_concepts": [
+        "Oracle",
+        "Oracle Auditor"
+      ],
+      "enables": [
+        "Aderenza agli obiettivi"
+      ],
+      "part_of": [
+        "Pianificazione ad alto livello"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "piano",
+        "vincoli",
+        "obiettivi"
+      ],
+      "metadata": {
+        "subject_type": "Piano",
+        "object_type": "Proprietà"
+      }
+    },
+    {
+      "subject": "FBT T_ij",
+      "definition": "For each selected intention ij, the Crafter generates a corresponding FBT T_ij supporting partial satisfaction and real-time adaptation. This matters for robust execution. It works by encoding low-level plans with fuzzy-labeled nodes.",
+      "semantic_relations": "è_generato_per",
+      "object": "intenzione ij selezionata",
+      "source": "Whenever an intention 𝑖𝑗is selected for execution, the Crafter agent generates a corresponding\nFuzzy Behavior Tree (FBT), denoted 𝑇𝑖𝑗, which encodes a low-level plan for achieving 𝑖𝑗. This structure\nsupports reasoning under conditions of partial satisfaction and enables real-time adaptation.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Intenzioni",
+        "FBT"
+      ],
+      "related_concepts": [
+        "Crafter",
+        "Crafter Auditor"
+      ],
+      "enables": [
+        "Adattamento in esecuzione"
+      ],
+      "part_of": [
+        "Pianificazione a basso livello"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "intenzione",
+        "adattamento"
+      ],
+      "metadata": {
+        "subject_type": "Struttura di esecuzione",
+        "object_type": "Intenzione"
+      }
+    },
+    {
+      "subject": "Struttura formale FBT",
+      "definition": "An FBT is defined as T_ij = (N, E, λ). This formalization matters for precise specification and validation. It works by defining nodes, edges, and a labeling function.",
+      "semantic_relations": "è_definito_come",
+      "object": "T_ij = (N, E, λ)",
+      "source": "Formally, the FBT is defined as 𝑇𝑖𝑗= (𝑁, 𝐸, 𝜆 ), where:",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Teoria dei grafi",
+        "Fuzzy logic"
+      ],
+      "related_concepts": [
+        "Nodi",
+        "Archi",
+        "Etichettatura fuzzy"
+      ],
+      "enables": [
+        "Verifica formale"
+      ],
+      "part_of": [
+        "Fuzzy Behavior Trees"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "formalismo",
+        "FBT",
+        "definizione"
+      ],
+      "metadata": {
+        "subject_type": "Definizione formale",
+        "object_type": "Struttura"
+      }
+    },
+    {
+      "subject": "N nell'FBT",
+      "definition": "In an FBT, N is a set of agents assigned to the roles of Sentinels, Executors, and Observers. This matters for role-based execution. It works by mapping agents to node responsibilities.",
+      "semantic_relations": "contiene",
+      "object": "agenti con ruoli di Sentinels, Executors, Observers",
+      "source": "•𝑁is a set of agents assigned to the roles of Sentinels ,Executors , and Observers ;",
+      "importance": 0.75,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "Ruoli di agenti"
+      ],
+      "related_concepts": [
+        "Sentinels",
+        "Executors",
+        "Observers"
+      ],
+      "enables": [
+        "Assegnazione dei compiti"
+      ],
+      "part_of": [
+        "Struttura formale FBT"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "ruoli",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Componente FBT",
+        "object_type": "Insieme di agenti"
+      }
+    },
+    {
+      "subject": "E nell'FBT",
+      "definition": "In an FBT, E defines the tree structure through a set of directed edges. This matters for control flow representation. It works by connecting nodes in a directed tree.",
+      "semantic_relations": "definisce",
+      "object": "struttura ad albero con archi orientati",
+      "source": "•𝐸defines the tree structure through a set of directed edges;",
+      "importance": 0.74,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Teoria dei grafi",
+        "BT"
+      ],
+      "related_concepts": [
+        "Nodi",
+        "Controllo di flusso"
+      ],
+      "enables": [
+        "Esecuzione sequenziale/parallela"
+      ],
+      "part_of": [
+        "Struttura formale FBT"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "struttura",
+        "archi"
+      ],
+      "metadata": {
+        "subject_type": "Componente FBT",
+        "object_type": "Struttura di grafo"
+      }
+    },
+    {
+      "subject": "λ nell'FBT",
+      "definition": "In an FBT, λ is a labeling function that assigns a fuzzy formula to each node. This matters for evaluation semantics. It works by associating fuzzy conditions or computations with nodes.",
+      "semantic_relations": "assegna",
+      "object": "formula fuzzy a ciascun nodo",
+      "source": "•𝜆is a labeling function that assigns a fuzzy formula to each node.",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Formule fuzzy",
+        "Etichettatura"
+      ],
+      "related_concepts": [
+        "Valutazione nodi",
+        "t-norm/t-conorm"
+      ],
+      "enables": [
+        "Valutazione dei nodi"
+      ],
+      "part_of": [
+        "Struttura formale FBT"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "FBT",
+        "etichettatura",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Componente FBT",
+        "object_type": "Funzione"
+      }
+    },
+    {
+      "subject": "Basi di conoscenza con descrittori NL",
+      "definition": "Beliefs include a natural language descriptor useful for LLM agents. This matters for interpretability and LLM guidance. It works by storing human-readable descriptions with each atom.",
+      "semantic_relations": "includono",
+      "object": "descrittore in linguaggio naturale",
+      "source": "The former is a natural\nlanguage description of the role of the atom, which is useful for LLM agents,",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "LLM",
+        "Descrizioni semantiche"
+      ],
+      "related_concepts": [
+        "Witness set",
+        "Atomi fuzzy"
+      ],
+      "enables": [
+        "Interazione LLM-guidata"
+      ],
+      "part_of": [
+        "Base di conoscenza delle credenze ΣB"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "LLM",
+        "interpretabilità",
+        "descrizioni"
+      ],
+      "metadata": {
+        "subject_type": "Proprietà della KB",
+        "object_type": "Descrizione testuale"
+      }
+    },
+    {
+      "subject": "Vincoli green-aware in LUMI",
+      "definition": "Rules in the knowledge base may include green-aware constraints defined by the user or designer. This matters for sustainable decision-making. It works by enforcing these constraints during planning and execution.",
+      "semantic_relations": "possono_includere",
+      "object": "vincoli green-aware",
+      "source": "The rules in the knowledge base may also include constraints on how the agent should behave, in\nparticular it can deal with green-aware constraints defined by the user/designer.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione vincoli",
+        "Policy di sostenibilità"
+      ],
+      "related_concepts": [
+        "Oracle Auditor",
+        "Piano conforme"
+      ],
+      "enables": [
+        "Allineamento a obiettivi di sostenibilità"
+      ],
+      "part_of": [
+        "Regole e vincoli in LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "green-aware",
+        "vincoli",
+        "policy"
+      ],
+      "metadata": {
+        "subject_type": "Regole di sistema",
+        "object_type": "Vincolo"
+      }
+    },
+    {
+      "subject": "Esecuzione a basso livello LUMI",
+      "definition": "Low-level execution is delegated to further agents designed according to current intentions, named Sentinels, Executors, and Observers. This matters for modular scalability. It works by instantiating agents that implement parts of the FBT.",
+      "semantic_relations": "è_delegata_a",
+      "object": "Sentinels, Executors, Observers",
+      "source": "Low-level execution is delegated to further agents specifically designed according\nto the current intentions, and named Sentinels, Executors, and Observers.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "FBT",
+        "Assegnazione ruoli"
+      ],
+      "related_concepts": [
+        "Crafter",
+        "Orchestrator"
+      ],
+      "enables": [
+        "Esecuzione modulare"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esecuzione",
+        "agenti",
+        "ruoli"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Agenti"
+      }
+    },
+    {
+      "subject": "LUMI",
+      "definition": "LUMI is a framework for creating and managing utility-driven agents inspired by the BDI paradigm. This matters for structured, goal-oriented behavior. It works by combining symbolic reasoning, fuzzy control, and LLM planning.",
+      "semantic_relations": "è",
+      "object": "framework per agenti utility-driven ispirato al paradigma BDI",
+      "source": "LUMI is a framework for creating and managing\nutility-driven agents inspired by the BDI paradigm, and it is based on",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "BDI",
+        "Utilità"
+      ],
+      "related_concepts": [
+        "Stati cognitivi fuzzy",
+        "Pianificazione a due strati"
+      ],
+      "enables": [
+        "Agenti orientati all'utilità"
+      ],
+      "part_of": [
+        "Descrizione generale LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "framework",
+        "BDI",
+        "utilità"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Classificazione"
+      }
+    },
+    {
+      "subject": "LUMI in eLearning Java",
+      "definition": "In the case study, the agent ingests unstructured documentation and desired learning goals, builds a fuzzy knowledge model, formulates personalized goals, and adapts exercises in real time. This matters as a demonstration of practical integration. It works through long-term reasoning, fuzzy execution, and neural planning.",
+      "semantic_relations": "realizza",
+      "object": "valutazione, piani personalizzati, adattamento esercizi in tempo reale",
+      "source": "The agent ingests unstructured documentation about the subject and the desired\nlearning goals, and then it builds a fuzzy knowledge model, formulates personalized learning goals, and\nadapts content in real time.",
+      "importance": 0.86,
+      "confidence": 0.98,
+      "prerequisites": [
+        "Documentazione non strutturata",
+        "Modello fuzzy"
+      ],
+      "related_concepts": [
+        "Java Enterprise",
+        "Pianificazione neurale"
+      ],
+      "enables": [
+        "Apprendimento personalizzato"
+      ],
+      "part_of": [
+        "Prototipo eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "eLearning",
+        "Java",
+        "adattamento"
+      ],
+      "metadata": {
+        "subject_type": "Caso d'uso",
+        "object_type": "Funzionalità"
+      }
+    },
+    {
+      "subject": "Monitoraggio moduli concettuali",
+      "definition": "The agent monitors understanding and performance across modules such as Variables, OOP, Exception Handling, Collections, and Concurrency. This matters for curriculum-aligned progression. It works by assessing fuzzy proficiencies per module.",
+      "semantic_relations": "copre",
+      "object": "Variables, OOP, Exception Handling, Collections, Concurrency",
+      "source": "•It monitors the student’s understanding and performance across several conceptual modules (e.g.,\nVariables, OOP, Exception Handling, Collections, Concurrency).",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Moduli didattici",
+        "Valutazioni fuzzy"
+      ],
+      "related_concepts": [
+        "Proficiency",
+        "Curriculum"
+      ],
+      "enables": [
+        "Percorsi di apprendimento adattivi"
+      ],
+      "part_of": [
+        "Caso d'uso eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "monitoraggio",
+        "moduli",
+        "didattica"
+      ],
+      "metadata": {
+        "subject_type": "Funzione",
+        "object_type": "Elenco di moduli"
+      }
+    },
+    {
+      "subject": "Valutazione di competenza fuzzy",
+      "definition": "The agent uses fuzzy logic to assess the student’s proficiency, handling partial, uncertain, or imprecise information. This matters for nuanced assessment. It works with membership functions and linguistic categories.",
+      "semantic_relations": "utilizza",
+      "object": "logica fuzzy per valutare la competenza",
+      "source": "•It uses fuzzy logic to assess the student’s proficiency, handling partial, uncertain, or imprecise\ninformation.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Logica fuzzy",
+        "Categorie linguistiche"
+      ],
+      "related_concepts": [
+        "Low/Medium/High",
+        "Membership"
+      ],
+      "enables": [
+        "Valutazioni sfumate"
+      ],
+      "part_of": [
+        "Caso d'uso eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "valutazione",
+        "fuzzy",
+        "competenza"
+      ],
+      "metadata": {
+        "subject_type": "Funzione",
+        "object_type": "Tecnica"
+      }
+    },
+    {
+      "subject": "Adattamento del percorso di apprendimento",
+      "definition": "The agent adapts the learning path dynamically based on fuzzy reasoning, selecting pedagogical actions like recommending reviews, administering quizzes, or allowing progression. This matters for personalized instruction. It works by mapping fuzzy conditions to actions.",
+      "semantic_relations": "seleziona",
+      "object": "azioni pedagogiche (review, quiz, progressione)",
+      "source": "•It adapts the learning path dynamically based on fuzzy reasoning, selecting suitable pedagogical\nactions such as recommending reviews, administering quizzes, or allowing progression.",
+      "importance": 0.83,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Regole fuzzy",
+        "Politiche didattiche"
+      ],
+      "related_concepts": [
+        "Raccomandazioni",
+        "FBT"
+      ],
+      "enables": [
+        "Personalizzazione continua"
+      ],
+      "part_of": [
+        "Caso d'uso eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "adattamento",
+        "didattica",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Funzione",
+        "object_type": "Azione"
+      }
+    },
+    {
+      "subject": "Piattaforma LUMI",
+      "definition": "The platform supports natural language interaction and external application integration through the Model Context Protocol (MCP). This matters for interoperability. It works by exposing endpoints consumable by external AI clients.",
+      "semantic_relations": "supporta_integrazione_con",
+      "object": "Model Context Protocol (MCP)",
+      "source": "The platform supports natural language interaction and external application integration\nthrough the Model Context Protocol (MCP).",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "MCP",
+        "Interazione in linguaggio naturale"
+      ],
+      "related_concepts": [
+        "Endpoint",
+        "Client AI esterni"
+      ],
+      "enables": [
+        "Integrazione applicazioni esterne"
+      ],
+      "part_of": [
+        "Prototipo eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "MCP",
+        "integrazione",
+        "NLP"
+      ],
+      "metadata": {
+        "subject_type": "Piattaforma",
+        "object_type": "Protocollo"
+      }
+    },
+    {
+      "subject": "Agenti LUMI",
+      "definition": "Agents are executed via AutoGen and Lang-Graph, using JSON message formats. This matters for implementation practicality. It works by orchestrating agent interactions through these frameworks.",
+      "semantic_relations": "sono_eseguiti_via",
+      "object": "AutoGen",
+      "source": "Agents are executed via AutoGen and Lang-Graph , using JSON message formats.",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "AutoGen",
+        "JSON"
+      ],
+      "related_concepts": [
+        "Lang-Graph",
+        "Messaggistica JSON"
+      ],
+      "enables": [
+        "Esecuzione multi-agente"
+      ],
+      "part_of": [
+        "Prototipo eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "esecuzione",
+        "framework",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Implementazione",
+        "object_type": "Framework"
+      }
+    },
+    {
+      "subject": "Agenti LUMI",
+      "definition": "Agents are executed via Lang-Graph, using JSON message formats. This matters for graph-structured workflows. It works by defining flows between agent nodes.",
+      "semantic_relations": "sono_eseguiti_via",
+      "object": "Lang-Graph",
+      "source": "Agents are executed via AutoGen and Lang-Graph , using JSON message formats.",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Lang-Graph",
+        "JSON"
+      ],
+      "related_concepts": [
+        "AutoGen",
+        "Workflow"
+      ],
+      "enables": [
+        "Orchestrazione ad agenti"
+      ],
+      "part_of": [
+        "Prototipo eLearning"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "workflow",
+        "framework",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Implementazione",
+        "object_type": "Framework"
+      }
+    },
+    {
+      "subject": "Endpoint create_fuzzy_learning_session",
+      "definition": "External AI clients can call the endpoint create_fuzzy_learning_session. This matters for session initialization. It works by exposing a callable interface through the platform.",
+      "semantic_relations": "è_disponibile_come_endpoint",
+      "object": "create_fuzzy_learning_session",
+      "source": "External AI clients (e.g., Claude Desktop, Cursor) can\ncall endpoints like: create_fuzzy_learning_session ,generate_dynamic_agents , and",
+      "importance": 0.66,
+      "confidence": 1.0,
+      "prerequisites": [
+        "API",
+        "Client AI"
+      ],
+      "related_concepts": [
+        "generate_dynamic_agents",
+        "execute_fbt_simulation"
+      ],
+      "enables": [
+        "Inizializzazione sessione fuzzy"
+      ],
+      "part_of": [
+        "Interfacce della piattaforma"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "endpoint",
+        "API",
+        "sessione"
+      ],
+      "metadata": {
+        "subject_type": "Piattaforma",
+        "object_type": "Endpoint API"
+      }
+    },
+    {
+      "subject": "Endpoint generate_dynamic_agents",
+      "definition": "External AI clients can call the endpoint generate_dynamic_agents. This matters for dynamic agent creation. It works via the platform’s API.",
+      "semantic_relations": "è_disponibile_come_endpoint",
+      "object": "generate_dynamic_agents",
+      "source": "call endpoints like: create_fuzzy_learning_session ,generate_dynamic_agents , and\nexecute_fbt_simulation , enabling seamless AI-assisted education.",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "API",
+        "Gestione agenti"
+      ],
+      "related_concepts": [
+        "create_fuzzy_learning_session",
+        "execute_fbt_simulation"
+      ],
+      "enables": [
+        "Generazione di agenti dinamici"
+      ],
+      "part_of": [
+        "Interfacce della piattaforma"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "endpoint",
+        "API",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Piattaforma",
+        "object_type": "Endpoint API"
+      }
+    },
+    {
+      "subject": "Endpoint execute_fbt_simulation",
+      "definition": "External AI clients can call the endpoint execute_fbt_simulation. This matters for testing and simulating execution. It works by running FBTs via the platform.",
+      "semantic_relations": "è_disponibile_come_endpoint",
+      "object": "execute_fbt_simulation",
+      "source": "call endpoints like: create_fuzzy_learning_session ,generate_dynamic_agents , and\nexecute_fbt_simulation , enabling seamless AI-assisted education.",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "API",
+        "FBT"
+      ],
+      "related_concepts": [
+        "FBT",
+        "Simulazione"
+      ],
+      "enables": [
+        "Simulazione FBT"
+      ],
+      "part_of": [
+        "Interfacce della piattaforma"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "endpoint",
+        "API",
+        "simulazione"
+      ],
+      "metadata": {
+        "subject_type": "Piattaforma",
+        "object_type": "Endpoint API"
+      }
+    },
+    {
+      "subject": "Prestazione: inizializzazione sessione",
+      "definition": "Session initialization takes less than 5 seconds. This matters for user experience. It works by rapidly loading context and configurations.",
+      "semantic_relations": "ha_tempo_di_inizializzazione",
+      "object": "<5 seconds",
+      "source": "1 Session initialization <5 seconds Rapid startup and context loading",
+      "importance": 0.68,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Caricamento contesto"
+      ],
+      "related_concepts": [
+        "Prestazioni piattaforma"
+      ],
+      "enables": [
+        "Avvio rapido"
+      ],
+      "part_of": [
+        "Metriche di performance"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "prestazioni",
+        "latenza",
+        "startup"
+      ],
+      "metadata": {
+        "subject_type": "Prestazione",
+        "object_type": "Tempo"
+      }
+    },
+    {
+      "subject": "Prestazione: aggiornamento credenze",
+      "definition": "Belief updates have latency under 100 ms. This matters for real-time feedback. It works by efficient state updates.",
+      "semantic_relations": "ha_latenza",
+      "object": "<100 ms",
+      "source": "2 Belief update <100 ms latency Real-time feedback",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Aggiornamento stato"
+      ],
+      "related_concepts": [
+        "Feedback in tempo reale"
+      ],
+      "enables": [
+        "Interattività"
+      ],
+      "part_of": [
+        "Metriche di performance"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "prestazioni",
+        "latenza",
+        "KB"
+      ],
+      "metadata": {
+        "subject_type": "Prestazione",
+        "object_type": "Latenza"
+      }
+    },
+    {
+      "subject": "Prestazione: tempo risposta agente",
+      "definition": "Per-agent processing time is 2–5 seconds. This matters for responsiveness. It works within the agent execution pipeline.",
+      "semantic_relations": "ha_tempo_di_risposta",
+      "object": "2–5 seconds",
+      "source": "3 Agent response time 2–5 seconds Per-agent processing",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Esecuzione agenti"
+      ],
+      "related_concepts": [
+        "Pipeline agenti"
+      ],
+      "enables": [
+        "Esperienza utente accettabile"
+      ],
+      "part_of": [
+        "Metriche di performance"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "prestazioni",
+        "risposta",
+        "agenti"
+      ],
+      "metadata": {
+        "subject_type": "Prestazione",
+        "object_type": "Tempo"
+      }
+    },
+    {
+      "subject": "Prestazione: generazione piani",
+      "definition": "Plan generation time is 2–4 minutes. This matters for complex task planning. It works during high-level planning with LLM assistance.",
+      "semantic_relations": "ha_tempo_di_generazione_piano",
+      "object": "2–4 minutes",
+      "source": "4 Plan generation Time 2–4 minutes Complex task planning",
+      "importance": 0.64,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Pianificazione LLM",
+        "Validazione"
+      ],
+      "related_concepts": [
+        "Oracle",
+        "Oracle Auditor"
+      ],
+      "enables": [
+        "Strategie complesse"
+      ],
+      "part_of": [
+        "Metriche di performance"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "prestazioni",
+        "pianificazione",
+        "LLM"
+      ],
+      "metadata": {
+        "subject_type": "Prestazione",
+        "object_type": "Tempo"
+      }
+    },
+    {
+      "subject": "Prestazione: flessibilità di dominio",
+      "definition": "The platform supports multiple domains for cross-domain integration. This matters for generality. It works by abstracting agent roles and fuzzy reasoning.",
+      "semantic_relations": "supporta",
+      "object": "Multiple domains",
+      "source": "5 Domain flexibility Multiple domains Cross-domain integration",
+      "importance": 0.62,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Adozione multi-dominio"
+      ],
+      "related_concepts": [
+        "Integrazione cross-domain"
+      ],
+      "enables": [
+        "Riutilizzo in diversi contesti"
+      ],
+      "part_of": [
+        "Metriche di performance"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "domini",
+        "flessibilità",
+        "integrazione"
+      ],
+      "metadata": {
+        "subject_type": "Caratteristica",
+        "object_type": "Ambito"
+      }
+    },
+    {
+      "subject": "Pianificazione a due strati LUMI",
+      "definition": "High-level planning uses LLMs guided by symbolic tools, while low-level planning uses Fuzzy Behavior Trees. This matters to combine flexibility and control. It works by anchoring LLM outputs and translating intentions to FBTs.",
+      "semantic_relations": "combina",
+      "object": "LLM ad alto livello e FBT a basso livello",
+      "source": "LUMI risolve questo problema con un'Architettura di Pianificazione a Due Strati che sfrutta gli LLM per la strategia, mantenendoli ancorati al ragionamento simbolico e fuzzy",
+      "importance": 0.9,
+      "confidence": 0.96,
+      "prerequisites": [
+        "LLM",
+        "FBT",
+        "Ragionamento simbolico"
+      ],
+      "related_concepts": [
+        "Oracle",
+        "Crafter"
+      ],
+      "enables": [
+        "Pianificazione flessibile e controllata"
+      ],
+      "part_of": [
+        "Architettura LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "pianificazione",
+        "LLM",
+        "FBT"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Combinazione di strati"
+      }
+    },
+    {
+      "subject": "Prodotto t-norm in LUMI",
+      "definition": "The product t-norm T(a,b)=a·b is used for rule evaluation examples. This matters as a concrete aggregation choice. It works by multiplying membership degrees.",
+      "semantic_relations": "è_esempio_di",
+      "object": "t-norm usata nelle valutazioni",
+      "source": "Here 𝑇is at-norm , like the product 𝑇(𝑎, 𝑏) =𝑎·𝑏, or any other t-norm selected according to\nthe desired fuzzy behavior.",
+      "importance": 0.74,
+      "confidence": 1.0,
+      "prerequisites": [
+        "t-norm",
+        "Appartenenza fuzzy"
+      ],
+      "related_concepts": [
+        "Sequence nodes",
+        "Regole SCM/ACE"
+      ],
+      "enables": [
+        "Aggregazione antecedenti"
+      ],
+      "part_of": [
+        "Valutazione fuzzy"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "t-norm",
+        "aggregazione",
+        "fuzzy"
+      ],
+      "metadata": {
+        "subject_type": "Operatore",
+        "object_type": "Esempio di funzione"
+      }
+    },
+    {
+      "subject": "LUMI",
+      "definition": "LUMI unifies symbolic reasoning, neural planning, and fuzzy control in an interpretable and adaptive agent framework. This matters for reliable behavior in dynamic conditions. It works by layering evaluation, planning, and execution with feedback.",
+      "semantic_relations": "unifica",
+      "object": "ragionamento simbolico, pianificazione neurale, controllo fuzzy",
+      "source": "This layered architecture enables LUMI to unify symbolic reasoning, neural planning, and fuzzy\ncontrol in an interpretable and adaptive agent framework.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Ragionamento simbolico",
+        "LLM",
+        "Fuzzy control"
+      ],
+      "related_concepts": [
+        "Ciclo LUMI",
+        "Agenti specializzati"
+      ],
+      "enables": [
+        "Affidabilità e adattività"
+      ],
+      "part_of": [
+        "Descrizione generale LUMI"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "unificazione",
+        "interpretabilità",
+        "adattività"
+      ],
+      "metadata": {
+        "subject_type": "Architettura",
+        "object_type": "Capacità integrate"
       }
     }
   ]

@@ -24,7 +24,7 @@ Ti verrà passato un payload JSON con:
 
 Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, niente code block).
 
-```jsonc
+```json
 {
   "status": "pass | revise",
   "summary": "Sintesi in 1-2 frasi sul giudizio complessivo.",

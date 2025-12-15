@@ -8,8 +8,6 @@ import chromadb
 from chromadb.config import Settings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from langchain_huggingface import HuggingFaceEmbeddings
-
 
 class DocumentProcessor:
     """Gestisce l'elaborazione e l'indicizzazione dei documenti per contesti multipli"""
@@ -38,11 +36,19 @@ class DocumentProcessor:
             chunk_overlap=200,
             length_function=len,
         )
-        self.embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-        )
+        self._embeddings = None  # Lazy loading: carica solo quando necessario
         self.client = None
         self.collection = None
+
+    @property
+    def embeddings(self):
+        """Property per lazy loading del modello embedding - carica solo quando necessario"""
+        if self._embeddings is None:
+            from langchain_huggingface import HuggingFaceEmbeddings
+            self._embeddings = HuggingFaceEmbeddings(
+                model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+            )
+        return self._embeddings
 
     def initialize_db(self):
         """Inizializza il database ChromaDB per il contesto corrente"""

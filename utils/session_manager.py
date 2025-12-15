@@ -148,7 +148,8 @@ class SessionManager:
         name: Optional[str] = None,
         description: Optional[str] = None,
         tags: Optional[List[str]] = None,
-        status: Optional[str] = None
+        status: Optional[str] = None,
+        chat_history_believer: Optional[List[Dict[str, Any]]] = None
     ) -> bool:
         """Aggiorna i metadata di una sessione"""
         session_dir = self.base_dir / session_id
@@ -171,6 +172,12 @@ class SessionManager:
         metadata["last_accessed"] = datetime.now().isoformat()
 
         self._save_json(metadata_file, metadata)
+
+        # Salva la chat history di Believer in un file separato se fornita
+        if chat_history_believer is not None:
+            chat_file = session_dir / "chat_history_believer.json"
+            self._save_json(chat_file, {"messages": chat_history_believer})
+
         return True
 
     def update_session_config(

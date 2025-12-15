@@ -8,10 +8,8 @@ import re
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.document_processor import DocumentProcessor
-from utils.llm_manager import LLMManager
 from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
-from utils.auditor import ConversationAuditor
 
 BELIEVER_MODULE_GOAL = (
     "Guidare il responsabile a estrarre e formalizzare belief verificabili che supportano i desire identificati, "
@@ -27,9 +25,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Inizializza il session state (senza doc_processor che dipende dalla sessione)
-if 'llm_manager' not in st.session_state:
-    st.session_state.llm_manager = LLMManager()
+# LLMManager non viene inizializzato qui - viene caricato lazy quando serve (Configurazione Believer)
 
 if 'session_manager' not in st.session_state:
     st.session_state.session_manager = SessionManager()
@@ -62,8 +58,10 @@ if 'believer_pending_prompt' not in st.session_state:
 if 'believer_last_audited_index' not in st.session_state:
     st.session_state.believer_last_audited_index = -1
 
-if 'conversation_auditor' not in st.session_state:
-    st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
+if 'believer_specialized_chat_active' not in st.session_state:
+    st.session_state.believer_specialized_chat_active = False
+
+# conversation_auditor viene inizializzato quando serve con LLMManager
 
 # Carica il system prompt da file
 BELIEVER_SYSTEM_PROMPT = get_prompt('believer')
@@ -296,7 +294,7 @@ with st.sidebar:
         st.info(f"📚 {len(st.session_state.base_beliefs_available)} Belief di Base disponibili nel contesto")
         with st.expander("💡 Belief di Base Disponibili"):
             for idx, belief in enumerate(st.session_state.base_beliefs_available, 1):
-                belief_desc = belief.get('belief_statement', belief.get('fonte', 'N/A'))
+                belief_desc = belief.get('belief_statement', belief.get('source', 'N/A'))
                 st.markdown(f"**{idx}**. {belief_desc[:100]}...")
 
    # Quick action: Add belief manually
@@ -348,7 +346,16 @@ with st.sidebar:
 
     # Configurazione
     st.header("⚙️ Configurazione Believer")
-    
+
+    # Lazy load LLMManager e conversation_auditor quando serve
+    if 'llm_manager' not in st.session_state:
+        from utils.llm_manager import LLMManager
+        st.session_state.llm_manager = LLMManager()
+
+    if 'conversation_auditor' not in st.session_state:
+        from utils.auditor import ConversationAuditor
+        st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
+
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()
 
@@ -618,8 +625,16 @@ for idx, message in enumerate(st.session_state.believer_chat_history):
 
 believer_suggestions_placeholder = st.empty()
 
+# Gestisci la chat conversazionale per i belief specializzati
+if st.session_state.believer_specialized_chat_active and not st.session_state.base_beliefs_available:
+    # In modalità chat specializzata senza belief di base
+    pass  # La chat continuerà normalmente sotto
+elif st.session_state.believer_specialized_chat_active and st.session_state.base_beliefs_available:
+    # In modalità chat specializzata con belief di base già caricati
+    pass  # La chat continuerà normalmente sotto
+
 # Mostra i pulsanti pills se ci sono belief di base e l'utente non ha ancora scelto
-if st.session_state.base_beliefs_available and not st.session_state.base_beliefs_checked and st.session_state.believer_greeted:
+if st.session_state.base_beliefs_available and not st.session_state.base_beliefs_checked and st.session_state.believer_greeted and not st.session_state.believer_specialized_chat_active:
     st.markdown("---")
 
     # Usa columns per mettere i pulsanti in fila
@@ -633,6 +648,7 @@ if st.session_state.base_beliefs_available and not st.session_state.base_beliefs
                 "content": "1"
             })
             st.session_state.base_beliefs_checked = True
+            st.session_state.believer_specialized_chat_active = True
 
             response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire in modalità conversazionale. 🎯
 
@@ -754,6 +770,38 @@ Ecco il risultato:
                         "content": response
                     })
 
+                    # Parsing JSON per estrarre i beliefs dal mix
+                    json_match = re.search(r'```json(.*?)```', mix_response, re.DOTALL) or re.search(r'\{[\s\S]*\}', mix_response)
+                    if json_match:
+                        try:
+                            json_str = json_match.group(1).strip() if '```' in json_match.group(0) else json_match.group(0).strip()
+                            parsed_json = json.loads(json_str)
+
+                            if "beliefs" in parsed_json and isinstance(parsed_json["beliefs"], list):
+                                extracted_beliefs = []
+                                existing_ids = [b.get("id", 0) for b in st.session_state.beliefs]
+                                next_id = max(existing_ids) + 1 if existing_ids else 1
+
+                                for b in parsed_json["beliefs"]:
+                                    # Mantieni la struttura completa del belief dal JSON dell'LLM
+                                    belief_copy = b.copy()
+                                    belief_copy["id"] = next_id + len(extracted_beliefs)
+
+                                    # Aggiungi timestamp se non presente
+                                    if "timestamp" not in belief_copy:
+                                        belief_copy["timestamp"] = datetime.now().isoformat()
+
+                                    extracted_beliefs.append(belief_copy)
+
+                                if extracted_beliefs:
+                                    st.session_state.beliefs.extend(extracted_beliefs)
+                                    st.session_state.session_manager.update_bdi_data(
+                                        st.session_state.active_session,
+                                        beliefs=st.session_state.beliefs
+                                    )
+                        except (json.JSONDecodeError, Exception):
+                            pass  # Se il parsing fallisce, ignora silenziosamente
+
                 except Exception as e:
                     response = f"❌ Si è verificato un errore durante la generazione del mix: {str(e)}\n\nPuoi provare a scegliere una delle altre opzioni o contattare il supporto."
                     st.session_state.believer_chat_history.append({
@@ -774,7 +822,87 @@ if isinstance(st.session_state.believer_pending_prompt, str):
 user_prompt = st.chat_input("Scrivi il tuo messaggio...")
 prompt = auto_prompt or user_prompt
 
-if prompt:
+# Gestisci la conversazione della chat specializzata
+if st.session_state.believer_specialized_chat_active and prompt and prompt.strip() not in ["1", "2", "3"]:
+    # L'utente sta scrivendo nella chat specializzata (non è una risposta ai pulsanti)
+
+    # Add user message
+    st.session_state.believer_chat_history.append({
+        "role": "user",
+        "content": prompt
+    })
+
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Chiama l'LLM con il system prompt di Believer
+    with st.spinner("Believer sta elaborando..."):
+        try:
+            # Prepara il contesto da includere nel prompt
+            desires_context = "\n## DESIRES DELL'UTENTE:\n"
+            for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                desire_id = desire.get('id', idx)
+                desire_desc = desire.get('description', desire.get('content', 'N/A'))
+                desire_priority = desire.get('priority', 'N/A')
+                desires_context += f"- **Desire #{desire_id}**: {desire_desc} (Priorità: {desire_priority})\n"
+
+            # Prepara i parametri per la chiamata LLM
+            messages = st.session_state.believer_chat_history.copy()
+
+            # Aggiorna il messaggio di sistema per includere i desire
+            system_prompt = BELIEVER_SYSTEM_PROMPT + desires_context
+
+            # Get LLM settings from session
+            llm_settings = active_session_data['config'].get('llm_settings', {})
+            use_defaults = llm_settings.get('use_defaults', False)
+
+            # Prepara i parametri della chiamata
+            chat_params = {
+                'provider': provider,
+                'model': model,
+                'messages': messages,
+                'system_prompt': system_prompt
+            }
+
+            # Aggiungi parametri custom solo se use_defaults è False
+            if not use_defaults:
+                chat_params['temperature'] = llm_settings.get('temperature', 1.0)
+                chat_params['top_p'] = llm_settings.get('top_p', 0.95 if provider == "Gemini" else 1.0)
+
+                # Max tokens
+                if provider == "Gemini":
+                    chat_params['max_output_tokens'] = min(llm_settings.get('max_output_tokens', 8192), 8192)
+                else:
+                    chat_params['max_tokens'] = min(llm_settings.get('max_tokens', 4096), 4096)
+
+                # Reasoning effort - solo per GPT-5
+                if model and model.startswith('gpt-5'):
+                    chat_params['reasoning_effort'] = llm_settings.get('reasoning_effort', 'medium')
+
+            # Chiama l'LLM
+            response = st.session_state.llm_manager.chat(**chat_params)
+
+            # Aggiungi la risposta alla chat history
+            st.session_state.believer_chat_history.append({
+                "role": "assistant",
+                "content": response
+            })
+
+            # Mostra la risposta
+            with st.chat_message("assistant"):
+                st.markdown(response)
+
+        except Exception as e:
+            error_msg = f"❌ Errore nella chat: {str(e)}"
+            st.error(error_msg)
+            st.session_state.believer_chat_history.append({
+                "role": "assistant",
+                "content": error_msg
+            })
+
+    st.rerun()
+
+elif prompt:
     # Add user message
     st.session_state.believer_chat_history.append({
         "role": "user",
@@ -812,6 +940,7 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
         elif "1" in prompt.strip() or "creare" in prompt.lower() or "nuovi" in prompt.lower() or "specializzati" in prompt.lower() or "chat" in prompt.lower():
             # L'utente vuole creare nuovi belief specializzati
             st.session_state.base_beliefs_checked = True
+            st.session_state.believer_specialized_chat_active = True
 
             response = """Ottimo! Procediamo a creare belief specializzati sui tuoi Desire in modalità conversazionale. 🎯
 
@@ -827,7 +956,7 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
             with st.chat_message("assistant"):
                 st.markdown(response)
 
-            st.stop()
+            st.rerun()
 
         elif "3" in prompt.strip() or "mix" in prompt.lower() or "automatico" in prompt.lower():
             # L'utente vuole creare il mix automatico
@@ -914,24 +1043,15 @@ Ecco il risultato:
                                 next_id = max(existing_ids) + 1 if existing_ids else 1
 
                                 for b in parsed_json["beliefs"]:
-                                    description_parts = []
-                                    soggetto = b.get("soggetto", "")
-                                    relazione = b.get("relazione", "")
-                                    oggetto = b.get("oggetto", "")
-                                    if soggetto or relazione or oggetto:
-                                        description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
-                                    else:
-                                        description_parts.append("N/A")
+                                    # Mantieni la struttura completa del belief dal JSON dell'LLM
+                                    belief_copy = b.copy()
+                                    belief_copy["id"] = next_id + len(extracted_beliefs)
 
-                                    extracted_beliefs.append({
-                                        "id": next_id + len(extracted_beliefs),
-                                        "description": " ".join(description_parts),
-                                        "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
-                                        "confidence": "medium",
-                                        "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
-                                        "evidence": b.get("fonte", ""),
-                                        "timestamp": datetime.now().isoformat()
-                                    })
+                                    # Aggiungi timestamp se non presente
+                                    if "timestamp" not in belief_copy:
+                                        belief_copy["timestamp"] = datetime.now().isoformat()
+
+                                    extracted_beliefs.append(belief_copy)
 
                                 if extracted_beliefs:
                                     st.session_state.beliefs.extend(extracted_beliefs)
@@ -971,24 +1091,15 @@ Ecco il risultato:
                                 next_id = max(existing_ids) + 1 if existing_ids else 1
 
                                 for b in parsed_json["beliefs"]:
-                                    description_parts = []
-                                    soggetto = b.get("soggetto", "")
-                                    relazione = b.get("relazione", "")
-                                    oggetto = b.get("oggetto", "")
-                                    if soggetto or relazione or oggetto:
-                                        description_parts.append(f"{soggetto} {relazione} {oggetto}".strip())
-                                    else:
-                                        description_parts.append("N/A")
+                                    # Mantieni la struttura completa del belief dal JSON dell'LLM
+                                    belief_copy = b.copy()
+                                    belief_copy["id"] = next_id + len(extracted_beliefs)
 
-                                    extracted_beliefs.append({
-                                        "id": next_id + len(extracted_beliefs),
-                                        "description": " ".join(description_parts),
-                                        "type": b.get("metadati", {}).get("tipo_soggetto", "fact"),
-                                        "confidence": "medium",
-                                        "related_desires": [d.get("desire_id") for d in b.get("desires_correlati", [])],
-                                        "evidence": b.get("fonte", ""),
-                                        "timestamp": datetime.now().isoformat()
-                                    })
+                                    # Aggiungi timestamp se non presente
+                                    if "timestamp" not in belief_copy:
+                                        belief_copy["timestamp"] = datetime.now().isoformat()
+
+                                    extracted_beliefs.append(belief_copy)
 
                                 if extracted_beliefs:
                                     st.session_state.beliefs.extend(extracted_beliefs)

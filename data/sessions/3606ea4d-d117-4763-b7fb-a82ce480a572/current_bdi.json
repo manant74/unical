@@ -1,139 +1,1526 @@
 {
-  "domains": [
+  "domain_summary": "Organizzare un'esperienza di lavoro di 1 mese in un pub a Londra entro 3 mesi, con offerta confermata prima della partenza e focus sul rafforzamento della comunicazione pratica.",
+  "beneficiario": {
+    "beneficiario_name": "Aspirante Pub Worker Breve Periodo",
+    "beneficiario_description": "Persona che vuole lavorare in un pub a Londra per 4 settimane entro i prossimi 3 mesi, con inglese base e necessità di migliorare la comunicazione pratica sul lavoro. Obiettivo: ottenere rapidamente un impiego, sostenere colloqui efficacemente e gestire le interazioni tipiche del pub in autonomia."
+  },
+  "desires": [
     {
-      "domain_summary": "Analisi strategica per la creazione di un corso di lingua inglese di livello B1, specificamente mirato a soddisfare le esigenze di studenti liceali che si preparano per un viaggio.",
-      "personas": [
-        {
-          "persona_name": "Il Liceale in Partenza",
-          "persona_description": "Studente di liceo, tipicamente tra i 16 e i 18 anni, motivato a imparare l'inglese non per obbligo scolastico, ma in preparazione a un'esperienza di viaggio a Londra. Il suo obiettivo primario è l'indipendenza e la sicurezza nelle interazioni sociali reali.",
-          "desires": [
-            {
-              "desire_id": "P1-D1",
-              "desire_statement": "Sentirsi sicuro e disinvolto nelle interazioni sociali informali, come ordinare in un pub o chiacchierare con coetanei, per godersi appieno l'esperienza del viaggio.",
-              "motivation": "Paura dell'imbarazzo e del giudizio sociale. Forte bisogno di autostima, di essere accettato e di vivere un'esperienza di viaggio autentica e senza ansie, sentendosi parte del contesto e non un turista goffo.",
-              "success_metrics": [
-                "Riuscire a ordinare da bere e scambiare qualche battuta senza bloccarsi.",
-                "Intraprendere una breve conversazione con un coetaneo senza sentirsi a disagio.",
-                "Tornare a casa dal viaggio con la sensazione di essersela cavata brillantemente nelle situazioni sociali."
-              ]
-            },
-            {
-              "desire_id": "P1-D2",
-              "desire_statement": "Avere una pronuncia abbastanza chiara e naturale da non diventare un ostacolo alla comunicazione o una fonte di imbarazzo.",
-              "motivation": "La paura di essere giudicato o deriso per il proprio accento. Il bisogno di essere compreso facilmente per avere conversazioni fluide e non sentirsi 'lo straniero che parla male'.",
-              "success_metrics": [
-                "Non dover ripetere più volte una frase perché non viene capito.",
-                "Vedere che l'interlocutore capisce al primo colpo.",
-                "Notare che la conversazione prosegue senza intoppi legati alla pronuncia."
-              ]
-            }
-          ]
-        }
-      ]
+      "desire_id": "D1",
+      "desire_statement": "Desidero ottenere un impiego temporaneo di 1 mese in un pub a Londra con ruolo, orari e retribuzione chiari prima della partenza o entro la prima settimana sul posto.",
+      "motivation": "Vivere un’esperienza internazionale coprendo i costi e riducendo gli imprevisti.",
+      "success_metrics": [
+        "Inviare almeno 10 candidature mirate a pub in 2 settimane",
+        "Ottenere almeno 3 colloqui (in presenza o da remoto) entro 2 settimane dall’avvio delle candidature",
+        "Ricevere 1 offerta confermata per iscritto con paga oraria e turni definiti, con data di inizio entro la prima settimana a Londra"
+      ],
+      "priority": "medium"
+    },
+    {
+      "desire_id": "D2",
+      "desire_statement": "Desidero comunicare in inglese con sicurezza nelle attività tipiche del pub (colloquio, presa ordini, indicazioni del supervisore e interazione con i clienti).",
+      "motivation": "Lavorare in autonomia e fare una buona impressione fin dal primo turno.",
+      "success_metrics": [
+        "Sostenere un colloquio di 15 minuti comprendendo almeno l’80% delle domande al primo ascolto",
+        "Prendere e confermare gli ordini di 10 clienti consecutivi senza fraintendimenti",
+        "Comprendere e seguire istruzioni operative per eseguire 3 task di fila senza chiedere traduzioni",
+        "Padroneggiare almeno 50 termini chiave del contesto pub (bevande, ordini, pagamenti, allergeni, policy ID)"
+      ],
+      "priority": "medium"
+    },
+    {
+      "desire_id": "D3",
+      "desire_statement": "Desidero presentarmi in modo professionale per ruoli da pub (CV in inglese, breve presentazione, referenze) così da ottenere colloqui e trial shifts.",
+      "motivation": "Aumentare le chance di essere selezionato rapidamente.",
+      "success_metrics": [
+        "CV in inglese di una pagina aggiornato e allineato al ruolo",
+        "Breve pitch personale di 30–45 secondi pronto per colloqui e candidature a freddo",
+        "Almeno 2 referenze contattabili inserite nel CV",
+        "Ottenere almeno 1 invito a trial shift entro 3 settimane dall’inizio delle candidature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "desire_id": "D4",
+      "desire_statement": "Desidero gestire in autonomia le principali procedure operative del pub durante i turni.",
+      "motivation": "Ridurre errori, alleggerire il carico del team e ricevere feedback positivo.",
+      "success_metrics": [
+        "Completare un trial shift ricevendo feedback positivo dal supervisore",
+        "Eseguire senza errori almeno 4 su 5 procedure chiave: spillatura base, gestione pagamenti, apertura/chiusura comande, spiegazione policy ID, registrazione allergeni",
+        "Gestire picchi brevi (es. 10 minuti di afflusso) mantenendo accuratezza negli ordini"
+      ],
+      "priority": "medium"
     }
   ],
   "beliefs": [
     {
-      "soggetto": "Livello di competenza B1",
-      "relazione": "permette_di_gestire",
-      "oggetto": "maggior parte delle situazioni di vita quotidiana in un paese anglofono",
-      "fonte": "Riesci a gestire la maggior parte delle situazioni della vita quotidiana come ad esempio comunicare in un paese dove l’inglese è una lingua locale.",
-      "metadati": {
-        "tipo_soggetto": "Livello di competenza",
-        "tipo_oggetto": "Capacità"
+      "subject": "Occupazione temporanea in pub a Londra - requisiti legali",
+      "definition": "Per ottenere un impiego (anche di 1 mese) in un pub a Londra, il datore deve verificare il diritto al lavoro del candidato prima dell'assunzione; senza tale requisito è improbabile ricevere un'offerta scritta.",
+      "semantic_relations": "richiede",
+      "object": "diritto al lavoro nel Regno Unito verificabile dal datore",
+      "source": "Inferenza basata sul Desire D1 (offerta scritta e impiego in UK)",
+      "importance": 0.95,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Documento d'identità valido",
+        "Prova del diritto al lavoro (es. visto/stato)",
+        "Documentazione conforme ai controlli pre-assunzione UK"
+      ],
+      "related_concepts": [
+        "Pre-employment checks",
+        "Offerta scritta",
+        "Right to Work"
+      ],
+      "enables": [
+        "Emissione offerta scritta",
+        "Avvio contratto"
+      ],
+      "part_of": [
+        "Processo di assunzione hospitality UK"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "UK",
+        "lavoro",
+        "diritto_al_lavoro",
+        "hospitality"
+      ],
+      "metadata": {
+        "subject_type": "Requisito legale",
+        "object_type": "Condizione",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D1",
-          "livello_rilevanza": "CRITICO",
-          "spiegazione": "Definisce il requisito fondamentale per raggiungere la sicurezza in contesti pratici e informali come ordinare in un pub."
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Ottenere offerta scritta per lavoro di 1 mese in pub a Londra"
         }
-      ]
+      ],
+      "id": 1,
+      "timestamp": "2025-12-15T11:26:41.619660"
     },
     {
-      "soggetto": "Livello di competenza B1",
-      "relazione": "permette_di_entrare_in",
-      "oggetto": "conversazioni relative a temi quotidiani",
-      "fonte": "Entri nelle conversazioni relative ai temi quotidiani",
-      "metadati": {
-        "tipo_soggetto": "Livello di competenza",
-        "tipo_oggetto": "Capacità"
+      "subject": "Impiego di 1 mese in pub a Londra - canali efficaci",
+      "definition": "Ruoli di durata 1 mese sono più accessibili tramite agenzie di lavoro temporaneo e piattaforme di copertura turni in hospitality, rispetto a candidature dirette standard.",
+      "semantic_relations": "è_facilitato_da",
+      "object": "utilizzo di agenzie di somministrazione e piattaforme di cover shifts in hospitality",
+      "source": "Inferenza basata sul Desire D1 (durata 1 mese e rapidità)",
+      "importance": 0.85,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Disponibilità date precise",
+        "Registrazione presso agenzie/piattaforme",
+        "Documentazione pre-assuntiva pronta"
+      ],
+      "related_concepts": [
+        "Seasonal/peak cover",
+        "Trial shift",
+        "Somministrazione"
+      ],
+      "enables": [
+        "Offerte rapide",
+        "Programmazione turni prima della partenza"
+      ],
+      "part_of": [
+        "Strategia di ricerca lavoro"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "temp",
+        "hospitality",
+        "Londra",
+        "cover_shifts"
+      ],
+      "metadata": {
+        "subject_type": "Strategia",
+        "object_type": "Canale di reclutamento",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D1",
-          "livello_rilevanza": "ALTO",
-          "spiegazione": "Supporta specificamente l'obiettivo di 'chiacchierare con coetanei', indicando la capacità di partecipare attivamente a scambi informali."
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Offerta scritta prima della partenza per lavoro in pub"
         }
-      ]
+      ],
+      "id": 2,
+      "timestamp": "2025-12-15T11:26:41.619672"
     },
     {
-      "soggetto": "Descrizioni del livello B1",
-      "relazione": "non_specificano",
-      "oggetto": "uno standard per qualità o naturalezza della pronuncia",
-      "fonte": "Sintesi basata sull'assenza di informazioni specifiche sulla pronuncia nella sezione B1 e la loro presenza nelle sezioni B2/C1.",
-      "metadati": {
-        "tipo_soggetto": "Descrizione di competenza",
-        "tipo_oggetto": "Standard qualitativo"
+      "subject": "Offerta scritta per pub a Londra - contenuti minimi",
+      "definition": "Per garantire chiarezza su ruolo, orari e retribuzione, l'offerta scritta (email/lettera) dovrebbe includere elementi chiave prima della partenza.",
+      "semantic_relations": "dovrebbe_includere",
+      "object": "ruolo, retribuzione oraria, sede, turni/ore previste, data di inizio, eventuale trial shift e termini di pagamento",
+      "source": "Inferenza basata sul Desire D1 (chiarezza pre-partenza)",
+      "importance": 0.9,
+      "confidence": 0.75,
+      "prerequisites": [
+        "Selezione positiva",
+        "Allineamento disponibilità",
+        "Scambio email con HR/manager"
+      ],
+      "related_concepts": [
+        "Offer letter",
+        "Zero-hours/contract types",
+        "Pay schedule"
+      ],
+      "enables": [
+        "Decisione informata",
+        "Pianificazione viaggio"
+      ],
+      "part_of": [
+        "Buone pratiche HR UK"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "offerta",
+        "trasparenza",
+        "contratto",
+        "UK"
+      ],
+      "metadata": {
+        "subject_type": "Linea guida",
+        "object_type": "Checklist contenuti",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D2",
-          "livello_rilevanza": "CRITICO",
-          "spiegazione": "Evidenzia che il raggiungimento del B1 standard non garantisce una pronuncia di qualità, giustificando la necessità di un focus specifico e di guardare a modelli di livello superiore."
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Offerta scritta e dettagli chiari prima della partenza"
         }
-      ]
+      ],
+      "id": 3,
+      "timestamp": "2025-12-15T11:26:41.619674"
     },
     {
-      "soggetto": "Livello di competenza B2",
-      "relazione": "include_capacità_di",
-      "oggetto": "interagire con una certa fluidità",
-      "fonte": "Sono in grado di interagire con una certa fluidità e comunicare facilmente.",
-      "metadati": {
-        "tipo_soggetto": "Livello di competenza",
-        "tipo_oggetto": "Capacità qualitativa"
+      "subject": "Colloqui e preselezione da remoto per pub a Londra",
+      "definition": "Nel settore hospitality londinese, preselezione e primi colloqui possono avvenire da remoto; a seguire si pianifica un trial shift all'arrivo.",
+      "semantic_relations": "sono_comunemente_condotti_via",
+      "object": "videochiamata o telefono",
+      "source": "Inferenza basata sui Desire D1 e D3 (risposte/colloqui da remoto)",
+      "importance": 0.8,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Profilo professionale aggiornato",
+        "Disponibilità per fasce orarie UK",
+        "Connessione stabile"
+      ],
+      "related_concepts": [
+        "Trial shift",
+        "Pre-screening",
+        "Remote hiring"
+      ],
+      "enables": [
+        "Offerta preliminare",
+        "Pianificazione trial entro prima settimana"
+      ],
+      "part_of": [
+        "Processo di selezione hospitality"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "colloquio_remoto",
+        "hospitality",
+        "Londra"
+      ],
+      "metadata": {
+        "subject_type": "Prassi di selezione",
+        "object_type": "Canale",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D2",
-          "livello_rilevanza": "ALTO",
-          "spiegazione": "Fornisce una prima definizione concreta di 'fluidità', un obiettivo qualitativo per la pronuncia da integrare nel livello B1."
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Offerta confermata prima della partenza"
+        },
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Ottenere risposte e colloqui da remoto"
         }
-      ]
+      ],
+      "id": 4,
+      "timestamp": "2025-12-15T11:26:41.619675"
     },
     {
-      "soggetto": "Interazione di livello B2",
-      "relazione": "risulta",
-      "oggetto": "regolare e senza sforzo per l'interlocutore madrelingua",
-      "fonte": "...possibile un'interazione regolare e senza sforzo per l'interlocutore madrelingua...",
-      "metadati": {
-        "tipo_soggetto": "Tipo di interazione",
-        "tipo_oggetto": "Caratteristica qualitativa"
+      "subject": "Inglese operativo per pub - livello target",
+      "definition": "Per gestire colloqui, ordini al banco, indicazioni del supervisore e interazioni con i clienti, un livello B1 è in genere adeguato; A2 può funzionare in contesti semplici con frasi memorizzate.",
+      "semantic_relations": "è_generalmente_adeguato_a",
+      "object": "livello CEFR B1 in ascolto e produzione orale",
+      "source": "Inferenza basata sul Desire D2 e sui descrittori CEFR",
+      "importance": 0.92,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Valutazione livello iniziale",
+        "Piano di studio mirato su listening e speaking"
+      ],
+      "related_concepts": [
+        "CEFR",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "enables": [
+        "Comunicazione sicura",
+        "Autonomia in turno",
+        "Performance al trial"
+      ],
+      "part_of": [
+        "Obiettivi linguistici pre-partenza"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "CEFR",
+        "pub",
+        "inglese",
+        "listening",
+        "speaking"
+      ],
+      "metadata": {
+        "subject_type": "Target di competenza",
+        "object_type": "Livello linguistico",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D2",
-          "livello_rilevanza": "CRITICO",
-          "spiegazione": "Definisce una metrica chiave per il successo del desire, in quanto 'non creare ostacoli alla comunicazione' si traduce in 'interazione senza sforzo' per chi ascolta."
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Comunicare in inglese con sicurezza nelle attività del pub"
+        },
+        {
+          "desire_id": "D4",
+          "relevance_level": "MEDIO",
+          "definition": "Gestire procedure operative durante i turni"
         }
-      ]
+      ],
+      "id": 5,
+      "timestamp": "2025-12-15T11:26:41.619677"
     },
     {
-      "soggetto": "Livello di competenza C1",
-      "relazione": "include_capacità_di",
-      "oggetto": "esprimersi con scioltezza e naturalezza",
-      "fonte": "Esprimersi con scioltezza, naturalezza e in modo efficace...",
-      "metadati": {
-        "tipo_soggetto": "Livello di competenza",
-        "tipo_oggetto": "Capacità qualitativa"
+      "subject": "Piano di apprendimento inglese per B1 in 3 mesi",
+      "definition": "Per passare da A2 a B1 prima della partenza, è realistico pianificare 60-90 ore di studio strutturato e 20-30 ore di pratica situazionale (roleplay, conversazioni reali).",
+      "semantic_relations": "richiede",
+      "object": "studio guidato 60-90 ore + pratica situazionale 20-30 ore",
+      "source": "Inferenza basata sul Desire D2 (tempo 3 mesi) e best practice formative",
+      "importance": 0.85,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Valutazione diagnostica iniziale",
+        "Materiali/coach o corso",
+        "Calendario settimanale"
+      ],
+      "related_concepts": [
+        "Didattica attiva",
+        "Roleplay",
+        "Listening intensivo"
+      ],
+      "enables": [
+        "Sicurezza comunicativa pre-partenza",
+        "Miglioramento misurabile"
+      ],
+      "part_of": [
+        "Pianificazione pre-partenza"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "B1",
+        "studio",
+        "3_mesi",
+        "learning_plan"
+      ],
+      "metadata": {
+        "subject_type": "Piano di studio",
+        "object_type": "Carico orario",
+        "source_type": "generated"
       },
-      "desires_correlati": [
+      "related_desires": [
         {
-          "desire_id": "P1-D2",
-          "livello_rilevanza": "ALTO",
-          "spiegazione": "Definisce l'ideale di qualità della pronuncia a cui aspirare, fornendo un modello di riferimento ('stella polare') per l'obiettivo."
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Comunicare in inglese con sicurezza prima della partenza"
         }
-      ]
+      ],
+      "id": 6,
+      "timestamp": "2025-12-15T11:26:41.619678"
+    },
+    {
+      "subject": "Allenamento linguistico per ruoli da pub - metodi efficaci",
+      "definition": "Simulazioni pratiche e lessico specifico del pub accelerano la sicurezza comunicativa in contesti reali.",
+      "semantic_relations": "dovrebbe_includere",
+      "object": "roleplay operativo, lessico di menu/allergeni, simulazioni di presa ordini e gestione reclami",
+      "source": "Inferenza basata sul Desire D2 e su metodologie didattiche efficaci",
+      "importance": 0.88,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Materiali di scenario",
+        "Feedback da tutor/coach",
+        "Registrazioni per autoanalisi"
+      ],
+      "related_concepts": [
+        "Didattica attiva",
+        "Apprendimento situato",
+        "Customer service"
+      ],
+      "enables": [
+        "Performance al colloquio",
+        "Trial shift riuscito"
+      ],
+      "part_of": [
+        "Preparazione operativa"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodologia",
+        "roleplay",
+        "hospitality",
+        "allergeni"
+      ],
+      "metadata": {
+        "subject_type": "Metodologia",
+        "object_type": "Tecniche pratiche",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Sicurezza in inglese per colloquio e interazioni in pub"
+        },
+        {
+          "desire_id": "D4",
+          "relevance_level": "MEDIO",
+          "definition": "Autonomia nelle procedure operative"
+        }
+      ],
+      "id": 7,
+      "timestamp": "2025-12-15T11:26:41.619679"
+    },
+    {
+      "subject": "CV per ruoli da pub (UK)",
+      "definition": "Un CV efficace per il mercato UK privilegia chiarezza e prove di risultati; includere disponibilità (1 mese), competenze chiave, e referenze accelera i colloqui.",
+      "semantic_relations": "dovrebbe_essere",
+      "object": "breve (1 pagina), orientato a risultati e responsabilità in hospitality, senza foto, con disponibilità e referenze",
+      "source": "Inferenza basata sul Desire D3 (presentazione professionale)",
+      "importance": 0.9,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Raccolta esperienze rilevanti",
+        "Adattamento a standard UK",
+        "Proofreading in inglese"
+      ],
+      "related_concepts": [
+        "Personal statement",
+        "Parole chiave hospitality",
+        "Referenze"
+      ],
+      "enables": [
+        "Risposte e colloqui da remoto",
+        "Invito a trial shift"
+      ],
+      "part_of": [
+        "Toolkit candidatura UK"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "CV",
+        "UK",
+        "hospitality",
+        "presentazione"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Linee guida CV",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Presentarsi in modo professionale per ottenere colloqui e trial"
+        }
+      ],
+      "id": 8,
+      "timestamp": "2025-12-15T11:26:41.619680"
+    },
+    {
+      "subject": "Presentazione breve professionale (elevator pitch) per pub",
+      "definition": "Una presentazione concisa in inglese aumenta la conversione a colloqui e trial, chiarendo subito valore e disponibilità.",
+      "semantic_relations": "dovrebbe_durare",
+      "object": "20-30 secondi con esperienza, punti di forza e disponibilità",
+      "source": "Inferenza basata sul Desire D3 (breve presentazione) e D2",
+      "importance": 0.8,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Script e prove su video",
+        "Feedback madrelingua/coach"
+      ],
+      "related_concepts": [
+        "Self-introduction",
+        "Storytelling",
+        "Soft skills"
+      ],
+      "enables": [
+        "Impatto al colloquio",
+        "Chiarezza dell'offerta di valore"
+      ],
+      "part_of": [
+        "Personal branding"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "pitch",
+        "intervista",
+        "inglese"
+      ],
+      "metadata": {
+        "subject_type": "Tecnica di presentazione",
+        "object_type": "Script",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Presentazione professionale per ottenere colloqui"
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Comunicare con sicurezza"
+        }
+      ],
+      "id": 9,
+      "timestamp": "2025-12-15T11:26:41.619682"
+    },
+    {
+      "subject": "Referenze per ruoli da pub",
+      "definition": "Nel mercato UK le referenze sono spesso verificate; predisporle in anticipo velocizza l'offerta scritta.",
+      "semantic_relations": "dovrebbero_includere",
+      "object": "contatto di 1-2 ex responsabili e breve attestazione",
+      "source": "Inferenza basata sul Desire D3 e D1",
+      "importance": 0.82,
+      "confidence": 0.85,
+      "prerequisites": [
+        "Consenso dei referenti",
+        "Dati di contatto aggiornati",
+        "Breve lettera/nota di referenza"
+      ],
+      "related_concepts": [
+        "Reference check",
+        "Background check"
+      ],
+      "enables": [
+        "Offerta scritta più rapida",
+        "Affidabilità percepita"
+      ],
+      "part_of": [
+        "Dossier candidatura"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "referenze",
+        "UK",
+        "assunzione"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Referenze",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Presentarsi in modo professionale (referenze)"
+        },
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Ottenere offerta scritta"
+        }
+      ],
+      "id": 10,
+      "timestamp": "2025-12-15T11:26:41.619683"
+    },
+    {
+      "subject": "Trial shift in pub - fattori di successo",
+      "definition": "I trial shift valutano soprattutto affidabilità e aderenza alle procedure; prepararsi a standard tipici aumenta le chance di offerta.",
+      "semantic_relations": "dipende_da",
+      "object": "puntualità, standard di servizio, comunicazione chiara, gestione pagamenti e allergeni",
+      "source": "Inferenza basata sui Desire D1 e D4",
+      "importance": 0.86,
+      "confidence": 0.75,
+      "prerequisites": [
+        "Brief iniziale con supervisore",
+        "Conoscenza menu/bevande",
+        "Comprensione procedure cassa"
+      ],
+      "related_concepts": [
+        "Customer journey",
+        "Allergen policy",
+        "Cash handling"
+      ],
+      "enables": [
+        "Esito positivo del trial",
+        "Offerta formale"
+      ],
+      "part_of": [
+        "Processo di selezione hospitality"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "trial_shift",
+        "standard_servizio",
+        "allergeni",
+        "pagamenti"
+      ],
+      "metadata": {
+        "subject_type": "Valutazione operativa",
+        "object_type": "Criteri",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Gestire procedure operative in autonomia"
+        },
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Ottenere impiego con offerta scritta"
+        }
+      ],
+      "id": 11,
+      "timestamp": "2025-12-15T11:26:41.619684"
+    },
+    {
+      "subject": "Procedure operative standard (SOP) del pub - nucleo essenziale",
+      "definition": "Conoscere e applicare le SOP di base permette autonomia in turno e riduce errori operativi.",
+      "semantic_relations": "include",
+      "object": "apertura/chiusura, cash/till, standard di spillatura e misure, allergeni e sicurezza, gestione sala e reclami",
+      "source": "Inferenza basata sul Desire D4",
+      "importance": 0.9,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Checklists operative",
+        "Formazione iniziale",
+        "Affiancamento breve"
+      ],
+      "related_concepts": [
+        "Checklists",
+        "Food safety",
+        "Service standards"
+      ],
+      "enables": [
+        "Gestione autonoma del turno",
+        "Riduzione incidenti e reclami"
+      ],
+      "part_of": [
+        "Manuale operativo del pub"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SOP",
+        "pub",
+        "operazioni"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elenco attività",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Autonomia nelle procedure operative"
+        }
+      ],
+      "id": 12,
+      "timestamp": "2025-12-15T11:26:41.619685"
+    },
+    {
+      "subject": "Regole chiave per servizio alcolici nel Regno Unito",
+      "definition": "Una consapevolezza minima delle regole su età, sicurezza e allergeni è attesa dagli esercenti e riduce rischi durante i turni.",
+      "semantic_relations": "comprende",
+      "object": "Challenge 25, rifiuto servizio a minori/intossicati, responsabilità allergeni",
+      "source": "Inferenza basata sul Desire D4 (procedure operative sicure)",
+      "importance": 0.84,
+      "confidence": 0.75,
+      "prerequisites": [
+        "Brief normativo dal datore",
+        "Materiali di policy visibili in sede"
+      ],
+      "related_concepts": [
+        "Licensing laws",
+        "Customer safety",
+        "Due diligence"
+      ],
+      "enables": [
+        "Conformità operativa",
+        "Servizio responsabile"
+      ],
+      "part_of": [
+        "Compliance operativa del pub"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "UK",
+        "regolamenti",
+        "alcol",
+        "allergeni"
+      ],
+      "metadata": {
+        "subject_type": "Conoscenza normativa",
+        "object_type": "Principi",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Gestire in autonomia le procedure operative"
+        }
+      ],
+      "id": 13,
+      "timestamp": "2025-12-15T11:26:41.619686"
+    },
+    {
+      "subject": "Canali di ricerca lavoro per pub a Londra (pre-partenza)",
+      "definition": "Usare canali specifici del settore aumenta le risposte e la possibilità di fissare colloqui e trial prima della partenza.",
+      "semantic_relations": "dovrebbe_utilizzare",
+      "object": "portali hospitality (Caterer.com, Indeed, Reed, CV-Library), gruppi social e candidature dirette a pub",
+      "source": "Inferenza basata sui Desire D1 e D3",
+      "importance": 0.83,
+      "confidence": 0.8,
+      "prerequisites": [
+        "CV/cover letter in inglese",
+        "Profilo LinkedIn aggiornato",
+        "Messaggi di candidatura brevi e mirati"
+      ],
+      "related_concepts": [
+        "Outbound applications",
+        "Networking locale",
+        "Agenzie per hospitality"
+      ],
+      "enables": [
+        "Colloqui e offerte entro 3 mesi",
+        "Trial nella prima settimana in loco"
+      ],
+      "part_of": [
+        "Piano di ricerca lavoro"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "ricerca_lavoro",
+        "hospitality",
+        "Londra",
+        "pre-partenza"
+      ],
+      "metadata": {
+        "subject_type": "Strategia",
+        "object_type": "Canali",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Ottenere impiego di 1 mese con offerta scritta"
+        },
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Ottenere risposte e colloqui da remoto"
+        }
+      ],
+      "id": 14,
+      "timestamp": "2025-12-15T11:26:41.619687"
+    },
+    {
+      "subject": "Pianificazione timeline 3 mesi per offerta scritta",
+      "definition": "Una pianificazione per fasi aumenta la probabilità di ottenere un'offerta scritta prima della partenza.",
+      "semantic_relations": "si_articola_in",
+      "object": "mese 1 preparazione (CV/pitch/inglese), mese 2 applicazioni e colloqui, mese 3 trial e offerta",
+      "source": "Inferenza basata sui Desire D1-D3 (deadline 3 mesi)",
+      "importance": 0.8,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Obiettivi settimanali",
+        "Monitoraggio candidature",
+        "Slot orari per colloqui UK"
+      ],
+      "related_concepts": [
+        "Project management personale",
+        "OKR/KPI individuali"
+      ],
+      "enables": [
+        "Monitoraggio progresso",
+        "Decisioni tempestive"
+      ],
+      "part_of": [
+        "Roadmap pre-partenza"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "timeline",
+        "3_mesi",
+        "pianificazione"
+      ],
+      "metadata": {
+        "subject_type": "Piano",
+        "object_type": "Sequenza fasi",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Offerta scritta entro 3 mesi"
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Migliorare l’inglese prima della partenza"
+        },
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Ottenere risposte e colloqui da remoto"
+        }
+      ],
+      "id": 15,
+      "timestamp": "2025-12-15T11:26:41.619688"
+    },
+    {
+      "subject": "Documenti per onboarding in pub UK",
+      "definition": "Avere i documenti pronti accelera contrattualizzazione e retribuzione nelle prime settimane.",
+      "semantic_relations": "include",
+      "object": "ID, diritto al lavoro, coordinate bancarie UK o alternative, NI number (o domanda), indirizzo per busta paga",
+      "source": "Inferenza basata sul Desire D1 (inizio entro prima settimana)",
+      "importance": 0.78,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Raccolta documenti",
+        "Eventuale appuntamento per NI",
+        "Account bancario o soluzione di pagamento"
+      ],
+      "related_concepts": [
+        "Onboarding",
+        "Payroll",
+        "Compliance"
+      ],
+      "enables": [
+        "Inizio lavoro fluido",
+        "Pagamenti puntuali"
+      ],
+      "part_of": [
+        "Preparazione pre-assunzione"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "onboarding",
+        "documenti",
+        "UK"
+      ],
+      "metadata": {
+        "subject_type": "Checklist",
+        "object_type": "Documentazione",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Inizio lavoro e chiarezza amministrativa"
+        }
+      ],
+      "id": 16,
+      "timestamp": "2025-12-15T11:26:41.619689"
+    },
+    {
+      "subject": "Condizioni per accettare un'offerta di 1 mese",
+      "definition": "Verificare questi elementi riduce rischi di sotto-impiego durante il mese di lavoro.",
+      "semantic_relations": "dovrebbe_verificare",
+      "object": "turni minimi garantiti, retribuzione oraria netta attesa, eventuali straordinari, politiche di ferie",
+      "source": "Inferenza basata sul Desire D1 (chiarezza su orari e retribuzione)",
+      "importance": 0.76,
+      "confidence": 0.7,
+      "prerequisites": [
+        "Offerta scritta ricevuta",
+        "Q&A con il manager"
+      ],
+      "related_concepts": [
+        "Scheduling",
+        "Minimum hours",
+        "Overtime policy"
+      ],
+      "enables": [
+        "Decisione informata",
+        "Allineamento aspettative"
+      ],
+      "part_of": [
+        "Due diligence candidato"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "offerta",
+        "condizioni",
+        "retribuzione"
+      ],
+      "metadata": {
+        "subject_type": "Decisione",
+        "object_type": "Criteri",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Chiarezza su ruolo, orari e retribuzione prima della partenza"
+        }
+      ],
+      "id": 17,
+      "timestamp": "2025-12-15T11:26:41.619690"
+    },
+    {
+      "subject": "CEFR (Quadro comune europeo di riferimento per le lingue)",
+      "definition": "Il CEFR è uno strumento per descrivere le abilità linguistiche. È importante per scegliere materiali e corsi adeguati. Funziona come standard per comparare livelli e risultati.",
+      "semantic_relations": "è",
+      "object": "uno strumento per descrivere le abilità linguistiche",
+      "source": "Il Quadro comune europeo di riferimento per la conoscenza delle lingue (CEFR)...",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Valutazione linguistica"
+      ],
+      "related_concepts": [
+        "Livelli A1-C2",
+        "IELTS",
+        "Aptis ESOL",
+        "Cambridge"
+      ],
+      "enables": [
+        "Allineamento corsi e certificazioni"
+      ],
+      "part_of": [
+        "Standard europei"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "CEFR",
+        "standard",
+        "valutazione"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Descrizione",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Definire un target linguistico per lavorare in pub"
+        }
+      ],
+      "id": 18,
+      "timestamp": "2025-12-15T11:26:41.619691"
+    },
+    {
+      "subject": "CEFR (Quadro comune europeo di riferimento per le lingue)",
+      "definition": "Il CEFR definisce sei livelli da A1 a C2, organizzati in tre blocchi. È importante per classificare l’utente come base, autonomo o avanzato. Copre abilità di parlare, leggere, ascoltare e scrivere.",
+      "semantic_relations": "ha_livelli",
+      "object": "sei livelli da A1 a C2 divisi in blocchi A (base), B (autonomo), C (avanzato)",
+      "source": "Il CEFR ha sei livelli, da A1 per principianti, fino a C2...",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Conoscenza CEFR"
+      ],
+      "related_concepts": [
+        "Descrittori abilità"
+      ],
+      "enables": [
+        "Scelta del corso adeguato"
+      ],
+      "part_of": [
+        "Struttura CEFR"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "livelli",
+        "A1-C2",
+        "classificazione"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Struttura livelli",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Stabilire livello e percorso di studio"
+        }
+      ],
+      "id": 19,
+      "timestamp": "2025-12-15T11:26:41.619692"
+    },
+    {
+      "subject": "Descrizione CEFR A2 (British Council)",
+      "definition": "Il livello A2 indica uso di espressioni frequenti nelle situazioni quotidiane. È importante per utenti base. Consolida la comunicazione di routine.",
+      "semantic_relations": "descrive_competenze",
+      "object": "comunicare utilizzando espressioni usate di frequente nelle situazioni quotidiane",
+      "source": "British Council - descrizione livello A2",
+      "importance": 0.66,
+      "confidence": 1.0,
+      "prerequisites": [
+        "A1"
+      ],
+      "related_concepts": [
+        "CEFR"
+      ],
+      "enables": [
+        "Interazioni quotidiane"
+      ],
+      "part_of": [
+        "Descrizione dei livelli"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "A2",
+        "CEFR",
+        "descrizione"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Descrittore livello",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Punto di partenza per raggiungere B1"
+        }
+      ],
+      "id": 20,
+      "timestamp": "2025-12-15T11:26:41.619693"
+    },
+    {
+      "subject": "Descrizione CEFR B1 (British Council)",
+      "definition": "Il livello B1 corrisponde alla comprensione di informazioni su argomenti familiari. È importante per autonomia iniziale. Abilita partecipazione a conversazioni comuni.",
+      "semantic_relations": "descrive_competenze",
+      "object": "comprendere informazioni su argomenti familiari",
+      "source": "British Council - descrizione livello B1",
+      "importance": 0.66,
+      "confidence": 1.0,
+      "prerequisites": [
+        "A2"
+      ],
+      "related_concepts": [
+        "CEFR"
+      ],
+      "enables": [
+        "Autonomia comunicativa"
+      ],
+      "part_of": [
+        "Descrizione dei livelli"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "B1",
+        "CEFR",
+        "descrizione"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Descrittore livello",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Target di sicurezza comunicativa per lavoro in pub"
+        }
+      ],
+      "id": 21,
+      "timestamp": "2025-12-15T11:26:41.619694"
+    },
+    {
+      "subject": "Descrizione CEFR B2 (British Council)",
+      "definition": "Il livello B2 permette di comprendere idee principali di testi complessi e interagire con fluidità. È importante per contesti accademici e professionali. Supporta comunicazione efficace.",
+      "semantic_relations": "descrive_competenze",
+      "object": "comprendere le idee principali di testi complessi e comunicare facilmente con una certa fluidità",
+      "source": "British Council - descrizione livello B2",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "B1"
+      ],
+      "related_concepts": [
+        "CEFR"
+      ],
+      "enables": [
+        "Studio e lavoro in inglese"
+      ],
+      "part_of": [
+        "Descrizione dei livelli"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "B2",
+        "CEFR",
+        "descrizione"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Descrittore livello",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Livello avanzato utile ma non strettamente necessario"
+        }
+      ],
+      "id": 22,
+      "timestamp": "2025-12-15T11:26:41.619696"
+    },
+    {
+      "subject": "Metodologia formativa dei corsi di inglese",
+      "definition": "La metodologia è interattiva e segue la didattica attiva per adulti. È importante perché favorisce l’apprendimento esperienziale. Alterna lezioni teoriche, esercitazioni pratiche, casi studio e lavori di gruppo.",
+      "semantic_relations": "utilizza",
+      "object": "approccio metodologico interattivo seguendo la logica della didattica attiva per adulti",
+      "source": "Metodologia formativa - didattica attiva per adulti",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Progettazione didattica"
+      ],
+      "related_concepts": [
+        "Lezioni teoriche",
+        "Esercitazioni pratiche",
+        "Lavori di gruppo",
+        "Simulazioni (roleplay)"
+      ],
+      "enables": [
+        "Apprendimento attivo"
+      ],
+      "part_of": [
+        "Impianto metodologico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodologia",
+        "didattica_attiva",
+        "adulti"
+      ],
+      "metadata": {
+        "subject_type": "Metodologia",
+        "object_type": "Approccio",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Praticare inglese in contesti di pub"
+        }
+      ],
+      "id": 23,
+      "timestamp": "2025-12-15T11:26:41.619697"
+    },
+    {
+      "subject": "Metodologia formativa dei corsi di inglese",
+      "definition": "Il contesto situazionale e lessicale delle attività è mirato. È importante per la spendibilità in ambito lavorativo e quotidiano. Le esercitazioni si riferiscono agli aspetti della vita professionale e quotidiana.",
+      "semantic_relations": "è_inerente_a",
+      "object": "vari aspetti della vita professionale e quotidiana",
+      "source": "Metodologia formativa - contesti professionali e quotidiani",
+      "importance": 0.66,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Scelta contenuti"
+      ],
+      "related_concepts": [
+        "Apprendimento contestualizzato"
+      ],
+      "enables": [
+        "Trasferibilità competenze"
+      ],
+      "part_of": [
+        "Impianto metodologico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "contestualizzazione",
+        "professionale",
+        "quotidiano"
+      ],
+      "metadata": {
+        "subject_type": "Metodologia",
+        "object_type": "Contesto",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Allenarsi su situazioni di pub"
+        }
+      ],
+      "id": 24,
+      "timestamp": "2025-12-15T11:26:41.619698"
+    },
+    {
+      "subject": "Selezione per l'accesso al corso di inglese",
+      "definition": "La selezione in ingresso verifica i prerequisiti didattici dei candidati. È rilevante per assegnare il livello corretto e garantire omogeneità in aula. Si attua tramite un test di ingresso.",
+      "semantic_relations": "prevede",
+      "object": "test di ingresso atto a valutare i prerequisiti didattici espressi",
+      "source": "Modalità di selezione: test di ingresso",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Candidatura al corso"
+      ],
+      "related_concepts": [
+        "Prerequisiti didattici",
+        "Placement test"
+      ],
+      "enables": [
+        "Assegnazione livello",
+        "Ammissione al corso"
+      ],
+      "part_of": [
+        "Criteri di ammissione"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "selezione",
+        "test",
+        "ammissione"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Strumento di valutazione",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Valutare il livello prima di iniziare"
+        }
+      ],
+      "id": 25,
+      "timestamp": "2025-12-15T11:26:41.619699"
+    },
+    {
+      "subject": "Valutazioni corso di lingua inglese (generale)",
+      "definition": "Il corso prevede prove in ingresso e in uscita per misurare livello e apprendimento. Sono importanti per il posizionamento e la verifica degli esiti formativi.",
+      "semantic_relations": "prevede",
+      "object": "Prove a inizio corso per stabilire il livello e a fine corso per verificare l’apprendimento",
+      "source": "Prove a inizio e fine corso",
+      "importance": 0.77,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Iscrizione",
+        "Calendario prove"
+      ],
+      "related_concepts": [
+        "Placement test",
+        "Valutazione finale"
+      ],
+      "enables": [
+        "Personalizzazione didattica",
+        "Certificazione esiti"
+      ],
+      "part_of": [
+        "Valutazione formativa"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "valutazione",
+        "prove",
+        "apprendimento"
+      ],
+      "metadata": {
+        "subject_type": "Corso",
+        "object_type": "Attività di valutazione",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Misurare i progressi prima della partenza"
+        }
+      ],
+      "id": 26,
+      "timestamp": "2025-12-15T11:26:41.619700"
+    },
+    {
+      "subject": "Corso di lingua inglese (generale)",
+      "definition": "Il corso ha una durata definita e un calendario compatibile con i lavoratori. Le lezioni si svolgono per un totale di 60 ore.",
+      "semantic_relations": "ha_durata_di",
+      "object": "60 ore",
+      "source": "Durata corso 60 ore",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Iscrizione attiva"
+      ],
+      "related_concepts": [
+        "Calendario didattico",
+        "Cadenza bisettimanale"
+      ],
+      "enables": [
+        "Pianificazione studio"
+      ],
+      "part_of": [
+        "Struttura corso"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "durata",
+        "orario",
+        "didattica"
+      ],
+      "metadata": {
+        "subject_type": "Corso",
+        "object_type": "Ore",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Programmare un percorso fino a B1"
+        }
+      ],
+      "id": 27,
+      "timestamp": "2025-12-15T11:26:41.619701"
+    },
+    {
+      "subject": "Calendario corso di lingua inglese (generale)",
+      "definition": "Il calendario del corso è pensato per lavoratori, con lezioni preserali o serali e cadenza bisettimanale.",
+      "semantic_relations": "ha_frequenza",
+      "object": "orario preserale/serale con cadenza bisettimanale",
+      "source": "Frequenza preserale/serale bisettimanale",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Pianificazione personale"
+      ],
+      "related_concepts": [
+        "Durata corso 60 ore"
+      ],
+      "enables": [
+        "Partecipazione compatibile con lavoro"
+      ],
+      "part_of": [
+        "Struttura corso"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "orari",
+        "frequenza",
+        "formazione_continua"
+      ],
+      "metadata": {
+        "subject_type": "Calendario",
+        "object_type": "Modalità frequenza",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "BASSO",
+          "definition": "Organizzare lo studio prima della partenza"
+        }
+      ],
+      "id": 28,
+      "timestamp": "2025-12-15T11:26:41.619702"
+    },
+    {
+      "subject": "Attestato finale corso di inglese (generale)",
+      "definition": "L’attestato di frequenza con profitto certifica la partecipazione e l’esito positivo. È utile come evidenza nel CV.",
+      "semantic_relations": "viene_rilasciato",
+      "object": "attestato di frequenza con profitto",
+      "source": "Titolo/riconoscimento: attestato di frequenza con profitto",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Frequenza minima",
+        "Prova finale"
+      ],
+      "related_concepts": [
+        "Certificazione interna"
+      ],
+      "enables": [
+        "Prova di competenza per CV"
+      ],
+      "part_of": [
+        "Esiti formativi"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "attestato",
+        "riconoscimento",
+        "CV"
+      ],
+      "metadata": {
+        "subject_type": "Titolo",
+        "object_type": "Documento",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "MEDIO",
+          "definition": "Presentarsi in modo professionale sul CV"
+        }
+      ],
+      "id": 29,
+      "timestamp": "2025-12-15T11:26:41.619703"
+    },
+    {
+      "subject": "Corso di lingua inglese - livello pre-intermedio",
+      "definition": "Il corso B1 mira a comprendere discorsi chiari su argomenti di immediata rilevanza, muoversi con disinvoltura in viaggio e produrre testi semplici.",
+      "semantic_relations": "ha_come_obiettivo",
+      "object": "comprendere discorsi chiari; gestire situazioni in viaggio; produrre testi semplici e descrivere esperienze",
+      "source": "Obiettivi formativi livello B1",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Conoscenze elementari",
+        "Test di ingresso"
+      ],
+      "related_concepts": [
+        "CEFR B1",
+        "Interazione pratica"
+      ],
+      "enables": [
+        "Autonomia comunicativa sul lavoro",
+        "Preparazione colloqui"
+      ],
+      "part_of": [
+        "Offerta corsi inglese"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "B1",
+        "obiettivi",
+        "comprensione",
+        "produzione"
+      ],
+      "metadata": {
+        "subject_type": "Corso",
+        "object_type": "Obiettivo formativo",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Comunicare in inglese con sicurezza"
+        }
+      ],
+      "id": 30,
+      "timestamp": "2025-12-15T11:26:41.619704"
+    },
+    {
+      "subject": "Mappatura CEFR-IELTS (A2)",
+      "definition": "La mappatura collega il livello A2 a IELTS 3.5, utile per interpretare risultati d’esame rispetto al CEFR.",
+      "semantic_relations": "corrisponde_a",
+      "object": "A2 = IELTS 3.5",
+      "source": "Tabella di equivalenza CEFR-IELTS",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tabella di equivalenza"
+      ],
+      "related_concepts": [
+        "British Council",
+        "Aptis ESOL"
+      ],
+      "enables": [
+        "Interpretazione punteggi",
+        "Definizione target"
+      ],
+      "part_of": [
+        "Mappatura CEFR-IELTS"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "CEFR",
+        "IELTS",
+        "equivalenza"
+      ],
+      "metadata": {
+        "subject_type": "Mappatura",
+        "object_type": "Equivalenza livello-punteggio",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "BASSO",
+          "definition": "Orientamento certificazioni"
+        }
+      ],
+      "id": 31,
+      "timestamp": "2025-12-15T11:26:41.619706"
+    },
+    {
+      "subject": "Mappatura CEFR-IELTS (B2)",
+      "definition": "La mappatura per B2 definisce IELTS 5.5-6.5, utile per contesti lavorativi dove è richiesta maggiore autonomia.",
+      "semantic_relations": "corrisponde_a",
+      "object": "B2 = IELTS 5.5-6.5",
+      "source": "Tabella di equivalenza CEFR-IELTS",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tabella di equivalenza"
+      ],
+      "related_concepts": [
+        "Aptis ESOL G/T"
+      ],
+      "enables": [
+        "Valutazione idoneità B2"
+      ],
+      "part_of": [
+        "Mappatura CEFR-IELTS"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "CEFR",
+        "IELTS",
+        "B2"
+      ],
+      "metadata": {
+        "subject_type": "Mappatura",
+        "object_type": "Intervallo punteggio",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "BASSO",
+          "definition": "Benchmark di livello ambizioso"
+        }
+      ],
+      "id": 32,
+      "timestamp": "2025-12-15T11:26:41.619706"
     }
-  ]
+  ],
+  "intentions": []
 }

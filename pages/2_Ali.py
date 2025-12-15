@@ -8,7 +8,6 @@ import re
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.document_processor import DocumentProcessor
-from utils.llm_manager import LLMManager
 from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
 from utils.context_manager import ContextManager
@@ -30,9 +29,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Inizializza il session state (senza doc_processor che dipende dalla sessione)
-if 'llm_manager' not in st.session_state:
-    st.session_state.llm_manager = LLMManager()
+# LLMManager non viene inizializzato qui - viene caricato lazy quando serve (Configurazione Alì)
 
 if 'session_manager' not in st.session_state:
     st.session_state.session_manager = SessionManager()
@@ -56,8 +53,7 @@ if 'ali_suggestions' not in st.session_state:
 if 'ali_pending_prompt' not in st.session_state:
     st.session_state.ali_pending_prompt = None
 
-if 'conversation_auditor' not in st.session_state:
-    st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
+# conversation_auditor viene inizializzato quando serve con LLMManager
 
 # Carica la sessione attiva se presente
 # Se non c'è active_session, prova a caricare l'ultima sessione attiva
@@ -281,6 +277,14 @@ with st.sidebar:
 
     # Configurazione
     st.header("⚙️ Configurazione Alì")
+
+    # Lazy load LLMManager e conversation_auditor quando serve
+    if 'llm_manager' not in st.session_state:
+        from utils.llm_manager import LLMManager
+        st.session_state.llm_manager = LLMManager()
+
+    if 'conversation_auditor' not in st.session_state:
+        st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
 
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()

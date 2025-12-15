@@ -212,15 +212,24 @@ graph TD
 
 ```json
 {
-  "soggetto": "JWST",
-  "relazione": "è_gestito_da",
-  "oggetto": "NASA",
-  "fonte": "Porzione esatta del testo originale",
-  "metadati": {
-    "tipo_soggetto": "Telescopio Spaziale",
-    "tipo_oggetto": "Agenzia Spaziale"
-  },
-  "rilevanza": "Pertinente al Desire 1, perché la NASA gestisce il budget della missione."
+  "subject": "JWST",
+  "definition": "Il James Webb Space Telescope è gestito dalla NASA in collaborazione con l'ESA e la CSA. Questa partnership internazionale è fondamentale per il successo della missione e la sostenibilità del budget complessivo.",
+  "semantic_relations": "è_gestito_da",
+  "object": "NASA",
+  "source": "Porzione esatta del testo originale",
+  "importance": 0.9,
+  "confidence": 1.0,
+  "prerequisites": ["Agenzia spaziale", "Collaborazione internazionale"],
+  "related_concepts": ["ESA", "CSA", "Budget management"],
+  "enables": ["Governance della missione", "Allocazione risorse"],
+  "part_of": ["Struttura gestionale JWST"],
+  "sub_concepts": ["Coordinamento NASA", "Partnership internazionali"],
+  "tags": ["governance", "budget", "collaboration"],
+  "metadata": {
+    "subject_type": "Telescopio Spaziale",
+    "object_type": "Agenzia Spaziale",
+    "rilevanza": "Pertinente al Desire 1, perché la NASA gestisce il budget della missione."
+  }
 }
 ```
 
@@ -271,15 +280,24 @@ Ogni belief DEVE includere:
 {
   "beliefs": [
     {
-      "soggetto": "Budget annuale progetto JWST (NASA)",
-      "relazione": "ammonta_a",
-      "oggetto": "circa 800 milioni di dollari",
-      "fonte": "...il cui budget annuale per il progetto è di circa 800 milioni di dollari...",
-      "metadati": {
-        "tipo_soggetto": "Budget del progetto",
-        "tipo_oggetto": "Valore monetario"
-      },
-      "rilevanza": "Fatto CRUCIALE per il Desire 1 (Valutare i costi), quantifica direttamente un costo di gestione."
+      "subject": "Budget annuale progetto JWST",
+      "definition": "Il budget annuale del progetto JWST ammonta a circa 800 milioni di dollari, rappresentando un investimento significativo nella ricerca astronomica moderna. Questo costo è suddiviso tra le agenzie partner (NASA, ESA, CSA) e influenza direttamente la sostenibilità e la governance della missione.",
+      "semantic_relations": "ammonta_a",
+      "object": "circa 800 milioni di dollari",
+      "source": "...il cui budget annuale per il progetto è di circa 800 milioni di dollari...",
+      "importance": 0.95,
+      "confidence": 1.0,
+      "prerequisites": ["Missione spaziale", "Analisi finanziaria"],
+      "related_concepts": ["Finanziamento internazionale", "Allocazione risorse", "Sostenibilità progetto"],
+      "enables": ["Valutazione costi-benefici", "Decisioni di governance"],
+      "part_of": ["Piano finanziario JWST"],
+      "sub_concepts": ["Distribuzione budget tra partner", "Costi operativi"],
+      "tags": ["budget", "finanziamento", "costi"],
+      "metadata": {
+        "subject_type": "Budget del progetto",
+        "object_type": "Valore monetario",
+        "rilevanza": "Fatto CRUCIALE per il Desire 1 (Valutare i costi), quantifica direttamente un costo di gestione."
+      }
     }
   ]
 }
