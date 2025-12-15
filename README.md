@@ -473,12 +473,21 @@ Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato s
   ],
   "beliefs": [
     {
-      "soggetto": "Entità soggetto",
-      "relazione": "Tipo di relazione",
-      "oggetto": "Entità oggetto",
-      "fonte": "Fonte testuale",
-      "metadati": {"tipo_soggetto": "Tipo di entità", "tipo_oggetto": "Tipo di entità"},
-      "desires_correlati": [{"desire_id": "D1", "livello_rilevanza": "CRITICO", "spiegazione": "Spiegazione della correlazione"}]
+      "subject": "Entità soggetto",
+      "definition": "Descrizione breve: WHAT it is, WHY it matters, HOW it works",
+      "semantic_relations": "tipo_di_relazione",
+      "object": "Entità oggetto",
+      "source": "Fonte testuale",
+      "importance": 0.85,
+      "confidence": 0.9,
+      "prerequisites": ["Concetto prerequisito"],
+      "related_concepts": ["Concetto correlato"],
+      "enables": ["Concetto abilitato"],
+      "part_of": ["Concetto padre"],
+      "sub_concepts": ["Sottoconcetto"],
+      "tags": ["tag1", "tag2"],
+      "metadata": {"subject_type": "Tipo di entità", "object_type": "Tipo di entità"},
+      "related_desires": [{"desire_id": "D1", "relevance_level": "CRITICO", "definition": "Spiegazione della correlazione"}]
     }
   ],
   "intentions": []
@@ -498,7 +507,26 @@ Per modificare un prompt:
 2. Modifica il contenuto
 3. Riavvia l'applicazione (o usa `clear_cache()` da `utils.prompts` per ricaricare)
 
-## 🆕 Nuove Funzionalità (v2.5 - Ottobre 2025)
+## 🆕 Nuove Funzionalità (v2.6 - Dicembre 2025)
+
+### Messaggi di Attesa Variabili e Simpatici
+
+Sistema di messaggi dinamici per migliorare l'esperienza utente durante l'elaborazione LLM:
+
+- **25 messaggi unici** sulla gestione della conoscenza e fantascienza
+- **Selezione casuale** ad ogni elaborazione in Alì e Believer
+- **Mix equilibrato**: 7 messaggi originali + 18 riferimenti fantascientifici (Borges, Asimov, Star Trek, Blade Runner, Dick, Star Wars)
+- **Nuovo modulo**: `utils/ui_messages.py` con funzione `get_random_thinking_message()`
+
+**Esempi**:
+- "Consultando la Biblioteca di Babele..."
+- "Attivando i neuroni positronici..."
+- "Decodificando le lacrime nella pioggia dei dati..."
+- "Cercando nella lato oscuro della Forza..."
+
+---
+
+## Nuove Funzionalità (v2.5 - Ottobre 2025)
 
 ### Sistema di Gestione Sessioni Enterprise
 
@@ -572,15 +600,15 @@ Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-
 
 ```json
 {
-  "soggetto": "Entità principale del fatto",
+  "subject": "Entità principale del fatto",
   "relazione": "Verbo o proprietà che lega soggetto e oggetto",
-  "oggetto": "Entità o valore collegato",
-  "fonte": "Testo esatto da cui è estratta l'informazione",
-  "metadati": {
-    "tipo_soggetto": "Tipo dell'entità soggetto",
-    "tipo_oggetto": "Tipo dell'entità oggetto"
+  "object": "Entità o valore collegato",
+  "source": "Testo esatto da cui è estratta l'informazione",
+  "metadata": {
+    "subject_type": "Tipo dell'entità soggetto",
+    "object_type": "Tipo dell'entità oggetto"
   },
-  "desires_correlati": [
+  "related_desires": [
     {
       "desire_id": "P1-D1",
       "livello_rilevanza": "CRITICO|ALTO|MEDIO|BASSO",

@@ -27,7 +27,6 @@ L'output DEVE essere ESCLUSIVAMENTE un blocco di codice JSON valido senza alcun 
 - `"tags"`: ["domain_tag1", "domain_tag2"],
 - `"metadata"`: Un oggetto contenente informazioni aggiuntive, come il tipo di entità. Deve contenere `"subject_type"` e `"object_type"`.
 
-
 ## 4. REGOLE E VINCOLI FONDAMENTALI
 
 1. **Fattualità Assoluta**: Estrai SOLO informazioni esplicitamente presenti nel testo. Non fare inferenze, supposizioni o aggiungere conoscenza esterna.

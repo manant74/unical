@@ -6,6 +6,71 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## Release - 2025-12-15
+
+### 🤖 Miglioramenti Prompts
+
+- Alì: modifica del prompt per la generazione dei Desire allineato a nuovo standard Json:
+
+```json
+{
+  "desire_id": "D1",
+  "desire_statement": "Formulazione chiara del desiderio dal punto di vista del beneficiario.",
+  "motivation": "Motivazione profonda (perché questo desire è importante).",
+  "success_metrics": [
+    "Indicatore di successo #1",
+    "Indicatore di successo #2"
+  ]
+}
+```
+
+- Believer: modifica del prompt del Believer per generare Beliefs secondo nuovo standard Json. Aggiornamento di tutte le componenti applicative che facevano uso dei belief i json:
+
+```json
+{
+  "subject": "Entità soggetto",
+  "definition": "Descrizione breve: WHAT it is, WHY it matters, HOW it works",
+  "semantic_relations": "tipo_di_relazione",
+  "object": "Entità oggetto",
+  "source": "Fonte testuale",
+  "importance": 0.85,
+  "confidence": 0.9,
+  "prerequisites": ["Concetto prerequisito"],
+  "related_concepts": ["Concetto correlato"],
+  "enables": ["Concetto abilitato"],
+  "part_of": ["Concetto padre"],
+  "sub_concepts": ["Sottoconcetto"],
+  "tags": ["tag1", "tag2"],
+  "metadata": {"subject_type": "Tipo di entità", "object_type": "Tipo di entità"},
+  "related_desires": [{"desire_id": "D1", "relevance_level": "CRITICO", "definition": "Spiegazione della correlazione"}]
+}
+```
+
+- Rimozione logica dei chackpoint dai vari prompt
+
+- Revisione del prompt di Alì per generare i desire individuando i maniera più chiara persone e beneficiari
+
+### ✨ Features
+
+- no elements
+
+### ✨ UI/UX Improvements
+
+- Gestone messaggi personalizzati nelle fasi in cui LLM pensa e sta elaborando
+- Sempligicazione modulo Knol
+
+### 🔧 Bug Fix e Miglioramenti
+
+#### **Believer Module**
+
+- Risolto problema su chat Believer che rimaneva bloccata
+
+#### Miglioramenti Auditor
+
+- Ottimizzazione logica di controllo e validazione
+- Miglioramento finalizzazione JSON delle risposte
+- Doppio passaggio di verifica per maggiore affidabilità
+
 ## Release - 2025-11-15
 
 ### 🎨 Home Page Redesign
@@ -26,9 +91,9 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - **Revisione Layout Sidebar**:
 
-#### Alì Agent 
+#### Alì Agent
 
-- Modificato il comportamento dell'Agente per indirizzare l'utente a definire un solo beneficiario, con l'Auditor che agisce in retroazione su Alì per garantire che l'agente guidi l'utente a definire il beneficiario prioritario  
+- Modificato il comportamento dell'Agente per indirizzare l'utente a definire una sola personas, con l'Auditor che agisce in retroazione sul Alì per garantire che l'agente guidi l'utente a definire la singola personas  
 
 #### Believer Agent
 
@@ -45,11 +110,11 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### 📊 Compass - Analytics Dashboard (WIP)
 
 - **Nuova tab Analytics**: Dashboard completo per analisi BDI in [Compass](pages/0_Compass.py)
-  - **Statistiche aggregate**: Metriche su desires, beliefs, coverage e domains/beneficiari
+  - **Statistiche aggregate**: Metriche su desires, beliefs, coverage e domains/personas
   - **Grafici interattivi** (Plotly):
   - **Grafo delle relazioni**: Visualizzazione interattiva rete Desire-Belief
 
-#### UI Improvements
+#### UI Improvements 2
 
 - Ottimizzazione Spazi
 
@@ -164,14 +229,14 @@ data/contexts/
 - Integrazione in **Believer**: Auditor valida beliefs estratti
 - UI per visualizzazione feedback auditor
 
-### 🤖 Miglioramenti Prompts
+### 🤖 Miglioramenti Prompts old
 
 #### Ali System Prompt
 
 - **Ristrutturazione completa** del prompt per Ali
 - Migliore guida per estrazione desires
 - Istruzioni più chiare per formato JSON
-- Supporto per domini e beneficiari
+- Supporto per domini e personas
 
 #### Belief Base Extraction
 
