@@ -12,6 +12,7 @@ from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
 from utils.context_manager import ContextManager
 from utils.auditor import ConversationAuditor
+from utils.ui_messages import get_random_thinking_message
 
 ALI_MODULE_GOAL = (
     "Guidare il responsabile di dominio a raccogliere e formalizzare desire concreti, "
@@ -302,31 +303,34 @@ with st.sidebar:
         else:
             default_provider = "Gemini" if "Gemini" in available_providers else available_providers[0]
 
-        provider = st.selectbox(
-            "Provider LLM",
-            available_providers,
-            index=available_providers.index(default_provider),
-            key="ali_provider",
-            help="Provider configurato dalla sessione attiva"
-        )
-
-        if provider:
-            models = st.session_state.llm_manager.get_models_for_provider(provider)
-            # Usa il modello della sessione come default
-            session_model = active_session_data['config'].get('llm_model')
-            if session_model and session_model in models:
-                default_model = session_model
-            else:
-                default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
-
-            model = st.selectbox(
-                "Modello",
-                options=list(models.keys()),
-                format_func=lambda x: models[x],
-                index=list(models.keys()).index(default_model),
-                key="ali_model",
-                help="Modello configurato dalla sessione attiva"
+        col_config1, col_config2 = st.columns(2)
+        with col_config1:
+            provider = st.selectbox(
+                "Provider LLM",
+                available_providers,
+                index=available_providers.index(default_provider),
+                key="ali_provider",
+                help="Provider configurato dalla sessione attiva"
             )
+
+        with col_config2:
+            if provider:
+                models = st.session_state.llm_manager.get_models_for_provider(provider)
+                # Usa il modello della sessione come default
+                session_model = active_session_data['config'].get('llm_model')
+                if session_model and session_model in models:
+                    default_model = session_model
+                else:
+                    default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
+
+                model = st.selectbox(
+                    "Modello",
+                    options=list(models.keys()),
+                    format_func=lambda x: models[x],
+                    index=list(models.keys()).index(default_model),
+                    key="ali_model",
+                    help="Modello configurato dalla sessione attiva"
+                )
 
     st.divider()
 
@@ -583,7 +587,7 @@ if prompt:
         st.markdown(prompt)
 
     # Get context from RAG + beneficiario corrente
-    with st.spinner("Sto pensando..."):
+    with st.spinner(get_random_thinking_message()):
         try:
             # Lazy initialization del database (solo al primo uso)
             if not st.session_state.get('doc_processor_initialized', False):
@@ -651,6 +655,22 @@ if prompt:
 
             with st.chat_message("assistant"):
                 st.markdown(response)
+
+            # Visualizzazione compressa del RAG context e beneficiario
+            with st.expander("📚 Dettagli RAG & Contesto", expanded=False):
+                if beneficiario_ctx:
+                    st.markdown("**👤 Beneficiario Contesto:**")
+                    st.markdown(beneficiario_ctx)
+                    st.divider()
+
+                if rag_results and rag_results['documents'] and rag_results['documents'][0]:
+                    st.markdown("**📖 Documenti RAG Recuperati:**")
+                    for i, (doc, metadata) in enumerate(zip(rag_results['documents'][0], rag_results['metadatas'][0] if 'metadatas' in rag_results else [{}] * len(rag_results['documents'][0])), 1):
+                        source = metadata.get('source', 'Unknown') if isinstance(metadata, dict) else 'Unknown'
+                        with st.expander(f"Documento {i} - {source}", expanded=False):
+                            st.markdown(doc)
+                else:
+                    st.info("Nessun documento RAG utilizzato per questa risposta")
 
             auditor_result = None
             auditor = st.session_state.get("conversation_auditor")

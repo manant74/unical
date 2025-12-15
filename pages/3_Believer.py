@@ -10,6 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils.document_processor import DocumentProcessor
 from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
+from utils.ui_messages import get_random_thinking_message
 
 BELIEVER_MODULE_GOAL = (
     "Guidare il responsabile a estrarre e formalizzare belief verificabili che supportano i desire identificati, "
@@ -703,7 +704,7 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
             st.session_state.base_beliefs_checked = True
 
             # Avvia il processo automatico di mix
-            with st.spinner("Sto analizzando i Desire e selezionando i Belief di Base rilevanti..."):
+            with st.spinner(get_random_thinking_message()):
                 try:
                     # Prepara il contesto per l'LLM
                     desires_context = "DESIRES DELL'UTENTE:\n"
@@ -836,7 +837,7 @@ if st.session_state.believer_specialized_chat_active and prompt and prompt.strip
         st.markdown(prompt)
 
     # Chiama l'LLM con il system prompt di Believer
-    with st.spinner("Believer sta elaborando..."):
+    with st.spinner(get_random_thinking_message()):
         try:
             # Prepara il contesto da includere nel prompt
             desires_context = "\n## DESIRES DELL'UTENTE:\n"
@@ -891,6 +892,26 @@ if st.session_state.believer_specialized_chat_active and prompt and prompt.strip
             # Mostra la risposta
             with st.chat_message("assistant"):
                 st.markdown(response)
+
+            # Visualizzazione compressa del RAG context e Desires
+            with st.expander("📚 Dettagli Contesto & Desires", expanded=False):
+                if st.session_state.loaded_desires:
+                    st.markdown("**🎯 Desires dell'Utente:**")
+                    for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                        desire_id = desire.get('id', idx)
+                        desire_desc = desire.get('description', desire.get('content', 'N/A'))
+                        desire_priority = desire.get('priority', 'N/A')
+                        st.markdown(f"- **#{desire_id}**: {desire_desc} (Priorità: {desire_priority})")
+                    st.divider()
+
+                if st.session_state.base_beliefs_available:
+                    st.markdown("**💡 Belief di Base Disponibili:**")
+                    for idx, belief in enumerate(st.session_state.base_beliefs_available, 1):
+                        belief_desc = belief.get('belief_statement', belief.get('source', 'N/A'))
+                        with st.expander(f"Belief Base {idx}", expanded=False):
+                            st.markdown(belief_desc)
+                else:
+                    st.info("Nessun belief di base disponibile")
 
         except Exception as e:
             error_msg = f"❌ Errore nella chat: {str(e)}"
@@ -963,7 +984,7 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
             st.session_state.base_beliefs_checked = True
 
             # Avvia il processo automatico di mix
-            with st.spinner("Sto analizzando i Desire e selezionando i Belief di Base rilevanti..."):
+            with st.spinner(get_random_thinking_message()):
                 try:
                     # Prepara il contesto per l'LLM
                     desires_context = "DESIRES DELL'UTENTE:\n"
