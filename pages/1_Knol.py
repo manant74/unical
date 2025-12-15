@@ -9,7 +9,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.document_processor import DocumentProcessor
 from utils.context_manager import ContextManager
-from utils.llm_manager import LLMManager
 
 st.set_page_config(
     page_title="Knol - LumIA Studio",
@@ -42,12 +41,31 @@ if 'doc_processor' not in st.session_state or st.session_state.get('context_chan
     else:
         st.session_state.doc_processor = None
 
-if 'llm_manager' not in st.session_state:
-    st.session_state.llm_manager = LLMManager()
+# LLMManager non viene inizializzato qui - viene caricato lazy quando serve (Estrai Belief)
 
 # Inizializza flag per modale editor
 if 'show_belief_editor' not in st.session_state:
     st.session_state.show_belief_editor = False
+
+# Funzione helper per caricare i belief base
+def load_belief_count():
+    """Carica il conteggio dei beliefs dal file (lazy loading)"""
+    if not st.session_state.current_context:
+        return 0
+
+    belief_base_path = st.session_state.context_manager.get_belief_base_path(
+        st.session_state.current_context
+    )
+
+    if not os.path.exists(belief_base_path):
+        return 0
+
+    try:
+        with open(belief_base_path, 'r', encoding='utf-8') as f:
+            belief_base = json.load(f)
+            return len(belief_base.get('beliefs_base', []))
+    except:
+        return 0
 
 # Funzione dialog per editor beliefs
 @st.dialog("📝 Editor Beliefs", width="large")
@@ -368,11 +386,33 @@ if current_ctx:
 
 st.divider()
 
+# Carica statistiche una volta sola
+stats = st.session_state.doc_processor.get_stats()
+sources = st.session_state.doc_processor.get_all_sources()
+
 # Layout a due colonne
-col1, col2 = st.columns([2, 1])
+col1, col2 = st.columns([1.5, 1])
 
 with col1:
-    st.subheader("📤 Carica Fonti")
+    # Stato della Knowledge Base
+    st.markdown("#### 📊 Stato Knowledge Base")
+    # Metriche principali in row orizzontale
+    metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+    with metric_col1:
+        st.metric("Chunks", stats['document_count'])
+    with metric_col2:
+        st.metric("Fonti", len(sources))
+    with metric_col3:
+        belief_count = load_belief_count()
+        st.metric("Beliefs", belief_count)
+    with metric_col4:
+        # Valuta altri KPI
+        avg_chunks_per_source = round(stats['document_count'] / len(sources), 1) if sources else 0
+        st.metric("Chunk/Fonte", avg_chunks_per_source)
+
+    st.divider()
+
+    st.markdown("#### 📤 Carica Fonti")
 
     # Tabs per diversi tipi di input
     tab1, tab2, tab3, tab4 = st.tabs(["📕 PDF", "🌐 Pagine Web", "📑 File di Testo", "📋 Markdown"])
@@ -487,69 +527,29 @@ with col1:
                     except Exception as e:
                         st.error(f"❌ Errore durante l'elaborazione di {md_file.name}: {str(e)}")
 
-    # Test della ricerca
+    # Suggerimento
     st.markdown("---")
-    st.markdown(" ")
-    st.subheader("🔍 Test sulla Knowledge Base")
+    st.markdown("💡 **Suggerimento**: Dopo aver caricato le fonti, estrai i Belief Base e passa ad **Alì** per definire i tuoi Desire.")
+    # Pulsanti per estrarre belief base, editor e cancellare contesto
+    st.markdown("---")
 
-    col_test1, col_test2 = st.columns([3, 1])
+    btn_col1, btn_col2, btn_col3 = st.columns(3)
 
-    with col_test1:
-        query = st.text_input(
-            "Prova a cercare qualcosa nella tua Knowledge Base",
-            placeholder="Inserisci una query di test..."
-        )
+    with btn_col1:
+        extract_belief = st.button("🧠 Estrai Belief", use_container_width=True)
 
-    with col_test2:
-        n_results = st.number_input("N. risultati", min_value=1, max_value=10, value=3)
+    with btn_col2:
+        edit_belief = st.button("📝 Modifica Belief", use_container_width=True)
 
-    if query and st.button("Cerca", key="search_btn"):
-        stats = st.session_state.doc_processor.get_stats()
-        if stats['document_count'] > 0:
-            with st.spinner("Ricerca in corso..."):
-                results = st.session_state.doc_processor.query(query, n_results=n_results)
+    with btn_col3:
+        clear_context = st.button("🗑️ Cancella KB", type="secondary", use_container_width=True)
 
-                if results and results['documents'] and results['documents'][0]:
-                    st.markdown("**Risultati trovati:**")
-                    for i, (doc, metadata) in enumerate(zip(results['documents'][0], results['metadatas'][0]), 1):
-                        with st.expander(f"Risultato {i} - {metadata.get('source', 'Unknown')}"):
-                            st.write(doc)
-                else:
-                    st.warning("Nessun risultato trovato")
-        else:
-            st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
 
 with col2:
-    st.markdown("##### 📊 Stato Knowledge Base")
-
-    # Statistiche del contesto corrente
-    stats = st.session_state.doc_processor.get_stats()
-    sources = st.session_state.doc_processor.get_all_sources()
-
-    # Calcola belief count
-    belief_base_path = st.session_state.context_manager.get_belief_base_path(st.session_state.current_context)
-    belief_count = 0
-    if os.path.exists(belief_base_path):
-        try:
-            with open(belief_base_path, 'r', encoding='utf-8') as f:
-                belief_base = json.load(f)
-                belief_count = len(belief_base.get('beliefs_base', []))
-        except:
-            belief_count = 0
-
-    # Metriche
-    metric_col1, metric_col2, metric_col3 = st.columns(3)
-    with metric_col1:
-        st.metric("Chunks", stats['document_count'])
-    with metric_col2:
-        st.metric("Fonti", len(sources))
-    with metric_col3:
-        st.metric("Beliefs", belief_count)
+    st.markdown("##### 📄 Fonti Caricate")
 
     # Lista dei contenuti caricati dal database
     if sources:
-        st.markdown("---")
-        st.markdown("##### 📄 Fonti Caricate")
         for idx, source in enumerate(sources, 1):
             # Determina il tipo dal prefisso della source
             if source.startswith("PDF:"):
@@ -575,19 +575,8 @@ with col2:
 
             with st.expander(f"{icon} {source_type}: {name}"):
                 st.caption(f"**Source ID:** {source}")
-
-    # Pulsanti per estrarre belief base, editor e cancellare contesto
-    st.markdown(" ")
-    btn_col1, btn_col2, btn_col3 = st.columns(3)
-
-    with btn_col1:
-        extract_belief = st.button("🧠 Estrai Belief", use_container_width=True)
-
-    with btn_col2:
-        edit_belief = st.button("📝 Modifica Belief", use_container_width=True)
-
-    with btn_col3:
-        clear_context = st.button("🗑️ Cancella KB", type="secondary", use_container_width=True)
+    else:
+        st.info("📭 Nessuna fonte caricata ancora")
 
     # Logica per estrazione belief base
     if extract_belief:
@@ -611,13 +600,22 @@ with col2:
                     context = "\n\n---\n\n".join(all_docs['documents'])
 
                     # Chiama l'LLM (usa il primo provider disponibile)
+                    # Lazy load LLMManager solo quando necessario
+                    if 'llm_manager' not in st.session_state:
+                        from utils.llm_manager import LLMManager
+                        st.session_state.llm_manager = LLMManager()
+
                     available_providers = st.session_state.llm_manager.get_available_providers()
                     if not available_providers:
                         st.error("❌ Nessun provider LLM configurato. Verifica le API keys.")
                     else:
                         provider = available_providers[0]
+                        #provider='OpenAI'
+                        # Rimosso print che non dava output su Streamlit; seleziona provider e modello normalmente
+
                         models = st.session_state.llm_manager.get_models_for_provider(provider)
-                        model = list(models.keys())[0]
+                        model = list(models.keys())[2]
+                        #model = 'GPT-5'
 
                         # STEP 2: Genera descrizione contesto se necessario
                         if generate_description:
@@ -625,11 +623,9 @@ with col2:
                             sources_list = "\n".join([f"- {source}" for source in sources])
 
                             description_prompt = f"""Analizza i seguenti titoli/nomi di documenti caricati nella knowledge base e genera una descrizione concisa del contesto in esattamente 20 parole che sintetizza il tema principale.
-
-Documenti:
-{sources_list}
-
-Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati."""
+                            Documenti:
+                            {sources_list}
+                            Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati."""
 
                             description_response = st.session_state.llm_manager.chat(
                                 provider=provider,
@@ -670,30 +666,41 @@ Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati.
 
                         if json_start != -1 and json_end > json_start:
                             json_str = response[json_start:json_end]
-                            belief_base = json.loads(json_str)
+                            try:
+                                belief_base = json.loads(json_str)
 
-                            # Salva nel file belief_base.json del contesto
-                            belief_base_path = st.session_state.context_manager.get_belief_base_path(
-                                st.session_state.current_context
-                            )
-                            with open(belief_base_path, 'w', encoding='utf-8') as f:
-                                json.dump(belief_base, f, ensure_ascii=False, indent=2)
+                                # Verifica che abbia la chiave richiesta
+                                if 'beliefs_base' not in belief_base:
+                                    st.error("❌ Errore: JSON non contiene la chiave 'beliefs_base'")
+                                    st.code(json_str[:500])
+                                else:
+                                    # Salva nel file belief_base.json del contesto
+                                    belief_base_path = st.session_state.context_manager.get_belief_base_path(
+                                        st.session_state.current_context
+                                    )
+                                    with open(belief_base_path, 'w', encoding='utf-8') as f:
+                                        json.dump(belief_base, f, ensure_ascii=False, indent=2)
 
-                            # Aggiorna il conteggio nel metadata
-                            belief_count = len(belief_base.get('beliefs_base', []))
-                            st.session_state.context_manager.update_context_metadata(
-                                st.session_state.current_context,
-                                {'belief_count': belief_count}
-                            )
+                                    # Aggiorna il conteggio nel metadata
+                                    belief_count = len(belief_base.get('beliefs_base', []))
+                                    st.session_state.context_manager.update_context_metadata(
+                                        st.session_state.current_context,
+                                        {'belief_count': belief_count}
+                                    )
 
-                            st.success(f"✅ Belief Base estratta con successo! {belief_count} belief individuati.")
-                            st.rerun()
+                                    st.success(f"✅ Belief Base estratta con successo! {belief_count} belief individuati.")
+                                    st.rerun()
+                            except json.JSONDecodeError as e:
+                                st.error(f"❌ Errore nel parsing JSON: {str(e)}")
+                                st.warning("Mostra i primi 1000 caratteri della risposta per il debug:")
+                                st.code(response[:1000])
                         else:
-                            st.error("❌ Errore: risposta LLM non contiene JSON valido")
+                            st.error("❌ Errore: risposta LLM non contiene JSON valido (nessun '{' o '}' trovato)")
+                            st.warning("Mostra la risposta completa:")
                             st.code(response)
 
                 except Exception as e:
-                    st.error(f"❌ Errore durante l'estrazione dei belief: {str(e)}")
+                    st.error(f"❌ Errore durante l'estrazione dei belief: {e}")
         else:
             st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
 
@@ -741,7 +748,3 @@ Rispondi SOLO con la descrizione (20 parole esatte), senza JSON o altri formati.
 # Apri modale editor se richiesto
 if st.session_state.show_belief_editor:
     belief_editor_modal()
-
-# Suggerimento
-st.markdown("---")
-st.markdown("💡 **Suggerimento**: Dopo aver caricato le fonti, estrai i Belief Base e passa ad **Alì** per definire i tuoi Desire.")
