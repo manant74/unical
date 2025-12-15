@@ -565,21 +565,31 @@ Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-
 
 ### Google Gemini
 
-- gemini-1.5-pro
-- gemini-1.5-flash
-- gemini-pro
-
-### Anthropic Claude
-
-- claude-3-5-sonnet-20241022
-- claude-3-opus-20240229
-- claude-3-haiku-20240307
+- gemini-2.5-pro
+- gemini-2.5-flash
+- gemini-2.5-flash-lite
 
 ### OpenAI
 
-- gpt-4-turbo-preview
-- gpt-4
-- gpt-3.5-turbo
+**Modelli Standard:**
+- gpt-4o
+- gpt-4o-mini
+
+**Modelli con Reasoning (GPT-5 Series):**
+- gpt-5
+- gpt-5-nano
+- gpt-5-mini
+- gpt-5.1
+- gpt-5.1-chat-latest
+- gpt-5.2
+- gpt-5.2-chat-latest
+
+**Supporto Reasoning Effort:**
+Tutti i modelli GPT-5/GPT-5.2 supportano `reasoning_effort`:
+- `"none"`: Disabilita reasoning (latenza bassa, comportamento standard)
+- `"low"`: Ragionamento minimo
+- `"medium"`: Ragionamento bilanciato (default)
+- `"high"`: Ragionamento profondo (latenza più alta, migliore qualità)
 
 ## Formati di Output
 

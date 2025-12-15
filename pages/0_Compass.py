@@ -339,30 +339,29 @@ else:
         else:
             col1, col2 = st.columns(2)
 
+            # Funzione helper per ottenere defaults dinamici dal modello
+            def get_default_settings_for_model(model):
+                """Estrae i default dinamicamente dalla configurazione del modello"""
+                params = st.session_state.llm_manager.get_model_parameters(model)
+                defaults = {'use_defaults': True}
+                for param_name, config_item in params.items():
+                    defaults[param_name] = config_item.get('default')
+                return defaults
+
             # Carica configurazione LLM esistente
             if current_session:
                 config = current_session['config']
                 current_provider = config.get('llm_provider', available_providers[0])
                 current_model = config.get('llm_model')
-                llm_settings = config.get('llm_settings', {
-                    'use_defaults': True,
-                    'temperature': 1.0,
-                    'top_p': 0.95,  # Default Gemini
-                    'max_output_tokens': 65536,  # Gemini
-                    'max_tokens': 4096,  # OpenAI
-                    'reasoning_effort': 'medium'  # GPT-5
-                })
+                llm_settings = config.get('llm_settings', {})
             else:
                 current_provider = available_providers[0]
                 current_model = None
-                llm_settings = {
-                    'use_defaults': True,
-                    'temperature': 1.0,
-                    'top_p': 0.95,
-                    'max_output_tokens': 65536,
-                    'max_tokens': 4096,
-                    'reasoning_effort': 'medium'
-                }
+                llm_settings = {}
+
+            # Se non ci sono settings salvati, usa defaults per il modello corrente
+            if not llm_settings and current_model:
+                llm_settings = get_default_settings_for_model(current_model)
 
             with col1:
                 # Provider selection
@@ -401,86 +400,64 @@ else:
                 use_defaults = st.checkbox(
                     "Use Default Parameters",
                     value=llm_settings.get('use_defaults', True),
-                    help="Use LLM provider's default parameters. Uncheck to customize."
+                    help="Se attivo, usa parametri ottimali per il modello"
                 )
 
-                # Determina i valori di default in base al provider
-                is_gemini = selected_provider == "Gemini"
-                is_gpt5 = selected_model.startswith("gpt-5")
+                # Ottieni parametri dinamici per il modello selezionato
+                model_params = st.session_state.llm_manager.get_model_parameters(selected_model)
 
-                default_top_p = 0.95 if is_gemini else 1.0
+                # Inizializza new_llm_settings
+                new_llm_settings = {'use_defaults': use_defaults}
 
-                # Disabilita i parametri se use_defaults è True
-                temperature = st.slider(
-                    "Temperature",
-                    min_value=0.0,
-                    max_value=2.0,
-                    value=llm_settings.get('temperature', 1.0),
-                    step=0.1,
-                    help="Controls randomness. Default: 1.0 for all providers",
-                    disabled=use_defaults
-                )
-
-                top_p = st.slider(
-                    "Top P",
-                    min_value=0.0,
-                    max_value=1.0,
-                    value=llm_settings.get('top_p', default_top_p),
-                    step=0.05,
-                    help=f"Nucleus sampling. Default: {default_top_p} ({'Gemini' if is_gemini else 'OpenAI'})",
-                    disabled=use_defaults
-                )
-
-                # Max tokens - diverso per provider
-                if is_gemini:
-                    max_output_tokens = st.number_input(
-                        "Max Output Tokens",
-                        min_value=1,
-                        max_value=65536,
-                        value=llm_settings.get('max_output_tokens', 65536),
-                        step=1024,
-                        help="Maximum output tokens for Gemini. Default: 65536",
-                        disabled=use_defaults
-                    )
-                    max_tokens = None
+                if not model_params:
+                    st.warning(f"⚠️ Parametri per '{selected_model}' non configurati.")
                 else:
-                    max_tokens = st.number_input(
-                        "Max Tokens",
-                        min_value=1,
-                        max_value=16384,
-                        value=llm_settings.get('max_tokens', 4096),
-                        step=512,
-                        help="Maximum tokens for OpenAI. Default: 4096",
-                        disabled=use_defaults
-                    )
-                    max_output_tokens = None
+                    # Renderizza dinamicamente ogni parametro per questo modello
+                    for param_name, param_config in model_params.items():
+                        param_type = param_config.get("type")
+                        label = param_config.get("label", param_name)
+                        help_text = param_config.get("help", "")
+                        default_value = param_config.get("default")
 
-                # Reasoning effort - solo per GPT-5
-                if is_gpt5:
-                    reasoning_effort = st.selectbox(
-                        "Reasoning Effort",
-                        options=['minimal', 'low', 'medium', 'high'],
-                        index=['minimal', 'low', 'medium', 'high'].index(llm_settings.get('reasoning_effort', 'medium')),
-                        help="Controls reasoning depth for GPT-5. Default: medium",
-                        disabled=use_defaults
-                    )
-                else:
-                    reasoning_effort = None
+                        # Recupera valore corrente o default
+                        current_value = llm_settings.get(param_name, default_value)
 
-            # Prepara llm_settings
-            new_llm_settings = {
-                'use_defaults': use_defaults,
-                'temperature': temperature,
-                'top_p': top_p
-            }
+                        if param_type == "slider":
+                            new_llm_settings[param_name] = st.slider(
+                                label,
+                                min_value=param_config["min"],
+                                max_value=param_config["max"],
+                                value=current_value,
+                                step=param_config["step"],
+                                disabled=use_defaults,
+                                help=help_text
+                            )
 
-            if is_gemini:
-                new_llm_settings['max_output_tokens'] = max_output_tokens
-            else:
-                new_llm_settings['max_tokens'] = max_tokens
+                        elif param_type == "number":
+                            new_llm_settings[param_name] = st.number_input(
+                                label,
+                                min_value=param_config["min"],
+                                max_value=param_config["max"],
+                                value=current_value,
+                                step=param_config["step"],
+                                disabled=use_defaults,
+                                help=help_text
+                            )
 
-            if is_gpt5:
-                new_llm_settings['reasoning_effort'] = reasoning_effort
+                        elif param_type == "selectbox":
+                            options = param_config["options"]
+                            try:
+                                index = options.index(current_value)
+                            except (ValueError, TypeError):
+                                index = options.index(default_value) if default_value in options else 0
+
+                            new_llm_settings[param_name] = st.selectbox(
+                                label,
+                                options=options,
+                                index=index,
+                                disabled=use_defaults,
+                                help=help_text
+                            )
 
             # Test connection e Save
             st.markdown("---")

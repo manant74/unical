@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 from dotenv import load_dotenv
 import google.generativeai as genai
 from openai import OpenAI
+from utils.llm_manager_config import MODEL_PARAMETERS
 
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
@@ -14,14 +15,20 @@ class LLMManager:
         "Gemini": {
             "gemini-2.5-flash-lite": "Gemini 2.5 Flash Lite",
             "gemini-2.5-flash": "Gemini 2.5 Flash",
-            "gemini-2.5-pro": "Gemini 2.5 Pro"
+            "gemini-2.5-pro": "Gemini 2.5 Pro",
+            "gemini-3-pro-preview": "Gemini 3 Pro (Preview)"
         },
         "OpenAI": {
             "gpt-4o": "GPT-4o",
             "gpt-4o-mini": "GPT-4o Mini",
             "gpt-5": "GPT-5",
             "gpt-5-nano": "GPT-5 Nano",
-            "gpt-5-mini": "GPT-5 Mini"
+            "gpt-5-mini": "GPT-5 Mini",
+            "gpt-5.1": "GPT-5.1 (Thinking)",
+            "gpt-5.1-chat-latest": "GPT-5.1 Instant",
+            "gpt-5.2": "GPT-5.2",
+            "gpt-5.2-pro": "GPT-5.2 Pro",
+            "gpt-5.2-chat-latest": "GPT-5.2 Instant"
         }
     }
 
@@ -49,6 +56,19 @@ class LLMManager:
         """Restituisce i modelli disponibili per un provider"""
         return self.MODELS.get(provider, {})
 
+    def get_model_parameters(self, model: str) -> Dict[str, Dict]:
+        """
+        Restituisce i parametri supportati da un modello specifico.
+
+        Args:
+            model: Nome del modello (es: "gpt-5.1", "gemini-2.5-flash")
+
+        Returns:
+            Dizionario dei parametri con metadata per rendering UI.
+            Se il modello non è configurato, restituisce dizionario vuoto.
+        """
+        return MODEL_PARAMETERS.get(model, {})
+
     def chat(self, provider: str, model: str, messages: List[Dict],
              system_prompt: Optional[str] = None, context: Optional[str] = None,
              temperature: float = 1.0, max_tokens: int = 65536, top_p: float = 1,
@@ -62,10 +82,12 @@ class LLMManager:
             messages: Lista di messaggi della conversazione
             system_prompt: Prompt di sistema (opzionale)
             context: Contesto aggiuntivo da RAG (opzionale)
-            temperature: Controllo creatività (0.0-2.0, default 0.7)
-            max_tokens: Lunghezza massima risposta (default 2000)
-            top_p: Nucleus sampling (0.0-1.0, default 0.9)
-            reasoning_effort: Effort di reasoning per modelli o1/o3/GPT-5 ("low", "medium", "high", opzionale)
+            temperature: Controllo creatività (0.0-2.0, default 0.7) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
+            max_tokens: Lunghezza massima risposta (default 2000) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
+            top_p: Nucleus sampling (0.0-1.0, default 0.9) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
+            reasoning_effort: Effort di reasoning per modelli GPT-5/GPT-5.1/o1/o3 ("none", "low", "medium", "high")
+                - "none": Disabilita il reasoning (GPT-5.1 si comporta come modello standard)
+                - "low", "medium", "high": Abilita reasoning con diversi livelli
             use_defaults: Se True, usa i parametri di default del provider e ignora temperature/max_tokens/top_p
 
         Returns:
@@ -129,11 +151,13 @@ class LLMManager:
             "messages": messages,
         }
 
-        # I modelli GPT-5 e o1/o3 hanno restrizioni sui parametri
-        is_new_model = model.startswith(("gpt-5"))
+        # I modelli GPT-5, GPT-5.1 e o1/o3 hanno restrizioni sui parametri
+        # Supportano solo reasoning_effort, non temperature/top_p
+        is_reasoning_model = model.startswith(("gpt-5", "o1", "o3"))
 
-        if is_new_model:
-            # Aggiungi reasoning_effort se specificato
+        if is_reasoning_model:
+            # Modelli con reasoning: usa solo reasoning_effort
+            # Nota: GPT-5.1 supporta reasoning_effort = "none" per comportamento non-reasoning
             if reasoning_effort:
                 kwargs["reasoning_effort"] = reasoning_effort
         else:

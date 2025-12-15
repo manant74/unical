@@ -803,12 +803,22 @@ class LLMManager:
 
 **Modelli Disponibili:**
 
+**Modelli Standard:**
 - `gpt-4o`: Ottimizzato per velocità
 - `gpt-4o-mini`: Versione compatta
+
+**Modelli con Reasoning (GPT-5 Series):**
 - `gpt-5`: Modello avanzato con reasoning
 - `gpt-5-nano`: Versione leggera GPT-5
 - `gpt-5-mini`: Versione media GPT-5
 
+**Modelli GPT-5.1 (Novembre 2025+):**
+- `gpt-5.1`: Versione con ragionamento adattivo (thinking model)
+- `gpt-5.1-chat-latest`: Versione istantanea ottimizzata per latenza
+
+**Modelli GPT-5.2 (Dicembre 2025+):**
+- `gpt-5.2`: Versione con ragionamento adattivo (thinking model)
+- `gpt-5.2-chat-latest`: Versione istantanea ottimizzata per latenza
 **Implementazione:**
 
 ```python
@@ -843,9 +853,41 @@ class LLMManager:
 
 **Caratteristiche OpenAI:**
 
-- Supporto reasoning effort (GPT-5/o1)
+- Supporto reasoning effort (GPT-5/GPT-5.1/o1/o3)
 - Function calling (non usato attualmente)
 - JSON mode per output strutturato (potenziale uso futuro)
+- Extended prompt caching (GPT-5.1, fino a 24 ore di retention)
+
+**Gestione Parametri per Modelli con Reasoning (GPT-5/GPT-5.1/o1/o3):**
+
+I modelli con reasoning hanno restrizioni sui parametri:
+- ❌ `temperature`: Non supportato (ignorato)
+- ❌ `top_p`: Non supportato (ignorato)
+- ✅ `max_tokens`: Supportato (opzionale, varia per modello)
+- ✅ `reasoning_effort`: **"none"**, **"low"**, **"medium"**, **"high"**
+  - `"none"`: Disabilita il reasoning (utile per latenza bassa)
+  - `"low"`: Reasoning minimo
+  - `"medium"`: Ragionamento bilanciato (default)
+  - `"high"`: Ragionamento profondo (latenza più alta)
+
+**Esempio GPT-5.1 con Reasoning:**
+
+```python
+response = llm_manager.chat(
+    provider="OpenAI",
+    model="gpt-5.1",
+    messages=[...],
+    reasoning_effort="medium"  # Usa reasoning adattivo
+)
+
+# Per comportamento non-reasoning (latenza bassa):
+response = llm_manager.chat(
+    provider="OpenAI",
+    model="gpt-5.1",
+    messages=[...],
+    reasoning_effort="none"  # Disabilita reasoning
+)
+```
 
 ### Parametri LLM Configurabili
 

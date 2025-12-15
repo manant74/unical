@@ -52,7 +52,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### ✨ Features
 
-- no elements
+#### **Integrazione Modelli LLM**
+
+- **OpenAI**:
+  - Aggiunto supporto a **ChatGPT 5.1** per le modalità *Thinking* e *Instant*
+  - Integrati nuovi modelli **ChatGPT 5.2** disponibili nelle modalità *Standard*, *Thinking* e *Instant*
+  - Integrati nuovi modelli **Gemini 3 Pro** disponibili per ora in modalità preview via API
 
 ### ✨ UI/UX Improvements
 

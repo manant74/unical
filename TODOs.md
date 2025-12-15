@@ -27,10 +27,10 @@
 
 [X] 5. believer valutare possibile generazione di un mix di belief tra base, avanzati in modo da avere una versione intermedia
 
-[ ] 6. Introduzione nuovi sistemi di LLM
-[ ] Gemini 3
-[ ] Chat GPT 5.1
-[ ] Chat GPT 5.2
+[X] 6. Introduzione nuovi sistemi di LLM
+[X] Chat GPT 5.1
+[X] Chat GPT 5.2
+[X] Gemini 3
 
 [X] 7. Ottimizzazione peformance all'avvio di:
 [X] 7.1 Knol
