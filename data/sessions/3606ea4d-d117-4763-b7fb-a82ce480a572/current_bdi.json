@@ -1522,5 +1522,321 @@
       "timestamp": "2025-12-15T11:26:41.619706"
     }
   ],
-  "intentions": []
+  "intentions": [
+    {
+      "intention": {
+        "id": "INT-001",
+        "statement": "Assunzione confermata prima della partenza in un solo pub (condizioni chiare).",
+        "linked_desire_id": "D4",
+        "rationale": "Allinea l'obiettivo di avere ruolo/orari/retribuzione chiari prima della partenza. La fattibilità aumenta con: right-to-work già disponibile, esperienza pregressa e preferenza per una singola venue."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-001",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire criteri di selezione venue (zona, distanza, tipologia pub, stile servizio, range di ore desiderate, pay rate minimo).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Creare shortlist di 10–15 pub e 3–5 catene (venue con gestione strutturata) con contatti di manager/HR.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Preparare pacchetto candidatura: CV in inglese UK-style, mini cover note personalizzata (2–3 righe), disponibilità date/ore, referenze 'available on request'.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Inviare candidature mirate e fare outreach diretto al manager (email + chiamata in fascia non-peak) per fissare colloquio video.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Sostenere colloqui video: evidenziare esperienza operativa e disponibilità a coprire l'intero mese; gestire obiezione 'solo 1 mese' come copertura affidabile.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Richiedere conferma scritta di: ruolo, rate oraria, policy tips, ore attese/minime, giorni, trial pagato/non pagato, start date.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 7,
+            "action": "Concordare onboarding day-1 (documenti, uniforme, training) e ottenere rota della prima settimana (o data di pubblicazione rota).",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Offerta confermata prima della partenza (o comunque con accordo scritto) con chiarezza su retribuzione e turni in una singola venue.",
+        "estimated_effort": "Alto"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-002",
+        "statement": "Chiusura in loco entro 72 ore: shortlist + trial mirati per una singola venue.",
+        "linked_desire_id": "D1",
+        "rationale": "Ottimizza l'obiettivo 'entro la prima settimana' massimizzando velocità e qualità: pochi pub selezionati, trial ravvicinati, decisione rapida per stabilizzarsi in un solo posto."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-002",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Prima dell'arrivo: creare shortlist di 8–12 pub e raccogliere orari utili per contattare il manager (fasce non-peak).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Fissare 3–5 appuntamenti (colloqui o trial) per i primi 2 giorni tramite chiamata/WhatsApp/email.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Preparare kit trial: CV stampato/QR, outfit hospitality, disponibilità completa, checklist punti da chiarire (rate/ore/tips).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Eseguire 2–3 trial shift in 48–72 ore su venue selezionate, puntando a performance e affidabilità (speed + accuracy + pulizia).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Applicare criteri di scelta rapida (ore attese, distanza, ambiente, pay rate, gestione rota) e selezionare una sola venue.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Negoziare conferma scritta e rota della settimana successiva; chiudere le altre opzioni con messaggio professionale.",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Entro 3 giorni dall'arrivo: inserimento in un pub con condizioni economiche e turni concordati.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-003",
+        "statement": "Selezionare pub ad alta probabilità di stabilità ore/rota (riduzione rischio di ore ballerine).",
+        "linked_desire_id": "D2",
+        "rationale": "Con preferenza per una sola venue, il rischio principale non è trovare un trial ma ottenere ore sufficienti e prevedibili. Strategia orientata a venue strutturate e segnali di stabilità."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-003",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire indicatori di stabilità: volume costante, rota pubblicata con anticipo, presenza di team strutturato, processi HR (specie nelle catene).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Ricercare e classificare 20 venue (A/B/C) in base a stabilità presunta e compatibilità logistica.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Preparare set di domande da colloquio per stabilità: ore medie settimanali, minimo ore, come gestiscono coperture e cambi turno, quando esce la rota.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Colloqui/trial: raccogliere risposte e segnali (chiarezza manager, organizzazione, standard operativi).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Scegliere venue con migliore previsione di ore e conferma scritta di rate + expected weekly hours (anche se non garantite).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Dopo la prima settimana, fare check: ore reali vs attese; se mismatch forte, attivare piano di sostituzione (nuova shortlist).",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Inserimento in un pub che offre prevedibilità e sufficienza di ore per tutto il mese, riducendo rischio di instabilità.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-004",
+        "statement": "Inglese operativo da servizio: comunicazione sicura durante picchi, ordini e gestione problemi.",
+        "linked_desire_id": "D3",
+        "rationale": "L'obiettivo linguistico è situazionale: prendere ordini, comprendere istruzioni del supervisore, gestire clienti e problemi. Con esperienza pregressa, conviene un approccio task-based focalizzato sulla performance in turno."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-004",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Mappare 30–40 scenari ricorrenti (greeting, order-taking, upsell, allergens, payments, complaints, last orders, manager instructions).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Creare 'phrase bank' per chunk (frasi complete) + varianti polite/firm, includendo strategie di chiarimento ('Just to confirm…').",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Allenare roleplay giornalieri (10–15 min) con timer e obiettivo accuracy/velocità.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Eseguire ascolto mirato su accento UK + rumore di fondo (simulazione pub) per aumentare comprensione in ambiente reale.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Preparare script per gestione reclami e recovery: scuse, soluzione, escalation al manager.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Simulare colloquio e trial in inglese: domande tipiche e risposte concise basate su esperienza.",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Aumento rapido di sicurezza e performance comunicativa nelle situazioni tipiche del pub, riducendo errori e stress in turno.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-005",
+        "statement": "Presentazione professionale 'pub-ready': CV UK, pitch e candidatura ad alta conversione.",
+        "linked_desire_id": "D4",
+        "rationale": "Per ottenere colloqui e trial shift velocemente serve un pacchetto di candidatura immediatamente credibile e orientato alla produttività. La disponibilità di 1 mese va posizionata come copertura affidabile di un periodo specifico."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-005",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Convertire CV in formato UK hospitality (bullet chiari, responsabilità operative, risultati, strumenti/POS se noti).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Creare 2 varianti del CV (bartender vs floor) e una cover note breve riusabile + personalizzazione per venue.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Scrivere pitch di 20–30 secondi: esperienza → punti forti (velocità, accuracy, team) → disponibilità 1 mese → flessibilità weekend/late shifts.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Preparare referenze (contatti + ruolo) e una frase standard 'References available on request'.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Preparare template messaggi per candidatura (email/Indeed/Gumtree/WhatsApp) con call-to-action: richiesta colloquio o trial immediato.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Impostare tracking candidature e follow-up entro 24–48 ore per aumentare le risposte dei manager.",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Maggiore tasso di risposta e conversione a colloqui/trial grazie a candidatura chiara, credibile e adatta al mercato hospitality UK.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-006",
+        "statement": "Trial-shift excellence: trasformare il trial in offerta in una singola venue.",
+        "linked_desire_id": "D1",
+        "rationale": "Nei pub UK il trial è spesso decisivo. Una strategia che rende visibile l'esperienza e dimostra autonomia operativa aumenta la probabilità di essere confermati e inseriti in rota rapidamente."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-006",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Prima del trial: chiarire ruolo esatto (bar/floor), durata, pagato/non pagato, standard attesi e cosa verrà valutato.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Durante il trial: dimostrare standard operativi (pulizia postazione, comunicazione con team, priorità corrette nei picchi).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Usare linguaggio operativo di sicurezza e coordinamento (es. passaggi stretti, lavoro di squadra, richieste rapide al supervisor).",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Mostrare autonomia controllata: chiedere una sola volta chiarimenti chiave, poi eseguire con costanza e ritmo.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "A fine trial: chiedere feedback specifico (2 cose ok, 1 cosa da migliorare) e proporre disponibilità immediata per entrare in rota.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 6,
+            "action": "Follow-up entro 12–24 ore: ringraziamento + richiesta conferma scritta di rate/ore/start date/rota.",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Trial convertito in offerta e inserimento operativo con autonomia crescente sulle procedure del pub.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-007",
+        "statement": "Ottenere chiarezza totale su ruolo, orari e retribuzione tramite negoziazione e conferma scritta.",
+        "linked_desire_id": "D2",
+        "rationale": "Il desiderio principale richiede eliminare ambiguità (tips, trial pagato, ore attese, pubblicazione rota). Una strategia dedicata alla 'clean offer' riduce sorprese e assicura coerenza con l'obiettivo di 1 mese in un solo pub."
+      },
+      "action_plan": {
+        "plan_id": "PLAN-007",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Creare checklist 'clean offer' (10 punti): ruolo, rate, tips, ore attese/minime, giorni, trial paid, pay schedule, uniform, start date, rota publication.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 2,
+            "action": "Portare la checklist in colloquio/trial e raccogliere risposte precise su ciascun punto.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 3,
+            "action": "Definire soglie minime accettabili (rate/ore/distanza) e applicarle come criterio di decisione.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 4,
+            "action": "Richiedere conferma scritta (email/WhatsApp) dei punti chiave prima di accettare definitivamente.",
+            "required_beliefs": []
+          },
+          {
+            "step_number": 5,
+            "action": "Se mancano dettagli (es. ore): concordare 'expected weekly hours' e data in cui viene pubblicata la rota, poi fare un check dopo 1 settimana.",
+            "required_beliefs": []
+          }
+        ],
+        "expected_outcome": "Accordo trasparente e verificabile che riduce rischio di incomprensioni e garantisce chiarezza economica/organizzativa per l’intero mese.",
+        "estimated_effort": "Basso"
+      }
+    }
+  ]
 }

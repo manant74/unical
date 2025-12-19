@@ -249,7 +249,7 @@ else:
     st.info(f"📝 Session Name Selected: **{current_session['metadata']['name']}**")
 
     # Tabs principali
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs", "📊 Analytics"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs", "🎯 Intentions", "📊 Analytics"])
 
     # ============================================================================
     # TAB 1: Session Info (nome, descrizione, LLM)
@@ -1009,9 +1009,141 @@ else:
                     st.metric("Total BDI Beliefs", len(bdi_beliefs))
 
     # ============================================================================
-    # TAB 5: Analytics
+    # TAB 5: Intentions Management
     # ============================================================================
     with tab5:
+        st.markdown("### 🎯 Intentions Management")
+
+        if not current_session:
+            st.warning("⚠️ Please save session info in the first tab before managing intentions.")
+        else:
+            # Toggle per espandere l'editor intentions
+            if 'intentions_editor_expanded' not in st.session_state:
+                st.session_state.intentions_editor_expanded = False
+
+            # Layout: Editor JSON a sinistra, pulsanti a destra (o full width se espanso)
+            if st.session_state.intentions_editor_expanded:
+                # Modalità espansa: editor a schermo intero
+                col1 = st.container()
+                col2 = None
+            else:
+                # Modalità normale: 2 colonne
+                col1, col2 = st.columns([3, 1])
+
+            with col1:
+                # Carica intentions dal BDI
+                try:
+                    bdi_data = st.session_state.session_manager.get_bdi_data(st.session_state.editing_session_id)
+                    intentions = bdi_data.get('intentions', []) if bdi_data else []
+                except AttributeError:
+                    # Fallback se il metodo non è ancora disponibile
+                    st.warning("⚠️ SessionManager non aggiornato. Riavvia l'applicazione per caricare le nuove funzionalità.")
+                    intentions = []
+
+                # JSON editor con syntax highlighting
+                intentions_json = json.dumps({"intentions": intentions}, indent=2, ensure_ascii=False)
+
+                # Header con pulsante expand inline
+                col_label, col_spacer, col_btn = st.columns([3, 0.6, 0.4])
+                with col_label:
+                    st.markdown("**Edit Intentions as JSON**")
+                with col_btn:
+                    expand_icon = "🔼" if st.session_state.intentions_editor_expanded else "🔽"
+                    if st.button(expand_icon, key="toggle_intentions_editor", help="Expand/Collapse editor", use_container_width=True):
+                        st.session_state.intentions_editor_expanded = not st.session_state.intentions_editor_expanded
+                        st.rerun()
+
+                # Configurazione del code editor (altezza dinamica in base allo stato)
+                editor_height = [40, 60] if st.session_state.intentions_editor_expanded else [20, 25]
+
+                response = code_editor(
+                    code=intentions_json,
+                    lang="json",
+                    height=editor_height,
+                    theme="default",
+                    shortcuts="vscode",
+                    allow_reset=True,
+                    options={
+                        "wrap": True,
+                        "showLineNumbers": True,
+                        "highlightActiveLine": True,
+                        "fontSize": 14,
+                    }
+                )
+
+                # Il valore editato è in response['text']
+                # Se il code editor non ha ancora un valore, usa il JSON originale
+                if response and 'text' in response and response['text'].strip():
+                    edited_intentions_json = response['text']
+                else:
+                    edited_intentions_json = intentions_json
+
+            # Pulsanti laterali (solo se NON espanso)
+            if not st.session_state.intentions_editor_expanded and col2:
+                with col2:
+                    st.markdown("###")
+
+                    # Save Intentions
+                    if st.button("💾 Save Intentions", width='stretch', type="primary", key="save_intentions"):
+                        try:
+                            parsed = json.loads(edited_intentions_json)
+                            if 'intentions' in parsed and isinstance(parsed['intentions'], list):
+                                st.session_state.session_manager.update_bdi_data(
+                                    st.session_state.editing_session_id,
+                                    intentions=parsed['intentions']
+                                )
+                                st.success("✅ Intentions saved!")
+                                st.rerun()
+                            else:
+                                st.error("❌ JSON must contain an 'intentions' array")
+                        except AttributeError:
+                            st.error("❌ SessionManager non aggiornato. Riavvia l'applicazione.")
+                        except json.JSONDecodeError as e:
+                            st.error(f"❌ Invalid JSON: {str(e)}")
+
+                    # Clear all Intentions
+                    if 'confirm_clear_intentions' not in st.session_state:
+                        st.session_state.confirm_clear_intentions = False
+
+                    if not st.session_state.confirm_clear_intentions:
+                        if st.button("🗑️ Clear All", width='stretch', key="clear_intentions"):
+                            st.session_state.confirm_clear_intentions = True
+                            st.rerun()
+                    else:
+                        st.warning("⚠️ Sure?")
+                        if st.button("✅ Yes", width='stretch', key="btn_confirm_clear_intentions"):
+                            try:
+                                st.session_state.session_manager.update_bdi_data(
+                                    st.session_state.editing_session_id,
+                                    intentions=[]
+                                )
+                                st.session_state.confirm_clear_intentions = False
+                                st.success("✅ Cleared!")
+                                st.rerun()
+                            except AttributeError:
+                                st.error("❌ SessionManager non aggiornato. Riavvia l'applicazione.")
+                        if st.button("❌ No", width='stretch', key="btn_cancel_clear_intentions"):
+                            st.session_state.confirm_clear_intentions = False
+                            st.rerun()
+
+                    # Validate JSON
+                    if st.button("✅ Validate JSON", width='stretch', key="validate_intentions_json"):
+                        try:
+                            parsed = json.loads(edited_intentions_json)
+                            if 'intentions' in parsed and isinstance(parsed['intentions'], list):
+                                st.success(f"✅ Valid JSON! Found {len(parsed['intentions'])} intentions.")
+                            else:
+                                st.error("❌ JSON must contain an 'intentions' array")
+                        except json.JSONDecodeError as e:
+                            st.error(f"❌ Invalid JSON: {str(e)}")
+
+                    # Stats
+                    st.metric("Total Intentions", len(intentions))
+
+    # ============================================================================
+    # TAB 6: Analytics
+    # ============================================================================
+    with tab6:
         st.markdown("### 📊 Analytics")
 
         if not current_session:
@@ -1065,21 +1197,27 @@ else:
                 desires = []
                 bdi_beliefs = []
 
+            # Estrai intentions (per usarle in tutta la sezione Analytics)
+            intentions = bdi_data.get('intentions', []) if bdi_data else []
+
             # ============================================================================
             # SEZIONE 1: STATISTICHE AGGREGATE
             # ============================================================================
             st.markdown("#### 📈 Aggregate Statistics")
 
             # Metriche generali
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4, col5 = st.columns(5)
 
             with col1:
                 st.metric("Total Desires", len(desires))
 
             with col2:
-                st.metric("Total Beliefs", len(bdi_beliefs))
+                st.metric("Total Intentions", len(intentions))
 
             with col3:
+                st.metric("Total Beliefs", len(bdi_beliefs))
+
+            with col4:
                 # Calcola coverage: desires con almeno un belief collegato
                 desires_with_beliefs = 0
                 if desires and bdi_beliefs:
@@ -1105,7 +1243,7 @@ else:
                 coverage_pct = (desires_with_beliefs / len(desires) * 100) if desires else 0
                 st.metric("Coverage %", f"{coverage_pct:.1f}%")
 
-            with col4:
+            with col5:
                 # Calcola numero di domini e beneficiari
                 domains_count = len(bdi_data.get('domains', [])) if bdi_data else 0
                 beneficiari_count = sum(
@@ -1116,7 +1254,9 @@ else:
 
             st.markdown("---")
 
-            # Layout a 2 colonne per i grafici delle statistiche
+            # ============================================================================
+            # SEZIONE 2: DESIRES & INTENTIONS ANALYSIS (2 colonne)
+            # ============================================================================
             col_left, col_right = st.columns(2)
 
             with col_left:
@@ -1184,7 +1324,70 @@ else:
                     st.info("No desires found. Create some desires in Alì to see statistics.")
 
             with col_right:
-                st.markdown("##### 🧠 Beliefs Analysis")
+                st.markdown("##### 🎯 Intentions Analysis")
+
+                if intentions:
+                    # Grafico Intentions by Status (Pie chart - Purples)
+                    status_counts = {}
+                    for intention in intentions:
+                        status = intention.get('status') or intention.get('state', 'undefined')
+                        status_counts[status] = status_counts.get(status, 0) + 1
+
+                    fig_status = px.pie(
+                        values=list(status_counts.values()),
+                        names=list(status_counts.keys()),
+                        title="Intentions by Status",
+                        color_discrete_sequence=px.colors.sequential.Purples
+                    )
+                    st.plotly_chart(fig_status, use_container_width=True)
+
+                    # Grafico Intentions by Type (Bar chart - Purples)
+                    type_counts = {}
+                    for intention in intentions:
+                        int_type = intention.get('type') or intention.get('intention_type', 'undefined')
+                        type_counts[int_type] = type_counts.get(int_type, 0) + 1
+
+                    fig_type = px.bar(
+                        x=list(type_counts.keys()),
+                        y=list(type_counts.values()),
+                        title="Intentions by Type",
+                        labels={'x': 'Type', 'y': 'Count'},
+                        color=list(type_counts.values()),
+                        color_continuous_scale='Purples',
+                        text=list(type_counts.values())
+                    )
+                    fig_type.update_traces(textposition='outside')
+                    st.plotly_chart(fig_type, use_container_width=True)
+
+                    # Grafico Intentions by Priority (Bar chart - Reds)
+                    priority_counts = {}
+                    for intention in intentions:
+                        priority = intention.get('priority', 'undefined')
+                        priority_counts[priority] = priority_counts.get(priority, 0) + 1
+
+                    fig_priority = px.bar(
+                        x=list(priority_counts.keys()),
+                        y=list(priority_counts.values()),
+                        title="Intentions by Priority",
+                        labels={'x': 'Priority', 'y': 'Count'},
+                        color=list(priority_counts.values()),
+                        color_continuous_scale='Reds',
+                        text=list(priority_counts.values())
+                    )
+                    fig_priority.update_traces(textposition='outside')
+                    st.plotly_chart(fig_priority, use_container_width=True)
+                else:
+                    st.info("No intentions found. Create some intentions to see statistics.")
+
+            st.markdown("---")
+
+            # ============================================================================
+            # SEZIONE 3: BELIEFS ANALYSIS (2 colonne)
+            # ============================================================================
+            col_left_beliefs, col_right_beliefs = st.columns(2)
+
+            with col_left_beliefs:
+                st.markdown("##### 🧠 Beliefs Analysis - Relations & Confidence")
 
                 # Grafico tipologie di relazioni beliefs
                 if bdi_beliefs:
@@ -1220,7 +1423,13 @@ else:
                             color_discrete_sequence=['#2E86AB']
                         )
                         st.plotly_chart(fig_confidence, use_container_width=True)
+                else:
+                    st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
+            with col_right_beliefs:
+                st.markdown("##### 🧠 Beliefs Analysis - Relevance")
+
+                if bdi_beliefs:
                     # Grafico relevance scores (se disponibile)
                     relevance_scores = []
                     for belief in bdi_beliefs:
@@ -1263,7 +1472,7 @@ else:
                     st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
             # ============================================================================
-            # SEZIONE 2: GRAFO DELLE RELAZIONI
+            # SEZIONE 4: GRAFO DELLE RELAZIONI (con Intentions)
             # ============================================================================
             st.markdown("---")
             st.markdown("#### 🕸️ Relationship Graph")
@@ -1274,10 +1483,11 @@ else:
                 layout_type = st.selectbox(
                     "Layout",
                     ["Bipartite", "Spring", "Circular", "Kamada-Kawai"],
+                    index=1,
                     help="Choose the graph layout algorithm"
                 )
 
-            if desires or bdi_beliefs:
+            if desires or bdi_beliefs or intentions:
                 # Crea il grafo NetworkX
                 G = nx.Graph()
 
@@ -1307,6 +1517,16 @@ else:
                     node_colors[node_label] = '#4ECDC4'  # Teal per beliefs
                     node_types[node_label] = 'Belief'
 
+                # Aggiungi nodi Intention
+                for idx, intention in enumerate(intentions):
+                    intention_id = intention.get('intention_id') or intention.get('id', f"I{idx+1}")
+                    # Usa diversi campi per il contenuto dell'intention
+                    content = intention.get('description') or intention.get('intention_statement') or intention.get('name', 'No content')
+                    node_label = f"I{intention_id}: {content[:30]}..."
+                    G.add_node(node_label)
+                    node_colors[node_label] = '#FFD93D'  # Giallo per intentions
+                    node_types[node_label] = 'Intention'
+
                 # Aggiungi edge tra Belief e Desire
                 for idx, belief in enumerate(bdi_beliefs):
                     belief_id = belief.get('id', f"B{idx+1}")
@@ -1326,27 +1546,119 @@ else:
                         else:
                             desire_id = item
 
-                        # Trova il desire corrispondente
+                        # Trova il desire corrispondente (supporta D1, DES-001, ecc.)
                         for desire in desires:
                             d_id = desire.get('desire_id') or desire.get('id')
-                            if d_id == desire_id:
+                            # Normalizza per matching (DES-001 -> D1, oppure cerca per valore esatto)
+                            if d_id == desire_id or (isinstance(desire_id, str) and isinstance(d_id, str) and desire_id.replace('DES-', 'D').lstrip('0') == d_id.replace('D', '').lstrip('0')):
                                 desc = desire.get('desire_statement') or desire.get('description', 'No desc')
                                 desire_label = f"D{desire_id}: {desc[:30]}..."
                                 if belief_label in G.nodes and desire_label in G.nodes:
                                     G.add_edge(belief_label, desire_label)
                                 break
 
+                # Aggiungi edge tra Intention e Desire
+                for idx, intention in enumerate(intentions):
+                    intention_id = intention.get('intention_id') or intention.get('id', f"I{idx+1}")
+                    content = intention.get('description') or intention.get('intention_statement') or intention.get('name', 'No content')
+                    intention_label = f"I{intention_id}: {content[:30]}..."
+
+                    # Edge Intention -> Desire (supporta diverse naming conventions incluso linked_desire_id)
+                    related_desires = intention.get('related_desires', []) or intention.get('desires', []) or []
+                    # Se intention ha linked_desire_id (singolo), aggiungilo alla lista
+                    if intention.get('linked_desire_id'):
+                        related_desires = list(related_desires) + [intention.get('linked_desire_id')]
+                    # Supporta anche intention.intention.linked_desire_id (nested)
+                    if intention.get('intention', {}).get('linked_desire_id'):
+                        related_desires = list(related_desires) + [intention['intention'].get('linked_desire_id')]
+
+                    for item in related_desires:
+                        # Estrai desire_id se è un oggetto, altrimenti usa il valore direttamente
+                        if isinstance(item, dict):
+                            desire_id = item.get('desire_id') or item.get('id')
+                        else:
+                            desire_id = item
+
+                        # Trova il desire corrispondente (supporta D1, DES-001, ecc.)
+                        for desire in desires:
+                            d_id = desire.get('desire_id') or desire.get('id')
+                            # Normalizza per matching (DES-001 -> D1, oppure cerca per valore esatto)
+                            if d_id == desire_id or (isinstance(desire_id, str) and isinstance(d_id, str) and desire_id.replace('DES-', 'D').lstrip('0') == d_id.replace('D', '').lstrip('0')):
+                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
+                                desire_label = f"D{desire_id}: {desc[:30]}..."
+                                if intention_label in G.nodes and desire_label in G.nodes:
+                                    G.add_edge(intention_label, desire_label)
+                                break
+
+                    # Fallback: cercare inversamente - Desire che referenziano questa Intention
+                    for desire in desires:
+                        d_id = desire.get('desire_id') or desire.get('id')
+                        # Supporta diverse naming conventions per intention references
+                        related_intentions = desire.get('related_intentions', []) or desire.get('intentions', []) or []
+                        for item in related_intentions:
+                            if isinstance(item, dict):
+                                rel_int_id = item.get('intention_id') or item.get('id')
+                            else:
+                                rel_int_id = item
+                            if rel_int_id == intention_id:
+                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
+                                desire_label = f"D{d_id}: {desc[:30]}..."
+                                if intention_label in G.nodes and desire_label in G.nodes:
+                                    G.add_edge(intention_label, desire_label)
+                                break
+
+                    # Edge Intention -> Belief (supporta diverse naming conventions)
+                    related_beliefs = intention.get('related_beliefs', []) or intention.get('beliefs', []) or []
+                    for item in related_beliefs:
+                        # Estrai belief_id se è un oggetto, altrimenti usa il valore direttamente
+                        if isinstance(item, dict):
+                            belief_id = item.get('belief_id') or item.get('id')
+                        else:
+                            belief_id = item
+
+                        # Trova il belief corrispondente
+                        for b_idx, belief in enumerate(bdi_beliefs):
+                            b_id = belief.get('id', f"B{b_idx+1}")
+                            if b_id == belief_id:
+                                b_content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
+                                belief_label = f"{b_id}: {b_content[:30]}..."
+                                if intention_label in G.nodes and belief_label in G.nodes:
+                                    G.add_edge(intention_label, belief_label)
+                                break
+
+                    # Fallback: cercare inversamente - Belief che referenziano questa Intention
+                    for b_idx, belief in enumerate(bdi_beliefs):
+                        b_id = belief.get('id', f"B{b_idx+1}")
+                        # Supporta diverse naming conventions per intention references
+                        related_intentions_from_belief = belief.get('related_intentions', []) or belief.get('intentions', []) or []
+                        for item in related_intentions_from_belief:
+                            if isinstance(item, dict):
+                                rel_int_id = item.get('intention_id') or item.get('id')
+                            else:
+                                rel_int_id = item
+                            if rel_int_id == intention_id:
+                                b_content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
+                                belief_label = f"{b_id}: {b_content[:30]}..."
+                                if intention_label in G.nodes and belief_label in G.nodes:
+                                    G.add_edge(intention_label, belief_label)
+                                break
+
                 # Calcola posizioni dei nodi in base al layout selezionato
                 if len(G.nodes) > 0:
                     if layout_type == "Bipartite":
-                        # Layout bipartito: Desires a sinistra, Beliefs a destra
+                        # Layout bipartito: Desires a sinistra (x=0), Intentions al centro (x=0.5), Beliefs a destra (x=1)
                         pos = {}
                         desires_nodes = [n for n in G.nodes() if node_types[n] == 'Desire']
+                        intentions_nodes = [n for n in G.nodes() if node_types[n] == 'Intention']
                         beliefs_nodes = [n for n in G.nodes() if node_types[n] == 'Belief']
 
                         # Posiziona Desires a sinistra (x=0)
                         for i, node in enumerate(desires_nodes):
                             pos[node] = (0, i - len(desires_nodes)/2)
+
+                        # Posiziona Intentions al centro (x=0.5)
+                        for i, node in enumerate(intentions_nodes):
+                            pos[node] = (0.5, i - len(intentions_nodes)/2)
 
                         # Posiziona Beliefs a destra (x=1)
                         for i, node in enumerate(beliefs_nodes):
@@ -1382,6 +1694,10 @@ else:
                     desire_nodes_y = []
                     desire_nodes_text = []
 
+                    intention_nodes_x = []
+                    intention_nodes_y = []
+                    intention_nodes_text = []
+
                     belief_nodes_x = []
                     belief_nodes_y = []
                     belief_nodes_text = []
@@ -1392,6 +1708,10 @@ else:
                             desire_nodes_x.append(x)
                             desire_nodes_y.append(y)
                             desire_nodes_text.append(node)
+                        elif node_types[node] == 'Intention':
+                            intention_nodes_x.append(x)
+                            intention_nodes_y.append(y)
+                            intention_nodes_text.append(node)
                         else:
                             belief_nodes_x.append(x)
                             belief_nodes_y.append(y)
@@ -1411,6 +1731,20 @@ else:
                         name='Desires'
                     )
 
+                    intention_trace = go.Scatter(
+                        x=intention_nodes_x, y=intention_nodes_y,
+                        mode='markers+text',
+                        hoverinfo='text',
+                        text=intention_nodes_text,
+                        textposition="top center",
+                        marker=dict(
+                            color='#FFD93D',
+                            size=20,
+                            line=dict(width=2, color='white')
+                        ),
+                        name='Intentions'
+                    )
+
                     belief_trace = go.Scatter(
                         x=belief_nodes_x, y=belief_nodes_y,
                         mode='markers+text',
@@ -1426,10 +1760,10 @@ else:
                     )
 
                     # Crea figura
-                    fig = go.Figure(data=[edge_trace, desire_trace, belief_trace],
+                    fig = go.Figure(data=[edge_trace, desire_trace, intention_trace, belief_trace],
                                     layout=go.Layout(
                                         title=dict(
-                                            text='Desire-Belief Relationship Graph',
+                                            text='BDI Relationship Graph (Desires, Intentions, Beliefs)',
                                             font=dict(size=16)
                                         ),
                                         showlegend=True,

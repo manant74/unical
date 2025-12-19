@@ -52,6 +52,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### ✨ Features
 
+#### **Cuma: l'agente che genera Intentions**
+
+- Creata una prima versione di prompt per Cuma, l'agente che sualla base dei desire e dei belief definiti è in grado di generare diverse Intentions
+Al momento l'implementazione non integra Oracolo o Auditor per poter guidare la generazione di Intentions
+E' statio progettato un prompt ad hoc che va nella direzione di generare possibili piano per soddisfare i Desire 
+
 #### **Integrazione Modelli LLM**
 
 - **OpenAI**:
