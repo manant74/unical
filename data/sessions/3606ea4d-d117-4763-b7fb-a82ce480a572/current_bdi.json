@@ -7,17 +7,6 @@
   "desires": [
     {
       "desire_id": "D1",
-      "desire_statement": "Desidero ottenere un impiego temporaneo di 1 mese in un pub a Londra con ruolo, orari e retribuzione chiari prima della partenza o entro la prima settimana sul posto.",
-      "motivation": "Vivere un’esperienza internazionale coprendo i costi e riducendo gli imprevisti.",
-      "success_metrics": [
-        "Inviare almeno 10 candidature mirate a pub in 2 settimane",
-        "Ottenere almeno 3 colloqui (in presenza o da remoto) entro 2 settimane dall’avvio delle candidature",
-        "Ricevere 1 offerta confermata per iscritto con paga oraria e turni definiti, con data di inizio entro la prima settimana a Londra"
-      ],
-      "priority": "medium"
-    },
-    {
-      "desire_id": "D2",
       "desire_statement": "Desidero comunicare in inglese con sicurezza nelle attività tipiche del pub (colloquio, presa ordini, indicazioni del supervisore e interazione con i clienti).",
       "motivation": "Lavorare in autonomia e fare una buona impressione fin dal primo turno.",
       "success_metrics": [
@@ -29,7 +18,7 @@
       "priority": "medium"
     },
     {
-      "desire_id": "D3",
+      "desire_id": "D2",
       "desire_statement": "Desidero presentarmi in modo professionale per ruoli da pub (CV in inglese, breve presentazione, referenze) così da ottenere colloqui e trial shifts.",
       "motivation": "Aumentare le chance di essere selezionato rapidamente.",
       "success_metrics": [
@@ -41,7 +30,7 @@
       "priority": "medium"
     },
     {
-      "desire_id": "D4",
+      "desire_id": "D3",
       "desire_statement": "Desidero gestire in autonomia le principali procedure operative del pub durante i turni.",
       "motivation": "Ridurre errori, alleggerire il carico del team e ricevere feedback positivo.",
       "success_metrics": [
@@ -53,147 +42,6 @@
     }
   ],
   "beliefs": [
-    {
-      "subject": "Occupazione temporanea in pub a Londra - requisiti legali",
-      "definition": "Per ottenere un impiego (anche di 1 mese) in un pub a Londra, il datore deve verificare il diritto al lavoro del candidato prima dell'assunzione; senza tale requisito è improbabile ricevere un'offerta scritta.",
-      "semantic_relations": "richiede",
-      "object": "diritto al lavoro nel Regno Unito verificabile dal datore",
-      "source": "Inferenza basata sul Desire D1 (offerta scritta e impiego in UK)",
-      "importance": 0.95,
-      "confidence": 0.8,
-      "prerequisites": [
-        "Documento d'identità valido",
-        "Prova del diritto al lavoro (es. visto/stato)",
-        "Documentazione conforme ai controlli pre-assunzione UK"
-      ],
-      "related_concepts": [
-        "Pre-employment checks",
-        "Offerta scritta",
-        "Right to Work"
-      ],
-      "enables": [
-        "Emissione offerta scritta",
-        "Avvio contratto"
-      ],
-      "part_of": [
-        "Processo di assunzione hospitality UK"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "UK",
-        "lavoro",
-        "diritto_al_lavoro",
-        "hospitality"
-      ],
-      "metadata": {
-        "subject_type": "Requisito legale",
-        "object_type": "Condizione",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Ottenere offerta scritta per lavoro di 1 mese in pub a Londra"
-        }
-      ],
-      "id": 1,
-      "timestamp": "2025-12-15T11:26:41.619660"
-    },
-    {
-      "subject": "Impiego di 1 mese in pub a Londra - canali efficaci",
-      "definition": "Ruoli di durata 1 mese sono più accessibili tramite agenzie di lavoro temporaneo e piattaforme di copertura turni in hospitality, rispetto a candidature dirette standard.",
-      "semantic_relations": "è_facilitato_da",
-      "object": "utilizzo di agenzie di somministrazione e piattaforme di cover shifts in hospitality",
-      "source": "Inferenza basata sul Desire D1 (durata 1 mese e rapidità)",
-      "importance": 0.85,
-      "confidence": 0.7,
-      "prerequisites": [
-        "Disponibilità date precise",
-        "Registrazione presso agenzie/piattaforme",
-        "Documentazione pre-assuntiva pronta"
-      ],
-      "related_concepts": [
-        "Seasonal/peak cover",
-        "Trial shift",
-        "Somministrazione"
-      ],
-      "enables": [
-        "Offerte rapide",
-        "Programmazione turni prima della partenza"
-      ],
-      "part_of": [
-        "Strategia di ricerca lavoro"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "temp",
-        "hospitality",
-        "Londra",
-        "cover_shifts"
-      ],
-      "metadata": {
-        "subject_type": "Strategia",
-        "object_type": "Canale di reclutamento",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Offerta scritta prima della partenza per lavoro in pub"
-        }
-      ],
-      "id": 2,
-      "timestamp": "2025-12-15T11:26:41.619672"
-    },
-    {
-      "subject": "Offerta scritta per pub a Londra - contenuti minimi",
-      "definition": "Per garantire chiarezza su ruolo, orari e retribuzione, l'offerta scritta (email/lettera) dovrebbe includere elementi chiave prima della partenza.",
-      "semantic_relations": "dovrebbe_includere",
-      "object": "ruolo, retribuzione oraria, sede, turni/ore previste, data di inizio, eventuale trial shift e termini di pagamento",
-      "source": "Inferenza basata sul Desire D1 (chiarezza pre-partenza)",
-      "importance": 0.9,
-      "confidence": 0.75,
-      "prerequisites": [
-        "Selezione positiva",
-        "Allineamento disponibilità",
-        "Scambio email con HR/manager"
-      ],
-      "related_concepts": [
-        "Offer letter",
-        "Zero-hours/contract types",
-        "Pay schedule"
-      ],
-      "enables": [
-        "Decisione informata",
-        "Pianificazione viaggio"
-      ],
-      "part_of": [
-        "Buone pratiche HR UK"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "offerta",
-        "trasparenza",
-        "contratto",
-        "UK"
-      ],
-      "metadata": {
-        "subject_type": "Linea guida",
-        "object_type": "Checklist contenuti",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Offerta scritta e dettagli chiari prima della partenza"
-        }
-      ],
-      "id": 3,
-      "timestamp": "2025-12-15T11:26:41.619674"
-    },
     {
       "subject": "Colloqui e preselezione da remoto per pub a Londra",
       "definition": "Nel settore hospitality londinese, preselezione e primi colloqui possono avvenire da remoto; a seguire si pianifica un trial shift all'arrivo.",
@@ -232,17 +80,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D1",
-          "relevance_level": "MEDIO",
-          "definition": "Offerta confermata prima della partenza"
-        },
-        {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "ALTO",
           "definition": "Ottenere risposte e colloqui da remoto"
         }
       ],
-      "id": 4,
+      "id": 1,
       "timestamp": "2025-12-15T11:26:41.619675"
     },
     {
@@ -286,17 +129,17 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Comunicare in inglese con sicurezza nelle attività del pub"
         },
         {
-          "desire_id": "D4",
+          "desire_id": "D3",
           "relevance_level": "MEDIO",
           "definition": "Gestire procedure operative durante i turni"
         }
       ],
-      "id": 5,
+      "id": 2,
       "timestamp": "2025-12-15T11:26:41.619677"
     },
     {
@@ -338,12 +181,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Comunicare in inglese con sicurezza prima della partenza"
         }
       ],
-      "id": 6,
+      "id": 3,
       "timestamp": "2025-12-15T11:26:41.619678"
     },
     {
@@ -385,17 +228,17 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Sicurezza in inglese per colloquio e interazioni in pub"
         },
         {
-          "desire_id": "D4",
+          "desire_id": "D3",
           "relevance_level": "MEDIO",
           "definition": "Autonomia nelle procedure operative"
         }
       ],
-      "id": 7,
+      "id": 4,
       "timestamp": "2025-12-15T11:26:41.619679"
     },
     {
@@ -437,12 +280,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "ALTO",
           "definition": "Presentarsi in modo professionale per ottenere colloqui e trial"
         }
       ],
-      "id": 8,
+      "id": 5,
       "timestamp": "2025-12-15T11:26:41.619680"
     },
     {
@@ -482,120 +325,18 @@
       },
       "related_desires": [
         {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "ALTO",
           "definition": "Presentazione professionale per ottenere colloqui"
         },
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Comunicare con sicurezza"
         }
       ],
-      "id": 9,
+      "id": 6,
       "timestamp": "2025-12-15T11:26:41.619682"
-    },
-    {
-      "subject": "Referenze per ruoli da pub",
-      "definition": "Nel mercato UK le referenze sono spesso verificate; predisporle in anticipo velocizza l'offerta scritta.",
-      "semantic_relations": "dovrebbero_includere",
-      "object": "contatto di 1-2 ex responsabili e breve attestazione",
-      "source": "Inferenza basata sul Desire D3 e D1",
-      "importance": 0.82,
-      "confidence": 0.85,
-      "prerequisites": [
-        "Consenso dei referenti",
-        "Dati di contatto aggiornati",
-        "Breve lettera/nota di referenza"
-      ],
-      "related_concepts": [
-        "Reference check",
-        "Background check"
-      ],
-      "enables": [
-        "Offerta scritta più rapida",
-        "Affidabilità percepita"
-      ],
-      "part_of": [
-        "Dossier candidatura"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "referenze",
-        "UK",
-        "assunzione"
-      ],
-      "metadata": {
-        "subject_type": "Documento",
-        "object_type": "Referenze",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D3",
-          "relevance_level": "ALTO",
-          "definition": "Presentarsi in modo professionale (referenze)"
-        },
-        {
-          "desire_id": "D1",
-          "relevance_level": "MEDIO",
-          "definition": "Ottenere offerta scritta"
-        }
-      ],
-      "id": 10,
-      "timestamp": "2025-12-15T11:26:41.619683"
-    },
-    {
-      "subject": "Trial shift in pub - fattori di successo",
-      "definition": "I trial shift valutano soprattutto affidabilità e aderenza alle procedure; prepararsi a standard tipici aumenta le chance di offerta.",
-      "semantic_relations": "dipende_da",
-      "object": "puntualità, standard di servizio, comunicazione chiara, gestione pagamenti e allergeni",
-      "source": "Inferenza basata sui Desire D1 e D4",
-      "importance": 0.86,
-      "confidence": 0.75,
-      "prerequisites": [
-        "Brief iniziale con supervisore",
-        "Conoscenza menu/bevande",
-        "Comprensione procedure cassa"
-      ],
-      "related_concepts": [
-        "Customer journey",
-        "Allergen policy",
-        "Cash handling"
-      ],
-      "enables": [
-        "Esito positivo del trial",
-        "Offerta formale"
-      ],
-      "part_of": [
-        "Processo di selezione hospitality"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "trial_shift",
-        "standard_servizio",
-        "allergeni",
-        "pagamenti"
-      ],
-      "metadata": {
-        "subject_type": "Valutazione operativa",
-        "object_type": "Criteri",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D4",
-          "relevance_level": "ALTO",
-          "definition": "Gestire procedure operative in autonomia"
-        },
-        {
-          "desire_id": "D1",
-          "relevance_level": "MEDIO",
-          "definition": "Ottenere impiego con offerta scritta"
-        }
-      ],
-      "id": 11,
-      "timestamp": "2025-12-15T11:26:41.619684"
     },
     {
       "subject": "Procedure operative standard (SOP) del pub - nucleo essenziale",
@@ -635,12 +376,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D4",
+          "desire_id": "D3",
           "relevance_level": "ALTO",
           "definition": "Autonomia nelle procedure operative"
         }
       ],
-      "id": 12,
+      "id": 7,
       "timestamp": "2025-12-15T11:26:41.619685"
     },
     {
@@ -681,12 +422,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D4",
+          "desire_id": "D3",
           "relevance_level": "ALTO",
           "definition": "Gestire in autonomia le procedure operative"
         }
       ],
-      "id": 13,
+      "id": 8,
       "timestamp": "2025-12-15T11:26:41.619686"
     },
     {
@@ -728,17 +469,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Ottenere impiego di 1 mese con offerta scritta"
-        },
-        {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "ALTO",
           "definition": "Ottenere risposte e colloqui da remoto"
         }
       ],
-      "id": 14,
+      "id": 9,
       "timestamp": "2025-12-15T11:26:41.619687"
     },
     {
@@ -779,113 +515,17 @@
       "related_desires": [
         {
           "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Offerta scritta entro 3 mesi"
-        },
-        {
-          "desire_id": "D2",
           "relevance_level": "MEDIO",
           "definition": "Migliorare l’inglese prima della partenza"
         },
         {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "ALTO",
           "definition": "Ottenere risposte e colloqui da remoto"
         }
       ],
-      "id": 15,
+      "id": 10,
       "timestamp": "2025-12-15T11:26:41.619688"
-    },
-    {
-      "subject": "Documenti per onboarding in pub UK",
-      "definition": "Avere i documenti pronti accelera contrattualizzazione e retribuzione nelle prime settimane.",
-      "semantic_relations": "include",
-      "object": "ID, diritto al lavoro, coordinate bancarie UK o alternative, NI number (o domanda), indirizzo per busta paga",
-      "source": "Inferenza basata sul Desire D1 (inizio entro prima settimana)",
-      "importance": 0.78,
-      "confidence": 0.7,
-      "prerequisites": [
-        "Raccolta documenti",
-        "Eventuale appuntamento per NI",
-        "Account bancario o soluzione di pagamento"
-      ],
-      "related_concepts": [
-        "Onboarding",
-        "Payroll",
-        "Compliance"
-      ],
-      "enables": [
-        "Inizio lavoro fluido",
-        "Pagamenti puntuali"
-      ],
-      "part_of": [
-        "Preparazione pre-assunzione"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "onboarding",
-        "documenti",
-        "UK"
-      ],
-      "metadata": {
-        "subject_type": "Checklist",
-        "object_type": "Documentazione",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D1",
-          "relevance_level": "MEDIO",
-          "definition": "Inizio lavoro e chiarezza amministrativa"
-        }
-      ],
-      "id": 16,
-      "timestamp": "2025-12-15T11:26:41.619689"
-    },
-    {
-      "subject": "Condizioni per accettare un'offerta di 1 mese",
-      "definition": "Verificare questi elementi riduce rischi di sotto-impiego durante il mese di lavoro.",
-      "semantic_relations": "dovrebbe_verificare",
-      "object": "turni minimi garantiti, retribuzione oraria netta attesa, eventuali straordinari, politiche di ferie",
-      "source": "Inferenza basata sul Desire D1 (chiarezza su orari e retribuzione)",
-      "importance": 0.76,
-      "confidence": 0.7,
-      "prerequisites": [
-        "Offerta scritta ricevuta",
-        "Q&A con il manager"
-      ],
-      "related_concepts": [
-        "Scheduling",
-        "Minimum hours",
-        "Overtime policy"
-      ],
-      "enables": [
-        "Decisione informata",
-        "Allineamento aspettative"
-      ],
-      "part_of": [
-        "Due diligence candidato"
-      ],
-      "sub_concepts": [],
-      "tags": [
-        "offerta",
-        "condizioni",
-        "retribuzione"
-      ],
-      "metadata": {
-        "subject_type": "Decisione",
-        "object_type": "Criteri",
-        "source_type": "generated"
-      },
-      "related_desires": [
-        {
-          "desire_id": "D1",
-          "relevance_level": "ALTO",
-          "definition": "Chiarezza su ruolo, orari e retribuzione prima della partenza"
-        }
-      ],
-      "id": 17,
-      "timestamp": "2025-12-15T11:26:41.619690"
     },
     {
       "subject": "CEFR (Quadro comune europeo di riferimento per le lingue)",
@@ -923,12 +563,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Definire un target linguistico per lavorare in pub"
         }
       ],
-      "id": 18,
+      "id": 11,
       "timestamp": "2025-12-15T11:26:41.619691"
     },
     {
@@ -964,12 +604,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Stabilire livello e percorso di studio"
         }
       ],
-      "id": 19,
+      "id": 12,
       "timestamp": "2025-12-15T11:26:41.619692"
     },
     {
@@ -1005,12 +645,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Punto di partenza per raggiungere B1"
         }
       ],
-      "id": 20,
+      "id": 13,
       "timestamp": "2025-12-15T11:26:41.619693"
     },
     {
@@ -1046,12 +686,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Target di sicurezza comunicativa per lavoro in pub"
         }
       ],
-      "id": 21,
+      "id": 14,
       "timestamp": "2025-12-15T11:26:41.619694"
     },
     {
@@ -1087,12 +727,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Livello avanzato utile ma non strettamente necessario"
         }
       ],
-      "id": 22,
+      "id": 15,
       "timestamp": "2025-12-15T11:26:41.619696"
     },
     {
@@ -1131,12 +771,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Praticare inglese in contesti di pub"
         }
       ],
-      "id": 23,
+      "id": 16,
       "timestamp": "2025-12-15T11:26:41.619697"
     },
     {
@@ -1172,12 +812,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Allenarsi su situazioni di pub"
         }
       ],
-      "id": 24,
+      "id": 17,
       "timestamp": "2025-12-15T11:26:41.619698"
     },
     {
@@ -1215,12 +855,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Valutare il livello prima di iniziare"
         }
       ],
-      "id": 25,
+      "id": 18,
       "timestamp": "2025-12-15T11:26:41.619699"
     },
     {
@@ -1259,12 +899,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Misurare i progressi prima della partenza"
         }
       ],
-      "id": 26,
+      "id": 19,
       "timestamp": "2025-12-15T11:26:41.619700"
     },
     {
@@ -1301,12 +941,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "MEDIO",
           "definition": "Programmare un percorso fino a B1"
         }
       ],
-      "id": 27,
+      "id": 20,
       "timestamp": "2025-12-15T11:26:41.619701"
     },
     {
@@ -1342,12 +982,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "BASSO",
           "definition": "Organizzare lo studio prima della partenza"
         }
       ],
-      "id": 28,
+      "id": 21,
       "timestamp": "2025-12-15T11:26:41.619702"
     },
     {
@@ -1384,12 +1024,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D3",
+          "desire_id": "D2",
           "relevance_level": "MEDIO",
           "definition": "Presentarsi in modo professionale sul CV"
         }
       ],
-      "id": 29,
+      "id": 22,
       "timestamp": "2025-12-15T11:26:41.619703"
     },
     {
@@ -1429,12 +1069,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "ALTO",
           "definition": "Comunicare in inglese con sicurezza"
         }
       ],
-      "id": 30,
+      "id": 23,
       "timestamp": "2025-12-15T11:26:41.619704"
     },
     {
@@ -1472,12 +1112,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "BASSO",
           "definition": "Orientamento certificazioni"
         }
       ],
-      "id": 31,
+      "id": 24,
       "timestamp": "2025-12-15T11:26:41.619706"
     },
     {
@@ -1513,12 +1153,12 @@
       },
       "related_desires": [
         {
-          "desire_id": "D2",
+          "desire_id": "D1",
           "relevance_level": "BASSO",
           "definition": "Benchmark di livello ambizioso"
         }
       ],
-      "id": 32,
+      "id": 25,
       "timestamp": "2025-12-15T11:26:41.619706"
     }
   ],
@@ -1527,7 +1167,7 @@
       "intention": {
         "id": "INT-001",
         "statement": "Assunzione confermata prima della partenza in un solo pub (condizioni chiare).",
-        "linked_desire_id": "D4",
+        "linked_desire_id": "D3",
         "rationale": "Allinea l'obiettivo di avere ruolo/orari/retribuzione chiari prima della partenza. La fattibilità aumenta con: right-to-work già disponibile, esperienza pregressa e preferenza per una singola venue."
       },
       "action_plan": {
@@ -1575,54 +1215,9 @@
     },
     {
       "intention": {
-        "id": "INT-002",
-        "statement": "Chiusura in loco entro 72 ore: shortlist + trial mirati per una singola venue.",
-        "linked_desire_id": "D1",
-        "rationale": "Ottimizza l'obiettivo 'entro la prima settimana' massimizzando velocità e qualità: pochi pub selezionati, trial ravvicinati, decisione rapida per stabilizzarsi in un solo posto."
-      },
-      "action_plan": {
-        "plan_id": "PLAN-002",
-        "steps": [
-          {
-            "step_number": 1,
-            "action": "Prima dell'arrivo: creare shortlist di 8–12 pub e raccogliere orari utili per contattare il manager (fasce non-peak).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 2,
-            "action": "Fissare 3–5 appuntamenti (colloqui o trial) per i primi 2 giorni tramite chiamata/WhatsApp/email.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 3,
-            "action": "Preparare kit trial: CV stampato/QR, outfit hospitality, disponibilità completa, checklist punti da chiarire (rate/ore/tips).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 4,
-            "action": "Eseguire 2–3 trial shift in 48–72 ore su venue selezionate, puntando a performance e affidabilità (speed + accuracy + pulizia).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 5,
-            "action": "Applicare criteri di scelta rapida (ore attese, distanza, ambiente, pay rate, gestione rota) e selezionare una sola venue.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Negoziare conferma scritta e rota della settimana successiva; chiudere le altre opzioni con messaggio professionale.",
-            "required_beliefs": []
-          }
-        ],
-        "expected_outcome": "Entro 3 giorni dall'arrivo: inserimento in un pub con condizioni economiche e turni concordati.",
-        "estimated_effort": "Medio"
-      }
-    },
-    {
-      "intention": {
         "id": "INT-003",
         "statement": "Selezionare pub ad alta probabilità di stabilità ore/rota (riduzione rischio di ore ballerine).",
-        "linked_desire_id": "D2",
+        "linked_desire_id": "D1",
         "rationale": "Con preferenza per una sola venue, il rischio principale non è trovare un trial ma ottenere ore sufficienti e prevedibili. Strategia orientata a venue strutturate e segnali di stabilità."
       },
       "action_plan": {
@@ -1667,7 +1262,7 @@
       "intention": {
         "id": "INT-004",
         "statement": "Inglese operativo da servizio: comunicazione sicura durante picchi, ordini e gestione problemi.",
-        "linked_desire_id": "D3",
+        "linked_desire_id": "D2",
         "rationale": "L'obiettivo linguistico è situazionale: prendere ordini, comprendere istruzioni del supervisore, gestire clienti e problemi. Con esperienza pregressa, conviene un approccio task-based focalizzato sulla performance in turno."
       },
       "action_plan": {
@@ -1712,7 +1307,7 @@
       "intention": {
         "id": "INT-005",
         "statement": "Presentazione professionale 'pub-ready': CV UK, pitch e candidatura ad alta conversione.",
-        "linked_desire_id": "D4",
+        "linked_desire_id": "D3",
         "rationale": "Per ottenere colloqui e trial shift velocemente serve un pacchetto di candidatura immediatamente credibile e orientato alla produttività. La disponibilità di 1 mese va posizionata come copertura affidabile di un periodo specifico."
       },
       "action_plan": {
@@ -1755,54 +1350,9 @@
     },
     {
       "intention": {
-        "id": "INT-006",
-        "statement": "Trial-shift excellence: trasformare il trial in offerta in una singola venue.",
-        "linked_desire_id": "D1",
-        "rationale": "Nei pub UK il trial è spesso decisivo. Una strategia che rende visibile l'esperienza e dimostra autonomia operativa aumenta la probabilità di essere confermati e inseriti in rota rapidamente."
-      },
-      "action_plan": {
-        "plan_id": "PLAN-006",
-        "steps": [
-          {
-            "step_number": 1,
-            "action": "Prima del trial: chiarire ruolo esatto (bar/floor), durata, pagato/non pagato, standard attesi e cosa verrà valutato.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 2,
-            "action": "Durante il trial: dimostrare standard operativi (pulizia postazione, comunicazione con team, priorità corrette nei picchi).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 3,
-            "action": "Usare linguaggio operativo di sicurezza e coordinamento (es. passaggi stretti, lavoro di squadra, richieste rapide al supervisor).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 4,
-            "action": "Mostrare autonomia controllata: chiedere una sola volta chiarimenti chiave, poi eseguire con costanza e ritmo.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 5,
-            "action": "A fine trial: chiedere feedback specifico (2 cose ok, 1 cosa da migliorare) e proporre disponibilità immediata per entrare in rota.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Follow-up entro 12–24 ore: ringraziamento + richiesta conferma scritta di rate/ore/start date/rota.",
-            "required_beliefs": []
-          }
-        ],
-        "expected_outcome": "Trial convertito in offerta e inserimento operativo con autonomia crescente sulle procedure del pub.",
-        "estimated_effort": "Medio"
-      }
-    },
-    {
-      "intention": {
         "id": "INT-007",
         "statement": "Ottenere chiarezza totale su ruolo, orari e retribuzione tramite negoziazione e conferma scritta.",
-        "linked_desire_id": "D2",
+        "linked_desire_id": "D1",
         "rationale": "Il desiderio principale richiede eliminare ambiguità (tips, trial pagato, ore attese, pubblicazione rota). Una strategia dedicata alla 'clean offer' riduce sorprese e assicura coerenza con l'obiettivo di 1 mese in un solo pub."
       },
       "action_plan": {
