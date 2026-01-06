@@ -89,8 +89,8 @@ def load_bdi_data():
         if bdi_data.get("beliefs"):
             for belief in bdi_data.get("beliefs", []):
                 beliefs.append({
-                    "id": belief.get("belief_id", f"belief_{len(beliefs)+1}"),
-                    "statement": belief.get("belief_statement") or belief.get("description", "N/A"),
+                    "id": belief.get("id", f"belief_{len(beliefs)+1}"),
+                    "statement": belief.get("belief_statement") or belief.get("definition", "N/A"),
                     "source": belief.get("source", "N/A"),
                     "confidence": belief.get("confidence_level", "medium")
                 })

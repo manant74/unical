@@ -123,14 +123,14 @@ with st.sidebar:
                     st.caption(f"LLM: {config['llm_provider']}")
 
                 with col_actions:
-                    if st.button("📂", key=f"load_{session['session_id']}", help="Load session", use_container_width=True):
+                    if st.button("📂", key=f"load_{session['session_id']}", help="Load session", width='stretch'):
                         st.session_state.editing_session_id = session['session_id']
                         st.session_state.active_session = session['session_id']
                         st.session_state.new_session_requested = False
                         st.success(f"Session '{metadata['name']}' loaded!")
                         st.rerun()
 
-                    if st.button("🗑️", key=f"del_{session['session_id']}", help="Delete session", use_container_width=True):
+                    if st.button("🗑️", key=f"del_{session['session_id']}", help="Delete session", width='stretch'):
                         st.session_state.session_manager.delete_session(session['session_id'])
                         if st.session_state.editing_session_id == session['session_id']:
                             st.session_state.editing_session_id = None
@@ -207,7 +207,7 @@ if not current_session:
             )
             selected_model = model_keys[selected_model_idx]
 
-            submitted = st.form_submit_button("Create Session", type="primary", use_container_width=True)
+            submitted = st.form_submit_button("Create Session", type="primary", width='stretch')
 
             if submitted:
                 if not session_name:
@@ -1284,7 +1284,7 @@ else:
                         text=list(desire_metrics.values())
                     )
                     fig_metrics.update_traces(textposition='outside')
-                    st.plotly_chart(fig_metrics, use_container_width=True)
+                    st.plotly_chart(fig_metrics, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Grafico Beliefs per Desire
                     if bdi_beliefs:
@@ -1319,7 +1319,7 @@ else:
                             text=list(beliefs_per_desire.values())
                         )
                         fig_beliefs_count.update_traces(textposition='outside')
-                        st.plotly_chart(fig_beliefs_count, use_container_width=True)
+                        st.plotly_chart(fig_beliefs_count, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
                     st.info("No desires found. Create some desires in Alì to see statistics.")
 
@@ -1339,7 +1339,7 @@ else:
                         title="Intentions by Status",
                         color_discrete_sequence=px.colors.sequential.Purples
                     )
-                    st.plotly_chart(fig_status, use_container_width=True)
+                    st.plotly_chart(fig_status, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Grafico Intentions by Type (Bar chart - Purples)
                     type_counts = {}
@@ -1357,7 +1357,7 @@ else:
                         text=list(type_counts.values())
                     )
                     fig_type.update_traces(textposition='outside')
-                    st.plotly_chart(fig_type, use_container_width=True)
+                    st.plotly_chart(fig_type, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Grafico Intentions by Priority (Bar chart - Reds)
                     priority_counts = {}
@@ -1375,7 +1375,7 @@ else:
                         text=list(priority_counts.values())
                     )
                     fig_priority.update_traces(textposition='outside')
-                    st.plotly_chart(fig_priority, use_container_width=True)
+                    st.plotly_chart(fig_priority, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
                     st.info("No intentions found. Create some intentions to see statistics.")
 
@@ -1406,7 +1406,7 @@ else:
                             title="Beliefs by Relation Type",
                             color_discrete_sequence=px.colors.sequential.Teal
                         )
-                        st.plotly_chart(fig_relations, use_container_width=True)
+                        st.plotly_chart(fig_relations, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Grafico livelli di confidenza (se disponibile)
                     confidence_levels = []
@@ -1422,7 +1422,7 @@ else:
                             labels={'x': 'Confidence', 'y': 'Count'},
                             color_discrete_sequence=['#2E86AB']
                         )
-                        st.plotly_chart(fig_confidence, use_container_width=True)
+                        st.plotly_chart(fig_confidence, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
                     st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
@@ -1444,7 +1444,7 @@ else:
                             labels={'x': 'Relevance Score', 'y': 'Count'},
                             color_discrete_sequence=['#A23B72']
                         )
-                        st.plotly_chart(fig_relevance, use_container_width=True)
+                        st.plotly_chart(fig_relevance, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Grafico livelli di rilevanza (se struttura related_desires)
                     relevance_levels = []
@@ -1467,7 +1467,7 @@ else:
                             color=list(level_counts.values()),
                             color_continuous_scale='Reds'
                         )
-                        st.plotly_chart(fig_levels, use_container_width=True)
+                        st.plotly_chart(fig_levels, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
                     st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
@@ -1495,6 +1495,14 @@ else:
                 node_colors = {}
                 node_types = {}
 
+                # Funzione helper per normalizzare gli ID durante il matching
+                def normalize_id(id_value, prefix=''):
+                    """Normalizza ID per matching robusto (B1, B01, 1, ecc.)"""
+                    if isinstance(id_value, str):
+                        normalized = id_value.replace(prefix, '').lstrip('0') if prefix else id_value.lstrip('0')
+                        return normalized or '0'
+                    return str(id_value)
+
                 # Aggiungi nodi Desire
                 for desire in desires:
                     # Supporta sia 'id' che 'desire_id' per compatibilità
@@ -1519,9 +1527,24 @@ else:
 
                 # Aggiungi nodi Intention
                 for idx, intention in enumerate(intentions):
-                    intention_id = intention.get('intention_id') or intention.get('id', f"I{idx+1}")
+                    # Gestisce sia struttura piatta che annidata (intention.intention.id)
+                    intention_id = (
+                        intention.get('intention_id') or
+                        intention.get('id') or
+                        intention.get('intention', {}).get('intention_id') or
+                        intention.get('intention', {}).get('id') or
+                        f"I{idx+1}"
+                    )
                     # Usa diversi campi per il contenuto dell'intention
-                    content = intention.get('description') or intention.get('intention_statement') or intention.get('name', 'No content')
+                    content = (
+                        intention.get('description') or
+                        intention.get('intention_statement') or
+                        intention.get('name') or
+                        intention.get('intention', {}).get('description') or
+                        intention.get('intention', {}).get('intention_statement') or
+                        intention.get('intention', {}).get('name') or
+                        'No content'
+                    )
                     node_label = f"I{intention_id}: {content[:30]}..."
                     G.add_node(node_label)
                     node_colors[node_label] = '#FFD93D'  # Giallo per intentions
@@ -1559,12 +1582,34 @@ else:
 
                 # Aggiungi edge tra Intention e Desire
                 for idx, intention in enumerate(intentions):
-                    intention_id = intention.get('intention_id') or intention.get('id', f"I{idx+1}")
-                    content = intention.get('description') or intention.get('intention_statement') or intention.get('name', 'No content')
+                    # Gestisce sia struttura piatta che annidata (intention.intention.id)
+                    intention_id = (
+                        intention.get('intention_id') or
+                        intention.get('id') or
+                        intention.get('intention', {}).get('intention_id') or
+                        intention.get('intention', {}).get('id') or
+                        f"I{idx+1}"
+                    )
+                    content = (
+                        intention.get('description') or
+                        intention.get('intention_statement') or
+                        intention.get('name') or
+                        intention.get('intention', {}).get('description') or
+                        intention.get('intention', {}).get('intention_statement') or
+                        intention.get('intention', {}).get('name') or
+                        'No content'
+                    )
                     intention_label = f"I{intention_id}: {content[:30]}..."
 
                     # Edge Intention -> Desire (supporta diverse naming conventions incluso linked_desire_id)
-                    related_desires = intention.get('related_desires', []) or intention.get('desires', []) or []
+                    # Gestisce sia struttura piatta che annidata
+                    related_desires = (
+                        intention.get('related_desires', []) or
+                        intention.get('desires', []) or
+                        intention.get('intention', {}).get('related_desires', []) or
+                        intention.get('intention', {}).get('desires', []) or
+                        []
+                    )
                     # Se intention ha linked_desire_id (singolo), aggiungilo alla lista
                     if intention.get('linked_desire_id'):
                         related_desires = list(related_desires) + [intention.get('linked_desire_id')]
@@ -1607,8 +1652,17 @@ else:
                                     G.add_edge(intention_label, desire_label)
                                 break
 
-                    # Edge Intention -> Belief (supporta diverse naming conventions)
-                    related_beliefs = intention.get('related_beliefs', []) or intention.get('beliefs', []) or []
+                    # Edge Intention -> Belief (supporta diverse naming conventions: linked_beliefs, related_beliefs, beliefs)
+                    # Gestisce sia struttura piatta che annidata (intention.intention.linked_beliefs)
+                    related_beliefs = (
+                        intention.get('linked_beliefs', []) or
+                        intention.get('intention', {}).get('linked_beliefs', []) or
+                        intention.get('related_beliefs', []) or
+                        intention.get('intention', {}).get('related_beliefs', []) or
+                        intention.get('beliefs', []) or
+                        intention.get('intention', {}).get('beliefs', []) or
+                        []
+                    )
                     for item in related_beliefs:
                         # Estrai belief_id se è un oggetto, altrimenti usa il valore direttamente
                         if isinstance(item, dict):
@@ -1616,10 +1670,15 @@ else:
                         else:
                             belief_id = item
 
-                        # Trova il belief corrispondente
+                        # Normalizza belief_id per matching (B1, B01, 1, ecc.)
+                        normalized_linked = normalize_id(belief_id, prefix='B')
+
+                        # Trova il belief corrispondente con matching robusto
                         for b_idx, belief in enumerate(bdi_beliefs):
                             b_id = belief.get('id', f"B{b_idx+1}")
-                            if b_id == belief_id:
+                            normalized_b_id = normalize_id(b_id, prefix='B')
+                            # Confronta con match esatto o normalizzato
+                            if b_id == belief_id or normalized_b_id == normalized_linked:
                                 b_content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
                                 belief_label = f"{b_id}: {b_content[:30]}..."
                                 if intention_label in G.nodes and belief_label in G.nodes:
@@ -1774,7 +1833,7 @@ else:
                                         height=600
                                     ))
 
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, use_container_width=True)  # Plotly chart parameter is still use_container_width
 
                     # Statistiche del grafo
                     col1, col2, col3, col4 = st.columns(4)

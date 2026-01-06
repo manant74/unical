@@ -156,6 +156,7 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
 {
   "beliefs": [
     {
+      "id": 1,
       "subject": "James Webb Space Telescope",
       "definition": "Il James Webb Space Telescope è gestito dalla NASA in collaborazione con l'ESA e la CSA. Questa partnership internazionale è fondamentale per il successo della missione e la sostenibilità del budget complessivo del progetto.",
       "semantic_relations": "è_gestito_da",
@@ -182,6 +183,7 @@ Usa un tono **professionale e analitico**. Fai domande per esplorare le conoscen
       ]
     },
     {
+      "id": 2,
       "subject": "Budget annuale progetto JWST",
       "definition": "Il budget annuale del progetto JWST ammonta a circa 800 milioni di dollari, rappresentando un investimento significativo nella ricerca astronomica moderna. Questo costo è suddiviso tra le agenzie partner (NASA, ESA, CSA) e influenza direttamente la sostenibilità e la governance della missione.",
       "semantic_relations": "ammonta_a",

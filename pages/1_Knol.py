@@ -121,7 +121,7 @@ def belief_editor_modal():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("✅ Valida JSON", use_container_width=True):
+        if st.button("✅ Valida JSON", width='stretch'):
             try:
                 parsed = json.loads(edited_json)
                 if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
@@ -132,7 +132,7 @@ def belief_editor_modal():
                 st.error(f"❌ JSON non valido: {str(e)}")
 
     with col2:
-        if st.button("💾 Salva", use_container_width=True, type="primary"):
+        if st.button("💾 Salva", width='stretch', type="primary"):
             try:
                 parsed = json.loads(edited_json)
                 if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
@@ -158,7 +158,7 @@ def belief_editor_modal():
                 st.error(f"❌ Errore nel salvataggio: {str(e)}")
 
     with col3:
-        if st.button("🗑️ Cancella Tutto", use_container_width=True):
+        if st.button("🗑️ Cancella Tutto", width='stretch'):
             if st.session_state.get('confirm_clear_beliefs_modal', False):
                 # Conferma e cancella
                 empty_data = {"beliefs_base": []}
@@ -178,7 +178,7 @@ def belief_editor_modal():
                 st.warning("⚠️ Clicca di nuovo per confermare la cancellazione")
 
     with col4:
-        if st.button("❌ Chiudi", use_container_width=True):
+        if st.button("❌ Chiudi", width='stretch'):
             st.session_state.show_belief_editor = False
             st.session_state.confirm_clear_beliefs_modal = False
             st.rerun()
@@ -253,7 +253,7 @@ with st.sidebar:
                     # Pulsante attiva (usa sempre stessa emoji, disabilitato se attivo)
                     if st.button("⚡", key=f"activate_{ctx['normalized_name']}",
                                help="Contesto attivo" if is_active else "Attiva contesto",
-                               disabled=is_active, use_container_width=True):
+                               disabled=is_active, width='stretch'):
                         st.session_state.current_context = ctx['normalized_name']
                         st.session_state.context_changed = True
                         st.rerun()
@@ -261,7 +261,7 @@ with st.sidebar:
                 with col_delete:
                     # Pulsante elimina
                     if st.button("🗑️", key=f"delete_{ctx['normalized_name']}",
-                               help="Elimina contesto", use_container_width=True):
+                               help="Elimina contesto", width='stretch'):
                         if st.session_state.context_manager.delete_context(ctx['normalized_name']):
                             st.success(f"Contesto '{ctx['name']}' eliminato!")
                             # Se era il contesto corrente, deselezionalo
@@ -296,7 +296,7 @@ with st.sidebar:
     with st.form("new_context_form", clear_on_submit=True):
         new_context_name = st.text_input("Nome del contesto", placeholder="es. Progetto X")
         new_context_desc = st.text_area("Descrizione (opzionale)", placeholder="Breve descrizione del contesto...")
-        create_btn = st.form_submit_button("Crea Contesto", use_container_width=True, type="primary")
+        create_btn = st.form_submit_button("Crea Contesto", width='stretch', type="primary")
 
         if create_btn and new_context_name:
             try:
@@ -333,7 +333,7 @@ with st.sidebar:
 
     # Export contesto
     if st.session_state.current_context:
-        if st.button("📦 Esporta Contesto", use_container_width=True):
+        if st.button("📦 Esporta Contesto", width='stretch'):
             try:
                 export_path = f"./exports/{st.session_state.current_context}.zip"
                 os.makedirs("./exports", exist_ok=True)
@@ -536,13 +536,13 @@ with col1:
     btn_col1, btn_col2, btn_col3 = st.columns(3)
 
     with btn_col1:
-        extract_belief = st.button("🧠 Estrai Belief", use_container_width=True)
+        extract_belief = st.button("🧠 Estrai Belief", width='stretch')
 
     with btn_col2:
-        edit_belief = st.button("📝 Modifica Belief", use_container_width=True)
+        edit_belief = st.button("📝 Modifica Belief", width='stretch')
 
     with btn_col3:
-        clear_context = st.button("🗑️ Cancella KB", type="secondary", use_container_width=True)
+        clear_context = st.button("🗑️ Cancella KB", type="secondary", width='stretch')
 
 
 with col2:

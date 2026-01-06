@@ -17,7 +17,7 @@ col_theme1, col_theme2, col_theme3 = st.columns([6, 1, 1])
 with col_theme3:
     theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
     theme_text = "Dark" if not st.session_state.dark_mode else "Light"
-    if st.button(f"{theme_icon} {theme_text}", key="theme_toggle", use_container_width=True):
+    if st.button(f"{theme_icon} {theme_text}", key="theme_toggle", width='stretch'):
         st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
 

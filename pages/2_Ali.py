@@ -178,7 +178,7 @@ def render_quick_replies(placeholder, suggestions, pending_state_key, button_pre
                 reason = suggestion.get("why")
 
                 with col:
-                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", use_container_width=True):
+                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", width='stretch'):
                         if message_text:
                             st.session_state[pending_state_key] = message_text
                     if reason:
@@ -226,7 +226,7 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
 if not active_session_data:
     st.error("❌ Errore: Sessione attiva non trovata nel database!")
-    if st.button("🧭 Vai a Compass", type="primary"):
+    if st.button("🧭 Vai a Compass", type="primary", width='stretch'):
         st.switch_page("pages/0_Compass.py")
     st.stop()
 
@@ -265,13 +265,13 @@ with st.sidebar:
                 st.warning("⚠️ Base di conoscenza vuota per questo contesto")
                 st.caption(f"🎯 Contesto: {kb_stats['context']}")
             
-            if st.button("🧭 Vai a Compass", use_container_width=True):
+            if st.button("🧭 Vai a Compass", width='stretch'):
                 st.switch_page("pages/0_Compass.py")
         else:
             st.warning("⚠️ Sessione attiva non trovata")
     else:
         st.info("ℹ️ Nessuna sessione attiva")
-        if st.button("🧭 Attiva una sessione", use_container_width=True):
+        if st.button("🧭 Attiva una sessione", width='stretch'):
             st.switch_page("pages/0_Compass.py")
 
     st.divider()
@@ -337,7 +337,7 @@ with st.sidebar:
     # Controllo sessione
     st.subheader("🎬 Controllo Sessione")
 
-    if st.button("🔄 Nuova Conversazione", use_container_width=True):
+    if st.button("🔄 Nuova Conversazione", width='stretch'):
         st.session_state.ali_chat_history = []
         st.session_state.ali_greeted = False
         st.session_state.ali_audit_trail = []
@@ -345,7 +345,7 @@ with st.sidebar:
         st.session_state.ali_pending_prompt = None
         st.rerun()
 
-    if st.button("Completa Sessione", type="primary", use_container_width=True):
+    if st.button("Completa Sessione", type="primary", width='stretch'):
         # Verifica se c'e' una sessione attiva
         if 'active_session' in st.session_state and st.session_state.active_session:
             if st.session_state.desires:
@@ -438,7 +438,7 @@ with st.sidebar:
         desire_context = st.text_area("Contesto", key="manual_desire_context")
         desire_criteria = st.text_area("Criteri di Successo", key="manual_desire_criteria")
 
-        if st.button("Aggiungi Desire"):
+        if st.button("Aggiungi Desire", width='stretch'):
             if desire_desc:
                 new_desire = {
                     "id": len(st.session_state.desires) + 1,
@@ -487,7 +487,7 @@ if kb_stats['document_count'] == 0:
         active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
         if active_session_data:
             st.info(f"🎯 Contesto attuale: {active_session_data['config'].get('context', 'N/A')}")
-    if st.button("📚 Vai a Knol"):
+    if st.button("📚 Vai a Knol", width='stretch'):
         st.switch_page("pages/1_Knol.py")
     st.stop()
 
