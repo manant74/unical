@@ -6,9 +6,28 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
-## Release - 2025-12-15
+## Release - 2026-01-12
+
+### ✨ Nuove Features
 
 ### 🤖 Miglioramenti Prompts
+
+- Arricchito prompt del Believer con sezione dedicata ai livelli di rilevanza dei Beliefs
+- in CUMA Specificato formato JSON finale con tracciamento relazioni:
+  - `linked_desire_id`: Collegamento univoco tra Intention e Desire
+  - `linked_beliefs`: Riferimento univoco ai Beliefs necessari per l'esecuzione
+
+### 🎨 Interventi UX
+
+- Miglioramento sezione Analytics in Compass
+- Grafo delle relazioni BDI più interattivo
+
+### 🔧 Bug Fix e Miglioramenti
+
+
+## Release - 2025-12-15
+
+### 🤖 Miglioramenti Prompts 0
 
 - Alì: modifica del prompt per la generazione dei Desire allineato a nuovo standard Json:
 
@@ -56,7 +75,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Creata una prima versione di prompt per Cuma, l'agente che sualla base dei desire e dei belief definiti è in grado di generare diverse Intentions
 Al momento l'implementazione non integra Oracolo o Auditor per poter guidare la generazione di Intentions
-E' statio progettato un prompt ad hoc che va nella direzione di generare possibili piano per soddisfare i Desire 
+E' statio progettato un prompt ad hoc che va nella direzione di generare possibili piano per soddisfare i Desire
 
 #### **Integrazione Modelli LLM**
 
@@ -70,7 +89,7 @@ E' statio progettato un prompt ad hoc che va nella direzione di generare possibi
 - Gestone messaggi personalizzati nelle fasi in cui LLM pensa e sta elaborando
 - Sempligicazione modulo Knol
 
-### 🔧 Bug Fix e Miglioramenti
+### 🔧 Bug Fix e Miglioramenti 0
 
 #### **Believer Module**
 

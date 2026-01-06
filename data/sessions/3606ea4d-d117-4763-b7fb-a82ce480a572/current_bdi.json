@@ -1166,226 +1166,485 @@
     {
       "intention": {
         "id": "INT-001",
-        "statement": "Assunzione confermata prima della partenza in un solo pub (condizioni chiare).",
-        "linked_desire_id": "D3",
-        "rationale": "Allinea l'obiettivo di avere ruolo/orari/retribuzione chiari prima della partenza. La fattibilità aumenta con: right-to-work già disponibile, esperienza pregressa e preferenza per una singola venue."
+        "statement": "B1 Sprint pre-partenza per comunicazione operativa in pub (colloquio, ordini, istruzioni supervisor).",
+        "linked_desire_id": "D1",
+        "rationale": "B1 è in genere adeguato per i compiti chiave in pub; il passaggio A2→B1 è pianificabile con un monte ore realistico e può essere accelerato con simulazioni e lessico specifico del pub.",
+        "linked_beliefs": [
+          "B2",
+          "B4",
+          "B5",
+          "B12",
+          "B13",
+          "B15",
+          "B18"
+        ]
       },
       "action_plan": {
         "plan_id": "PLAN-001",
         "steps": [
           {
             "step_number": 1,
-            "action": "Definire criteri di selezione venue (zona, distanza, tipologia pub, stile servizio, range di ore desiderate, pay rate minimo).",
-            "required_beliefs": []
+            "action": "Eseguire un rapido assessment (CEFR + speaking/listening) per identificare gap rispetto a B1 funzionale per pub.",
+            "required_beliefs": [
+              "B12",
+              "B13",
+              "B15"
+            ]
           },
           {
             "step_number": 2,
-            "action": "Creare shortlist di 10–15 pub e 3–5 catene (venue con gestione strutturata) con contatti di manager/HR.",
-            "required_beliefs": []
+            "action": "Pianificare 60–90 ore di studio strutturato (funzioni comunicative, grammatica essenziale, listening) distribuite prima della partenza.",
+            "required_beliefs": [
+              "B4"
+            ]
           },
           {
             "step_number": 3,
-            "action": "Preparare pacchetto candidatura: CV in inglese UK-style, mini cover note personalizzata (2–3 righe), disponibilità date/ore, referenze 'available on request'.",
-            "required_beliefs": []
+            "action": "Aggiungere 20–30 ore di pratica situazionale (roleplay ordini, pagamenti, richieste, small talk, istruzioni del supervisore).",
+            "required_beliefs": [
+              "B4",
+              "B5",
+              "B18"
+            ]
           },
           {
             "step_number": 4,
-            "action": "Inviare candidature mirate e fare outreach diretto al manager (email + chiamata in fascia non-peak) per fissare colloquio video.",
-            "required_beliefs": []
+            "action": "Creare e ripetere simulazioni complete 'rush hour' (rumore, velocità, multitasking) con lessico da pub e correzione mirata.",
+            "required_beliefs": [
+              "B5",
+              "B18"
+            ]
           },
           {
             "step_number": 5,
-            "action": "Sostenere colloqui video: evidenziare esperienza operativa e disponibilità a coprire l'intero mese; gestire obiezione 'solo 1 mese' come copertura affidabile.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Richiedere conferma scritta di: ruolo, rate oraria, policy tips, ore attese/minime, giorni, trial pagato/non pagato, start date.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 7,
-            "action": "Concordare onboarding day-1 (documenti, uniforme, training) e ottenere rota della prima settimana (o data di pubblicazione rota).",
-            "required_beliefs": []
+            "action": "Fare mock interview e scenario 'supervisor instructions' fino a gestire consegne, priorità e domande di chiarimento.",
+            "required_beliefs": [
+              "B2",
+              "B5"
+            ]
           }
         ],
-        "expected_outcome": "Offerta confermata prima della partenza (o comunque con accordo scritto) con chiarezza su retribuzione e turni in una singola venue.",
+        "expected_outcome": "Capacità di sostenere colloqui e gestire interazioni tipiche del pub con autonomia iniziale (B1 funzionale).",
         "estimated_effort": "Alto"
       }
     },
     {
       "intention": {
-        "id": "INT-003",
-        "statement": "Selezionare pub ad alta probabilità di stabilità ore/rota (riduzione rischio di ore ballerine).",
+        "id": "INT-002",
+        "statement": "A2 Survival: repertorio di frasi memorizzate e routine per reggere contesti semplici e arrivare al trial shift.",
         "linked_desire_id": "D1",
-        "rationale": "Con preferenza per una sola venue, il rischio principale non è trovare un trial ma ottenere ore sufficienti e prevedibili. Strategia orientata a venue strutturate e segnali di stabilità."
+        "rationale": "Se il contesto è semplice e si usano frasi memorizzate, A2 può essere sufficiente per alcune mansioni; utile quando il tempo pre-partenza è poco e l'obiettivo è 'non bloccarsi' nelle interazioni ricorrenti.",
+        "linked_beliefs": [
+          "B3",
+          "B5",
+          "B14",
+          "B18",
+          "B1"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-002",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Selezionare 40–60 micro-script ad alta frequenza (saluti, ordini base, pagamenti, richieste di ripetizione, 'I’ll check').",
+            "required_beliefs": [
+              "B3",
+              "B14"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Allenare i micro-script con drilling + varianti (diversi accenti/velocità), includendo lessico specifico del pub.",
+            "required_beliefs": [
+              "B5",
+              "B18"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Roleplay focalizzati su: prendere ordini semplici, confermare, chiedere chiarimenti, gestire 'out of stock'.",
+            "required_beliefs": [
+              "B3",
+              "B5"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Preparare una mini-scaletta di 'colloquio remoto' con risposte standard e disponibilità, per arrivare al trial con fiducia.",
+            "required_beliefs": [
+              "B1"
+            ]
+          }
+        ],
+        "expected_outcome": "Comunicazione di routine più fluida in situazioni prevedibili; riduzione dei blocchi linguistici in contesti semplici.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-003",
+        "statement": "Target B2 per massima mobilità e gestione di situazioni complesse (clienti difficili, spiegazioni, training).",
+        "linked_desire_id": "D1",
+        "rationale": "B2 aumenta fluidità e tenuta comunicativa in contesti professionali complessi; utile se si mira a venue più esigenti o a crescita più rapida in responsabilità.",
+        "linked_beliefs": [
+          "B16",
+          "B26",
+          "B5",
+          "B18",
+          "B13"
+        ]
       },
       "action_plan": {
         "plan_id": "PLAN-003",
         "steps": [
           {
             "step_number": 1,
-            "action": "Definire indicatori di stabilità: volume costante, rota pubblicata con anticipo, presenza di team strutturato, processi HR (specie nelle catene).",
-            "required_beliefs": []
+            "action": "Definire il profilo target e verificare se B2 è un vantaggio competitivo per ruolo/venue (obiettivi + scenari tipici).",
+            "required_beliefs": [
+              "B16",
+              "B26"
+            ]
           },
           {
             "step_number": 2,
-            "action": "Ricercare e classificare 20 venue (A/B/C) in base a stabilità presunta e compatibilità logistica.",
-            "required_beliefs": []
+            "action": "Costruire un percorso B1→B2 con focus su speaking fluente e listening rapido in ambiente rumoroso.",
+            "required_beliefs": [
+              "B16",
+              "B5"
+            ]
           },
           {
             "step_number": 3,
-            "action": "Preparare set di domande da colloquio per stabilità: ore medie settimanali, minimo ore, come gestiscono coperture e cambi turno, quando esce la rota.",
-            "required_beliefs": []
+            "action": "Allenare scenari 'ad alta complessità' (reclami articolati, negoziazione, spiegazioni dettagliate di prodotti/ingredienti).",
+            "required_beliefs": [
+              "B16",
+              "B18"
+            ]
           },
           {
             "step_number": 4,
-            "action": "Colloqui/trial: raccogliere risposte e segnali (chiarezza manager, organizzazione, standard operativi).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 5,
-            "action": "Scegliere venue con migliore previsione di ore e conferma scritta di rate + expected weekly hours (anche se non garantite).",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Dopo la prima settimana, fare check: ore reali vs attese; se mismatch forte, attivare piano di sostituzione (nuova shortlist).",
-            "required_beliefs": []
+            "action": "Eseguire simulazioni complete con feedback su pragmatica (politeness, tono, escalation) e chiarezza.",
+            "required_beliefs": [
+              "B16",
+              "B18"
+            ]
           }
         ],
-        "expected_outcome": "Inserimento in un pub che offre prevedibilità e sufficienza di ore per tutto il mese, riducendo rischio di instabilità.",
-        "estimated_effort": "Medio"
+        "expected_outcome": "Maggiore fluidità e resilienza comunicativa; migliore performance in situazioni non standard e potenziale crescita più rapida.",
+        "estimated_effort": "Alto"
       }
     },
     {
       "intention": {
         "id": "INT-004",
-        "statement": "Inglese operativo da servizio: comunicazione sicura durante picchi, ordini e gestione problemi.",
+        "statement": "Funnel remoto: CV UK + pitch + canali settoriali per fissare colloqui e trial prima della partenza.",
         "linked_desire_id": "D2",
-        "rationale": "L'obiettivo linguistico è situazionale: prendere ordini, comprendere istruzioni del supervisore, gestire clienti e problemi. Con esperienza pregressa, conviene un approccio task-based focalizzato sulla performance in turno."
+        "rationale": "Un CV UK orientato a risultati e un pitch conciso aumentano la conversione; usare canali specifici del settore aumenta le risposte e la preselezione può avvenire da remoto.",
+        "linked_beliefs": [
+          "B6",
+          "B7",
+          "B10",
+          "B1"
+        ]
       },
       "action_plan": {
         "plan_id": "PLAN-004",
         "steps": [
           {
             "step_number": 1,
-            "action": "Mappare 30–40 scenari ricorrenti (greeting, order-taking, upsell, allergens, payments, complaints, last orders, manager instructions).",
-            "required_beliefs": []
+            "action": "Riscrivere il CV in stile UK: risultati misurabili, skill chiave, disponibilità (1 mese), referenze/prontezza a fornirle.",
+            "required_beliefs": [
+              "B6"
+            ]
           },
           {
             "step_number": 2,
-            "action": "Creare 'phrase bank' per chunk (frasi complete) + varianti polite/firm, includendo strategie di chiarimento ('Just to confirm…').",
-            "required_beliefs": []
+            "action": "Preparare un pitch di 30–45 secondi e 2 template di messaggio candidatura (breve + esteso).",
+            "required_beliefs": [
+              "B7"
+            ]
           },
           {
             "step_number": 3,
-            "action": "Allenare roleplay giornalieri (10–15 min) con timer e obiettivo accuracy/velocità.",
-            "required_beliefs": []
+            "action": "Selezionare e usare canali specifici hospitality (3–5) con applicazioni a batch (es. 10–20 candidature/sett).",
+            "required_beliefs": [
+              "B10"
+            ]
           },
           {
             "step_number": 4,
-            "action": "Eseguire ascolto mirato su accento UK + rumore di fondo (simulazione pub) per aumentare comprensione in ambiente reale.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 5,
-            "action": "Preparare script per gestione reclami e recovery: scuse, soluzione, escalation al manager.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Simulare colloquio e trial in inglese: domande tipiche e risposte concise basate su esperienza.",
-            "required_beliefs": []
+            "action": "Impostare un processo per colloqui remoti: slot orari, checklist documenti, Q&A ricorrenti, follow-up.",
+            "required_beliefs": [
+              "B1"
+            ]
           }
         ],
-        "expected_outcome": "Aumento rapido di sicurezza e performance comunicativa nelle situazioni tipiche del pub, riducendo errori e stress in turno.",
+        "expected_outcome": "Aumento del tasso di risposta e fissazione di colloqui/trial prima della partenza tramite un processo ripetibile.",
         "estimated_effort": "Medio"
       }
     },
     {
       "intention": {
         "id": "INT-005",
-        "statement": "Presentazione professionale 'pub-ready': CV UK, pitch e candidatura ad alta conversione.",
-        "linked_desire_id": "D3",
-        "rationale": "Per ottenere colloqui e trial shift velocemente serve un pacchetto di candidatura immediatamente credibile e orientato alla produttività. La disponibilità di 1 mese va posizionata come copertura affidabile di un periodo specifico."
+        "statement": "Offerta scritta prima della partenza tramite pianificazione per fasi (remote screening → colloqui → trial programmato).",
+        "linked_desire_id": "D2",
+        "rationale": "Una pianificazione per fasi aumenta la probabilità di ottenere un'offerta scritta prima della partenza; il flusso remoto→trial all'arrivo è compatibile con questo approccio.",
+        "linked_beliefs": [
+          "B11",
+          "B1"
+        ]
       },
       "action_plan": {
         "plan_id": "PLAN-005",
         "steps": [
           {
             "step_number": 1,
-            "action": "Convertire CV in formato UK hospitality (bullet chiari, responsabilità operative, risultati, strumenti/POS se noti).",
-            "required_beliefs": []
+            "action": "Definire una timeline a fasi con milestone: (1) materiali pronti, (2) candidature, (3) colloqui remoti, (4) pre-accordo, (5) trial shift pianificato.",
+            "required_beliefs": [
+              "B11"
+            ]
           },
           {
             "step_number": 2,
-            "action": "Creare 2 varianti del CV (bartender vs floor) e una cover note breve riusabile + personalizzazione per venue.",
-            "required_beliefs": []
+            "action": "Durante i colloqui, chiedere esplicitamente prossimi step e condizioni minime, puntando alla conferma scritta di ruolo e data trial.",
+            "required_beliefs": [
+              "B11",
+              "B1"
+            ]
           },
           {
             "step_number": 3,
-            "action": "Scrivere pitch di 20–30 secondi: esperienza → punti forti (velocità, accuracy, team) → disponibilità 1 mese → flessibilità weekend/late shifts.",
-            "required_beliefs": []
+            "action": "Formalizzare per iscritto: data/ora trial, durata, luogo, persona di riferimento, documenti richiesti, dress code.",
+            "required_beliefs": [
+              "B11",
+              "B1"
+            ]
           },
           {
             "step_number": 4,
-            "action": "Preparare referenze (contatti + ruolo) e una frase standard 'References available on request'.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 5,
-            "action": "Preparare template messaggi per candidatura (email/Indeed/Gumtree/WhatsApp) con call-to-action: richiesta colloquio o trial immediato.",
-            "required_beliefs": []
-          },
-          {
-            "step_number": 6,
-            "action": "Impostare tracking candidature e follow-up entro 24–48 ore per aumentare le risposte dei manager.",
-            "required_beliefs": []
+            "action": "Allineare logistica (arrivo a Londra, disponibilità effettiva) con la data del trial e predisporre piano di backup (2–3 contatti).",
+            "required_beliefs": [
+              "B11"
+            ]
           }
         ],
-        "expected_outcome": "Maggiore tasso di risposta e conversione a colloqui/trial grazie a candidatura chiara, credibile e adatta al mercato hospitality UK.",
+        "expected_outcome": "Riduzione incertezza pre-partenza e aumento probabilità di arrivare con un trial/offer già incanalati e confermati.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-006",
+        "statement": "SOP Bootcamp: autonomia operativa in turno e riduzione errori (service flow, apertura/chiusura, pulizie, stock).",
+        "linked_desire_id": "D3",
+        "rationale": "Conoscere e applicare SOP di base aumenta autonomia e riduce errori; è un moltiplicatore di affidabilità durante trial e prime settimane.",
+        "linked_beliefs": [
+          "B8"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-006",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Mappare un set minimo di SOP tipiche (apertura/chiusura, service flow, cleaning, gestione bicchieri, stock/restock, cassa di base).",
+            "required_beliefs": [
+              "B8"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Convertire le SOP in checklist e sequenze operative (ordine delle azioni + standard di qualità).",
+            "required_beliefs": [
+              "B8"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Simulare micro-task (2–5 minuti) e macro-task (15–30 minuti) con misurazione errori/tempi e correzione.",
+            "required_beliefs": [
+              "B8"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Preparare frasi funzionali collegate alle SOP (chiedere priorità, confermare consegne, segnalare problemi).",
+            "required_beliefs": [
+              "B8",
+              "B2"
+            ]
+          }
+        ],
+        "expected_outcome": "Esecuzione più consistente e autonoma delle attività base; migliore percezione di affidabilità durante trial e primi turni.",
         "estimated_effort": "Medio"
       }
     },
     {
       "intention": {
         "id": "INT-007",
-        "statement": "Ottenere chiarezza totale su ruolo, orari e retribuzione tramite negoziazione e conferma scritta.",
-        "linked_desire_id": "D1",
-        "rationale": "Il desiderio principale richiede eliminare ambiguità (tips, trial pagato, ore attese, pubblicazione rota). Una strategia dedicata alla 'clean offer' riduce sorprese e assicura coerenza con l'obiettivo di 1 mese in un solo pub."
+        "statement": "Compliance minima (età, sicurezza, allergeni): riduzione rischio e maggiore fiducia del datore durante i turni.",
+        "linked_desire_id": "D3",
+        "rationale": "Una consapevolezza minima su regole di età, sicurezza e allergeni è attesa e riduce rischi; incide direttamente sulla sicurezza operativa e sulla qualità del servizio.",
+        "linked_beliefs": [
+          "B9"
+        ]
       },
       "action_plan": {
         "plan_id": "PLAN-007",
         "steps": [
           {
             "step_number": 1,
-            "action": "Creare checklist 'clean offer' (10 punti): ruolo, rate, tips, ore attese/minime, giorni, trial paid, pay schedule, uniform, start date, rota publication.",
-            "required_beliefs": []
+            "action": "Creare una 'compliance cheat-sheet' con: richiesta ID/età, gestione incidenti/sicurezza, domande/risposte standard sugli allergeni.",
+            "required_beliefs": [
+              "B9"
+            ]
           },
           {
             "step_number": 2,
-            "action": "Portare la checklist in colloquio/trial e raccogliere risposte precise su ciascun punto.",
-            "required_beliefs": []
+            "action": "Roleplay scenari critici: cliente senza ID, cliente alterato, dichiarazione allergia, dubbio su ingredienti → escalation al supervisore.",
+            "required_beliefs": [
+              "B9"
+            ]
           },
           {
             "step_number": 3,
-            "action": "Definire soglie minime accettabili (rate/ore/distanza) e applicarle come criterio di decisione.",
-            "required_beliefs": []
+            "action": "Integrare 5–10 frasi chiave nel repertorio per comunicare in modo fermo e cortese (policy-based).",
+            "required_beliefs": [
+              "B9",
+              "B2"
+            ]
+          }
+        ],
+        "expected_outcome": "Riduzione errori e rischi; gestione più sicura di situazioni sensibili; maggiore fiducia del supervisore.",
+        "estimated_effort": "Basso"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-008",
+        "statement": "Trial shift readiness pack: simulazioni complete (lingua + SOP + compliance) per massimizzare la performance al trial.",
+        "linked_desire_id": "D3",
+        "rationale": "Il percorso tipico include trial shift all'arrivo; simulazioni, lessico da pub, SOP e compliance aumentano prontezza e riducono errori proprio nel momento di valutazione.",
+        "linked_beliefs": [
+          "B1",
+          "B5",
+          "B8",
+          "B9",
+          "B2",
+          "B18"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-008",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire lo 'scope' del trial: mansioni probabili, interazioni richieste, criteri di valutazione tipici (velocità, accuratezza, atteggiamento).",
+            "required_beliefs": [
+              "B1"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Costruire 3 simulazioni complete di turno (apertura → rush → chiusura) con lessico specifico e correzione.",
+            "required_beliefs": [
+              "B5",
+              "B18"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Integrare checklist SOP + punti di controllo qualità (pulizia, sequenza servizio, restock) nelle simulazioni.",
+            "required_beliefs": [
+              "B8"
+            ]
           },
           {
             "step_number": 4,
-            "action": "Richiedere conferma scritta (email/WhatsApp) dei punti chiave prima di accettare definitivamente.",
-            "required_beliefs": []
+            "action": "Inserire 'eventi critici' nelle simulazioni (allergeni/ID/sicurezza) e allenare escalation corretta al supervisore.",
+            "required_beliefs": [
+              "B9",
+              "B2"
+            ]
           },
           {
             "step_number": 5,
-            "action": "Se mancano dettagli (es. ore): concordare 'expected weekly hours' e data in cui viene pubblicata la rota, poi fare un check dopo 1 settimana.",
-            "required_beliefs": []
+            "action": "Debrief strutturato post-simulazione: errori ricorrenti, frasi mancanti, priorità di miglioramento per la settimana successiva.",
+            "required_beliefs": [
+              "B5",
+              "B8"
+            ]
           }
         ],
-        "expected_outcome": "Accordo trasparente e verificabile che riduce rischio di incomprensioni e garantisce chiarezza economica/organizzativa per l’intero mese.",
-        "estimated_effort": "Basso"
+        "expected_outcome": "Performance più solida e coerente al trial shift; meno errori operativi; comunicazione più efficace in contesto reale.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-009",
+        "statement": "Percorso certificabile: corso 60 ore + test ingresso/uscita + attestato per evidenza nel CV e credibilità in selezione.",
+        "linked_desire_id": "D2",
+        "rationale": "Un percorso strutturato con test e attestato produce evidenza spendibile nel CV; la metodologia attiva e il contesto mirato aumentano l'utilità pratica per il lavoro.",
+        "linked_beliefs": [
+          "B19",
+          "B20",
+          "B21",
+          "B22",
+          "B23",
+          "B17",
+          "B18",
+          "B24",
+          "B6"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-009",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Eseguire test di ingresso e posizionamento per garantire livello coerente e obiettivi realistici.",
+            "required_beliefs": [
+              "B19",
+              "B20"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Frequentare il corso da 60 ore con calendario compatibile (serale/preserale, bisettimanale) mantenendo continuità.",
+            "required_beliefs": [
+              "B21",
+              "B22"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Massimizzare l'apprendimento con metodologia attiva: roleplay, casi studio, lavori di gruppo su situazioni lavorative e quotidiane.",
+            "required_beliefs": [
+              "B17",
+              "B18"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Eseguire test finale (uscita) e ottenere attestato di frequenza con profitto.",
+            "required_beliefs": [
+              "B20",
+              "B23"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Aggiornare il CV UK inserendo attestato e risultati/competenze sviluppate come evidenza di preparazione.",
+            "required_beliefs": [
+              "B23",
+              "B6"
+            ]
+          }
+        ],
+        "expected_outcome": "Credibilità aumentata in selezione grazie a evidenze formali; progressi misurabili e comunicabili nel CV UK.",
+        "estimated_effort": "Alto"
       }
     }
   ]

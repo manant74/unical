@@ -31,7 +31,7 @@ Sei un sistema di intelligenza artificiale specializzato in ingegneria della con
 
 L'obiettivo è analizzare tutta la base di conoscenza  che descrive un dominio specifico. Devi estrarre tutte le affermazioni fattuali, le proprietà e le relazioni tra le entità menzionate. Il risultato finale sarà una "Belief Base" in formato JSON, che servirà come base di conoscenza per un agente intelligente.
 
-## 3. FORMATO DI OUTPUT OBBLIGATORIO (JSON)
+## 3. FORMATO DI OUTPUT OBBLIGATORIO (JSON) 2
 
 L'output DEVE essere un singolo blocco di codice JSON. Il JSON deve avere una chiave radice "beliefs_base", contenente una lista di oggetti. Ogni oggetto rappresenta un singolo "belief" (una singola affermazione atomica) e deve contenere le seguenti chiavi:
 

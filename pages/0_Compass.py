@@ -6,8 +6,6 @@ from datetime import datetime
 from code_editor import code_editor
 import plotly.graph_objects as go
 import plotly.express as px
-import networkx as nx
-import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -1255,139 +1253,12 @@ else:
             st.markdown("---")
 
             # ============================================================================
-            # SEZIONE 2: DESIRES & INTENTIONS ANALYSIS (2 colonne)
-            # ============================================================================
-            col_left, col_right = st.columns(2)
-
-            with col_left:
-                st.markdown("##### 💭 Desires Analysis")
-
-                # Grafico Success Metrics per Desire
-                if desires:
-                    # Calcola quanti success metrics ha ogni desire
-                    desire_metrics = {}
-                    for desire in desires:
-                        desire_id = desire.get('desire_id') or desire.get('id', 'Unknown')
-                        metrics_count = len(desire.get('success_metrics', []))
-                        # Usa una label più corta per il grafico
-                        short_label = f"{desire_id}"
-                        desire_metrics[short_label] = metrics_count
-
-                    # Crea grafico a barre
-                    fig_metrics = px.bar(
-                        x=list(desire_metrics.keys()),
-                        y=list(desire_metrics.values()),
-                        title="Success Metrics per Desire",
-                        labels={'x': 'Desire ID', 'y': 'Number of Success Metrics'},
-                        color=list(desire_metrics.values()),
-                        color_continuous_scale='Blues',
-                        text=list(desire_metrics.values())
-                    )
-                    fig_metrics.update_traces(textposition='outside')
-                    st.plotly_chart(fig_metrics, use_container_width=True)  # Plotly chart parameter is still use_container_width
-
-                    # Grafico Beliefs per Desire
-                    if bdi_beliefs:
-                        # Conta quanti beliefs sono collegati a ogni desire
-                        beliefs_per_desire = {}
-                        for desire in desires:
-                            desire_id = desire.get('desire_id') or desire.get('id')
-                            beliefs_per_desire[desire_id] = 0
-
-                        # Conta i collegamenti
-                        for belief in bdi_beliefs:
-                            related = belief.get('related_desires', [])
-
-                            for item in related:
-                                # Supporta sia array semplice di stringhe che array di oggetti
-                                if isinstance(item, dict):
-                                    desire_id = item.get('desire_id')
-                                else:
-                                    desire_id = item
-
-                                if desire_id in beliefs_per_desire:
-                                    beliefs_per_desire[desire_id] += 1
-
-                        # Crea grafico a barre
-                        fig_beliefs_count = px.bar(
-                            x=list(beliefs_per_desire.keys()),
-                            y=list(beliefs_per_desire.values()),
-                            title="Beliefs per Desire",
-                            labels={'x': 'Desire ID', 'y': 'Number of Beliefs'},
-                            color=list(beliefs_per_desire.values()),
-                            color_continuous_scale='Greens',
-                            text=list(beliefs_per_desire.values())
-                        )
-                        fig_beliefs_count.update_traces(textposition='outside')
-                        st.plotly_chart(fig_beliefs_count, use_container_width=True)  # Plotly chart parameter is still use_container_width
-                else:
-                    st.info("No desires found. Create some desires in Alì to see statistics.")
-
-            with col_right:
-                st.markdown("##### 🎯 Intentions Analysis")
-
-                if intentions:
-                    # Grafico Intentions by Status (Pie chart - Purples)
-                    status_counts = {}
-                    for intention in intentions:
-                        status = intention.get('status') or intention.get('state', 'undefined')
-                        status_counts[status] = status_counts.get(status, 0) + 1
-
-                    fig_status = px.pie(
-                        values=list(status_counts.values()),
-                        names=list(status_counts.keys()),
-                        title="Intentions by Status",
-                        color_discrete_sequence=px.colors.sequential.Purples
-                    )
-                    st.plotly_chart(fig_status, use_container_width=True)  # Plotly chart parameter is still use_container_width
-
-                    # Grafico Intentions by Type (Bar chart - Purples)
-                    type_counts = {}
-                    for intention in intentions:
-                        int_type = intention.get('type') or intention.get('intention_type', 'undefined')
-                        type_counts[int_type] = type_counts.get(int_type, 0) + 1
-
-                    fig_type = px.bar(
-                        x=list(type_counts.keys()),
-                        y=list(type_counts.values()),
-                        title="Intentions by Type",
-                        labels={'x': 'Type', 'y': 'Count'},
-                        color=list(type_counts.values()),
-                        color_continuous_scale='Purples',
-                        text=list(type_counts.values())
-                    )
-                    fig_type.update_traces(textposition='outside')
-                    st.plotly_chart(fig_type, use_container_width=True)  # Plotly chart parameter is still use_container_width
-
-                    # Grafico Intentions by Priority (Bar chart - Reds)
-                    priority_counts = {}
-                    for intention in intentions:
-                        priority = intention.get('priority', 'undefined')
-                        priority_counts[priority] = priority_counts.get(priority, 0) + 1
-
-                    fig_priority = px.bar(
-                        x=list(priority_counts.keys()),
-                        y=list(priority_counts.values()),
-                        title="Intentions by Priority",
-                        labels={'x': 'Priority', 'y': 'Count'},
-                        color=list(priority_counts.values()),
-                        color_continuous_scale='Reds',
-                        text=list(priority_counts.values())
-                    )
-                    fig_priority.update_traces(textposition='outside')
-                    st.plotly_chart(fig_priority, use_container_width=True)  # Plotly chart parameter is still use_container_width
-                else:
-                    st.info("No intentions found. Create some intentions to see statistics.")
-
-            st.markdown("---")
-
-            # ============================================================================
-            # SEZIONE 3: BELIEFS ANALYSIS (2 colonne)
+            # SEZIONE 1: BELIEFS ANALYSIS (2 colonne)
             # ============================================================================
             col_left_beliefs, col_right_beliefs = st.columns(2)
 
             with col_left_beliefs:
-                st.markdown("##### 🧠 Beliefs Analysis - Relations & Confidence")
+                st.markdown("##### 🧠 Beliefs Analysis - Relations")
 
                 # Grafico tipologie di relazioni beliefs
                 if bdi_beliefs:
@@ -1407,22 +1278,6 @@ else:
                             color_discrete_sequence=px.colors.sequential.Teal
                         )
                         st.plotly_chart(fig_relations, use_container_width=True)  # Plotly chart parameter is still use_container_width
-
-                    # Grafico livelli di confidenza (se disponibile)
-                    confidence_levels = []
-                    for belief in bdi_beliefs:
-                        if 'confidence' in belief:
-                            confidence_levels.append(belief['confidence'])
-
-                    if confidence_levels:
-                        fig_confidence = px.histogram(
-                            x=confidence_levels,
-                            nbins=20,
-                            title="Confidence Levels Distribution",
-                            labels={'x': 'Confidence', 'y': 'Count'},
-                            color_discrete_sequence=['#2E86AB']
-                        )
-                        st.plotly_chart(fig_confidence, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
                     st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
@@ -1471,388 +1326,831 @@ else:
                 else:
                     st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
-            # ============================================================================
-            # SEZIONE 4: GRAFO DELLE RELAZIONI (con Intentions)
-            # ============================================================================
             st.markdown("---")
-            st.markdown("#### 🕸️ Relationship Graph")
 
-            # Selettore layout
-            col_title, col_layout = st.columns([3, 1])
-            with col_layout:
-                layout_type = st.selectbox(
-                    "Layout",
-                    ["Bipartite", "Spring", "Circular", "Kamada-Kawai"],
-                    index=1,
-                    help="Choose the graph layout algorithm"
-                )
+            # ============================================================================
+            # SEZIONE 2: DESIRES ANALYSIS (2 colonne)
+            # ============================================================================
+            col_left, col_right = st.columns(2)
 
-            if desires or bdi_beliefs or intentions:
-                # Crea il grafo NetworkX
-                G = nx.Graph()
+            with col_left:
+                st.markdown("##### 💭 Desires Analysis - Metrics")
 
-                # Dizionari per tracciare nodi e colori
-                node_colors = {}
-                node_types = {}
-
-                # Funzione helper per normalizzare gli ID durante il matching
-                def normalize_id(id_value, prefix=''):
-                    """Normalizza ID per matching robusto (B1, B01, 1, ecc.)"""
-                    if isinstance(id_value, str):
-                        normalized = id_value.replace(prefix, '').lstrip('0') if prefix else id_value.lstrip('0')
-                        return normalized or '0'
-                    return str(id_value)
-
-                # Aggiungi nodi Desire
-                for desire in desires:
-                    # Supporta sia 'id' che 'desire_id' per compatibilità
-                    desire_id = desire.get('desire_id') or desire.get('id')
-                    if desire_id:
-                        # Usa 'desire_statement' se disponibile, altrimenti 'description'
-                        desc = desire.get('desire_statement') or desire.get('description', 'No desc')
-                        node_label = f"D{desire_id}: {desc[:30]}..."
-                        G.add_node(node_label)
-                        node_colors[node_label] = '#FF6B6B'  # Rosso per desires
-                        node_types[node_label] = 'Desire'
-
-                # Aggiungi nodi Belief (usa indice come ID se non presente)
-                for idx, belief in enumerate(bdi_beliefs):
-                    belief_id = belief.get('id', f"B{idx+1}")
-                    # Usa diversi campi per il contenuto del belief (ordine di priorità)
-                    content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
-                    node_label = f"{belief_id}: {content[:30]}..."
-                    G.add_node(node_label)
-                    node_colors[node_label] = '#4ECDC4'  # Teal per beliefs
-                    node_types[node_label] = 'Belief'
-
-                # Aggiungi nodi Intention
-                for idx, intention in enumerate(intentions):
-                    # Gestisce sia struttura piatta che annidata (intention.intention.id)
-                    intention_id = (
-                        intention.get('intention_id') or
-                        intention.get('id') or
-                        intention.get('intention', {}).get('intention_id') or
-                        intention.get('intention', {}).get('id') or
-                        f"I{idx+1}"
-                    )
-                    # Usa diversi campi per il contenuto dell'intention
-                    content = (
-                        intention.get('description') or
-                        intention.get('intention_statement') or
-                        intention.get('name') or
-                        intention.get('intention', {}).get('description') or
-                        intention.get('intention', {}).get('intention_statement') or
-                        intention.get('intention', {}).get('name') or
-                        'No content'
-                    )
-                    node_label = f"I{intention_id}: {content[:30]}..."
-                    G.add_node(node_label)
-                    node_colors[node_label] = '#FFD93D'  # Giallo per intentions
-                    node_types[node_label] = 'Intention'
-
-                # Aggiungi edge tra Belief e Desire
-                for idx, belief in enumerate(bdi_beliefs):
-                    belief_id = belief.get('id', f"B{idx+1}")
-                    content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
-                    belief_label = f"{belief_id}: {content[:30]}..."
-
-                    # Supporta sia 'related_desires' (array semplice) che 'desires_correlati' (array di oggetti)
-                    related = belief.get('related_desires', [])
-                    if not related and 'desires_correlati' in belief:
-                        # Estrai gli ID dagli oggetti desires_correlati
-                        related = [dc.get('desire_id') for dc in belief.get('desires_correlati', []) if dc.get('desire_id')]
-
-                    for item in related:
-                        # Estrai desire_id se è un oggetto, altrimenti usa il valore direttamente
-                        if isinstance(item, dict):
-                            desire_id = item.get('desire_id')
-                        else:
-                            desire_id = item
-
-                        # Trova il desire corrispondente (supporta D1, DES-001, ecc.)
-                        for desire in desires:
-                            d_id = desire.get('desire_id') or desire.get('id')
-                            # Normalizza per matching (DES-001 -> D1, oppure cerca per valore esatto)
-                            if d_id == desire_id or (isinstance(desire_id, str) and isinstance(d_id, str) and desire_id.replace('DES-', 'D').lstrip('0') == d_id.replace('D', '').lstrip('0')):
-                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
-                                desire_label = f"D{desire_id}: {desc[:30]}..."
-                                if belief_label in G.nodes and desire_label in G.nodes:
-                                    G.add_edge(belief_label, desire_label)
-                                break
-
-                # Aggiungi edge tra Intention e Desire
-                for idx, intention in enumerate(intentions):
-                    # Gestisce sia struttura piatta che annidata (intention.intention.id)
-                    intention_id = (
-                        intention.get('intention_id') or
-                        intention.get('id') or
-                        intention.get('intention', {}).get('intention_id') or
-                        intention.get('intention', {}).get('id') or
-                        f"I{idx+1}"
-                    )
-                    content = (
-                        intention.get('description') or
-                        intention.get('intention_statement') or
-                        intention.get('name') or
-                        intention.get('intention', {}).get('description') or
-                        intention.get('intention', {}).get('intention_statement') or
-                        intention.get('intention', {}).get('name') or
-                        'No content'
-                    )
-                    intention_label = f"I{intention_id}: {content[:30]}..."
-
-                    # Edge Intention -> Desire (supporta diverse naming conventions incluso linked_desire_id)
-                    # Gestisce sia struttura piatta che annidata
-                    related_desires = (
-                        intention.get('related_desires', []) or
-                        intention.get('desires', []) or
-                        intention.get('intention', {}).get('related_desires', []) or
-                        intention.get('intention', {}).get('desires', []) or
-                        []
-                    )
-                    # Se intention ha linked_desire_id (singolo), aggiungilo alla lista
-                    if intention.get('linked_desire_id'):
-                        related_desires = list(related_desires) + [intention.get('linked_desire_id')]
-                    # Supporta anche intention.intention.linked_desire_id (nested)
-                    if intention.get('intention', {}).get('linked_desire_id'):
-                        related_desires = list(related_desires) + [intention['intention'].get('linked_desire_id')]
-
-                    for item in related_desires:
-                        # Estrai desire_id se è un oggetto, altrimenti usa il valore direttamente
-                        if isinstance(item, dict):
-                            desire_id = item.get('desire_id') or item.get('id')
-                        else:
-                            desire_id = item
-
-                        # Trova il desire corrispondente (supporta D1, DES-001, ecc.)
-                        for desire in desires:
-                            d_id = desire.get('desire_id') or desire.get('id')
-                            # Normalizza per matching (DES-001 -> D1, oppure cerca per valore esatto)
-                            if d_id == desire_id or (isinstance(desire_id, str) and isinstance(d_id, str) and desire_id.replace('DES-', 'D').lstrip('0') == d_id.replace('D', '').lstrip('0')):
-                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
-                                desire_label = f"D{desire_id}: {desc[:30]}..."
-                                if intention_label in G.nodes and desire_label in G.nodes:
-                                    G.add_edge(intention_label, desire_label)
-                                break
-
-                    # Fallback: cercare inversamente - Desire che referenziano questa Intention
+                # Grafico Success Metrics per Desire
+                if desires:
+                    # Calcola quanti success metrics ha ogni desire
+                    desire_metrics = {}
                     for desire in desires:
-                        d_id = desire.get('desire_id') or desire.get('id')
-                        # Supporta diverse naming conventions per intention references
-                        related_intentions = desire.get('related_intentions', []) or desire.get('intentions', []) or []
-                        for item in related_intentions:
-                            if isinstance(item, dict):
-                                rel_int_id = item.get('intention_id') or item.get('id')
-                            else:
-                                rel_int_id = item
-                            if rel_int_id == intention_id:
-                                desc = desire.get('desire_statement') or desire.get('description', 'No desc')
-                                desire_label = f"D{d_id}: {desc[:30]}..."
-                                if intention_label in G.nodes and desire_label in G.nodes:
-                                    G.add_edge(intention_label, desire_label)
-                                break
+                        desire_id = desire.get('desire_id') or desire.get('id', 'Unknown')
+                        metrics_count = len(desire.get('success_metrics', []))
+                        # Usa una label più corta per il grafico
+                        short_label = f"{desire_id}"
+                        desire_metrics[short_label] = metrics_count
 
-                    # Edge Intention -> Belief (supporta diverse naming conventions: linked_beliefs, related_beliefs, beliefs)
-                    # Gestisce sia struttura piatta che annidata (intention.intention.linked_beliefs)
-                    related_beliefs = (
-                        intention.get('linked_beliefs', []) or
-                        intention.get('intention', {}).get('linked_beliefs', []) or
-                        intention.get('related_beliefs', []) or
-                        intention.get('intention', {}).get('related_beliefs', []) or
-                        intention.get('beliefs', []) or
-                        intention.get('intention', {}).get('beliefs', []) or
-                        []
+                    # Crea grafico a barre
+                    fig_metrics = px.bar(
+                        x=list(desire_metrics.keys()),
+                        y=list(desire_metrics.values()),
+                        title="Success Metrics per Desire",
+                        labels={'x': 'Desire ID', 'y': 'Number of Success Metrics'},
+                        color=list(desire_metrics.values()),
+                        color_continuous_scale='Blues',
+                        text=list(desire_metrics.values())
                     )
-                    for item in related_beliefs:
-                        # Estrai belief_id se è un oggetto, altrimenti usa il valore direttamente
-                        if isinstance(item, dict):
-                            belief_id = item.get('belief_id') or item.get('id')
-                        else:
-                            belief_id = item
-
-                        # Normalizza belief_id per matching (B1, B01, 1, ecc.)
-                        normalized_linked = normalize_id(belief_id, prefix='B')
-
-                        # Trova il belief corrispondente con matching robusto
-                        for b_idx, belief in enumerate(bdi_beliefs):
-                            b_id = belief.get('id', f"B{b_idx+1}")
-                            normalized_b_id = normalize_id(b_id, prefix='B')
-                            # Confronta con match esatto o normalizzato
-                            if b_id == belief_id or normalized_b_id == normalized_linked:
-                                b_content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
-                                belief_label = f"{b_id}: {b_content[:30]}..."
-                                if intention_label in G.nodes and belief_label in G.nodes:
-                                    G.add_edge(intention_label, belief_label)
-                                break
-
-                    # Fallback: cercare inversamente - Belief che referenziano questa Intention
-                    for b_idx, belief in enumerate(bdi_beliefs):
-                        b_id = belief.get('id', f"B{b_idx+1}")
-                        # Supporta diverse naming conventions per intention references
-                        related_intentions_from_belief = belief.get('related_intentions', []) or belief.get('intentions', []) or []
-                        for item in related_intentions_from_belief:
-                            if isinstance(item, dict):
-                                rel_int_id = item.get('intention_id') or item.get('id')
-                            else:
-                                rel_int_id = item
-                            if rel_int_id == intention_id:
-                                b_content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
-                                belief_label = f"{b_id}: {b_content[:30]}..."
-                                if intention_label in G.nodes and belief_label in G.nodes:
-                                    G.add_edge(intention_label, belief_label)
-                                break
-
-                # Calcola posizioni dei nodi in base al layout selezionato
-                if len(G.nodes) > 0:
-                    if layout_type == "Bipartite":
-                        # Layout bipartito: Desires a sinistra (x=0), Intentions al centro (x=0.5), Beliefs a destra (x=1)
-                        pos = {}
-                        desires_nodes = [n for n in G.nodes() if node_types[n] == 'Desire']
-                        intentions_nodes = [n for n in G.nodes() if node_types[n] == 'Intention']
-                        beliefs_nodes = [n for n in G.nodes() if node_types[n] == 'Belief']
-
-                        # Posiziona Desires a sinistra (x=0)
-                        for i, node in enumerate(desires_nodes):
-                            pos[node] = (0, i - len(desires_nodes)/2)
-
-                        # Posiziona Intentions al centro (x=0.5)
-                        for i, node in enumerate(intentions_nodes):
-                            pos[node] = (0.5, i - len(intentions_nodes)/2)
-
-                        # Posiziona Beliefs a destra (x=1)
-                        for i, node in enumerate(beliefs_nodes):
-                            pos[node] = (1, i - len(beliefs_nodes)/2)
-
-                    elif layout_type == "Spring":
-                        pos = nx.spring_layout(G, k=1, iterations=50)
-
-                    elif layout_type == "Circular":
-                        pos = nx.circular_layout(G)
-
-                    elif layout_type == "Kamada-Kawai":
-                        pos = nx.kamada_kawai_layout(G)
-
-                    # Prepara edge traces
-                    edge_x = []
-                    edge_y = []
-                    for edge in G.edges():
-                        x0, y0 = pos[edge[0]]
-                        x1, y1 = pos[edge[1]]
-                        edge_x.extend([x0, x1, None])
-                        edge_y.extend([y0, y1, None])
-
-                    edge_trace = go.Scatter(
-                        x=edge_x, y=edge_y,
-                        line=dict(width=1, color='#888'),
-                        hoverinfo='none',
-                        mode='lines'
-                    )
-
-                    # Prepara node traces (separati per tipo per avere colori diversi)
-                    desire_nodes_x = []
-                    desire_nodes_y = []
-                    desire_nodes_text = []
-
-                    intention_nodes_x = []
-                    intention_nodes_y = []
-                    intention_nodes_text = []
-
-                    belief_nodes_x = []
-                    belief_nodes_y = []
-                    belief_nodes_text = []
-
-                    for node in G.nodes():
-                        x, y = pos[node]
-                        if node_types[node] == 'Desire':
-                            desire_nodes_x.append(x)
-                            desire_nodes_y.append(y)
-                            desire_nodes_text.append(node)
-                        elif node_types[node] == 'Intention':
-                            intention_nodes_x.append(x)
-                            intention_nodes_y.append(y)
-                            intention_nodes_text.append(node)
-                        else:
-                            belief_nodes_x.append(x)
-                            belief_nodes_y.append(y)
-                            belief_nodes_text.append(node)
-
-                    desire_trace = go.Scatter(
-                        x=desire_nodes_x, y=desire_nodes_y,
-                        mode='markers+text',
-                        hoverinfo='text',
-                        text=desire_nodes_text,
-                        textposition="top center",
-                        marker=dict(
-                            color='#FF6B6B',
-                            size=20,
-                            line=dict(width=2, color='white')
-                        ),
-                        name='Desires'
-                    )
-
-                    intention_trace = go.Scatter(
-                        x=intention_nodes_x, y=intention_nodes_y,
-                        mode='markers+text',
-                        hoverinfo='text',
-                        text=intention_nodes_text,
-                        textposition="top center",
-                        marker=dict(
-                            color='#FFD93D',
-                            size=20,
-                            line=dict(width=2, color='white')
-                        ),
-                        name='Intentions'
-                    )
-
-                    belief_trace = go.Scatter(
-                        x=belief_nodes_x, y=belief_nodes_y,
-                        mode='markers+text',
-                        hoverinfo='text',
-                        text=belief_nodes_text,
-                        textposition="top center",
-                        marker=dict(
-                            color='#4ECDC4',
-                            size=20,
-                            line=dict(width=2, color='white')
-                        ),
-                        name='Beliefs'
-                    )
-
-                    # Crea figura
-                    fig = go.Figure(data=[edge_trace, desire_trace, intention_trace, belief_trace],
-                                    layout=go.Layout(
-                                        title=dict(
-                                            text='BDI Relationship Graph (Desires, Intentions, Beliefs)',
-                                            font=dict(size=16)
-                                        ),
-                                        showlegend=True,
-                                        hovermode='closest',
-                                        margin=dict(b=20, l=5, r=5, t=40),
-                                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                                        height=600
-                                    ))
-
-                    st.plotly_chart(fig, use_container_width=True)  # Plotly chart parameter is still use_container_width
-
-                    # Statistiche del grafo
-                    col1, col2, col3, col4 = st.columns(4)
-                    with col1:
-                        st.metric("Total Nodes", len(G.nodes))
-                    with col2:
-                        st.metric("Total Edges", len(G.edges))
-                    with col3:
-                        # Calcola densità
-                        density = nx.density(G) if len(G.nodes) > 1 else 0
-                        st.metric("Graph Density", f"{density:.2f}")
-                    with col4:
-                        # Calcola componenti connesse
-                        components = nx.number_connected_components(G)
-                        st.metric("Connected Components", components)
+                    fig_metrics.update_traces(textposition='outside')
+                    st.plotly_chart(fig_metrics, use_container_width=True)  # Plotly chart parameter is still use_container_width
                 else:
-                    st.info("No nodes to display. Create desires and beliefs with relationships to see the graph.")
-            else:
-                st.info("No data available for graph visualization. Create desires and beliefs to see the relationship graph.")
+                    st.info("No desires found. Create some desires in Alì to see statistics.")
+
+            with col_right:
+                st.markdown("##### 💭 Desires Analysis - Beliefs")
+
+                if desires and bdi_beliefs:
+                    # Conta quanti beliefs sono collegati a ogni desire
+                    beliefs_per_desire = {}
+                    for desire in desires:
+                        desire_id = desire.get('desire_id') or desire.get('id')
+                        beliefs_per_desire[desire_id] = 0
+
+                    # Conta i collegamenti
+                    for belief in bdi_beliefs:
+                        related = belief.get('related_desires', [])
+
+                        for item in related:
+                            # Supporta sia array semplice di stringhe che array di oggetti
+                            if isinstance(item, dict):
+                                desire_id = item.get('desire_id')
+                            else:
+                                desire_id = item
+
+                            if desire_id in beliefs_per_desire:
+                                beliefs_per_desire[desire_id] += 1
+
+                    # Crea grafico a barre
+                    fig_beliefs_count = px.bar(
+                        x=list(beliefs_per_desire.keys()),
+                        y=list(beliefs_per_desire.values()),
+                        title="Beliefs per Desire",
+                        labels={'x': 'Desire ID', 'y': 'Number of Beliefs'},
+                        color=list(beliefs_per_desire.values()),
+                        color_continuous_scale='Greens',
+                        text=list(beliefs_per_desire.values())
+                    )
+                    fig_beliefs_count.update_traces(textposition='outside')
+                    st.plotly_chart(fig_beliefs_count, use_container_width=True)  # Plotly chart parameter is still use_container_width
+                else:
+                    st.info("No desires or beliefs found.")
+
+            st.markdown("---")
+
+            # ============================================================================
+            # SEZIONE 3: INTENTIONS ANALYSIS (2 colonne)
+            # ============================================================================
+            col_int_left, col_int_right = st.columns(2)
+
+            with col_int_left:
+                st.markdown("##### 🎯 Intentions Analysis - Distribution")
+
+                if intentions:
+                    # Grafico 1: Distribuzione Intentions per Desire
+                    intentions_per_desire = {}
+                    for intention in intentions:
+                        # Estrai desire IDs (supporta diverse naming conventions)
+                        related_desires = (
+                            intention.get('related_desires', []) or
+                            intention.get('desires', []) or
+                            intention.get('intention', {}).get('related_desires', []) or
+                            intention.get('intention', {}).get('desires', []) or
+                            []
+                        )
+                        if intention.get('linked_desire_id'):
+                            related_desires = list(related_desires) + [intention.get('linked_desire_id')]
+                        if intention.get('intention', {}).get('linked_desire_id'):
+                            related_desires = list(related_desires) + [intention['intention'].get('linked_desire_id')]
+
+                        # Se nessun desire è collegato, usa "Unassigned"
+                        if not related_desires:
+                            intentions_per_desire['Unassigned'] = intentions_per_desire.get('Unassigned', 0) + 1
+                        else:
+                            for item in related_desires:
+                                desire_id = item.get('desire_id') or item.get('id') if isinstance(item, dict) else item
+                                if desire_id:
+                                    desire_key = f"{desire_id}"
+                                    intentions_per_desire[desire_key] = intentions_per_desire.get(desire_key, 0) + 1
+
+                    if intentions_per_desire:
+                        fig_intentions_per_desire = px.bar(
+                            x=list(intentions_per_desire.values()),
+                            y=list(intentions_per_desire.keys()),
+                            orientation='h',
+                            title="Intentions Distribution per Desire",
+                            labels={'x': 'Count', 'y': 'Desire'},
+                            color=list(intentions_per_desire.values()),
+                            color_continuous_scale='Viridis',
+                            text=list(intentions_per_desire.values())
+                        )
+                        fig_intentions_per_desire.update_traces(textposition='outside')
+                        st.plotly_chart(fig_intentions_per_desire, use_container_width=True)
+                else:
+                    st.info("No intentions found. Create some intentions to see statistics.")
+
+            with col_int_right:
+                st.markdown("##### 🎯 Intentions Analysis - Steps")
+
+                if intentions:
+                    # Grafico 2: Steps per Intention
+                    intention_steps = {}
+                    for idx, intention in enumerate(intentions):
+                        # Estrai intention ID
+                        intention_id = (
+                            intention.get('intention_id') or
+                            intention.get('id') or
+                            intention.get('intention', {}).get('intention_id') or
+                            intention.get('intention', {}).get('id') or
+                            f"I{idx+1}"
+                        )
+
+                        # Conta i steps (supporta diverse naming conventions: steps, plan, actions, tasks, action_plan)
+                        steps_count = 0
+
+                        # Primo livello: steps direttamente nell'intention
+                        if 'steps' in intention:
+                            steps_count = len(intention.get('steps', []))
+                        elif 'plan' in intention:
+                            steps_count = len(intention.get('plan', []))
+                        elif 'actions' in intention:
+                            steps_count = len(intention.get('actions', []))
+                        elif 'tasks' in intention:
+                            steps_count = len(intention.get('tasks', []))
+                        # Secondo livello: dentro action_plan
+                        elif 'action_plan' in intention:
+                            action_plan = intention.get('action_plan', {})
+                            if 'steps' in action_plan:
+                                steps_count = len(action_plan.get('steps', []))
+                        # Terzo livello: dentro intention (struttura annidata)
+                        elif 'intention' in intention:
+                            nested = intention.get('intention', {})
+                            if 'steps' in nested:
+                                steps_count = len(nested.get('steps', []))
+                            elif 'plan' in nested:
+                                steps_count = len(nested.get('plan', []))
+                            elif 'actions' in nested:
+                                steps_count = len(nested.get('actions', []))
+                            elif 'tasks' in nested:
+                                steps_count = len(nested.get('tasks', []))
+                            elif 'action_plan' in nested:
+                                action_plan = nested.get('action_plan', {})
+                                if 'steps' in action_plan:
+                                    steps_count = len(action_plan.get('steps', []))
+
+                        # Ottieni priority per colore (se disponibile)
+                        priority = intention.get('priority') or intention.get('intention', {}).get('priority', 'Medium')
+
+                        intention_steps[f"{intention_id}"] = {
+                            'steps': steps_count,
+                            'priority': priority
+                        }
+
+                    if intention_steps:
+                        # Prepara dati per il grafico
+                        intentions_labels = list(intention_steps.keys())
+                        steps_values = [intention_steps[k]['steps'] for k in intentions_labels]
+
+                        fig_steps = go.Figure(data=[
+                            go.Bar(
+                                x=steps_values,
+                                y=intentions_labels,
+                                orientation='h',
+                                marker=dict(color='#5DADE2'),  # Colore freddo rassicurante (blu azzurro)
+                                text=steps_values,
+                                textposition='outside',
+                                hovertemplate='<b>%{y}</b><br>Steps: %{x}<extra></extra>'
+                            )
+                        ])
+
+                        fig_steps.update_layout(
+                            title="Steps per Intention",
+                            xaxis_title="Number of Steps",
+                            yaxis_title="Intention",
+                            showlegend=False,
+                            height=max(300, 50 * len(intentions_labels))
+                        )
+
+                        st.plotly_chart(fig_steps, use_container_width=True)
+                else:
+                    st.info("No intentions found. Create some intentions to see statistics.")
+
+            st.markdown("---")
+
+            # ============================================================================
+            # SEZIONE 4: GRAFO DELLE RELAZIONI INTERATTIVO (PyVis)
+            # ============================================================================
+            st.markdown("#### 🕸️ Interactive Relationship Graph")
+
+            try:
+                from pyvis.network import Network
+                import streamlit.components.v1 as components
+                import tempfile
+                import os
+
+                if desires or bdi_beliefs or intentions:
+                    # Tentativo di rilevare il tema di base dalla configurazione (non live)
+                    try:
+                        theme_base = st.get_option("theme.base")
+                        default_idx = 1 if theme_base == "light" else 0
+                    except:
+                        default_idx = 0
+
+                    # Leggi tema precedente dalla session state
+                    if "graph_theme_toggle" not in st.session_state:
+                        st.session_state.graph_theme_toggle = default_idx == 0  # True = Dark
+
+                    if "graph_layout_choice" not in st.session_state:
+                        st.session_state.graph_layout_choice = "No Physics (Static)"
+
+                    st.markdown("---")
+
+                    # Riga con pulsanti layout e tema
+                    layout_options = [
+                        ("No Physics", "No Physics (Static)"),
+                        ("BarnesHut", "BarnesHut (Force-Directed)"),
+                        ("ForceAtlas2", "ForceAtlas2Based"),
+                        ("Hierarchical", "Hierarchical"),
+                        ("Repulsion", "Repulsion"),
+                        ("Circular", "Circular"),
+                        ("Radial", "Radial")
+                    ]
+
+                    # Crea colonne con etichetta e pulsanti layout
+                    col_label, *layout_cols_list, col_separator, col_theme = st.columns([0.8] + [1] * len(layout_options) + [0.2, 0.6])
+
+                    # Etichetta "Layouts:"
+                    with col_label:
+                        st.markdown("**Layouts:**")
+
+                    # Pulsanti layout
+                    for idx, (label, value) in enumerate(layout_options):
+                        with layout_cols_list[idx]:
+                            if st.button(label, key=f"btn_layout_{value}", use_container_width=True):
+                                st.session_state.graph_layout_choice = value
+                                st.rerun()
+
+                    # Separatore visivo
+                    with col_separator:
+                        st.markdown("")
+                    with col_theme:
+                        col_d, col_l = st.columns(2)
+                        with col_d:
+                            if st.button("🌙", key="btn_dark_theme", help="Dark", type="secondary", use_container_width=True):
+                                st.session_state.graph_theme_toggle = True
+                                st.rerun()
+                        with col_l:
+                            if st.button("☀️", key="btn_light_theme", help="Light", type="secondary", use_container_width=True):
+                                st.session_state.graph_theme_toggle = False
+                                st.rerun()
+
+                    layout_choice = st.session_state.graph_layout_choice
+                    graph_theme = "Dark" if st.session_state.graph_theme_toggle else "Light"
+
+                    # Imposta sfondo trasparente per adattarsi alla pagina
+                    bg_color = "rgba(0,0,0,0)"
+
+                    # Determina i colori del contenuto in base al tema selezionato
+                    if graph_theme == "Dark":
+                        font_color = "#fafafa"
+                        edge_color = "#555555"
+                    else:
+                        font_color = "#333333"
+                        edge_color = "#888888"
+
+                    # Crea network PyVis
+                    net = Network(
+                        height="600px",
+                        width="100%",
+                        bgcolor=bg_color,
+                        font_color=font_color,
+                        notebook=False,
+                        directed=False
+                    )
+
+                    # Configura physics in base al layout selezionato
+                    if layout_choice == "BarnesHut (Force-Directed)":
+                        physics_config = {
+                            "enabled": True,
+                            "barnesHut": {
+                                "gravitationalConstant": -8000,
+                                "centralGravity": 0.3,
+                                "springLength": 95,
+                                "springConstant": 0.04,
+                                "damping": 0.09
+                            },
+                            "solver": "barnesHut",
+                            "stabilization": {
+                                "enabled": True,
+                                "iterations": 200
+                            }
+                        }
+                    elif layout_choice == "ForceAtlas2Based":
+                        physics_config = {
+                            "enabled": True,
+                            "forceAtlas2Based": {
+                                "gravitationalConstant": -50,
+                                "centralGravity": 0.01,
+                                "springLength": 200,
+                                "springConstant": 0.08,
+                                "damping": 0.4,
+                                "avoidOverlap": 0.5
+                            },
+                            "solver": "forceAtlas2Based",
+                            "stabilization": {
+                                "enabled": True,
+                                "iterations": 200
+                            }
+                        }
+                    elif layout_choice == "Hierarchical":
+                        physics_config = {
+                            "enabled": True,
+                            "hierarchicalRepulsion": {
+                                "centralGravity": 0.0,
+                                "springLength": 100,
+                                "nodeDistance": 200,
+                                "damping": 0.3
+                            },
+                            "solver": "hierarchicalRepulsion",
+                            "stabilization": {
+                                "enabled": True,
+                                "iterations": 200
+                            }
+                        }
+                    elif layout_choice == "Repulsion":
+                        physics_config = {
+                            "enabled": True,
+                            "repulsion": {
+                                "nodeDistance": 200,
+                                "centralGravity": 0.2,
+                                "springLength": 200,
+                                "springConstant": 0.05,
+                                "damping": 0.09
+                            },
+                            "solver": "repulsion",
+                            "stabilization": {
+                                "enabled": True,
+                                "iterations": 200
+                            }
+                        }
+                    elif layout_choice == "Circular":
+                        # Per layout circolare, disabilitiamo la fisica e posizioneremo i nodi in cerchio dopo
+                        physics_config = {
+                            "enabled": False
+                        }
+                    elif layout_choice == "Radial":
+                        # Per layout radiale, disabilitiamo la fisica e posizioneremo i nodi in modo radiale dopo
+                        physics_config = {
+                            "enabled": False
+                        }
+                    else:  # No Physics (Static)
+                        physics_config = {
+                            "enabled": False
+                        }
+
+                    options_dict = {
+                        "physics": physics_config,
+                        "interaction": {
+                            "hover": True,
+                            "tooltipDelay": 100,
+                            "navigationButtons": True,
+                            "keyboard": True
+                        },
+                        "nodes": {
+                            "font": {
+                                "size": 14,
+                                "face": "arial"
+                            }
+                        },
+                        "edges": {
+                            "smooth": {
+                                "type": "continuous"
+                            }
+                        }
+                    }
+
+                    import json
+                    net.set_options(json.dumps(options_dict))
+
+                    # Funzione helper per normalizzare gli ID durante il matching
+                    def normalize_id(id_value, prefix=''):
+                        """Normalizza ID per matching robusto (B1, B01, 1, ecc.)"""
+                        if isinstance(id_value, str):
+                            normalized = id_value.replace(prefix, '').lstrip('0') if prefix else id_value.lstrip('0')
+                            return normalized or '0'
+                        return str(id_value)
+
+                    # Funzione helper per layout circolare
+                    def apply_circular_layout(network, nodes_list):
+                        """Posiziona i nodi in un cerchio"""
+                        import math
+                        center_x, center_y = 0, 0
+                        radius = 300
+                        num_nodes = len(nodes_list)
+
+                        for idx, node_id in enumerate(nodes_list):
+                            angle = 2 * math.pi * idx / num_nodes
+                            x = center_x + radius * math.cos(angle)
+                            y = center_y + radius * math.sin(angle)
+                            network.nodes[idx]['x'] = x
+                            network.nodes[idx]['y'] = y
+                            network.nodes[idx]['fixed'] = False
+
+                    # Funzione helper per layout radiale
+                    def apply_radial_layout(network, nodes_list, center_idx=0):
+                        """Posiziona i nodi in modo radiale (uno al centro, gli altri intorno)"""
+                        import math
+                        center_x, center_y = 0, 0
+                        num_rings = 3
+
+                        # Nodo al centro
+                        if len(nodes_list) > 0:
+                            center_node_id = nodes_list[center_idx]
+                            # Trova l'indice del nodo nel network
+                            for idx, node in enumerate(network.nodes):
+                                if node['id'] == center_node_id:
+                                    network.nodes[idx]['x'] = center_x
+                                    network.nodes[idx]['y'] = center_y
+                                    network.nodes[idx]['fixed'] = False
+                                    break
+
+                        # Nodi in anelli concentrici
+                        remaining_nodes = [n for i, n in enumerate(nodes_list) if i != center_idx]
+                        nodes_per_ring = max(3, len(remaining_nodes) // num_rings)
+
+                        for ring_idx in range(num_rings):
+                            radius = 150 + (ring_idx + 1) * 150
+                            start_idx = ring_idx * nodes_per_ring
+                            end_idx = start_idx + nodes_per_ring if ring_idx < num_rings - 1 else len(remaining_nodes)
+                            ring_nodes = remaining_nodes[start_idx:end_idx]
+                            num_in_ring = len(ring_nodes)
+
+                            for pos_idx, node_id in enumerate(ring_nodes):
+                                angle = 2 * math.pi * pos_idx / max(1, num_in_ring)
+                                x = center_x + radius * math.cos(angle)
+                                y = center_y + radius * math.sin(angle)
+
+                                # Trova l'indice del nodo nel network
+                                for idx, node in enumerate(network.nodes):
+                                    if node['id'] == node_id:
+                                        network.nodes[idx]['x'] = x
+                                        network.nodes[idx]['y'] = y
+                                        network.nodes[idx]['fixed'] = False
+                                        break
+
+                    # Funzione helper per creare tooltip HTML
+                    def create_tooltip(node_type, node_id, full_desc, data):
+                        """Crea tooltip testuale per PyVis (senza HTML per evitare visualizzazione codice)."""
+                        tooltip = f"{node_id} ({node_type})\n\n"
+
+                        # Trunca descrizione se troppo lunga
+                        if len(full_desc) > 200:
+                            full_desc = full_desc[:197] + "..."
+                        tooltip += f"Description:\n{full_desc}\n\n"
+
+                        # Info specifiche per tipo
+                        if node_type == 'Desire':
+                            priority = data.get('priority', 'N/A')
+                            metrics_count = len(data.get('success_metrics', []))
+                            tooltip += f"Priority: {priority}\n"
+                            tooltip += f"Success Metrics: {metrics_count}\n"
+                        elif node_type == 'Belief':
+                            importance = data.get('importance', 'N/A')
+                            confidence = data.get('confidence', 'N/A')
+                            tooltip += f"Importance: {importance}\n"
+                            tooltip += f"Confidence: {confidence}\n"
+                        elif node_type == 'Intention':
+                            steps = 0
+                            effort = 'N/A'
+                            # Controlla prima action_plan a livello root
+                            if 'action_plan' in data:
+                                steps = len(data.get('action_plan', {}).get('steps', []))
+                                effort = data.get('action_plan', {}).get('estimated_effort', 'N/A')
+                            else:
+                                # Poi controlla dentro 'intention'
+                                intention_data = data.get('intention', {})
+                                if 'action_plan' in intention_data:
+                                    steps = len(intention_data.get('action_plan', {}).get('steps', []))
+                                    effort = intention_data.get('action_plan', {}).get('estimated_effort', 'N/A')
+                                elif 'steps' in intention_data:
+                                    steps = len(intention_data.get('steps', []))
+                            tooltip += f"Steps: {steps}\n"
+                            tooltip += f"Effort: {effort}"
+
+                        return tooltip
+
+                    # Aggiungi nodi Desires
+                    for desire in desires:
+                        desire_id = desire.get('desire_id') or desire.get('id')
+                        desc = desire.get('desire_statement') or desire.get('description', 'No desc')
+                        label = f"{desire_id}"
+
+                        tooltip = create_tooltip('Desire', f"{desire_id}", desc, desire)
+
+                        net.add_node(
+                            label,
+                            label=label,
+                            title=tooltip,
+                            color='#FF6B6B',
+                            size=25,
+                            shape='dot'
+                        )
+
+                    # Filtra beliefs: mantieni solo quelli collegati a desires o intentions
+                    filtered_beliefs = []
+                    for idx, belief in enumerate(bdi_beliefs):
+                        belief_id = belief.get('id', idx+1)
+                        has_relation = False
+
+                        # Controlla se il belief è collegato a desires
+                        related_desires = belief.get('related_desires', [])
+                        if related_desires:
+                            has_relation = True
+
+                        # Controlla se il belief è collegato a intentions
+                        if not has_relation:
+                            for intention in intentions:
+                                linked_beliefs = (
+                                    intention.get('linked_beliefs', []) or
+                                    intention.get('intention', {}).get('linked_beliefs', []) or
+                                    []
+                                )
+                                for item in linked_beliefs:
+                                    # Item può essere una stringa (es. "B2") o un numero
+                                    if isinstance(item, dict):
+                                        belief_id_check = item.get('id')
+                                    elif isinstance(item, str):
+                                        # Estrai il numero da "B2" -> "2"
+                                        belief_id_check = int(item.replace('B', '')) if item.startswith('B') else int(item)
+                                    else:
+                                        belief_id_check = item
+
+                                    # Converti belief_id a int per confronto uniforme
+                                    if int(belief_id) == int(belief_id_check):
+                                        has_relation = True
+                                        break
+                                if has_relation:
+                                    break
+
+                        if has_relation:
+                            filtered_beliefs.append(belief)
+
+                    # Aggiungi nodi Beliefs (solo quelli con relazioni)
+                    for idx, belief in enumerate(filtered_beliefs):
+                        belief_id = belief.get('id', f"{idx+1}")
+                        content = belief.get('subject') or belief.get('content') or belief.get('description', 'No content')
+                        label = f"B{belief_id}"
+
+                        tooltip = create_tooltip('Belief', f"B{belief_id}", belief.get('definition', content), belief)
+
+                        net.add_node(
+                            label,
+                            label=label,
+                            title=tooltip,
+                            color='#4ECDC4',
+                            size=25,
+                            shape='dot'
+                        )
+
+                    # Aggiungi nodi Intentions
+                    for idx, intention in enumerate(intentions):
+                        intention_id = (
+                            intention.get('id') or
+                            intention.get('intention', {}).get('id') or
+                            f"I{idx+1}"
+                        )
+                        content = (
+                            intention.get('statement') or
+                            intention.get('intention', {}).get('statement') or
+                            'No content'
+                        )
+                        label = f"{intention_id}"
+
+                        tooltip = create_tooltip('Intention', label, content, intention)
+
+                        net.add_node(
+                            label,
+                            label=label,
+                            title=tooltip,
+                            color='#FFD93D',
+                            size=25,
+                            shape='dot'
+                        )
+
+                    # Crea set di nodi esistenti per validazione rapida
+                    # In PyVis, net.nodes è una lista di dizionari, non un dict
+                    existing_nodes = set([node['id'] for node in net.nodes])
+
+                    # Aggiungi edges Belief -> Desire (con validazione nodi e normalizzazione ID)
+                    for idx, belief in enumerate(filtered_beliefs):
+                        belief_id = belief.get('id')
+                        belief_label = f"B{belief_id}"
+                        related = belief.get('related_desires', [])
+
+                        for item in related:
+                            if isinstance(item, dict):
+                                desire_id = item.get('desire_id')
+                            else:
+                                desire_id = item
+
+                            # Trova il nodo desire corrispondente e verifica esistenza con normalizzazione ID
+                            for desire in desires:
+                                d_id = desire.get('desire_id') or desire.get('id')
+                                # Normalizza per matching robusto (B1, B01, 1, ecc.)
+                                normalized_linked = normalize_id(str(desire_id), prefix='D')
+                                normalized_d_id = normalize_id(str(d_id), prefix='D')
+
+                                if d_id == desire_id or normalized_d_id == normalized_linked:
+                                    desire_label = f"{desire_id}"
+                                    # Verifica che entrambi i nodi esistono
+                                    if belief_label in existing_nodes and desire_label in existing_nodes:
+                                        net.add_edge(belief_label, desire_label, color=edge_color)
+                                    break
+
+                    # Aggiungi edges Intention -> Desire (con validazione nodi)
+                    for idx, intention in enumerate(intentions):
+                        intention_id = (
+                            intention.get('intention_id') or
+                            intention.get('id') or
+                            intention.get('intention', {}).get('intention_id') or
+                            intention.get('intention', {}).get('id') or
+                            f"I{idx+1}"
+                        )
+                        intention_label = f"{intention_id}"
+
+                        # Verifica che il nodo intention esiste
+                        if intention_label not in existing_nodes:
+                            continue
+
+                        # Estrai related desires
+                        related_desires = (
+                            intention.get('related_desires', []) or
+                            intention.get('desires', []) or
+                            intention.get('intention', {}).get('related_desires', []) or
+                            intention.get('intention', {}).get('desires', []) or
+                            []
+                        )
+
+                        # Aggiungi linked_desire_id se presente
+                        if intention.get('linked_desire_id'):
+                            related_desires = list(related_desires) + [intention.get('linked_desire_id')]
+                        if intention.get('intention', {}).get('linked_desire_id'):
+                            related_desires = list(related_desires) + [intention['intention'].get('linked_desire_id')]
+
+                        for item in related_desires:
+                            if isinstance(item, dict):
+                                desire_id = item.get('desire_id') or item.get('id')
+                            else:
+                                desire_id = item
+
+                            if desire_id:
+                                desire_label = f"{desire_id}"
+                                # Verifica che il nodo desire esiste
+                                if desire_label in existing_nodes:
+                                    net.add_edge(intention_label, desire_label, color=edge_color)
+
+                    # Aggiungi edges Intention -> Belief (con validazione nodi e normalizzazione ID)
+                    for idx, intention in enumerate(intentions):
+                        intention_id = (
+                            intention.get('intention_id') or
+                            intention.get('id') or
+                            intention.get('intention', {}).get('intention_id') or
+                            intention.get('intention', {}).get('id') or
+                            f"I{idx+1}"
+                        )
+                        intention_label = f"{intention_id}"
+
+                        # Verifica che il nodo intention esiste
+                        if intention_label not in existing_nodes:
+                            continue
+
+                        related_beliefs = (
+                            intention.get('linked_beliefs', []) or
+                            intention.get('intention', {}).get('linked_beliefs', []) or
+                            intention.get('related_beliefs', []) or
+                            intention.get('intention', {}).get('related_beliefs', []) or
+                            intention.get('beliefs', []) or
+                            intention.get('intention', {}).get('beliefs', []) or
+                            []
+                        )
+
+                        for item in related_beliefs:
+                            if isinstance(item, dict):
+                                linked_belief_id = item.get('belief_id') or item.get('id')
+                            else:
+                                linked_belief_id = item
+
+                            if linked_belief_id:
+                                # Normalizza per matching robusto (B1, B01, 1, ecc.)
+                                normalized_linked = normalize_id(str(linked_belief_id), prefix='B')
+
+                                # Cerca il belief corrispondente nel grafo
+                                for belief_node in existing_nodes:
+                                    belief_node_str = str(belief_node)
+                                    if belief_node_str.startswith('B'):
+                                        normalized_belief = normalize_id(belief_node_str, prefix='B')
+                                        if normalized_belief == normalized_linked:
+                                            # Verifica che il nodo belief esiste
+                                            if belief_node in existing_nodes:
+                                                net.add_edge(intention_label, belief_node, color=edge_color)
+                                            break
+
+                    # Applica layout circolare o radiale se selezionato
+                    all_node_ids = [node['id'] for node in net.nodes]
+
+                    if layout_choice == "Circular":
+                        apply_circular_layout(net, all_node_ids)
+                    elif layout_choice == "Radial":
+                        # Per layout radiale, metti il primo nodo al centro
+                        apply_radial_layout(net, all_node_ids, center_idx=0)
+
+                    # Genera HTML
+                    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.html', encoding='utf-8') as f:
+                        net.save_graph(f.name)
+                        temp_file = f.name
+
+                    # Leggi il file e mostra in Streamlit
+                    with open(temp_file, 'r', encoding='utf-8') as html_file:
+                        html_content = html_file.read()
+
+                        # Aggiungi CSS per il tema selezionato
+                        if graph_theme == "Dark":
+                            theme_css = '''<style>
+                            * {
+                                border: none !important;
+                            }
+                            html, body, #mynetwork, canvas {
+                                background-color: #0e1117 !important;
+                                color: #fafafa !important;
+                                border: none !important;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            .vis-network {
+                                background-color: #0e1117 !important;
+                                border: none !important;
+                            }
+                            .vis-tooltip {
+                                max-width: 400px !important;
+                                white-space: normal !important;
+                                word-break: break-word !important;
+                                word-wrap: break-word !important;
+                                overflow-wrap: break-word !important;
+                            }
+                            </style>'''
+                        else:
+                            theme_css = '''<style>
+                            html, body, #mynetwork, canvas {
+                                background-color: #ffffff !important;
+                                color: #333333 !important;
+                                border: none !important;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            .vis-network {
+                                background-color: #ffffff !important;
+                                border: none !important;
+                            }
+                            .vis-tooltip {
+                                max-width: 400px !important;
+                                white-space: normal !important;
+                                word-break: break-word !important;
+                                word-wrap: break-word !important;
+                                overflow-wrap: break-word !important;
+                            }
+                            </style>'''
+
+                        html_content = html_content.replace('</head>', theme_css + '</head>')
+                        components.html(html_content, height=650, scrolling=True)
+
+                    # Cleanup
+                    try:
+                        os.unlink(temp_file)
+                    except:
+                        pass
+
+                    # Info box
+                    st.info("""
+                    💡 **PyVis Graph Features:**
+                    - 🖱️ **Drag nodes** to reposition them
+                    - 🔍 **Zoom** with mouse wheel
+                    - 👆 **Hover** over nodes for detailed tooltips
+                    - 🎯 **Click** nodes to highlight connections
+                    - ⌨️ **Use arrow keys** to navigate
+                    """)
+
+                else:
+                    st.info("No data available for PyVis graph visualization.")
+
+            except ImportError:
+                st.error("❌ PyVis library not installed. Run: `pip install pyvis>=0.3.2`")
+            except Exception as e:
+                st.error(f"❌ Error creating PyVis graph: {str(e)}")
 
 # Footer
 st.markdown("---")

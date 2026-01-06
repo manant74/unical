@@ -30,3 +30,4 @@ streamlit-code-editor
 plotly>=5.18.0
 networkx>=3.2
 pandas>=2.0.0
+pyvis>=0.3.2
