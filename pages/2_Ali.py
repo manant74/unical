@@ -54,7 +54,7 @@ if 'ali_suggestions' not in st.session_state:
 if 'ali_pending_prompt' not in st.session_state:
     st.session_state.ali_pending_prompt = None
 
-# conversation_auditor viene inizializzato quando serve con LLMManager
+# desires_auditor viene inizializzato quando serve con LLMManager
 
 # Carica la sessione attiva se presente
 # Se non c'è active_session, prova a caricare l'ultima sessione attiva
@@ -279,13 +279,16 @@ with st.sidebar:
     # Configurazione
     st.header("⚙️ Configurazione Alì")
 
-    # Lazy load LLMManager e conversation_auditor quando serve
+    # Lazy load LLMManager e desires_auditor quando serve
     if 'llm_manager' not in st.session_state:
         from utils.llm_manager import LLMManager
         st.session_state.llm_manager = LLMManager()
 
-    if 'conversation_auditor' not in st.session_state:
-        st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
+    if 'desires_auditor' not in st.session_state:
+        st.session_state.desires_auditor = ConversationAuditor(
+            st.session_state.llm_manager,
+            auditor_agent_name="desires_auditor"
+        )
 
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()
@@ -673,7 +676,7 @@ if prompt:
                     st.info("Nessun documento RAG utilizzato per questa risposta")
 
             auditor_result = None
-            auditor = st.session_state.get("conversation_auditor")
+            auditor = st.session_state.get("desires_auditor")
             if auditor and provider and model:
                 context_summary = {
                     "session_name": active_session_data['metadata'].get('name'),
@@ -731,6 +734,27 @@ if prompt:
                     st.markdown(f"**Auditor {icon}**")
                     if summary:
                         st.markdown(summary)
+
+                    rubric = auditor_result.get("rubric") or {}
+                    if isinstance(rubric, dict) and rubric:
+                        rubric_labels = [
+                            ("coerenza_domanda", "Coerenza con la domanda"),
+                            ("allineamento_modulo", "Allineamento al modulo"),
+                            ("contesto_conservato", "Contesto conservato"),
+                            ("progressione_dialogo", "Progressione dialogo"),
+                            ("focus_beneficiario", "Focus sul beneficiario"),
+                            ("gestione_json", "Gestione finalizzazione/JSON"),
+                        ]
+                        st.markdown("**Score rubrica:**")
+                        for key, label in rubric_labels:
+                            item = rubric.get(key) or {}
+                            score = item.get("score")
+                            notes = (item.get("notes") or "").strip()
+                            score_text = f"{score}/5" if isinstance(score, int) else "N/D"
+                            if notes:
+                                st.write(f"- {label}: {score_text} — {notes}")
+                            else:
+                                st.write(f"- {label}: {score_text}")
 
                     issues = auditor_result.get("issues") or []
                     if issues:
