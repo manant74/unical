@@ -10,6 +10,9 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### ✨ Nuove Features
 
+- Separazione dei Validator, per definire un Validator dedicato ad Ali e uno a Believer
+- Implementazione regola di Rubric per le attività dei validator
+
 ### 🤖 Miglioramenti Prompts
 
 - Arricchito prompt del Believer con sezione dedicata ai livelli di rilevanza dei Beliefs

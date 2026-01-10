@@ -129,8 +129,15 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 1. **Identificazione del dominio**: Esplora e definisce il contesto di lavoro
 2. **Segnali sull'utente reale**: Raccoglie esempi, comportamenti e motivazioni per poter inferire la categoria corretta senza domande esplicite
 3. **Formalizzazione del beneficiario primario**: Formula un'etichetta descrittiva dedotta dal dialogo e la mantiene allineata lungo tutta la sessione
-4. **Esplorazione desires**: Usa domande strategiche per far emergere bisogni profondi del beneficiario dedotto
-5. **Checkpoint intermedi**: Validazione progressiva del dominio, del beneficiario e dei desire per evitare deriva del contesto
+4. **Esplorazione desires**: Usa domande strategiche per far emergere bisogni profondi del beneficiario dedotto con:
+   - **Desire statement**: Formulazione chiara dal punto di vista del beneficiario
+   - **Motivation**: Motivazione profonda (perché è importante)
+   - **Success metrics**: Indicatori concreti di successo
+5. **Validazione Auditor**: Sistema rubric-based valida desires su:
+   - Inferenza del beneficiario (segnali raccolti)
+   - Struttura dei desires
+   - Completezza dei metadati
+   - Coerenza semantica
 6. **Report finale JSON**: Genera un documento strutturato con il beneficiario dedotto e tutti i suoi desires
 
 **Caratteristiche tecniche:**
@@ -141,6 +148,7 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 - Accesso RAG alla knowledge base del contesto selezionato
 - **Saluto contestualizzato**: Legge descrizione del contesto dal metadata (generata da Knol)
 - Parsing automatico report JSON per estrazione desires strutturati
+- **Auditor Dedicato**: Validazione specializzata con `prompts/desires_auditor_system_prompt.md`
 - **Salvataggio automatico**: Desires salvati in BDI data della sessione in tempo reale
 - **Aggiunta manuale desires**: Form sidebar con metadati completi
 - **UI ottimizzata**: Chat pulita, session badge, link rapido a Compass
@@ -156,9 +164,16 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 1. **Caricamento desires**: Legge automaticamente i desires da Alì (supporta entrambi i formati JSON)
 2. **Esplorazione interattiva**: Chiede all'utente informazioni aggiuntive per contestualizzare l'estrazione
 3. **Query RAG contestuale**: Interroga la KB con contesto che include sia documenti che desires
-4. **Estrazione strutturata**: Identifica fatti atomici in formato soggetto-relazione-oggetto
+4. **Estrazione strutturata**: Identifica fatti atomici con:
+   - **Subject-Relation-Object**: Formato base per ogni belief
+   - **Definition completa**: WHAT (cosa è), WHY (perché è importante), HOW (come funziona)
+   - **Semantic Relations**: Array di relazioni strutturate con altri concetti
 5. **Classificazione prioritaria**: Assegna livelli di rilevanza (CRITICO/ALTO/MEDIO/BASSO) per ogni belief rispetto ai desires correlati
-6. **Validazione utente**: Interagisce per feedback e raffinamento
+6. **Validazione Auditor**: Sistema rubric-based valida beliefs estratti su:
+   - Struttura del belief
+   - Citazione delle fonti
+   - Correlazione con desires
+   - Ricchezza semantica
 7. **Report finale**: Genera JSON completo con beliefs correlati ai desires
 
 **Livelli di rilevanza (v2.2):**
@@ -175,7 +190,8 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 - **Caricamento automatico desires**: Legge desires dalla sessione BDI data
 - Supporto multi-LLM con **parametri configurabili dalla sessione**
 - Estrazione guidata dal "Principio di Rilevanza": solo fatti pertinenti
-- Metadati arricchiti (tipo entità, fonte, correlazione desire)
+- Metadati arricchiti (tipo entità, fonte, correlazione desire, semantic relations)
+- **Auditor Dedicato**: Validazione specializzata con `prompts/belief_auditor_system_prompt.md`
 - **Salvataggio automatico**: Beliefs salvati in BDI data in tempo reale
 - **Aggiunta manuale beliefs**: Form sidebar con multi-select desires correlati
 - **UI ottimizzata**: Session badge, desires disponibili visualizzati, link Compass
@@ -191,15 +207,49 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 
 **Uso**: Permette correzioni manuali, aggiustamenti e pulizia del JSON prima di procedere con moduli downstream (Cuma, Genius).
 
-### 🔮 Cuma - Scenario Planning Agent (In Sviluppo)
+### 🔮 Cuma - Intentions Planning Agent (Beta)
 
-**Futuro modulo** per analisi predittiva e scenario planning basato sul framework BDI costruito.
+**Cuma** è l'agente responsabile della generazione delle **Intentions** (intenzioni), il terzo pilastro del framework BDI. Trasforma desires e beliefs in piani d'azione concreti e strutturati.
 
-**Obiettivi pianificati:**
+**Funzionalità Attuali (Beta):**
 
-- Simulazione di scenari futuri basati su beliefs e desires
-- Identificazione di rischi e opportunità
-- Supporto decisionale strategico
+- **Generazione Intentions**: Crea piani d'azione basati su desires e beliefs esistenti
+- **Tracciamento Relazioni**: Collegamenti espliciti tra intentions, desires e beliefs
+- **Action Steps Strutturati**: Decomposizione in passi concreti con:
+  - Effort estimates
+  - Dependencies tra steps
+  - Risorse necessarie
+  - Expected outcomes
+- **Risk Assessment**: Identificazione rischi e strategie di mitigazione
+
+**Formato JSON Intentions:**
+
+```json
+{
+  "intention_id": "I1",
+  "intention_statement": "Piano d'azione per raggiungere desire",
+  "linked_desire_id": "D1",
+  "linked_beliefs": ["B1", "B3", "B5"],
+  "action_steps": [
+    {
+      "step_id": "S1",
+      "description": "Descrizione step",
+      "estimated_effort": "2 weeks",
+      "dependencies": [],
+      "resources_needed": ["Risorsa 1"]
+    }
+  ],
+  "expected_outcomes": ["Outcome 1"],
+  "risks": [
+    {
+      "risk": "Rischio potenziale",
+      "mitigation": "Strategia di mitigazione"
+    }
+  ]
+}
+```
+
+**Status**: In fase Beta - Sistema funzionale in attesa di integrazione con Auditor
 
 ### ⚡ Genius - BDI Optimization Agent (In Sviluppo)
 
@@ -413,11 +463,14 @@ unical/
 │   ├── 4_Cuma.py             # Placeholder
 │   └── 5_Genius.py           # Placeholder
 ├── prompts/
-│   ├── ali.md                # System prompt per Alì
-│   ├── believer.md           # System prompt per Believer
-│   ├── belief_base_prompt.md # Prompt per generazione belief base
-│   ├── cuma.md               # System prompt per Cuma
-│   └── genius.md             # System prompt per Genius
+│   ├── ali_system_prompt.md             # System prompt per Alì
+│   ├── believer_system_prompt.md        # System prompt per Believer
+│   ├── belief_base_prompt.md            # Prompt per generazione belief base
+│   ├── believer_mix_beliefs_prompt.md   # Prompt per mix beliefs base+RAG
+│   ├── cuma_system_prompt.md            # System prompt per Cuma
+│   ├── genius_system_prompt.md          # System prompt per Genius
+│   ├── desires_auditor_system_prompt.md # Auditor dedicato per Desires (Alì)
+│   └── belief_auditor_system_prompt.md  # Auditor dedicato per Beliefs (Believer)
 ├── utils/
 │   ├── __init__.py
 │   ├── document_processor.py    # Elaborazione documenti e RAG
@@ -507,26 +560,82 @@ Per modificare un prompt:
 2. Modifica il contenuto
 3. Riavvia l'applicazione (o usa `clear_cache()` da `utils.prompts` per ricaricare)
 
-## 🆕 Nuove Funzionalità (v2.6 - Dicembre 2025)
+## 🆕 Nuove Funzionalità (v2.7 - Gennaio 2026)
 
-### Messaggi di Attesa Variabili e Simpatici
+### Sistema di Auditing Rubric-Based
 
-Sistema di messaggi dinamici per migliorare l'esperienza utente durante l'elaborazione LLM:
+Implementazione di un sistema di validazione avanzato con criteri oggettivi:
 
-- **25 messaggi unici** sulla gestione della conoscenza e fantascienza
-- **Selezione casuale** ad ogni elaborazione in Alì e Believer
-- **Mix equilibrato**: 7 messaggi originali + 18 riferimenti fantascientifici (Borges, Asimov, Star Trek, Blade Runner, Dick, Star Wars)
-- **Nuovo modulo**: `utils/ui_messages.py` con funzione `get_random_thinking_message()`
+- **Auditor Separati**: Due auditor dedicati per Alì (desires) e Believer (beliefs)
+- **Valutazione Rubric**: Sistema di scoring 0-10 su dimensioni specifiche:
+  - **Desires Auditor**: Persona inference, desire structure, completeness, semantic coherence
+  - **Beliefs Auditor**: Belief structure, source citation, desire correlation, semantic richness
+- **Feedback Oggettivo**: Issues, improvements e quick replies basati su criteri espliciti
+- **Prompt Specializzati**:
+  - `prompts/desires_auditor_system_prompt.md` per validazione desires
+  - `prompts/belief_auditor_system_prompt.md` per validazione beliefs
 
-**Esempi**:
-- "Consultando la Biblioteca di Babele..."
-- "Attivando i neuroni positronici..."
-- "Decodificando le lacrime nella pioggia dei dati..."
-- "Cercando nella lato oscuro della Forza..."
+### Miglioramenti Strutturali BDI
+
+**Nuovi Standard JSON:**
+
+**Desires** (formato aggiornato):
+```json
+{
+  "desire_id": "D1",
+  "desire_statement": "Formulazione chiara dal punto di vista del beneficiario",
+  "motivation": "Motivazione profonda (perché questo desire è importante)",
+  "success_metrics": ["Indicatore #1", "Indicatore #2"]
+}
+```
+
+**Beliefs** (formato arricchito):
+```json
+{
+  "subject": "Entità soggetto",
+  "definition": "Descrizione: WHAT it is, WHY it matters, HOW it works",
+  "semantic_relations": [
+    {
+      "relation": "tipo_di_relazione",
+      "object": "Entità oggetto",
+      "description": "Spiegazione"
+    }
+  ],
+  "prerequisites": ["Prerequisito"],
+  "related_concepts": ["Concetto correlato"],
+  "enables": ["Cosa abilita"],
+  "related_desires": [
+    {
+      "desire_id": "D1",
+      "relevance_level": "CRITICO",
+      "definition": "Spiegazione correlazione"
+    }
+  ]
+}
+```
+
+### Cuma - Agent for Intentions (Beta)
+
+Primo rilascio dell'agente per la pianificazione strategica:
+
+- **Generazione Intentions**: Crea piani d'azione basati su desires e beliefs
+- **Tracciamento Relazioni**: Collegamento esplicito tra intentions, desires e beliefs
+- **Formato JSON Strutturato**:
+  - `linked_desire_id`: Riferimento univoco al desire
+  - `linked_beliefs`: Array di beliefs necessari per l'esecuzione
+  - `action_steps`: Passi concreti con effort estimates e dependencies
+
+### Messaggi di Attesa Dinamici
+
+Sistema di messaggi per migliorare l'UX durante l'elaborazione LLM:
+
+- **25 messaggi unici** con riferimenti a fantascienza e knowledge management
+- **Selezione casuale** ad ogni elaborazione
+- **Nuovo modulo**: `utils/ui_messages.py`
 
 ---
 
-## Nuove Funzionalità (v2.5 - Ottobre 2025)
+## Nuove Funzionalità (v2.6 - Dicembre 2025)
 
 ### Sistema di Gestione Sessioni Enterprise
 
@@ -565,31 +674,42 @@ Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-
 
 ### Google Gemini
 
-- gemini-2.5-pro
-- gemini-2.5-flash
-- gemini-2.5-flash-lite
+**Modelli di Produzione:**
+- gemini-2.5-pro - Massima qualità, ragionamento complesso
+- gemini-2.5-flash - Bilanciamento velocità/qualità (raccomandato)
+- gemini-2.5-flash-lite - Velocità massima, task semplici
+
+**Modelli Preview:**
+- gemini-3-pro-preview - Next-gen con capacità avanzate (Beta)
 
 ### OpenAI
 
 **Modelli Standard:**
-- gpt-4o
-- gpt-4o-mini
+- gpt-4o - Flagship multimodale
+- gpt-4o-mini - Efficiente e veloce
 
 **Modelli con Reasoning (GPT-5 Series):**
-- gpt-5
-- gpt-5-nano
-- gpt-5-mini
-- gpt-5.1
-- gpt-5.1-chat-latest
-- gpt-5.2
-- gpt-5.2-chat-latest
+- gpt-5 - Base reasoning model
+- gpt-5-nano - Lightweight reasoning
+- gpt-5-mini - Compact reasoning
+
+**GPT-5.1 Series (Novembre 2025+):**
+- gpt-5.1 - Enhanced reasoning
+- gpt-5.1-chat-latest - Latest chat-optimized
+
+**GPT-5.2 Series (Dicembre 2025+):**
+- gpt-5.2 - Advanced reasoning
+- gpt-5.2-chat-latest - Latest generation
 
 **Supporto Reasoning Effort:**
-Tutti i modelli GPT-5/GPT-5.2 supportano `reasoning_effort`:
+
+Tutti i modelli GPT-5/5.1/5.2 supportano il parametro `reasoning_effort`:
 - `"none"`: Disabilita reasoning (latenza bassa, comportamento standard)
 - `"low"`: Ragionamento minimo
 - `"medium"`: Ragionamento bilanciato (default)
 - `"high"`: Ragionamento profondo (latenza più alta, migliore qualità)
+
+**Nota**: I modelli reasoning non supportano `temperature` e `top_p`
 
 ## Formati di Output
 
@@ -705,9 +825,12 @@ LUMIA Studio è versatile e applicabile a diversi scenari:
 
 ### AI e Machine Learning
 
-- **LLM Integration**: Google Gemini (2.5 Pro/Flash), Anthropic Claude (3.7/4.x Sonnet, 4 Opus), OpenAI (GPT-4o, GPT-5, o1)
+- **LLM Integration**:
+  - Google Gemini (2.5 Pro/Flash/Flash-Lite, 3 Pro Preview)
+  - OpenAI (GPT-4o/mini, GPT-5/5.1/5.2 series con reasoning)
 - **Embeddings**: sentence-transformers (`paraphrase-multilingual-MiniLM-L12-v2`)
 - **RAG Framework**: Custom implementation con ChromaDB
+- **Quality Assurance**: Sistema rubric-based auditing con auditor specializzati per desires e beliefs
 
 ### Data Storage e Processing
 
@@ -730,15 +853,23 @@ LUMIA Studio è versatile e applicabile a diversi scenari:
 
 ## Roadmap
 
+### Funzionalità in Sviluppo
+
+- [ ] **Cuma**: Integrazione Auditor per intentions (completamento Beta)
+- [ ] **Genius**: Implementazione agente di ottimizzazione BDI
+- [ ] **Analytics Avanzato**: Espansione dashboard in Compass con:
+  - Trend analysis multi-sessione
+  - Pattern discovery automatico
+  - Recommendation engine
+
 ### Funzionalità Future
 
-- [ ] Implementazione funzionalità Cuma (scenario planning)
-- [ ] Implementazione funzionalità Genius (ottimizzazione BDI)
-- [ ] Sistema di gestione Intentions completo
-- [ ] Export in formati multipli (CSV, XML, PDF)
-- [ ] Dashboard analitica con grafici interattivi
-- [ ] Sistema di versioning per sessioni multiple
-- [ ] Integrazione con altri provider LLM
+- [ ] Export in formati multipli (CSV, XML, PDF report)
+- [ ] Sistema di versioning completo per sessioni (git-like)
+- [ ] Integrazione provider LLM aggiuntivi (Anthropic Claude, Mistral)
+- [ ] Collaborative editing multi-utente
+- [ ] Template library per domini comuni
+- [ ] API REST per integrazione esterna
 
 ## Contribuire
 

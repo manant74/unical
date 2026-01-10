@@ -346,31 +346,58 @@ with st.spinner(get_random_thinking_message()):
 
 #### 6. **ConversationAuditor** (`utils/auditor.py`)
 
-Meta-agente di quality assurance per risposte degli agenti.
+Sistema di quality assurance avanzato con auditor specializzati e valutazione rubric-based.
 
-**Funzionalità:**
+**Architettura Auditor (v2.7 - Gennaio 2026):**
 
-- Monitoraggio conversazioni Alì e Believer
-- Rilevamento richieste di finalizzazione (generazione JSON)
-- Validazione formato output strutturato
-- Suggerimenti di miglioramento
-- Quick replies per l'utente
+- **Auditor Separati**: Due auditor dedicati per validazione specifica
+  - **Desires Auditor**: Validazione per agente Alì (`prompts/desires_auditor_system_prompt.md`)
+  - **Beliefs Auditor**: Validazione per agente Believer (`prompts/belief_auditor_system_prompt.md`)
 
-**Output Auditor:**
+**Sistema Rubric-Based:**
+
+**Desires Auditor - Criteri di Valutazione (0-10):**
+1. **Persona Inference**: Segnali raccolti, inferenza logica, categoria chiara
+2. **Desire Structure**: Statement chiaro, azionabile, specifico
+3. **Completeness**: Campi presenti, priorità assegnata, contesto fornito
+4. **Semantic Coherence**: Desires correlati, no contraddizioni, allineamento dominio
+
+**Beliefs Auditor - Criteri di Valutazione (0-10):**
+1. **Belief Structure**: Formato subject-relation-object, definition completa (WHAT/WHY/HOW), semantic relations
+2. **Source Citation**: Fonte esatta, riferimento verificabile, pagina/sezione specificata
+3. **Desire Correlation**: Desires rilevanti identificati, livello rilevanza appropriato, spiegazione chiara
+4. **Semantic Richness**: Prerequisites, related concepts, enables/part_of/sub_concepts
+
+**Output Auditor (Enhanced):**
 
 ```json
 {
-  "issues": ["Issue 1", "Issue 2"],
-  "improvements": ["Miglioramento 1"],
-  "quick_replies": ["Domanda 1?", "Domanda 2?"]
+  "issues": ["Issue 1: Desire D3 manca success metrics quantitativi"],
+  "improvements": ["Considera aggiungere time-bound targets a D2"],
+  "quick_replies": ["Aggiungiamo altri desires?", "Procediamo con beliefs?"],
+  "rubric_scores": {
+    "persona_inference": 9.0,
+    "desire_structure": 8.5,
+    "completeness": 8.0,
+    "semantic_coherence": 9.5
+  },
+  "overall_score": 8.75,
+  "is_finalization_request": false
 }
 ```
 
 **Parametri LLM Auditor:**
 
-- Temperature: 0.15 (bassa per consistenza)
+- Temperature: **0.15** (molto bassa per consistenza e riproducibilità)
 - Max tokens: 1500
+- Top P: 0.9
 - Provider: Stesso della sessione attiva
+
+**Benefici Sistema Rubric:**
+- Validazione oggettiva con metriche quantitative
+- Feedback strutturato e azionabile
+- Tracciabilità della qualità nel tempo
+- Separazione concerns (desires vs beliefs validation)
 
 ---
 
@@ -745,11 +772,15 @@ def extract_belief_base(context_name):
 
 **SDK:** `google-generativeai >= 0.3.0`
 
-**Modelli Disponibili:**
+**Modelli di Produzione:**
 
-- `gemini-2.5-flash-lite`: Ultra-veloce, uso generale
-- `gemini-2.5-flash`: Bilanciato velocità/qualità
+- `gemini-2.5-flash-lite`: Ultra-veloce, task semplici
+- `gemini-2.5-flash`: Bilanciato velocità/qualità (raccomandato)
 - `gemini-2.5-pro`: Massima qualità, ragionamento complesso
+
+**Modelli Preview:**
+
+- `gemini-3-pro-preview`: Next-generation con capacità avanzate (Beta, da Dicembre 2025)
 
 **Implementazione:**
 
@@ -819,6 +850,7 @@ class LLMManager:
 **Modelli GPT-5.2 (Dicembre 2025+):**
 - `gpt-5.2`: Versione con ragionamento adattivo (thinking model)
 - `gpt-5.2-chat-latest`: Versione istantanea ottimizzata per latenza
+
 **Implementazione:**
 
 ```python
@@ -1328,28 +1360,93 @@ if agent_response.contains('```json'):
 - Max tokens: 1500
 - Provider: Eredita da sessione
 
-### Agenti Futuri (In Sviluppo)
+### Agente Cuma - Intentions Planning (Beta)
 
-#### **Cuma** - Scenario Planning
+**Ruolo:** Specialista in pianificazione strategica e generazione intentions
 
-**Obiettivo:** Analisi predittiva e scenario what-if
+**System Prompt:** `prompts/cuma_system_prompt.md`
+
+**Status:** Beta (Gennaio 2026) - Funzionale, in attesa integrazione Auditor
+
+**Fasi Operative:**
+
+#### Fase 1: Caricamento BDI Context
+
+```python
+# Carica desires e beliefs dalla sessione
+desires = session_manager.get_bdi_data(session_id)['desires']
+beliefs = session_manager.get_bdi_data(session_id)['beliefs']
+```
+
+#### Fase 2: Analisi Desire-Belief Mapping
+
+- Identifica desires prioritari
+- Mappa beliefs rilevanti (CRITICO/ALTO) per ogni desire
+- Identifica gap di conoscenza
+
+#### Fase 3: Generazione Intentions
+
+**Output Strutturato:**
+
+```json
+{
+  "intention_id": "I1",
+  "intention_statement": "Implementare sistema di onboarding interattivo per studenti",
+  "linked_desire_id": "D1",
+  "linked_beliefs": ["B1", "B3", "B5", "B7"],
+  "action_steps": [
+    {
+      "step_id": "S1",
+      "description": "Analisi drop-off points nel corso attuale",
+      "estimated_effort": "1 settimana",
+      "dependencies": [],
+      "resources_needed": ["Analytics access", "UX researcher"]
+    },
+    {
+      "step_id": "S2",
+      "description": "Design wireframes onboarding flow",
+      "estimated_effort": "2 settimane",
+      "dependencies": ["S1"],
+      "resources_needed": ["UI/UX designer", "Feedback da belief B3"]
+    }
+  ],
+  "expected_outcomes": [
+    "Riduzione drop-off del 30%",
+    "Aumento completion rate a 70%"
+  ],
+  "risks": [
+    {
+      "risk": "Resistenza utenti a flow più lungo",
+      "mitigation": "A/B testing con skip option"
+    }
+  ]
+}
+```
+
+**Caratteristiche:**
+
+- **Tracciamento Relazioni**: Collegamenti espliciti `linked_desire_id`, `linked_beliefs`
+- **Action Steps Strutturati**: Effort estimates, dependencies, resources
+- **Risk Assessment**: Identificazione rischi e strategie di mitigazione
+- **Auto-save**: Intentions salvati in session BDI data
+
+**Prossimi Sviluppi:**
+
+- Integrazione Auditor per validazione intentions
+- Sistema di prioritizzazione automatica
+- Timeline generation
+
+### Agente Genius - BDI Optimization (In Sviluppo)
+
+**Obiettivo:** Ottimizzazione intelligente del framework BDI completo
 
 **Funzionalità Pianificate:**
 
-- Simulazione scenari alternativi
-- Impact analysis desires-beliefs
-- Identificazione gap critici
-
-#### **Genius** - BDI Optimization
-
-**Obiettivo:** Generazione intentions e piani d'azione
-
-**Funzionalità Pianificate:**
-
-- Analisi gap desires-beliefs
-- Generazione intentions strutturate
-- Prioritizzazione azioni
-- Resource allocation suggestions
+- Analisi completezza BDI (gap desires-beliefs, beliefs-intentions)
+- Suggerimenti beliefs mancanti per desires
+- Ottimizzazione correlazioni desire-belief
+- Validazione coerenza semantica
+- Raccomandazioni strategiche basate su pattern
 
 ---
 
@@ -1790,7 +1887,35 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## Changelog Architetturale
 
-### v2.5 (Novembre 2025) - Architettura Corrente
+### v2.7 (Gennaio 2026) - Architettura Corrente
+
+**Sistema di Auditing Avanzato:**
+
+- ✨ **Auditor Separati**: Desires Auditor e Beliefs Auditor con prompt dedicati
+- ✨ **Valutazione Rubric-Based**: Sistema di scoring 0-10 su dimensioni specifiche
+  - Desires: Persona inference, structure, completeness, semantic coherence
+  - Beliefs: Structure, source citation, desire correlation, semantic richness
+- ✨ **Output Strutturato**: `rubric_scores` e `overall_score` per tracking qualità
+
+**Nuovi Modelli LLM:**
+
+- ✨ **Gemini 3 Pro Preview**: Next-gen model (Beta)
+- ✨ **GPT-5.1 Series**: Enhanced reasoning models (Novembre 2025+)
+- ✨ **GPT-5.2 Series**: Advanced reasoning models (Dicembre 2025+)
+
+**Agente Cuma (Beta):**
+
+- ✨ **Intentions Planning**: Generazione piani d'azione strutturati
+- ✨ **Tracciamento Relazioni**: Collegamenti espliciti `linked_desire_id`, `linked_beliefs`
+- ✨ **Action Steps**: Effort estimates, dependencies, resources, risks
+
+**Miglioramenti:**
+
+- 🔧 Prompt specializzati per auditor (`desires_auditor_system_prompt.md`, `belief_auditor_system_prompt.md`)
+- 🔧 Semantic relations strutturate nei beliefs (array di oggetti relation-object-description)
+- 🔧 Formato JSON desires arricchito con campo `motivation`
+
+### v2.5 (Novembre 2025)
 
 **Breaking Changes:**
 
@@ -1803,6 +1928,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 - ✨ Analytics dashboard con Plotly/NetworkX
 - ✨ Modal editor JSON in-app
 - ✨ Normalizzazione parametri LLM cross-provider
+- ✨ UI Messages system (25 messaggi variabili)
 
 **Miglioramenti:**
 
@@ -1810,7 +1936,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 - 🔧 Reasoning effort parameter per GPT-5/o1
 - 🔧 Backward compatibility handling session data
 
-### v2.0 (Ipotetica - Pre-2025)
+### v2.0 (Pre-2025)
 
 **Features:**
 
@@ -1887,6 +2013,6 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ---
 
-**Documento generato:** 25 Novembre 2025
-**Versione Architettura:** v2.5
+**Documento generato:** 10 Gennaio 2026
+**Versione Architettura:** v2.7
 **Autore:** LUMIA Development Team
