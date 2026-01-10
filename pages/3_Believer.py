@@ -62,7 +62,7 @@ if 'believer_last_audited_index' not in st.session_state:
 if 'believer_specialized_chat_active' not in st.session_state:
     st.session_state.believer_specialized_chat_active = False
 
-# conversation_auditor viene inizializzato quando serve con LLMManager
+# belief_auditor viene inizializzato quando serve con LLMManager
 
 # Carica il system prompt da file
 BELIEVER_SYSTEM_PROMPT = get_prompt('believer')
@@ -348,14 +348,17 @@ with st.sidebar:
     # Configurazione
     st.header("⚙️ Configurazione Believer")
 
-    # Lazy load LLMManager e conversation_auditor quando serve
+    # Lazy load LLMManager e belief_auditor quando serve
     if 'llm_manager' not in st.session_state:
         from utils.llm_manager import LLMManager
         st.session_state.llm_manager = LLMManager()
 
-    if 'conversation_auditor' not in st.session_state:
+    if 'belief_auditor' not in st.session_state:
         from utils.auditor import ConversationAuditor
-        st.session_state.conversation_auditor = ConversationAuditor(st.session_state.llm_manager)
+        st.session_state.belief_auditor = ConversationAuditor(
+            st.session_state.llm_manager,
+            auditor_agent_name="belief_auditor"
+        )
 
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()

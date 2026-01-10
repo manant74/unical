@@ -138,9 +138,10 @@ MODULE_STRUCTURED_THRESHOLDS = {
 class ConversationAuditor:
     """Gestisce le chiamate all'agente Auditor per valutare le risposte degli altri agenti."""
 
-    def __init__(self, llm_manager):
+    def __init__(self, llm_manager, auditor_agent_name: str = "auditor"):
         self._llm_manager = llm_manager
-        self._system_prompt = get_prompt("auditor")
+        self._auditor_agent_name = auditor_agent_name or "auditor"
+        self._system_prompt = get_prompt(self._auditor_agent_name)
 
     def review(
         self,
@@ -399,4 +400,3 @@ class ConversationAuditor:
                 return True
 
         return False
-

@@ -52,7 +52,15 @@ def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "sy
         FileNotFoundError: Se il file prompt non esiste
     """
     agent_name_lower = agent_name.lower()
-    available_agents = ['ali', 'believer', 'cuma', 'genius', 'auditor']
+    available_agents = [
+        'ali',
+        'believer',
+        'cuma',
+        'genius',
+        'auditor',
+        'desires_auditor',
+        'belief_auditor',
+    ]
 
     if agent_name_lower not in available_agents:
         raise ValueError(
@@ -93,7 +101,15 @@ def get_all_prompts(use_cache: bool = True) -> dict:
     Returns:
         Dizionario con tutti i prompts {agent_name: prompt_text}
     """
-    agents = ['ali', 'believer', 'cuma', 'genius', 'auditor']
+    agents = [
+        'ali',
+        'believer',
+        'cuma',
+        'genius',
+        'auditor',
+        'desires_auditor',
+        'belief_auditor',
+    ]
     prompts = {}
 
     for agent in agents:
