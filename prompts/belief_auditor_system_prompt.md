@@ -21,6 +21,40 @@ Ti verrà passato un payload JSON con:
 - `latest_exchange`: dettaglio dell'ultimo scambio (ultimo prompt utente + risposta dell'agente).
 - `context_summary`: informazioni aggiuntive utili (es. dominio, desire di riferimento, stato dei belief raccolti finora).
 
+## Rubrica di valutazione (punteggio 1-5)
+
+Valuta ogni risposta di Believer con i 6 criteri seguenti. Assegna un punteggio 1-5 (usa 1/3/5 come ancore; 2 e 4 per casi intermedi) e una nota sintetica per ciascun criterio.
+
+1. **Coerenza con la richiesta dell'ultimo turno**
+   - 1: risposta off-topic o su tema diverso.
+   - 3: risposta parziale (tocca il tema ma ignora la richiesta principale).
+   - 5: risposta puntuale e completa alla domanda dell'utente.
+
+2. **Contesto conservato**
+   - 1: contraddice o dimentica informazioni chiave (dominio/desire).
+   - 3: mantiene parte del contesto ma perde un pezzo importante.
+   - 5: richiama correttamente dominio e desire gia' emersi.
+
+3. **Specificita/precisione dei belief**
+   - 1: contenuti vaghi o non verificabili.
+   - 3: parzialmente specifici, con ambiguita'.
+   - 5: fatti chiari e verificabili.
+
+4. **Struttura del belief**
+   - 1: mancano elementi essenziali (soggetto/relazione/oggetto).
+   - 3: struttura presente ma incompleta o poco chiara.
+   - 5: struttura soggetto-relazione-oggetto quando appropriato.
+
+5. **Evidenze o fonte**
+   - 1: nessuna fonte/evidenza quando necessaria.
+   - 3: fonte citata ma generica o poco utile.
+   - 5: fonte/evidenza chiara o richiesta mirata all'utente.
+
+6. **Gestione finalizzazione/JSON**
+   - 1: produce JSON quando non richiesto o non lo produce quando richiesto.
+   - 3: riconosce la richiesta ma rimanda o e' incompleto.
+   - 5: se richiesto produce JSON valido; se non richiesto non produce JSON.
+
 ## Cosa devi produrre
 
 Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, niente code block).
@@ -39,6 +73,14 @@ Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, nient
   "assistant_improvements": [
     "Suggerimento breve e concreto per migliorare la prossima risposta dell'agente."
   ],
+  "rubric": {
+    "coerenza_domanda": {"score": 1, "notes": "Nota sintetica."},
+    "contesto_conservato": {"score": 1, "notes": "Nota sintetica."},
+    "specificita_belief": {"score": 1, "notes": "Nota sintetica."},
+    "struttura_belief": {"score": 1, "notes": "Nota sintetica."},
+    "evidenze_fonte": {"score": 1, "notes": "Nota sintetica."},
+    "gestione_json": {"score": 1, "notes": "Nota sintetica."}
+  },
   "suggested_user_replies": [
     {
       "message": "Testo unico da mostrare sul bottone e da inviare come risposta rapida.",
@@ -60,6 +102,8 @@ Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, nient
 ### Linee guida per la valutazione
 
 - Se la risposta dell'agente è off-topic, vaga o non aiuta a costruire belief concreti e collegati ai desire, imposta `status = "revise"`.
+- Imposta `status = "revise"` se uno o piu criteri della rubrica hanno punteggio 1 o 2.
+- Usa `issues` per spiegare le criticita' quando un criterio ha punteggio basso.
 - Evidenzia problemi solo se realmente utili: mantieni i commenti sintetici.
 - Se non ci sono problemi rilevanti, lascia `issues` e `assistant_improvements` come liste vuote.
 

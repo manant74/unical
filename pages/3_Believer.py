@@ -604,6 +604,27 @@ for idx, message in enumerate(st.session_state.believer_chat_history):
             if summary:
                 st.markdown(summary)
 
+            rubric = audit_payload.get("rubric") or {}
+            if isinstance(rubric, dict) and rubric:
+                rubric_labels = [
+                    ("coerenza_domanda", "Coerenza con la domanda"),
+                    ("contesto_conservato", "Contesto conservato"),
+                    ("specificita_belief", "Specificita belief"),
+                    ("struttura_belief", "Struttura belief"),
+                    ("evidenze_fonte", "Evidenze o fonte"),
+                    ("gestione_json", "Gestione finalizzazione/JSON"),
+                ]
+                st.markdown("**Score rubrica:**")
+                for key, label in rubric_labels:
+                    item = rubric.get(key) or {}
+                    score = item.get("score")
+                    notes = (item.get("notes") or "").strip()
+                    score_text = f"{score}/5" if isinstance(score, int) else "N/D"
+                    if notes:
+                        st.write(f"- {label}: {score_text} — {notes}")
+                    else:
+                        st.write(f"- {label}: {score_text}")
+
             issues = audit_payload.get("issues") or []
             if issues:
                 st.markdown("**Problemi rilevati:**")
