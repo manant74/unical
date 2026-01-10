@@ -735,6 +735,27 @@ if prompt:
                     if summary:
                         st.markdown(summary)
 
+                    rubric = auditor_result.get("rubric") or {}
+                    if isinstance(rubric, dict) and rubric:
+                        rubric_labels = [
+                            ("coerenza_domanda", "Coerenza con la domanda"),
+                            ("allineamento_modulo", "Allineamento al modulo"),
+                            ("contesto_conservato", "Contesto conservato"),
+                            ("progressione_dialogo", "Progressione dialogo"),
+                            ("focus_beneficiario", "Focus sul beneficiario"),
+                            ("gestione_json", "Gestione finalizzazione/JSON"),
+                        ]
+                        st.markdown("**Score rubrica:**")
+                        for key, label in rubric_labels:
+                            item = rubric.get(key) or {}
+                            score = item.get("score")
+                            notes = (item.get("notes") or "").strip()
+                            score_text = f"{score}/5" if isinstance(score, int) else "N/D"
+                            if notes:
+                                st.write(f"- {label}: {score_text} — {notes}")
+                            else:
+                                st.write(f"- {label}: {score_text}")
+
                     issues = auditor_result.get("issues") or []
                     if issues:
                         st.markdown("**Problemi rilevati:**")
