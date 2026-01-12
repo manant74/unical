@@ -20,25 +20,25 @@ Generare un singolo file JSON che contenga una lista di `beliefs`. Questa lista 
 
 ### PASSO 1: Generazione di Nuovi Belief dai Desire
 
-1.  **Analizza** ogni `Desire` fornito nel contesto.
-2.  Per ogni `Desire`, **inferisci e crea** uno o più nuovi `belief` che rappresentino le condizioni, le assunzioni o le ipotesi necessarie per soddisfare quel `Desire`.
-3.  Per ogni `belief` generato in questo passo, formatta l'oggetto JSON corrispondente e assicurati che `metadata.source_type` sia impostato su `"generated"`.
-4.  Conserva questa lista di belief generati per il Passo 3.
+1. **Analizza** ogni `Desire` fornito nel contesto.
+2. Per ogni `Desire`, **inferisci e crea** uno o più nuovi `belief` che rappresentino le condizioni, le assunzioni o le ipotesi necessarie per soddisfare quel `Desire`.
+3. Per ogni `belief` generato in questo passo, formatta l'oggetto JSON corrispondente e assicurati che `metadata.source_type` sia impostato su `"generated"`.
+4. Conserva questa lista di belief generati per il Passo 3.
 
 ### PASSO 2: Selezione dei Belief di Base Rilevanti
 
-1.  **Analizza** la lista dei `Belief di Base` fornita nel contesto.
-2.  **Confronta** ogni `Belief di Base` con la lista dei `Desire`.
-3.  **Seleziona** SOLO i `Belief di Base` che sono direttamente pertinenti o di supporto ad almeno uno dei `Desire`.
-4.  Per ogni `Belief di Base` selezionato, **trasformalo** in un oggetto JSON seguendo la struttura definita. Assicurati che `metadata.source_type` sia impostato su `"base"`.
-5.  Conserva questa lista di belief selezionati per il Passo 3.
+1. **Analizza** la lista dei `Belief di Base` fornita nel contesto.
+2. **Confronta** ogni `Belief di Base` con la lista dei `Desire`.
+3. **Seleziona** SOLO i `Belief di Base` che sono direttamente pertinenti o di supporto ad almeno uno dei `Desire`.
+4. Per ogni `Belief di Base` selezionato, **trasformalo** in un oggetto JSON seguendo la struttura definita. Assicurati che `metadata.source_type` sia impostato su `"base"`.
+5. Conserva questa lista di belief selezionati per il Passo 3.
 
 ### PASSO 3: Assemblaggio del JSON Finale
 
-1.  **Crea** un oggetto JSON radice con una singola chiave: `"beliefs"`.
-2.  Il valore di `"beliefs"` deve essere un array.
-3.  **Unisci** le due liste create nei Passi 1 e 2 in questo unico array.
-4.  Assicurati che ogni elemento nell'array finale rispetti la struttura definita nell'esempio sottostante.
+1. **Crea** un oggetto JSON radice con una singola chiave: `"beliefs"`.
+2. Il valore di `"beliefs"` deve essere un array.
+3. **Unisci** le due liste create nei Passi 1 e 2 in questo unico array.
+4. Assicurati che ogni elemento nell'array finale rispetti la struttura definita nell'esempio sottostante.
 
 ## Output atteso
 

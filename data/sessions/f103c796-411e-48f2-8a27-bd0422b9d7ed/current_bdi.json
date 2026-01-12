@@ -1,0 +1,2345 @@
+{
+  "domain_summary": "Definizione di una guida operativa (in step sequenziali) per redigere perizie immobiliari a fini mutuo su ville monofamiliari, incluse ville “medie” e ville con grande giardino. Focus su processo difendibile: raccolta dati/documenti, analisi di mercato con comparables, aggiustamenti e sintesi in un range di valore.",
+  "beneficiario": {
+    "beneficiario_name": "Tecnico Junior Perizie Mutuo – Ville",
+    "beneficiario_description": "È un professionista alle prime esperienze che deve stimare il valore di mercato di ville monofamiliari per finalità mutuo, partendo spesso da poche informazioni iniziali (es. coordinate) ma potendo fare sopralluogo e recuperare i dati dell’immobile. Vuole una procedura semplice e replicabile che riduca errori, omissioni e richieste di integrazione da parte di chi revisiona la perizia."
+  },
+  "desires": [
+    {
+      "desire_id": 1,
+      "desire_statement": "Desidera una sequenza di passi (8–12 step) chiara e replicabile per stimare in modo difendibile il valore di mercato a fini mutuo di una villa monofamiliare (anche con grande giardino), dalla presa in carico fino alla conclusione.",
+      "priority": "medium",
+      "success_metrics": [
+        "Riduzione del tempo medio di completamento della perizia (a parità di qualità/completezza).\\nRiduzione delle revisioni/integrazioni richieste (es. richieste di chiarimenti, documenti mancanti, passaggi non giustificati)."
+      ]
+    },
+    {
+      "desire_id": 2,
+      "desire_statement": "Desidera una checklist di raccolta e verifica documentale (catasto, urbanistica, titoli edilizi, proprietà/gravami) con criteri decisionali su cosa fare quando emergono difformità o rischi di non conformità.",
+      "priority": "medium",
+      "success_metrics": [
+        "% perizie consegnate con set documentale completo rispetto allo standard definito.\\n% perizie in cui la conformità/difformità è esplicitata con impatto sul valore (tracciabilità del ragionamento)."
+      ]
+    },
+    {
+      "desire_id": 3,
+      "desire_statement": "Desidera un criterio pratico per individuare e selezionare 3–5 comparabili pertinenti partendo dalle coordinate geografiche, usando fonti disponibili (annunci/agenzie) e OMI come controllo, con regole di omogeneità territoriale, tipologica e temporale.",
+      "priority": "medium",
+      "success_metrics": [
+        "Numero di perizie con almeno 3 comparabili che rispettano criteri minimi (es. stessa zona/area coerente, tipologia simile, recenza transazioni/offerte).\\nRiduzione della varianza tra perizie simili (coerenza nella selezione dei comparabili e nel perimetro territoriale)."
+      ]
+    },
+    {
+      "desire_id": 4,
+      "desire_statement": "Desidera un modo guidato per normalizzare e rendere confrontabili i prezzi dei comparabili (superficie commerciale e ragguagli), includendo correttamente gli elementi tipici delle ville (lotto/giardino, pertinenze, dotazioni) e gli aggiustamenti per stato manutentivo.",
+      "priority": "medium",
+      "success_metrics": [
+        "% perizie in cui gli aggiustamenti sono esplicitati e coerenti tra comparabili (tracciabilità: da prezzo comparabile a prezzo “rettificato”).\\nRiduzione delle contestazioni interne su “aggiustamenti arbitrari” durante la revisione."
+      ]
+    },
+    {
+      "desire_id": 5,
+      "desire_statement": "Desidera produrre un risultato finale espresso come forchetta di valore motivata (non un numero ‘magico’), con assunzioni/limitazioni dichiarate e una sintesi che riconcilia i dati di mercato con le caratteristiche specifiche della villa.",
+      "priority": "medium",
+      "success_metrics": [
+        "Tasso di accettazione della perizia senza richieste di chiarimento su assunzioni/limitazioni e riconciliazione finale.\\nPresenza sistematica nel report di: range valutativo, assunzioni/limitazioni, motivazione della scelta dei comparabili e sintesi di riconciliazione."
+      ]
+    }
+  ],
+  "beliefs": [
+    {
+      "subject": "Stima per mutuo di villa monofamiliare",
+      "definition": "Per produrre una stima difendibile a fini mutuo è necessario impostare un processo replicabile che parta dall'incarico (scopo, data, standard, livello di approfondimento) e arrivi a una conclusione motivata e tracciabile.",
+      "semantic_relations": "richiede",
+      "object": "processo replicabile end-to-end dalla presa in carico alla conclusione",
+      "source": "Inferenza dai desire D1 e D5: richiesta di sequenza chiara e replicabile + output motivato con assunzioni/limitazioni.",
+      "importance": 0.88,
+      "confidence": 0.82,
+      "prerequisites": [
+        "Definizione scopo della valutazione (mutuo)",
+        "Disponibilità documenti e accesso all'immobile",
+        "Standard di riferimento (IVS/EVS/ABI)"
+      ],
+      "related_concepts": [
+        "Mandato professionale",
+        "Tracciabilità dei calcoli",
+        "Auditabilità"
+      ],
+      "enables": [
+        "Stima difendibile",
+        "Riduzione contestazioni in istruttoria"
+      ],
+      "part_of": [
+        "Processo di valutazione immobiliare"
+      ],
+      "sub_concepts": [
+        "Definizione ambito e responsabilità",
+        "Raccolta dati",
+        "Sintesi e range"
+      ],
+      "tags": [
+        "mutuo",
+        "processo",
+        "replicabilità"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Requisito operativo",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Serve una sequenza di passi chiara e replicabile per stimare il valore di mercato a fini mutuo."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Serve un risultato finale come forchetta motivata con assunzioni e limitazioni dichiarate."
+        }
+      ],
+      "id": 1,
+      "timestamp": "2026-01-12T16:51:36.412022"
+    },
+    {
+      "subject": "Due diligence come prerequisito della stima",
+      "definition": "La raccolta e verifica documentale (catasto, urbanistica, titoli edilizi, proprietà/gravami) deve precedere la quantificazione del valore; difformità e rischi devono generare azioni decisionali (regolarizzazione, decurtazioni, limitazioni) prima della conclusione.",
+      "semantic_relations": "deve_precedere",
+      "object": "quantificazione del valore di mercato",
+      "source": "Inferenza dal desire D2: checklist documentale con criteri decisionali in caso di difformità/rischi.",
+      "importance": 0.9,
+      "confidence": 0.84,
+      "prerequisites": [
+        "Accesso a visure e titoli",
+        "Conoscenza scenari di conformità e impatti"
+      ],
+      "related_concepts": [
+        "Stato legittimo",
+        "Conformità catastale",
+        "Gravami e commerciabilità"
+      ],
+      "enables": [
+        "Valutazione prudenziale",
+        "Riduzione rischio regolatorio e legale"
+      ],
+      "part_of": [
+        "Fase documentale e legale della perizia"
+      ],
+      "sub_concepts": [
+        "Decisione su sanabilità",
+        "Quantificazione costi e rischio",
+        "Dichiarazione limitazioni"
+      ],
+      "tags": [
+        "due_diligence",
+        "conformità",
+        "rischio"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Regola di processo",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Checklist raccolta/verifica documentale con criteri decisionali su difformità o rischi."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Assunzioni/limitazioni devono essere dichiarate e motivate nella sintesi finale."
+        }
+      ],
+      "id": 2,
+      "timestamp": "2026-01-12T16:51:36.412035"
+    },
+    {
+      "subject": "Selezione comparabili basata su omogeneità",
+      "definition": "La selezione di 3–5 comparabili pertinenti deve rispettare regole di omogeneità territoriale (microzona/contesto), tipologica (villa/lotto/pertinenze) e temporale (recenza), per ridurre aggiustamenti e aumentare difendibilità.",
+      "semantic_relations": "si_basa_su",
+      "object": "omogeneità territoriale, tipologica e temporale",
+      "source": "Inferenza dal desire D3: criterio pratico di selezione comparabili da coordinate geografiche con regole di omogeneità.",
+      "importance": 0.87,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Geolocalizzazione del soggetto",
+        "Accesso a fonti (annunci/agenzie) e OMI come controllo",
+        "Scheda standard comparabili"
+      ],
+      "related_concepts": [
+        "MCA",
+        "Microzona OMI",
+        "Segmentazione di mercato"
+      ],
+      "enables": [
+        "Riduzione errori da comparabili non pertinenti",
+        "Aggiustamenti più contenuti"
+      ],
+      "part_of": [
+        "Metodo del confronto di mercato (MCA)"
+      ],
+      "sub_concepts": [
+        "Raggio di ricerca",
+        "Filtri qualità dato",
+        "Filtri recenza"
+      ],
+      "tags": [
+        "comparabili",
+        "omogeneità",
+        "geografia"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Criterio di selezione",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Criterio pratico per individuare e selezionare 3–5 comparabili pertinenti da coordinate, usando fonti e OMI come controllo."
+        }
+      ],
+      "id": 3,
+      "timestamp": "2026-01-12T16:51:36.412036"
+    },
+    {
+      "subject": "Qualità dato dei comparabili",
+      "definition": "I prezzi da annunci devono essere corretti per sconto medio e stato di trattativa quando possibile; i dati di transazione (atti/notai o evidenze di venduto) hanno priorità rispetto ai prezzi richiesti.",
+      "semantic_relations": "privilegia",
+      "object": "dati di transazione rispetto ai prezzi richiesti",
+      "source": "Inferenza dai desire D3 e D5: uso di fonti annunci/agenzie con correzioni e sintesi motivata.",
+      "importance": 0.8,
+      "confidence": 0.75,
+      "prerequisites": [
+        "Raccolta annunci e riscontri con operatori",
+        "Stima sconto medio in zona/segmento"
+      ],
+      "related_concepts": [
+        "Indicatori di mercato",
+        "Sconto medio sul prezzo richiesto",
+        "Data quality"
+      ],
+      "enables": [
+        "Comparazione più realistica",
+        "Riduzione bias da asking price"
+      ],
+      "part_of": [
+        "Analisi di mercato e selezione comparabili"
+      ],
+      "sub_concepts": [
+        "Verifica duplicati",
+        "Pulizia outlier",
+        "Normalizzazione temporale"
+      ],
+      "tags": [
+        "data_quality",
+        "annunci",
+        "sconto"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Criterio di affidabilità dati",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "MEDIO",
+          "definition": "Uso di fonti (annunci/agenzie) con regole pratiche di selezione."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Risultato finale motivato e difendibile richiede qualità e correzione dei dati."
+        }
+      ],
+      "id": 4,
+      "timestamp": "2026-01-12T16:51:36.412037"
+    },
+    {
+      "subject": "Normalizzazione prezzi tramite superficie commerciale (SCV)",
+      "definition": "Per rendere confrontabili i comparabili è necessario normalizzare i prezzi su SCV (non su calpestabile) applicando coefficienti di ponderazione coerenti e tarati sul mercato locale.",
+      "semantic_relations": "si_ottiene_con",
+      "object": "normalizzazione €/mq su SCV e coefficienti tarati localmente",
+      "source": "Inferenza dal desire D4: normalizzare correttamente includendo lotto/giardino, pertinenze, dotazioni e stato manutentivo.",
+      "importance": 0.9,
+      "confidence": 0.83,
+      "prerequisites": [
+        "Rilievo superfici e pertinenze",
+        "Regole di ragguaglio e coefficienti locali"
+      ],
+      "related_concepts": [
+        "SCV",
+        "Coefficienti di ponderazione",
+        "Aggiustamenti comparativi"
+      ],
+      "enables": [
+        "Comparazione €/mq coerente",
+        "Riduzione errori da metriche non omogenee"
+      ],
+      "part_of": [
+        "MCA - Normalizzazione e aggiustamenti"
+      ],
+      "sub_concepts": [
+        "Ragguaglio esterni e pertinenze",
+        "Tracciamento calcoli SCV",
+        "Coerenza tra comparabili"
+      ],
+      "tags": [
+        "SCV",
+        "normalizzazione",
+        "ragguagli"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Regola di calcolo",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Modo guidato per normalizzare e rendere confrontabili i prezzi includendo elementi tipici delle ville e lo stato manutentivo."
+        }
+      ],
+      "id": 5,
+      "timestamp": "2026-01-12T16:51:36.412038"
+    },
+    {
+      "subject": "Valorizzazione elementi tipici delle ville",
+      "definition": "Nel confronto di mercato per ville monofamiliari gli elementi come lotto/giardino, pertinenze (box, cantine), dotazioni (piscina, impianti, sicurezza) devono essere trattati con regole esplicite: (a) inclusione in SCV tramite coefficienti, oppure (b) valorizzazione a corpo, evitando doppie conte.",
+      "semantic_relations": "deve_trattare",
+      "object": "giardino/lotto e dotazioni con regole esplicite evitando doppie conte",
+      "source": "Inferenza dal desire D4: includere correttamente elementi tipici delle ville e renderli confrontabili.",
+      "importance": 0.82,
+      "confidence": 0.78,
+      "prerequisites": [
+        "Inventario pertinenze e dotazioni",
+        "Scelta coerente del criterio (SCV vs valore a corpo)"
+      ],
+      "related_concepts": [
+        "Coefficienti SCV",
+        "Aggiustamenti comparativi",
+        "Trasparenza metodologica"
+      ],
+      "enables": [
+        "Confronti omogenei tra ville",
+        "Riduzione contestazioni su 'extra' non esplicitati"
+      ],
+      "part_of": [
+        "Normalizzazione e aggiustamenti per ville"
+      ],
+      "sub_concepts": [
+        "Regola anti-doppia-conte",
+        "Dotazioni premium",
+        "Qualità esterni"
+      ],
+      "tags": [
+        "ville",
+        "giardino",
+        "pertinenze",
+        "dotazioni"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Criterio di confronto",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Normalizzare prezzi dei comparabili includendo lotto/giardino, pertinenze e dotazioni tipiche delle ville."
+        }
+      ],
+      "id": 6,
+      "timestamp": "2026-01-12T16:51:36.412039"
+    },
+    {
+      "subject": "Aggiustamenti comparativi: trasparenza e prudenza per mutuo",
+      "definition": "Gli aggiustamenti per differenze (stato manutentivo, qualità, esposizione, pertinenze, rischi) devono essere espliciti, giustificati e, in ambito mutuo, applicati con criteri conservativi e documentabili.",
+      "semantic_relations": "devono_essere",
+      "object": "espliciti, giustificati, conservativi e documentabili",
+      "source": "Inferenza dai desire D1, D4 e D5: processo difendibile, normalizzazione guidata, risultato motivato.",
+      "importance": 0.86,
+      "confidence": 0.8,
+      "prerequisites": [
+        "Rilievo tecnico-estimativo completo",
+        "Scala/range di coefficienti o prezzi marginali",
+        "Evidenze di mercato a supporto"
+      ],
+      "related_concepts": [
+        "MCA",
+        "Coefficienti di ragguaglio",
+        "Supporto a finanziamenti"
+      ],
+      "enables": [
+        "Difendibilità della griglia di confronto",
+        "Riduzione rischio di sovrastima"
+      ],
+      "part_of": [
+        "Metodo del confronto di mercato (MCA)"
+      ],
+      "sub_concepts": [
+        "Tracciabilità aggiustamenti",
+        "Coerenza tra comparabili",
+        "Prudenzialità"
+      ],
+      "tags": [
+        "aggiustamenti",
+        "prudenza",
+        "mutuo"
+      ],
+      "metadata": {
+        "subject_type": "Linea guida",
+        "object_type": "Criterio applicativo",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Processo replicabile e difendibile per stima a fini mutuo."
+        },
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Aggiustamenti corretti per stato manutentivo e differenze tra comparabili."
+        }
+      ],
+      "id": 7,
+      "timestamp": "2026-01-12T16:51:36.412040"
+    },
+    {
+      "subject": "Criterio minimo di numerosità e coerenza dei comparabili",
+      "definition": "Per una stima difendibile con MCA è necessario usare almeno 3 comparabili e verificare la coerenza dei valori normalizzati; se la dispersione è elevata occorre sostituire comparabili, aumentare campione o ampliare prudentemente il range.",
+      "semantic_relations": "richiede",
+      "object": "minimo 3 comparabili e controllo dispersione/coerenza",
+      "source": "Inferenza dai desire D3 e D5: selezione 3–5 comparabili e output come forchetta motivata.",
+      "importance": 0.84,
+      "confidence": 0.78,
+      "prerequisites": [
+        "Schede comparabili complete",
+        "Calcolo SCV e aggiustamenti"
+      ],
+      "related_concepts": [
+        "Validazione perizia",
+        "Range valutativo",
+        "Outlier management"
+      ],
+      "enables": [
+        "Riduzione rischio di cherry-picking",
+        "Range coerente e difendibile"
+      ],
+      "part_of": [
+        "Controllo qualità della stima comparativa"
+      ],
+      "sub_concepts": [
+        "Criteri esclusione outlier",
+        "Robustezza (mediana vs media)",
+        "Allargamento prudenziale range"
+      ],
+      "tags": [
+        "comparabili",
+        "coerenza",
+        "qualità"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Controllo qualità",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Selezionare 3–5 comparabili pertinenti con regole pratiche."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Restituire una forchetta motivata riconciliando i dati e dichiarando limiti."
+        }
+      ],
+      "id": 8,
+      "timestamp": "2026-01-12T16:51:36.412041"
+    },
+    {
+      "subject": "Output finale come forchetta motivata con assunzioni e limitazioni",
+      "definition": "Il risultato della perizia deve essere espresso come intervallo di valore (min, max, più probabile), esplicitando assunzioni, limitazioni, scenario di conformità e riconciliazione tra dati di mercato e caratteristiche specifiche della villa.",
+      "semantic_relations": "deve_essere",
+      "object": "forchetta di valore motivata con assunzioni/limitazioni e riconciliazione",
+      "source": "Inferenza dal desire D5: no numero 'magico', ma range motivato con assunzioni/limitazioni e sintesi di riconciliazione.",
+      "importance": 0.92,
+      "confidence": 0.86,
+      "prerequisites": [
+        "Analisi di sensibilità",
+        "Selezione e normalizzazione comparabili",
+        "Due diligence (conformità e gravami)"
+      ],
+      "related_concepts": [
+        "Valore probabilistico",
+        "Analisi di sensibilità",
+        "Relazione di perizia"
+      ],
+      "enables": [
+        "Comunicazione chiara dell'incertezza",
+        "Difendibilità in contesto bancario"
+      ],
+      "part_of": [
+        "Conclusioni della perizia"
+      ],
+      "sub_concepts": [
+        "Scenario base",
+        "Scenario prudenziale",
+        "Scenario ottimistico"
+      ],
+      "tags": [
+        "forchetta",
+        "assunzioni",
+        "limitazioni",
+        "sintesi"
+      ],
+      "metadata": {
+        "subject_type": "Output",
+        "object_type": "Formato risultato",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Produrre risultato finale come forchetta di valore motivata con assunzioni/limitazioni e riconciliazione."
+        }
+      ],
+      "id": 9,
+      "timestamp": "2026-01-12T16:51:36.412042"
+    },
+    {
+      "subject": "Tracciabilità e auditabilità della perizia",
+      "definition": "Per essere difendibile, la perizia deve rendere tracciabili fonti, calcoli (SCV, normalizzazioni, aggiustamenti), scelte di comparabili e decisioni su difformità, includendo evidenze (foto, estratti documentali, tabelle).",
+      "semantic_relations": "richiede",
+      "object": "fonti citate, calcoli tracciabili ed evidenze documentali",
+      "source": "Inferenza dai desire D1, D2 e D5: replicabilità, gestione difformità, e sintesi motivata richiedono audit trail completo.",
+      "importance": 0.9,
+      "confidence": 0.84,
+      "prerequisites": [
+        "Raccolta documenti e foto",
+        "Template tabelle MCA/SCV",
+        "Archiviazione ordinata delle fonti"
+      ],
+      "related_concepts": [
+        "Checklist validazione perizia",
+        "Relazione di perizia",
+        "Trasparenza metodologica"
+      ],
+      "enables": [
+        "Revisione interna/esterna",
+        "Riduzione rischio di contestazioni"
+      ],
+      "part_of": [
+        "Quality assurance della valutazione"
+      ],
+      "sub_concepts": [
+        "Data room",
+        "Versioning",
+        "Note metodologiche"
+      ],
+      "tags": [
+        "audit",
+        "tracciabilità",
+        "qualità"
+      ],
+      "metadata": {
+        "subject_type": "Requisito",
+        "object_type": "Controllo qualità",
+        "source_type": "generated"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Passi chiari e replicabili per una stima difendibile."
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Checklist documentale con criteri decisionali richiede tracciabilità."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Forchetta motivata con assunzioni/limitazioni necessita calcoli e fonti tracciabili."
+        }
+      ],
+      "id": 10,
+      "timestamp": "2026-01-12T16:51:36.412045"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia immobiliare di stima determina il Più Probabile Valore di Mercato di un immobile a una data specifica. Serve a supportare decisioni e transazioni in condizioni di mercato competitive e informate.",
+      "semantic_relations": "ha_come_obiettivo",
+      "object": "Determinare il Più Probabile Valore di Mercato (Market Value) a una data specifica in condizioni di libera contrattazione",
+      "source": "La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica, in condizioni di libera contrattazione tra parti informate, indipendenti e non condizionate, dopo un congruo periodo di esposizione sul mercato.",
+      "importance": 0.98,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Concetto di valore di mercato",
+        "Condizioni di mercato competitive"
+      ],
+      "related_concepts": [
+        "Libera contrattazione",
+        "Esposizione sul mercato"
+      ],
+      "enables": [
+        "Determinazione prezzo di vendita",
+        "Pianificazione strategica di vendita"
+      ],
+      "part_of": [
+        "Processo di valutazione immobiliare"
+      ],
+      "sub_concepts": [
+        "Data di riferimento",
+        "Condizioni di mercato"
+      ],
+      "tags": [
+        "perizia",
+        "valutazione",
+        "mercato"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Obiettivo",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Stimare in modo difendibile il valore di mercato a fini mutuo."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Esplicitare il valore come risultato motivato e legato alla data di riferimento."
+        }
+      ],
+      "id": 11,
+      "timestamp": "2026-01-12T16:51:36.412046"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può supportare richieste di finanziamento applicando metodologie più conservative. Riduce il rischio per finanziatori.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Supporto a finanziamenti (con metodologie più conservative)",
+      "source": "La stima può essere richiesta per: ... - supporto a finanziamenti (con metodologie più conservative).",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Metodologie conservative",
+        "Normativa bancaria"
+      ],
+      "related_concepts": [
+        "Saggio di capitalizzazione",
+        "Loan-to-Value"
+      ],
+      "enables": [
+        "Istruttoria creditizia"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "finanza"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Stima difendibile specificamente per finalità mutuo."
+        }
+      ],
+      "id": 12,
+      "timestamp": "2026-01-12T16:51:36.412047"
+    },
+    {
+      "subject": "Valore stimato",
+      "definition": "Il valore stimato è una grandezza probabilistica, non un prezzo certo. Dipende da ipotesi di mercato.",
+      "semantic_relations": "è_una_grandezza",
+      "object": "Probabilistica dipendente da ipotesi di mercato",
+      "source": "Il valore stimato  non è un prezzo certo , ma una grandezza probabilistica, dipendente da ipotesi di mercato.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Statistica",
+        "Ipotesi di mercato"
+      ],
+      "related_concepts": [
+        "Forchetta di valore",
+        "Analisi di sensibilità"
+      ],
+      "enables": [
+        "Espressione di range di valori"
+      ],
+      "part_of": [
+        "Output di perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "valore",
+        "probabilità"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Caratteristica",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Produrre una forchetta motivata, non un numero 'magico'."
+        }
+      ],
+      "id": 13,
+      "timestamp": "2026-01-12T16:51:36.412048"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "La data di riferimento viene fissata all'inizio. Rende temporale il giudizio di valore.",
+      "semantic_relations": "include",
+      "object": "Data di riferimento",
+      "source": "Il  perito  definisce:  ...  -  data  di  riferimento;",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Condizioni di mercato alla data"
+      ],
+      "enables": [
+        "Contestualizzazione temporale"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "data"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elemento di mandato",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Processo end-to-end dalla presa in carico fino alla conclusione include data di riferimento."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Il valore va espresso e motivato alla data di riferimento."
+        }
+      ],
+      "id": 14,
+      "timestamp": "2026-01-12T16:51:36.412049"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "Il grado di approfondimento (desktop, drive-by, full appraisal) è definito in fase iniziale. Stabilisce estensione e costi.",
+      "semantic_relations": "include",
+      "object": "Grado di approfondimento (desktop, drive-by, full appraisal)",
+      "source": "Il  perito  definisce: ... -  grado  di  approfondimento  (desktop,  drive-by,  full  appraisal);",
+      "importance": 0.75,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Sopralluogo",
+        "Due diligence"
+      ],
+      "enables": [
+        "Pianificazione attività"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "approfondimento"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro operativo",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Sequenza di passi replicabile richiede definire il livello di approfondimento."
+        }
+      ],
+      "id": 15,
+      "timestamp": "2026-01-12T16:51:36.412049"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "Limitazioni e assunzioni vengono dichiarate nel mandato. Esplicitano confini e ipotesi del lavoro.",
+      "semantic_relations": "include",
+      "object": "Limitazioni e assunzioni",
+      "source": "Il  perito  definisce: ... - limitazioni e assunzioni.",
+      "importance": 0.77,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Assunzioni di mercato",
+        "Limitazioni di responsabilità"
+      ],
+      "enables": [
+        "Trasparenza metodologica"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "assunzioni"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro operativo",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Assunzioni/limitazioni devono essere dichiarate nell'output finale."
+        }
+      ],
+      "id": 16,
+      "timestamp": "2026-01-12T16:51:36.412050"
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "La verifica di titolarità e provenienza è essenziale per identificare chi può vendere. Include l'atto notarile.",
+      "semantic_relations": "include",
+      "object": "Atto notarile (compravendita, donazione, successione)",
+      "source": "3.1 Titolarità e provenienza\nAtto notarile (compravendita, donazione, successione);",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Identificazione immobile",
+        "Verifica proprietà"
+      ],
+      "related_concepts": [
+        "Visura ipotecaria",
+        "Gravami"
+      ],
+      "enables": [
+        "Legittimazione alla vendita"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "documenti",
+        "proprietà"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Checklist documentale include proprietà e titolarità."
+        }
+      ],
+      "id": 17,
+      "timestamp": "2026-01-12T16:51:36.412051"
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "La presenza di usufrutto, diritti reali o pignoramenti deve essere accertata, anche tramite visura ipotecaria. Influisce sulla commerciabilità.",
+      "semantic_relations": "può_includere",
+      "object": "Usufrutto, diritti reali, pignoramenti (visura ipotecaria se necessario)",
+      "source": "1Presenza di usufrutto, diritti reali, pignoramenti (visura ipotecaria se necessario).",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Visura ipotecaria"
+      ],
+      "related_concepts": [
+        "Gravami",
+        "Commerciabilità"
+      ],
+      "enables": [
+        "Valutazione rischi legali"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "gravami",
+        "ipoteche"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Gravame",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Checklist include gravami e rischi di commerciabilità."
+        }
+      ],
+      "id": 18,
+      "timestamp": "2026-01-12T16:51:36.412052"
+    },
+    {
+      "subject": "Analisi catastale",
+      "definition": "La planimetria catastale va confrontata con lo stato di fatto. Garantisce coerenza fisica.",
+      "semantic_relations": "include",
+      "object": "Planimetria catastale",
+      "source": "Planimetria catastale;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo stato di fatto"
+      ],
+      "related_concepts": [
+        "Conformità catastale",
+        "SCV"
+      ],
+      "enables": [
+        "Verifica conformità"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "planimetria"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Checklist catasto con verifica coerenza stato di fatto."
+        }
+      ],
+      "id": 19,
+      "timestamp": "2026-01-12T16:51:36.412053"
+    },
+    {
+      "subject": "Dato catastale",
+      "definition": "Il dato catastale non ha valore estimativo diretto ma incide su fiscalità e commerciabilità. Va usato come supporto, non come base di valore.",
+      "semantic_relations": "non_ha_valore_estimativo_diretto",
+      "object": "Incide su fiscalità e commerciabilità",
+      "source": "⚠️ Il dato catastale  non ha valore estimativo diretto , ma incide su fiscalità e commerciabilità.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi catastale"
+      ],
+      "related_concepts": [
+        "Rendita catastale",
+        "Imposte"
+      ],
+      "enables": [
+        "Correzioni fiscali"
+      ],
+      "part_of": [
+        "Due diligence"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "fiscalità"
+      ],
+      "metadata": {
+        "subject_type": "Dato",
+        "object_type": "Impatto",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "La verifica catastale serve a conformità e commerciabilità, non a stimare direttamente il valore."
+        }
+      ],
+      "id": 20,
+      "timestamp": "2026-01-12T16:51:36.412055"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Lo stato legittimo dell'immobile deve essere verificato. Condiziona la commerciabilità.",
+      "semantic_relations": "richiede_verifica_di",
+      "object": "Stato legittimo dell’immobile",
+      "source": "Stato legittimo dell’immobile;",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Titoli edilizi",
+        "Planimetrie"
+      ],
+      "related_concepts": [
+        "Conformità urbanistica"
+      ],
+      "enables": [
+        "Commerciabilità"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "urbanistica",
+        "legittimità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Verifica",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Checklist urbanistica/titoli edilizi con criteri decisionali su difformità."
+        }
+      ],
+      "id": 21,
+      "timestamp": "2026-01-12T16:51:36.412056"
+    },
+    {
+      "subject": "Difformità sanabili",
+      "definition": "Le difformità sanabili comportano detrazione dei costi e un rischio. Riduce il valore in misura dei costi e del rischio.",
+      "semantic_relations": "ha_impatto",
+      "object": "Detrazione costi + rischio",
+      "source": "Scenari tipici : ... - difformità sanabili → detrazione costi + rischio;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi costi sanatoria"
+      ],
+      "related_concepts": [
+        "Sanatorie",
+        "Rischio regolatorio"
+      ],
+      "enables": [
+        "Adeguamento valutativo"
+      ],
+      "part_of": [
+        "Scenari urbanistici"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "difformità",
+        "rischio"
+      ],
+      "metadata": {
+        "subject_type": "Stato conformità",
+        "object_type": "Impatto sul valore",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Criteri decisionali quando emergono difformità/rischi."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Output deve riflettere costi e rischio in caso di non conformità."
+        }
+      ],
+      "id": 22,
+      "timestamp": "2026-01-12T16:51:36.412057"
+    },
+    {
+      "subject": "Difformità insanabili",
+      "definition": "Le difformità insanabili causano drastico abbattimento del valore o non commerciabilità. Rappresentano rischio elevato.",
+      "semantic_relations": "ha_impatto",
+      "object": "Drastico abbattimento valore / non commerciabilità",
+      "source": "Scenari tipici : ... - difformità insanabili → drastico abbattimento valore / non commerciabilità.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Verifica urbanistica"
+      ],
+      "related_concepts": [
+        "Vincoli",
+        "Rischio legale"
+      ],
+      "enables": [
+        "Decisioni di remediation"
+      ],
+      "part_of": [
+        "Scenari urbanistici"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "difformità",
+        "commerciabilità"
+      ],
+      "metadata": {
+        "subject_type": "Stato conformità",
+        "object_type": "Impatto sul valore",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Gestione rischi di non conformità fino alla non commerciabilità."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Assunzioni/limitazioni devono esplicitare impatti e scenari."
+        }
+      ],
+      "id": 23,
+      "timestamp": "2026-01-12T16:51:36.412058"
+    },
+    {
+      "subject": "Sopralluogo tecnico-estimativo",
+      "definition": "Il sopralluogo verifica la corrispondenza documentale e rileva superfici reali. È essenziale per la qualità della stima.",
+      "semantic_relations": "consente_di",
+      "object": "Verificare corrispondenza documentale; Rilevare superfici reali",
+      "source": "Il  sopralluogo  consente  di:  -  verificare  la  corrispondenza  documentale;  -  rilevare  superfici  reali;",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Documentazione",
+        "Strumenti di rilievo"
+      ],
+      "related_concepts": [
+        "SCV",
+        "Conformità"
+      ],
+      "enables": [
+        "Calcolo superfici",
+        "Validazione documenti"
+      ],
+      "part_of": [
+        "Fase 2 – Sopralluogo tecnico-estimativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "sopralluogo",
+        "rilievo"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Attività",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Processo completo richiede sopralluogo per misure e coerenza documentale."
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Verifica conformità documentale supportata da rilievo in sito."
+        },
+        {
+          "desire_id": "D4",
+          "relevance_level": "MEDIO",
+          "definition": "Normalizzazione prezzi richiede superfici reali e pertinenze rilevate."
+        }
+      ],
+      "id": 24,
+      "timestamp": "2026-01-12T16:51:36.412058"
+    },
+    {
+      "subject": "Superficie Commerciale Vendibile (SCV)",
+      "definition": "Il mercato scambia superficie commerciale, non calpestabile. La SCV è la base per il prezzo unitario.",
+      "semantic_relations": "è_la_grandezza_di_scambio",
+      "object": "Superficie commerciale",
+      "source": "Il mercato scambia superficie commerciale , non superficie calpestabile.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Misurazione superfici"
+      ],
+      "related_concepts": [
+        "Prezzo al mq",
+        "Coefficienti di ponderazione"
+      ],
+      "enables": [
+        "Determinazione €/mq"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "superfici"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Principio estimativo",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Normalizzazione comparabili deve usare SCV e ragguagli corretti."
+        }
+      ],
+      "id": 25,
+      "timestamp": "2026-01-12T16:51:36.412059"
+    },
+    {
+      "subject": "Superficie Commerciale Vendibile (SCV)",
+      "definition": "La SCV si calcola sommando le superfici ponderate per coefficienti. È un algoritmo additivo.",
+      "semantic_relations": "si_calcola_con",
+      "object": "SCV = Σ (Superficie × Coefficiente di ponderazione)",
+      "source": "SCV = Σ (Superficie × Coefficiente di ponderazione)",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo superfici",
+        "Coefficienti"
+      ],
+      "related_concepts": [
+        "UNI 10750",
+        "DPR 138/98"
+      ],
+      "enables": [
+        "Calcolo consistenza commerciale"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "formula"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Formula",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Metodo guidato per rendere confrontabili i prezzi tramite SCV e ragguagli."
+        }
+      ],
+      "id": 26,
+      "timestamp": "2026-01-12T16:51:36.412060"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I coefficienti SCV non sono fissi e dipendono dal mercato locale. Devono essere tarati sul contesto.",
+      "semantic_relations": "non_sono_fissi",
+      "object": "Dipendono dal mercato locale",
+      "source": "⚠️ I coefficienti  non sono fissi , ma dipendono dal mercato locale.",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi mercato locale"
+      ],
+      "related_concepts": [
+        "Segmentazione",
+        "OMI"
+      ],
+      "enables": [
+        "Adattamento coefficienti"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "coefficienti"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Regola",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "I ragguagli devono essere corretti e coerenti con il mercato locale."
+        }
+      ],
+      "id": 27,
+      "timestamp": "2026-01-12T16:51:36.412061"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I giardini pesano tipicamente tra il 5% e il 20% secondo tipologia. Il peso varia per appartamenti e ville.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Giardini: 5–20% secondo tipologia",
+      "source": "Giardini: 5–20% secondo tipologia",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tipologia immobile"
+      ],
+      "related_concepts": [
+        "Spazi esterni",
+        "Appartamenti",
+        "Ville"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "giardini"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Includere correttamente lotto/giardino nella comparazione per ville."
+        }
+      ],
+      "id": 28,
+      "timestamp": "2026-01-12T16:51:36.412062"
+    },
+    {
+      "subject": "Fonti informative di mercato",
+      "definition": "Atti notarili, agenzie locali, banche dati, annunci corretti e OMI come controllo sono fonti chiave. Supportano dati affidabili.",
+      "semantic_relations": "includono",
+      "object": "Atti notarili; Agenzie locali; Banche dati interne; Annunci; OMI (solo come controllo)",
+      "source": "6.2 Fonti informative\natti notarili; ... agenzie locali; ... banche dati interne; annunci (opportunamente corretti); OMI (solo come controllo).",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Accesso dati"
+      ],
+      "related_concepts": [
+        "Data quality",
+        "Normalizzazione prezzi"
+      ],
+      "enables": [
+        "Selezione comparabili"
+      ],
+      "part_of": [
+        "Analisi di mercato"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "dati",
+        "fonti"
+      ],
+      "metadata": {
+        "subject_type": "Fonte dati",
+        "object_type": "Elenco",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Selezione comparabili usando annunci/agenzie e OMI come controllo."
+        }
+      ],
+      "id": 29,
+      "timestamp": "2026-01-12T16:51:36.412063"
+    },
+    {
+      "subject": "Metodo del Confronto di Mercato (MCA)",
+      "definition": "La procedura prevede selezione comparabili, normalizzazione prezzi, aggiustamenti e sintesi. Garantisce coerenza.",
+      "semantic_relations": "ha_procedura",
+      "object": "1. Selezione comparabili; 2. Normalizzazione prezzi; 3. Aggiustamenti; 4. Sintesi",
+      "source": "Procedura :  1.  selezione  comparabili;  2.  normalizzazione  prezzi;  3.  aggiustamenti  per  differenze;  4.\nsintesi dei valori.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Fonti dati",
+        "Scheda comparabili"
+      ],
+      "related_concepts": [
+        "Prezzi marginali",
+        "Data grid"
+      ],
+      "enables": [
+        "Calcolo valore comparativo"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "procedura"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Procedura",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Processo replicabile per stimare valore di mercato include una procedura MCA strutturata."
+        },
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Selezione comparabili è il primo passo della procedura."
+        },
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Normalizzazione e aggiustamenti sono necessari per confrontabilità."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "MEDIO",
+          "definition": "Sintesi dei valori è base per forchetta motivata."
+        }
+      ],
+      "id": 30,
+      "timestamp": "2026-01-12T16:51:36.412064"
+    },
+    {
+      "subject": "Aggiustamenti comparativi",
+      "definition": "Gli aggiustamenti considerano piano, ascensore, stato manutentivo, esposizione, pertinenze e stato locativo. Rendono omogenei i comparabili.",
+      "semantic_relations": "includono",
+      "object": "Piano; Ascensore; Stato manutentivo; Esposizione; Pertinenze; Stato locativo",
+      "source": "Aggiustamenti: - piano; - ascensore; - stato manutentivo; - esposizione; - pertinenze; - stato locativo.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo caratteristiche"
+      ],
+      "related_concepts": [
+        "Coefficienti di ragguaglio"
+      ],
+      "enables": [
+        "Normalizzazione prezzi"
+      ],
+      "part_of": [
+        "MCA"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "aggiustamenti"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elenco",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D4",
+          "relevance_level": "ALTO",
+          "definition": "Rendere confrontabili i prezzi richiede aggiustamenti per stato manutentivo, pertinenze e altre differenze."
+        }
+      ],
+      "id": 31,
+      "timestamp": "2026-01-12T16:51:36.412065"
+    },
+    {
+      "subject": "OMI",
+      "definition": "Le quotazioni OMI vanno usate come benchmark di controllo, non come valore assoluto. Forniscono range al mq.",
+      "semantic_relations": "si_usa_come",
+      "object": "Benchmark di controllo",
+      "source": "1. Valore OMI (Osservatorio Mercato Immobiliare - Agenzia Entrate): Usare come benchmark di controllo, non come valore assoluto. Fornisce range Min/Max al mq.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi mercato locale"
+      ],
+      "related_concepts": [
+        "MCA",
+        "Valore base di zona"
+      ],
+      "enables": [
+        "Controllo plausibilità"
+      ],
+      "part_of": [
+        "Analisi di sensibilità"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "OMI",
+        "benchmark"
+      ],
+      "metadata": {
+        "subject_type": "Fonte dati",
+        "object_type": "Uso",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Uso di OMI come controllo nel processo di selezione comparabili."
+        }
+      ],
+      "id": 32,
+      "timestamp": "2026-01-12T16:51:36.412066"
+    },
+    {
+      "subject": "Analisi di sensibilità",
+      "definition": "La forchetta di valore esprime minimo, massimo e valore più probabile. Rende la stima più realistica.",
+      "semantic_relations": "è_espressa_come",
+      "object": "Valore minimo; Valore massimo; Valore più probabile",
+      "source": "Il valore finale viene espresso come: - Valore minimo (floor price); - Valore massimo (ceiling price); - Valore più probabile.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Valore puntuale",
+        "Variabilità"
+      ],
+      "related_concepts": [
+        "Range tipico ±5%/±10%"
+      ],
+      "enables": [
+        "Strategia di vendita"
+      ],
+      "part_of": [
+        "Fase 6 – Scenari di valutazione"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "forchetta",
+        "range"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Output",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Output richiesto come forchetta di valore motivata."
+        }
+      ],
+      "id": 33,
+      "timestamp": "2026-01-12T16:51:36.412067"
+    },
+    {
+      "subject": "Relazione di perizia",
+      "definition": "La relazione deve contenere mandato, identificazione immobile, stato giuridico/urbanistico, descrizione tecnica, analisi superfici, analisi di mercato, metodologia, calcoli, conclusioni e allegati.",
+      "semantic_relations": "ha_sezioni",
+      "object": "Inquadramento e mandato; Identificazione immobile; Stato giuridico e urbanistico; Descrizione tecnica; Analisi superfici; Analisi di mercato; Metodologia adottata; Calcoli e tabelle; Conclusioni e valori; Allegati",
+      "source": "9.1 Struttura consigliata\nInquadramento e mandato\nIdentificazione immobile\nStato giuridico e urbanistico\nDescrizione tecnica\nAnalisi superfici\nAnalisi di mercato\nMetodologia adottata\nCalcoli e tabelle\nConclusioni e valori\nAllegati",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Processo valutativo completo"
+      ],
+      "related_concepts": [
+        "Validazione",
+        "Checklist"
+      ],
+      "enables": [
+        "Trasparenza e tracciabilità"
+      ],
+      "part_of": [
+        "Output finale – Relazione di perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "report",
+        "struttura"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Sezioni",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "MEDIO",
+          "definition": "Processo replicabile include reporting strutturato."
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "MEDIO",
+          "definition": "Checklist documentale confluisce nella sezione stato giuridico/urbanistico."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Conclusioni con forchetta motivata e assunzioni/limitazioni devono essere riportate in relazione."
+        }
+      ],
+      "id": 34,
+      "timestamp": "2026-01-12T16:51:36.412068"
+    },
+    {
+      "subject": "Checklist validazione perizia",
+      "definition": "La checklist include conformità catastale e urbanistica, sopralluogo documentato, min 3 comparables, range ≤ 15%, coerenza < 10%, documentazione fotografica, calcoli tracciabili, fonti citate, limitazioni dichiarate.",
+      "semantic_relations": "include",
+      "object": "Conformità catastale; Conformità urbanistica; Sopralluogo; Minimo 3 comparables; Range ≤ 15%; Coerenza < 10%; Documentazione fotografica; Calcoli tracciabili; Fonti citate; Limitazioni dichiarate",
+      "source": "Checklist controllo qualità:\n Conformità catastale verificata\n Conformità urbanistica verificata\n Sopralluogo documentato\n Minimo 3 comparables per metodo comparativo\n Range valutativo ≤ 15% valore centrale\n Coerenza tra metodologie < 10%\n Documentazione fotografica completa\n Calcoli verificati e tracciabili\n Fonti dati citate\n Limitazioni dichiarate",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Relazione completa"
+      ],
+      "related_concepts": [
+        "Best practices"
+      ],
+      "enables": [
+        "Qualità e auditabilità"
+      ],
+      "part_of": [
+        "Validazione Perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "validazione",
+        "qualità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Checklist",
+        "source_type": "base"
+      },
+      "related_desires": [
+        {
+          "desire_id": "D1",
+          "relevance_level": "ALTO",
+          "definition": "Processo difendibile richiede controlli qualità replicabili."
+        },
+        {
+          "desire_id": "D2",
+          "relevance_level": "ALTO",
+          "definition": "Conformità catastale/urbanistica è parte della checklist documentale."
+        },
+        {
+          "desire_id": "D3",
+          "relevance_level": "ALTO",
+          "definition": "Minimo 3 comparabili e criteri di coerenza supportano selezione comparabili."
+        },
+        {
+          "desire_id": "D5",
+          "relevance_level": "ALTO",
+          "definition": "Range e limitazioni dichiarate sono requisiti per output a forchetta motivata."
+        }
+      ],
+      "id": 35,
+      "timestamp": "2026-01-12T16:51:36.412069"
+    }
+  ],
+  "intentions": [
+    {
+      "intention": {
+        "id": "INT-001",
+        "statement": "Istituire un processo end-to-end replicabile e difendibile per la stima a fini mutuo di una villa monofamiliare (8–12 step, dalla presa in carico alla conclusione).",
+        "linked_desire_id": "D1",
+        "rationale": "I Beliefs indicano che per una stima difendibile a fini mutuo serve un processo replicabile che parta dal mandato (scopo, data, standard, livello) e arrivi a una conclusione tracciabile; inoltre, la procedura deve includere sopralluogo, SCV, comparabili, aggiustamenti conservativi, controlli di coerenza e risultato finale in forchetta con assunzioni/limitazioni dichiarate.",
+        "linked_beliefs": [
+          "B1",
+          "B14",
+          "B15",
+          "B16",
+          "B24",
+          "B25",
+          "B26",
+          "B30",
+          "B9",
+          "B10",
+          "B34",
+          "B35"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-001",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Formalizzare il mandato: scopo (mutuo), data di riferimento, standard/metodologia, livello di approfondimento (desktop/drive-by/full).",
+            "required_beliefs": [
+              "B1",
+              "B14",
+              "B15"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Definire e registrare assunzioni e limitazioni (es. accesso parziale, documenti mancanti, ipotesi su stato legittimo).",
+            "required_beliefs": [
+              "B16",
+              "B9"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Avviare raccolta e verifica documentale preliminare (catasto, urbanistica, titoli, proprietà/gravami) prima di qualunque quantificazione.",
+            "required_beliefs": [
+              "B2",
+              "B17",
+              "B18",
+              "B19",
+              "B21"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Eseguire un “decision gate” su difformità/rischi: regolarizzazione, decurtazioni, limitazioni o impossibilità di conclusione.",
+            "required_beliefs": [
+              "B2",
+              "B22",
+              "B23"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Sopralluogo documentato: verificare coerenza con documenti, rilevare superfici reali, dotazioni/pertinenze, stato manutentivo; produrre set fotografico.",
+            "required_beliefs": [
+              "B24",
+              "B10"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Calcolare la Superficie Commerciale Vendibile (SCV) con ragguagli e coefficienti coerenti e tarati localmente (incl. regole per giardino/lotto/pertinenze).",
+            "required_beliefs": [
+              "B25",
+              "B26",
+              "B27",
+              "B6",
+              "B28"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Selezionare 3–5 comparabili omogenei per microzona/contesto, tipologia e recenza; documentare criteri di inclusione/esclusione.",
+            "required_beliefs": [
+              "B3",
+              "B8",
+              "B35"
+            ]
+          },
+          {
+            "step_number": 8,
+            "action": "Normalizzare i prezzi dei comparabili su SCV e correggere i dati: priorità a transazioni; annunci corretti per sconto/trattativa quando stimabile; OMI come benchmark.",
+            "required_beliefs": [
+              "B5",
+              "B4",
+              "B29",
+              "B32"
+            ]
+          },
+          {
+            "step_number": 9,
+            "action": "Applicare aggiustamenti espliciti, giustificati e conservativi (stato, qualità, esposizione, pertinenze, rischi, stato locativo), evitando doppie conte.",
+            "required_beliefs": [
+              "B7",
+              "B6",
+              "B31",
+              "B12"
+            ]
+          },
+          {
+            "step_number": 10,
+            "action": "Controlli qualità (dispersione/coerenza) e sintesi: riconciliazione e output finale in forchetta (min-max-più probabile) con tracciabilità completa (fonti, calcoli, allegati).",
+            "required_beliefs": [
+              "B8",
+              "B9",
+              "B10",
+              "B33",
+              "B35",
+              "B34"
+            ]
+          }
+        ],
+        "expected_outcome": "Una procedura standard (8–12 step) ripetibile e verificabile che produce una stima difendibile a fini mutuo con calcoli tracciati, comparabili pertinenti e conclusione in forchetta.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-002",
+        "statement": "Implementare una checklist decisionale di raccolta e verifica documentale con gestione strutturata di difformità e rischi (prima della stima).",
+        "linked_desire_id": "D2",
+        "rationale": "I Beliefs enfatizzano che la verifica documentale deve precedere la quantificazione del valore e che difformità sanabili/insanabili impattano commerciabilità e valore (fino alla non commerciabilità). Serve quindi una checklist con criteri decisionali espliciti e tracciabili.",
+        "linked_beliefs": [
+          "B2",
+          "B17",
+          "B18",
+          "B19",
+          "B21",
+          "B22",
+          "B23",
+          "B16",
+          "B10",
+          "B34",
+          "B35"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-002",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire elenco documenti minimi: atto di provenienza/titolarità, visure ipotecarie, visure catastali, planimetrie, pratiche edilizie/titoli, eventuali certificazioni disponibili.",
+            "required_beliefs": [
+              "B17",
+              "B18",
+              "B19",
+              "B21"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Eseguire pre-check titolarità e gravami (usufrutto, diritti reali, pignoramenti/ipoteche) e registrare impatto su commerciabilità.",
+            "required_beliefs": [
+              "B17",
+              "B18"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Verificare coerenza planimetria catastale vs stato di fatto e annotare scostamenti.",
+            "required_beliefs": [
+              "B19",
+              "B24"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Verificare stato legittimo urbanistico-edilizio (titoli/condoni/varianti) e classificare esiti: conforme / difforme sanabile / difforme insanabile / non determinabile.",
+            "required_beliefs": [
+              "B21",
+              "B2"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Per difformità sanabili: stimare costi/tempi e definire decurtazione + premio rischio (approccio conservativo mutuo).",
+            "required_beliefs": [
+              "B22",
+              "B12",
+              "B7"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Per difformità insanabili: definire scenario di drastico abbattimento valore o non commerciabilità; valutare sospensione o limitazione della perizia.",
+            "required_beliefs": [
+              "B23",
+              "B2"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Registrare assunzioni/limitazioni e scenario di conformità da usare nella stima (es. “valore condizionato alla regolarizzazione”).",
+            "required_beliefs": [
+              "B16",
+              "B9"
+            ]
+          },
+          {
+            "step_number": 8,
+            "action": "Integrare in relazione le evidenze (estratti documentali) e le decisioni prese, mantenendo tracciabilità per audit banca.",
+            "required_beliefs": [
+              "B10",
+              "B34"
+            ]
+          },
+          {
+            "step_number": 9,
+            "action": "Eseguire check di completezza finale con checklist qualità (foto, fonti citate, calcoli tracciabili, min 3 comparabili quando si procede alla stima).",
+            "required_beliefs": [
+              "B35",
+              "B10"
+            ]
+          }
+        ],
+        "expected_outcome": "Una checklist operativa con criteri decisionali che riduce il rischio legale/urbanistico e rende difendibile (o correttamente limitata) la stima a fini mutuo.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-003",
+        "statement": "Standardizzare un metodo pratico per selezionare 3–5 comparabili pertinenti da coordinate geografiche, con regole di omogeneità e qualità delle fonti.",
+        "linked_desire_id": "D3",
+        "rationale": "I Beliefs richiedono 3–5 comparabili omogenei per microzona/tipologia/recenza e danno priorità ai dati di transazione rispetto agli annunci; gli annunci vanno corretti per sconto/trattativa e OMI va usato solo come controllo. La qualità del campione è centrale per la difendibilità MCA.",
+        "linked_beliefs": [
+          "B3",
+          "B8",
+          "B4",
+          "B29",
+          "B32",
+          "B30",
+          "B35"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-003",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire microzona primaria (raggio/isochrone) e microzona secondaria di backup se il campione è scarso; registrare criteri geografici.",
+            "required_beliefs": [
+              "B3"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Definire filtri tipologici: villa monofamiliare, dimensioni SCV comparabili, lotto/giardino simile, presenza pertinenze/dotazioni rilevanti.",
+            "required_beliefs": [
+              "B3",
+              "B6"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Definire finestra temporale di recenza e regole di espansione prudente (solo se necessario e motivato).",
+            "required_beliefs": [
+              "B3",
+              "B8"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Costruire una long-list (10–20 casi) da: agenzie locali, banche dati, annunci, eventuali evidenze di venduto/atti; classificare affidabilità fonte.",
+            "required_beliefs": [
+              "B29",
+              "B4"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Correggere i prezzi da annunci con ipotesi documentabili su sconto/trattativa quando possibile; marcare come ‘inferiore affidabilità’ rispetto al venduto.",
+            "required_beliefs": [
+              "B4"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Selezionare 3–5 comparabili finali minimizzando la necessità di aggiustamenti (criterio: massima omogeneità).",
+            "required_beliefs": [
+              "B3",
+              "B7"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Verificare coerenza del campione: dispersione valori normalizzati; se alta, sostituire comparabili o ampliare campione.",
+            "required_beliefs": [
+              "B8"
+            ]
+          },
+          {
+            "step_number": 8,
+            "action": "Usare OMI come benchmark esterno per controllare il range, senza assumerlo come valore; documentare la verifica.",
+            "required_beliefs": [
+              "B32"
+            ]
+          }
+        ],
+        "expected_outcome": "Un set di 3–5 comparabili robusti, omogenei e difendibili, con fonti classificate e motivazioni tracciate.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-004",
+        "statement": "Guidare la normalizzazione dei comparabili su SCV e la gestione corretta di giardino/lotto/pertinenze/dotazioni per ville (senza doppie conte).",
+        "linked_desire_id": "D4",
+        "rationale": "I Beliefs stabiliscono che il mercato scambia SCV (non calpestabile) e che per le ville gli elementi (giardino/lotto, pertinenze, dotazioni) vanno trattati con regole esplicite: inclusione in SCV con coefficienti o valorizzazione a corpo, evitando doppie conte. I coefficienti vanno tarati sul mercato locale.",
+        "linked_beliefs": [
+          "B25",
+          "B26",
+          "B27",
+          "B5",
+          "B6",
+          "B28",
+          "B7",
+          "B31"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-004",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire struttura SCV (superficie principale + accessorie + pertinenze + esterni) e unità di misura coerenti per tutti i casi.",
+            "required_beliefs": [
+              "B25",
+              "B26"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Stabilire coefficienti SCV preliminari basati su prassi locale e osservazioni di mercato; documentare fonte/criterio di taratura.",
+            "required_beliefs": [
+              "B27",
+              "B29"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Definire regola unica per giardino/lotto: (A) coefficiente in SCV oppure (B) valorizzazione a corpo; esplicitare il criterio ed evitare doppia conta.",
+            "required_beliefs": [
+              "B6",
+              "B28"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Definire regole per pertinenze (box, cantine, posti auto) e dotazioni (piscina, impianti, sicurezza): in SCV con coefficiente o premio a corpo, con note anti-doppia conta.",
+            "required_beliefs": [
+              "B6"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Calcolare SCV dell’immobile oggetto e di ciascun comparabile con lo stesso schema e coefficienti.",
+            "required_beliefs": [
+              "B26",
+              "B5"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Normalizzare i prezzi: prezzo totale comparabile → €/SCV; distinguere tra dati di venduto e prezzi richiesti corretti.",
+            "required_beliefs": [
+              "B5",
+              "B4"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Applicare aggiustamenti espliciti per differenze (stato manutentivo, qualità, esposizione, pertinenze, rischi, stato locativo) con criteri conservativi per mutuo.",
+            "required_beliefs": [
+              "B7",
+              "B31",
+              "B12"
+            ]
+          },
+          {
+            "step_number": 8,
+            "action": "Produrre tabella comparativa completa: SCV, €/SCV grezzo, aggiustamenti, €/SCV rettificato, note di giustificazione.",
+            "required_beliefs": [
+              "B10",
+              "B7"
+            ]
+          },
+          {
+            "step_number": 9,
+            "action": "Test di coerenza/dispersione e revisione: se risultati instabili, rivedere comparabili o coefficienti e motivare le modifiche.",
+            "required_beliefs": [
+              "B8",
+              "B27"
+            ]
+          }
+        ],
+        "expected_outcome": "Comparabili resi realmente confrontabili tramite SCV e regole coerenti per componenti tipiche delle ville, con calcoli e aggiustamenti difendibili.",
+        "estimated_effort": "Alto"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-005",
+        "statement": "Produrre una conclusione finale in forchetta (min–max–più probabile) motivata, con riconciliazione, assunzioni/limitazioni e allegati tracciabili.",
+        "linked_desire_id": "D5",
+        "rationale": "I Beliefs richiedono che il valore sia espresso come intervallo e che la perizia renda tracciabili fonti, calcoli, scelte di comparabili e decisioni su difformità; inoltre il valore è probabilistico e dipende dalla data di riferimento e dalle ipotesi dichiarate.",
+        "linked_beliefs": [
+          "B9",
+          "B33",
+          "B10",
+          "B13",
+          "B14",
+          "B34",
+          "B32"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-005",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Ribadire data di riferimento e scenario di conformità adottato (conforme / sanabile con costi / limitazioni).",
+            "required_beliefs": [
+              "B14",
+              "B9"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Sintetizzare i valori dei comparabili normalizzati e rettificati (range, mediana/media, dispersione).",
+            "required_beliefs": [
+              "B30",
+              "B8"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Riconciliare i comparabili: attribuire maggior peso ai più simili e con fonti più affidabili (venduto > richiesto corretto).",
+            "required_beliefs": [
+              "B4",
+              "B29"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Determinare la forchetta finale (min–max) e il valore più probabile; motivare la scelta con riferimento a evidenze e aggiustamenti.",
+            "required_beliefs": [
+              "B9",
+              "B33"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Eseguire controllo esterno con OMI come benchmark e documentare coerenza o motivi di scostamento.",
+            "required_beliefs": [
+              "B32"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Esplicitare assunzioni e limitazioni che rendono il valore probabilistico e condizionato (se applicabile).",
+            "required_beliefs": [
+              "B13",
+              "B16"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Compilare relazione completa con struttura standard (mandato, stato giuridico/urbanistico, descrizione, superfici, mercato, metodologia, calcoli, conclusione).",
+            "required_beliefs": [
+              "B34"
+            ]
+          },
+          {
+            "step_number": 8,
+            "action": "Allegare evidenze e tracciabilità (fonti, tabelle SCV e aggiustamenti, foto, estratti documentali) per auditabilità.",
+            "required_beliefs": [
+              "B10"
+            ]
+          }
+        ],
+        "expected_outcome": "Una conclusione difendibile e auditabile, non un numero ‘magico’, ma un intervallo motivato e coerente con mercato e caratteristiche specifiche della villa.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-006",
+        "statement": "Adottare una policy “conservative-by-default” per perizie a fini mutuo (scelte dati e aggiustamenti orientati alla riduzione del rischio finanziatore).",
+        "linked_desire_id": "D1",
+        "rationale": "I Beliefs evidenziano che per mutuo la metodologia deve essere più conservativa e documentabile; gli aggiustamenti devono essere espliciti e prudenti e l’uso dei dati deve privilegiare evidenze robuste (venduto) rispetto a richiesti, con correzioni quando necessario.",
+        "linked_beliefs": [
+          "B12",
+          "B7",
+          "B4",
+          "B8",
+          "B9",
+          "B35"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-006",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire regole di prudenza: priorità venduto; annunci solo se corretti e motivati; escludere outlier e comparabili borderline.",
+            "required_beliefs": [
+              "B4",
+              "B8"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Impostare cap/limiti agli aggiustamenti e richiedere sempre giustificazione documentale per ciascun aggiustamento.",
+            "required_beliefs": [
+              "B7",
+              "B10"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Gestire difformità con approccio prudente: decurtazione costi + rischio; limitare conclusioni se incertezza elevata.",
+            "required_beliefs": [
+              "B22",
+              "B16"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Applicare controlli di coerenza stringenti (dispersione e range) e sostituire comparabili finché non si ottiene stabilità accettabile.",
+            "required_beliefs": [
+              "B8",
+              "B35"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Produrre output in forchetta e scegliere ‘più probabile’ con criterio prudenziale, esplicitando perché non si adotta l’estremo alto.",
+            "required_beliefs": [
+              "B9",
+              "B33"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Documentare in modo trasparente le scelte conservative (motivazioni, alternative scartate, impatti sul valore).",
+            "required_beliefs": [
+              "B10"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Allineare la relazione ai requisiti di checklist qualità (foto, fonti, calcoli tracciabili, limitazioni).",
+            "required_beliefs": [
+              "B35",
+              "B34"
+            ]
+          }
+        ],
+        "expected_outcome": "Una stima più robusta per il finanziatore, con rischio ridotto di contestazioni o revisioni al ribasso in fase di controllo.",
+        "estimated_effort": "Medio"
+      }
+    },
+    {
+      "intention": {
+        "id": "INT-007",
+        "statement": "Creare un ‘audit pack’ standard (template + tabelle + allegati) per massimizzare tracciabilità e verificabilità della perizia.",
+        "linked_desire_id": "D5",
+        "rationale": "I Beliefs indicano che la difendibilità dipende dalla tracciabilità di fonti, calcoli (SCV/normalizzazioni/aggiustamenti), scelte di comparabili e decisioni su difformità, includendo evidenze e allegati; inoltre la relazione deve avere una struttura completa e rispettare una checklist qualità.",
+        "linked_beliefs": [
+          "B10",
+          "B34",
+          "B35",
+          "B26",
+          "B30"
+        ]
+      },
+      "action_plan": {
+        "plan_id": "PLAN-007",
+        "steps": [
+          {
+            "step_number": 1,
+            "action": "Definire template standard di relazione (sezioni obbligatorie) e checklist qualità allegata.",
+            "required_beliefs": [
+              "B34",
+              "B35"
+            ]
+          },
+          {
+            "step_number": 2,
+            "action": "Definire fogli/tabelle standard: calcolo SCV, normalizzazione €/SCV, matrice aggiustamenti, sintesi e riconciliazione.",
+            "required_beliefs": [
+              "B26",
+              "B30"
+            ]
+          },
+          {
+            "step_number": 3,
+            "action": "Imporre citazione puntuale fonti e archiviazione evidenze (screenshot, email agenzie, estratti, riferimenti atti se disponibili).",
+            "required_beliefs": [
+              "B10",
+              "B29"
+            ]
+          },
+          {
+            "step_number": 4,
+            "action": "Standardizzare allegati fotografici e mappa comparabili (georeferenziazione e motivazione omogeneità).",
+            "required_beliefs": [
+              "B10",
+              "B3"
+            ]
+          },
+          {
+            "step_number": 5,
+            "action": "Tracciare decisioni su difformità e impatto sul valore (costi/rischi/limitazioni) in un registro dedicato.",
+            "required_beliefs": [
+              "B2",
+              "B22",
+              "B23",
+              "B16"
+            ]
+          },
+          {
+            "step_number": 6,
+            "action": "Eseguire controllo finale “audit-ready”: completezza calcoli, coerenza range, min 3 comparabili, fonti presenti, limitazioni dichiarate.",
+            "required_beliefs": [
+              "B35",
+              "B8",
+              "B16"
+            ]
+          },
+          {
+            "step_number": 7,
+            "action": "Versionare e archiviare il pacchetto (relazione + allegati + calcoli) per ripetibilità e verifiche future.",
+            "required_beliefs": [
+              "B1",
+              "B10"
+            ]
+          }
+        ],
+        "expected_outcome": "Un pacchetto di perizia pronto per audit/revisione banca, con massima trasparenza, replicabilità e riduzione dei ritorni per integrazioni.",
+        "estimated_effort": "Medio"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "context": "perizia_immobiliare",
+  "llm_provider": "OpenAI",
+  "llm_model": "gpt-5.2",
+  "llm_settings": {
+    "use_defaults": true,
+    "reasoning_effort": "medium"
+  }
+}

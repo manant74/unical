@@ -1,0 +1,3296 @@
+{
+  "beliefs": [
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia immobiliare di stima determina il Più Probabile Valore di Mercato di un immobile a una data specifica. Serve a supportare decisioni e transazioni in condizioni di mercato competitive e informate.",
+      "semantic_relations": "ha_come_obiettivo",
+      "object": "Determinare il Più Probabile Valore di Mercato (Market Value) a una data specifica in condizioni di libera contrattazione",
+      "source": "La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica, in condizioni di libera contrattazione tra parti informate, indipendenti e non condizionate, dopo un congruo periodo di esposizione sul mercato.",
+      "importance": 0.98,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Concetto di valore di mercato",
+        "Condizioni di mercato competitive"
+      ],
+      "related_concepts": [
+        "Libera contrattazione",
+        "Esposizione sul mercato"
+      ],
+      "enables": [
+        "Determinazione prezzo di vendita",
+        "Pianificazione strategica di vendita"
+      ],
+      "part_of": [
+        "Processo di valutazione immobiliare"
+      ],
+      "sub_concepts": [
+        "Data di riferimento",
+        "Condizioni di mercato"
+      ],
+      "tags": [
+        "perizia",
+        "valutazione",
+        "mercato"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Obiettivo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920494",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può essere richiesta per supportare vendite sul libero mercato. Questo ne evidenzia l'applicazione pratica in transazioni volontarie.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Vendita sul libero mercato",
+      "source": "La stima può essere richiesta per: - vendita sul libero mercato;",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Perizia immobiliare di stima"
+      ],
+      "related_concepts": [
+        "Transazione immobiliare",
+        "Prezzo di vendita"
+      ],
+      "enables": [
+        "Definizione strategia di prezzo",
+        "Negoziazione"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "vendita"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità"
+      },
+      "imported_at": "2026-01-12T16:40:06.920509",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può supportare decisioni patrimoniali. Consente al proprietario o all'investitore di valutare opzioni riguardanti il proprio patrimonio.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Supporto a decisioni patrimoniali",
+      "source": "La stima può essere richiesta per: - vendita sul libero mercato; - supporto a decisioni patrimoniali;",
+      "importance": 0.75,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi patrimoniale"
+      ],
+      "related_concepts": [
+        "Gestione patrimoniale",
+        "Valore di mercato"
+      ],
+      "enables": [
+        "Pianificazione patrimoniale"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "patrimonio"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità"
+      },
+      "imported_at": "2026-01-12T16:40:06.920513",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può essere utilizzata per divisioni, successioni o conferimenti. Rende condivisibili e difendibili le basi di riparto o trasferimento.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Divisioni, successioni, conferimenti",
+      "source": "La stima può essere richiesta per: - ... - divisioni, successioni, conferimenti;",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa civilistica",
+        "Riparto patrimoniale"
+      ],
+      "related_concepts": [
+        "Successioni",
+        "Divisioni"
+      ],
+      "enables": [
+        "Determinazione valori di riparto"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "successioni",
+        "divisioni"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità"
+      },
+      "imported_at": "2026-01-12T16:40:06.920515",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può servire a valutazioni interne come la pricing strategy. Supporta scelte interne dell'operatore o proprietario.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Valutazioni interne (pricing strategy)",
+      "source": "La stima può essere richiesta per: ... - valutazioni interne (pricing strategy);",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi di mercato locale"
+      ],
+      "related_concepts": [
+        "Strategia di prezzo",
+        "Segmentazione"
+      ],
+      "enables": [
+        "Definizione asking price"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "pricing"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità"
+      },
+      "imported_at": "2026-01-12T16:40:06.920517",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia può supportare richieste di finanziamento applicando metodologie più conservative. Riduce il rischio per finanziatori.",
+      "semantic_relations": "può_essere_richiesta_per",
+      "object": "Supporto a finanziamenti (con metodologie più conservative)",
+      "source": "La stima può essere richiesta per: ... - supporto a finanziamenti (con metodologie più conservative).",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Metodologie conservative",
+        "Normativa bancaria"
+      ],
+      "related_concepts": [
+        "Saggio di capitalizzazione",
+        "Loan-to-Value"
+      ],
+      "enables": [
+        "Istruttoria creditizia"
+      ],
+      "part_of": [
+        "Finalità della stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "finalità",
+        "finanza"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Finalità"
+      },
+      "imported_at": "2026-01-12T16:40:06.920519",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare",
+      "definition": "Il perito opera in conformità agli IVS. Ciò garantisce standard internazionali di qualità e comparabilità.",
+      "semantic_relations": "è_gestita_secondo",
+      "object": "IVS – International Valuation Standards",
+      "source": "Il perito opera secondo: -  IVS – International Valuation Standards ;",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Standard di valutazione"
+      ],
+      "related_concepts": [
+        "EVS",
+        "Codice delle Valutazioni Immobiliari"
+      ],
+      "enables": [
+        "Conformità internazionale"
+      ],
+      "part_of": [
+        "Quadro normativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "normativa",
+        "standard"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Standard"
+      },
+      "imported_at": "2026-01-12T16:40:06.920521",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare",
+      "definition": "Il perito applica gli standard EVS europei. Assicura coerenza con prassi continentali.",
+      "semantic_relations": "è_gestita_secondo",
+      "object": "EVS – European Valuation Standards (TEGoVA)",
+      "source": "Il perito opera secondo: -  EVS – European Valuation Standards  (TEGoVA) ;",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Standard di valutazione"
+      ],
+      "related_concepts": [
+        "IVS",
+        "TEGoVA"
+      ],
+      "enables": [
+        "Allineamento europeo"
+      ],
+      "part_of": [
+        "Quadro normativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "normativa",
+        "standard"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Standard"
+      },
+      "imported_at": "2026-01-12T16:40:06.920522",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare",
+      "definition": "Il perito segue il Codice delle Valutazioni Immobiliari ABI – Tecnoborsa. Fornisce linee guida nazionali.",
+      "semantic_relations": "è_gestita_secondo",
+      "object": "Codice delle Valutazioni Immobiliari (ABI – Tecnoborsa)",
+      "source": "Il perito opera secondo: ... -  Codice  delle  Valutazioni  Immobiliari  (ABI  –  Tecnoborsa) ;",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa nazionale"
+      ],
+      "related_concepts": [
+        "IVS",
+        "EVS"
+      ],
+      "enables": [
+        "Conformità nazionale"
+      ],
+      "part_of": [
+        "Quadro normativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "normativa",
+        "standard"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Standard"
+      },
+      "imported_at": "2026-01-12T16:40:06.920524",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare",
+      "definition": "Il perito considera la normativa catastale DPR 138/98. Rileva effetti su superfici e fiscalità.",
+      "semantic_relations": "è_gestita_secondo",
+      "object": "Normativa catastale (DPR 138/98)",
+      "source": "Normativa catastale (DPR 138/98) ;",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Catasto",
+        "Determinazione superfici"
+      ],
+      "related_concepts": [
+        "SCV",
+        "Rendita catastale"
+      ],
+      "enables": [
+        "Corretta classificazione catastale"
+      ],
+      "part_of": [
+        "Quadro normativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "normativa",
+        "catasto"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Normativa"
+      },
+      "imported_at": "2026-01-12T16:40:06.920525",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Valore stimato",
+      "definition": "Il valore stimato è una grandezza probabilistica, non un prezzo certo. Dipende da ipotesi di mercato.",
+      "semantic_relations": "è_una_grandezza",
+      "object": "Probabilistica dipendente da ipotesi di mercato",
+      "source": "Il valore stimato  non è un prezzo certo , ma una grandezza probabilistica, dipendente da ipotesi di mercato.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Statistica",
+        "Ipotesi di mercato"
+      ],
+      "related_concepts": [
+        "Forchetta di valore",
+        "Analisi di sensibilità"
+      ],
+      "enables": [
+        "Espressione di range di valori"
+      ],
+      "part_of": [
+        "Output di perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "valore",
+        "probabilità"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Caratteristica"
+      },
+      "imported_at": "2026-01-12T16:40:06.920527",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "Nel mandato il perito identifica il committente per definire responsabilità e ambito. È la base contrattuale della perizia.",
+      "semantic_relations": "include",
+      "object": "Soggetto committente",
+      "source": "Il  perito  definisce:  -  soggetto  committente;",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Finalità",
+        "Oggetto della stima"
+      ],
+      "enables": [
+        "Formalizzazione dell'incarico"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "incarico"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elemento di mandato"
+      },
+      "imported_at": "2026-01-12T16:40:06.920529",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "L'oggetto della stima è parte del mandato. Definisce cosa viene valutato.",
+      "semantic_relations": "include",
+      "object": "Oggetto della stima",
+      "source": "Il  perito  definisce:  ...  -  oggetto  della  stima;",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Identificazione immobile"
+      ],
+      "enables": [
+        "Scopo della valutazione"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "incarico"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elemento di mandato"
+      },
+      "imported_at": "2026-01-12T16:40:06.920530",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "La finalità (vendita, consulenza, garanzia) è definita nel mandato. Orienta metodi e assunzioni.",
+      "semantic_relations": "include",
+      "object": "Finalità (vendita, consulenza, garanzia)",
+      "source": "Il  perito  definisce:  ...  -  finalità  (vendita,  consulenza, garanzia);",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Scopo della perizia"
+      ],
+      "related_concepts": [
+        "Metodologia",
+        "Output"
+      ],
+      "enables": [
+        "Scelta metodologica"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "finalità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elemento di mandato"
+      },
+      "imported_at": "2026-01-12T16:40:06.920532",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "La data di riferimento viene fissata all'inizio. Rende temporale il giudizio di valore.",
+      "semantic_relations": "include",
+      "object": "Data di riferimento",
+      "source": "Il  perito  definisce:  ...  -  data  di  riferimento;",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Condizioni di mercato alla data"
+      ],
+      "enables": [
+        "Contestualizzazione temporale"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "data"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elemento di mandato"
+      },
+      "imported_at": "2026-01-12T16:40:06.920534",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "Il grado di approfondimento (desktop, drive-by, full appraisal) è definito in fase iniziale. Stabilisce estensione e costi.",
+      "semantic_relations": "include",
+      "object": "Grado di approfondimento (desktop, drive-by, full appraisal)",
+      "source": "Il  perito  definisce: ... -  grado  di  approfondimento  (desktop,  drive-by,  full  appraisal);",
+      "importance": 0.75,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Sopralluogo",
+        "Due diligence"
+      ],
+      "enables": [
+        "Pianificazione attività"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "approfondimento"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro operativo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920536",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Mandato professionale",
+      "definition": "Limitazioni e assunzioni vengono dichiarate nel mandato. Esplicitano confini e ipotesi del lavoro.",
+      "semantic_relations": "include",
+      "object": "Limitazioni e assunzioni",
+      "source": "Il  perito  definisce: ... - limitazioni e assunzioni.",
+      "importance": 0.77,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Incarico professionale"
+      ],
+      "related_concepts": [
+        "Assunzioni di mercato",
+        "Limitazioni di responsabilità"
+      ],
+      "enables": [
+        "Trasparenza metodologica"
+      ],
+      "part_of": [
+        "Fase 0 – Impostazione dell’incarico"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mandato",
+        "assunzioni"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro operativo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920537",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Principio di Highest and Best Use (HBU)",
+      "definition": "Prima della stima si verifica se l'uso è legalmente consentito. L'HBU guida la determinazione del miglior impiego del bene.",
+      "semantic_relations": "richiede_che_uso_sia",
+      "object": "Legalmente consentito",
+      "source": "Prima di stimare il valore, il perito valuta se l’uso attuale dell’immobile rappresenta: - uso legalmente consentito ;",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa urbanistica"
+      ],
+      "related_concepts": [
+        "Conformità urbanistica",
+        "Stato legittimo"
+      ],
+      "enables": [
+        "Coerenza con destinazione d'uso"
+      ],
+      "part_of": [
+        "Analisi HBU"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "HBU",
+        "uso"
+      ],
+      "metadata": {
+        "subject_type": "Principio",
+        "object_type": "Criterio"
+      },
+      "imported_at": "2026-01-12T16:40:06.920539",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Principio di Highest and Best Use (HBU)",
+      "definition": "L'uso deve essere fisicamente possibile. Ciò implica fattibilità tecnica e dimensionale.",
+      "semantic_relations": "richiede_che_uso_sia",
+      "object": "Fisicamente possibile",
+      "source": "Prima di stimare il valore, il perito valuta se l’uso attuale dell’immobile rappresenta: - ... - fisicamente possibile ;",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi tecnica"
+      ],
+      "related_concepts": [
+        "Caratteristiche intrinseche",
+        "Caratteristiche estrinseche"
+      ],
+      "enables": [
+        "Verifica fattibilità"
+      ],
+      "part_of": [
+        "Analisi HBU"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "HBU",
+        "fattibilità"
+      ],
+      "metadata": {
+        "subject_type": "Principio",
+        "object_type": "Criterio"
+      },
+      "imported_at": "2026-01-12T16:40:06.920541",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Principio di Highest and Best Use (HBU)",
+      "definition": "L'uso deve essere economicamente sostenibile. Garantisce redditività o convenienza economica.",
+      "semantic_relations": "richiede_che_uso_sia",
+      "object": "Economicamente sostenibile",
+      "source": "Prima di stimare il valore, il perito valuta se l’uso attuale dell’immobile rappresenta: - ... - economicamente sostenibile ;",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi economico-finanziaria"
+      ],
+      "related_concepts": [
+        "Metodo reddituale",
+        "Domanda e offerta"
+      ],
+      "enables": [
+        "Scelta uso ottimale"
+      ],
+      "part_of": [
+        "Analisi HBU"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "HBU",
+        "economia"
+      ],
+      "metadata": {
+        "subject_type": "Principio",
+        "object_type": "Criterio"
+      },
+      "imported_at": "2026-01-12T16:40:06.920542",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Principio di Highest and Best Use (HBU)",
+      "definition": "L'uso deve essere massimamente produttivo. Identifica l'impiego che massimizza il valore.",
+      "semantic_relations": "richiede_che_uso_sia",
+      "object": "Massimamente produttivo",
+      "source": "Prima di stimare il valore, il perito valuta se l’uso attuale dell’immobile rappresenta: - ... - massimamente produttivo .",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi costi-benefici"
+      ],
+      "related_concepts": [
+        "HBU",
+        "Scenario di mercato"
+      ],
+      "enables": [
+        "Determinazione del valore massimo"
+      ],
+      "part_of": [
+        "Analisi HBU"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "HBU",
+        "ottimizzazione"
+      ],
+      "metadata": {
+        "subject_type": "Principio",
+        "object_type": "Criterio"
+      },
+      "imported_at": "2026-01-12T16:40:06.920544",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "La verifica di titolarità e provenienza è essenziale per identificare chi può vendere. Include l'atto notarile.",
+      "semantic_relations": "include",
+      "object": "Atto notarile (compravendita, donazione, successione)",
+      "source": "3.1 Titolarità e provenienza\nAtto notarile (compravendita, donazione, successione);",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Identificazione immobile",
+        "Verifica proprietà"
+      ],
+      "related_concepts": [
+        "Visura ipotecaria",
+        "Gravami"
+      ],
+      "enables": [
+        "Legittimazione alla vendita"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "documenti",
+        "proprietà"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920545",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "La verifica di quote, vincoli e servitù fa parte del controllo legale. Riduce rischi di contenzioso.",
+      "semantic_relations": "include",
+      "object": "Verifica quote, vincoli, servitù",
+      "source": "Verifica quote, vincoli, servitù;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi titolarità"
+      ],
+      "related_concepts": [
+        "Diritti reali",
+        "Pignoramenti"
+      ],
+      "enables": [
+        "Chiarezza su gravami"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "documenti",
+        "vincoli"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Verifica"
+      },
+      "imported_at": "2026-01-12T16:40:06.920547",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "La presenza di usufrutto, diritti reali o pignoramenti deve essere accertata, anche tramite visura ipotecaria. Influisce sulla commerciabilità.",
+      "semantic_relations": "può_includere",
+      "object": "Usufrutto, diritti reali, pignoramenti (visura ipotecaria se necessario)",
+      "source": "1Presenza di usufrutto, diritti reali, pignoramenti (visura ipotecaria se necessario).",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Visura ipotecaria"
+      ],
+      "related_concepts": [
+        "Gravami",
+        "Commerciabilità"
+      ],
+      "enables": [
+        "Valutazione rischi legali"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "gravami",
+        "ipoteche"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Gravame"
+      },
+      "imported_at": "2026-01-12T16:40:06.920549",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi catastale",
+      "definition": "La visura catastale storica documenta passaggi e dati. Serve per coerenza e fiscalità.",
+      "semantic_relations": "include",
+      "object": "Visura catastale storica",
+      "source": "Visura catastale storica;",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Catasto",
+        "Identificativi catastali"
+      ],
+      "related_concepts": [
+        "Rendita catastale",
+        "Planimetria catastale"
+      ],
+      "enables": [
+        "Verifica storica"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "visura"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920550",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi catastale",
+      "definition": "La planimetria catastale va confrontata con lo stato di fatto. Garantisce coerenza fisica.",
+      "semantic_relations": "include",
+      "object": "Planimetria catastale",
+      "source": "Planimetria catastale;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo stato di fatto"
+      ],
+      "related_concepts": [
+        "Conformità catastale",
+        "SCV"
+      ],
+      "enables": [
+        "Verifica conformità"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "planimetria"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920552",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi catastale",
+      "definition": "Categoria, classe, consistenza e rendita sono elementi da verificare. Incidono su fiscalità e comparazioni.",
+      "semantic_relations": "include",
+      "object": "Categoria, classe, consistenza, rendita",
+      "source": "Categoria, classe, consistenza, rendita;",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Visura catastale"
+      ],
+      "related_concepts": [
+        "Fiscalità",
+        "OMI"
+      ],
+      "enables": [
+        "Coerenza con mercato"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "rendita"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro"
+      },
+      "imported_at": "2026-01-12T16:40:06.920553",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi catastale",
+      "definition": "La coerenza tra subalterni, pertinenze e stato di fatto deve essere verificata. Evita incongruenze.",
+      "semantic_relations": "richiede_verifica_di",
+      "object": "Coerenza tra subalterni, pertinenze e stato di fatto",
+      "source": "Coerenza tra subalterni, pertinenze e stato di fatto.",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo",
+        "Planimetrie"
+      ],
+      "related_concepts": [
+        "Conformità catastale"
+      ],
+      "enables": [
+        "Conformità documentale"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "coerenza"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Verifica"
+      },
+      "imported_at": "2026-01-12T16:40:06.920555",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Dato catastale",
+      "definition": "Il dato catastale non ha valore estimativo diretto ma incide su fiscalità e commerciabilità. Va usato come supporto, non come base di valore.",
+      "semantic_relations": "non_ha_valore_estimativo_diretto",
+      "object": "Incide su fiscalità e commerciabilità",
+      "source": "⚠️ Il dato catastale  non ha valore estimativo diretto , ma incide su fiscalità e commerciabilità.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi catastale"
+      ],
+      "related_concepts": [
+        "Rendita catastale",
+        "Imposte"
+      ],
+      "enables": [
+        "Correzioni fiscali"
+      ],
+      "part_of": [
+        "Due diligence"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "catasto",
+        "fiscalità"
+      ],
+      "metadata": {
+        "subject_type": "Dato",
+        "object_type": "Impatto"
+      },
+      "imported_at": "2026-01-12T16:40:06.920557",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Il titolo edilizio originario è un documento fondamentale. Attesta la legittimità iniziale dell'immobile.",
+      "semantic_relations": "include",
+      "object": "Titolo edilizio originario",
+      "source": "3.3 Analisi urbanistico-edilizia (fondamentale)\nTitolo edilizio originario;",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa edilizia"
+      ],
+      "related_concepts": [
+        "Permesso di costruire",
+        "Agibilità"
+      ],
+      "enables": [
+        "Verifica stato legittimo"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "urbanistica",
+        "edilizia"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920558",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Le varianti e gli ampliamenti devono essere documentati. Tracciano l'evoluzione edilizia.",
+      "semantic_relations": "include",
+      "object": "Titoli successivi (varianti, ampliamenti)",
+      "source": "Titoli successivi (varianti, ampliamenti);",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Pratiche edilizie"
+      ],
+      "related_concepts": [
+        "SCIA",
+        "CILA"
+      ],
+      "enables": [
+        "Conformità edilizia"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "urbanistica",
+        "edilizia"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920560",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Condoni e sanatorie sono rilevanti per regolarizzare difformità. Impattano il valore.",
+      "semantic_relations": "include",
+      "object": "Condoni / sanatorie",
+      "source": "Condoni / sanatorie;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa sanatorie"
+      ],
+      "related_concepts": [
+        "Difformità",
+        "Rischio regolatorio"
+      ],
+      "enables": [
+        "Regolarizzazione"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "urbanistica",
+        "sanatoria"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920561",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Lo stato legittimo dell'immobile deve essere verificato. Condiziona la commerciabilità.",
+      "semantic_relations": "richiede_verifica_di",
+      "object": "Stato legittimo dell’immobile",
+      "source": "Stato legittimo dell’immobile;",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Titoli edilizi",
+        "Planimetrie"
+      ],
+      "related_concepts": [
+        "Conformità urbanistica"
+      ],
+      "enables": [
+        "Commerciabilità"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "urbanistica",
+        "legittimità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Verifica"
+      },
+      "imported_at": "2026-01-12T16:40:06.920563",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi urbanistico-edilizia",
+      "definition": "Il certificato di agibilità è parte della verifica edilizia. Attesta condizioni igienico-sanitarie e di sicurezza.",
+      "semantic_relations": "include",
+      "object": "Certificato di agibilità",
+      "source": "Certificato di agibilità;",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa edilizia"
+      ],
+      "related_concepts": [
+        "Agibilità/abitabilità",
+        "Sicurezza"
+      ],
+      "enables": [
+        "Conformità alla vendita"
+      ],
+      "part_of": [
+        "Fase 1 – Due Diligence documentale approfondita"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "agibilità",
+        "urbanistica"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920565",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Conformità urbanistico-edilizia",
+      "definition": "La piena conformità non impatta il valore negativamente. È lo scenario migliore.",
+      "semantic_relations": "ha_impatto",
+      "object": "Nessun impatto",
+      "source": "Scenari tipici : - piena conformità → nessun impatto;",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi urbanistica"
+      ],
+      "related_concepts": [
+        "Difformità sanabili",
+        "Difformità insanabili"
+      ],
+      "enables": [
+        "Valore stabile"
+      ],
+      "part_of": [
+        "Scenari urbanistici"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "conformità",
+        "valore"
+      ],
+      "metadata": {
+        "subject_type": "Stato conformità",
+        "object_type": "Impatto sul valore"
+      },
+      "imported_at": "2026-01-12T16:40:06.920566",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Difformità sanabili",
+      "definition": "Le difformità sanabili comportano detrazione dei costi e un rischio. Riduce il valore in misura dei costi e del rischio.",
+      "semantic_relations": "ha_impatto",
+      "object": "Detrazione costi + rischio",
+      "source": "Scenari tipici : ... - difformità sanabili → detrazione costi + rischio;",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi costi sanatoria"
+      ],
+      "related_concepts": [
+        "Sanatorie",
+        "Rischio regolatorio"
+      ],
+      "enables": [
+        "Adeguamento valutativo"
+      ],
+      "part_of": [
+        "Scenari urbanistici"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "difformità",
+        "rischio"
+      ],
+      "metadata": {
+        "subject_type": "Stato conformità",
+        "object_type": "Impatto sul valore"
+      },
+      "imported_at": "2026-01-12T16:40:06.920568",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Difformità insanabili",
+      "definition": "Le difformità insanabili causano drastico abbattimento del valore o non commerciabilità. Rappresentano rischio elevato.",
+      "semantic_relations": "ha_impatto",
+      "object": "Drastico abbattimento valore / non commerciabilità",
+      "source": "Scenari tipici : ... - difformità insanabili → drastico abbattimento valore / non commerciabilità.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Verifica urbanistica"
+      ],
+      "related_concepts": [
+        "Vincoli",
+        "Rischio legale"
+      ],
+      "enables": [
+        "Decisioni di remediation"
+      ],
+      "part_of": [
+        "Scenari urbanistici"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "difformità",
+        "commerciabilità"
+      ],
+      "metadata": {
+        "subject_type": "Stato conformità",
+        "object_type": "Impatto sul valore"
+      },
+      "imported_at": "2026-01-12T16:40:06.920570",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Documentazione tecnica ed energetica",
+      "definition": "L'APE indica la classe energetica e incide sul valore. È obbligatoria per la vendita.",
+      "semantic_relations": "include",
+      "object": "APE (classe energetica)",
+      "source": "3.4 Documentazione tecnica ed energetica\nAPE (classe energetica);",
+      "importance": 0.83,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa APE"
+      ],
+      "related_concepts": [
+        "Efficienza energetica",
+        "Prezzo"
+      ],
+      "enables": [
+        "Valutazione energetica"
+      ],
+      "part_of": [
+        "Due diligence documentale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "energia",
+        "APE"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920571",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "APE",
+      "definition": "L'Attestato di Prestazione Energetica è obbligatorio per la vendita e influenza il valore. Comunica prestazioni energetiche all'acquirente.",
+      "semantic_relations": "è_obbligatorio_per",
+      "object": "Vendita",
+      "source": "Certificazione Energetica (APE): Obbligatoria per la vendita, influenza il valore.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Normativa APE"
+      ],
+      "related_concepts": [
+        "Classe energetica",
+        "Domanda di mercato"
+      ],
+      "enables": [
+        "Trasparenza informativa"
+      ],
+      "part_of": [
+        "Documentazione necessaria"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "energia",
+        "obbligo"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Requisito"
+      },
+      "imported_at": "2026-01-12T16:40:06.920573",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Documentazione tecnica",
+      "definition": "Il libretto impianti e le certificazioni impiantistiche sono parte della due diligence. Supportano la sicurezza e conformità.",
+      "semantic_relations": "include",
+      "object": "Libretto impianti; Certificazioni (elettrico, gas)",
+      "source": "Libretto impianti;\nCertificazioni (elettrico, gas);",
+      "importance": 0.75,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Norme impianti"
+      ],
+      "related_concepts": [
+        "DM 37/08",
+        "Sicurezza"
+      ],
+      "enables": [
+        "Riduzione rischio tecnico"
+      ],
+      "part_of": [
+        "Due diligence documentale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "impianti",
+        "sicurezza"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documento"
+      },
+      "imported_at": "2026-01-12T16:40:06.920574",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Documentazione tecnica",
+      "definition": "La presenza di amianto o vincoli ambientali va verificata. Può incidere su valore e costi.",
+      "semantic_relations": "richiede_verifica_di",
+      "object": "Presenza di amianto o vincoli ambientali",
+      "source": "Presenza di amianto o vincoli ambientali.",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Verifiche ambientali"
+      ],
+      "related_concepts": [
+        "Bonifica",
+        "Rischio ambientale"
+      ],
+      "enables": [
+        "Adeguamenti economici"
+      ],
+      "part_of": [
+        "Due diligence documentale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "ambiente",
+        "rischio"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Verifica"
+      },
+      "imported_at": "2026-01-12T16:40:06.920576",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi condominiale",
+      "definition": "Il regolamento e le spese condominiali sono documenti da acquisire. Influiscono su oneri e valore.",
+      "semantic_relations": "include",
+      "object": "Regolamento; Spese ordinarie e straordinarie",
+      "source": "Analisi condominiale\nRegolamento;\nSpese ordinarie e straordinarie;",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Condominio"
+      ],
+      "related_concepts": [
+        "Millesimi",
+        "Delibere"
+      ],
+      "enables": [
+        "Valutazione oneri ricorrenti"
+      ],
+      "part_of": [
+        "Due diligence documentale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "condominio",
+        "spese"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Documenti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920578",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi condominiale",
+      "definition": "I lavori deliberati e i contenziosi condominiali devono essere valutati. Possono generare costi e rischi.",
+      "semantic_relations": "include",
+      "object": "Lavori deliberati; Contenziosi",
+      "source": "Lavori deliberati (ascensore, facciata, cappotto);\nContenziosi.",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Verbali assemblee"
+      ],
+      "related_concepts": [
+        "Spese straordinarie",
+        "Disagio"
+      ],
+      "enables": [
+        "Detrazioni di valore"
+      ],
+      "part_of": [
+        "Due diligence documentale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "condominio",
+        "lavori"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Eventi condominiali"
+      },
+      "imported_at": "2026-01-12T16:40:06.920579",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Sopralluogo tecnico-estimativo",
+      "definition": "Il sopralluogo verifica la corrispondenza documentale e rileva superfici reali. È essenziale per la qualità della stima.",
+      "semantic_relations": "consente_di",
+      "object": "Verificare corrispondenza documentale; Rilevare superfici reali",
+      "source": "Il  sopralluogo  consente  di:  -  verificare  la  corrispondenza  documentale;  -  rilevare  superfici  reali;",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Documentazione",
+        "Strumenti di rilievo"
+      ],
+      "related_concepts": [
+        "SCV",
+        "Conformità"
+      ],
+      "enables": [
+        "Calcolo superfici",
+        "Validazione documenti"
+      ],
+      "part_of": [
+        "Fase 2 – Sopralluogo tecnico-estimativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "sopralluogo",
+        "rilievo"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Attività"
+      },
+      "imported_at": "2026-01-12T16:40:06.920581",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Sopralluogo tecnico-estimativo",
+      "definition": "Nel sopralluogo si valuta la qualità costruttiva e manutentiva. Influisce sugli aggiustamenti di valore.",
+      "semantic_relations": "consente_di",
+      "object": "Valutare qualità costruttiva e manutentiva",
+      "source": "valutare qualità costruttiva e manutentiva.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Competenza tecnica"
+      ],
+      "related_concepts": [
+        "Stato conservativo",
+        "Aggiustamenti"
+      ],
+      "enables": [
+        "Coefficiente stato"
+      ],
+      "part_of": [
+        "Fase 2 – Sopralluogo tecnico-estimativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "sopralluogo",
+        "qualità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Valutazione"
+      },
+      "imported_at": "2026-01-12T16:40:06.920583",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Caratteristiche estrinseche",
+      "definition": "Le caratteristiche estrinseche includono microzona OMI, contesto e servizi. Determinano la posizione competitiva.",
+      "semantic_relations": "includono",
+      "object": "Microzona OMI; Contesto urbano; Servizi e infrastrutture; Appetibilità commerciale; Rumorosità; Esposizione; Sicurezza",
+      "source": "4.2 Caratteristiche estrinseche\nmicrozona OMI;\ncontesto urbano;\nservizi e infrastrutture;\nappetibilità commerciale;\nrumorosità, esposizione, sicurezza.",
+      "importance": 0.83,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi territoriale"
+      ],
+      "related_concepts": [
+        "OMI",
+        "Posizionamento"
+      ],
+      "enables": [
+        "Aggiustamenti comparativi"
+      ],
+      "part_of": [
+        "Sopralluogo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "posizione",
+        "servizi"
+      ],
+      "metadata": {
+        "subject_type": "Categoria di caratteristiche",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920584",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Caratteristiche intrinseche",
+      "definition": "Le caratteristiche intrinseche comprendono piano, accessibilità, luminosità, distribuzione, finiture, impianti e flessibilità d’uso.",
+      "semantic_relations": "includono",
+      "object": "Piano e accessibilità; Luminosità; Distribuzione interna; Stato finiture; Qualità impianti; Flessibilità d’uso",
+      "source": "24.3 Caratteristiche intrinseche\npiano e accessibilità;\nluminosità;\ndistribuzione interna;\nstato finiture;\nqualità impianti;\nflessibilità d’uso.",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo unità immobiliare"
+      ],
+      "related_concepts": [
+        "Aggiustamenti",
+        "SCV"
+      ],
+      "enables": [
+        "Determinazione coefficienti merit"
+      ],
+      "part_of": [
+        "Sopralluogo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "caratteristiche",
+        "unità"
+      ],
+      "metadata": {
+        "subject_type": "Categoria di caratteristiche",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920586",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Vetustà e ciclo di vita",
+      "definition": "La vetustà include età, interventi manutentivi, obsolescenza tecnica e funzionale. Incide sulla stima e sui deprezzamenti.",
+      "semantic_relations": "includono",
+      "object": "Età edificio; Interventi manutentivi; Obsolescenza tecnica e funzionale",
+      "source": "4.4 Vetustà e ciclo di vita\netà edificio;\ninterventi manutentivi;\nobsolescenza tecnica e funzionale.",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Dati storici edificio"
+      ],
+      "related_concepts": [
+        "Metodo dei costi",
+        "Deprezzamenti"
+      ],
+      "enables": [
+        "Aggiustamenti di valore"
+      ],
+      "part_of": [
+        "Sopralluogo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "vetustà",
+        "obsolescenza"
+      ],
+      "metadata": {
+        "subject_type": "Categoria di caratteristiche",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920587",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Superficie Commerciale Vendibile (SCV)",
+      "definition": "Il mercato scambia superficie commerciale, non calpestabile. La SCV è la base per il prezzo unitario.",
+      "semantic_relations": "è_la_grandezza_di_scambio",
+      "object": "Superficie commerciale",
+      "source": "Il mercato scambia superficie commerciale , non superficie calpestabile.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Misurazione superfici"
+      ],
+      "related_concepts": [
+        "Prezzo al mq",
+        "Coefficienti di ponderazione"
+      ],
+      "enables": [
+        "Determinazione €/mq"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "superfici"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Principio estimativo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920588",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Superficie Commerciale Vendibile (SCV)",
+      "definition": "La SCV si calcola sommando le superfici ponderate per coefficienti. È un algoritmo additivo.",
+      "semantic_relations": "si_calcola_con",
+      "object": "SCV = Σ (Superficie × Coefficiente di ponderazione)",
+      "source": "SCV = Σ (Superficie × Coefficiente di ponderazione)",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo superfici",
+        "Coefficienti"
+      ],
+      "related_concepts": [
+        "UNI 10750",
+        "DPR 138/98"
+      ],
+      "enables": [
+        "Calcolo consistenza commerciale"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "formula"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920590",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I coefficienti SCV non sono fissi e dipendono dal mercato locale. Devono essere tarati sul contesto.",
+      "semantic_relations": "non_sono_fissi",
+      "object": "Dipendono dal mercato locale",
+      "source": "⚠️ I coefficienti  non sono fissi , ma dipendono dal mercato locale.",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi mercato locale"
+      ],
+      "related_concepts": [
+        "Segmentazione",
+        "OMI"
+      ],
+      "enables": [
+        "Adattamento coefficienti"
+      ],
+      "part_of": [
+        "Fase 3 – Misurazioni e SCV"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "coefficienti"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Regola"
+      },
+      "imported_at": "2026-01-12T16:40:06.920591",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "La superficie principale è ponderata al 100%. Rappresenta la base della SCV.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Superficie principale: 100%",
+      "source": "Superficie principale: 100%",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione superfici"
+      ],
+      "related_concepts": [
+        "Interni",
+        "Muri perimetrali"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "coefficienti"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920593",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I balconi scoperti pesano tipicamente tra il 30% e il 35% nella SCV. Valorizza gli spazi esterni.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Balconi scoperti: 30–35%",
+      "source": "Balconi scoperti: 30–35%",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione superfici accessorie"
+      ],
+      "related_concepts": [
+        "Terrazzi",
+        "Logge"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "esterni"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920594",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I terrazzi a livello pesano tipicamente tra il 40% e il 50%. Più alti delle semplici balconate.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Terrazzi a livello: 40–50%",
+      "source": "Terrazzi a livello: 40–50%",
+      "importance": 0.74,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione terrazzi"
+      ],
+      "related_concepts": [
+        "Balconi",
+        "Logge"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "esterni"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920596",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "Le cantine pesano dal 20% al 25% nella SCV. Considerano l'utilità non abitativa.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Cantine: 20–25%",
+      "source": "Cantine: 20–25%",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione pertinenze"
+      ],
+      "related_concepts": [
+        "Soffitte",
+        "Box"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "pertinenze"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920597",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I box auto possono essere valutati a corpo o tra il 40% e il 60% della superficie. Dipende dal mercato.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Box auto: a corpo o 40–60%",
+      "source": "Box auto: a corpo o 40–60%",
+      "importance": 0.74,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Mercato locale"
+      ],
+      "related_concepts": [
+        "Posti auto",
+        "Valorizzazione autonoma"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "box"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920599",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti SCV",
+      "definition": "I giardini pesano tipicamente tra il 5% e il 20% secondo tipologia. Il peso varia per appartamenti e ville.",
+      "semantic_relations": "ha_coefficiente_tipico",
+      "object": "Giardini: 5–20% secondo tipologia",
+      "source": "Giardini: 5–20% secondo tipologia",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tipologia immobile"
+      ],
+      "related_concepts": [
+        "Spazi esterni",
+        "Appartamenti",
+        "Ville"
+      ],
+      "enables": [
+        "Calcolo SCV"
+      ],
+      "part_of": [
+        "Coefficienti tipici (usi di mercato)"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "giardini"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920600",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi del mercato immobiliare locale",
+      "definition": "La segmentazione distingue tra prima casa, investimento, lusso, nuova costruzione e usato da ristrutturare. Permette comparazioni omogenee.",
+      "semantic_relations": "include",
+      "object": "Residenziale prima casa; Investimento; Lusso; Nuova costruzione; Usato da ristrutturare",
+      "source": "6.1 Segmentazione\nresidenziale prima casa;\ninvestimento;\nlusso;\nnuova costruzione;\nusato da ristrutturare.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Raccolta dati"
+      ],
+      "related_concepts": [
+        "Comparables",
+        "MCA"
+      ],
+      "enables": [
+        "Scelta comparabili"
+      ],
+      "part_of": [
+        "Analisi di mercato"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "mercato",
+        "segmentazione"
+      ],
+      "metadata": {
+        "subject_type": "Analisi",
+        "object_type": "Elenco segmenti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920602",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Fonti informative di mercato",
+      "definition": "Atti notarili, agenzie locali, banche dati, annunci corretti e OMI come controllo sono fonti chiave. Supportano dati affidabili.",
+      "semantic_relations": "includono",
+      "object": "Atti notarili; Agenzie locali; Banche dati interne; Annunci; OMI (solo come controllo)",
+      "source": "6.2 Fonti informative\natti notarili; ... agenzie locali; ... banche dati interne; annunci (opportunamente corretti); OMI (solo come controllo).",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Accesso dati"
+      ],
+      "related_concepts": [
+        "Data quality",
+        "Normalizzazione prezzi"
+      ],
+      "enables": [
+        "Selezione comparabili"
+      ],
+      "part_of": [
+        "Analisi di mercato"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "dati",
+        "fonti"
+      ],
+      "metadata": {
+        "subject_type": "Fonte dati",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920603",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Indicatori di mercato",
+      "definition": "€/mq medi/mediani, tempi di assorbimento, sconto medio e elasticità domanda/prezzo sono indicatori chiave. Orientano la valutazione.",
+      "semantic_relations": "includono",
+      "object": "€/mq medi e mediani; Tempi di assorbimento; Sconto medio; Elasticità domanda/prezzo",
+      "source": "6.3 Indicatori chiave\n€/mq medi e mediani;\ntempi di assorbimento;\nsconto medio sul prezzo richiesto;\nelasticità domanda/prezzo.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Raccolta dati mercato"
+      ],
+      "related_concepts": [
+        "Forchetta di valore",
+        "Sensitivity"
+      ],
+      "enables": [
+        "Taratura coefficienti"
+      ],
+      "part_of": [
+        "Analisi di mercato"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "indicatori",
+        "mercato"
+      ],
+      "metadata": {
+        "subject_type": "Analisi",
+        "object_type": "Parametri"
+      },
+      "imported_at": "2026-01-12T16:40:06.920605",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo del Confronto di Mercato (MCA)",
+      "definition": "È il metodo elettivo per immobili residenziali in mercati attivi. Confronta il soggetto con comparabili recenti.",
+      "semantic_relations": "è_il_metodo_principale_per",
+      "object": "Immobili residenziali",
+      "source": "7.1 Metodo del Confronto di Mercato (MCA)\nMetodo elettivo per immobili residenziali.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Dati comparabili"
+      ],
+      "related_concepts": [
+        "Normalizzazione prezzi",
+        "Aggiustamenti"
+      ],
+      "enables": [
+        "Valore di mercato comparativo"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "MCA"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Ambito"
+      },
+      "imported_at": "2026-01-12T16:40:06.920607",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo del Confronto di Mercato (MCA)",
+      "definition": "La procedura prevede selezione comparabili, normalizzazione prezzi, aggiustamenti e sintesi. Garantisce coerenza.",
+      "semantic_relations": "ha_procedura",
+      "object": "1. Selezione comparabili; 2. Normalizzazione prezzi; 3. Aggiustamenti; 4. Sintesi",
+      "source": "Procedura :  1.  selezione  comparabili;  2.  normalizzazione  prezzi;  3.  aggiustamenti  per  differenze;  4.\nsintesi dei valori.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Fonti dati",
+        "Scheda comparabili"
+      ],
+      "related_concepts": [
+        "Prezzi marginali",
+        "Data grid"
+      ],
+      "enables": [
+        "Calcolo valore comparativo"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "procedura"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Procedura"
+      },
+      "imported_at": "2026-01-12T16:40:06.920608",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Aggiustamenti comparativi",
+      "definition": "Gli aggiustamenti considerano piano, ascensore, stato manutentivo, esposizione, pertinenze e stato locativo. Rendono omogenei i comparabili.",
+      "semantic_relations": "includono",
+      "object": "Piano; Ascensore; Stato manutentivo; Esposizione; Pertinenze; Stato locativo",
+      "source": "Aggiustamenti: - piano; - ascensore; - stato manutentivo; - esposizione; - pertinenze; - stato locativo.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo caratteristiche"
+      ],
+      "related_concepts": [
+        "Coefficienti di ragguaglio"
+      ],
+      "enables": [
+        "Normalizzazione prezzi"
+      ],
+      "part_of": [
+        "MCA"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "aggiustamenti"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920610",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo per Coefficienti di Merito",
+      "definition": "È un approccio sintetico per mercati poco trasparenti. Applica coefficienti a SCV e valore base.",
+      "semantic_relations": "ha_formula",
+      "object": "V = SCV × Valore base × Π coefficienti",
+      "source": "7.2 Metodo per Coefficienti di Merito\nApproccio sintetico utilizzato in mercati poco trasparenti.\nV = SCV × Valore base × Π coefficienti",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "SCV",
+        "Valore base di zona"
+      ],
+      "related_concepts": [
+        "Coefficienti di merito",
+        "Usi di piazza"
+      ],
+      "enables": [
+        "Stima sintetica"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "coefficienti"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920611",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo Reddituale",
+      "definition": "Si applica a immobili locati o da investimento. Capitalizza il reddito netto a un saggio di mercato.",
+      "semantic_relations": "si_applica_a",
+      "object": "Immobili locati o da investimento",
+      "source": "7.3 Metodo Reddituale\nApplicabile a immobili locati o da investimento.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Reddito locativo",
+        "Saggio di capitalizzazione"
+      ],
+      "related_concepts": [
+        "Cap rate",
+        "RNA"
+      ],
+      "enables": [
+        "Valore da reddito"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "reddituale"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Ambito"
+      },
+      "imported_at": "2026-01-12T16:40:06.920613",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo Reddituale",
+      "definition": "La formula base del metodo reddituale capitalizza il reddito netto. È una valutazione diretta.",
+      "semantic_relations": "ha_formula",
+      "object": "V = Reddito Netto / Saggio di capitalizzazione",
+      "source": "V = Reddito Netto / Saggio di capitalizzazione",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Calcolo RNA",
+        "Determinazione r"
+      ],
+      "related_concepts": [
+        "Risk-free",
+        "Premio rischio"
+      ],
+      "enables": [
+        "Stima valore reddituale"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "formula"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920615",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Saggio di capitalizzazione",
+      "definition": "Il saggio incorpora tasso risk-free, rischio locativo, rischio immobiliare e liquidità del bene. Si ricava dal mercato o per costruzione.",
+      "semantic_relations": "incorpora",
+      "object": "Tasso risk-free; Rischio locativo; Rischio immobiliare; Liquidità del bene",
+      "source": "Il saggio incorpora: - tasso risk-free; - rischio locativo; - rischio immobiliare; - liquidità del bene.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Mercati finanziari",
+        "Analisi rischio"
+      ],
+      "related_concepts": [
+        "Cap rate",
+        "RNA"
+      ],
+      "enables": [
+        "Valutazione reddituale"
+      ],
+      "part_of": [
+        "Metodo reddituale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "cap_rate",
+        "rischio"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Componenti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920616",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo dei Costi",
+      "definition": "Si usa per immobili speciali, nuovi o unici. Combina valore area, costo di ricostruzione e deprezzamenti.",
+      "semantic_relations": "si_applica_a",
+      "object": "Immobili speciali, nuovi o unici",
+      "source": "7.4 Metodo dei Costi\nUsato per immobili speciali, nuovi o unici.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "CR",
+        "Vs",
+        "Deprezzamenti"
+      ],
+      "related_concepts": [
+        "Obsolescenza",
+        "Vita utile"
+      ],
+      "enables": [
+        "Valore di costo"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "costi"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Ambito"
+      },
+      "imported_at": "2026-01-12T16:40:06.920618",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo dei Costi",
+      "definition": "La formula del costo combina terreno, ricostruzione e deprezzamenti. Fornisce il valore tecnico.",
+      "semantic_relations": "ha_formula",
+      "object": "V = Valore area + costo di ricostruzione – deprezzamenti",
+      "source": "V = Valore area + costo di ricostruzione – deprezzamenti",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "CR",
+        "Vs",
+        "Deprezzamenti"
+      ],
+      "related_concepts": [
+        "Deprezzamento fisico",
+        "Obsolescenza funzionale"
+      ],
+      "enables": [
+        "Stima costo deprezzato"
+      ],
+      "part_of": [
+        "Metodologie di stima"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodo",
+        "formula"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920619",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "OMI",
+      "definition": "Le quotazioni OMI vanno usate come benchmark di controllo, non come valore assoluto. Forniscono range al mq.",
+      "semantic_relations": "si_usa_come",
+      "object": "Benchmark di controllo",
+      "source": "1. Valore OMI (Osservatorio Mercato Immobiliare - Agenzia Entrate): Usare come benchmark di controllo, non come valore assoluto. Fornisce range Min/Max al mq.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi mercato locale"
+      ],
+      "related_concepts": [
+        "MCA",
+        "Valore base di zona"
+      ],
+      "enables": [
+        "Controllo plausibilità"
+      ],
+      "part_of": [
+        "Analisi di sensibilità"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "OMI",
+        "benchmark"
+      ],
+      "metadata": {
+        "subject_type": "Fonte dati",
+        "object_type": "Uso"
+      },
+      "imported_at": "2026-01-12T16:40:06.920621",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Analisi di sensibilità",
+      "definition": "La forchetta di valore esprime minimo, massimo e valore più probabile. Rende la stima più realistica.",
+      "semantic_relations": "è_espressa_come",
+      "object": "Valore minimo; Valore massimo; Valore più probabile",
+      "source": "Il valore finale viene espresso come: - Valore minimo (floor price); - Valore massimo (ceiling price); - Valore più probabile.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Valore puntuale",
+        "Variabilità"
+      ],
+      "related_concepts": [
+        "Range tipico ±5%/±10%"
+      ],
+      "enables": [
+        "Strategia di vendita"
+      ],
+      "part_of": [
+        "Fase 6 – Scenari di valutazione"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "forchetta",
+        "range"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Output"
+      },
+      "imported_at": "2026-01-12T16:40:06.920622",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Forchetta di valore",
+      "definition": "Il range tipico di variabilità è ±5% / ±10% attorno al valore più probabile. Riflette incertezza di mercato.",
+      "semantic_relations": "ha_range_tipico",
+      "object": "±5% / ±10%",
+      "source": "Range tipico: ±5% / ±10%.",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi di sensibilità"
+      ],
+      "related_concepts": [
+        "Scenari prudenziale/ottimistico"
+      ],
+      "enables": [
+        "Determinazione asking price"
+      ],
+      "part_of": [
+        "Output valutativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "forchetta",
+        "range"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Intervallo percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920623",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Relazione di perizia",
+      "definition": "La relazione deve contenere mandato, identificazione immobile, stato giuridico/urbanistico, descrizione tecnica, analisi superfici, analisi di mercato, metodologia, calcoli, conclusioni e allegati.",
+      "semantic_relations": "ha_sezioni",
+      "object": "Inquadramento e mandato; Identificazione immobile; Stato giuridico e urbanistico; Descrizione tecnica; Analisi superfici; Analisi di mercato; Metodologia adottata; Calcoli e tabelle; Conclusioni e valori; Allegati",
+      "source": "9.1 Struttura consigliata\nInquadramento e mandato\nIdentificazione immobile\nStato giuridico e urbanistico\nDescrizione tecnica\nAnalisi superfici\nAnalisi di mercato\nMetodologia adottata\nCalcoli e tabelle\nConclusioni e valori\nAllegati",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Processo valutativo completo"
+      ],
+      "related_concepts": [
+        "Validazione",
+        "Checklist"
+      ],
+      "enables": [
+        "Trasparenza e tracciabilità"
+      ],
+      "part_of": [
+        "Output finale – Relazione di perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "report",
+        "struttura"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Sezioni"
+      },
+      "imported_at": "2026-01-12T16:40:06.920625",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Valori restituiti in perizia",
+      "definition": "La perizia restituisce valore di mercato, valore di vendita rapida e forchetta di prezzo consigliata. Possono includere raccomandazioni.",
+      "semantic_relations": "includono",
+      "object": "Valore di mercato; Valore di vendita rapida; Forchetta di prezzo consigliata; Eventuali raccomandazioni",
+      "source": "9.2 Valori restituiti\nValore di mercato;\nValore di vendita rapida;\nForchetta di prezzo consigliata;\nEventuali raccomandazioni (home staging, lavori migliorativi).",
+      "importance": 0.84,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Metodologie applicate"
+      ],
+      "related_concepts": [
+        "Analisi di sensibilità"
+      ],
+      "enables": [
+        "Pianificazione vendita"
+      ],
+      "part_of": [
+        "Relazione di perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "output",
+        "valori"
+      ],
+      "metadata": {
+        "subject_type": "Documento",
+        "object_type": "Output"
+      },
+      "imported_at": "2026-01-12T16:40:06.920626",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia immobiliare",
+      "definition": "La perizia è un processo analitico complesso, non un semplice calcolo €/mq. Richiede dati accurati e metodo.",
+      "semantic_relations": "è",
+      "object": "Processo analitico complesso",
+      "source": "La perizia immobiliare è un processo analitico complesso , non un semplice calcolo €/mq.",
+      "importance": 0.92,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Dati e metodo"
+      ],
+      "related_concepts": [
+        "MCA",
+        "SCV"
+      ],
+      "enables": [
+        "Valutazioni difendibili"
+      ],
+      "part_of": [
+        "Considerazioni finali"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "processo",
+        "metodo"
+      ],
+      "metadata": {
+        "subject_type": "Processo",
+        "object_type": "Caratterizzazione"
+      },
+      "imported_at": "2026-01-12T16:40:06.920627",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Qualità della stima",
+      "definition": "Dipende da accuratezza dati, conoscenza del mercato locale, corretta scelta metodologica e capacità di interpretare la domanda.",
+      "semantic_relations": "dipende_da",
+      "object": "Accuratezza dei dati; Conoscenza del mercato locale; Corretta scelta metodologica; Capacità di interpretare la domanda",
+      "source": "La qualità della  stima  dipende  da:  -  accuratezza  dei  dati;  -  conoscenza  del  mercato  locale;  -  corretta  scelta metodologica; - capacità di interpretare la domanda.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Esperienza",
+        "Dati affidabili"
+      ],
+      "related_concepts": [
+        "Best practices",
+        "Validazione"
+      ],
+      "enables": [
+        "Affidabilità della perizia"
+      ],
+      "part_of": [
+        "Considerazioni finali"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "qualità",
+        "metodo"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Fattori"
+      },
+      "imported_at": "2026-01-12T16:40:06.920628",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Buona perizia",
+      "definition": "Una buona perizia riduce il rischio, accelera la vendita e aumenta la credibilità del prezzo richiesto. Migliora l'esito della transazione.",
+      "semantic_relations": "produce",
+      "object": "Riduzione rischio; Accelerazione vendita; Aumento credibilità prezzo",
+      "source": "Una buona perizia riduce il rischio , accelera la vendita e aumenta la credibilità del prezzo richiesto.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Qualità della stima"
+      ],
+      "related_concepts": [
+        "Output perizia",
+        "Strategia di vendita"
+      ],
+      "enables": [
+        "Negoziazione efficace"
+      ],
+      "part_of": [
+        "Considerazioni finali"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "benefici",
+        "vendita"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Effetti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920630",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Perizia per neofiti",
+      "definition": "La perizia risponde a quale valore un immobile può essere ragionevolmente venduto oggi. Il risultato è una forchetta di valori fondata su dati e ipotesi verificabili.",
+      "semantic_relations": "spiega_che",
+      "object": "Il risultato non è un numero magico ma una forchetta di valori",
+      "source": "A che valore un immobile può essere ragionevolmente venduto oggi, in questo mercato, con queste caratteristiche?\nIl risultato non è un numero magico , ma una forchetta di valori  fondata su dati, confronti e ipotesi verificabili.",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Concetto di MV",
+        "Analisi comparativa"
+      ],
+      "related_concepts": [
+        "Forchetta di valore",
+        "OMI"
+      ],
+      "enables": [
+        "Pianificazione decisionale"
+      ],
+      "part_of": [
+        "Guida assistita per neofiti"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "neofiti",
+        "forchetta"
+      ],
+      "metadata": {
+        "subject_type": "Guida",
+        "object_type": "Concetto"
+      },
+      "imported_at": "2026-01-12T16:40:06.920631",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Regola pratica conformità",
+      "definition": "Un immobile non conforme vale meno, anche se è esteticamente valido. Il mercato penalizza il rischio regolatorio.",
+      "semantic_relations": "afferma_che",
+      "object": "Un immobile non conforme vale meno",
+      "source": "📌 Regola pratica:\nUn immobile non conforme vale meno, anche se è bello.",
+      "importance": 0.85,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Conformità urbanistica"
+      ],
+      "related_concepts": [
+        "Difformità",
+        "Rischio"
+      ],
+      "enables": [
+        "Detrazioni di valore"
+      ],
+      "part_of": [
+        "Guida assistita per neofiti"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "regola",
+        "conformità"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Impatto"
+      },
+      "imported_at": "2026-01-12T16:40:06.920632",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Difformità edilizie",
+      "definition": "Per il mercato una difformità equivale a rischio, che genera sconto e perdita di valore reale. Il perito quantifica l'impatto economico.",
+      "semantic_relations": "implica",
+      "object": "Rischio → Sconto sul prezzo → Perdita di valore",
+      "source": "✅ Per il mercato: - una difformità = rischio; - rischio = sconto sul prezzo; - sconto = perdita di valore reale.",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi urbanistica"
+      ],
+      "related_concepts": [
+        "Scenari urbanistici",
+        "Sanatoria"
+      ],
+      "enables": [
+        "Aggiustamenti prudenziali"
+      ],
+      "part_of": [
+        "Guida assistita per neofiti"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "difformità",
+        "sconto"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Relazione causale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920634",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "SCV vs calpestabile",
+      "definition": "Il prezzo finale si forma sulla SCV, non sui mq percepiti o calpestabili. Pesa superfici accessorie con coefficienti.",
+      "semantic_relations": "afferma_che",
+      "object": "Il prezzo finale si forma sulla SCV, non sui mq percepiti",
+      "source": "👉 Il prezzo finale si forma sulla  SCV, non sui mq “percepiti”.",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Definizione SCV"
+      ],
+      "related_concepts": [
+        "Coefficienti SCV"
+      ],
+      "enables": [
+        "Calcolo corretto del valore"
+      ],
+      "part_of": [
+        "Guida assistita per neofiti"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "SCV",
+        "prezzo"
+      ],
+      "metadata": {
+        "subject_type": "Regola",
+        "object_type": "Principio"
+      },
+      "imported_at": "2026-01-12T16:40:06.920635",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Scelta del metodo",
+      "definition": "Per case normali si usa il confronto di mercato; per immobili affittati il reddituale; per unici o nuovi il costo. Si privilegia il metodo che il mercato usa.",
+      "semantic_relations": "linea_guida",
+      "object": "Confronto di mercato; Reddituale; Costi",
+      "source": "Se l’immobile è una casa “normale” → confronto di mercato\nSe l’immobile è affittato → metodo reddituale\nSe è unico o nuovo → metodo dei costi\n📌 Regola pratica:\nSi usa il metodo che il mercato usa inconsapevolmente.",
+      "importance": 0.88,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tipologia immobile"
+      ],
+      "related_concepts": [
+        "Matrice decisionale"
+      ],
+      "enables": [
+        "Selezione metodologia"
+      ],
+      "part_of": [
+        "Guida assistita per neofiti"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "metodi",
+        "scelta"
+      ],
+      "metadata": {
+        "subject_type": "Linea guida",
+        "object_type": "Selezione metodo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920636",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Definizioni IVS",
+      "definition": "Market Value è il prezzo più probabile in condizioni competitive; Forced Sale e Liquidation Value sono valori sotto pressione temporale.",
+      "semantic_relations": "includono",
+      "object": "Market Value; Investment Value; Forced Sale Value; Liquidation Value",
+      "source": "Definizioni IVS:\nMarket Value: prezzo più probabile in condizioni di mercato competitive\nInvestment Value: valore per specifico investitore\nForced Sale Value: vendita sottopressione temporale (tipicamente -15-25% MV)\nLiquidation Value: vendita immediata (tipicamente -30-40% MV)",
+      "importance": 0.9,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Standard IVS"
+      ],
+      "related_concepts": [
+        "Analisi di sensibilità"
+      ],
+      "enables": [
+        "Chiarezza terminologica"
+      ],
+      "part_of": [
+        "SINTESI VALUTATIVA"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "IVS",
+        "definizioni"
+      ],
+      "metadata": {
+        "subject_type": "Standard",
+        "object_type": "Definizioni"
+      },
+      "imported_at": "2026-01-12T16:40:06.920638",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Media ponderata dei metodi",
+      "definition": "La riconciliazione dei valori può usare pesi tipici: comparativo 70%, reddituale 20%, costo 10%. Fornisce il valore finale.",
+      "semantic_relations": "ha_pesi_tipici",
+      "object": "Comparativo 70%; Reddituale 20%; Costo 10%",
+      "source": "Esempio pesi tipici (immobile r esidenziale standard):\nMetodo comparativo: 70%\nMetodo reddituale: 20%\nMetodo costo: 10%",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Applicazione metodi"
+      ],
+      "related_concepts": [
+        "Valore finale",
+        "Riconciliazione"
+      ],
+      "enables": [
+        "Determinazione valore probabile"
+      ],
+      "part_of": [
+        "SINTESI VALUTATIVA"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "pesi",
+        "metodi"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Pesi"
+      },
+      "imported_at": "2026-01-12T16:40:06.920639",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Checklist validazione perizia",
+      "definition": "La checklist include conformità catastale e urbanistica, sopralluogo documentato, min 3 comparables, range ≤ 15%, coerenza < 10%, documentazione fotografica, calcoli tracciabili, fonti citate, limitazioni dichiarate.",
+      "semantic_relations": "include",
+      "object": "Conformità catastale; Conformità urbanistica; Sopralluogo; Minimo 3 comparables; Range ≤ 15%; Coerenza < 10%; Documentazione fotografica; Calcoli tracciabili; Fonti citate; Limitazioni dichiarate",
+      "source": "Checklist controllo qualità:\n Conformità catastale verificata\n Conformità urbanistica verificata\n Sopralluogo documentato\n Minimo 3 comparables per metodo comparativo\n Range valutativo ≤ 15% valore centrale\n Coerenza tra metodologie < 10%\n Documentazione fotografica completa\n Calcoli verificati e tracciabili\n Fonti dati citate\n Limitazioni dichiarate",
+      "importance": 0.86,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Relazione completa"
+      ],
+      "related_concepts": [
+        "Best practices"
+      ],
+      "enables": [
+        "Qualità e auditabilità"
+      ],
+      "part_of": [
+        "Validazione Perizia"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "validazione",
+        "qualità"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Checklist"
+      },
+      "imported_at": "2026-01-12T16:40:06.920640",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Costi unitari di costruzione 2024 (Italia)",
+      "definition": "I costi unitari indicativi variano per tipologia: civili 1.200–1.600 €/mq, signorili 1.800–2.500 €/mq, economiche 800–1.200 €/mq, uffici 1.400–1.900 €/mq, capannoni 400–700 €/mq.",
+      "semantic_relations": "sono_compresi_tra",
+      "object": "Abitazioni civili: €1.200–€1.600/mq; Signorili: €1.800–€2.500/mq; Economiche: €800–€1.200/mq; Uffici: €1.400–€1.900/mq; Capannoni: €400–€700/mq",
+      "source": "Costi unitari di riferimento (Italia, €/mq - valori 2024):\n- Abitazioni civili: €1.200-€1.600/mq\n- Abitazioni signorili: €1.800-€2.500/mq\n- Abitazioni economiche: €800-€1.200/mq\n- Uffici: €1.400-€1.900/mq\n- Capannoni industriali: €400-€700/mq",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Metodo dei costi"
+      ],
+      "related_concepts": [
+        "CR",
+        "Prezzari"
+      ],
+      "enables": [
+        "Stima CR"
+      ],
+      "part_of": [
+        "Metodo del costo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "costi",
+        "prezzari"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Range di costo"
+      },
+      "imported_at": "2026-01-12T16:40:06.920641",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Saggio di capitalizzazione (valori indicativi 2024-2025)",
+      "definition": "Il cap rate totale indicativo varia tra 6,5% e 9,5% in Italia. È somma di risk-free, premio rischio e illiquidità.",
+      "semantic_relations": "è_compreso_tra",
+      "object": "6,5% - 9,5%",
+      "source": "Totale r = 6,5-9,5% (valori indicativi Italia 2024-2025)",
+      "importance": 0.72,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Mercato degli investimenti"
+      ],
+      "related_concepts": [
+        "rf",
+        "Premio rischio immobiliare",
+        "Premio illiquidità"
+      ],
+      "enables": [
+        "Valutazione reddituale"
+      ],
+      "part_of": [
+        "Metodo reddituale"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "cap_rate",
+        "mercato"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Range percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920642",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti di ragguaglio (piano)",
+      "definition": "I coefficienti piano variano per altezza e ascensore: PT 0,85–0,90; 1°–2° 0,95–1,00; 3°–4° 0,90–0,95; 5°+ con asc. 0,85–0,90; 5°+ senza asc. 0,70–0,80; attico 1,05–1,15.",
+      "semantic_relations": "sono_compresi_tra",
+      "object": "Piano terra: 0,85–0,90; 1°–2°: 0,95–1,00; 3°–4°: 0,90–0,95; 5°+ con ascensore: 0,85–0,90; 5°+ senza ascensore: 0,70–0,80; Attico: 1,05–1,15",
+      "source": "Piano terra: 0,85-0,90\nPiano 1°-2°: 0,95-1,00 (riferimento)\nPiano 3°-4°: 0,90-0,95\nPiano 5°+ con ascensore: 0,85-0,90\nPiano 5°+ senza ascensore: 0,70-0,80\nPiano attico: 1,05-1,15",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "MCA",
+        "Caratteristiche piano"
+      ],
+      "related_concepts": [
+        "Ascensore",
+        "Esposizione"
+      ],
+      "enables": [
+        "Ragguaglio prezzi"
+      ],
+      "part_of": [
+        "Coefficienti di ragguaglio"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "coefficienti",
+        "piano"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Range coefficienti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920644",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Coefficienti di ragguaglio (stato conservativo)",
+      "definition": "I coefficienti per stato: ottimo 1,10–1,15; buono 1,00–1,05; discreto 0,90–0,95; mediocre 0,75–0,85; pessimo 0,60–0,70.",
+      "semantic_relations": "sono_compresi_tra",
+      "object": "Ottimo: 1,10–1,15; Buono: 1,00–1,05; Discreto: 0,90–0,95; Mediocre: 0,75–0,85; Pessimo: 0,60–0,70",
+      "source": "Ottimo (ristrutturato < 5 anni): 1,10-1,15\nBuono: 1,00-1,05\nDiscreto: 0,90-0,95\nMediocre: 0,75-0,85\nPessimo (da ristrutturare): 0,60-0,70",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Rilievo stato"
+      ],
+      "related_concepts": [
+        "Aggiustamenti",
+        "MCA"
+      ],
+      "enables": [
+        "Ragguaglio prezzi"
+      ],
+      "part_of": [
+        "Coefficienti di ragguaglio"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "coefficienti",
+        "stato"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Range coefficienti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920645",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Vista/Esposizione (coefficiente)",
+      "definition": "Panoramico/ottima esposizione 1,05–1,10; buona 1,00; affaccio interno/scarsa 0,92–0,95. Incide sulla percezione.",
+      "semantic_relations": "sono_compresi_tra",
+      "object": "Panoramico 1,05–1,10; Buona 1,00; Affaccio interno 0,92–0,95",
+      "source": "Panoramico/ottima esposizione: 1,05-1,10\nBuona esposizione: 1,00\nAffaccio interno/scarsa esposizione: 0,92-0,95",
+      "importance": 0.74,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Sopralluogo"
+      ],
+      "related_concepts": [
+        "Luminosità",
+        "Piano"
+      ],
+      "enables": [
+        "Aggiustamenti"
+      ],
+      "part_of": [
+        "Coefficienti di ragguaglio"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "coefficienti",
+        "esposizione"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Range coefficienti"
+      },
+      "imported_at": "2026-01-12T16:40:06.920647",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Metodo della Trasformazione",
+      "definition": "Per immobili da riqualificare o aree, il valore di trasformazione si calcola come valore post-intervento meno costi e utile operatore, con eventuale coefficiente riduttivo.",
+      "semantic_relations": "ha_formula",
+      "object": "Vt = Vm - Ct - U; Vt effettivo = Vt teorico × k",
+      "source": "Valore di trasformazione (Vt) = Valore di mercato trasformato (Vm) - Costi trasformazione (Ct) - Utile operatore (U)\nVt effettivo = Vt teorico × k",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Vm comparativo",
+        "Analisi costi"
+      ],
+      "related_concepts": [
+        "Riqualificazione",
+        "Rischio sviluppo"
+      ],
+      "enables": [
+        "Valutazioni di progetto"
+      ],
+      "part_of": [
+        "Metodologie estimative"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "trasformazione",
+        "sviluppo"
+      ],
+      "metadata": {
+        "subject_type": "Metodo",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920648",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Scenario valutativo: Abusi edilizi",
+      "definition": "L'approccio prevede valutazione come se conforme, stima costi sanatoria/demolizione, decurtazione rischio 20–40%, e calcolo finale.",
+      "semantic_relations": "prevede",
+      "object": "Decurtazione rischio 20–40% oltre costi",
+      "source": "Scenario A: Immobile con Abusi Edilizi\nAppr occio:\n1. Valutazione \"come se conforme\"\n2. Stima costi sanatoria/demolizione\n3. Applicazione decurtazione rischio (20-40%)\n4. Valutazione finale = Valore conforme - Costi - Decurtazione rischio",
+      "importance": 0.82,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi urbanistica",
+        "Costi sanatoria"
+      ],
+      "related_concepts": [
+        "Rischio regolatorio"
+      ],
+      "enables": [
+        "Valore prudenziale"
+      ],
+      "part_of": [
+        "Scenari valutativi complessi"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "abusi",
+        "scenario"
+      ],
+      "metadata": {
+        "subject_type": "Procedura",
+        "object_type": "Parametro percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920649",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Scenario valutativo: Vincoli",
+      "definition": "I vincoli possono ridurre il valore: paesaggistico/storico -10–20%; idrogeologico -15–30%; archeologico -20–40%. Si usano comparabili vincolati.",
+      "semantic_relations": "ha_riduzioni_tipiche",
+      "object": "Paesaggistico -10–20%; Idrogeologico -15–30%; Archeologico -20–40%",
+      "source": "Scenario B: Immobile in Zona Sottoposta a Vincoli\nAppr occio:\nVincolo paesaggistico/storico: -10-20%\nVincolo idrogeologico: -15-30%\nVincolo archeologico: -20-40% Metodo comparativo con comparabili vincolati.",
+      "importance": 0.79,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Individuazione vincoli"
+      ],
+      "related_concepts": [
+        "Conformità",
+        "MCA"
+      ],
+      "enables": [
+        "Aggiustamenti specifici"
+      ],
+      "part_of": [
+        "Scenari valutativi complessi"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "vincoli",
+        "riduzioni"
+      ],
+      "metadata": {
+        "subject_type": "Scenario",
+        "object_type": "Range percentuali"
+      },
+      "imported_at": "2026-01-12T16:40:06.920651",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Scenario lavori straordinari",
+      "definition": "Il valore si ottiene sottraendo le quote millesimali dei lavori e una decurtazione disagio del 5–10%. Riflette costi imminenti.",
+      "semantic_relations": "ha_formula",
+      "object": "Valore = Valore base - Quote millesimali lavori straordinari - Decurtazione disagio (5-10%)",
+      "source": "Valore = Valore base - Quote millesimali lavori straordinari - Decurtazione disagio (5-10%)",
+      "importance": 0.76,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Delibere lavori",
+        "Riparto millesimi"
+      ],
+      "related_concepts": [
+        "Condominio",
+        "Spese straordinarie"
+      ],
+      "enables": [
+        "Determinazione valore corretto"
+      ],
+      "part_of": [
+        "Scenari valutativi complessi"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "lavori",
+        "condominio"
+      ],
+      "metadata": {
+        "subject_type": "Scenario",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920652",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Nuda proprietà",
+      "definition": "Il valore della nuda proprietà è pari al valore della piena proprietà moltiplicato per 1 meno il coefficiente di usufrutto, funzione di età usufruttuario e saggio legale.",
+      "semantic_relations": "ha_formula",
+      "object": "Valore nuda proprietà = Valore piena proprietà × (1 - Coefficiente usufrutto)",
+      "source": "Valore nuda proprietà = Valore piena proprietà × (1 - Coef ficiente usufrutto)\nCoef ficiente usufrutto (T abelle Ministeriali):\nFunzione di età usufruttuario e saggio legale (attualmente 2,5%)",
+      "importance": 0.8,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Tabelle ministeriali"
+      ],
+      "related_concepts": [
+        "Usufrutto",
+        "Saggio legale 2,5%"
+      ],
+      "enables": [
+        "Valutazioni diritti reali"
+      ],
+      "part_of": [
+        "Scenari valutativi complessi"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "diritti_reali",
+        "nuda_proprietà"
+      ],
+      "metadata": {
+        "subject_type": "Concetto",
+        "object_type": "Formula"
+      },
+      "imported_at": "2026-01-12T16:40:06.920653",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Hedonic Pricing Model",
+      "definition": "La regressione multipla stima il prezzo in funzione di variabili come SCV, locali, piano, ascensore, stato, classe energetica, distanze e pertinenze.",
+      "semantic_relations": "ha_variabili_tipiche",
+      "object": "X1=SCV; X2=Numero locali; X3=Piano; X4=Ascensore; X5=Stato; X6=Classe energetica; X7=Dist. centro; X8=Dist. metro; X9=Box; X10=Balcone",
+      "source": "V = β0 + β1×X1 + β2×X2 + ... + βn×Xn + ε\nVariabili tipiche:\nX1 = Superficie commerciale (mq)\nX2 = Numero locali\nX3 = Piano (dummy variable)\nX4 = Presenza ascensore (0/1)\nX5 = Stato conservativo (scala 1-5)\nX6 = Classe energetica (scala 1-7)\nX7 = Distanza centro (km)\nX8 = Distanza metro (m)\nX9 = Presenza box (0/1)\nX10 = Presenza balcone (mq)",
+      "importance": 0.7,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Dataset transazioni",
+        "Statistica"
+      ],
+      "related_concepts": [
+        "Machine learning",
+        "Feature engineering"
+      ],
+      "enables": [
+        "Modelli predittivi"
+      ],
+      "part_of": [
+        "Algoritmi di calcolo avanzati"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "hedonic",
+        "regressione"
+      ],
+      "metadata": {
+        "subject_type": "Metodo statistico",
+        "object_type": "Variabili"
+      },
+      "imported_at": "2026-01-12T16:40:06.920654",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Machine Learning per valutazione",
+      "definition": "Random Forest e Gradient Boosting gestiscono relazioni non lineari e grandi dataset, con workflow di training e validazione incrociata.",
+      "semantic_relations": "utilizza",
+      "object": "Random Forest; Gradient Boosting (XGBoost, LightGBM)",
+      "source": "Metodi di Machine Learning\nRandom For est per  Valutazione Immobiliar e\nVantaggi:\nGestione relazioni non lineari\nRobustezza outliers\nFeature importance automatica\nWorkflow:\n1. Dataset training (comparabili storici)\n2. Feature engineering (variabili predittive)\n3. Training modello (hyperparameter tuning)\n4. Validazione incrociata (k-fold CV)\nGradient Boosting (XGBoost, LightGBM)",
+      "importance": 0.65,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Dataset",
+        "ML tools"
+      ],
+      "related_concepts": [
+        "Hedonic model",
+        "Cross-validation"
+      ],
+      "enables": [
+        "Predizione valore"
+      ],
+      "part_of": [
+        "Algoritmi di calcolo avanzati"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "ML",
+        "valutazione"
+      ],
+      "metadata": {
+        "subject_type": "Tecnica",
+        "object_type": "Algoritmi"
+      },
+      "imported_at": "2026-01-12T16:40:06.920656",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Normative e standard di riferimento",
+      "definition": "Oltre a IVS/EVS, la valutazione fa riferimento a Codice Civile, TUB art. 64, Standard ABI, norme deontologiche e UNI.",
+      "semantic_relations": "includono",
+      "object": "Codice Civile; TUB art. 64; Standard ABI; Norme deontologiche; UNI 10750; UNI 11612",
+      "source": "Codice Civile : artt. 1124-1127, 1148 (criteri di valutazione)\n... Art. 64 del D.Lgs. 385/93 (TUB), Standard di Valutazione ABI ...\nUNI 10750:2005 - Determinazione superficie commerciale\nUNI 11612:2015 - Valutazione beni immobili",
+      "importance": 0.82,
+      "confidence": 0.95,
+      "prerequisites": [
+        "Quadro normativo"
+      ],
+      "related_concepts": [
+        "IVS",
+        "EVS"
+      ],
+      "enables": [
+        "Conformità regolamentare"
+      ],
+      "part_of": [
+        "Inquadramento normativo"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "normativa",
+        "standard"
+      ],
+      "metadata": {
+        "subject_type": "Quadro normativo",
+        "object_type": "Elenco"
+      },
+      "imported_at": "2026-01-12T16:40:06.920657",
+      "imported_from": "perizia_immobiliare"
+    },
+    {
+      "subject": "Accuratezza tipica valutazione professionale",
+      "definition": "L'accuratezza tipica si attesta nel range ±5–10% del valore effettivo di transazione. Riflette incertezza intrinseca.",
+      "semantic_relations": "è_compresa_in",
+      "object": "±5–10%",
+      "source": "L'accuratezza tipica di una valutazione professionale si attesta nel range ±5-10% del valore ef fettivo di transazione.",
+      "importance": 0.78,
+      "confidence": 1.0,
+      "prerequisites": [
+        "Analisi di sensibilità"
+      ],
+      "related_concepts": [
+        "Intervallo di confidenza"
+      ],
+      "enables": [
+        "Gestione aspettative"
+      ],
+      "part_of": [
+        "Limiti della valutazione"
+      ],
+      "sub_concepts": [],
+      "tags": [
+        "accuratezza",
+        "range"
+      ],
+      "metadata": {
+        "subject_type": "Parametro",
+        "object_type": "Intervallo percentuale"
+      },
+      "imported_at": "2026-01-12T16:40:06.920659",
+      "imported_from": "perizia_immobiliare"
+    }
+  ]
+}

@@ -27,7 +27,7 @@ THINKING_MESSAGES = [
     "Sto impiantando ricordi di conoscenza sintetica...",
     "Sto testando se sono sogni di androidi elettrici...",
     "Sto decodificando le lacrime nella pioggia dei dati...",
-    "Sto cercando nella lato oscuro della Forza...",
+    "Sto cercando nel lato oscuro della Forza...",
     "Sto consultando gli archivi Jedi della conoscenza...",
 ]
 
