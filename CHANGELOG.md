@@ -27,6 +27,8 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### 🔧 Bug Fix e Miglioramenti
 
+- Creato il modello BDI per lo use case delle perizie immobiliari, partendo da manuali che spiegano come si realizza una perizia immobiliare e defininedo come Desire quello di effettuare una perizia immobiliare su villette autonome
+
 
 ## Release - 2025-12-15
 
