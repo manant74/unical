@@ -125,7 +125,6 @@ def save_intentions_to_bdi(intentions):
             intentions=intentions
         )
 
-        st.success(f"✅ {len(intentions)} Intenzioni salvate nella sessione!")
         return True
 
     except Exception as e:
@@ -318,7 +317,6 @@ with st.sidebar:
                 if save_intentions_to_bdi(st.session_state.intentions_list):
                     st.success(f"✅ Sessione completata! {len(st.session_state.intentions_list)} Intenzioni salvate.")
                     st.balloons()
-                st.rerun()
             else:
                 st.warning("Nessuna intenzione da salvare!")
 
