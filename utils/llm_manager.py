@@ -19,8 +19,6 @@ class LLMManager:
             "gemini-3-pro-preview": "Gemini 3 Pro (Preview)"
         },
         "OpenAI": {
-            "gpt-4o": "GPT-4o",
-            "gpt-4o-mini": "GPT-4o Mini",
             "gpt-5": "GPT-5",
             "gpt-5-nano": "GPT-5 Nano",
             "gpt-5-mini": "GPT-5 Mini",

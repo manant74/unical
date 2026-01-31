@@ -6,66 +6,6 @@ i controlli UI in base al modello selezionato.
 
 # Dizionario centrale con metadati di tutti i parametri per ogni modello
 MODEL_PARAMETERS = {
-    # ==================== OPENAI - MODELLI STANDARD ====================
-    "gpt-4o": {
-        "temperature": {
-            "type": "slider",
-            "min": 0.0,
-            "max": 2.0,
-            "step": 0.1,
-            "default": 1.0,
-            "label": "Temperature",
-            "help": "Controlla creatività: 0=deterministico, 2=molto creativo"
-        },
-        "max_tokens": {
-            "type": "number",
-            "min": 1,
-            "max": 16384,
-            "step": 512,
-            "default": 4096,
-            "label": "Max Tokens",
-            "help": "Lunghezza massima della risposta"
-        },
-        "top_p": {
-            "type": "slider",
-            "min": 0.0,
-            "max": 1.0,
-            "step": 0.05,
-            "default": 1.0,
-            "label": "Top P (Nucleus Sampling)",
-            "help": "Campionamento probabilistico"
-        }
-    },
-    "gpt-4o-mini": {
-        "temperature": {
-            "type": "slider",
-            "min": 0.0,
-            "max": 2.0,
-            "step": 0.1,
-            "default": 1.0,
-            "label": "Temperature",
-            "help": "Controlla creatività: 0=deterministico, 2=molto creativo"
-        },
-        "max_tokens": {
-            "type": "number",
-            "min": 1,
-            "max": 16384,
-            "step": 512,
-            "default": 4096,
-            "label": "Max Tokens",
-            "help": "Lunghezza massima della risposta"
-        },
-        "top_p": {
-            "type": "slider",
-            "min": 0.0,
-            "max": 1.0,
-            "step": 0.05,
-            "default": 1.0,
-            "label": "Top P (Nucleus Sampling)",
-            "help": "Campionamento probabilistico"
-        }
-    },
-
     # ==================== OPENAI - MODELLI CON REASONING ====================
     "gpt-5": {
         "reasoning_effort": {

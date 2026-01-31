@@ -834,10 +834,6 @@ class LLMManager:
 
 **Modelli Disponibili:**
 
-**Modelli Standard:**
-- `gpt-4o`: Ottimizzato per velocità
-- `gpt-4o-mini`: Versione compatta
-
 **Modelli con Reasoning (GPT-5 Series):**
 - `gpt-5`: Modello avanzato con reasoning
 - `gpt-5-nano`: Versione leggera GPT-5
@@ -1620,7 +1616,7 @@ SCENARIO: Aggiungere nuovi desires a sessione esistente
 | | Similarity | Cosine | - | Metric distanza |
 | **LLM** | Provider 1 | Google Gemini | - | gemini-2.5-flash/pro/lite |
 | | SDK Gemini | google-generativeai | 0.3.0+ | API client |
-| | Provider 2 | OpenAI | - | GPT-4o, GPT-5 series |
+| | Provider 2 | OpenAI | - | GPT-5 series |
 | | SDK OpenAI | openai | 1.12.0+ | API client |
 | **Document Processing** | PDF Parser | PyPDF2 | 3.0.0+ | Estrazione testo PDF |
 | | HTML Parser | BeautifulSoup4 | 4.12.0+ | Web scraping |
@@ -1816,7 +1812,7 @@ OPENAI_API_KEY=your_openai_api_key_here
         │            EXTERNAL SERVICES                     │
         │  ┌────────────────┐      ┌──────────────────┐   │
         │  │  Gemini API    │      │   OpenAI API     │   │
-        │  │  (Google)      │      │   (GPT-4o/5)     │   │
+        │  │  (Google)      │      │   (GPT-5)        │   │
         │  └────────────────┘      └──────────────────┘   │
         │  ┌────────────────────────────────────────────┐  │
         │  │  HuggingFace Model Hub                     │  │

@@ -336,7 +336,7 @@ LUMIA Studio segue un workflow sequenziale ben definito:
 3. **Configura la sessione**:
    - Seleziona il **contesto** (knowledge base) da utilizzare (o "Nessuno" se nuovo progetto)
    - Scegli **Provider LLM** (Gemini, Claude, OpenAI)
-   - Scegli **Modello** (es: gemini-2.5-pro, claude-4-sonnet, gpt-4o)
+   - Scegli **Modello** (es: gemini-2.5-pro, claude-4-sonnet, gpt-5)
    - **Configura parametri LLM** (opzionale):
      - Temperature (0.0-1.0, default 0.7) - Controllo creatività
      - Max Tokens (100-8000, default 2000) - Lunghezza risposte
@@ -684,10 +684,6 @@ Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-
 
 ### OpenAI
 
-**Modelli Standard:**
-- gpt-4o - Flagship multimodale
-- gpt-4o-mini - Efficiente e veloce
-
 **Modelli con Reasoning (GPT-5 Series):**
 - gpt-5 - Base reasoning model
 - gpt-5-nano - Lightweight reasoning
@@ -827,7 +823,7 @@ LUMIA Studio è versatile e applicabile a diversi scenari:
 
 - **LLM Integration**:
   - Google Gemini (2.5 Pro/Flash/Flash-Lite, 3 Pro Preview)
-  - OpenAI (GPT-4o/mini, GPT-5/5.1/5.2 series con reasoning)
+  - OpenAI (GPT-5/5.1/5.2 series con reasoning)
 - **Embeddings**: sentence-transformers (`paraphrase-multilingual-MiniLM-L12-v2`)
 - **RAG Framework**: Custom implementation con ChromaDB
 - **Quality Assurance**: Sistema rubric-based auditing con auditor specializzati per desires e beliefs
