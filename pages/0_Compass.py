@@ -1348,8 +1348,8 @@ else:
                                 title="Beliefs by Relation Type",
                                 color_discrete_sequence=px.colors.sequential.Teal
                             )
-                            st.plotly_chart(fig_relations, use_container_width=True)  # Plotly chart parameter is still use_container_width
-                    else:
+                            st.plotly_chart(fig_relations, width='stretch')  
+
                         st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
                 with col_right_beliefs:
@@ -1370,7 +1370,7 @@ else:
                                 labels={'x': 'Relevance Score', 'y': 'Count'},
                                 color_discrete_sequence=['#A23B72']
                             )
-                            st.plotly_chart(fig_relevance, use_container_width=True)  # Plotly chart parameter is still use_container_width
+                            st.plotly_chart(fig_relevance, width='stretch')  
 
                         # Grafico livelli di rilevanza (se struttura related_desires)
                         relevance_levels = []
@@ -1393,7 +1393,7 @@ else:
                                 color=list(level_counts.values()),
                                 color_continuous_scale='Reds'
                             )
-                            st.plotly_chart(fig_levels, use_container_width=True)  # Plotly chart parameter is still use_container_width
+                            st.plotly_chart(fig_levels, width='stretch')  
                     else:
                         st.info("No beliefs found. Generate some beliefs in Believer to see statistics.")
 
@@ -1429,7 +1429,7 @@ else:
                             text=list(desire_metrics.values())
                         )
                         fig_metrics.update_traces(textposition='outside')
-                        st.plotly_chart(fig_metrics, use_container_width=True)  # Plotly chart parameter is still use_container_width
+                        st.plotly_chart(fig_metrics, width='stretch')  
                     else:
                         st.info("No desires found. Create some desires in Alì to see statistics.")
 
@@ -1468,7 +1468,7 @@ else:
                             text=list(beliefs_per_desire.values())
                         )
                         fig_beliefs_count.update_traces(textposition='outside')
-                        st.plotly_chart(fig_beliefs_count, use_container_width=True)  # Plotly chart parameter is still use_container_width
+                        st.plotly_chart(fig_beliefs_count, width='stretch')  
                     else:
                         st.info("No desires or beliefs found.")
 
@@ -1521,7 +1521,7 @@ else:
                                 text=list(intentions_per_desire.values())
                             )
                             fig_intentions_per_desire.update_traces(textposition='outside')
-                            st.plotly_chart(fig_intentions_per_desire, use_container_width=True)
+                            st.plotly_chart(fig_intentions_per_desire, width='stretch')
                     else:
                         st.info("No intentions found. Create some intentions to see statistics.")
 
@@ -1607,7 +1607,7 @@ else:
                                 height=max(300, 50 * len(intentions_labels))
                             )
 
-                            st.plotly_chart(fig_steps, use_container_width=True)
+                            st.plotly_chart(fig_steps, width='stretch')
                     else:
                         st.info("No intentions found. Create some intentions to see statistics.")
 

@@ -217,7 +217,7 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("🧭 Vai a Compass", use_container_width=True, type="primary"):
+        if st.button("🧭 Vai a Compass", width='stretch', type="primary"):
             st.switch_page("pages/0_Compass.py")
 
     st.stop()  # Ferma l'esecuzione se non c'è sessione

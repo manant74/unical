@@ -89,7 +89,7 @@ def render_quick_replies(placeholder, suggestions, pending_state_key, button_pre
                 reason = suggestion.get("why")
 
                 with col:
-                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", use_container_width=True):
+                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", width='stretch'):
                         if message_text:
                             st.session_state[pending_state_key] = message_text
                     if reason:
@@ -140,7 +140,7 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("🧭 Vai a Compass", use_container_width=True, type="primary"):
+        if st.button("🧭 Vai a Compass", width='stretch', type="primary"):
             st.switch_page("pages/0_Compass.py")
 
     st.stop()  # Ferma l'esecuzione se non c'è sessione
@@ -257,13 +257,13 @@ with st.sidebar:
 
             # Mostra il pulsante Compass solo se l'utente ha scelto di verificare i belief di base
             if st.session_state.get('show_compass_button', False):
-                if st.button("🧭 Vai a Compass", use_container_width=True, type="primary"):
+                if st.button("🧭 Vai a Compass", width='stretch', type="primary"):
                     st.switch_page("pages/0_Compass.py")
         else:
             st.warning("⚠️ Sessione attiva non trovata")
     else:
         st.info("ℹ️ Nessuna sessione attiva")
-        if st.button("🧭 Attiva una sessione", use_container_width=True):
+        if st.button("🧭 Attiva una sessione", width='stretch'):
             st.switch_page("pages/0_Compass.py")
 
     st.divider()
@@ -415,7 +415,7 @@ with st.sidebar:
     col_left, col_right = st.columns(2)
 
     with col_left:
-        if st.button("🔄 Nuova", use_container_width=True):
+        if st.button("🔄 Nuova", width='stretch'):
             st.session_state.believer_chat_history = []
             st.session_state.believer_greeted = False
             st.session_state.loaded_desires = None  # Forza il ricaricamento
@@ -428,7 +428,7 @@ with st.sidebar:
             st.rerun()
 
     with col_right:
-        if st.button("✅ Completa", type="primary", use_container_width=True):
+        if st.button("✅ Completa", type="primary", width='stretch'):
             # Verifica se c'è una sessione attiva
             if 'active_session' in st.session_state and st.session_state.active_session:
                 if st.session_state.beliefs:
@@ -669,7 +669,7 @@ if st.session_state.base_beliefs_available and not st.session_state.base_beliefs
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("🎯 Chat per creare i Belief Specializzati", key="btn_create_beliefs", use_container_width=True):
+        if st.button("🎯 Chat per creare i Belief Specializzati", key="btn_create_beliefs", width='stretch'):
             # Simula la scelta dell'opzione 1
             st.session_state.believer_chat_history.append({
                 "role": "user",
@@ -691,7 +691,7 @@ Iniziamo a esplorare la tua base di conoscenza per identificare i belief rilevan
             st.rerun()
 
     with col2:
-        if st.button("📋 Verificare i Belief di Base", key="btn_verify_beliefs", use_container_width=True):
+        if st.button("📋 Verificare i Belief di Base", key="btn_verify_beliefs", width='stretch'):
             # Simula la scelta dell'opzione 2
             st.session_state.believer_chat_history.append({
                 "role": "user",
@@ -722,7 +722,7 @@ Una volta verificati i belief di base, torna qui se vuoi creare belief più spec
             st.rerun()
 
     with col3:
-        if st.button("🔄 Crea un mix tra Belief di Base e Desire", key="btn_mix_beliefs", use_container_width=True):
+        if st.button("🔄 Crea un mix tra Belief di Base e Desire", key="btn_mix_beliefs", width='stretch'):
             # Simula la scelta dell'opzione 3
             st.session_state.believer_chat_history.append({
                 "role": "user",
@@ -840,7 +840,7 @@ Ecco il risultato:
             st.rerun()
 
     with col4:
-        if st.button("🎯 Generazione Belief da Zero", key="btn_from_scratch", use_container_width=True, help="Genera belief direttamente dai chunk della KB, ignorando il belief base"):
+        if st.button("🎯 Generazione Belief da Zero", key="btn_from_scratch", width='stretch', help="Genera belief direttamente dai chunk della KB, ignorando il belief base"):
             # Simula la scelta dell'opzione 4
             st.session_state.believer_chat_history.append({
                 "role": "user",
