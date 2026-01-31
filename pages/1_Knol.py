@@ -68,7 +68,7 @@ def load_belief_count():
         return 0
 
 # Funzione dialog per editor beliefs
-@st.dialog("📝 Editor Beliefs", width="large")
+@st.dialog("📝 Beliefs Editor", width="large")
 def belief_editor_modal():
     """Modale per editing dei beliefs in formato JSON"""
 
@@ -84,14 +84,14 @@ def belief_editor_modal():
                 belief_data = json.load(f)
                 beliefs = belief_data.get('beliefs_base', belief_data.get('beliefs', []))
         except Exception as e:
-            st.error(f"Errore nel caricamento dei beliefs: {str(e)}")
+            st.error(f"Error loading beliefs: {str(e)}")
             beliefs = []
 
     # Prepara JSON per l'editor
     beliefs_json = json.dumps({"beliefs_base": beliefs}, indent=2, ensure_ascii=False)
 
-    st.markdown("**Modifica i beliefs in formato JSON**")
-    st.caption("💡 Puoi modificare, aggiungere o rimuovere beliefs direttamente nel JSON sottostante")
+    st.markdown("**Edit beliefs in JSON format**")
+    st.caption("💡 You can edit, add, or remove beliefs directly in the JSON below")
 
     # Code editor
     response = code_editor(
@@ -121,18 +121,18 @@ def belief_editor_modal():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("✅ Valida JSON", width='stretch'):
+        if st.button("✅ Validate JSON", width='stretch'):
             try:
                 parsed = json.loads(edited_json)
                 if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
-                    st.success(f"✅ JSON valido! {len(parsed['beliefs_base'])} beliefs trovati.")
+                    st.success(f"✅ Valid JSON! {len(parsed['beliefs_base'])} beliefs found.")
                 else:
-                    st.error("❌ Il JSON deve contenere un array 'beliefs_base'")
+                    st.error("❌ JSON must contain a 'beliefs_base' array")
             except json.JSONDecodeError as e:
-                st.error(f"❌ JSON non valido: {str(e)}")
+                st.error(f"❌ Invalid JSON: {str(e)}")
 
     with col2:
-        if st.button("💾 Salva", width='stretch', type="primary"):
+        if st.button("💾 Save", width='stretch', type="primary"):
             try:
                 parsed = json.loads(edited_json)
                 if 'beliefs_base' in parsed and isinstance(parsed['beliefs_base'], list):
@@ -147,15 +147,15 @@ def belief_editor_modal():
                         {'belief_count': belief_count}
                     )
 
-                    st.success(f"✅ Beliefs salvati! ({belief_count} beliefs)")
+                    st.success(f"✅ Beliefs saved! ({belief_count} beliefs)")
                     st.session_state.show_belief_editor = False
                     st.rerun()
                 else:
-                    st.error("❌ Il JSON deve contenere un array 'beliefs_base'")
+                    st.error("❌ JSON must contain a 'beliefs_base' array")
             except json.JSONDecodeError as e:
-                st.error(f"❌ JSON non valido: {str(e)}")
+                st.error(f"❌ Invalid JSON: {str(e)}")
             except Exception as e:
-                st.error(f"❌ Errore nel salvataggio: {str(e)}")
+                st.error(f"❌ Save error: {str(e)}")
 
     with col3:
         if st.button("🗑️ Cancella Tutto", width='stretch'):
@@ -222,18 +222,18 @@ with st.sidebar:
         st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
 
     with col_home:
-        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+        if st.button("🏠", width='stretch', type="secondary", help="Back to Home"):
             st.switch_page("app.py")
 
     st.divider()
 
     # Sezione lista contesti
-    st.markdown("### 📋 Contesti Disponibili")
+    st.markdown("### 📋 Available Contexts")
 
     contexts = st.session_state.context_manager.get_all_contexts()
 
     if not contexts:
-        st.info("Nessun contesto disponibile. Creane uno!")
+        st.info("No context available. Create one!")
     else:
         for idx, ctx in enumerate(contexts):
             is_active = ctx['normalized_name'] == st.session_state.current_context
@@ -252,7 +252,7 @@ with st.sidebar:
                 with col_activate:
                     # Pulsante attiva (usa sempre stessa emoji, disabilitato se attivo)
                     if st.button("⚡", key=f"activate_{ctx['normalized_name']}",
-                               help="Contesto attivo" if is_active else "Attiva contesto",
+                               help="Active context" if is_active else "Activate context",
                                disabled=is_active, width='stretch'):
                         st.session_state.current_context = ctx['normalized_name']
                         st.session_state.context_changed = True
@@ -261,9 +261,9 @@ with st.sidebar:
                 with col_delete:
                     # Pulsante elimina
                     if st.button("🗑️", key=f"delete_{ctx['normalized_name']}",
-                               help="Elimina contesto", width='stretch'):
+                               help="Delete context", width='stretch'):
                         if st.session_state.context_manager.delete_context(ctx['normalized_name']):
-                            st.success(f"Contesto '{ctx['name']}' eliminato!")
+                            st.success(f"Context '{ctx['name']}' deleted!")
                             # Se era il contesto corrente, deselezionalo
                             if st.session_state.current_context == ctx['normalized_name']:
                                 remaining = st.session_state.context_manager.get_all_contexts()
@@ -271,7 +271,7 @@ with st.sidebar:
                                 st.session_state.context_changed = True
                             st.rerun()
                         else:
-                            st.error("Errore nell'eliminazione")
+                            st.error("Deletion error")
 
                 # Seconda riga: Descrizione del contesto (con spazio ridotto)
                 testo =" "
@@ -291,12 +291,12 @@ with st.sidebar:
     st.divider()
 
     # Sezione creazione nuovo contesto
-    st.markdown("### ➕ Nuovo Contesto")
+    st.markdown("### ➕ New Context")
 
     with st.form("new_context_form", clear_on_submit=True):
-        new_context_name = st.text_input("Nome del contesto", placeholder="es. Progetto X")
-        new_context_desc = st.text_area("Descrizione (opzionale)", placeholder="Breve descrizione del contesto...")
-        create_btn = st.form_submit_button("Crea Contesto", width='stretch', type="primary")
+        new_context_name = st.text_input("Context name", placeholder="e.g. Project X")
+        new_context_desc = st.text_area("Description (optional)", placeholder="Brief context description...")
+        create_btn = st.form_submit_button("Create Context", width='stretch', type="primary")
 
         if create_btn and new_context_name:
             try:
@@ -304,7 +304,7 @@ with st.sidebar:
                     name=new_context_name,
                     description=new_context_desc
                 )
-                st.success(f"✅ Contesto '{new_context_name}' creato!")
+                st.success(f"✅ Context '{new_context_name}' created!")
                 # Seleziona automaticamente il nuovo contesto
                 st.session_state.current_context = metadata['normalized_name']
                 st.session_state.context_changed = True
@@ -312,12 +312,12 @@ with st.sidebar:
             except ValueError as e:
                 st.error(f"❌ {str(e)}")
             except Exception as e:
-                st.error(f"❌ Errore nella creazione: {str(e)}")
+                st.error(f"❌ Creation error: {str(e)}")
 
     st.divider()
 
     # Statistiche globali
-    st.markdown("### 📊 Statistiche Globali")
+    st.markdown("### 📊 Global Statistics")
     global_stats = st.session_state.context_manager.get_global_stats()
 
     col1, col2 = st.columns(2)
@@ -412,22 +412,22 @@ with col1:
 
     st.divider()
 
-    st.markdown("#### 📤 Carica Fonti")
+    st.markdown("#### 📤 Load Sources")
 
     # Tabs per diversi tipi di input
-    tab1, tab2, tab3, tab4 = st.tabs(["📕 PDF", "🌐 Pagine Web", "📑 File di Testo", "📋 Markdown"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📕 PDF", "🌐 Web Pages", "📑 Text Files", "📋 Markdown"])
 
     with tab1:
-        st.markdown("Carica file PDF per estrarre il contenuto testuale")
+        st.markdown("Load PDF files to extract text content")
         pdf_files = st.file_uploader(
-            "Seleziona file PDF",
+            "Select PDF files",
             type=['pdf'],
             accept_multiple_files=True,
             key="pdf_uploader"
         )
 
-        if pdf_files and st.button("Processa PDF", key="process_pdf"):
-            with st.spinner("Elaborazione dei file PDF in corso..."):
+        if pdf_files and st.button("Process PDF", key="process_pdf"):
+            with st.spinner("Processing PDF files..."):
                 for pdf_file in pdf_files:
                     try:
                         chunks = st.session_state.doc_processor.process_pdf(pdf_file)
@@ -435,7 +435,7 @@ with col1:
                             chunks,
                             source=f"PDF: {pdf_file.name}"
                         )
-                        st.success(f"✅ {pdf_file.name} processato con successo ({len(chunks)} chunks)")
+                        st.success(f"✅ {pdf_file.name} processed successfully ({len(chunks)} chunks)")
 
                         # Aggiorna il conteggio documenti nel metadata
                         stats = st.session_state.doc_processor.get_stats()
@@ -444,21 +444,21 @@ with col1:
                             {'document_count': stats['document_count']}
                         )
                     except Exception as e:
-                        st.error(f"❌ Errore durante l'elaborazione di {pdf_file.name}: {str(e)}")
+                        st.error(f"❌ Error processing {pdf_file.name}: {str(e)}")
 
     with tab2:
-        st.markdown("Inserisci URL di pagine web per estrarre il contenuto")
-        url_input = st.text_input("URL della pagina web", placeholder="https://esempio.com")
+        st.markdown("Enter web page URLs to extract content")
+        url_input = st.text_input("Web page URL", placeholder="https://example.com")
 
-        if url_input and st.button("Carica da Web", key="process_url"):
-            with st.spinner(f"Caricamento di {url_input}..."):
+        if url_input and st.button("Load from Web", key="process_url"):
+            with st.spinner(f"Loading {url_input}..."):
                 try:
                     chunks = st.session_state.doc_processor.process_url(url_input)
                     st.session_state.doc_processor.add_documents(
                         chunks,
                         source=f"Web: {url_input}"
                     )
-                    st.success(f"✅ Pagina web caricata con successo ({len(chunks)} chunks)")
+                    st.success(f"✅ Web page loaded successfully ({len(chunks)} chunks)")
 
                     # Aggiorna il conteggio documenti nel metadata
                     stats = st.session_state.doc_processor.get_stats()
@@ -467,19 +467,19 @@ with col1:
                         {'document_count': stats['document_count']}
                     )
                 except Exception as e:
-                    st.error(f"❌ Errore: {str(e)}")
+                    st.error(f"❌ Error: {str(e)}")
 
     with tab3:
-        st.markdown("Carica file di testo (.txt)")
+        st.markdown("Load text files (.txt)")
         txt_files = st.file_uploader(
-            "Seleziona file di testo",
+            "Select text files",
             type=['txt'],
             accept_multiple_files=True,
             key="txt_uploader"
         )
 
-        if txt_files and st.button("Processa File di Testo", key="process_txt"):
-            with st.spinner("Elaborazione dei file di testo..."):
+        if txt_files and st.button("Process Text Files", key="process_txt"):
+            with st.spinner("Processing text files..."):
                 for txt_file in txt_files:
                     try:
                         chunks = st.session_state.doc_processor.process_text(txt_file)
@@ -487,7 +487,7 @@ with col1:
                             chunks,
                             source=f"TXT: {txt_file.name}"
                         )
-                        st.success(f"✅ {txt_file.name} processato con successo ({len(chunks)} chunks)")
+                        st.success(f"✅ {txt_file.name} processed successfully ({len(chunks)} chunks)")
 
                         # Aggiorna il conteggio documenti nel metadata
                         stats = st.session_state.doc_processor.get_stats()
@@ -496,19 +496,19 @@ with col1:
                             {'document_count': stats['document_count']}
                         )
                     except Exception as e:
-                        st.error(f"❌ Errore durante l'elaborazione di {txt_file.name}: {str(e)}")
+                        st.error(f"❌ Error processing {txt_file.name}: {str(e)}")
 
     with tab4:
-        st.markdown("Carica file Markdown (.md)")
+        st.markdown("Load Markdown files (.md)")
         md_files = st.file_uploader(
-            "Seleziona file Markdown",
+            "Select Markdown files",
             type=['md'],
             accept_multiple_files=True,
             key="md_uploader"
         )
 
-        if md_files and st.button("Processa Markdown", key="process_md"):
-            with st.spinner("Elaborazione dei file Markdown..."):
+        if md_files and st.button("Process Markdown", key="process_md"):
+            with st.spinner("Processing Markdown files..."):
                 for md_file in md_files:
                     try:
                         chunks = st.session_state.doc_processor.process_text(md_file)
@@ -516,7 +516,7 @@ with col1:
                             chunks,
                             source=f"MD: {md_file.name}"
                         )
-                        st.success(f"✅ {md_file.name} processato con successo ({len(chunks)} chunks)")
+                        st.success(f"✅ {md_file.name} processed successfully ({len(chunks)} chunks)")
 
                         # Aggiorna il conteggio documenti nel metadata
                         stats = st.session_state.doc_processor.get_stats()
@@ -525,28 +525,28 @@ with col1:
                             {'document_count': stats['document_count']}
                         )
                     except Exception as e:
-                        st.error(f"❌ Errore durante l'elaborazione di {md_file.name}: {str(e)}")
+                        st.error(f"❌ Error processing {md_file.name}: {str(e)}")
 
     # Suggerimento
     st.markdown("---")
-    st.markdown("💡 **Suggerimento**: Dopo aver caricato le fonti, estrai i Belief Base e passa ad **Alì** per definire i tuoi Desire.")
+    st.markdown("💡 **Tip**: After loading sources, extract the Belief Base and proceed to **Alì** to define your Desires.")
     # Pulsanti per estrarre belief base, editor e cancellare contesto
     st.markdown("---")
 
     btn_col1, btn_col2, btn_col3 = st.columns(3)
 
     with btn_col1:
-        extract_belief = st.button("🧠 Estrai Belief", width='stretch')
+        extract_belief = st.button("🧠 Extract Beliefs", width='stretch')
 
     with btn_col2:
-        edit_belief = st.button("📝 Modifica Belief", width='stretch')
+        edit_belief = st.button("📝 Edit Beliefs", width='stretch')
 
     with btn_col3:
-        clear_context = st.button("🗑️ Cancella KB", type="secondary", width='stretch')
+        clear_context = st.button("🗑️ Clear KB", type="secondary", width='stretch')
 
 
 with col2:
-    st.markdown("##### 📄 Fonti Caricate")
+    st.markdown("##### 📄 Loaded Sources")
 
     # Lista dei contenuti caricati dal database
     if sources:
@@ -576,7 +576,7 @@ with col2:
             with st.expander(f"{icon} {source_type}: {name}"):
                 st.caption(f"**Source ID:** {source}")
     else:
-        st.info("📭 Nessuna fonte caricata ancora")
+        st.info("📭 No sources loaded yet")
 
     # Logica per estrazione belief base
     if extract_belief:
@@ -591,7 +591,7 @@ with col2:
                     generate_description = False
                     if not context_metadata.get('description') or context_metadata.get('description').strip() == '':
                         generate_description = True
-                        st.info("📝 Generazione descrizione del contesto...")
+                        st.info("📝 Generating context description...")
 
                     # Recupera tutti i documenti dalla knowledge base
                     all_docs = st.session_state.doc_processor.collection.get()
@@ -688,21 +688,21 @@ with col2:
                                         {'belief_count': belief_count}
                                     )
 
-                                    st.success(f"✅ Belief Base estratta con successo! {belief_count} belief individuati.")
+                                    st.success(f"✅ Belief Base extracted successfully! {belief_count} beliefs identified.")
                                     st.rerun()
                             except json.JSONDecodeError as e:
-                                st.error(f"❌ Errore nel parsing JSON: {str(e)}")
-                                st.warning("Mostra i primi 1000 caratteri della risposta per il debug:")
+                                st.error(f"❌ JSON parsing error: {str(e)}")
+                                st.warning("Showing first 1000 characters of response for debugging:")
                                 st.code(response[:1000])
                         else:
-                            st.error("❌ Errore: risposta LLM non contiene JSON valido (nessun '{' o '}' trovato)")
-                            st.warning("Mostra la risposta completa:")
+                            st.error("❌ Error: LLM response does not contain valid JSON (no '{' or '}' found)")
+                            st.warning("Showing complete response:")
                             st.code(response)
 
                 except Exception as e:
-                    st.error(f"❌ Errore durante l'estrazione dei belief: {e}")
+                    st.error(f"❌ Error extracting beliefs: {e}")
         else:
-            st.warning("⚠️ Carica prima alcuni documenti nella base di conoscenza!")
+            st.warning("⚠️ Load some documents into the knowledge base first!")
 
     # Logica per aprire editor beliefs
     if edit_belief:
@@ -724,7 +724,7 @@ with col2:
                     try:
                         os.remove(belief_base_path)
                     except Exception as e:
-                        st.warning(f"⚠️ Impossibile cancellare belief_base.json: {e}")
+                        st.warning(f"⚠️ Cannot delete belief_base.json: {e}")
 
                 # Forza la re-inizializzazione del DocumentProcessor
                 st.session_state.doc_processor = DocumentProcessor(
@@ -738,12 +738,12 @@ with col2:
                     {'document_count': 0, 'belief_count': 0}
                 )
 
-                st.success("✅ Knowledge Base cancellata con successo!")
+                st.success("✅ Knowledge Base cleared successfully!")
                 st.rerun()
             except Exception as e:
-                st.error(f"❌ Errore durante la cancellazione: {str(e)}")
+                st.error(f"❌ Deletion error: {str(e)}")
         else:
-            st.info("Nessun contenuto da cancellare")
+            st.info("No content to delete")
 
 # Apri modale editor se richiesto
 if st.session_state.show_belief_editor:

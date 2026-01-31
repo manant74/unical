@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Configurazione della pagina
+# Page configuration
 st.set_page_config(
     page_title="LumIA Studio - BDI Framework",
     page_icon="✨",
@@ -8,11 +8,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Inizializza il session state per il tema
+# Initialize session state for theme
 if 'dark_mode' not in st.session_state:
     st.session_state.dark_mode = False
 
-# Toggle button per il tema
+# Toggle button for theme
 col_theme1, col_theme2, col_theme3 = st.columns([6, 1, 1])
 with col_theme3:
     theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
@@ -21,7 +21,7 @@ with col_theme3:
         st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
 
-# Genera CSS dinamico in base al tema
+# Generate dynamic CSS based on theme
 theme_colors = {
     'light': {
         'bg_gradient': 'linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe)',
@@ -74,27 +74,27 @@ shadow_hover = colors['shadow_hover']
 footer_text = colors['footer_text']
 footer_border = colors['footer_border']
 
-# CSS personalizzato avanzato
+# Advanced custom CSS
 st.markdown(f"""
 <style>
-    /* Importa font Google */
+    /* Import Google fonts */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-    /* Reset e font base */
-    * {{{{ 
+    /* Reset and base font */
+    * {{{{
         font-family: 'Poppins', sans-serif;
     }}}}
 
-    /* Nascondi elementi Streamlit non necessari */
+    /* Hide unnecessary Streamlit elements */
     #MainMenu {{visibility: hidden;}}
     footer {{visibility: hidden;}}
     header {{visibility: hidden;}}
 
-    /* Nascondi completamente la sidebar nella homepage */
+    /* Hide sidebar completely on homepage */
     [data-testid="stSidebarNav"] {{display: none;}}
     section[data-testid="stSidebar"] {{display: none;}}
 
-    /* Background gradiente animato */
+    /* Animated gradient background */
     .main {{
         background: {bg_gradient};
         background-size: 400% 400%;
@@ -108,7 +108,7 @@ st.markdown(f"""
         100% {{ background-position: 0% 50%; }}
     }}}}
 
-    /* Container principale */
+    /* Main container */
     .block-container {{
         background: {container_bg};
         padding: 3rem 2rem !important;
@@ -117,7 +117,7 @@ st.markdown(f"""
         transition: all 0.5s ease;
     }}
 
-    /* Header con animazione */
+    /* Animated header */
     .main-header {{
         text-align: center;
         margin-bottom: 3rem;
@@ -160,7 +160,7 @@ st.markdown(f"""
         line-height: 1.6;
     }}
 
-    /* Sezione workflow */
+    /* Workflow section */
     .workflow-section {{
         background: {workflow_bg};
         border-radius: 20px;
@@ -208,7 +208,7 @@ st.markdown(f"""
         color: #667eea;
     }}
 
-    /* Cards per le features - MIGLIORATO ALLINEAMENTO */
+    /* Feature cards - IMPROVED ALIGNMENT */
     .feature-card {{
         background: {card_bg};
         border-radius: 20px;
@@ -389,7 +389,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Workflow section (aggiornato)
+# Workflow section (updated)
 st.markdown("""
 <div class='workflow-section'>
     <div class='workflow-title'>🚀 Recommended Workflow</div>
@@ -405,7 +405,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Definizione delle funzionalità (riorganizzate per categoria)
+# Feature definitions (organized by category)
 features_configuration = [
     {
         "name": "Knol",
@@ -457,7 +457,7 @@ features_live = [
     }
 ]
 
-# Funzione helper per creare le card
+# Helper function to create cards
 def create_feature_card(feature):
     status_class = "status-active" if feature["status"] == "active" else "status-dev"
     status_text = "✓ Active" if feature["status"] == "active" else "🚧 In Development"
@@ -479,10 +479,10 @@ def create_feature_card(feature):
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Sezione moduli
+# Modules section
 st.markdown(f"<h2 style='text-align: center; color: {text_primary}; font-weight: 600; margin-bottom: 0;'>🎨 Explore Modules</h2>", unsafe_allow_html=True)
 
-# CSS per i box raggruppati
+# CSS for grouped boxes
 st.markdown(f"""
 <style>
     .section-divider {{

@@ -94,7 +94,7 @@ with st.sidebar:
         st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
 
     with col_home:
-        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+        if st.button("🏠", width='stretch', type="secondary", help="Back to Home"):
             st.switch_page("app.py")
 
     st.markdown("---")
@@ -147,49 +147,78 @@ with st.sidebar:
         st.markdown("---")
         st.markdown("### ⚡ Genius")
 
-        if st.button("📤 Export as Framework", width='stretch', type="secondary", key="export_framework_sidebar", help="Export BDI as reusable framework for Genius"):
-            try:
-                # Get complete BDI data
-                bdi_data = get_cached_bdi_data(st.session_state.editing_session_id)
+        # Initialize export state
+        if 'pending_framework_export' not in st.session_state:
+            st.session_state.pending_framework_export = None
 
-                if not bdi_data:
-                    st.error("❌ No BDI data to export")
-                elif not bdi_data.get('desires') or not bdi_data.get('beliefs'):
-                    st.warning("⚠️ BDI must have both Desires and Beliefs to export")
-                else:
-                    # Get session for naming
-                    current_session_export = st.session_state.session_manager.get_session(st.session_state.editing_session_id)
-                    session_name = current_session_export['metadata']['name']
+        # Show overwrite confirmation if needed
+        if st.session_state.pending_framework_export:
+            framework_info = st.session_state.pending_framework_export
+            st.warning(f"⚠️ Framework '{framework_info['filename']}' already exists.")
 
-                    # Normalize filename: lowercase, replace spaces with underscores, remove special chars
-                    framework_name = session_name.lower().replace(' ', '_')
-                    framework_name = ''.join(c for c in framework_name if c.isalnum() or c == '_')
-                    framework_filename = f"{framework_name}_bdi.json"
+            col_cancel, col_overwrite = st.columns(2)
+            with col_cancel:
+                if st.button("❌ Cancel", key="cancel_overwrite_framework", width='stretch'):
+                    st.session_state.pending_framework_export = None
+                    st.rerun()
 
-                    # Path to frameworks directory
-                    frameworks_dir = os.path.join("data", "bdi_frameworks")
-                    os.makedirs(frameworks_dir, exist_ok=True)
+            with col_overwrite:
+                if st.button("✅ Overwrite", key="confirm_overwrite_framework", width='stretch', type="primary"):
+                    try:
+                        # Save BDI to framework
+                        with open(framework_info['path'], 'w', encoding='utf-8') as f:
+                            json.dump(framework_info['bdi_data'], f, indent=2, ensure_ascii=False)
+                        st.success(f"✅ Exported:\n`{framework_info['filename']}`")
+                        st.info("💡 Use it in Genius!")
+                        st.session_state.pending_framework_export = None
+                    except Exception as e:
+                        st.error(f"❌ Export failed: {str(e)}")
+                        st.session_state.pending_framework_export = None
+        else:
+            # Show export button
+            if st.button("📤 Export as Framework", width='stretch', type="secondary", key="export_framework_sidebar", help="Export BDI as reusable framework for Genius"):
+                try:
+                    # Get complete BDI data
+                    bdi_data = get_cached_bdi_data(st.session_state.editing_session_id)
 
-                    framework_path = os.path.join(frameworks_dir, framework_filename)
+                    if not bdi_data:
+                        st.error("❌ No BDI data to export")
+                    elif not bdi_data.get('desires') or not bdi_data.get('beliefs'):
+                        st.warning("⚠️ BDI must have both Desires and Beliefs to export")
+                    else:
+                        # Get session for naming
+                        current_session_export = st.session_state.session_manager.get_session(st.session_state.editing_session_id)
+                        session_name = current_session_export['metadata']['name']
 
-                    # Check if file exists
-                    if os.path.exists(framework_path):
-                        st.warning(f"⚠️ Framework '{framework_filename}' already exists.")
-                        if st.button("✅ Overwrite", key="confirm_overwrite_framework_sidebar", width='stretch'):
+                        # Normalize filename: lowercase, replace spaces with underscores, remove special chars
+                        framework_name = session_name.lower().replace(' ', '_')
+                        framework_name = ''.join(c for c in framework_name if c.isalnum() or c == '_')
+                        framework_filename = f"{framework_name}_bdi.json"
+
+                        # Path to frameworks directory
+                        frameworks_dir = os.path.join("data", "bdi_frameworks")
+                        os.makedirs(frameworks_dir, exist_ok=True)
+
+                        framework_path = os.path.join(frameworks_dir, framework_filename)
+
+                        # Check if file exists
+                        if os.path.exists(framework_path):
+                            # Store export info for confirmation
+                            st.session_state.pending_framework_export = {
+                                'filename': framework_filename,
+                                'path': framework_path,
+                                'bdi_data': bdi_data
+                            }
+                            st.rerun()
+                        else:
                             # Save BDI to framework
                             with open(framework_path, 'w', encoding='utf-8') as f:
                                 json.dump(bdi_data, f, indent=2, ensure_ascii=False)
                             st.success(f"✅ Exported:\n`{framework_filename}`")
                             st.info("💡 Use it in Genius!")
-                    else:
-                        # Save BDI to framework
-                        with open(framework_path, 'w', encoding='utf-8') as f:
-                            json.dump(bdi_data, f, indent=2, ensure_ascii=False)
-                        st.success(f"✅ Exported:\n`{framework_filename}`")
-                        st.info("💡 Use it in Genius!")
 
-            except Exception as e:
-                st.error(f"❌ Export failed: {str(e)}")
+                except Exception as e:
+                    st.error(f"❌ Export failed: {str(e)}")
 
 # Main content - Tabs
 # Carica i dati della sessione corrente se in editing
