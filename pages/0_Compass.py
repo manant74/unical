@@ -142,6 +142,55 @@ with st.sidebar:
     else:
         st.info("No sessions yet. Create your first one!")
 
+    # Export as Framework button (visible only when a session is loaded)
+    if st.session_state.editing_session_id:
+        st.markdown("---")
+        st.markdown("### ⚡ Genius")
+
+        if st.button("📤 Export as Framework", width='stretch', type="secondary", key="export_framework_sidebar", help="Export BDI as reusable framework for Genius"):
+            try:
+                # Get complete BDI data
+                bdi_data = get_cached_bdi_data(st.session_state.editing_session_id)
+
+                if not bdi_data:
+                    st.error("❌ No BDI data to export")
+                elif not bdi_data.get('desires') or not bdi_data.get('beliefs'):
+                    st.warning("⚠️ BDI must have both Desires and Beliefs to export")
+                else:
+                    # Get session for naming
+                    current_session_export = st.session_state.session_manager.get_session(st.session_state.editing_session_id)
+                    session_name = current_session_export['metadata']['name']
+
+                    # Normalize filename: lowercase, replace spaces with underscores, remove special chars
+                    framework_name = session_name.lower().replace(' ', '_')
+                    framework_name = ''.join(c for c in framework_name if c.isalnum() or c == '_')
+                    framework_filename = f"{framework_name}_bdi.json"
+
+                    # Path to frameworks directory
+                    frameworks_dir = os.path.join("data", "bdi_frameworks")
+                    os.makedirs(frameworks_dir, exist_ok=True)
+
+                    framework_path = os.path.join(frameworks_dir, framework_filename)
+
+                    # Check if file exists
+                    if os.path.exists(framework_path):
+                        st.warning(f"⚠️ Framework '{framework_filename}' already exists.")
+                        if st.button("✅ Overwrite", key="confirm_overwrite_framework_sidebar", width='stretch'):
+                            # Save BDI to framework
+                            with open(framework_path, 'w', encoding='utf-8') as f:
+                                json.dump(bdi_data, f, indent=2, ensure_ascii=False)
+                            st.success(f"✅ Exported:\n`{framework_filename}`")
+                            st.info("💡 Use it in Genius!")
+                    else:
+                        # Save BDI to framework
+                        with open(framework_path, 'w', encoding='utf-8') as f:
+                            json.dump(bdi_data, f, indent=2, ensure_ascii=False)
+                        st.success(f"✅ Exported:\n`{framework_filename}`")
+                        st.info("💡 Use it in Genius!")
+
+            except Exception as e:
+                st.error(f"❌ Export failed: {str(e)}")
+
 # Main content - Tabs
 # Carica i dati della sessione corrente se in editing
 current_session = None
@@ -251,7 +300,7 @@ else:
     st.info(f"📝 Session Name Selected: **{current_session['metadata']['name']}**")
 
     # Tabs principali
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs", "🎯 Intentions", "📊 Analytics"])
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["📋 Session Settings", "🗂️ Context & Beliefs", "💭 Desires", "🧠 Beliefs", "🎯 Intentions", "📊 Analytics", "🕸️ Grafo BDI"])
 
     # ============================================================================
     # TAB 1: Session Info (nome, descrizione, LLM)
@@ -586,7 +635,7 @@ else:
                         st.markdown("**Edit beliefs as JSON**")
                     with col_btn:
                         expand_icon = "🔼" if st.session_state.editor_expanded else "🔽"
-                        if st.button(expand_icon, key="toggle_editor", help="Expand/Collapse editor", use_container_width=True):
+                        if st.button(expand_icon, key="toggle_editor", help="Expand/Collapse editor", width='stretch'):
                             st.session_state.editor_expanded = not st.session_state.editor_expanded
                             st.rerun()
 
@@ -600,6 +649,7 @@ else:
                         theme="default",
                         shortcuts="vscode",
                         allow_reset=True,
+                        key=f"beliefs_editor_{st.session_state.editing_session_id}",
                         options={
                             "wrap": True,
                             "showLineNumbers": True,
@@ -783,7 +833,7 @@ else:
                     st.markdown("**Edit beneficiario & desires**")
                 with col_btn:
                     expand_icon = "[-]" if st.session_state.desires_editor_expanded else "[+]"
-                    if st.button(expand_icon, key="toggle_desires_editor", help="Expand/Collapse editor", use_container_width=True):
+                    if st.button(expand_icon, key="toggle_desires_editor", help="Expand/Collapse editor", width='stretch'):
                         st.session_state.desires_editor_expanded = not st.session_state.desires_editor_expanded
                         st.rerun()
 
@@ -797,6 +847,7 @@ else:
                     theme="default",
                     shortcuts="vscode",
                     allow_reset=True,
+                    key=f"desires_editor_{st.session_state.editing_session_id}",
                     options={
                         "wrap": True,
                         "showLineNumbers": True,
@@ -919,7 +970,7 @@ else:
                     st.markdown("**Edit BDI beliefs as JSON**")
                 with col_btn:
                     expand_icon = "🔼" if st.session_state.bdi_beliefs_editor_expanded else "🔽"
-                    if st.button(expand_icon, key="toggle_bdi_beliefs_editor", help="Expand/Collapse editor", use_container_width=True):
+                    if st.button(expand_icon, key="toggle_bdi_beliefs_editor", help="Expand/Collapse editor", width='stretch'):
                         st.session_state.bdi_beliefs_editor_expanded = not st.session_state.bdi_beliefs_editor_expanded
                         st.rerun()
 
@@ -933,6 +984,7 @@ else:
                     theme="default",
                     shortcuts="vscode",
                     allow_reset=True,
+                    key=f"bdi_beliefs_editor_{st.session_state.editing_session_id}",
                     options={
                         "wrap": True,
                         "showLineNumbers": True,
@@ -970,6 +1022,8 @@ else:
                             st.error("❌ SessionManager non aggiornato. Riavvia l'applicazione.")
                         except json.JSONDecodeError as e:
                             st.error(f"❌ Invalid JSON: {str(e)}")
+
+                    st.markdown("---")
 
                     # Clear all BDI beliefs
                     if 'confirm_clear_bdi_beliefs' not in st.session_state:
@@ -1051,7 +1105,7 @@ else:
                     st.markdown("**Edit Intentions as JSON**")
                 with col_btn:
                     expand_icon = "🔼" if st.session_state.intentions_editor_expanded else "🔽"
-                    if st.button(expand_icon, key="toggle_intentions_editor", help="Expand/Collapse editor", use_container_width=True):
+                    if st.button(expand_icon, key="toggle_intentions_editor", help="Expand/Collapse editor", width='stretch'):
                         st.session_state.intentions_editor_expanded = not st.session_state.intentions_editor_expanded
                         st.rerun()
 
@@ -1065,6 +1119,7 @@ else:
                     theme="default",
                     shortcuts="vscode",
                     allow_reset=True,
+                    key=f"intentions_editor_{st.session_state.editing_session_id}",
                     options={
                         "wrap": True,
                         "showLineNumbers": True,
@@ -1558,7 +1613,13 @@ else:
 
                 st.markdown("---")
 
-                # ============================================================================
+                
+    # ============================================================================
+    # TAB 7: Grafo BDI
+    # ============================================================================
+    with tab7:
+
+        # ============================================================================
                 # SEZIONE 4: GRAFO DELLE RELAZIONI INTERATTIVO (PyVis)
                 # ============================================================================
                 st.markdown("#### 🕸️ Interactive Relationship Graph")
@@ -1607,7 +1668,7 @@ else:
                         # Pulsanti layout
                         for idx, (label, value) in enumerate(layout_options):
                             with layout_cols_list[idx]:
-                                if st.button(label, key=f"btn_layout_{value}", use_container_width=True):
+                                if st.button(label, key=f"btn_layout_{value}", width='stretch'):
                                     st.session_state.graph_layout_choice = value
                                     st.rerun()
 
@@ -1617,11 +1678,11 @@ else:
                         with col_theme:
                             col_d, col_l = st.columns(2)
                             with col_d:
-                                if st.button("🌙", key="btn_dark_theme", help="Dark", type="secondary", use_container_width=True):
+                                if st.button("🌙", key="btn_dark_theme", help="Dark", type="secondary", width='stretch'):
                                     st.session_state.graph_theme_toggle = True
                                     st.rerun()
                             with col_l:
-                                if st.button("☀️", key="btn_light_theme", help="Light", type="secondary", use_container_width=True):
+                                if st.button("☀️", key="btn_light_theme", help="Light", type="secondary", width='stretch'):
                                     st.session_state.graph_theme_toggle = False
                                     st.rerun()
 
@@ -1868,12 +1929,26 @@ else:
 
                             tooltip = create_tooltip('Desire', f"{desire_id}", desc, desire)
 
+                            # Dimensione basata su priorità
+                            priority = desire.get('priority', 'medium')
+                            if isinstance(priority, str):
+                                priority = priority.lower()
+                            priority_sizes = {
+                                'high': 35,
+                                'alta': 35,
+                                'medium': 25,
+                                'media': 25,
+                                'low': 18,
+                                'bassa': 18
+                            }
+                            desire_size = priority_sizes.get(priority, 25)
+
                             net.add_node(
                                 label,
                                 label=label,
                                 title=tooltip,
                                 color='#FF6B6B',
-                                size=25,
+                                size=desire_size,
                                 shape='dot'
                             )
 
@@ -1924,12 +1999,17 @@ else:
 
                             tooltip = create_tooltip('Belief', f"B{belief_id}", belief.get('definition', content), belief)
 
+                            # Dimensione basata su importance score (0.0-1.0)
+                            importance = belief.get('importance', 0.5)
+                            # Scala: da 15 (importance=0.0) a 35 (importance=1.0)
+                            belief_size = 15 + int(importance * 20)
+
                             net.add_node(
                                 label,
                                 label=label,
                                 title=tooltip,
                                 color='#4ECDC4',
-                                size=25,
+                                size=belief_size,
                                 shape='dot'
                             )
 
@@ -1949,12 +2029,29 @@ else:
 
                             tooltip = create_tooltip('Intention', label, content, intention)
 
+                            # Dimensione basata su numero di beliefs + desires collegati
+                            linked_beliefs = (
+                                intention.get('linked_beliefs', []) or
+                                intention.get('intention', {}).get('linked_beliefs', []) or
+                                []
+                            )
+                            linked_desires = (
+                                intention.get('linked_desires', []) or
+                                intention.get('intention', {}).get('linked_desires', []) or
+                                []
+                            )
+                            total_connections = len(linked_beliefs) + len(linked_desires)
+                            # Scala: base 20, +3 per ogni connessione
+                            intention_size = 20 + (total_connections * 3)
+                            # Cap massimo a 50 per evitare nodi troppo grandi
+                            intention_size = min(intention_size, 50)
+
                             net.add_node(
                                 label,
                                 label=label,
                                 title=tooltip,
                                 color='#FFD93D',
-                                size=25,
+                                size=intention_size,
                                 shape='dot'
                             )
 
@@ -1977,12 +2074,13 @@ else:
                                 # Trova il nodo desire corrispondente e verifica esistenza con normalizzazione ID
                                 for desire in desires:
                                     d_id = desire.get('desire_id') or desire.get('id')
-                                    # Normalizza per matching robusto (B1, B01, 1, ecc.)
+                                    # Normalizza per matching robusto (D1, D01, 1, ecc.)
                                     normalized_linked = normalize_id(str(desire_id), prefix='D')
                                     normalized_d_id = normalize_id(str(d_id), prefix='D')
 
                                     if d_id == desire_id or normalized_d_id == normalized_linked:
-                                        desire_label = f"{desire_id}"
+                                        # Usa d_id (che include già "D" prefix) come label
+                                        desire_label = f"{d_id}"
                                         # Verifica che entrambi i nodi esistono
                                         if belief_label in existing_nodes and desire_label in existing_nodes:
                                             net.add_edge(belief_label, desire_label, color=edge_color)
@@ -2025,7 +2123,11 @@ else:
                                     desire_id = item
 
                                 if desire_id:
-                                    desire_label = f"{desire_id}"
+                                    # Assicura che desire_id abbia il prefisso "D"
+                                    if not str(desire_id).startswith('D'):
+                                        desire_label = f"D{desire_id}"
+                                    else:
+                                        desire_label = f"{desire_id}"
                                     # Verifica che il nodo desire esiste
                                     if desire_label in existing_nodes:
                                         net.add_edge(intention_label, desire_label, color=edge_color)
@@ -2167,7 +2269,6 @@ else:
                     st.error("❌ PyVis library not installed. Run: `pip install pyvis>=0.3.2`")
                 except Exception as e:
                     st.error(f"❌ Error creating PyVis graph: {str(e)}")
-
 # Footer
 st.markdown("---")
 st.markdown("""
