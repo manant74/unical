@@ -565,7 +565,10 @@ Puoi scegliere tra tre opzioni:
 **3. Crea un mix tra Belief di Base e Belief per Desire** 🔄
    Genererò automaticamente un set completo senza richiedere ulteriori input. Analizzerò i tuoi Desire, genererò Belief specializzati per ciascuno, e selezionerò solo i Belief di Base pertinenti. Il processo è completamente automatico.
 
-**Cosa preferisci fare?** Rispondi "1" per la chat interattiva, "2" per verificare i belief di base, oppure "3" per la generazione automatica completa."""
+**4. Genera i Belief da zero** 🔄
+   Genererò automaticamente un set completo senza richiedere ulteriori input, ignorando i belief di base già presenti e rigenerando i Belief confrontando la knowledge base e i desire.
+
+**Cosa preferisci fare?** Rispondi "1" per la chat interattiva, "2" per verificare i belief di base, "3" per la generazione automatica completa, oppure "4" per la generazione automatica da zero."""
     else:
         # Nessun belief di base o già controllato - procedi normalmente
         greeting = f"""Ciao! Sono Believer e sono qui per aiutarti a individuare i Belief. 💡
@@ -663,7 +666,7 @@ if st.session_state.base_beliefs_available and not st.session_state.base_beliefs
     st.markdown("---")
 
     # Usa columns per mettere i pulsanti in fila
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         if st.button("🎯 Chat per creare i Belief Specializzati", key="btn_create_beliefs", use_container_width=True):
@@ -836,7 +839,170 @@ Ecco il risultato:
 
             st.rerun()
 
+    with col4:
+        if st.button("🎯 Generazione Belief da Zero", key="btn_from_scratch", use_container_width=True, help="Genera belief direttamente dai chunk della KB, ignorando il belief base"):
+            # Simula la scelta dell'opzione 4
+            st.session_state.believer_chat_history.append({
+                "role": "user",
+                "content": "4"
+            })
+            st.session_state.base_beliefs_checked = True
+
+            # Imposta flag per avviare generazione da zero
+            st.session_state.from_scratch_generation_requested = True
+            st.rerun()
+
     st.markdown("---")
+
+# === MODE 4: FROM SCRATCH GENERATION ===
+if 'from_scratch_generation_requested' in st.session_state and st.session_state.from_scratch_generation_requested:
+    st.session_state.from_scratch_generation_requested = False  # Reset flag
+
+    # Verifica desires disponibili
+    if not st.session_state.loaded_desires:
+        st.error("⚠️ Nessun desire disponibile. Vai su Alì per definire i desires prima.")
+        st.stop()
+
+    # Verifica KB non vuota
+    kb_stats = st.session_state.doc_processor.get_stats()
+    if kb_stats['document_count'] == 0:
+        st.error("⚠️ Knowledge base vuota. Carica documenti in Knol prima.")
+        st.stop()
+
+    # Mostra messaggio di avvio nella chat
+    with st.chat_message("assistant"):
+        progress_placeholder = st.empty()
+        progress_placeholder.markdown("🎯 **Avvio generazione belief da zero...**\n\n⏳ Sto preparando il contesto...")
+
+    # Avvia processo con spinner
+    with st.spinner(get_random_thinking_message()):
+        try:
+            # STEP 1: Prepare desires context
+            desires_context = "DESIRES DELL'UTENTE:\n\n"
+            for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                desire_id = desire.get('id', f'D{idx}')
+                desire_desc = desire.get('description', desire.get('content', 'N/A'))
+                desire_priority = desire.get('priority', 'N/A')
+                desires_context += f"- **Desire {desire_id}**: {desire_desc} (Priorità: {desire_priority})\n"
+
+            # STEP 2: Query KB for each desire
+            progress_placeholder.markdown("🎯 **Generazione belief da zero in corso...**\n\n🔍 Interrogazione knowledge base per desires...")
+
+            desire_to_chunks = {}
+            query_details = []
+
+            for idx, desire in enumerate(st.session_state.loaded_desires, 1):
+                desire_id = desire.get('id', f'D{idx}')
+                desire_desc = desire.get('description', desire.get('content', 'N/A'))
+
+                # Query top-10 chunks (user preference: balanced coverage)
+                query_results = st.session_state.doc_processor.query(
+                    query_text=desire_desc,
+                    n_results=10
+                )
+
+                # Format chunks
+                chunks_text = []
+                if query_results and 'documents' in query_results:
+                    for doc_list in query_results['documents']:
+                        for doc in doc_list:
+                            chunks_text.append(doc)
+
+                desire_to_chunks[desire_id] = chunks_text
+                query_details.append(f"- Desire {desire_id}: {len(chunks_text)} chunks trovati")
+
+            # STEP 3: Format chunks context
+            progress_placeholder.markdown(f"🎯 **Generazione belief da zero in corso...**\n\n📝 Formattazione contesto...\n\n" + "\n".join(query_details))
+
+            chunks_context = "CHUNKS DALLA KNOWLEDGE BASE:\n\n"
+            for desire_id, chunks in desire_to_chunks.items():
+                chunks_context += f"### [Desire {desire_id}]\n\n"
+                for i, chunk in enumerate(chunks, 1):
+                    chunks_context += f"**Chunk {i}:**\n{chunk}\n\n"
+
+            # STEP 4: Load prompt template
+            from_scratch_template = get_prompt('believer', use_cache=False, prompt_suffix='from_scratch_prompt')
+
+            # Template substitution
+            from_scratch_prompt = from_scratch_template.replace('{desires_context}', desires_context)
+            from_scratch_prompt = from_scratch_prompt.replace('{chunks_context}', chunks_context)
+
+            # STEP 5: LLM call
+            progress_placeholder.markdown(f"🎯 **Generazione belief da zero in corso...**\n\n🤖 Analisi in corso con LLM...\n\n" + "\n".join(query_details))
+
+            from_scratch_response = st.session_state.llm_manager.chat(
+                provider=provider,
+                model=model,
+                messages=[{"role": "user", "content": from_scratch_prompt}],
+                system_prompt=None,
+                max_tokens=8192,
+                temperature=0.5  # Balanced mode: medium-high relevance (user preference)
+            )
+
+            # STEP 6: Parse JSON
+            json_match = re.search(r'```json\s*(.*?)\s*```', from_scratch_response, re.DOTALL)
+            if not json_match:
+                json_match = re.search(r'\{[\s\S]*\}', from_scratch_response)
+
+            if json_match:
+                json_text = json_match.group(1) if '```json' in from_scratch_response else json_match.group(0)
+                parsed_json = json.loads(json_text)
+
+                extracted_beliefs = parsed_json.get("beliefs", [])
+
+                if extracted_beliefs:
+                    # STEP 7: Assign IDs & timestamps
+                    existing_ids = [b.get("id", 0) for b in st.session_state.beliefs]
+                    next_id = max(existing_ids) + 1 if existing_ids else 1
+
+                    for i, b in enumerate(extracted_beliefs):
+                        belief_copy = b.copy()
+                        belief_copy["id"] = next_id + i
+                        if "timestamp" not in belief_copy:
+                            belief_copy["timestamp"] = datetime.now().isoformat()
+                        st.session_state.beliefs.append(belief_copy)
+
+                    # STEP 8: Save to session
+                    st.session_state.session_manager.update_bdi_data(
+                        st.session_state.active_session,
+                        beliefs=st.session_state.beliefs
+                    )
+
+                    # Update final message
+                    success_msg = f"""✅ **Generazione da zero completata!** {len(extracted_beliefs)} nuovi beliefs aggiunti.
+
+I belief sono stati estratti direttamente dai chunk della knowledge base e sono ora disponibili nella sidebar. Ogni belief è stato classificato per rilevanza rispetto ai desires e include la citazione della fonte originale.
+
+📊 **Riepilogo generazione:**
+- Desires analizzati: {len(st.session_state.loaded_desires)}
+- Chunks processati: {sum(len(chunks) for chunks in desire_to_chunks.values())}
+- Beliefs estratti: {len(extracted_beliefs)}
+
+Puoi visualizzare i belief nella sidebar o esportarli usando il pulsante in fondo alla pagina."""
+
+                    progress_placeholder.markdown(success_msg)
+
+                    st.session_state.believer_chat_history.append({
+                        "role": "assistant",
+                        "content": success_msg
+                    })
+
+                    st.rerun()
+                else:
+                    error_msg = "⚠️ Nessun belief estratto dal JSON."
+                    progress_placeholder.error(error_msg)
+            else:
+                # User preference: generic error message (no raw response)
+                error_msg = "⚠️ Impossibile estrarre JSON dalla risposta del LLM. Riprova o contatta il supporto."
+                progress_placeholder.error(error_msg)
+
+        except json.JSONDecodeError as e:
+            # User preference: generic error message
+            error_msg = "❌ Errore parsing JSON. Il formato della risposta non è valido."
+            progress_placeholder.error(error_msg)
+        except Exception as e:
+            error_msg = f"❌ Errore durante la generazione: {str(e)}"
+            progress_placeholder.error(error_msg)
 
 # Chat input (supporta suggerimenti automatici dell'Auditor)
 auto_prompt = None
