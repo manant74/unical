@@ -5,9 +5,9 @@ This document tracks the complete transformation of LUMIA Studio from Italian to
 ## Translation Progress Overview
 
 - **Total Components**: 35
-- **Completed**: 9
+- **Completed**: 12
 - **In Progress**: 0
-- **Not Started**: 26
+- **Not Started**: 23
 
 ---
 
@@ -194,17 +194,26 @@ Error messages, logging, and helper functions.
   - ✅ All error messages and user-facing strings translated
   - Status: ✅ Completed
 
-- [ ] **utils/context_manager.py** (304 lines, ~7 Italian instances)
-  - Error logging messages
-  - Status: ⬜ Not Started
+- [x] **utils/context_manager.py** (304 lines, ~15 Italian instances translated)
+  - ✅ Class docstring: "Gestisce la creazione, selezione ed eliminazione..." → "Manages the creation, selection, and deletion..."
+  - ✅ All method docstrings (11 methods) translated
+  - ✅ Error messages: "Errore nel caricamento..." → "Error loading...", "Errore nell'aggiornamento..." → "Error updating...", etc.
+  - ✅ Exception message: "Il contesto 'X' esiste già" → "The context 'X' already exists"
+  - Status: ✅ Completed
 
-- [ ] **utils/document_processor.py** (263 lines, ~5 Italian instances)
-  - Error handling messages
-  - Status: ⬜ Not Started
+- [x] **utils/document_processor.py** (264 lines, ~15 Italian instances translated)
+  - ✅ Class docstring: "Gestisce l'elaborazione e l'indicizzazione..." → "Manages document processing and indexing..."
+  - ✅ All method docstrings (11 methods) translated
+  - ✅ Error messages: "Errore durante il rilascio..." → "Error releasing...", "Errore nell'eliminazione..." → "Error deleting...", etc.
+  - ✅ Exception: "Errore durante il recupero dell'URL" → "Error retrieving URL"
+  - Status: ✅ Completed
 
-- [ ] **utils/prompts.py** (121 lines, ~1 Italian instance)
-  - Error message: "File prompt non trovato"
-  - Status: ⬜ Not Started
+- [x] **utils/prompts.py** (122 lines, ~8 Italian instances translated)
+  - ✅ Module docstring: "System prompts per gli agenti..." → "System prompts for BDI Framework agents..."
+  - ✅ Function docstrings (4 functions): All translated
+  - ✅ Error messages: "File prompt non trovato" → "Prompt file not found", "Agente 'X' non riconosciuto" → "Agent 'X' not recognized"
+  - ✅ Fallback message: "Prompt non disponibile per X" → "Prompt not available for X"
+  - Status: ✅ Completed
 
 - [ ] **utils/session_manager.py** (311 lines)
   - Review for any Italian content
@@ -331,15 +340,15 @@ ALI_EXPECTED_OUTCOME = "Progress toward..."
 
 - System Prompts: 0/14 (0%)
 - Streamlit Pages: 6/6 (100%) ✅
-- Utility Modules: 3/8 (38%)
+- Utility Modules: 6/8 (75%)
 - Homepage & Docs: 1/3 (33%)
 - Testing: 0/4 (0%)
 
 ### Overall Progress
 
 - Total Items: 35
-- Completed: 9 (26%)
-- Remaining: 26
+- Completed: 12 (34%)
+- Remaining: 23
 
 ---
 
@@ -361,6 +370,53 @@ ALI_EXPECTED_OUTCOME = "Progress toward..."
 ## Recent Changes
 
 ### 2026-02-01 (Latest)
+
+- ✅ **utils/prompts.py**: Completed translation
+  - Translated ~8 Italian docstrings and messages (122 lines total)
+  - Module docstring: "System prompts per gli agenti del BDI Framework" → "System prompts for BDI Framework agents"
+  - Function docstrings (4 functions):
+    - _load_prompt_from_file: "Carica un system prompt da file Markdown" → "Loads a system prompt from a Markdown file"
+    - get_prompt: "Restituisce il system prompt per un agente specifico" → "Returns the system prompt for a specific agent"
+    - clear_cache: "Svuota la cache dei prompts" → "Clears the prompts cache"
+    - get_all_prompts: "Restituisce tutti i system prompts disponibili" → "Returns all available system prompts"
+  - Error messages:
+    - "File prompt non trovato" → "Prompt file not found"
+    - "Agente 'X' non riconosciuto" → "Agent 'X' not recognized"
+    - "Prompt non disponibile per X" → "Prompt not available for X"
+  - Code comments NOT translated (per user request)
+
+- ✅ **utils/document_processor.py**: Completed translation
+  - Translated ~15 Italian docstrings and error messages (264 lines total)
+  - Class docstring: "Gestisce l'elaborazione e l'indicizzazione dei documenti..." → "Manages document processing and indexing..."
+  - Method docstrings (11 methods): All translated
+    - __init__: "Inizializza il DocumentProcessor..." → "Initializes the DocumentProcessor..."
+    - embeddings (property): "Property per lazy loading del modello embedding..." → "Property for lazy loading of embedding model..."
+    - initialize_db: "Inizializza il database ChromaDB..." → "Initializes the ChromaDB database..."
+    - release_connections: "Rilascia tutte le connessioni..." → "Releases all connections..."
+    - clear_database, process_pdf, process_text, process_url, add_documents, query, get_stats, get_all_sources, get_all_documents, _normalize_collection_name
+  - Error messages (5 instances):
+    - "Errore durante il rilascio delle connessioni" → "Error releasing connections"
+    - "Errore nell'eliminazione della collection" → "Error deleting collection"
+    - "Errore durante la cancellazione del database" → "Error clearing database"
+    - "Errore durante il recupero dell'URL" → "Error retrieving URL"
+  - Code comments NOT translated (per user request)
+
+- ✅ **utils/context_manager.py**: Completed translation
+  - Translated ~15 Italian docstrings and error messages (304 lines total)
+  - Class docstring: "Gestisce la creazione, selezione ed eliminazione di contesti multipli" → "Manages the creation, selection, and deletion of multiple contexts"
+  - Method docstrings (11 methods): All translated with Args and Returns sections
+    - create_context: "Crea un nuovo contesto..." → "Creates a new context..."
+    - get_all_contexts: "Recupera tutti i contesti..." → "Retrieves all available contexts..."
+    - get_context: "Recupera un contesto specifico..." → "Retrieves a specific context..."
+    - update_context_metadata, delete_context, get_context_path, get_chroma_db_path, get_belief_base_path, export_context, import_context, get_global_stats, _normalize_name
+  - Error messages (6 instances):
+    - "Errore nel caricamento del contesto" → "Error loading context"
+    - "Errore nell'aggiornamento del contesto" → "Error updating context"
+    - "Errore nell'eliminazione del contesto" → "Error deleting context"
+    - "Errore nell'export del contesto" → "Error exporting context"
+    - "Errore nell'import del contesto" → "Error importing context"
+  - Exception: "Il contesto 'X' esiste già" → "The context 'X' already exists"
+  - Code comments NOT translated (per user request)
 
 - ✅ **utils/auditor.py**: Completed translation
   - Translated ~40 Italian user-facing messages and keyword lists (402 lines total)

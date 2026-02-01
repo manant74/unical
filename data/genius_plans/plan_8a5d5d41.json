@@ -1,0 +1,700 @@
+{
+  "plan_id": "8a5d5d41",
+  "session_id": null,
+  "bdi_source": "perizia_immobiliare_bdi.json",
+  "created_at": "2026-02-01T19:32:30.593161",
+  "last_updated": "2026-02-01T19:37:15.734545",
+  "target_desire": {
+    "desire_id": 1,
+    "desire_statement": "Desidera una sequenza di passi (8–12 step) chiara e replicabile per stimare in modo difendibile il valore di mercato a fini mutuo di una villa monofamiliare (anche con grande giardino), dalla presa in carico fino alla conclusione.",
+    "priority": "medium",
+    "success_metrics": [
+      "Riduzione del tempo medio di completamento della perizia (a parità di qualità/completezza).\\nRiduzione delle revisioni/integrazioni richieste (es. richieste di chiarimenti, documenti mancanti, passaggi non giustificati)."
+    ]
+  },
+  "user_profile": {
+    "profile_id": "e418d082",
+    "role": "User",
+    "timeline_weeks": 12,
+    "current_situation": "Working on implementing desire",
+    "constraints": [],
+    "skill_level": "intermediate",
+    "additional_notes": "",
+    "created_at": "2026-02-01T19:31:11.819695"
+  },
+  "plan_structure": {
+    "total_phases": 4,
+    "total_steps": 12,
+    "estimated_duration_weeks": 12,
+    "phases": [
+      {
+        "phase_id": "P1",
+        "phase_name": "Definizione del perimetro e struttura standard della perizia",
+        "duration_weeks": 3,
+        "steps": [
+          {
+            "step_id": "S1.1",
+            "description": "Formalizzare un modello standard di mandato professionale per perizie di ville a fini mutuo",
+            "tasks": [
+              "Elencare tutte le informazioni minime da includere nel mandato (committente, oggetto, finalità, data di valutazione, livello di approfondimento, limitazioni/assunzioni).",
+              "Redigere una bozza di mandato tipo specifica per perizie a garanzia mutuo di ville monofamiliari (anche con grande giardino).",
+              "Verificare la bozza rispetto alle richieste abituali degli istituti di credito con cui lavori (o linee guida interne) e apportare eventuali modifiche.",
+              "Salvare il modello in un format riutilizzabile (es. Word con campi variabili) e organizzarlo in una cartella accessibile e ordinata."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Mandato professionale (contenuti)",
+                "definition": "Nella fase 0 il perito definisce committente, oggetto, finalità, data di riferimento, grado di approfondimento e limitazioni/assunzioni. Questo imposta correttamente il perimetro della stima.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 5, Chunk 7]: \"Il perito definisce: - soggetto committente; - oggetto della stima; - finalità (vendita, consulenza, garanzia); - data di riferimento; - grado di approfondimento (desktop, drive-by, full appraisal); - limitazioni e assunzioni.\""
+              },
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste un file di mandato tipo aggiornato, riutilizzabile e adattabile in meno di 5 minuti a un nuovo incarico.",
+              "Per ogni nuovo incarico, il mandato richiede esplicitamente: finalità (mutuo), data di valutazione, grado di approfondimento, limitazioni/assunzioni."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 1,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": "2026-02-01T19:37:04.033270",
+            "user_notes": "",
+            "practical_tips": [
+              "Crea il modello di mandato in Microsoft Word usando i 'Controlli contenuto' (campi compilabili per committente, oggetto, finalità mutuo, data di valutazione, livello di approfondimento, assunzioni/limitazioni) e salvalo come modello (.dotx) in una cartella dedicata su OneDrive/SharePoint.",
+              "Usa Google Drive o Dropbox con una struttura di cartelle standard (es. /Modelli/Mandati_mutuo_ville /Banche/[Nome banca]) e una convenzione di nomenclatura fissa (es. MANDATO_[Banca]_[CognomeCliente]_[AAAAMMGG]) per ritrovare velocemente il modello giusto e le versioni aggiornate.",
+              "Imposta una tabella in Notion o Airtable con le richieste tipiche dei vari istituti di credito (colonne: Banca, data linee guida, clausole obbligatorie, livelli di approfondimento richiesti, note) e usa una vista checklist per confrontare velocemente il tuo mandato tipo con i requisiti di ciascuna banca.",
+              "Utilizza ChatGPT (con istruzioni personalizzate in cui incolli i requisiti standard delle banche con cui collabori) per perfezionare il testo del mandato: incolla la tua bozza, chiedi di verificare che includa tutte le informazioni minime e di suggerire clausole aggiuntive specifiche per perizie di ville unifamiliari a garanzia mutuo.",
+              "🔧 Estensione Tecnologica: Generatore automatico di mandati che, partendo da un semplice form (banca, committente, dati immobile, finalità mutuo, data valutazione, livello di approfondimento, limitazioni), produce un documento Word/PDF già strutturato con le clausole standard corrette per la banca selezionata e lo salva nella cartella corretta con il nome file standard."
+            ]
+          },
+          {
+            "step_id": "S1.2",
+            "description": "Tradurre in termini operativi la definizione di Market Value applicata alle perizie per mutuo",
+            "tasks": [
+              "Scrivere in massimo una pagina la definizione operativa di Market Value da usare nelle perizie (condizioni di libera contrattazione, parti informate, indipendenti, tempo di esposizione, ecc.).",
+              "Definire criteri pratici per verificare che l’uso dei comparabili rifletta condizioni di mercato normali (no vendite anomale, aste, vendite forzate, ecc.).",
+              "Inserire nel modello di perizia un paragrafo standard che riporti la definizione di Market Value e le condizioni di validità della stima."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Market Value (Più Probabile Valore di Mercato)",
+                "definition": "Il Market Value è definito come il prezzo che si forma tra parti informate, indipendenti e non condizionate, dopo congruo periodo di esposizione sul mercato. Questa definizione delimita le condizioni di validità della stima.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 1]: \"in condizioni di libera contrattazione tra parti informate, indipendenti e non condizionate, dopo un congruo periodo di esposizione sul mercato\""
+              },
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              }
+            ],
+            "verification_criteria": [
+              "È disponibile un testo standard sulla definizione di Market Value pronto da copiare/incollare nelle perizie.",
+              "Almeno 3 esempi di situazioni di mercato non ordinarie sono elencati con indicazione di come gestirli o escluderli dai comparabili."
+            ],
+            "estimated_effort_days": 2,
+            "assigned_to": "User",
+            "step_order": 2,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": "2026-02-01T19:37:06.033479",
+            "user_notes": "",
+            "practical_tips": [
+              "Usa ChatGPT o Claude insieme a un documento di riferimento (IVS/EVS + linee guida interne) caricato in Google Docs per farti generare una bozza di definizione operativa di Market Value di una pagina, poi rifiniscila collaborativamente con il team usando la modalità Commenti/Suggerimenti.",
+              "Crea in Google Sheets o Excel un foglio standard con una checklist per ogni comparabile (aste, vendite tra parti correlate, vendite forzate, tempi di esposizione anomali, ecc.) con caselle di spunta e note obbligatorie, da compilare per ogni perizia e salvare come parte della documentazione.",
+              "Imposta un modello di perizia in Microsoft Word (o Google Docs) con il paragrafo standard sulla Market Value salvato come Quick Part/AutoText (Word) o snippet fisso; archivia il modello in SharePoint/Drive in sola lettura così tutti inseriscono sempre la stessa formulazione aggiornata con un clic.",
+              "🔧 **Estensione Tecnologica**: Strumento di verifica comparabili che importa un file CSV/Excel da banca dati immobiliare, evidenzia in automatico transazioni potenzialmente non in condizioni di mercato normali (aste, ribassi eccessivi, tempi di esposizione estremi, vendite intra-familiari) e genera un paragrafo standardizzato da inserire nella perizia sulle condizioni di mercato e sulla selezione dei comparabili."
+            ]
+          },
+          {
+            "step_id": "S1.3",
+            "description": "Disegnare la bozza di flusso end-to-end della perizia in 8–12 step chiari",
+            "tasks": [
+              "Elencare sulla base dell’esperienza attuale tutti i passaggi che compi dalla presa in carico alla consegna della perizia.",
+              "Raggruppare e razionalizzare i passaggi in 8–12 step massimi, ordinandoli cronologicamente (es. mandato, due diligence documentale, sopralluogo, MCA, relazione, ecc.).",
+              "Identificare per ciascuno step l’output principale (documento, dato, decisione) e i prerequisiti.",
+              "Disegnare uno schema visivo (anche semplice, es. in PowerPoint o foglio A4) che rappresenti in modo chiaro il flusso standard di lavoro."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              },
+              {
+                "subject": "Principio fondamentale di stima",
+                "definition": "Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables). Questo fonda l’intera selezione dei comparabili e le regole di omogeneità.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 2]: \"Principio fondamentale: Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables).\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste uno schema unico con 8–12 step numerati che copre l’intero processo di perizia di una villa.",
+              "Per ogni step è definito almeno un output concreto (es. “checklist documentale completata”, “scheda sopralluogo compilata”, “griglia MCA completata”, ecc.)."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 3,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": "2026-02-01T19:37:07.173857",
+            "user_notes": "",
+            "practical_tips": [
+              "Usa una board Miro (template 'Flowchart' o 'User Journey') per mettere ogni micro-passaggio della perizia su sticky note, poi raggrupparli visivamente in 8–12 blocchi numerati, aggiungendo commenti direttamente sui nodi per dubbi o varianti.",
+              "Crea una tabella in Notion o Airtable dove ogni riga è uno step (colonne: Ordine, Nome step, Descrizione, Output principale, Prerequisiti, Chi è coinvolto) e poi unisci/raggruppa le righe fino ad arrivare a 8–12 step standard ordinati cronologicamente.",
+              "Prendi l’elenco dettagliato dei passaggi che fai oggi e incollalo in ChatGPT, chiedendo di proporre una versione razionalizzata in 8–12 step con per ogni step: breve descrizione, output atteso e prerequisiti; usa il risultato come base da rifinire manualmente.",
+              "Partendo dalla tabella definitiva, usa PowerPoint o Google Slides con SmartArt → 'Processo' per generare automaticamente uno schema visivo lineare o con diramazioni, inserendo in piccolo sotto ogni blocco l’output e i prerequisiti principali.",
+              "🔧 **Estensione Tecnologica**: Assistente che legge i tuoi vecchi incarichi, email e perizie (PDF/Word), ricostruisce in automatico la sequenza tipica delle attività con tempi medi, raggruppa in 8–12 fasi standard e genera sia la tabella (step/output/prerequisiti) sia il diagramma di flusso pronto da modificare."
+            ]
+          }
+        ],
+        "phase_order": 1,
+        "status": "completed",
+        "started_at": "2026-02-01T19:37:04.033295",
+        "completed_at": "2026-02-01T19:37:07.173871"
+      },
+      {
+        "phase_id": "P2",
+        "phase_name": "Standardizzazione di due diligence documentale e sopralluogo",
+        "duration_weeks": 3,
+        "steps": [
+          {
+            "step_id": "S2.1",
+            "description": "Creare una checklist strutturata per la Due diligence documentale specifica per ville con giardino",
+            "tasks": [
+              "Elencare tutti i documenti necessari per una perizia affidabile (titolo di proprietà, planimetrie catastali, visure, concessioni edilizie, agibilità, eventuali servitù, regolamenti urbanistici, ecc.).",
+              "Classificare i documenti in: obbligatori, altamente raccomandati, opzionali, distinguendo tra fase pre-sopralluogo e fase post-sopralluogo.",
+              "Redigere una checklist compilabile (es. in Excel o modulo PDF) da usare ogni volta, con campi per: ricevuto/sì-no, note, richieste al cliente.",
+              "Preparare un modello di email/lettera standard per la richiesta dei documenti al cliente/committente."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Due diligence documentale",
+                "definition": "Prima di qualsiasi sopralluogo o calcolo, il valutatore deve acquisire documentazione probatoria per identificare l’immobile e verificarne la legittimità. Questo ordina la sequenza operativa e riduce rischio di stime fragili.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 3]: \"Prima di qualsiasi sopralluogo o calcolo, il valutatore deve acquisire la documentazione probatoria per identificare l'immobile e verificarne la legittimità.\""
+              },
+              {
+                "subject": "Regola pratica (documenti e stima affidabile)",
+                "definition": "Senza documenti corretti non esiste una stima affidabile. Questo stabilisce un prerequisito operativo per avviare la valutazione.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 9]: \"Senza documenti corretti non esiste una stima affidabile.\""
+              }
+            ],
+            "verification_criteria": [
+              "È disponibile una checklist documentale con almeno 15 voci specifiche per ville monofamiliari.",
+              "Ogni nuova perizia avviata utilizza la checklist per verificare completezza documentale prima del sopralluogo."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 1,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa Airtable per creare un database “Due diligence ville con giardino” con una tabella unica che includa: nome documento, categoria (titolo, catasto, urbanistica, ecc.), fase (pre/post sopralluogo), livello (obbligatorio/altamente raccomandato/opzionale), checkbox ricevuto, note, richiesta al cliente; poi crea un’Interfaccia (Interface Designer) con vista checklist filtrabile e stampabile in PDF.",
+              "Imposta un file Google Sheets/Excel con un foglio per l’elenco master dei documenti (con colonne per fase e priorità) e un foglio ‘Checklist per pratica’ con convalide dati (menu a tendina sì/no, obbligatorio/opzionale) e formattazione condizionale che evidenzia in rosso i documenti obbligatori mancanti, così puoi duplicarlo a ogni nuova perizia.",
+              "Crea in Google Docs o Word un modello standard di email/lettera di richiesta documenti con campi segnaposto (nome cliente, indirizzo immobile, lista documenti mancanti) e usa un componente aggiuntivo di mail merge tipo Document Studio (Google) o la stampa unione di Word/Outlook collegata al tuo foglio checklist per inviare in blocco richieste personalizzate.",
+              "Usa Jotform o Microsoft Forms per creare un modulo “Checklist sopralluogo villa con giardino” con tutte le voci già classificate per area (proprietà, catasto, urbanistica, servitù, giardino/pertinenze) e attiva l’opzione che genera automaticamente un PDF riepilogativo firmabile digitalmente e archiviato in OneDrive/Google Drive.",
+              "🔧 Estensione Tecnologica: Sistema smart che, caricati i documenti (atto di proprietà, visure, concessioni, agibilità, ecc.), riconosce automaticamente la tipologia di ciascun file, estrae i dati chiave (intestatari, estremi catastali, protocollo, date) e li confronta con la checklist, producendo un report di “documenti mancanti” e “criticità da chiarire”.",
+              "🔧 Estensione Tecnologica: Assistente normativo che, inseriti comune, indirizzo e caratteristiche dell’immobile (villa singola, con giardino, eventuali pertinenze e vincoli), genera una checklist dinamica dei documenti obbligatori e raccomandati in base alla normativa locale (regolamenti urbanistici, vincoli paesaggistici, servitù di passaggio, ecc.) da importare direttamente nel tuo modello di checklist."
+            ]
+          },
+          {
+            "step_id": "S2.2",
+            "description": "Standardizzare il protocollo di sopralluogo per ville con grande giardino",
+            "tasks": [
+              "Definire un percorso tipo di sopralluogo (esterno, giardino, pertinenze, interni, parti comuni/contesto) e le misurazioni da eseguire.",
+              "Creare una scheda sopralluogo con sezioni dedicate a: rilievo metrico, stato manutentivo, finiture, impianti, esposizione, affacci, caratteristiche del giardino (superficie, sistemazione, privacy, accessi, ecc.).",
+              "Definire uno schema minimo di report fotografico (quante foto, cosa fotografare, criteri di inquadratura) per garantire documentazione sufficiente ma non ridondante.",
+              "Testare la scheda su un sopralluogo reale o simulato e correggere eventuali mancanze."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              },
+              {
+                "subject": "Principio fondamentale di stima",
+                "definition": "Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables). Questo fonda l’intera selezione dei comparabili e le regole di omogeneità.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 2]: \"Principio fondamentale: Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables).\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste una scheda sopralluogo standard compilabile in formato cartaceo o digitale.",
+              "Il tempo medio di sopralluogo è stimato e annotato (prima e dopo la standardizzazione) per misurare eventuali riduzioni future."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 2,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa Airtable per creare una 'Scheda Sopralluogo Ville con Giardino' con tabelle/section: Dati immobile, Esterni, Giardino, Pertinenze, Interni, Parti comuni/contesto e misurazioni; attiva un Airtable Form da usare su smartphone così ogni campo (rilievo metrico, stato manutentivo, finiture, impianti, esposizione, affacci, caratteristiche del giardino) diventa obbligatorio dove serve.",
+              "Imposta un template di ispezione in SafetyCulture (iAuditor) o Fulcrum con sezioni nell’ordine del percorso tipo (esterno → giardino → pertinenze → interni → contesto), aggiungendo campi guidati (menu a tendina, scale di valutazione, note) e foto obbligatorie per ogni area per standardizzare sia la raccolta dati sia il report PDF finale.",
+              "Mappa il percorso standard di sopralluogo in Miro o Lucidchart (diagramma semplice con tappe e check principali: cosa misurare, cosa osservare, cosa fotografare per ogni tappa) e stampa una versione A4 da portare con te, oltre a caricare lo schema come immagine all’inizio della scheda in Airtable/Notion come promemoria visivo.",
+              "Definisci lo schema minimo di report fotografico creando in Google Drive un modello di cartella con sottocartelle numerate (01_Esterni, 02_Giardino, 03_Pertinenze, 04_Interni, 05_Contesto) e una checklist in Google Keep/Notion con la lista delle inquadrature obbligatorie (facciata, prospetti, accessi, viste principali dal giardino, dettagli criticità, ecc.) da spuntare a fine sopralluogo.",
+              "🔧 **Estensione Tecnologica**: Assistente mobile per sopralluogo che guida l’operatore passo–passo sul percorso standard (con checklist interattiva), controlla in tempo reale che tutte le misure e le foto minime per ogni area siano state inserite e, a fine visita, segnala eventuali mancanze e genera automaticamente un report strutturato pronto per la revisione."
+            ]
+          },
+          {
+            "step_id": "S2.3",
+            "description": "Definire i criteri di segmentazione dell’immobile e del contesto rilevanti ai fini del valore",
+            "tasks": [
+              "Elencare le principali caratteristiche che influenzano il valore di una villa con giardino (posizione, accessibilità, affacci, superficie giardino, qualità finiture, stato manutentivo, ecc.).",
+              "Organizzare le caratteristiche in macro-categorie (es. localizzazione, caratteristiche edilizie, caratteristiche del lotto e giardino, caratteristiche impiantistiche, contesto di mercato).",
+              "Stabilire per ogni categoria quali dati DEVONO essere raccolti in modo sistematico in sopralluogo o da documenti.",
+              "Integrare questi campi nella scheda sopralluogo e/o checklist documentale in modo che nulla di critico venga tralasciato."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Principio fondamentale di stima",
+                "definition": "Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables). Questo fonda l’intera selezione dei comparabili e le regole di omogeneità.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 2]: \"Principio fondamentale: Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables).\""
+              },
+              {
+                "subject": "Market Value (Più Probabile Valore di Mercato)",
+                "definition": "Il Market Value è definito come il prezzo che si forma tra parti informate, indipendenti e non condizionate, dopo congruo periodo di esposizione sul mercato. Questa definizione delimita le condizioni di validità della stima.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 1]: \"in condizioni di libera contrattazione tra parti informate, indipendenti e non condizionate, dopo un congruo periodo di esposizione sul mercato\""
+              }
+            ],
+            "verification_criteria": [
+              "Per ogni perizia è possibile estrarre rapidamente un elenco di caratteristiche chiave dell’immobile utili alla comparazione.",
+              "Nelle ultime 2–3 perizie non risultano campi critici lasciati in bianco nelle schede (es. superficie giardino, stato impianti, ecc.)."
+            ],
+            "estimated_effort_days": 2,
+            "assigned_to": "User",
+            "step_order": 3,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa un database Airtable dedicato agli immobili con campi strutturati per macro-categorie (Localizzazione, Edificio, Lotto/Giardino, Impianti, Contesto di mercato) e imposta come *obbligatori* i campi critici (es. superficie giardino, qualità finiture, accessibilità, affacci) nella vista Form per il sopralluogo.",
+              "Crea una checklist di sopralluogo con Google Forms (o Typeform) suddivisa in sezioni per macro-categorie e rendi obbligatorie le domande chiave; fai confluire automaticamente le risposte in un Google Sheet che userai come archivio dei dati raccolti sul campo.",
+              "Imposta in Notion una singola database “Schede Immobile” con un template precompilato che includa tutti i campi da raccogliere (testuali, numerici, a tendina per la qualità/stato manutentivo) e collegalo alle pagine dei singoli incarichi di valutazione per avere sempre la scheda completa a portata di mano.",
+              "Usa Make.com o Zapier per collegare il modulo di sopralluogo (Google Forms/Typeform) al tuo database principale (Airtable/Notion): ogni nuova compilazione crea/aggiorna automaticamente la scheda immobile, rinomina una cartella Google Drive con indirizzo e data e vi archivia eventuali documenti/foto.",
+              "🔧 **Estensione Tecnologica**: Assistente di analisi documentale che, caricando visura catastale, planimetria, foto e annuncio, compila in automatico una bozza della scheda (superfici, numero piani, esposizioni, tipo affacci, stato manutentivo indicativo) e segnala chiaramente quali campi fondamentali mancano ancora da verificare in sopralluogo."
+            ]
+          }
+        ],
+        "phase_order": 2,
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null
+      },
+      {
+        "phase_id": "P3",
+        "phase_name": "Procedura MCA e gestione strutturata delle fonti di mercato",
+        "duration_weeks": 4,
+        "steps": [
+          {
+            "step_id": "S3.1",
+            "description": "Mappare e valutare le fonti informative di mercato per ville monofamiliari",
+            "tasks": [
+              "Elencare tutte le fonti disponibili: atti notarili, agenzie immobiliari locali, banche dati interne, portali e annunci, OMI e altri osservatori.",
+              "Per ciascuna fonte, valutare: affidabilità, aggiornamento, granularità dei dati (es. se distingue ville da appartamenti), costo/tempo di accesso.",
+              "Definire una gerarchia di utilizzo delle fonti (es. atti notarili e banche dati interne come primarie, annunci corretti e agenzie come secondarie, OMI come controllo di coerenza).",
+              "Documentare la procedura di ricerca dati: sequenza delle fonti da consultare e criteri per scartare dati non affidabili."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Fonti informative per analisi mercato",
+                "definition": "Sono elencate fonti informative come atti notarili, agenzie locali, banche dati interne, annunci (corretti) e OMI come controllo. Questo guida la raccolta dati per comparabili e verifica coerenza.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 10]: \"Fonti informative: atti notarili; agenzie locali; banche dati interne; annunci (opportunamente corretti); OMI (solo come controllo).\""
+              },
+              {
+                "subject": "Metodo del Confronto di Mercato (MCA)",
+                "definition": "Il MCA è indicato come metodo principale per immobili residenziali in mercati attivi e si basa su comparazione con immobili simili. È centrale per stimare il valore di una villa residenziale con dati di mercato.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 7]: \"È il metodo principale (\\\"Gold Standard\\\") per immobili residenziali in mercati attivi.\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste un documento o una pagina di procedura che descrive le fonti di mercato da utilizzare in ordine di priorità.",
+              "Per almeno 2 aree geografiche in cui operi sono elencate le fonti locali preferenziali (es. specifiche agenzie di riferimento)."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 1,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa un database Airtable per censire tutte le fonti (atti notarili, agenzie, banche dati interne, portali, OMI, osservatori) con campi dedicati a: affidabilità (1–5), frequenza di aggiornamento, granularità (es. distingue ville/appartamenti?), costo/tempo di accesso, link e note; crea viste filtrate per tipo di fonte e punteggio di affidabilità.",
+              "Imposta un Google Sheet come matrice di valutazione fonti con menu a tendina (Data → Validazione dati) per classificare ogni fonte e usa formattazione condizionale per evidenziare le fonti primarie (es. verde per affidabilità ≥4, aggiornamento mensile) e quelle da usare solo come controllo (es. OMI in giallo).",
+              "Documenta la procedura di ricerca dati in Notion (o Confluence) creando una pagina \"Workflow valutazione fonti\" con: sequenza delle fonti da consultare, criteri di esclusione (es. annunci senza planimetria o senza categoria catastale), esempi buoni/cattivi e link diretti alle viste del database/fonti.",
+              "Usa Make.com o Zapier per creare un flusso che raccoglie automaticamente annunci da portali (RSS, email alert, o export dove possibile) filtrati per \"villa/villino\" in zone target e li scrive dentro Airtable/Google Sheets, così puoi misurare nel tempo volume, completezza e aggiornamento di ogni portale/agenzia.",
+              "🔧 Estensione Tecnologica: Cruscotto unico di \"rating fonti\" che importa dati da portali, atti notarili (file caricati), gestionale interno e OMI, riconosce automaticamente se l’immobile è una villa o un appartamento, deduplica i record e assegna un punteggio di affidabilità/completezza per aiutarti a definire e aggiornare la gerarchia delle fonti."
+            ]
+          },
+          {
+            "step_id": "S3.2",
+            "description": "Formalizzare la procedura di selezione, omogeneizzazione e normalizzazione dei comparabili",
+            "tasks": [
+              "Definire i criteri minimi di omogeneità per scegliere i comparabili rispetto al soggetto (tipologia villa, zona, epoca costruttiva, dimensioni, presenza giardino, ecc.).",
+              "Stabilire un intervallo temporale massimo per la validità dei comparabili (es. transazioni degli ultimi 12–24 mesi, con eccezioni motivate).",
+              "Descrivere come normalizzare i prezzi (es. prezzo al mq commerciale, aggiustamento per differenze nelle condizioni, esclusione di oneri accessori).",
+              "Scrivere una procedura in 4–6 sotto-step che riprenda la selezione, la normalizzazione e la preparazione dei comparabili da inserire nella griglia MCA."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Procedura MCA (passi principali)",
+                "definition": "La procedura del MCA elenca: selezione comparabili, normalizzazione prezzi, aggiustamenti per differenze e sintesi dei valori. Questa sequenza supporta una procedura replicabile.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 3, Chunk 10]: \"Procedura : 1. selezione comparabili; 2. normalizzazione prezzi; 3. aggiustamenti per differenze; 4. sintesi dei valori.\""
+              },
+              {
+                "subject": "Metodo del Confronto di Mercato (MCA)",
+                "definition": "Il MCA è indicato come metodo principale per immobili residenziali in mercati attivi e si basa su comparazione con immobili simili. È centrale per stimare il valore di una villa residenziale con dati di mercato.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 7]: \"È il metodo principale (\\\"Gold Standard\\\") per immobili residenziali in mercati attivi.\""
+              },
+              {
+                "subject": "Principio fondamentale di stima",
+                "definition": "Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables). Questo fonda l’intera selezione dei comparabili e le regole di omogeneità.",
+                "relevance_level": "ALTO",
+                "source": "[Desire 1, Chunk 2]: \"Principio fondamentale: Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables).\""
+              }
+            ],
+            "verification_criteria": [
+              "Per ogni perizia sono individuati almeno 3–5 comparabili che rispettano i criteri di omogeneità definiti.",
+              "Per ciascun comparabile è indicato chiaramente il prezzo normalizzato al mq o per unità confrontabile, con il metodo di calcolo documentato."
+            ],
+            "estimated_effort_days": 4,
+            "assigned_to": "User",
+            "step_order": 2,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa un database Airtable dedicato ai comparabili con campi obbligatori per tutti i criteri di omogeneità (tipologia, zona, epoca, superficie, giardino, stato manutentivo) usando menu a tendina e regole di convalida per impedire inserimenti non coerenti.",
+              "Crea un template in Google Sheets/Excel con colonne standardizzate (dati immobile, data transazione, prezzo totale, prezzo/mq commerciale, coefficienti di aggiustamento) e formule bloccate che calcolano automaticamente prezzo/mq e normalizzazioni, così ogni valutazione segue la stessa procedura.",
+              "In Notion imposta un database 'Comparabili' con viste filtrate predefinite (es. ultimi 12 mesi, 12–24 mesi, oltre 24 mesi) e una proprietà ‘Validità’ calcolata che segnala automaticamente i comparabili fuori intervallo temporale.",
+              "Usa Make.com o Zapier per importare automaticamente i dati da file CSV/Excel o Google Forms in un Google Sheet/Airtable dei comparabili e applicare subito etichette come ‘Da verificare’, ‘Omogeneo’, ‘Non omogeneo’ in base a regole semplici (zona, tipologia, range di mq).",
+              "🔧 **Estensione Tecnologica**: Motore di controllo comparabili che, quando inserisci un nuovo immobile simile, confronta automaticamente tutti i campi chiave con il soggetto (tipologia, zona, epoca, dimensioni, pertinenze) e restituisce un punteggio di omogeneità con suggerimento se includerlo o escluderlo.",
+              "🔧 **Estensione Tecnologica**: Calcolatore di normalizzazione prezzi che, partendo dai comparabili grezzi, applica in automatico coefficienti predefiniti per condizioni, stato, presenza di giardino/box, oneri accessori, generando direttamente la riga pronta per la griglia MCA (con log delle correzioni applicate)."
+            ]
+          },
+          {
+            "step_id": "S3.3",
+            "description": "Definire una griglia di aggiustamenti standard per il MCA delle ville con giardino",
+            "tasks": [
+              "Individuare le variabili per cui è più frequente effettuare aggiustamenti (es. superficie, stato manutentivo, qualità del giardino, posizione, accessori come piscina o dependance).",
+              "Stabilire, sulla base dell’esperienza e dati storici, degli intervalli tipici di aggiustamento percentuale o per mq per ciascuna variabile (anche solo come range indicativo).",
+              "Costruire una griglia MCA in Excel o software equivalente che permetta di applicare in modo sistematico tali aggiustamenti, mantenendo la tracciabilità dei calcoli.",
+              "Aggiungere nel modello un campo per motivare testualmente ogni aggiustamento rilevante (es. “+10% per migliore posizione collinare e vista aperta”)."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Procedura MCA (passi principali)",
+                "definition": "La procedura del MCA elenca: selezione comparabili, normalizzazione prezzi, aggiustamenti per differenze e sintesi dei valori. Questa sequenza supporta una procedura replicabile.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 3, Chunk 10]: \"Procedura : 1. selezione comparabili; 2. normalizzazione prezzi; 3. aggiustamenti per differenze; 4. sintesi dei valori.\""
+              },
+              {
+                "subject": "Metodo del Confronto di Mercato (MCA)",
+                "definition": "Il MCA è indicato come metodo principale per immobili residenziali in mercati attivi e si basa su comparazione con immobili simili. È centrale per stimare il valore di una villa residenziale con dati di mercato.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 7]: \"È il metodo principale (\\\"Gold Standard\\\") per immobili residenziali in mercati attivi.\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste un file di griglia MCA personalizzato per ville con campi predefiniti per almeno 8–10 caratteristiche da aggiustare.",
+              "In almeno 2 perizie recenti tutti gli aggiustamenti sono esplicitamente motivati nella griglia o nel testo di relazione."
+            ],
+            "estimated_effort_days": 4,
+            "assigned_to": "User",
+            "step_order": 3,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Imposta una tabella strutturata in Excel o Google Sheets con una colonna per ogni variabile di aggiustamento (superficie, stato manutentivo, qualità giardino, posizione, piscina/dependance) e usa convalida dati + menu a tendina per le categorie qualitative che richiamano automaticamente un range di aggiustamento tramite CERCA.VERT/XLOOKUP.",
+              "Crea una base Airtable con due tabelle: una per le compravendite storiche e una per la “Griglia standard di aggiustamenti”; collega le tabelle per filtrare rapidamente per zona/tipologia e visualizzare i range tipici, aggiungendo un campo “Motivazione aggiustamento” obbligatorio in fase di compilazione MCA.",
+              "Usa un database Notion dedicato agli MCA con proprietà per ogni variabile (numeriche e qualitative), proprietà formula per calcolare automaticamente gli aggiustamenti e una proprietà testo “Motivazione aggiustamento”: crea un template “Villa con giardino - MCA” da duplicare per ogni pratica.",
+              "Esporta le compravendite storiche in CSV da Excel/gestionale e caricale in ChatGPT o in Excel con Copilot per farti proporre range indicativi di aggiustamento (% o €/mq) per ciascuna variabile, poi trasferisci questi range raffinati nella tua griglia standard in Excel/Sheets.",
+              "🔧 Estensione Tecnologica: Motore di suggerimento aggiustamenti MCA che, partendo dai dati del soggetto e dei comparabili (superficie, stato, qualità giardino, posizione, accessori), propone in automatico i singoli aggiustamenti con range e motivazione testuale, apprendendo nel tempo dai tuoi MCA archiviati e mantenendo lo storico di tutte le modifiche."
+            ]
+          },
+          {
+            "step_id": "S3.4",
+            "description": "Costruire il modello di calcolo finale e la traccia standard di motivazione della stima",
+            "tasks": [
+              "Integrare la griglia MCA con un riepilogo automatico del valore unitario e del valore complessivo stimato (con eventuali range e valore finale scelto).",
+              "Predisporre nel modello di relazione una sezione standard che descriva il metodo utilizzato (MCA), le sue fasi principali e il motivo della sua scelta rispetto ad altri metodi.",
+              "Inserire nel modello un paragrafo tipo per spiegare come si è passati dai valori dei comparabili al Più Probabile Valore di Mercato del bene oggetto.",
+              "Verificare che tutti i passaggi del calcolo siano replicabili e che un terzo possa ricostruire il valore a partire dai dati in griglia."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              },
+              {
+                "subject": "Procedura MCA (passi principali)",
+                "definition": "La procedura del MCA elenca: selezione comparabili, normalizzazione prezzi, aggiustamenti per differenze e sintesi dei valori. Questa sequenza supporta una procedura replicabile.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 3, Chunk 10]: \"Procedura : 1. selezione comparabili; 2. normalizzazione prezzi; 3. aggiustamenti per differenze; 4. sintesi dei valori.\""
+              }
+            ],
+            "verification_criteria": [
+              "Il modello di perizia contiene una sezione standard \"Metodo di stima\" specifica per il MCA, pronta all’uso.",
+              "In un test su almeno 1 perizia, un collega/terzo può ricostruire il valore stimato partendo esclusivamente dalla griglia MCA e dalla relazione."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 4,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa Google Sheets o Excel per aggiungere un foglio “Sintesi MCA” collegato alla griglia comparabili: imposta formule (MIN, MAX, MEDIA, SCARTO.TIPO, SCARTO) sul valore unitario e inserisci un campo a tendina (convalida dati) per selezionare il valore finale, in modo che il riepilogo (range, valore scelto, motivazione breve) si aggiorni automaticamente.",
+              "Prepara un modello standard di relazione in Google Docs o Word con segnalibri/segnaposto (es. «[METODO_MCA]», «[FASI_CALCOLO]», «[MOTIVAZIONE_SCELTA_METODO]») e collega il documento al foglio Excel/Sheets tramite Zapier o Make.com, così da generare ogni volta una nuova relazione precompilata con descrizione del metodo e fasi principali.",
+              "Crea in Notion o Airtable una tabella “Relazioni di stima” che importi (manualmente o via Zapier) i dati chiave della MCA (valore unitario medio, range, scostamenti applicati ai comparabili) e aggiungi campi testuali standardizzati per descrivere il passaggio dai comparabili al Più Probabile Valore di Mercato, in modo da avere sempre una traccia motivazionale coerente e riutilizzabile.",
+              "Usa ChatGPT o Notion AI per generare il paragrafo tipo che spiega come si è passati dai valori dei comparabili al valore finale: fornisci come prompt una tabella riassuntiva (valori dei comparabili, aggiustamenti, pesi) e chiedi una spiegazione in linguaggio tecnico ma chiaro, da incollare poi nel modello di relazione.",
+              "🔧 Estensione Tecnologica: Validatore automatico di perizia che legge la griglia MCA (file Excel/Sheets) e la bozza di relazione, controlla che ogni aggiustamento ai comparabili sia rintracciabile, che il valore finale derivi da formule (non da input manuali) e genera un report di “tracciabilità” che conferma a un terzo la completa ricostruibilità del valore."
+            ]
+          }
+        ],
+        "phase_order": 3,
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null
+      },
+      {
+        "phase_id": "P4",
+        "phase_name": "Test operativo, ottimizzazione e fissazione della sequenza definitiva",
+        "duration_weeks": 2,
+        "steps": [
+          {
+            "step_id": "S4.1",
+            "description": "Applicare la procedura completa a 3–5 casi reali o recenti e misurare tempi e revisioni",
+            "tasks": [
+              "Selezionare 3–5 perizie di ville (nuove o recenti) rappresentative del tuo lavoro abituale.",
+              "Applicare rigorosamente la nuova sequenza 8–12 step, dalla fase documentale alla consegna, registrando il tempo impiegato per ogni step.",
+              "Confrontare i tempi con perizie precedenti (quando possibile) e annotare eventuali richieste di integrazione o chiarimenti da parte del committente/banca.",
+              "Raccogliere tutti i feedback (anche informali) su chiarezza, completezza e difendibilità delle perizie prodotte con la nuova procedura."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              },
+              {
+                "subject": "Metodo del Confronto di Mercato (MCA)",
+                "definition": "Il MCA è indicato come metodo principale per immobili residenziali in mercati attivi e si basa su comparazione con immobili simili. È centrale per stimare il valore di una villa residenziale con dati di mercato.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 7]: \"È il metodo principale (\\\"Gold Standard\\\") per immobili residenziali in mercati attivi.\""
+              }
+            ],
+            "verification_criteria": [
+              "Per i 3–5 casi test, è disponibile un semplice report di confronto tra tempi di lavorazione \"prima/dopo\" per almeno 3 fasi chiave (documenti, sopralluogo, MCA/relazione).",
+              "Il numero medio di richieste di integrazione/richieste di chiarimenti sulle perizie test non supera quello delle perizie precedenti e idealmente risulta ridotto."
+            ],
+            "estimated_effort_days": 5,
+            "assigned_to": "User",
+            "step_order": 1,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa Toggl Track o Clockify per misurare in modo preciso il tempo impiegato in ciascuno degli 8–12 step per ogni perizia, creando un progetto ‘Nuova Procedura Ville’ con task identici per confrontare facilmente i casi.",
+              "Crea un database in Notion o Airtable con una riga per ogni perizia (vecchie e nuove) e campi per: tempi per step, numero di revisioni, richieste integrazioni, esito banca/committente, così da avere subito una panoramica comparativa.",
+              "Imposta un semplice Google Form (link inviato al committente o al referente in banca) per raccogliere feedback standardizzati su chiarezza, completezza e difendibilità della perizia, e visualizza i risultati in automatico in Google Sheets.",
+              "Usa Google Sheets o Excel con tabelle pivot e grafici per confrontare i tempi medi per step tra vecchie perizie e quelle con la nuova procedura, evidenziando riduzioni/aumenti di tempo e numero di integrazioni richieste.",
+              "🔧 **Estensione Tecnologica**: Cruscotto automatico per perizie che raccoglie tempi per step, versioni del documento e feedback della banca/committente, generando un report mensile con indicatori chiave (tempi medi, tasso di revisioni, punti critici ricorrenti)."
+            ]
+          },
+          {
+            "step_id": "S4.2",
+            "description": "Raffinare e fissare la sequenza definitiva di 8–12 step e le checklist operative",
+            "tasks": [
+              "Analizzare le difficoltà o le perdite di tempo emerse nei casi test e individuare dove semplificare o chiarire la procedura.",
+              "Aggiornare lo schema di flusso 8–12 step, le checklist (documentale, sopralluogo) e i modelli (griglia MCA, relazione) sulla base dei feedback e dei risultati.",
+              "Scrivere una breve \"procedura operativa standard\" (max 2–3 pagine) che descriva passo-passo cosa fare dalla presa in carico alla consegna per una villa monofamiliare.",
+              "Archiviare tutta la documentazione aggiornata (schemi, modelli, procedure) in una struttura di cartelle ordinata, pronta per essere usata in ogni nuova perizia."
+            ],
+            "supporting_beliefs": [
+              {
+                "subject": "Perizia immobiliare di stima",
+                "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un momento temporale preciso.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+              },
+              {
+                "subject": "Procedura MCA (passi principali)",
+                "definition": "La procedura del MCA elenca: selezione comparabili, normalizzazione prezzi, aggiustamenti per differenze e sintesi dei valori. Questa sequenza supporta una procedura replicabile.",
+                "relevance_level": "CRITICO",
+                "source": "[Desire 3, Chunk 10]: \"Procedura : 1. selezione comparabili; 2. normalizzazione prezzi; 3. aggiustamenti per differenze; 4. sintesi dei valori.\""
+              }
+            ],
+            "verification_criteria": [
+              "Esiste un documento di procedura operativa standard che descrive in 8–12 step numerati l’intero processo di perizia di una villa per mutuo.",
+              "Per l’ultimo incarico gestito, tutti gli step e le checklist sono stati seguiti senza necessità di inventare passaggi ad hoc."
+            ],
+            "estimated_effort_days": 3,
+            "assigned_to": "User",
+            "step_order": 2,
+            "status": "pending",
+            "started_at": null,
+            "completed_at": null,
+            "user_notes": "",
+            "practical_tips": [
+              "Usa Miro o Whimsical per disegnare lo schema di flusso 8–12 step e inserire direttamente sui blocchi i commenti/problemi emersi dai casi test, così puoi iterare rapidamente e poi esportare il diagramma in PDF da allegare alla SOP.",
+              "Crea in Notion (o Confluence) uno spazio dedicato alla “Procedura villa monofamiliare” con: una pagina SOP (2–3 pagine), un database per le checklist (documentale, sopralluogo) e un database per i modelli (griglia MCA, relazione), collegando ogni elemento allo step di flusso corrispondente.",
+              "Imposta un Google Form per ogni perito/caso test con 5–10 domande mirate (es. su quali step hai perso tempo? quali passaggi non erano chiari?) che confluiscono in un Google Sheet, e usa filtri/pivot per individuare gli step più critici da semplificare.",
+              "Prepara in Google Drive o OneDrive una cartella “_TEMPLATE PERIZIA VILLA” con sottocartelle standard (01_Incarico, 02_Documenti, 03_Sopralluogo, 04_Elaborazioni, 05_Relazione, ecc.) e usa Zapier/Make.com per clonare automaticamente questa struttura e i file modello ogni volta che inserisci una nuova perizia in un foglio di calcolo.",
+              "🔧 **Estensione Tecnologica**: Assistente “setup perizia” che, inseriti pochi dati (committente, immobile, scadenze), genera automaticamente il pacchetto completo: cartelle nominative, ultima versione di SOP, checklist e modelli precompilati con i dati di base, e un mini-cruscotto che mostra lo stato avanzamento sugli 8–12 step."
+            ]
+          }
+        ],
+        "phase_order": 4,
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null
+      }
+    ]
+  },
+  "relevant_beliefs_summary": [
+    {
+      "subject": "Perizia immobiliare di stima",
+      "definition": "La perizia di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato di un bene a una data specifica. Questo è fondamentale per produrre una valutazione difendibile e riferita a un mom...",
+      "relevance_level": "CRITICO",
+      "used_in_steps": [
+        "S1.1",
+        "S1.2",
+        "S1.3",
+        "S2.2",
+        "S3.4",
+        "S4.1",
+        "S4.2"
+      ],
+      "source": "[Desire 1, Chunk 1]: \"La perizia immobiliare di stima ha l’obiettivo di determinare il Più Probabile Valore di Mercato (Market Value) di un bene immobiliare a una data specifica\""
+    },
+    {
+      "subject": "Metodo del Confronto di Mercato (MCA)",
+      "definition": "Il MCA è indicato come metodo principale per immobili residenziali in mercati attivi e si basa su comparazione con immobili simili. È centrale per stimare il valore di una villa residenziale con dati ...",
+      "relevance_level": "CRITICO",
+      "used_in_steps": [
+        "S3.1",
+        "S3.2",
+        "S3.3",
+        "S4.1"
+      ],
+      "source": "[Desire 1, Chunk 7]: \"È il metodo principale (\\\"Gold Standard\\\") per immobili residenziali in mercati attivi.\""
+    },
+    {
+      "subject": "Procedura MCA (passi principali)",
+      "definition": "La procedura del MCA elenca: selezione comparabili, normalizzazione prezzi, aggiustamenti per differenze e sintesi dei valori. Questa sequenza supporta una procedura replicabile....",
+      "relevance_level": "CRITICO",
+      "used_in_steps": [
+        "S3.2",
+        "S3.3",
+        "S3.4",
+        "S4.2"
+      ],
+      "source": "[Desire 3, Chunk 10]: \"Procedura : 1. selezione comparabili; 2. normalizzazione prezzi; 3. aggiustamenti per differenze; 4. sintesi dei valori.\""
+    },
+    {
+      "subject": "Market Value (Più Probabile Valore di Mercato)",
+      "definition": "Il Market Value è definito come il prezzo che si forma tra parti informate, indipendenti e non condizionate, dopo congruo periodo di esposizione sul mercato. Questa definizione delimita le condizioni ...",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S1.2",
+        "S2.3"
+      ],
+      "source": "[Desire 1, Chunk 1]: \"in condizioni di libera contrattazione tra parti informate, indipendenti e non condizionate, dopo un congruo periodo di esposizione sul mercato\""
+    },
+    {
+      "subject": "Principio fondamentale di stima",
+      "definition": "Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables). Questo fonda l’intera selezione dei comparabili e le regole di omogeneità....",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S1.3",
+        "S2.2",
+        "S2.3",
+        "S3.2"
+      ],
+      "source": "[Desire 1, Chunk 2]: \"Principio fondamentale: Il valore di un immobile è pari al prezzo che si forma sul mercato per immobili similari (comparables).\""
+    },
+    {
+      "subject": "Due diligence documentale",
+      "definition": "Prima di qualsiasi sopralluogo o calcolo, il valutatore deve acquisire documentazione probatoria per identificare l’immobile e verificarne la legittimità. Questo ordina la sequenza operativa e riduce ...",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S2.1"
+      ],
+      "source": "[Desire 1, Chunk 3]: \"Prima di qualsiasi sopralluogo o calcolo, il valutatore deve acquisire la documentazione probatoria per identificare l'immobile e verificarne la legittimità.\""
+    },
+    {
+      "subject": "Fonti informative per analisi mercato",
+      "definition": "Sono elencate fonti informative come atti notarili, agenzie locali, banche dati interne, annunci (corretti) e OMI come controllo. Questo guida la raccolta dati per comparabili e verifica coerenza....",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S3.1"
+      ],
+      "source": "[Desire 1, Chunk 10]: \"Fonti informative: atti notarili; agenzie locali; banche dati interne; annunci (opportunamente corretti); OMI (solo come controllo).\""
+    },
+    {
+      "subject": "Regola pratica (documenti e stima affidabile)",
+      "definition": "Senza documenti corretti non esiste una stima affidabile. Questo stabilisce un prerequisito operativo per avviare la valutazione....",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S2.1"
+      ],
+      "source": "[Desire 1, Chunk 9]: \"Senza documenti corretti non esiste una stima affidabile.\""
+    },
+    {
+      "subject": "Mandato professionale (contenuti)",
+      "definition": "Nella fase 0 il perito definisce committente, oggetto, finalità, data di riferimento, grado di approfondimento e limitazioni/assunzioni. Questo imposta correttamente il perimetro della stima....",
+      "relevance_level": "ALTO",
+      "used_in_steps": [
+        "S1.1"
+      ],
+      "source": "[Desire 5, Chunk 7]: \"Il perito definisce: - soggetto committente; - oggetto della stima; - finalità (vendita, consulenza, garanzia); - data di riferimento; - grado di approfondimento (desktop, drive-by, full appraisal); - limitazioni e assunzioni.\""
+    }
+  ],
+  "overall_progress": {
+    "total_steps": 12,
+    "completed_steps": 0,
+    "in_progress_steps": 0,
+    "pending_steps": 12,
+    "percentage_complete": 0.0,
+    "current_phase": null,
+    "current_step": null
+  },
+  "metadata": {
+    "llm_provider": "Gemini",
+    "llm_model": "gemini-2.0-flash-exp",
+    "generation_method": "single_shot",
+    "refinement_iterations": 0
+  }
+}
