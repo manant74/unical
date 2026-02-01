@@ -10,15 +10,15 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 class DocumentProcessor:
-    """Gestisce l'elaborazione e l'indicizzazione dei documenti per contesti multipli"""
+    """Manages document processing and indexing for multiple contexts"""
 
     def __init__(self, context_name: str = None, persist_directory: str = None):
         """
-        Inizializza il DocumentProcessor per un contesto specifico
+        Initializes the DocumentProcessor for a specific context
 
         Args:
-            context_name: Nome normalizzato del contesto
-            persist_directory: Directory dove salvare il ChromaDB (opzionale, calcolato dal context_name)
+            context_name: Normalized context name
+            persist_directory: Directory where to save ChromaDB (optional, calculated from context_name)
         """
         self.context_name = context_name
 
@@ -42,7 +42,7 @@ class DocumentProcessor:
 
     @property
     def embeddings(self):
-        """Property per lazy loading del modello embedding - carica solo quando necessario"""
+        """Property for lazy loading of embedding model - loads only when needed"""
         if self._embeddings is None:
             from langchain_huggingface import HuggingFaceEmbeddings
             self._embeddings = HuggingFaceEmbeddings(
@@ -51,7 +51,7 @@ class DocumentProcessor:
         return self._embeddings
 
     def initialize_db(self):
-        """Inizializza il database ChromaDB per il contesto corrente"""
+        """Initializes the ChromaDB database for the current context"""
         # Crea la directory se non esiste
         os.makedirs(self.persist_directory, exist_ok=True)
 
@@ -76,7 +76,7 @@ class DocumentProcessor:
             )
 
     def release_connections(self):
-        """Rilascia tutte le connessioni al database ChromaDB"""
+        """Releases all connections to the ChromaDB database"""
         try:
             if self.collection:
                 # Reset della collection
@@ -86,10 +86,10 @@ class DocumentProcessor:
                 # ChromaDB non ha un metodo close esplicito, ma possiamo resettare il riferimento
                 self.client = None
         except Exception as e:
-            print(f"Errore durante il rilascio delle connessioni: {e}")
+            print(f"Error releasing connections: {e}")
 
     def clear_database(self):
-        """Cancella il database esistente per il contesto corrente"""
+        """Clears the existing database for the current context"""
         # Prima rilascia tutte le connessioni
         self.release_connections()
 
@@ -103,18 +103,18 @@ class DocumentProcessor:
                 try:
                     temp_client.delete_collection(collection.name)
                 except Exception as e:
-                    print(f"Errore nell'eliminazione della collection {collection.name}: {e}")
+                    print(f"Error deleting collection {collection.name}: {e}")
 
             # Reset del client temporaneo
             temp_client = None
         except Exception as e:
-            print(f"Errore durante la cancellazione del database: {e}")
+            print(f"Error clearing database: {e}")
 
         # Re-inizializza il database con un nuovo client
         self.initialize_db()
 
     def process_pdf(self, file) -> List[str]:
-        """Estrae il testo da un file PDF"""
+        """Extracts text from a PDF file"""
         pdf_reader = PyPDF2.PdfReader(file)
         text = ""
         for page in pdf_reader.pages:
@@ -122,12 +122,12 @@ class DocumentProcessor:
         return self.text_splitter.split_text(text)
 
     def process_text(self, file) -> List[str]:
-        """Processa file di testo o markdown"""
+        """Processes text or markdown files"""
         content = file.read().decode('utf-8')
         return self.text_splitter.split_text(content)
 
     def process_url(self, url: str) -> List[str]:
-        """Estrae il testo da una pagina web"""
+        """Extracts text from a web page"""
         try:
             response = requests.get(url, timeout=10)
             response.raise_for_status()
@@ -144,10 +144,10 @@ class DocumentProcessor:
 
             return self.text_splitter.split_text(text)
         except Exception as e:
-            raise Exception(f"Errore durante il recupero dell'URL: {str(e)}")
+            raise Exception(f"Error retrieving URL: {str(e)}")
 
     def add_documents(self, chunks: List[str], source: str):
-        """Aggiunge documenti al database vettoriale del contesto corrente"""
+        """Adds documents to the vector database of the current context"""
         if not self.collection:
             self.initialize_db()
 
@@ -166,7 +166,7 @@ class DocumentProcessor:
         )
 
     def query(self, query_text: str, n_results: int = 5) -> List[Dict]:
-        """Interroga il database vettoriale del contesto corrente"""
+        """Queries the vector database of the current context"""
         if not self.collection:
             self.initialize_db()
 
@@ -180,7 +180,7 @@ class DocumentProcessor:
         return results
 
     def get_stats(self) -> Dict:
-        """Restituisce statistiche sul database del contesto corrente"""
+        """Returns statistics on the current context database"""
         if not self.collection:
             self.initialize_db()
 
@@ -192,7 +192,7 @@ class DocumentProcessor:
         }
 
     def get_all_sources(self) -> List[str]:
-        """Restituisce tutti i nomi delle fonti (documenti) presenti nel database del contesto corrente"""
+        """Returns all source names (documents) present in the current context database"""
         if not self.collection:
             self.initialize_db()
 
@@ -214,10 +214,10 @@ class DocumentProcessor:
 
     def get_all_documents(self) -> List[Dict]:
         """
-        Restituisce tutti i documenti del contesto corrente con i loro metadati
+        Returns all documents of the current context with their metadata
 
         Returns:
-            Lista di dizionari con 'text' e 'metadata' per ogni chunk
+            List of dictionaries with 'text' and 'metadata' for each chunk
         """
         if not self.collection:
             self.initialize_db()
@@ -242,15 +242,15 @@ class DocumentProcessor:
     @staticmethod
     def _normalize_collection_name(name: str) -> str:
         """
-        Normalizza un nome per l'uso come nome di collection ChromaDB
-        ChromaDB richiede nomi di collection di lunghezza 3-63 caratteri,
-        contenenti solo caratteri alfanumerici, underscore e trattini
+        Normalizes a name for use as a ChromaDB collection name
+        ChromaDB requires collection names of length 3-63 characters,
+        containing only alphanumeric characters, underscores and hyphens
 
         Args:
-            name: Nome da normalizzare
+            name: Name to normalize
 
         Returns:
-            Nome normalizzato
+            Normalized name
         """
         import re
         # Sostituisci caratteri non validi con underscore

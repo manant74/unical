@@ -15,12 +15,12 @@ from utils.auditor import ConversationAuditor
 from utils.ui_messages import get_random_thinking_message
 
 ALI_MODULE_GOAL = (
-    "Guidare il responsabile di dominio a raccogliere e formalizzare desire concreti, "
-    "motivazioni e metriche di successo per una sola categoria di utenti dedotta dalla conversazione."
+    "Guide the domain owner to collect and formalize concrete desires, "
+    "motivations and success metrics for a single user category inferred from the conversation."
 )
 ALI_EXPECTED_OUTCOME = (
-    "Progredire verso la conferma o la creazione di un desire ben formulato, "
-    "mantenendo il dialogo focalizzato e orientato all'azione."
+    "Progress towards confirming or creating a well-formulated desire, "
+    "keeping the dialogue focused and action-oriented."
 )
 
 st.set_page_config(
@@ -212,12 +212,12 @@ st.markdown("""
 
 # CONTROLLO SESSIONE OBBLIGATORIO
 if 'active_session' not in st.session_state or not st.session_state.active_session:
-    st.error("⚠️ Nessuna sessione attiva! Alì richiede una sessione attiva per funzionare.")
-    st.info("📝 Configura una sessione in Compass prima di usare Alì.")
+    st.error("⚠️ No active session! Alì requires an active session to work.")
+    st.info("📝 Configure a session in Compass before using Alì.")
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("🧭 Vai a Compass", width='stretch', type="primary"):
+        if st.button("🧭 Go to Compass", width='stretch', type="primary"):
             st.switch_page("pages/0_Compass.py")
 
     st.stop()  # Ferma l'esecuzione se non c'è sessione
@@ -225,8 +225,8 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 # Se arriviamo qui, la sessione esiste - caricala
 active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
 if not active_session_data:
-    st.error("❌ Errore: Sessione attiva non trovata nel database!")
-    if st.button("🧭 Vai a Compass", type="primary", width='stretch'):
+    st.error("❌ Error: Active session not found in database!")
+    if st.button("🧭 Go to Compass", type="primary", width='stretch'):
         st.switch_page("pages/0_Compass.py")
     st.stop()
 
@@ -239,7 +239,7 @@ with st.sidebar:
         st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
 
     with col_home:
-        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+        if st.button("🏠", width='stretch', type="secondary", help="Back to Home"):
             st.switch_page("app.py")
 
     st.divider()
@@ -248,36 +248,36 @@ with st.sidebar:
     if 'active_session' in st.session_state and st.session_state.active_session:
         active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
         if active_session_data:
-            st.success(f"📍 Sessione Attiva: **{active_session_data['metadata']['name']}**")
+            st.success(f"📍 Active Session: **{active_session_data['metadata']['name']}**")
             st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')}")
             if st.session_state.get("active_beneficiario"):
                 beneficiario = st.session_state["active_beneficiario"]
                 beneficiario_name = beneficiario.get("beneficiario_name") or beneficiario.get("persona_name", "N/A")
                 beneficiario_desc = (beneficiario.get("beneficiario_description") or beneficiario.get("persona_description", "")).strip()
-                st.info(f"Beneficiario corrente: **{beneficiario_name}**" + (f" - {beneficiario_desc}" if beneficiario_desc else ""))
-            
+                st.info(f"Current beneficiary: **{beneficiario_name}**" + (f" - {beneficiario_desc}" if beneficiario_desc else ""))
+
             # Mostra informazioni sulla base di conoscenza caricata
             kb_stats = st.session_state.doc_processor.get_stats()
             if kb_stats['document_count'] > 0:
-                st.success(f"📚 KB Caricata: {kb_stats['document_count']} documenti")
-                st.caption(f"🎯 Contesto: {kb_stats['context']}")
+                st.success(f"📚 KB Loaded: {kb_stats['document_count']} documents")
+                st.caption(f"🎯 Context: {kb_stats['context']}")
             else:
-                st.warning("⚠️ Base di conoscenza vuota per questo contesto")
-                st.caption(f"🎯 Contesto: {kb_stats['context']}")
-            
-            if st.button("🧭 Vai a Compass", width='stretch'):
+                st.warning("⚠️ Empty knowledge base for this context")
+                st.caption(f"🎯 Context: {kb_stats['context']}")
+
+            if st.button("🧭 Go to Compass", width='stretch'):
                 st.switch_page("pages/0_Compass.py")
         else:
-            st.warning("⚠️ Sessione attiva non trovata")
+            st.warning("⚠️ Active session not found")
     else:
-        st.info("ℹ️ Nessuna sessione attiva")
-        if st.button("🧭 Attiva una sessione", width='stretch'):
+        st.info("ℹ️ No active session")
+        if st.button("🧭 Activate a session", width='stretch'):
             st.switch_page("pages/0_Compass.py")
 
     st.divider()
 
     # Configurazione
-    st.header("⚙️ Configurazione Alì")
+    st.header("⚙️ Alì Configuration")
 
     # Lazy load LLMManager e desires_auditor quando serve
     if 'llm_manager' not in st.session_state:
@@ -295,8 +295,8 @@ with st.sidebar:
     model = None
 
     if not available_providers:
-        st.error("⚠️ Nessun provider LLM disponibile!")
-        st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
+        st.error("⚠️ No LLM provider available!")
+        st.info("Configure API keys in .env file:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
         provider = None
     else:
         # Usa il provider della sessione come default
@@ -309,11 +309,11 @@ with st.sidebar:
         col_config1, col_config2 = st.columns(2)
         with col_config1:
             provider = st.selectbox(
-                "Provider LLM",
+                "LLM Provider",
                 available_providers,
                 index=available_providers.index(default_provider),
                 key="ali_provider",
-                help="Provider configurato dalla sessione attiva"
+                help="Provider configured from active session"
             )
 
         with col_config2:
@@ -327,20 +327,20 @@ with st.sidebar:
                     default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
 
                 model = st.selectbox(
-                    "Modello",
+                    "Model",
                     options=list(models.keys()),
                     format_func=lambda x: models[x],
                     index=list(models.keys()).index(default_model),
                     key="ali_model",
-                    help="Modello configurato dalla sessione attiva"
+                    help="Model configured from active session"
                 )
 
     st.divider()
 
     # Controllo sessione
-    st.subheader("🎬 Controllo Sessione")
+    st.subheader("🎬 Session Control")
 
-    if st.button("🔄 Nuova Conversazione", width='stretch'):
+    if st.button("🔄 New Conversation", width='stretch'):
         st.session_state.ali_chat_history = []
         st.session_state.ali_greeted = False
         st.session_state.ali_audit_trail = []
@@ -348,7 +348,7 @@ with st.sidebar:
         st.session_state.ali_pending_prompt = None
         st.rerun()
 
-    if st.button("Completa Sessione", type="primary", width='stretch'):
+    if st.button("Complete Session", type="primary", width='stretch'):
         # Verifica se c'e' una sessione attiva
         if 'active_session' in st.session_state and st.session_state.active_session:
             if st.session_state.desires:
@@ -378,21 +378,21 @@ with st.sidebar:
                     
                 )
 
-                st.success(f"Sessione completata! {len(st.session_state.desires)} Desires salvati nella sessione attiva.")
+                st.success(f"Session completed! {len(st.session_state.desires)} Desires saved in active session.")
                 st.balloons()
             elif len(st.session_state.ali_chat_history) > 1:
                 st.session_state.session_manager.update_session_metadata(
                     st.session_state.active_session,
-                    
+
                 )
 
-                st.warning("Nessun desire identificato, ma la conversazione e' stata salvata nella sessione.")
-                st.info("Suggerimento: chiedi ad Ali di generare il report finale con i desires identificati.")
+                st.warning("No desires identified, but the conversation has been saved in the session.")
+                st.info("Tip: ask Alì to generate the final report with identified desires.")
             else:
-                st.warning("Nessuna conversazione da salvare!")
+                st.warning("No conversation to save!")
         else:
             # Fallback: salva su file locali se non c'e' sessione attiva
-            st.warning("Nessuna sessione attiva! Salvataggio in file locali...")
+            st.warning("No active session! Saving to local files...")
 
             if st.session_state.desires:
                 fallback_bdi = {
@@ -425,23 +425,23 @@ with st.sidebar:
                 with open("./data/current_bdi.json", 'w', encoding='utf-8') as f:
                     json.dump(fallback_bdi, f, ensure_ascii=False, indent=2)
 
-                st.info(f"BDI (desires) salvato in: {filename}")
-                st.info("Suggerimento: Attiva una sessione in Compass per integrarla nel sistema!")
+                st.info(f"BDI (desires) saved in: {filename}")
+                st.info("Tip: Activate a session in Compass to integrate it into the system!")
             else:
-                st.warning("Nessun dato da salvare!")
+                st.warning("No data to save!")
 
     st.divider()
 
     # Quick action: Add desire manually
-    with st.expander("➕ Aggiungi Desire Manualmente"):
-        st.markdown("Compila i campi per aggiungere un desire manualmente")
+    with st.expander("➕ Add Desire Manually"):
+        st.markdown("Fill in the fields to add a desire manually")
 
-        desire_desc = st.text_area("Descrizione", key="manual_desire_desc")
-        desire_priority = st.selectbox("Priorità", ["high", "medium", "low"], key="manual_desire_priority")
-        desire_context = st.text_area("Contesto", key="manual_desire_context")
-        desire_criteria = st.text_area("Criteri di Successo", key="manual_desire_criteria")
+        desire_desc = st.text_area("Description", key="manual_desire_desc")
+        desire_priority = st.selectbox("Priority", ["high", "medium", "low"], key="manual_desire_priority")
+        desire_context = st.text_area("Context", key="manual_desire_context")
+        desire_criteria = st.text_area("Success Criteria", key="manual_desire_criteria")
 
-        if st.button("Aggiungi Desire", width='stretch'):
+        if st.button("Add Desire", width='stretch'):
             if desire_desc:
                 new_desire = {
                     "id": len(st.session_state.desires) + 1,
@@ -452,14 +452,14 @@ with st.sidebar:
                     "timestamp": datetime.now().isoformat()
                 }
                 st.session_state.desires.append(new_desire)
-                st.success("✅ Desire aggiunto!")
+                st.success("✅ Desire added!")
                 st.rerun()
             else:
-                st.warning("⚠️ Inserisci almeno una descrizione")
+                st.warning("⚠️ Enter at least a description")
 
     # Visualizza desires
     if st.session_state.desires:
-        st.subheader("🎯 Desire Identificati")
+        st.subheader("🎯 Identified Desires")
         for idx, desire in enumerate(st.session_state.desires, 1):
             # Usa 'id' se presente, altrimenti usa l'indice
             desire_id = desire.get('id', idx)
@@ -469,34 +469,34 @@ with st.sidebar:
 
     # Statistiche in basso
     st.divider()
-    st.subheader("📊 Statistiche")
-    st.metric("Messaggi", len(st.session_state.ali_chat_history))
-    st.metric("Desire Identificati", len(st.session_state.desires))
+    st.subheader("📊 Statistics")
+    st.metric("Messages", len(st.session_state.ali_chat_history))
+    st.metric("Identified Desires", len(st.session_state.desires))
 
     stats = st.session_state.doc_processor.get_stats()
-    st.metric("Contenuti in KB", stats['document_count'])
+    st.metric("KB Contents", stats['document_count'])
 
 # Main content
 st.title("🎯 Alì - Agent for Desires")
-st.markdown("**Benvenuto! Sono qui per aiutarti a identificare e definire i tuoi Desire**")
+st.markdown("**Welcome! I'm here to help you identify and define your Desires**")
 st.divider()
 
 # Check se la KB è vuota
 kb_stats = st.session_state.doc_processor.get_stats()
 if kb_stats['document_count'] == 0:
     context_name = kb_stats.get('context', 'default')
-    st.warning(f"⚠️ La base di conoscenza per il contesto '{context_name}' è vuota! Vai a Knol per caricare documenti prima di iniziare.")
+    st.warning(f"⚠️ The knowledge base for context '{context_name}' is empty! Go to Knol to upload documents before starting.")
     if 'active_session' in st.session_state and st.session_state.active_session:
         active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
         if active_session_data:
-            st.info(f"🎯 Contesto attuale: {active_session_data['config'].get('context', 'N/A')}")
-    if st.button("📚 Vai a Knol", width='stretch'):
+            st.info(f"🎯 Current context: {active_session_data['config'].get('context', 'N/A')}")
+    if st.button("📚 Go to Knol", width='stretch'):
         st.switch_page("pages/1_Knol.py")
     st.stop()
 
 # Check provider disponibile
 if not available_providers or provider is None:
-    st.error("❌ Nessun provider LLM configurato. Configura le API keys per continuare.")
+    st.error("❌ No LLM provider configured. Configure API keys to continue.")
     st.stop()
 
 # Saluto iniziale
@@ -506,9 +506,9 @@ if not st.session_state.ali_greeted:
 
     # Costruisci il messaggio di saluto
     if context_description:
-        greeting = f"Ciao! Sono Alì e sono qui per aiutarti a trovare i tuoi Desire. 🎯\n\nHai creato un contesto che parla di: {context_description}\n\nOra posso aiutarti a identificare obiettivi chiari e raggiungibili nel tuo dominio. Dimmi, cosa vuoi ottenere?"
+        greeting = f"Hello! I'm Alì and I'm here to help you find your Desires. 🎯\n\nYou created a context about: {context_description}\n\nNow I can help you identify clear and achievable goals in your domain. Tell me, what do you want to accomplish?"
     else:
-        greeting = "Ciao! Sono Alì e sono qui per aiutarti a trovare i tuoi Desire. 🎯\n\nHo accesso alla tua base di conoscenza e posso aiutarti a identificare obiettivi chiari e raggiungibili nel tuo dominio. Dimmi, cosa vuoi ottenere?"
+        greeting = "Hello! I'm Alì and I'm here to help you find your Desires. 🎯\n\nI have access to your knowledge base and can help you identify clear and achievable goals in your domain. Tell me, what do you want to accomplish?"
 
     st.session_state.ali_chat_history.append({
         "role": "assistant",
@@ -540,7 +540,7 @@ for idx, message in enumerate(st.session_state.ali_chat_history):
 
             issues = audit_payload.get("issues") or []
             if issues:
-                st.markdown("**Problemi rilevati:**")
+                st.markdown("**Detected issues:**")
                 for issue in issues:
                     issue_type = issue.get("type", "issue")
                     severity = issue.get("severity", "low")
@@ -549,17 +549,17 @@ for idx, message in enumerate(st.session_state.ali_chat_history):
 
             improvements = audit_payload.get("assistant_improvements") or []
             if improvements:
-                st.markdown("**Suggerimenti per l'agente:**")
+                st.markdown("**Suggestions for the agent:**")
                 for idea in improvements:
                     st.write(f"- {idea}")
 
             next_focus = audit_payload.get("next_focus")
             if next_focus:
-                st.caption(f"Prossimo focus: {next_focus}")
+                st.caption(f"Next focus: {next_focus}")
 
             confidence = audit_payload.get("confidence")
             if confidence:
-                st.caption(f"Sicurezza valutazione: {confidence}")
+                st.caption(f"Assessment confidence: {confidence}")
 
             if idx == len(st.session_state.ali_chat_history) - 1:
                 quick_reply_placeholder = st.empty()
@@ -576,7 +576,7 @@ if isinstance(st.session_state.ali_pending_prompt, str):
     auto_prompt = st.session_state.ali_pending_prompt.strip()
     st.session_state.ali_pending_prompt = None
 
-user_prompt = st.chat_input("Scrivi il tuo messaggio...")
+user_prompt = st.chat_input("Write your message...")
 prompt = auto_prompt or user_prompt
 
 if prompt:
@@ -660,20 +660,20 @@ if prompt:
                 st.markdown(response)
 
             # Visualizzazione compressa del RAG context e beneficiario
-            with st.expander("📚 Dettagli RAG & Contesto", expanded=False):
+            with st.expander("📚 RAG & Context Details", expanded=False):
                 if beneficiario_ctx:
-                    st.markdown("**👤 Beneficiario Contesto:**")
+                    st.markdown("**👤 Beneficiary Context:**")
                     st.markdown(beneficiario_ctx)
                     st.divider()
 
                 if rag_results and rag_results['documents'] and rag_results['documents'][0]:
-                    st.markdown("**📖 Documenti RAG Recuperati:**")
+                    st.markdown("**📖 Retrieved RAG Documents:**")
                     for i, (doc, metadata) in enumerate(zip(rag_results['documents'][0], rag_results['metadatas'][0] if 'metadatas' in rag_results else [{}] * len(rag_results['documents'][0])), 1):
                         source = metadata.get('source', 'Unknown') if isinstance(metadata, dict) else 'Unknown'
-                        with st.expander(f"Documento {i} - {source}", expanded=False):
+                        with st.expander(f"Document {i} - {source}", expanded=False):
                             st.markdown(doc)
                 else:
-                    st.info("Nessun documento RAG utilizzato per questa risposta")
+                    st.info("No RAG documents used for this response")
 
             auditor_result = None
             auditor = st.session_state.get("desires_auditor")
@@ -745,12 +745,12 @@ if prompt:
                             ("focus_beneficiario", "Focus sul beneficiario"),
                             ("gestione_json", "Gestione finalizzazione/JSON"),
                         ]
-                        st.markdown("**Score rubrica:**")
+                        st.markdown("**Rubric scores:**")
                         for key, label in rubric_labels:
                             item = rubric.get(key) or {}
                             score = item.get("score")
                             notes = (item.get("notes") or "").strip()
-                            score_text = f"{score}/5" if isinstance(score, int) else "N/D"
+                            score_text = f"{score}/5" if isinstance(score, int) else "N/A"
                             if notes:
                                 st.write(f"- {label}: {score_text} — {notes}")
                             else:
@@ -758,7 +758,7 @@ if prompt:
 
                     issues = auditor_result.get("issues") or []
                     if issues:
-                        st.markdown("**Problemi rilevati:**")
+                        st.markdown("**Detected issues:**")
                         for issue in issues:
                             issue_type = issue.get("type", "issue")
                             severity = issue.get("severity", "low")
@@ -767,17 +767,17 @@ if prompt:
 
                     improvements = auditor_result.get("assistant_improvements") or []
                     if improvements:
-                        st.markdown("**Suggerimenti per l'agente:**")
+                        st.markdown("**Suggestions for the agent:**")
                         for idea in improvements:
                             st.write(f"- {idea}")
 
                     next_focus = auditor_result.get("next_focus")
                     if next_focus:
-                        st.caption(f"Prossimo focus: {next_focus}")
+                        st.caption(f"Next focus: {next_focus}")
 
                     confidence = auditor_result.get("confidence")
                     if confidence:
-                        st.caption(f"Sicurezza valutazione: {confidence}")
+                        st.caption(f"Assessment confidence: {confidence}")
 
                     quick_reply_placeholder = st.empty()
                     render_quick_replies(
@@ -789,7 +789,7 @@ if prompt:
 
             elif auditor_result and "error" in auditor_result:
                 st.session_state.ali_suggestions = []
-                st.warning(f"Auditor non disponibile: {auditor_result['error']}")
+                st.warning(f"Auditor not available: {auditor_result['error']}")
 
             # --- NUOVA LOGICA PER PARSARE IL JSON ---
             json_content_str = None
@@ -848,24 +848,24 @@ if prompt:
                                 beneficiario=beneficiario_info or existing_bdi.get("beneficiario") or existing_bdi.get("persona") or {},
                                 domain_summary=domain_summary if domain_summary is not None else existing_bdi.get("domain_summary", "")
                             )
-                            st.success(f"?o. Report finale rilevato! {len(extracted_desires)} nuovi desires estratti e aggiunti! Totale: {len(st.session_state.desires)}")
+                            st.success(f"✅ Final report detected! {len(extracted_desires)} new desires extracted and added! Total: {len(st.session_state.desires)}")
                         else:
-                            st.success(f"?o. Report finale rilevato! {len(extracted_desires)} desires estratti! Totale: {len(st.session_state.desires)}")
+                            st.success(f"✅ Final report detected! {len(extracted_desires)} desires extracted! Total: {len(st.session_state.desires)}")
 
-                        st.info("Puoi ora completare la sessione o aggiungere altri desires manualmente.")
+                        st.info("You can now complete the session or add more desires manually.")
                         st.rerun()
                     else:
-                        st.warning("?s???? Il report JSON ?? stato rilevato ma non contiene desires nel formato atteso.")
+                        st.warning("⚠️ The JSON report was detected but doesn't contain desires in the expected format.")
 
                 except json.JSONDecodeError:
-                    st.error("??O Il report finale JSON generato dall'agente non ?? valido e non pu?? essere parsato.")
+                    st.error("❌ The final JSON report generated by the agent is invalid and cannot be parsed.")
                 except Exception as e:
                     st.error(f"An unexpected error occurred while parsing the report: {e}")
             # --- FINE NUOVA LOGICA ---
 
             # Check if a desire was mentioned (simple heuristic)
             elif any(keyword in response.lower() for keyword in ["desire identificato", "registriamo", "aggiungiamo questo desire"]):
-                st.info("💡 Sembra che abbiamo identificato un desire! Puoi confermarlo usando il pannello laterale.")
+                st.info("💡 It looks like we identified a desire! You can confirm it using the sidebar.")
 
         except Exception as e:
-            st.error(f"❌ Errore: {str(e)}")
+            st.error(f"❌ Error: {str(e)}")

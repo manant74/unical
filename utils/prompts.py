@@ -1,7 +1,7 @@
 """
-System prompts per gli agenti del BDI Framework
+System prompts for BDI Framework agents
 
-Questo modulo carica i system prompts dai file Markdown nella directory prompts/
+This module loads system prompts from Markdown files in the prompts/ directory
 """
 
 import os
@@ -12,24 +12,24 @@ _prompts_cache = {}
 
 def _load_prompt_from_file(agent_name: str, prompt_suffix: str = "system_prompt") -> str:
     """
-    Carica un system prompt da file Markdown
+    Loads a system prompt from a Markdown file
 
     Args:
-        agent_name: Nome dell'agente (es. 'ali', 'believer')
-        prompt_suffix: Suffisso del file prompt (default: 'system_prompt')
+        agent_name: Agent name (e.g., 'ali', 'believer')
+        prompt_suffix: Prompt file suffix (default: 'system_prompt')
 
     Returns:
-        Il contenuto del file markdown come stringa
+        The markdown file content as a string
 
     Raises:
-        FileNotFoundError: Se il file non esiste
+        FileNotFoundError: If the file does not exist
     """
     # Costruisci il percorso del file
     current_dir = Path(__file__).parent.parent
     prompt_file = current_dir / "prompts" / f"{agent_name}_{prompt_suffix}.md"
 
     if not prompt_file.exists():
-        raise FileNotFoundError(f"File prompt non trovato: {prompt_file}")
+        raise FileNotFoundError(f"Prompt file not found: {prompt_file}")
 
     # Leggi il contenuto del file
     with open(prompt_file, 'r', encoding='utf-8') as f:
@@ -37,19 +37,19 @@ def _load_prompt_from_file(agent_name: str, prompt_suffix: str = "system_prompt"
 
 def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "system_prompt") -> str:
     """
-    Restituisce il system prompt per un agente specifico
+    Returns the system prompt for a specific agent
 
     Args:
-        agent_name: Nome dell'agente ('ali', 'believer', 'cuma', 'genius')
-        use_cache: Se True, usa la cache (default). Se False, ricarica sempre da file.
-        prompt_suffix: Suffisso del file prompt (default: 'system_prompt')
+        agent_name: Agent name ('ali', 'believer', 'cuma', 'genius')
+        use_cache: If True, use cache (default). If False, always reload from file.
+        prompt_suffix: Prompt file suffix (default: 'system_prompt')
 
     Returns:
-        Il system prompt corrispondente
+        The corresponding system prompt
 
     Raises:
-        ValueError: Se l'agente non è riconosciuto
-        FileNotFoundError: Se il file prompt non esiste
+        ValueError: If the agent is not recognized
+        FileNotFoundError: If the prompt file does not exist
     """
     agent_name_lower = agent_name.lower()
     available_agents = [
@@ -64,8 +64,8 @@ def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "sy
 
     if agent_name_lower not in available_agents:
         raise ValueError(
-            f"Agente '{agent_name}' non riconosciuto. "
-            f"Agenti disponibili: {available_agents}"
+            f"Agent '{agent_name}' not recognized. "
+            f"Available agents: {available_agents}"
         )
 
     # Crea una chiave di cache che include il suffisso
@@ -85,21 +85,21 @@ def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "sy
 
 def clear_cache():
     """
-    Svuota la cache dei prompts.
-    Utile se i file vengono modificati e si vuole ricaricarli.
+    Clears the prompts cache.
+    Useful if files are modified and need to be reloaded.
     """
     global _prompts_cache
     _prompts_cache = {}
 
 def get_all_prompts(use_cache: bool = True) -> dict:
     """
-    Restituisce tutti i system prompts disponibili
+    Returns all available system prompts
 
     Args:
-        use_cache: Se True, usa la cache
+        use_cache: If True, use cache
 
     Returns:
-        Dizionario con tutti i prompts {agent_name: prompt_text}
+        Dictionary with all prompts {agent_name: prompt_text}
     """
     agents = [
         'ali',
@@ -116,6 +116,6 @@ def get_all_prompts(use_cache: bool = True) -> dict:
         try:
             prompts[agent] = get_prompt(agent, use_cache=use_cache)
         except FileNotFoundError:
-            prompts[agent] = f"[Prompt non disponibile per {agent}]"
+            prompts[agent] = f"[Prompt not available for {agent}]"
 
     return prompts

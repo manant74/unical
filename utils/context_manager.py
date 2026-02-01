@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 class ContextManager:
-    """Gestisce la creazione, selezione ed eliminazione di contesti multipli"""
+    """Manages the creation, selection, and deletion of multiple contexts"""
 
     def __init__(self, base_directory: str = "./data/contexts"):
         self.base_directory = base_directory
@@ -14,14 +14,14 @@ class ContextManager:
 
     def create_context(self, name: str, description: str = "") -> Dict:
         """
-        Crea un nuovo contesto con la sua struttura di cartelle
+        Creates a new context with its folder structure
 
         Args:
-            name: Nome del contesto (verrà normalizzato)
-            description: Descrizione opzionale del contesto
+            name: Context name (will be normalized)
+            description: Optional context description
 
         Returns:
-            Dict con le informazioni del contesto creato
+            Dict with the created context information
         """
         # Normalizza il nome del contesto (rimuovi spazi, caratteri speciali)
         normalized_name = self._normalize_name(name)
@@ -29,7 +29,7 @@ class ContextManager:
 
         # Verifica se il contesto esiste già
         if os.path.exists(context_path):
-            raise ValueError(f"Il contesto '{name}' esiste già")
+            raise ValueError(f"The context '{name}' already exists")
 
         # Crea la struttura delle cartelle
         os.makedirs(context_path, exist_ok=True)
@@ -54,10 +54,10 @@ class ContextManager:
 
     def get_all_contexts(self) -> List[Dict]:
         """
-        Recupera tutti i contesti disponibili
+        Retrieves all available contexts
 
         Returns:
-            Lista di dizionari con le informazioni dei contesti
+            List of dictionaries with context information
         """
         contexts = []
 
@@ -74,7 +74,7 @@ class ContextManager:
                             metadata = json.load(f)
                             contexts.append(metadata)
                     except Exception as e:
-                        print(f"Errore nel caricamento del contesto {item}: {e}")
+                        print(f"Error loading context {item}: {e}")
 
         # Ordina per data di creazione (più recente prima)
         contexts.sort(key=lambda x: x.get('created_at', ''), reverse=True)
@@ -82,13 +82,13 @@ class ContextManager:
 
     def get_context(self, normalized_name: str) -> Optional[Dict]:
         """
-        Recupera un contesto specifico
+        Retrieves a specific context
 
         Args:
-            normalized_name: Nome normalizzato del contesto
+            normalized_name: Normalized context name
 
         Returns:
-            Dict con le informazioni del contesto o None se non esiste
+            Dict with context information or None if it doesn't exist
         """
         context_path = os.path.join(self.base_directory, normalized_name)
         metadata_path = os.path.join(context_path, "context_metadata.json")
@@ -98,20 +98,20 @@ class ContextManager:
                 with open(metadata_path, 'r', encoding='utf-8') as f:
                     return json.load(f)
             except Exception as e:
-                print(f"Errore nel caricamento del contesto: {e}")
+                print(f"Error loading context: {e}")
 
         return None
 
     def update_context_metadata(self, normalized_name: str, updates: Dict) -> bool:
         """
-        Aggiorna i metadati di un contesto
+        Updates context metadata
 
         Args:
-            normalized_name: Nome normalizzato del contesto
-            updates: Dizionario con i campi da aggiornare
+            normalized_name: Normalized context name
+            updates: Dictionary with fields to update
 
         Returns:
-            True se l'aggiornamento è riuscito, False altrimenti
+            True if update succeeded, False otherwise
         """
         context_path = os.path.join(self.base_directory, normalized_name)
         metadata_path = os.path.join(context_path, "context_metadata.json")
@@ -132,18 +132,18 @@ class ContextManager:
 
             return True
         except Exception as e:
-            print(f"Errore nell'aggiornamento del contesto: {e}")
+            print(f"Error updating context: {e}")
             return False
 
     def delete_context(self, normalized_name: str) -> bool:
         """
-        Elimina un contesto e tutti i suoi dati
+        Deletes a context and all its data
 
         Args:
-            normalized_name: Nome normalizzato del contesto
+            normalized_name: Normalized context name
 
         Returns:
-            True se l'eliminazione è riuscita, False altrimenti
+            True if deletion succeeded, False otherwise
         """
         context_path = os.path.join(self.base_directory, normalized_name)
 
@@ -154,55 +154,55 @@ class ContextManager:
             shutil.rmtree(context_path)
             return True
         except Exception as e:
-            print(f"Errore nell'eliminazione del contesto: {e}")
+            print(f"Error deleting context: {e}")
             return False
 
     def get_context_path(self, normalized_name: str) -> str:
         """
-        Restituisce il percorso completo di un contesto
+        Returns the full path of a context
 
         Args:
-            normalized_name: Nome normalizzato del contesto
+            normalized_name: Normalized context name
 
         Returns:
-            Percorso completo del contesto
+            Full path of the context
         """
         return os.path.join(self.base_directory, normalized_name)
 
     def get_chroma_db_path(self, normalized_name: str) -> str:
         """
-        Restituisce il percorso del ChromaDB di un contesto
+        Returns the ChromaDB path of a context
 
         Args:
-            normalized_name: Nome normalizzato del contesto
+            normalized_name: Normalized context name
 
         Returns:
-            Percorso del ChromaDB del contesto
+            ChromaDB path of the context
         """
         return os.path.join(self.base_directory, normalized_name, "chroma_db")
 
     def get_belief_base_path(self, normalized_name: str) -> str:
         """
-        Restituisce il percorso del file belief_base di un contesto
+        Returns the belief_base file path of a context
 
         Args:
-            normalized_name: Nome normalizzato del contesto
+            normalized_name: Normalized context name
 
         Returns:
-            Percorso del file belief_base.json del contesto
+            Path of the context's belief_base.json file
         """
         return os.path.join(self.base_directory, normalized_name, "belief_base.json")
 
     def export_context(self, normalized_name: str, export_path: str) -> bool:
         """
-        Esporta un contesto in un file ZIP
+        Exports a context to a ZIP file
 
         Args:
-            normalized_name: Nome normalizzato del contesto
-            export_path: Percorso dove salvare il file ZIP
+            normalized_name: Normalized context name
+            export_path: Path where to save the ZIP file
 
         Returns:
-            True se l'export è riuscito, False altrimenti
+            True if export succeeded, False otherwise
         """
         context_path = self.get_context_path(normalized_name)
 
@@ -213,18 +213,18 @@ class ContextManager:
             shutil.make_archive(export_path.replace('.zip', ''), 'zip', context_path)
             return True
         except Exception as e:
-            print(f"Errore nell'export del contesto: {e}")
+            print(f"Error exporting context: {e}")
             return False
 
     def import_context(self, zip_path: str) -> Optional[Dict]:
         """
-        Importa un contesto da un file ZIP
+        Imports a context from a ZIP file
 
         Args:
-            zip_path: Percorso del file ZIP da importare
+            zip_path: Path of the ZIP file to import
 
         Returns:
-            Dict con le informazioni del contesto importato o None se fallisce
+            Dict with imported context information or None if it fails
         """
         try:
             # Estrai il file ZIP
@@ -264,15 +264,15 @@ class ContextManager:
 
                 return metadata
         except Exception as e:
-            print(f"Errore nell'import del contesto: {e}")
+            print(f"Error importing context: {e}")
             return None
 
     def get_global_stats(self) -> Dict:
         """
-        Restituisce statistiche globali su tutti i contesti
+        Returns global statistics on all contexts
 
         Returns:
-            Dict con statistiche aggregate
+            Dict with aggregated statistics
         """
         contexts = self.get_all_contexts()
 
@@ -289,13 +289,13 @@ class ContextManager:
     @staticmethod
     def _normalize_name(name: str) -> str:
         """
-        Normalizza un nome per l'uso come nome di cartella
+        Normalizes a name for use as a folder name
 
         Args:
-            name: Nome da normalizzare
+            name: Name to normalize
 
         Returns:
-            Nome normalizzato
+            Normalized name
         """
         # Rimuovi caratteri non validi per i nomi di file
         import re

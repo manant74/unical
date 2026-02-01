@@ -13,12 +13,12 @@ from utils.session_manager import SessionManager
 from utils.ui_messages import get_random_thinking_message
 
 CUMA_MODULE_GOAL = (
-    "Mappare diverse Intenzioni strategiche possibili per uno specifico dominio, aiutando esperti "
-    "di dominio a esplorare il massimo numero di scenari strategici basandosi su Beliefs e Desires."
+    "Map multiple possible strategic Intentions for a specific domain, helping domain "
+    "experts explore the maximum number of strategic scenarios based on Beliefs and Desires."
 )
 CUMA_EXPECTED_OUTCOME = (
-    "Una mapping completa di molteplici Intenzioni strategiche alternative, ognuna con un Piano d'Azione "
-    "dettagliato, pronte per essere assegnate successivamente a singoli utenti in base ai loro bisogni."
+    "A complete mapping of multiple alternative strategic Intentions, each with a detailed "
+    "Action Plan, ready to be subsequently assigned to individual users based on their needs."
 )
 
 st.set_page_config(
@@ -115,7 +115,7 @@ def load_bdi_data():
 def save_intentions_to_bdi(intentions):
     """Salva le Intentions nel file current_bdi.json."""
     if 'active_session' not in st.session_state or not st.session_state.active_session:
-        st.warning("Nessuna sessione attiva. Impossibile salvare le Intentions.")
+        st.warning("No active session. Cannot save Intentions.")
         return False
 
     try:
@@ -128,7 +128,7 @@ def save_intentions_to_bdi(intentions):
         return True
 
     except Exception as e:
-        st.error(f"**Errore nel salvataggio delle Intentions:** {e}")
+        st.error(f"**Error saving Intentions:** {e}")
         return False
 
 def extract_intention_from_response(response_text):
@@ -157,19 +157,19 @@ def extract_intention_from_response(response_text):
                 "id": f"INT-{len(st.session_state.intentions_list) + 1:03d}",
                 "statement": intention,
                 "linked_desire_id": st.session_state.loaded_desires[0]['id'] if st.session_state.loaded_desires else "N/A",
-                "rationale": "Proposta dallo Strategic Architect basata su Beliefs e Desires"
+                "rationale": "Proposed by the Strategic Architect based on Beliefs and Desires"
             },
             "action_plan": {
                 "plan_id": f"PLAN-{len(st.session_state.intentions_list) + 1:03d}",
                 "steps": [
                     {
                         "step_number": 1,
-                        "action": plan or "Azione da definire nella validazione",
+                        "action": plan or "Action to be defined during validation",
                         "required_beliefs": [b['id'] for b in st.session_state.loaded_beliefs[:2]] if st.session_state.loaded_beliefs else []
                     }
                 ],
-                "expected_outcome": "Raggiungimento della intenzione attraverso l'esecuzione ordinata dei passi",
-                "estimated_effort": "Medio"
+                "expected_outcome": "Achievement of the intention through ordered execution of steps",
+                "estimated_effort": "Medium"
             }
         }
 
@@ -187,12 +187,12 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 
 # CONTROLLO SESSIONE OBBLIGATORIO
 if 'active_session' not in st.session_state or not st.session_state.active_session:
-    st.error("⚠️ Nessuna sessione attiva! Cuma richiede una sessione attiva per funzionare.")
-    st.info("📝 Configura una sessione in Compass prima di usare Cuma.")
+    st.error("⚠️ No active session! Cuma requires an active session to function.")
+    st.info("📝 Configure a session in Compass before using Cuma.")
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("🧭 Vai a Compass", width='stretch', type="primary"):
+        if st.button("🧭 Go to Compass", width='stretch', type="primary"):
             st.switch_page("pages/0_Compass.py")
 
     st.stop()
@@ -200,8 +200,8 @@ if 'active_session' not in st.session_state or not st.session_state.active_sessi
 # Se arriviamo qui, la sessione esiste - caricala
 active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
 if not active_session_data:
-    st.error("❌ Errore: Sessione attiva non trovata nel database!")
-    if st.button("🧭 Vai a Compass", type="primary"):
+    st.error("❌ Error: Active session not found in database!")
+    if st.button("🧭 Go to Compass", type="primary"):
         st.switch_page("pages/0_Compass.py")
     st.stop()
 
@@ -222,7 +222,7 @@ with st.sidebar:
         st.markdown("<div style='padding-top: 0px;'><h2>✨ LumIA Studio</h2></div>", unsafe_allow_html=True)
 
     with col_home:
-        if st.button("🏠", width='stretch', type="secondary", help="Torna alla Home"):
+        if st.button("🏠", width='stretch', type="secondary", help="Back to Home"):
             st.switch_page("app.py")
 
     st.divider()
@@ -231,22 +231,22 @@ with st.sidebar:
     if 'active_session' in st.session_state and st.session_state.active_session:
         active_session_data = st.session_state.session_manager.get_session(st.session_state.active_session)
         if active_session_data:
-            st.success(f"📍 Sessione Attiva: **{active_session_data['metadata']['name']}**")
+            st.success(f"📍 Active Session: **{active_session_data['metadata']['name']}**")
             st.caption(f"🗂️ Context: {active_session_data['config'].get('context', 'N/A')}")
 
-            if st.button("🧭 Vai a Compass", width='stretch'):
+            if st.button("🧭 Go to Compass", width='stretch'):
                 st.switch_page("pages/0_Compass.py")
         else:
-            st.warning("⚠️ Sessione attiva non trovata")
+            st.warning("⚠️ Active session not found")
     else:
-        st.info("ℹ️ Nessuna sessione attiva")
-        if st.button("🧭 Attiva una sessione", width='stretch'):
+        st.info("ℹ️ No active session")
+        if st.button("🧭 Activate a session", width='stretch'):
             st.switch_page("pages/0_Compass.py")
 
     st.divider()
 
     # Configurazione
-    st.header("⚙️ Configurazione CUMA")
+    st.header("⚙️ CUMA Configuration")
 
     # Lazy load LLMManager e conversation_auditor quando serve
     if 'llm_manager' not in st.session_state:
@@ -258,8 +258,8 @@ with st.sidebar:
     model = None
 
     if not available_providers:
-        st.error("⚠️ Nessun provider LLM disponibile!")
-        st.info("Configura le API keys nel file .env:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
+        st.error("⚠️ No LLM provider available!")
+        st.info("Configure API keys in .env file:\n- GOOGLE_API_KEY\n- ANTHROPIC_API_KEY\n- OPENAI_API_KEY")
         provider = None
     else:
         # Usa il provider della sessione come default
@@ -272,11 +272,11 @@ with st.sidebar:
         col_config1, col_config2 = st.columns(2)
         with col_config1:
             provider = st.selectbox(
-                "Provider LLM",
+                "LLM Provider",
                 available_providers,
                 index=available_providers.index(default_provider),
                 key="cuma_provider",
-                help="Provider configurato dalla sessione attiva"
+                help="Provider configured from active session"
             )
 
         with col_config2:
@@ -290,40 +290,40 @@ with st.sidebar:
                     default_model = "gemini-2.5-pro" if provider == "Gemini" and "gemini-2.5-pro" in models else list(models.keys())[0]
 
                 model = st.selectbox(
-                    "Modello",
+                    "Model",
                     options=list(models.keys()),
                     format_func=lambda x: models[x],
                     index=list(models.keys()).index(default_model),
                     key="cuma_model",
-                    help="Modello configurato dalla sessione attiva"
+                    help="Model configured from active session"
                 )
 
     st.divider()
 
     # Controllo sessione
-    st.subheader("🎬 Controllo Sessione")
+    st.subheader("🎬 Session Control")
 
     col_new, col_complete = st.columns(2)
     with col_new:
-        if st.button("🔄 Nuova Conversazione", width='stretch'):
+        if st.button("🔄 New Conversation", width='stretch'):
             st.session_state.cuma_chat_history = []
             st.session_state.cuma_greeted = False
             st.session_state.intentions_list = []
             st.rerun()
 
     with col_complete:
-        if st.button("💾 Completa Sessione", type="primary", width='stretch'):
+        if st.button("💾 Complete Session", type="primary", width='stretch'):
             if st.session_state.intentions_list:
                 if save_intentions_to_bdi(st.session_state.intentions_list):
-                    st.success(f"✅ Sessione completata! {len(st.session_state.intentions_list)} Intenzioni salvate.")
+                    st.success(f"✅ Session completed! {len(st.session_state.intentions_list)} Intentions saved.")
                     st.balloons()
             else:
-                st.warning("Nessuna intenzione da salvare!")
+                st.warning("No intention to save!")
 
     st.divider()
 
     # Visualizza dati caricati
-    st.subheader("📊 Dati Caricati")
+    st.subheader("📊 Loaded Data")
 
     col_desires, col_beliefs = st.columns(2)
 
@@ -336,44 +336,44 @@ with st.sidebar:
             st.metric("Beliefs", len(st.session_state.loaded_beliefs))
 
     if st.session_state.intentions_list:
-        st.metric("Intenzioni Definite", len(st.session_state.intentions_list))
+        st.metric("Defined Intentions", len(st.session_state.intentions_list))
 
     st.divider()
 
     # Statistiche
-    st.subheader("📈 Statistiche")
+    st.subheader("📈 Statistics")
     col_messages, col_intentions = st.columns(2)
     with col_messages:
-        st.metric("Messaggi", len(st.session_state.cuma_chat_history))
+        st.metric("Messages", len(st.session_state.cuma_chat_history))
     with col_intentions:
-        st.metric("Intenzioni Create", len(st.session_state.intentions_list))
+        st.metric("Created Intentions", len(st.session_state.intentions_list))
 
 # MAIN CONTENT
 st.title("🗺️ CUMA - Domain Strategy Mapper")
-st.markdown("**Mappa diverse Intenzioni strategiche per il tuo dominio**")
+st.markdown("**Map multiple strategic Intentions for your domain**")
 st.divider()
 
 # Verifica che ci siano Beliefs e Desires caricati
 if not st.session_state.loaded_desires:
-    st.warning("⚠️ Nessun Desire trovato nella sessione. Completa la fase Alì prima di continuare.")
-    if st.button("🎯 Vai ad Alì"):
+    st.warning("⚠️ No Desire found in session. Complete the Alì phase before continuing.")
+    if st.button("🎯 Go to Alì"):
         st.switch_page("pages/2_Ali.py")
     st.stop()
 
 if not st.session_state.loaded_beliefs:
-    st.info("ℹ️ Nessun Belief trovato nella sessione. Completa la fase Believer per migliorare i risultati.")
+    st.info("ℹ️ No Belief found in session. Complete the Believer phase to improve results.")
 
 # Saluto iniziale
 if not st.session_state.cuma_greeted:
     greeting = (
-        "Ciao! Sono CUMA, il Domain Strategy Mapper. 🗺️\n\n"
-        "Il mio ruolo è aiutare gli esperti di dominio a **mappare le diverse Intenzioni strategiche** "
-        "possibili per uno specifico ambito.\n\n"
-        "Non cercherò una sola soluzione 'giusta', ma esplorerò **molteplici scenari strategici** "
-        "basandomi sui Beliefs e Desires che hai fornito. In questo modo, avrai una visione completa "
-        "di tutte le possibili direzioni che il dominio può prendere.\n\n"
-        "Successivamente, potrai decidere quale Intenzione proporre a quali utenti.\n\n"
-        "**Iniziamo a esplorare le possibilità?**"
+        "Hello! I'm CUMA, the Domain Strategy Mapper. 🗺️\n\n"
+        "My role is to help domain experts **map the different strategic Intentions** "
+        "possible for a specific domain.\n\n"
+        "I won't look for a single 'right' solution, but will explore **multiple strategic scenarios** "
+        "based on the Beliefs and Desires you've provided. This way, you'll have a complete vision "
+        "of all possible directions the domain can take.\n\n"
+        "Subsequently, you can decide which Intention to propose to which users.\n\n"
+        "**Shall we start exploring the possibilities?**"
     )
 
     st.session_state.cuma_chat_history.append({
@@ -394,30 +394,30 @@ def get_ai_system_context():
     beliefs_context = "\n".join([
         f"- {b['statement']} (Confidence: {b['confidence']})"
         for b in st.session_state.loaded_beliefs
-    ]) if st.session_state.loaded_beliefs else "Nessun belief disponibile."
+    ]) if st.session_state.loaded_beliefs else "No beliefs available."
 
     desires_context = "\n".join([
-        f"- {d['statement']} (Priorità: {d['priority']})"
+        f"- {d['statement']} (Priority: {d['priority']})"
         for d in st.session_state.loaded_desires
-    ]) if st.session_state.loaded_desires else "Nessun desire disponibile."
+    ]) if st.session_state.loaded_desires else "No desires available."
 
     intentions_context = ""
     if st.session_state.intentions_list:
-        intentions_context = "\n\nIntenzioni definite finora:\n"
+        intentions_context = "\n\nIntentions defined so far:\n"
         for idx, intention in enumerate(st.session_state.intentions_list, 1):
             intentions_context += f"{idx}. {intention.get('intention', {}).get('statement', 'N/A')}\n"
 
     return (
         f"{CUMA_SYSTEM_PROMPT}\n\n"
-        f"### BELIEFS DISPONIBILI:\n{beliefs_context}\n\n"
-        f"### DESIRES DISPONIBILI:\n{desires_context}\n"
+        f"### AVAILABLE BELIEFS:\n{beliefs_context}\n\n"
+        f"### AVAILABLE DESIRES:\n{desires_context}\n"
         f"{intentions_context}"
     )
 
 def process_ai_response(response):
     """Elabora la risposta dell'AI"""
     if not response:
-        st.error("❌ Nessuna risposta ricevuta dall'AI. Riprova.")
+        st.error("❌ No response received from AI. Please try again.")
         st.session_state.cuma_chat_history.pop()
         return False
 
@@ -439,7 +439,7 @@ def process_ai_response(response):
                 parsed_json = json.loads(json_str)
                 if "intentions" in parsed_json:
                     st.session_state.intentions_list = parsed_json["intentions"]
-                    st.success("✅ Report JSON estratto con successo!")
+                    st.success("✅ JSON report extracted successfully!")
                 else:
                     if parsed_json and parsed_json not in st.session_state.intentions_list:
                         st.session_state.intentions_list.append(parsed_json)
@@ -491,7 +491,7 @@ def handle_ai_response(user_message):
                 st.rerun()
 
         except Exception as e:
-            st.error(f"❌ Errore nella comunicazione con l'AI: {e}")
+            st.error(f"❌ Error communicating with AI: {e}")
             import traceback
             st.write(traceback.format_exc())
             st.session_state.cuma_chat_history.pop()
@@ -504,26 +504,26 @@ if st.session_state.cuma_greeted and len(st.session_state.cuma_chat_history) == 
 
     with col1:
         if st.button(
-            "🗺️ Mappa diverse Intenzioni per il dominio",
+            "🗺️ Map multiple Intentions for the domain",
             width='stretch',
             key="btn_generate_proposal"
         ):
-            user_msg = "Genera diverse Intenzioni strategiche possibili per questo dominio. Proponi almeno 3-5 scenari alternativi basandoti sui Beliefs e Desires forniti."
+            user_msg = "Generate multiple possible strategic Intentions for this domain. Propose at least 3-5 alternative scenarios based on the provided Beliefs and Desires."
             handle_ai_response(user_msg)
 
     with col2:
         if st.button(
-            "🔍 Approfondisci un aspetto specifico",
+            "🔍 Deep dive into a specific aspect",
             width='stretch',
             key="btn_user_objective"
         ):
-            st.session_state.user_input_prompt = "Su quale aspetto del dominio vorresti che approfondissi ulteriormente?"
+            st.session_state.user_input_prompt = "Which aspect of the domain would you like me to explore further?"
             st.rerun()
 
     st.divider()
 
 # Chat input
-user_input = st.chat_input("Scrivi il tuo messaggio per Cuma...")
+user_input = st.chat_input("Write your message for Cuma...")
 
 if user_input:
     handle_ai_response(user_input)
