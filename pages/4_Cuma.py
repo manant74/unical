@@ -75,7 +75,24 @@ st.markdown("""
 CUMA_SYSTEM_PROMPT = get_prompt('cuma')
 
 def load_bdi_data():
-    """Carica Beliefs e Desires dalla sessione attiva."""
+    """Loads and normalises Beliefs and Desires from the active session.
+
+    Reads the full BDI payload via ``SessionManager`` and converts each
+    belief and desire into the simplified dicts that Cuma's chat context
+    and sidebar widgets expect.  Handles missing or ``None`` sub-arrays
+    gracefully.
+
+    Returns:
+        tuple[list[dict] | None, list[dict] | None]: A two-element tuple
+        ``(beliefs, desires)``.  Each element is either a list of
+        normalised dicts or ``None`` when the active session is missing
+        or an error occurs.
+
+        * Each **belief** dict contains ``id``, ``statement``,
+          ``source``, and ``confidence``.
+        * Each **desire** dict contains ``id``, ``statement``,
+          ``priority``, and ``success_metrics``.
+    """
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         return None, None
 
@@ -113,7 +130,22 @@ def load_bdi_data():
         return None, None
 
 def save_intentions_to_bdi(intentions):
-    """Salva le Intentions nel file current_bdi.json."""
+    """Persists the current list of Intentions into the active session's BDI data.
+
+    Delegates to ``SessionManager.update_bdi_data`` so that the
+    intentions are written to ``current_bdi.json`` alongside the
+    existing desires and beliefs without overwriting them.
+
+    Args:
+        intentions: List of intention dicts to persist.  Each dict
+            typically contains an ``intention`` sub-dict and an
+            ``action_plan`` sub-dict as produced by
+            :func:`extract_intention_from_response`.
+
+    Returns:
+        bool: ``True`` when the write succeeded, ``False`` otherwise.
+        Displays an ``st.error`` on failure.
+    """
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         st.warning("No active session. Cannot save Intentions.")
         return False
@@ -132,9 +164,25 @@ def save_intentions_to_bdi(intentions):
         return False
 
 def extract_intention_from_response(response_text):
-    """
-    Estrae una intenzione strutturata dal testo della risposta dell'AI.
-    Ritorna un dict con intention e action_plan.
+    """Extracts a structured Intention from a free-text LLM response.
+
+    Uses simple Italian-keyword regex patterns (``intenzione:``,
+    ``piano:``) to locate the intention statement and the first action
+    step.  When a match is found the function wraps it in the standard
+    Intention + ActionPlan schema expected by :func:`save_intentions_to_bdi`.
+
+    The generated IDs are sequential based on the current length of
+    ``st.session_state.intentions_list``, and the first loaded desire is
+    linked by default.
+
+    Args:
+        response_text: Raw text returned by the LLM for the current
+            Cuma turn.
+
+    Returns:
+        dict | None: A dict with two keys — ``"intention"`` and
+        ``"action_plan"`` — if an intention pattern was matched,
+        or ``None`` when no match is found.
     """
     # Pattern semplice per estrarre intenzioni proposte
     intent_pattern = r"intenzione[:\s]*([^.!?\n]*[.!?])"

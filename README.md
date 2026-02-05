@@ -52,7 +52,7 @@ Un file JSON strutturato che mappa desires degli utenti con fatti rilevanti dell
 
 ## 🎨 Moduli e Funzionalità
 
-LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI dedicato o funzionalità specifiche:
+LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI dedicato o funzionalità specifiche. La homepage (`app.py`) presenta i moduli come card cliccabili raggruppati in tre sezioni (Configuration, Domain Definition, Live Sessions) e include un **toggle Dark/Light mode** (`🌙`/`☀️`) nell'angolo superiore destro.
 
 ### 🧭 Compass - Session Configuration & BDI Management
 
@@ -63,14 +63,17 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 - **Gestione Sessioni**:
   - Creazione sessioni con nome, descrizione e tag
   - Selezione del contesto (knowledge base) da utilizzare
-  - Configurazione provider LLM (Gemini, Claude, OpenAI) e modello
-  - **Parametri LLM avanzati**: temperature, max_tokens, top_p
+  - Configurazione provider LLM (Gemini, OpenAI) e modello
+  - **Parametri LLM avanzati**: model-specific (vedi sezione Provider LLM)
   - Test connessione LLM con sessione attiva
   - Gestione sessioni recenti (carica, elimina, switch)
+  - **📤 Export as Framework**: esporta il BDI della sessione in `data/bdi_frameworks/` per l'uso in Genius
 
 - **Gestione BDI Data**:
   - **Tab Desires**: Visualizzazione e gestione desires della sessione
   - **Tab Beliefs**: Visualizzazione e gestione beliefs della sessione
+  - **Tab Intentions**: Visualizzazione e gestione intentions della sessione
+  - **Tab Grafo BDI**: Grafo interattivo delle relazioni Desire-Belief con dimensionamento dinamico dei nodi in base al peso nel grafo (layout selezionabile: BarnesHut, ForceAtlas2, Hierarchical, Repulsion, Circular, Radial)
   - Editor JSON con syntax highlighting per belief base
   - Import/export belief base dal contesto
   - Validazione JSON in tempo reale
@@ -115,8 +118,13 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
   - Salvataggio in `belief_base.json` nel contesto
   - Update automatico metadata contesto
 
-- **Test KB**: Interfaccia query per verificare qualità indicizzazione
-- **Gestione**: Reset KB, eliminazione contesto, export/import
+- **Test KB**: Interfaccia query interattiva sulla KB — invia una query testuale e visualizza i chunk recuperati con i relativi punteggi di similarità, per verificare qualità e rilevanza dell'indicizzazione
+- **Gestione contesti**:
+  - Reset KB (`🗑️ Clear KB`)
+  - Eliminazione contesto completo
+  - **📦 Export contesto (ZIP)**: esporta chroma_db, metadata e belief_base in un archivio ZIP
+  - **📥 Import contesto (ZIP)**: ripristina un contesto precedentemente esportato
+- **📝 Editor Beliefs**: editor JSON modale con syntax highlighting per modificare la belief base estratta
 
 **Tecnologia RAG**: Implementa Retrieval Augmented Generation per accesso contestuale agli agenti.
 
@@ -133,11 +141,13 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
    - **Desire statement**: Formulazione chiara dal punto di vista del beneficiario
    - **Motivation**: Motivazione profonda (perché è importante)
    - **Success metrics**: Indicatori concreti di successo
-5. **Validazione Auditor**: Sistema rubric-based valida desires su:
-   - Inferenza del beneficiario (segnali raccolti)
-   - Struttura dei desires
-   - Completezza dei metadati
-   - Coerenza semantica
+5. **Validazione Auditor**: Sistema rubric-based (scoring 0-5) valida desires su:
+   - Coerenza con la domanda
+   - Allineamento al modulo
+   - Contesto conservato
+   - Progressione dialogo
+   - Focus sul beneficiario
+   - Gestione finalizzazione / JSON
 6. **Report finale JSON**: Genera un documento strutturato con il beneficiario dedotto e tutti i suoi desires
 
 **Caratteristiche tecniche:**
@@ -169,12 +179,21 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
    - **Definition completa**: WHAT (cosa è), WHY (perché è importante), HOW (come funziona)
    - **Semantic Relations**: Array di relazioni strutturate con altri concetti
 5. **Classificazione prioritaria**: Assegna livelli di rilevanza (CRITICO/ALTO/MEDIO/BASSO) per ogni belief rispetto ai desires correlati
-6. **Validazione Auditor**: Sistema rubric-based valida beliefs estratti su:
+6. **Validazione Auditor**: Sistema rubric-based (scoring 0-5) valida beliefs estratti su:
+   - Coerenza con la domanda
+   - Contesto conservato
+   - Specificità del belief
    - Struttura del belief
-   - Citazione delle fonti
-   - Correlazione con desires
-   - Ricchezza semantica
+   - Evidenza / sorgente
+   - Gestione finalizzazione / JSON
 7. **Report finale**: Genera JSON completo con beliefs correlati ai desires
+
+**Modalità di generazione:**
+
+- **Interattiva** (default): conversazione guidata con Believer, estrazione belief per belief con RAG
+- **Da belief base**: genera beliefs a partire dalla belief base pre-estratta del contesto, correlando con i desires
+- **Mix beliefs**: combina beliefs della base con nuovi estratti tramite RAG
+- **Da zero** (`believer_from_scratch_prompt.md`): genera beliefs direttamente dai chunk della KB e dai desires, senza passare dalla belief base — utile quando la belief base è assente o rumorosa
 
 **Livelli di rilevanza (v2.2):**
 
@@ -214,6 +233,9 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 **Funzionalità Attuali (Beta):**
 
 - **Generazione Intentions**: Crea piani d'azione basati su desires e beliefs esistenti
+- **Due modalità di invio**:
+  - `🗺️ Map multiple Intentions for the domain` — genera più intentions coprendo il dominio
+  - `🔍 Deep dive into a specific aspect` — esplorazione in profondità di un singolo aspetto
 - **Tracciamento Relazioni**: Collegamenti espliciti tra intentions, desires e beliefs
 - **Action Steps Strutturati**: Decomposizione in passi concreti con:
   - Effort estimates
@@ -221,6 +243,7 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
   - Risorse necessarie
   - Expected outcomes
 - **Risk Assessment**: Identificazione rischi e strategie di mitigazione
+- **Salvataggio automatico**: Intentions salvate nel BDI della sessione
 
 **Formato JSON Intentions:**
 
@@ -251,15 +274,29 @@ LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI d
 
 **Status**: In fase Beta - Sistema funzionale in attesa di integrazione con Auditor
 
-### ⚡ Genius - BDI Optimization Agent (In Sviluppo)
+### ⚡ Genius - BDI Execution Coach
 
-**Futuro modulo** per ottimizzazione intelligente del framework BDI.
+**Genius** è un agente di coaching esecutivo che trasforma i Desires in piani d'azione personalizzati, sfruttando i Beliefs già estratti nel framework BDI. Non richiede una sessione attiva: opera direttamente su BDI framework esportati da Compass.
 
-**Obiettivi pianificati:**
+**Flusso operativo:**
 
-- Analisi di completezza e coerenza del framework
-- Suggerimenti per colmare gap informativi
-- Raccomandazioni strategiche basate sull'analisi BDI
+1. **Selezione BDI**: Carica un framework BDI dalla directory `data/bdi_frameworks/` (esportati da Compass) o ripristina un piano precedentemente salvato
+2. **Customizzazione del Desire**: Seleziona il desire target tramite conversazione (per ID o descrizione)
+3. **Raccolta contesto utente**: Il discovery prompt raccoglie ruolo, timeline, situazione attuale e vincoli
+4. **Generazione piano**: L'LLM genera un piano strutturato in fasi e step, correlando i Beliefs con relevance CRITICO e ALTO
+5. **Arricchimento con tips**: Funzione opzionale che genera consigli pratici e strumenti per ogni step
+6. **Tracking progetto**: Checkbox per completamento step con aggiornamento progressivo persistito su disco
+
+**Caratteristiche tecniche:**
+
+- **Engine dedicato**: `utils/genius_engine.py` gestisce loading BDI, filtering beliefs, generazione e persistenza piani
+- **Prompt specializzati**: `genius_discovery_prompt.md` (discovery), `genius_plan_generation_prompt.md` (generazione piano), `genius_step_tips_prompt.md` (tips per step), `genius_coach_template.md` (coaching)
+- **Persistenza piani**: Piani salvati in `data/genius_plans/` con supporto piano attivo (`.active_plan`)
+- **Export Markdown**: Esporta il piano completo in formato Markdown scaricabile
+- **Progress tracking**: Sidebar con progress bar, checkboxe per step e stato per fase
+- **Riutilizzo BDI**: Stesso framework BDI usabile per generare piani diversi targeting desires diversi
+
+**Output**: Piano d'azione strutturato salvato in `data/genius_plans/`, esportabile in Markdown
 
 ## Installazione
 
@@ -304,7 +341,6 @@ cp .env.example .env
 # Modifica .env con le tue API keys
 # Configura almeno una delle seguenti:
 # - GOOGLE_API_KEY (per Gemini)
-# - ANTHROPIC_API_KEY (per Claude)
 # - OPENAI_API_KEY (per OpenAI)
 ```
 
@@ -335,13 +371,12 @@ LUMIA Studio segue un workflow sequenziale ben definito:
    - Tag per organizzazione
 3. **Configura la sessione**:
    - Seleziona il **contesto** (knowledge base) da utilizzare (o "Nessuno" se nuovo progetto)
-   - Scegli **Provider LLM** (Gemini, Claude, OpenAI)
-   - Scegli **Modello** (es: gemini-2.5-pro, claude-4-sonnet, gpt-5)
-   - **Configura parametri LLM** (opzionale):
-     - Temperature (0.0-1.0, default 0.7) - Controllo creatività
-     - Max Tokens (100-8000, default 2000) - Lunghezza risposte
-     - Top P (0.0-1.0, default 0.9) - Nucleus sampling
-     - Stop Sequences (max 4, opzionale) - Sequenze di interruzione
+   - Scegli **Provider LLM** (Gemini, OpenAI)
+   - Scegli **Modello** (es: gemini-2.5-pro, gpt-5.2)
+   - **Configura parametri LLM** (opzionale, model-specific):
+     - Modelli Gemini: Temperature (0.0-2.0), Max Output Tokens (fino a 65536), Top P (0.0-1.0)
+     - Modelli GPT-5/5.1/5.2: Reasoning Effort (none/low/medium/high)
+     - Checkbox **Use Default Parameters** per usare i valori predefiniti del modello
 4. **Test connessione** LLM (opzionale ma consigliato)
 5. **Attiva sessione** - Rende la sessione disponibile per Alì e Believer
 
@@ -413,6 +448,20 @@ LUMIA Studio segue un workflow sequenziale ben definito:
 
 **Pronto per l'uso**: Il framework BDI è ora strutturato, validato e pronto per essere utilizzato in applicazioni downstream o per analisi strategiche.
 
+#### Passo 5: ⚡ Generazione Piano d'Azione (Genius)
+
+1. Prima di accedere a Genius, clicca **📤 Export as Framework** nel sidebar di Compass per esportare il BDI della sessione in `data/bdi_frameworks/`
+2. Accedi al modulo **Genius**
+3. **Seleziona il BDI framework** dalla lista dei disponibili (o carica un piano precedente)
+4. **Seleziona il Desire target** tramite conversazione
+5. Rispondi alle domande di discovery (ruolo, timeline, vincoli)
+6. Genius **genera il piano** strutturato in fasi e step, correlando i beliefs più rilevanti
+7. (Opzionale) Clicca **"💡 Enrich with Tips and Tools"** per arricchire ogni step con consigli pratici
+8. Usa i **checkbox nel sidebar** per tracciare il progresso degli step
+9. (Opzionale) Clicca **"📄 Export Markdown"** per scaricare il piano
+
+**Output**: Piano d'azione personalizzato salvato in `data/genius_plans/`, esportabile in Markdown
+
 ### Funzionalità Avanzate
 
 #### Saluto Contestualizzato (Alì)
@@ -456,48 +505,54 @@ Nella sidebar di Believer, espandi "➕ Aggiungi Belief Manualmente" e compila:
 unical/
 ├── app.py                     # Pagina principale con tiles
 ├── pages/
-│   ├── 0_Compass.py          # ✨ NUOVO: Gestione sessioni e BDI
+│   ├── 0_Compass.py          # Gestione sessioni, BDI e analytics
 │   ├── 1_Knol.py             # Gestione contesti e KB
 │   ├── 2_Ali.py              # Agente per Desires
 │   ├── 3_Believer.py         # Agente per Beliefs
-│   ├── 4_Cuma.py             # Placeholder
-│   └── 5_Genius.py           # Placeholder
+│   ├── 4_Cuma.py             # Agente per Intentions (Beta)
+│   └── 6_Genius.py           # Agente Execution Coach
 ├── prompts/
-│   ├── ali_system_prompt.md             # System prompt per Alì
-│   ├── believer_system_prompt.md        # System prompt per Believer
-│   ├── belief_base_prompt.md            # Prompt per generazione belief base
-│   ├── believer_mix_beliefs_prompt.md   # Prompt per mix beliefs base+RAG
-│   ├── cuma_system_prompt.md            # System prompt per Cuma
-│   ├── genius_system_prompt.md          # System prompt per Genius
-│   ├── desires_auditor_system_prompt.md # Auditor dedicato per Desires (Alì)
-│   └── belief_auditor_system_prompt.md  # Auditor dedicato per Beliefs (Believer)
+│   ├── ali_system_prompt.md                # System prompt per Alì
+│   ├── believer_system_prompt.md           # System prompt per Believer
+│   ├── believer_from_scratch_prompt.md     # Generazione beliefs da zero (senza belief base)
+│   ├── belief_base_prompt.md               # Prompt per generazione belief base
+│   ├── believer_mix_beliefs_prompt.md      # Prompt per mix beliefs base+RAG
+│   ├── cuma_system_prompt.md               # System prompt per Cuma
+│   ├── desires_auditor_system_prompt.md    # Auditor dedicato per Desires (Alì)
+│   ├── belief_auditor_system_prompt.md     # Auditor dedicato per Beliefs (Believer)
+│   ├── genius_discovery_prompt.md          # Genius: fase discovery e profilo utente
+│   ├── genius_plan_generation_prompt.md    # Genius: generazione struttura piano
+│   ├── genius_step_tips_prompt.md          # Genius: tips pratici per step
+│   └── genius_coach_template.md            # Genius: template coaching
 ├── utils/
 │   ├── __init__.py
 │   ├── document_processor.py    # Elaborazione documenti e RAG
-│   ├── llm_manager.py           # ✨ AGGIORNATO: Gestione LLM con parametri
-│   ├── session_manager.py       # ✨ NUOVO: Gestione sessioni
-│   ├── context_manager.py       # ✨ NUOVO: Gestione contesti multipli
-│   └── prompts.py               # Caricamento system prompts
+│   ├── llm_manager.py           # Gestione LLM multi-provider
+│   ├── llm_manager_config.py    # Configurazione parametri per modello
+│   ├── session_manager.py       # Gestione sessioni
+│   ├── context_manager.py       # Gestione contesti multipli
+│   ├── auditor.py               # Quality assurance rubric-based
+│   ├── genius_engine.py         # Engine Genius: piani, persistenza, progress
+│   ├── prompts.py               # Caricamento system prompts
+│   └── ui_messages.py           # Messaggi di loading dinamici
 ├── data/
-│   ├── contexts/                # ✨ NUOVO: Contesti multipli
+│   ├── contexts/                # Contesti multipli (knowledge base)
 │   │   └── {context_name}/
 │   │       ├── chroma_db/       # DB vettoriale per contesto
 │   │       ├── context_metadata.json  # Metadata contesto
 │   │       └── belief_base.json       # Belief base contesto
-│   ├── sessions/                # ✨ AGGIORNATO: Sessioni complete
+│   ├── sessions/                # Sessioni di lavoro
 │   │   └── {session_id}/
 │   │       ├── metadata.json    # Nome, descrizione, timestamp
 │   │       ├── config.json      # Context, LLM provider/model/settings
-│   │       ├── bdi_data.json    # Desires e beliefs della sessione
+│   │       ├── current_bdi.json # Desires e beliefs della sessione
 │   │       └── belief_base.json # Belief base (opzionale)
-│   ├── current_context.json     # ⚠️ DEPRECATO: Sostituito da context metadata
-│   └── current_bdi.json         # ⚠️ DEPRECATO: Sostituito da session BDI data
-├── docs/                        # ✨ NUOVO: Documentazione tecnica
-│   ├── COMPASS_GUIDE.md
-│   ├── LLM_PARAMETERS_ANALYSIS.md
-│   ├── SESSION_INTEGRATION_TODO.md
-│   └── ...
-├── test_*.py                    # ✨ NUOVO: Suite di test
+│   ├── bdi_frameworks/          # BDI esportati da Compass per Genius
+│   │   └── {domain}_bdi.json
+│   └── genius_plans/            # Piani generati da Genius
+│       ├── plan_{id}.json       # Piano completo
+│       └── .active_plan         # Marker piano attivo
+├── docs/                        # Documentazione tecnica
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -546,6 +601,7 @@ Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato s
   "intentions": []
 }
 ```
+
 ### Personalizzazione dei System Prompts
 
 I system prompts degli agenti sono memorizzati in file Markdown separati nella directory [prompts/](prompts/). Questo permette di:
@@ -567,9 +623,9 @@ Per modificare un prompt:
 Implementazione di un sistema di validazione avanzato con criteri oggettivi:
 
 - **Auditor Separati**: Due auditor dedicati per Alì (desires) e Believer (beliefs)
-- **Valutazione Rubric**: Sistema di scoring 0-10 su dimensioni specifiche:
-  - **Desires Auditor**: Persona inference, desire structure, completeness, semantic coherence
-  - **Beliefs Auditor**: Belief structure, source citation, desire correlation, semantic richness
+- **Valutazione Rubric**: Sistema di scoring 0-5 su dimensioni specifiche:
+  - **Desires Auditor** (6 dimensioni): coerenza con domanda, allineamento al modulo, contesto conservato, progressione dialogo, focus sul beneficiario, gestione finalizzazione/JSON
+  - **Beliefs Auditor** (6 dimensioni): coerenza con domanda, contesto conservato, specificità belief, struttura belief, evidenza/sorgente, gestione finalizzazione/JSON
 - **Feedback Oggettivo**: Issues, improvements e quick replies basati su criteri espliciti
 - **Prompt Specializzati**:
   - `prompts/desires_auditor_system_prompt.md` per validazione desires
@@ -580,6 +636,7 @@ Implementazione di un sistema di validazione avanzato con criteri oggettivi:
 **Nuovi Standard JSON:**
 
 **Desires** (formato aggiornato):
+
 ```json
 {
   "desire_id": "D1",
@@ -590,6 +647,7 @@ Implementazione di un sistema di validazione avanzato con criteri oggettivi:
 ```
 
 **Beliefs** (formato arricchito):
+
 ```json
 {
   "subject": "Entità soggetto",
@@ -652,7 +710,7 @@ Sistema di messaggi per migliorare l'UX durante l'elaborazione LLM:
 - **Top P Sampling** (0.0-1.0): Nucleus sampling per varietà output
 - **Stop Sequences** (max 4): Sequenze custom per interrompere generazione
 - **Configurazione Centralizzata**: Parametri configurati una volta in Compass, usati automaticamente da Alì/Believer
-- **Cross-Provider**: Funziona con Gemini, Claude e OpenAI
+- **Cross-Provider**: Funziona con Gemini e OpenAI
 
 ### Gestione Contesti Multipli
 
@@ -675,31 +733,38 @@ Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-
 ### Google Gemini
 
 **Modelli di Produzione:**
+
 - gemini-2.5-pro - Massima qualità, ragionamento complesso
 - gemini-2.5-flash - Bilanciamento velocità/qualità (raccomandato)
 - gemini-2.5-flash-lite - Velocità massima, task semplici
 
 **Modelli Preview:**
+
 - gemini-3-pro-preview - Next-gen con capacità avanzate (Beta)
 
 ### OpenAI
 
 **Modelli con Reasoning (GPT-5 Series):**
+
 - gpt-5 - Base reasoning model
 - gpt-5-nano - Lightweight reasoning
 - gpt-5-mini - Compact reasoning
 
 **GPT-5.1 Series (Novembre 2025+):**
-- gpt-5.1 - Enhanced reasoning
-- gpt-5.1-chat-latest - Latest chat-optimized
+
+- gpt-5.1 - Enhanced reasoning (Thinking)
+- gpt-5.1-chat-latest - Instant, default reasoning_effort "none"
 
 **GPT-5.2 Series (Dicembre 2025+):**
+
 - gpt-5.2 - Advanced reasoning
-- gpt-5.2-chat-latest - Latest generation
+- gpt-5.2-pro - Versione Pro, default reasoning_effort "high" per massima accuratezza
+- gpt-5.2-chat-latest - Instant, default reasoning_effort "none"
 
 **Supporto Reasoning Effort:**
 
 Tutti i modelli GPT-5/5.1/5.2 supportano il parametro `reasoning_effort`:
+
 - `"none"`: Disabilita reasoning (latenza bassa, comportamento standard)
 - `"low"`: Ragionamento minimo
 - `"medium"`: Ragionamento bilanciato (default)
@@ -709,36 +774,52 @@ Tutti i modelli GPT-5/5.1/5.2 supportano il parametro `reasoning_effort`:
 
 ## Formati di Output
 
-### Desire JSON Structure
+### Desire JSON Structure (v2.7)
 
 ```json
 {
-  "id": 1,
-  "description": "Descrizione del desire",
+  "desire_id": "D1",
+  "desire_statement": "Formulazione chiara dal punto di vista del beneficiario",
   "priority": "high|medium|low",
-  "context": "Contesto specifico",
-  "success_criteria": "Criteri di successo",
-  "timestamp": "2025-01-01T12:00:00"
+  "motivation": "Motivazione profonda (perché questo desire è importante)",
+  "success_metrics": ["Indicatore #1", "Indicatore #2"],
+  "context": "Contesto aggiuntivo o vincoli (opzionale)"
 }
 ```
 
-### Belief JSON Structure (v2.2 - Con Livelli di Rilevanza)
+### Belief JSON Structure (v2.7)
 
 ```json
 {
   "subject": "Entità principale del fatto",
-  "relazione": "Verbo o proprietà che lega soggetto e oggetto",
-  "object": "Entità o valore collegato",
-  "source": "Testo esatto da cui è estratta l'informazione",
+  "definition": "Descrizione completa: WHAT it is, WHY it matters, HOW it works",
+  "semantic_relations": [
+    {
+      "relation": "tipo_di_relazione",
+      "object": "Entità o valore collegato",
+      "description": "Spiegazione della relazione"
+    }
+  ],
+  "source": "Citazione esatta della sorgente",
+  "importance": 0.85,
+  "confidence": 0.9,
+  "prerequisites": ["Concetto prerequisito"],
+  "related_concepts": ["Concetto correlato"],
+  "enables": ["Concetto abilitato"],
+  "part_of": ["Concetto padre"],
+  "sub_concepts": ["Sottoconcetto"],
+  "tags": ["tag1", "tag2"],
   "metadata": {
     "subject_type": "Tipo dell'entità soggetto",
-    "object_type": "Tipo dell'entità oggetto"
+    "object_type": "Tipo dell'entità oggetto",
+    "extraction_method": "rag_retrieval|llm_generation|manual",
+    "source_type": "base|mixed|manual"
   },
   "related_desires": [
     {
-      "desire_id": "P1-D1",
-      "livello_rilevanza": "CRITICO|ALTO|MEDIO|BASSO",
-      "spiegazione": "Perché questo belief è rilevante per il desire"
+      "desire_id": "D1",
+      "relevance_level": "CRITICO|ALTO|MEDIO|BASSO",
+      "definition": "Spiegazione di perché questo belief è rilevante per il desire"
     }
   ]
 }
@@ -763,34 +844,6 @@ Tutti i modelli GPT-5/5.1/5.2 supportano il parametro `reasoning_effort`:
   "chat_history": [...]
 }
 ```
-
-## 💼 Casi d'Uso e Applicazioni
-
-LUMIA Studio è versatile e applicabile a diversi scenari:
-
-### Product Management e Design
-
-- **User Research**: Identificazione sistematica del beneficiario primario e dei suoi bisogni dedotti dal dialogo
-- **Product Strategy**: Definizione di obiettivi allineati agli utenti
-- **Gap Analysis**: Identificazione di informazioni mancanti critiche per decisioni strategiche
-
-### Knowledge Management
-
-- **Documentation Mining**: Estrazione di conoscenza strutturata da documentazione non strutturata
-- **Domain Modeling**: Creazione di modelli di dominio basati su fatti e relazioni
-- **Ontology Building**: Costruzione di basi di conoscenza semantiche per sistemi esperti
-
-### Business Analysis
-
-- **Requirements Engineering**: Elicitazione e strutturazione di requisiti attraverso analisi dei desires
-- **Stakeholder Analysis**: Mappatura di bisogni e obiettivi di diversi stakeholder
-- **Decision Support**: Correlazione tra fatti e obiettivi per supporto decisionale informato
-
-### Strategic Planning
-
-- **Goal Setting**: Definizione di obiettivi strategici evidence-based
-- **Priority Management**: Classificazione prioritaria di informazioni e iniziative
-- **Scenario Analysis**: Base strutturata per analisi predittiva (con moduli futuri)
 
 ## 🎓 Vantaggi dell'Approccio BDI con AI
 
@@ -847,27 +900,6 @@ LUMIA Studio è versatile e applicabile a diversi scenari:
 - **[docs/PROMPT_ANALYSIS.md](docs/PROMPT_ANALYSIS.md)** - Analisi dei system prompts
 - **[NewFeatures.md](NewFeatures.md)** - Proposte di nuove funzionalità
 
-## Roadmap
-
-### Funzionalità in Sviluppo
-
-- [ ] **Cuma**: Integrazione Auditor per intentions (completamento Beta)
-- [ ] **Genius**: Implementazione agente di ottimizzazione BDI
-- [ ] **Analytics Avanzato**: Espansione dashboard in Compass con:
-  - Trend analysis multi-sessione
-  - Pattern discovery automatico
-  - Recommendation engine
-
-### Funzionalità Future
-
-- [ ] Export in formati multipli (CSV, XML, PDF report)
-- [ ] Sistema di versioning completo per sessioni (git-like)
-- [ ] Integrazione provider LLM aggiuntivi (Anthropic Claude, Mistral)
-- [ ] Collaborative editing multi-utente
-- [ ] Template library per domini comuni
-- [ ] API REST per integrazione esterna
-
 ## Contribuire
 
 Contributi, issue e feature request sono benvenuti!
-

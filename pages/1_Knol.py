@@ -49,7 +49,17 @@ if 'show_belief_editor' not in st.session_state:
 
 # Funzione helper per caricare i belief base
 def load_belief_count():
-    """Carica il conteggio dei beliefs dal file (lazy loading)"""
+    """Returns the number of beliefs stored in the active context's belief base.
+
+    Reads ``belief_base.json`` from the path provided by ``ContextManager``
+    only when a context is selected.  The file is opened on every call (no
+    Streamlit cache) to always reflect the latest on-disk state.
+
+    Returns:
+        int: Number of beliefs in the ``beliefs_base`` array.
+            Returns ``0`` when no context is selected, the file does not
+            exist, or any read / parse error occurs.
+    """
     if not st.session_state.current_context:
         return 0
 
@@ -70,7 +80,26 @@ def load_belief_count():
 # Funzione dialog per editor beliefs
 @st.dialog("📝 Beliefs Editor", width="large")
 def belief_editor_modal():
-    """Modale per editing dei beliefs in formato JSON"""
+    """Opens a full-screen modal for editing the active context's belief base as JSON.
+
+    The modal loads the current ``belief_base.json``, presents it in a
+    syntax-highlighted code editor (VSCode shortcuts), and exposes four
+    actions:
+
+    * **Validate** – parses the JSON and reports the belief count.
+    * **Save** – writes the edited JSON back to disk and updates
+      context metadata.
+    * **Clear All** – replaces the belief base with an empty array
+      (requires a second click for confirmation).
+    * **Close** – discards unsaved changes and closes the dialog.
+
+    The function mutates ``st.session_state`` directly: it clears
+    ``show_belief_editor`` on save / close and triggers ``st.rerun()``.
+
+    Raises:
+        No exceptions are raised; all errors are caught and displayed
+        via ``st.error``.
+    """
 
     # Carica belief base
     belief_base_path = st.session_state.context_manager.get_belief_base_path(

@@ -31,27 +31,60 @@ Il sistema implementa il framework cognitivo BDI, tipico dell'AI simbolica:
 
 ```text
 unical/
-├── app.py                      # Entry point principale (Homepage)
-├── pages/                      # Applicazione multi-pagina Streamlit
-│   ├── 0_Compass.py           # Gestione sessioni & visualizzazione BDI
-│   ├── 1_Knol.py              # Builder knowledge base
-│   ├── 2_Ali.py               # Agente estrazione desires
-│   ├── 3_Believer.py          # Agente estrazione beliefs
-│   ├── 5_Cuma.py              # Scenario planning (in sviluppo)
-│   └── 6_Genius.py            # Ottimizzazione BDI (in sviluppo)
-├── utils/                      # Core business logic
-│   ├── llm_manager.py         # Orchestrazione LLM multi-provider
-│   ├── document_processor.py  # RAG & processamento documenti
-│   ├── session_manager.py     # Gestione lifecycle sessioni
-│   ├── context_manager.py     # Gestione multi-context KB
-│   ├── auditor.py             # Quality assurance conversazioni
-│   └── prompts.py             # Caricamento system prompt
-├── prompts/                    # System prompt agenti (Markdown)
-├── data/                       # Storage persistente
-│   ├── contexts/              # Knowledge bases multiple
-│   └── sessions/              # Sessioni di lavoro
-└── docs/                       # Documentazione tecnica
+├── app.py                          # Entry point principale (Homepage, 549 righe)
+├── pages/                          # Applicazione multi-pagina Streamlit
+│   ├── 0_Compass.py               # Gestione sessioni & visualizzazione BDI (2,392 righe)
+│   ├── 1_Knol.py                  # Builder knowledge base (778 righe)
+│   ├── 2_Ali.py                   # Agente estrazione desires (906 righe)
+│   ├── 3_Believer.py              # Agente estrazione beliefs (1,374 righe)
+│   ├── 4_Cuma.py                  # Pianificazione intenzioni (577 righe, WIP)
+│   └── 6_Genius.py                # Execution coach BDI (778 righe, ACTIVE)
+├── utils/                          # Core business logic
+│   ├── llm_manager.py             # Orchestrazione LLM multi-provider (188 righe)
+│   ├── llm_manager_config.py      # Configurazione parametri per modello (204 righe)
+│   ├── document_processor.py      # RAG & processamento documenti (263 righe)
+│   ├── session_manager.py         # Gestione lifecycle sessioni (311 righe)
+│   ├── context_manager.py         # Gestione multi-context KB (304 righe)
+│   ├── auditor.py                 # Quality assurance conversazioni (392 righe)
+│   ├── genius_engine.py           # Engine generazione piani Genius (1,239 righe)
+│   ├── prompts.py                 # Caricamento system prompt (121 righe)
+│   └── ui_messages.py             # Messaggi UI castuali (91 righe)
+├── prompts/                        # System prompt agenti (14 file Markdown)
+│   ├── ali_system_prompt.md
+│   ├── believer_system_prompt.md
+│   ├── believer_from_scratch_prompt.md
+│   ├── believer_mix_beliefs_prompt.md
+│   ├── belief_base_prompt.md
+│   ├── cuma_system_prompt.md
+│   ├── auditor_system_prompt.md
+│   ├── desires_auditor_system_prompt.md
+│   ├── belief_auditor_system_prompt.md
+│   ├── genius_system_prompt.md
+│   ├── genius_discovery_prompt.md
+│   ├── genius_plan_generation_prompt.md
+│   ├── genius_step_tips_prompt.md
+│   └── genius_coach_template.md
+├── data/                           # Storage persistente (filesystem-based)
+│   ├── bdi_frameworks/            # BDI frameworks esportati e riutilizzabili
+│   ├── genius_plans/              # Piani d'azione generati da Genius
+│   ├── contexts/                  # Knowledge bases isolate
+│   └── sessions/                  # Sessioni di lavoro
+├── docs/                           # Documentazione tecnica
+├── lib/                            # Librerie JavaScript frontend
+│   ├── tom-select/                # Componente select dropdown
+│   └── vis-9.1.2/                 # Visualizzazioni network
+├── requirements.txt                # Dipendenze Python
+├── .env.example                    # Template variabili ambiente
+└── setup_models.py                 # Script di setup modelli
 ```
+
+**Statistiche codice:**
+- **Python totale**: 10,468 righe
+- **Pagine applicazione**: 6 moduli
+- **Moduli utility**: 9 file
+- **System prompt**: 14 file Markdown
+- **Provider LLM supportati**: 2 (Google Gemini, OpenAI)
+- **Modelli supportati**: 12+ tra i due provider
 
 ---
 
@@ -107,15 +140,15 @@ Streamlit è stato scelto per la sua capacità di creare rapidamente interfacce 
 
 Ogni pagina rappresenta un modulo funzionale indipendente:
 
-| Pagina | File | Funzione |
-|--------|------|----------|
-| **Homepage** | `app.py` | Landing page con descrizione del sistema |
-| **Compass** | `pages/0_Compass.py` | Gestione sessioni, visualizzazione BDI, analytics |
-| **Knol** | `pages/1_Knol.py` | Creazione/gestione knowledge bases |
-| **Alì** | `pages/2_Ali.py` | Interfaccia agente estrazione desires |
-| **Believer** | `pages/3_Believer.py` | Interfaccia agente estrazione beliefs |
-| **Cuma** | `pages/5_Cuma.py` | Scenario planning (futuro) |
-| **Genius** | `pages/6_Genius.py` | Ottimizzazione BDI (futuro) |
+| Pagina | File | Righe | Status | Funzione |
+|--------|------|-------|--------|----------|
+| **Homepage** | `app.py` | 549 | Active | Landing page con descrizione del sistema |
+| **Compass** | `pages/0_Compass.py` | 2,392 | Active | Gestione sessioni, visualizzazione BDI, analytics |
+| **Knol** | `pages/1_Knol.py` | 778 | Active | Creazione/gestione knowledge bases |
+| **Alì** | `pages/2_Ali.py` | 906 | Active | Interfaccia agente estrazione desires |
+| **Believer** | `pages/3_Believer.py` | 1,374 | Active | Interfaccia agente estrazione beliefs |
+| **Cuma** | `pages/4_Cuma.py` | 577 | WIP | Pianificazione intenzioni |
+| **Genius** | `pages/6_Genius.py` | 778 | Active (MVP) | Execution coach: genera piani d'azione da BDI |
 
 #### Componenti UI Avanzati
 
@@ -311,23 +344,84 @@ RecursiveCharacterTextSplitter(
 )
 ```
 
-#### 5. **UI Messages** (`utils/ui_messages.py`)
+#### 5. **GeniusEngine** (`utils/genius_engine.py` — 1,239 righe)
+
+Engine di business logic per l'agente Genius. Gestisce il ciclo completo dalla selezione del BDI alla generazione e persistenza dei piani d'azione.
+
+**Responsabilità:**
+
+- Caricamento e validazione dei BDI framework da `data/bdi_frameworks/`
+- Filtro beliefs per rilevanza (CRITICO/ALTO) relativa a un desire target
+- Creazione del profilo utente (ruolo, timeline, vincoli)
+- Generazione struttura piano tramite LLM con prompt dedicato
+- Persistenza piani in `data/genius_plans/` e tracking dello stato attivo
+- Aggiornamento progressivo degli step (pending → in_progress → completed)
+
+**Metodi principali:**
+
+```python
+class GeniusEngine:
+    # Caricamento BDI
+    load_bdi_frameworks() -> List[Dict]
+    load_bdi(filename: str) -> Optional[Dict]
+
+    # Belief filtering
+    filter_beliefs(bdi_data, desire_id, min_relevance_level="ALTO") -> List[Dict]
+
+    # Generazione piano
+    generate_plan_structure(llm_manager, bdi_data, desire_id, user_profile) -> Dict
+    create_full_plan(plan_structure, bdi_data, desire_id, user_profile, bdi_source) -> Dict
+
+    # Persistenza
+    save_plan(plan, session_id=None) -> str
+    load_plan(plan_id, session_id=None) -> Optional[Dict]
+    get_active_plan(session_id=None) -> Optional[Dict]
+    list_plans(session_id=None) -> List[Dict]
+    update_plan_progress(plan_id, step_id, new_status, user_notes="") -> bool
+```
+
+**Struttura piano generato:**
+
+```json
+{
+  "plan_id": "abc123",
+  "bdi_source": "perizia_immobiliare_bdi.json",
+  "target_desire": { "desire_id": "D2", "desire_statement": "...", "success_metrics": [] },
+  "user_profile": { "role": "Product Manager", "timeline_weeks": 12, "constraints": ["small_team"] },
+  "plan_structure": {
+    "phases": [
+      {
+        "phase_id": "P1",
+        "phase_name": "Research & Analysis",
+        "duration_weeks": 2,
+        "status": "pending",
+        "steps": [
+          {
+            "step_id": "S1.1",
+            "description": "...",
+            "tasks": ["Task 1", "Task 2"],
+            "supporting_beliefs": [{ "subject": "...", "relevance_level": "CRITICO" }],
+            "verification_criteria": ["..."],
+            "estimated_effort_days": 3,
+            "status": "pending"
+          }
+        ]
+      }
+    ]
+  },
+  "overall_progress": { "total_steps": 12, "completed_steps": 0, "percentage_complete": 0.0 }
+}
+```
+
+#### 6. **UI Messages** (`utils/ui_messages.py`)
 
 Modulo utility per messaggi di attesa variabili e contestuali.
 
 **Responsabilità:**
 
-- Gestione lista di messaggi simpatici sulla gestione della conoscenza
-- Selezione casuale di messaggi per spinner e indicatori di caricamento
-- Mantenimento di tono professionale e creativo durante l'elaborazione
-
-**Messaggio Randomico:**
-
-```python
-def get_random_thinking_message():
-    """Restituisce un messaggio casuale dalla lista dei 25 messaggi approvati."""
-    return random.choice(THINKING_MESSAGES)
-```
+- Gestione lista di messaggi sulla gestione della conoscenza e riferimenti fantascientifici
+- Selezione casuale per spinner e indicatori di caricamento
+- Tono professionale e creativo durante l'elaborazione
 
 **Utilizzo:**
 
@@ -339,10 +433,10 @@ with st.spinner(get_random_thinking_message()):
     pass
 ```
 
-**Lista Messaggi (25):**
+**Lista Messaggi (86 totali):**
 
-- 7 messaggi originali sulla gestione della conoscenza
-- 18 messaggi con riferimenti fantascientifici (Borges, Asimov, Star Trek, Blade Runner, Dick, Star Wars)
+- Messaggi originali sulla gestione della conoscenza
+- Riferimenti fantascientifici: Borges, Asimov, Star Trek, Blade Runner, Star Wars, 2001: A Space Odyssey, Dune, Hitchhiker's Guide, Doctor Who, Neuromancer e altri
 
 #### 6. **ConversationAuditor** (`utils/auditor.py`)
 
@@ -772,15 +866,12 @@ def extract_belief_base(context_name):
 
 **SDK:** `google-generativeai >= 0.3.0`
 
-**Modelli di Produzione:**
+**Modelli disponibili:**
 
-- `gemini-2.5-flash-lite`: Ultra-veloce, task semplici
-- `gemini-2.5-flash`: Bilanciato velocità/qualità (raccomandato)
-- `gemini-2.5-pro`: Massima qualità, ragionamento complesso
-
-**Modelli Preview:**
-
-- `gemini-3-pro-preview`: Next-generation con capacità avanzate (Beta, da Dicembre 2025)
+- `gemini-2.5-flash-lite`: Ultra-veloce, task semplici (max 65,536 token, default 4,096)
+- `gemini-2.5-flash`: Bilanciato velocità/qualità — raccomandato (max 65,536 token, default 8,192)
+- `gemini-2.5-pro`: Massima qualità, ragionamento complesso (max 65,536 token, default 8,192)
+- `gemini-3-pro-preview`: Next-generation con capacità avanzate (Beta, max 65,536 token, default 8,192)
 
 **Implementazione:**
 
@@ -834,18 +925,21 @@ class LLMManager:
 
 **Modelli Disponibili:**
 
-**Modelli con Reasoning (GPT-5 Series):**
+**GPT-5 Series (reasoning_effort: low/medium/high):**
 - `gpt-5`: Modello avanzato con reasoning
 - `gpt-5-nano`: Versione leggera GPT-5
 - `gpt-5-mini`: Versione media GPT-5
 
-**Modelli GPT-5.1 (Novembre 2025+):**
-- `gpt-5.1`: Versione con ragionamento adattivo (thinking model)
-- `gpt-5.1-chat-latest`: Versione istantanea ottimizzata per latenza
+**GPT-5.1 Series — Novembre 2025+ (reasoning_effort: none/low/medium/high):**
 
-**Modelli GPT-5.2 (Dicembre 2025+):**
-- `gpt-5.2`: Versione con ragionamento adattivo (thinking model)
-- `gpt-5.2-chat-latest`: Versione istantanea ottimizzata per latenza
+- `gpt-5.1`: Ragionamento adattivo (thinking model)
+- `gpt-5.1-chat-latest`: Istantanea ottimizzata per latenza (default reasoning_effort: none)
+
+**GPT-5.2 Series — Dicembre 2025+ (reasoning_effort: none/low/medium/high):**
+
+- `gpt-5.2`: Ragionamento adattivo (thinking model)
+- `gpt-5.2-pro`: Versione pro con reasoning profondo (default reasoning_effort: high)
+- `gpt-5.2-chat-latest`: Istantanea ottimizzata per latenza (default reasoning_effort: none)
 
 **Implementazione:**
 
@@ -916,6 +1010,52 @@ response = llm_manager.chat(
     reasoning_effort="none"  # Disabilita reasoning
 )
 ```
+
+### Configurazione Parametri per Modello (`utils/llm_manager_config.py`)
+
+Il modulo `llm_manager_config.py` centralizza i vincoli e i default dei parametri per ogni modello supportato. `LLMManager` lo consulta per determinare quali parametri sono validi e quali valori predefiniti applicare.
+
+**Struttura `MODEL_PARAMETERS`:**
+
+```python
+MODEL_PARAMETERS = {
+    # --- Gemini: temperature, max_output_tokens, top_p ---
+    "gemini-2.5-flash-lite": {
+        "temperature":        {"min": 0.0, "max": 2.0,    "default": 1.0},
+        "max_output_tokens":  {"min": 1,   "max": 65536,  "default": 4096},
+        "top_p":              {"min": 0.0, "max": 1.0,    "default": 1.0}
+    },
+    "gemini-2.5-flash": {
+        "temperature":        {"min": 0.0, "max": 2.0,    "default": 1.0},
+        "max_output_tokens":  {"min": 1,   "max": 65536,  "default": 8192},
+        "top_p":              {"min": 0.0, "max": 1.0,    "default": 1.0}
+    },
+    # gemini-2.5-pro e gemini-3-pro-preview: stessa struttura di flash
+
+    # --- GPT-5 Series: reasoning_effort [low, medium, high] ---
+    "gpt-5":      { "reasoning_effort": {"options": ["low","medium","high"], "default": "medium"} },
+    "gpt-5-nano": { "reasoning_effort": {"options": ["low","medium","high"], "default": "medium"} },
+    "gpt-5-mini": { "reasoning_effort": {"options": ["low","medium","high"], "default": "medium"} },
+
+    # --- GPT-5.1 Series: reasoning_effort [none, low, medium, high] ---
+    "gpt-5.1":              { "reasoning_effort": {"options": ["none","low","medium","high"], "default": "medium"} },
+    "gpt-5.1-chat-latest":  { "reasoning_effort": {"options": ["none","low","medium","high"], "default": "none"} },
+
+    # --- GPT-5.2 Series: reasoning_effort [none, low, medium, high] ---
+    "gpt-5.2":              { "reasoning_effort": {"options": ["none","low","medium","high"], "default": "medium"} },
+    "gpt-5.2-pro":          { "reasoning_effort": {"options": ["none","low","medium","high"], "default": "high"} },
+    "gpt-5.2-chat-latest":  { "reasoning_effort": {"options": ["none","low","medium","high"], "default": "none"} },
+}
+```
+
+**Vincoli parametri per tipologia modello:**
+
+| Parametro | Gemini | OpenAI Standard | GPT-5/5.1/5.2 Reasoning |
+|-----------|--------|-----------------|-------------------------|
+| temperature | Sì (0.0–2.0) | Sì (0.0–2.0) | Ignorato |
+| max_tokens | Sì (variabile) | Sì (variabile) | Sì (limiti maggiori) |
+| top_p | Sì (0.0–1.0) | Sì (0.0–1.0) | Ignorato |
+| reasoning_effort | N/A | N/A | Sì (none/low/medium/high) |
 
 ### Parametri LLM Configurabili
 
@@ -994,7 +1134,7 @@ messages = [
 
 - **Beliefs**: Fatti estratti dalla knowledge base aziendale
 - **Desires**: Goal strategici degli stakeholder (utenti, manager, etc.)
-- **Intentions**: Azioni derivate dall'analisi desires-beliefs (futuro: Genius)
+- **Intentions**: Azioni derivate dall'analisi desires-beliefs (Cuma: WIP; Genius: MVP attivo)
 
 ### Architettura Agenti
 
@@ -1013,7 +1153,7 @@ messages = [
    ↓
 3. ALÌ AGENT (Desires Extraction)
    ↓
-   Domain Analysis → User Signals → Single Persona → Desires → JSON
+   Domain Analysis → User Signals → Single Beneficiario → Desires → JSON
    ↓
    Save to session BDI data
    ↓
@@ -1025,10 +1165,16 @@ messages = [
    ↓
 5. COMPASS (Analytics & Visualization)
    ↓
-   View/Edit BDI → Graphs → Export
+   View/Edit BDI → Graphs → Export BDI Framework
    ↓
-6. CUMA & GENIUS (Future: Scenario Planning & Optimization)
-```text
+6. GENIUS (Execution Coach — MVP Attivo)
+   ↓
+   Load BDI Framework → Select Desire → User Profile → Generate Plan → Track Progress
+   ↓
+7. CUMA (Intentions Planning — WIP)
+   ↓
+   Load Desires + Beliefs → Scenario Analysis → Intentions → Action Steps
+```
 
 ### Agente Alì - Desires Extraction
 
@@ -1069,15 +1215,15 @@ User: "Tasso di completamento e feedback surveys"
 [Alì inferisce: Focus su retention e satisfaction]
 ```
 
-#### Fase 3: Formalizzazione Persona Singola
+#### Fase 3: Formalizzazione Beneficiario Singolo
 
 **Output:**
 
 ```json
 {
-  "persona_name": "Course Manager",
-  "persona_description": "Responsabile della progettazione e gestione corsi online, focalizzato su engagement e learning outcomes",
-  "persona_inference_notes": [
+  "beneficiario_name": "Course Manager",
+  "beneficiario_description": "Responsabile della progettazione e gestione corsi online, focalizzato su engagement e learning outcomes",
+  "beneficiario_inference_notes": [
     "Menzionato engagement studenti come sfida primaria",
     "Usa metriche quantitative (completion rate)",
     "Interesse per feedback qualitativo"
@@ -1085,7 +1231,7 @@ User: "Tasso di completamento e feedback surveys"
 }
 ```
 
-**Nota Architetturale:** Versione precedente supportava multi-persona, ora rimosso per focus su singolo stakeholder primario.
+**Nota Architetturale:** Versione precedente supportava multi-persona, ora rimosso per focus su singolo beneficiario primario (v2.5+).
 
 #### Fase 4: Estrazione Desires con Checkpoint
 
@@ -1123,10 +1269,10 @@ Questi rispecchiano le tue priorità? Vuoi aggiungere o modificare qualcosa?
 ```json
 {
   "domain_summary": "Piattaforma e-learning per corsi universitari con focus su engagement e learning outcomes",
-  "persona": {
-    "persona_name": "Course Manager",
-    "persona_description": "...",
-    "persona_inference_notes": ["..."]
+  "beneficiario": {
+    "beneficiario_name": "Course Manager",
+    "beneficiario_description": "...",
+    "beneficiario_inference_notes": ["..."]
   },
   "desires": [
     {
@@ -1432,17 +1578,73 @@ beliefs = session_manager.get_bdi_data(session_id)['beliefs']
 - Sistema di prioritizzazione automatica
 - Timeline generation
 
-### Agente Genius - BDI Optimization (In Sviluppo)
+### Agente Genius - Execution Coach (MVP Attivo — v2.7)
 
-**Obiettivo:** Ottimizzazione intelligente del framework BDI completo
+**File:** `pages/6_Genius.py` (778 righe) + `utils/genius_engine.py` (1,239 righe)
 
-**Funzionalità Pianificate:**
+**Prompts:** `genius_system_prompt.md`, `genius_discovery_prompt.md`, `genius_plan_generation_prompt.md`, `genius_step_tips_prompt.md`, `genius_coach_template.md`
 
-- Analisi completezza BDI (gap desires-beliefs, beliefs-intentions)
-- Suggerimenti beliefs mancanti per desires
-- Ottimizzazione correlazioni desire-belief
-- Validazione coerenza semantica
-- Raccomandazioni strategiche basate su pattern
+**Obiettivo:** Trasformare un desire strategico estratto dal BDI in un piano d'azione personalizzato e strutturato, basandosi sui beliefs correlati come evidenza.
+
+**Fasi Operative:**
+
+#### Fase 1: Selezione BDI Framework
+
+- Carica i BDI esportati da `data/bdi_frameworks/`
+- Visualizza come card con metadati (desires, beliefs, tags, domain)
+- Utente seleziona il BDI su cui operare
+
+#### Fase 2: Selezione Desire Target
+
+- Genius elenca tutti i desires del BDI caricato
+- Utente seleziona il desire obiettivo (es. "D2")
+- Detection tramite linguaggio naturale o ID diretto
+
+#### Fase 3: Raccolta Profilo Utente (Conversazionale)
+
+```text
+Genius: "Qual è il tuo ruolo?"
+User:   "Product Manager"
+Genius: "Quanto tempo hai a disposizione?"
+User:   "3 mesi"
+Genius: "Qual è la situazione attuale?"
+User:   "Onboarding basilare da migliorare"
+Genius: "Ci sono vincoli?"
+User:   "Team piccolo, solo 2 persone"
+```
+
+**Output:** oggetto `user_profile` con role, timeline_weeks, current_situation, constraints.
+
+#### Fase 4: Generazione Piano (LLM-powered)
+
+- Filtro beliefs rilevanti (CRITICO + ALTO) tramite `GeniusEngine.filter_beliefs()`
+- Prompt a LLM con: desire target + beliefs filtrati + profilo utente
+- Output strutturato: 3–5 fasi, 8–15 step totali, task per step, criteri di verifica
+- Arricchimento metadati (status, timestamp)
+- Auto-save in `data/genius_plans/`
+
+#### Fase 5: Visualizzazione Piano
+
+- Metriche sommarie (fasi, step, durata totale)
+- Expander per fase con dettaglio step
+- Per ogni step: tasks, criteri di verifica, beliefs di supporto
+- Pulsante di salvataggio manuale
+
+**Interazione con altri moduli:**
+
+- **Compass** → esporta BDI framework che Genius consuma
+- **Knol** → knowledge base → beliefs nel BDI
+- **Alì** → definizione desires → target per Genius
+- **Believer** → estrazione beliefs + correlazione → evidenza nel piano
+
+**Sviluppi futuri pianificati:**
+
+- Progress tracking interattivo nell'UI
+- Q&A coaching durante l'esecuzione del piano
+- Note utente per step
+- Export piano in Markdown
+- Integrazione sessione per storico piani
+- Tips pratici per step (LLM enrichment)
 
 ---
 
@@ -1553,9 +1755,36 @@ FASE 5: ANALISI & VISUALIZZAZIONE (COMPASS)
 │    • Validazione real-time              │
 │    • Save changes                       │
 ├─────────────────────────────────────────┤
-│ 4. Export                               │
+│ 4. Export BDI Framework                 │
 │    • Download current_bdi.json          │
+│    • Export in data/bdi_frameworks/     │
 │    • Copy to clipboard                  │
+└─────────────────────────────────────────┘
+                   ↓
+FASE 6: GENERAZIONE PIANO (GENIUS — MVP)
+┌─────────────────────────────────────────┐
+│ 1. Selezione BDI Framework              │
+│    • Carica da data/bdi_frameworks/     │
+│    • Seleziona il BDI esportato         │
+├─────────────────────────────────────────┤
+│ 2. Selezione Desire Target              │
+│    • Genius elenca desires disponibili  │
+│    • User: "Voglio lavorare su D2"      │
+├─────────────────────────────────────────┤
+│ 3. Profilo Utente (conversazionale)     │
+│    • Ruolo, timeline, situazione        │
+│    • Vincoli (team, budget)             │
+├─────────────────────────────────────────┤
+│ 4. Generazione Piano (LLM)             │
+│    • Filter beliefs CRITICO + ALTO      │
+│    • LLM genera struttura piano         │
+│    • 3-5 fasi, 8-15 step               │
+│    • Auto-save in genius_plans/         │
+├─────────────────────────────────────────┤
+│ 5. Visualizzazione & Tracking           │
+│    • Metriche: fasi, step, durata       │
+│    • Expander fase → step → tasks       │
+│    • Beliefs di supporto per step       │
 └─────────────────────────────────────────┘
 ```
 
@@ -1599,13 +1828,13 @@ SCENARIO: Aggiungere nuovi desires a sessione esistente
 |-------|------------|------------|----------|-------|
 | **Frontend** | Web Framework | Streamlit | 1.31.0+ | Interfaccia utente multi-page |
 | | UI Components | streamlit-code-editor | latest | Editor JSON/code |
-| | Visualizzazioni | Plotly | 5.18.0+ | Grafici interattivi |
-| | Data Manipulation | Pandas | 2.0.0+ | Tabelle e analytics |
-| | Graph Analytics | NetworkX | 3.2+ | Grafi desires-beliefs |
+| | Grafici | Plotly | 5.18.0+ | Grafici interattivi |
+| | Network Graph | PyVis | 0.3.2+ | Visualizzazioni network |
 | **Backend** | Runtime | Python | 3.9+ | Core business logic |
 | | Config Management | python-dotenv | 1.0.0+ | Variabili ambiente |
-| | Data Validation | Pydantic | 2.0.0+ | Schema validation |
-| | UI Messages | random | - | Messaggi variabili di attesa |
+| | Data Validation | Pydantic + Settings | 2.0.0+ | Schema validation |
+| | Plan Engine | GeniusEngine | - | Generazione/persistenza piani |
+| | UI Messages | random | - | 86 messaggi variabili di attesa |
 | **RAG** | Text Chunking | LangChain | 0.1.0+ | Orchestrazione RAG |
 | | | langchain-text-splitters | 0.0.1+ | RecursiveCharacterTextSplitter |
 | | Embeddings | sentence-transformers | 2.3.0+ | Generazione vettori |
@@ -1613,16 +1842,18 @@ SCENARIO: Aggiungere nuovi desires a sessione esistente
 | | Embedding Model | paraphrase-multilingual-MiniLM-L12-v2 | - | 384-dim, multilingue |
 | **Vector DB** | Database | ChromaDB | 0.4.22+ | Storage embeddings |
 | | Indexing | HNSW | - | Ricerca approssimata |
-| | Similarity | Cosine | - | Metric distanza |
-| **LLM** | Provider 1 | Google Gemini | - | gemini-2.5-flash/pro/lite |
+| | Similarity | Cosine | - | Metrica distanza |
+| **LLM** | Provider 1 | Google Gemini | - | gemini-2.5-flash-lite/flash/pro + 3-pro-preview |
 | | SDK Gemini | google-generativeai | 0.3.0+ | API client |
-| | Provider 2 | OpenAI | - | GPT-5 series |
+| | Config | llm_manager_config | - | Vincoli parametri per modello |
+| | Provider 2 | OpenAI | - | GPT-5 / 5.1 / 5.2 series |
 | | SDK OpenAI | openai | 1.12.0+ | API client |
-| **Document Processing** | PDF Parser | PyPDF2 | 3.0.0+ | Estrazione testo PDF |
+| **Doc Processing** | PDF Parser | PyPDF2 | 3.0.0+ | Estrazione testo PDF |
 | | HTML Parser | BeautifulSoup4 | 4.12.0+ | Web scraping |
 | | HTTP Client | requests | 2.31.0+ | Fetch URLs |
-| **Storage** | Format | JSON | - | Filesystem persistence |
-| | Encoding | UTF-8 | - | Testo multilingue |
+| **Storage** | Sessioni/BDI | JSON | - | Filesystem persistence |
+| | Piani Genius | JSON | - | `data/genius_plans/` |
+| | BDI Framework | JSON | - | `data/bdi_frameworks/` |
 
 ### Dipendenze Python (requirements.txt)
 
@@ -1650,12 +1881,12 @@ openai>=1.12.0
 
 # Data & Visualization
 plotly>=5.18.0
-networkx>=3.2
-pandas>=2.0.0
+pyvis>=0.3.2
 
 # Utilities
 python-dotenv>=1.0.0
 pydantic>=2.0.0
+pydantic-settings>=2.0.0
 ```
 
 ### Configurazione Ambiente (.env)
@@ -1764,62 +1995,64 @@ OPENAI_API_KEY=your_openai_api_key_here
 ### Diagramma Componenti
 
 ```text
-┌───────────────────────────────────────────────────────────────┐
-│                      USER INTERFACE                           │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐          │
-│  │ Compass │  │  Knol   │  │   Alì   │  │Believer │          │
-│  │ (Mgmt)  │  │  (KB)   │  │(Desires)│  │(Beliefs)│          │
-│  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘          │
-└───────┼───────────┼────────────┼────────────┼────────────────┘
-        │           │            │            │
-        └───────────┴────────────┴────────────┘
-                    │
-        ┌───────────▼───────────────────────┐
-        │   STREAMLIT SESSION STATE         │
-        │   • Active session ID             │
-        │   • Conversation history          │
-        │   • Temp UI state                 │
-        └───────────┬───────────────────────┘
-                    │
-        ┌───────────▼───────────────────────────────────────┐
-        │             BUSINESS LOGIC LAYER                  │
-        │  ┌──────────────┐  ┌──────────────┐              │
-        │  │SessionManager│  │ContextManager│              │
-        │  └──────┬───────┘  └───────┬──────┘              │
-        │         │                   │                     │
-        │  ┌──────▼───────┐  ┌───────▼──────────────────┐  │
-        │  │  LLMManager  │  │  DocumentProcessor       │  │
-        │  │  (Multi-LLM) │  │  (RAG Pipeline)          │  │
-        │  └──────┬───────┘  └───────┬──────────────────┘  │
-        │         │                   │                     │
-        │  ┌──────▼──────────────────▼─────────┐           │
-        │  │     ConversationAuditor            │           │
-        │  │     (Quality Assurance)            │           │
-        │  └────────────────────────────────────┘           │
-        └───────────────┬──────────────────────────────────┘
-                        │
-        ┌───────────────▼──────────────────────────────────┐
-        │           DATA PERSISTENCE LAYER                 │
-        │  ┌──────────────────┐   ┌───────────────────┐   │
-        │  │ JSON Files       │   │   ChromaDB        │   │
-        │  │ • sessions/      │   │ • Vector store    │   │
-        │  │ • contexts/      │   │ • HNSW index      │   │
-        │  │ • BDI data       │   │ • Embeddings      │   │
-        │  └──────────────────┘   └───────────────────┘   │
-        └──────────────────────────────────────────────────┘
-                        │
-        ┌───────────────▼──────────────────────────────────┐
-        │            EXTERNAL SERVICES                     │
-        │  ┌────────────────┐      ┌──────────────────┐   │
-        │  │  Gemini API    │      │   OpenAI API     │   │
-        │  │  (Google)      │      │   (GPT-5)        │   │
-        │  └────────────────┘      └──────────────────┘   │
-        │  ┌────────────────────────────────────────────┐  │
-        │  │  HuggingFace Model Hub                     │  │
-        │  │  (sentence-transformers embeddings)        │  │
-        │  └────────────────────────────────────────────┘  │
-        └──────────────────────────────────────────────────┘
-```text
+┌──────────────────────────────────────────────────────────────────────┐
+│                        USER INTERFACE                                │
+│  ┌─────────┐ ┌──────┐ ┌─────────┐ ┌─────────┐ ┌──────┐ ┌─────────┐  │
+│  │ Compass │ │ Knol │ │   Alì   │ │Believer │ │ Cuma │ │ Genius  │  │
+│  │ (Mgmt)  │ │ (KB) │ │(Desires)│ │(Beliefs)│ │(WIP) │ │ (Coach) │  │
+│  └────┬────┘ └──┬───┘ └────┬────┘ └────┬────┘ └──┬───┘ └────┬────┘  │
+└───────┼─────────┼──────────┼───────────┼─────────┼───────────┼──────┘
+        │         │          │           │         │           │
+        └─────────┴──────────┴───────────┴─────────┴───────────┘
+                             │
+        ┌────────────────────▼──────────────────────┐
+        │        STREAMLIT SESSION STATE            │
+        │   • Active session ID                     │
+        │   • Conversation histories (per agente)   │
+        │   • Temp UI state                         │
+        └────────────────────┬──────────────────────┘
+                             │
+        ┌────────────────────▼────────────────────────────────────┐
+        │                BUSINESS LOGIC LAYER                     │
+        │  ┌──────────────┐  ┌──────────────┐  ┌───────────────┐  │
+        │  │SessionManager│  │ContextManager│  │  GeniusEngine │  │
+        │  └──────┬───────┘  └───────┬──────┘  └───────┬───────┘  │
+        │         │                  │                  │          │
+        │  ┌──────▼───────┐  ┌──────▼──────────────┐   │          │
+        │  │  LLMManager  │  │  DocumentProcessor  │   │          │
+        │  │  (Multi-LLM) │  │  (RAG Pipeline)     │   │          │
+        │  │  + Config    │  │                     │   │          │
+        │  └──────┬───────┘  └──────┬─────────────┘   │          │
+        │         │                 │                  │          │
+        │  ┌──────▼─────────────────▼──────────────────▼──────┐   │
+        │  │          ConversationAuditor                      │   │
+        │  │    (Desires Auditor + Beliefs Auditor)            │   │
+        │  └───────────────────────────────────────────────────┘   │
+        └─────────────────────┬───────────────────────────────────┘
+                              │
+        ┌─────────────────────▼───────────────────────────────────┐
+        │              DATA PERSISTENCE LAYER                     │
+        │  ┌───────────────────────┐   ┌──────────────────────┐   │
+        │  │ JSON Files            │   │   ChromaDB           │   │
+        │  │ • sessions/           │   │ • Vector store       │   │
+        │  │ • contexts/           │   │ • HNSW index         │   │
+        │  │ • bdi_frameworks/     │   │ • Embeddings         │   │
+        │  │ • genius_plans/       │   │ • Context-isolated   │   │
+        │  └───────────────────────┘   └──────────────────────┘   │
+        └─────────────────────┬───────────────────────────────────┘
+                              │
+        ┌─────────────────────▼───────────────────────────────────┐
+        │              EXTERNAL SERVICES                          │
+        │  ┌────────────────┐      ┌──────────────────┐           │
+        │  │  Gemini API    │      │   OpenAI API     │           │
+        │  │  (Google)      │      │   (GPT-5 series) │           │
+        │  └────────────────┘      └──────────────────┘           │
+        │  ┌──────────────────────────────────────────┐           │
+        │  │  HuggingFace Model Hub                   │           │
+        │  │  (paraphrase-multilingual-MiniLM-L12-v2) │           │
+        │  └──────────────────────────────────────────┘           │
+        └─────────────────────────────────────────────────────────┘
+```
 
 ### Diagramma Flusso RAG
 
@@ -1878,111 +2111,6 @@ OPENAI_API_KEY=your_openai_api_key_here
 │ → Contextual Response              │
 └────────────────────────────────────┘
 ```
-
----
-
-## Changelog Architetturale
-
-### v2.7 (Gennaio 2026) - Architettura Corrente
-
-**Sistema di Auditing Avanzato:**
-
-- ✨ **Auditor Separati**: Desires Auditor e Beliefs Auditor con prompt dedicati
-- ✨ **Valutazione Rubric-Based**: Sistema di scoring 0-10 su dimensioni specifiche
-  - Desires: Persona inference, structure, completeness, semantic coherence
-  - Beliefs: Structure, source citation, desire correlation, semantic richness
-- ✨ **Output Strutturato**: `rubric_scores` e `overall_score` per tracking qualità
-
-**Nuovi Modelli LLM:**
-
-- ✨ **Gemini 3 Pro Preview**: Next-gen model (Beta)
-- ✨ **GPT-5.1 Series**: Enhanced reasoning models (Novembre 2025+)
-- ✨ **GPT-5.2 Series**: Advanced reasoning models (Dicembre 2025+)
-
-**Agente Cuma (Beta):**
-
-- ✨ **Intentions Planning**: Generazione piani d'azione strutturati
-- ✨ **Tracciamento Relazioni**: Collegamenti espliciti `linked_desire_id`, `linked_beliefs`
-- ✨ **Action Steps**: Effort estimates, dependencies, resources, risks
-
-**Miglioramenti:**
-
-- 🔧 Prompt specializzati per auditor (`desires_auditor_system_prompt.md`, `belief_auditor_system_prompt.md`)
-- 🔧 Semantic relations strutturate nei beliefs (array di oggetti relation-object-description)
-- 🔧 Formato JSON desires arricchito con campo `motivation`
-
-### v2.5 (Novembre 2025)
-
-**Breaking Changes:**
-
-- ✂️ Rimossa architettura multi-persona
-- ✂️ Rimosso supporto Anthropic Claude
-
-**Aggiunte:**
-
-- ✨ Agente Auditor per QA conversazioni
-- ✨ Analytics dashboard con Plotly/NetworkX
-- ✨ Modal editor JSON in-app
-- ✨ Normalizzazione parametri LLM cross-provider
-- ✨ UI Messages system (25 messaggi variabili)
-
-**Miglioramenti:**
-
-- 🔧 Single-persona architecture (focus stakeholder primario)
-- 🔧 Reasoning effort parameter per GPT-5/o1
-- 🔧 Backward compatibility handling session data
-
-### v2.0 (Pre-2025)
-
-**Features:**
-
-- Multi-persona desires extraction
-- Anthropic Claude support
-- Basic Compass session management
-
----
-
-## Conclusioni e Direzioni Future
-
-### Punti di Forza Architetturali
-
-1. **Modularità**: Manager classes ben separati, facili da estendere
-2. **Flessibilità LLM**: Provider-agnostic, facile aggiunta nuovi provider
-3. **RAG Efficace**: ChromaDB + sentence-transformers offre semantic search di qualità
-4. **BDI Framework**: Approccio strutturato e teoricamente fondato
-5. **UX Streamlit**: Rapid prototyping con UI pulita
-
-### Aree di Miglioramento
-
-1. **Multi-Tenancy**: Attualmente single-user, necessità autenticazione
-2. **Testing**: Coverage limitato, aggiungere unit/integration tests
-3. **Monitoring**: Mancano metriche su performance/qualità RAG
-4. **Scalabilità Storage**: Filesystem limita deployment cloud
-5. **Async Operations**: Molte operazioni bloccanti (LLM calls, embedding)
-
-### Roadmap Tecnologica Suggerita
-
-**Short-term (3-6 mesi):**
-
-- Completare Cuma e Genius agents
-- Aggiungere export multi-formato (CSV, Excel)
-- Migliorare analytics dashboard (trend analysis)
-- Implementare caching query frequenti
-
-**Medium-term (6-12 mesi):**
-
-- Backend API REST/GraphQL
-- Database relazionale per metadata
-- Autenticazione e multi-tenancy
-- Docker containerization
-
-**Long-term (12+ mesi):**
-
-- Cloud deployment (AWS/Azure/GCP)
-- Advanced analytics (ML-driven insights)
-- Collaborative features (team sessions)
-- Integration con strumenti esterni (Jira, Notion, etc.)
-
 ---
 
 ## Riferimenti
@@ -2010,5 +2138,6 @@ OPENAI_API_KEY=your_openai_api_key_here
 ---
 
 **Documento generato:** 10 Gennaio 2026
+**Ultimo aggiornamento:** 5 Febbraio 2026 — allineamento completo al codice (Genius MVP, GeniusEngine, llm_manager_config, modelli corretti, diagrammi)
 **Versione Architettura:** v2.7
 **Autore:** LUMIA Development Team

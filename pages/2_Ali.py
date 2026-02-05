@@ -125,10 +125,21 @@ else:
 ALI_SYSTEM_PROMPT = get_prompt('ali')
 
 def get_context_description():
-    """
-    Ottiene la descrizione del contesto dal metadata della sessione attiva.
-    La descrizione viene ora generata in Knol durante l'estrazione dei belief.
-    Se non c'è sessione o contesto, ritorna None.
+    """Retrieves the knowledge-base description for the active session's context.
+
+    The description is generated automatically in Knol during belief
+    extraction and stored in ``context_metadata.json``.  It is used here
+    to personalise Alì's opening greeting so the user immediately sees
+    which domain they are working in.
+
+    Returns:
+        str | None: The trimmed description string, or ``None`` when any
+        of the following conditions are true:
+
+        * No active session exists.
+        * The session has no associated context.
+        * The context metadata file is missing or has an empty description.
+        * Any unexpected exception is raised during the lookup.
     """
     try:
         # Ottieni il contesto dalla sessione attiva
@@ -158,7 +169,31 @@ def get_context_description():
 
 
 def render_quick_replies(placeholder, suggestions, pending_state_key, button_prefix):
-    """Renderizza i suggerimenti rapidi dell'Auditor in un container dedicato."""
+    """Renders the Auditor's quick-reply suggestion buttons inside a Streamlit placeholder.
+
+    Each suggestion is shown as a clickable button laid out in rows of
+    three.  When a button is pressed its ``message`` value is written to
+    ``st.session_state[pending_state_key]``; the main chat loop picks
+    that value up on the next rerun and injects it as the user's input.
+
+    The placeholder is emptied first so that stale suggestions from a
+    previous turn are cleared before new ones appear.
+
+    Args:
+        placeholder: A ``st.empty()`` placeholder that owns the rendered
+            widgets.
+        suggestions: List of suggestion dicts, each expected to contain:
+
+            * ``"message"`` (str) – the text injected as user input.
+            * ``"label"`` (str, optional) – button display text; falls
+              back to ``message``.
+            * ``"why"`` (str, optional) – a caption shown below the
+              button explaining the suggestion.
+        pending_state_key: The ``st.session_state`` key where the
+            selected message is stored for the chat loop to consume.
+        button_prefix: A unique string prepended to each button's
+            ``key`` to avoid Streamlit key collisions across reruns.
+    """
     placeholder.empty()
 
     if not suggestions:

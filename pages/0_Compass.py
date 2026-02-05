@@ -70,7 +70,19 @@ if 'context_manager' not in st.session_state:
 # Cache per get_bdi_data() - evita multiple chiamhe al disco
 @st.cache_data
 def get_cached_bdi_data(session_id: str):
-    """Cached wrapper per get_bdi_data() - evita 4 letture dal disco nella stessa pagina"""
+    """Returns cached BDI data for a session, avoiding repeated disk reads.
+
+    Wraps ``SessionManager.get_bdi_data`` with Streamlit's ``@cache_data``
+    so that multiple calls within the same page rerun share one disk read.
+
+    Args:
+        session_id: Unique identifier of the target session.
+
+    Returns:
+        dict: The full BDI payload (desires, beliefs, intentions, etc.)
+            as stored in ``current_bdi.json``, or ``None`` if the session
+            has no BDI data yet.
+    """
     return st.session_state.session_manager.get_bdi_data(session_id)
 
 # Inizializza editing mode
@@ -421,7 +433,19 @@ else:
 
             # Funzione helper per ottenere defaults dinamici dal modello
             def get_default_settings_for_model(model):
-                """Estrae i default dinamicamente dalla configurazione del modello"""
+                """Builds the default LLM-settings dict for a specific model.
+
+                Reads per-model parameter definitions from ``LLMManager`` and
+                extracts each parameter's ``default`` value so the UI can
+                pre-populate sliders / selectors without user input.
+
+                Args:
+                    model: The model identifier string (e.g. ``"gemini-2.5-flash"``).
+
+                Returns:
+                    dict: Mapping of parameter names to their default values,
+                    plus ``use_defaults: True`` as a sentinel flag.
+                """
                 params = st.session_state.llm_manager.get_model_parameters(model)
                 defaults = {'use_defaults': True}
                 for param_name, config_item in params.items():
@@ -1845,7 +1869,22 @@ else:
 
                         # Funzione helper per normalizzare gli ID durante il matching
                         def normalize_id(id_value, prefix=''):
-                            """Normalizza ID per matching robusto (B1, B01, 1, ecc.)"""
+                            """Strips a known prefix and leading zeros from an ID for robust matching.
+
+                            Handles the inconsistent ID formats that may appear in BDI
+                            data (e.g. ``"B1"``, ``"B01"``, ``"1"``), producing a
+                            canonical numeric string so belief-to-desire edges can be
+                            resolved reliably.
+
+                            Args:
+                                id_value: The raw ID (str or int).
+                                prefix: Optional alphabetic prefix to strip before
+                                    removing leading zeros (e.g. ``"B"`` or ``"D"``).
+
+                            Returns:
+                                str: The normalized numeric portion of the ID.
+                                Returns ``"0"`` when the result would otherwise be empty.
+                            """
                             if isinstance(id_value, str):
                                 normalized = id_value.replace(prefix, '').lstrip('0') if prefix else id_value.lstrip('0')
                                 return normalized or '0'
@@ -1853,7 +1892,17 @@ else:
 
                         # Funzione helper per layout circolare
                         def apply_circular_layout(network, nodes_list):
-                            """Posiziona i nodi in un cerchio"""
+                            """Arranges all nodes in a single circle around the origin.
+
+                            Each node is placed at an equal angular interval on a circle
+                            of fixed radius so the graph is immediately readable without
+                            relying on the physics solver.
+
+                            Args:
+                                network: A ``pyvis.network.Network`` instance whose
+                                    ``.nodes`` list will be mutated in place.
+                                nodes_list: Ordered list of node IDs to position.
+                            """
                             import math
                             center_x, center_y = 0, 0
                             radius = 300
@@ -1869,7 +1918,19 @@ else:
 
                         # Funzione helper per layout radiale
                         def apply_radial_layout(network, nodes_list, center_idx=0):
-                            """Posiziona i nodi in modo radiale (uno al centro, gli altri intorno)"""
+                            """Places one node at the center and distributes the rest in concentric rings.
+
+                            Useful when a single "hub" node (e.g. a high-priority Desire)
+                            should visually dominate the graph.  Remaining nodes are
+                            spread across up to three rings with increasing radius.
+
+                            Args:
+                                network: A ``pyvis.network.Network`` instance whose
+                                    ``.nodes`` list will be mutated in place.
+                                nodes_list: Ordered list of node IDs to position.
+                                center_idx: Index within *nodes_list* of the node that
+                                    should be placed at the origin.  Defaults to ``0``.
+                            """
                             import math
                             center_x, center_y = 0, 0
                             num_rings = 3
@@ -1911,7 +1972,30 @@ else:
 
                         # Funzione helper per creare tooltip HTML
                         def create_tooltip(node_type, node_id, full_desc, data):
-                            """Crea tooltip testuale per PyVis (senza HTML per evitare visualizzazione codice)."""
+                            """Builds a plain-text tooltip string for a BDI graph node.
+
+                            Plain text is used instead of HTML because PyVis renders
+                            raw HTML tags as visible characters in some browsers.
+                            The description is truncated at 200 characters.  Extra
+                            metadata fields are appended depending on the node type:
+
+                            * **Desire** – priority and success-metric count.
+                            * **Belief** – importance and confidence scores.
+                            * **Intention** – action-plan step count and effort estimate.
+
+                            Args:
+                                node_type: One of ``"Desire"``, ``"Belief"``,
+                                    or ``"Intention"``.
+                                node_id: Display identifier shown at the top of the
+                                    tooltip (e.g. ``"D1"``).
+                                full_desc: Full description text; will be truncated if
+                                    longer than 200 characters.
+                                data: The raw BDI dict for this node, used to extract
+                                    type-specific metadata.
+
+                            Returns:
+                                str: Formatted tooltip string ready for PyVis.
+                            """
                             tooltip = f"{node_id} ({node_type})\n\n"
 
                             # Trunca descrizione se troppo lunga

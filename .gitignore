@@ -208,3 +208,4 @@ __marimo__/
 GEMINI.md
 .claude/settings.local.json
 CLAUDE.md
+.agents/*

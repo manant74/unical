@@ -69,7 +69,27 @@ BELIEVER_SYSTEM_PROMPT = get_prompt('believer')
 
 
 def render_quick_replies(placeholder, suggestions, pending_state_key, button_prefix):
-    """Renderizza i suggerimenti rapidi dell'Auditor in un container dedicato."""
+    """Renders the Auditor's quick-reply suggestion buttons inside a Streamlit placeholder.
+
+    Mirrors the same helper used by Alì.  Each suggestion is displayed
+    as a button in rows of three.  Pressing a button writes its
+    ``message`` value to ``st.session_state[pending_state_key]`` so the
+    Believer chat loop can pick it up on the next rerun.
+
+    Args:
+        placeholder: A ``st.empty()`` placeholder that owns the rendered
+            widgets.
+        suggestions: List of suggestion dicts, each expected to contain:
+
+            * ``"message"`` (str) – the text injected as user input.
+            * ``"label"`` (str, optional) – button display text; falls
+              back to ``message``.
+            * ``"why"`` (str, optional) – a caption shown below the button.
+        pending_state_key: The ``st.session_state`` key where the
+            selected message is stored for the chat loop to consume.
+        button_prefix: A unique string prepended to each button's
+            ``key`` to avoid Streamlit key collisions across reruns.
+    """
     placeholder.empty()
 
     if not suggestions:
@@ -173,7 +193,21 @@ else:
         st.session_state.doc_processor.initialize_db()
 
 def load_desires():
-    """Carica i desires dalla sessione attiva in formato single-beneficiario."""
+    """Loads and normalises desires from the active session's BDI data.
+
+    Reads the single-beneficiary BDI payload via ``SessionManager`` and
+    converts each desire into the internal UI dict that Believer's
+    sidebar and chat context expect.  Supports both the current
+    ``beneficiario`` key and the legacy ``persona`` key for backward
+    compatibility.
+
+    Returns:
+        list[dict] | None: A list of normalised desire dicts, each
+        containing ``id``, ``description``, ``priority``, ``context``,
+        and ``timestamp``.  Returns an empty list when the BDI exists
+        but contains no desires, and ``None`` when no active session is
+        available or an unexpected error occurs.
+    """
 
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         return None
@@ -206,10 +240,18 @@ def load_desires():
         return None
 
 def load_base_beliefs():
-    """Carica i belief di base dalla sessione attiva.
+    """Loads the pre-extracted base beliefs for the active session.
+
+    Base beliefs are generated once in Knol (``Extract Beliefs``) and
+    stored alongside the context.  ``SessionManager.get_belief_base``
+    is the single entry-point; this wrapper adds a guard for missing
+    sessions and returns a clean ``None`` on any failure so the UI can
+    decide whether to show the "base beliefs available" prompt.
 
     Returns:
-        Lista di belief di base o None se non ce ne sono
+        list[dict] | None: The list of base-belief dicts from the
+        session's belief base, or ``None`` when no base beliefs exist
+        or an error occurs.
     """
     if 'active_session' not in st.session_state or not st.session_state.active_session:
         return None

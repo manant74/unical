@@ -22,12 +22,12 @@
 ### Cuma
 
 - [ ] Aggiungere l'Auditor sull'agente delle Intentions
-- [ ] Verificare i collegamenti tra Intention e Belief in modo da capire se ci sono collegamenti che non erano previsti prima tra desire collegato all'intention e i relativi belief.
+- [X] Verificare i collegamenti tra Intention e Belief in modo da capire se ci sono collegamenti che non erano previsti prima tra desire collegato all'intention e i relativi belief.
 
 ### Genius
 
-- [ ] Implementare Genius come un meta agente in grado di generare un altro agente specifico per il singolo BDI
-- [ ] Valutare di avere una lista di tool definiti su un MCP server
+- [X] Implementare Genius come un meta agente in grado di generare un altro agente specifico per il singolo BDI
+- [X] Valutare di avere una lista di tool definiti su un MCP server
 
 ### Tutti
 
@@ -40,7 +40,7 @@
 
 ## Altro
 
-- [ ] Lorena costruisce KBe BDI per il caso botanica usato nella sua tesi
-- [ ] Tradurre l'app in inglese
+- [ ] Lorena costruisce KB e BDI per il caso botanica usato nella sua tesi
+- [-] Tradurre l'app in inglese
 
 ---
