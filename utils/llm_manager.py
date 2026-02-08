@@ -9,7 +9,7 @@ from utils.llm_manager_config import MODEL_PARAMETERS
 load_dotenv()
 
 class LLMManager:
-    """Gestisce le interazioni con diversi modelli LLM"""
+    """Manages interactions with different LLM models"""
 
     MODELS = {
         "Gemini": {
@@ -35,7 +35,7 @@ class LLMManager:
         self._initialize_clients()
 
     def _initialize_clients(self):
-        """Inizializza i client per i diversi provider"""
+        """Initializes clients for different providers"""
         # OpenAI
         if os.getenv("OPENAI_API_KEY"):
             self.clients["OpenAI"] = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -47,23 +47,23 @@ class LLMManager:
 
 
     def get_available_providers(self) -> List[str]:
-        """Restituisce la lista dei provider disponibili"""
+        """Returns the list of available providers"""
         return list(self.clients.keys())
 
     def get_models_for_provider(self, provider: str) -> Dict[str, str]:
-        """Restituisce i modelli disponibili per un provider"""
+        """Returns the available models for a provider"""
         return self.MODELS.get(provider, {})
 
     def get_model_parameters(self, model: str) -> Dict[str, Dict]:
         """
-        Restituisce i parametri supportati da un modello specifico.
+        Returns the parameters supported by a specific model.
 
         Args:
-            model: Nome del modello (es: "gpt-5.1", "gemini-2.5-flash")
+            model: Model name (e.g., "gpt-5.1", "gemini-2.5-flash")
 
         Returns:
-            Dizionario dei parametri con metadata per rendering UI.
-            Se il modello non è configurato, restituisce dizionario vuoto.
+            Dictionary of parameters with metadata for UI rendering.
+            If the model is not configured, returns an empty dictionary.
         """
         return MODEL_PARAMETERS.get(model, {})
 
@@ -72,28 +72,28 @@ class LLMManager:
              temperature: float = 1.0, max_tokens: int = 65536, top_p: float = 1,
              reasoning_effort: Optional[str] = 'medium', use_defaults: bool = False) -> str:
         """
-        Invia una richiesta di chat al modello selezionato
+        Sends a chat request to the selected model
 
         Args:
-            provider: Provider LLM (Gemini, OpenAI)
-            model: Nome del modello
-            messages: Lista di messaggi della conversazione
-            system_prompt: Prompt di sistema (opzionale)
-            context: Contesto aggiuntivo da RAG (opzionale)
-            temperature: Controllo creatività (0.0-2.0, default 0.7) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
-            max_tokens: Lunghezza massima risposta (default 2000) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
-            top_p: Nucleus sampling (0.0-1.0, default 0.9) - Ignorato per modelli GPT-5/GPT-5.1/o1/o3
-            reasoning_effort: Effort di reasoning per modelli GPT-5/GPT-5.1/o1/o3 ("none", "low", "medium", "high")
-                - "none": Disabilita il reasoning (GPT-5.1 si comporta come modello standard)
-                - "low", "medium", "high": Abilita reasoning con diversi livelli
-            use_defaults: Se True, usa i parametri di default del provider e ignora temperature/max_tokens/top_p
+            provider: LLM provider (Gemini, OpenAI)
+            model: Model name
+            messages: List of conversation messages
+            system_prompt: System prompt (optional)
+            context: Additional context from RAG (optional)
+            temperature: Creativity control (0.0-2.0, default 0.7) - Ignored for GPT-5/GPT-5.1/o1/o3 models
+            max_tokens: Maximum response length (default 2000) - Ignored for GPT-5/GPT-5.1/o1/o3 models
+            top_p: Nucleus sampling (0.0-1.0, default 0.9) - Ignored for GPT-5/GPT-5.1/o1/o3 models
+            reasoning_effort: Reasoning effort for GPT-5/GPT-5.1/o1/o3 models ("none", "low", "medium", "high")
+                - "none": Disables reasoning (GPT-5.1 behaves like a standard model)
+                - "low", "medium", "high": Enables reasoning with different levels
+            use_defaults: If True, uses provider default parameters and ignores temperature/max_tokens/top_p
 
         Returns:
-            Risposta del modello LLM
+            LLM model response
         """
 
         if provider not in self.clients:
-            raise ValueError(f"Provider {provider} non disponibile. Verifica le API keys.")
+            raise ValueError(f"Provider {provider} not available. Check your API keys.")
 
         # Prepara il contesto se disponibile
         if context:
@@ -106,11 +106,11 @@ class LLMManager:
         elif provider == "OpenAI":
             return self._chat_openai(model, messages, system_prompt, temperature, max_tokens, top_p, reasoning_effort, use_defaults)
 
-        raise ValueError(f"Provider {provider} non supportato")
+        raise ValueError(f"Provider {provider} not supported")
 
     def _chat_gemini(self, model: str, messages: List[Dict], system_prompt: Optional[str],
                      temperature: float, max_tokens: int, top_p: float, use_defaults: bool = False) -> str:
-        """Chat con Gemini"""
+        """Chat with Gemini"""
         # Configura i parametri di generazione solo se use_defaults è False
         generation_config = None
         if not use_defaults:
@@ -140,7 +140,7 @@ class LLMManager:
     def _chat_openai(self, model: str, messages: List[Dict], system_prompt: Optional[str],
                      temperature: float, max_tokens: int, top_p: float,
                      reasoning_effort: Optional[str] = None, use_defaults: bool = False) -> str:
-        """Chat con OpenAI"""
+        """Chat with OpenAI"""
         if system_prompt:
             messages = [{"role": "system", "content": system_prompt}] + messages
 

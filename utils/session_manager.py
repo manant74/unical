@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 class SessionManager:
-    """Gestisce le sessioni utente per LUMIA Studio"""
+    """Manages user sessions for LUMIA Studio"""
 
     def __init__(self, base_dir: str = "./data/sessions"):
         self.base_dir = Path(base_dir)
@@ -24,19 +24,19 @@ class SessionManager:
         llm_settings: Dict[str, Any] = None
     ) -> str:
         """
-        Crea una nuova sessione
+        Creates a new session
 
         Args:
-            name: Nome della sessione
-            context: Nome del contesto selezionato
-            llm_provider: Provider LLM (gemini, claude, openai)
-            llm_model: Modello LLM
-            description: Descrizione opzionale
-            tags: Tag opzionali
-            llm_settings: Impostazioni avanzate LLM
+            name: Session name
+            context: Selected context name
+            llm_provider: LLM provider (gemini, claude, openai)
+            llm_model: LLM model
+            description: Optional description
+            tags: Optional tags
+            llm_settings: Advanced LLM settings
 
         Returns:
-            session_id: ID univoco della sessione creata
+            session_id: Unique ID of the created session
         """
         session_id = str(uuid.uuid4())
         session_dir = self.base_dir / session_id
@@ -85,7 +85,7 @@ class SessionManager:
         return session_id
 
     def get_session(self, session_id: str) -> Optional[Dict[str, Any]]:
-        """Recupera i dati completi di una sessione"""
+        """Retrieves complete session data"""
         session_dir = self.base_dir / session_id
 
         if not session_dir.exists():
@@ -110,13 +110,13 @@ class SessionManager:
 
     def get_all_sessions(self, status: Optional[str] = None) -> List[Dict[str, Any]]:
         """
-        Recupera tutte le sessioni
+        Retrieves all sessions
 
         Args:
-            status: Filtra per status (active, archived, draft). None per tutte.
+            status: Filter by status (active, archived, draft). None for all.
 
         Returns:
-            Lista di sessioni ordinate per data (più recenti prima)
+            List of sessions sorted by date (most recent first)
         """
         sessions = []
 
@@ -151,7 +151,7 @@ class SessionManager:
         status: Optional[str] = None,
         chat_history_believer: Optional[List[Dict[str, Any]]] = None
     ) -> bool:
-        """Aggiorna i metadata di una sessione"""
+        """Updates session metadata"""
         session_dir = self.base_dir / session_id
         metadata_file = session_dir / "metadata.json"
 
@@ -188,7 +188,7 @@ class SessionManager:
         llm_model: Optional[str] = None,
         llm_settings: Optional[Dict[str, Any]] = None
     ) -> bool:
-        """Aggiorna la configurazione di una sessione"""
+        """Updates session configuration"""
         session_dir = self.base_dir / session_id
         config_file = session_dir / "config.json"
 
@@ -210,7 +210,7 @@ class SessionManager:
         return True
 
     def get_belief_base(self, session_id: str) -> Optional[Dict[str, Any]]:
-        """Recupera i belief base di una sessione"""
+        """Retrieves the belief base of a session"""
         session_dir = self.base_dir / session_id
         belief_file = session_dir / "belief_base.json"
 
@@ -220,7 +220,7 @@ class SessionManager:
         return self._load_json(belief_file)
 
     def update_belief_base(self, session_id: str, beliefs: List[Dict[str, Any]]) -> bool:
-        """Aggiorna i belief base di una sessione"""
+        """Updates the belief base of a session"""
         session_dir = self.base_dir / session_id
         belief_file = session_dir / "belief_base.json"
 
@@ -228,11 +228,11 @@ class SessionManager:
         return True
 
     def delete_session(self, session_id: str) -> bool:
-        """Elimina una sessione (soft delete -> status archived)"""
+        """Deletes a session (soft delete -> status archived)"""
         return self.update_session_metadata(session_id, status="archived")
 
     def get_bdi_data(self, session_id: str) -> Optional[Dict[str, Any]]:
-        """Recupera i dati BDI (Beliefs, Desires, Intentions) di una sessione"""
+        """Retrieves the BDI data (Beliefs, Desires, Intentions) of a session"""
         session_dir = self.base_dir / session_id
         bdi_file = session_dir / "current_bdi.json"
 
@@ -251,10 +251,10 @@ class SessionManager:
         domain_summary: Optional[str] = None
     ) -> bool:
         """
-        Aggiorna i dati BDI di una sessione normalizzandoli sul modello single-beneficiario.
+        Updates the BDI data of a session by normalizing them to the single-beneficiary model.
 
-        Qualsiasi struttura legacy (es. domains/beneficiari) viene scartata in favore del
-        nuovo schema: domain_summary, beneficiario, desires, beliefs, intentions.
+        Any legacy structure (e.g., domains/beneficiaries) is discarded in favor of the
+        new schema: domain_summary, beneficiario, desires, beliefs, intentions.
         """
         session_dir = self.base_dir / session_id
         bdi_file = session_dir / "current_bdi.json"
@@ -285,7 +285,7 @@ class SessionManager:
         return True
 
     def get_session_path(self, session_id: str, file_name: str) -> Optional[Path]:
-        """Restituisce il path completo di un file nella sessione"""
+        """Returns the complete path of a file in the session"""
         session_dir = self.base_dir / session_id
 
         if not session_dir.exists():
@@ -294,12 +294,12 @@ class SessionManager:
         return session_dir / file_name
 
     def _save_json(self, file_path: Path, data: Dict[str, Any]):
-        """Salva dati in formato JSON"""
+        """Saves data in JSON format"""
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
 
     def _load_json(self, file_path: Path) -> Optional[Dict[str, Any]]:
-        """Carica dati da file JSON"""
+        """Loads data from JSON file"""
         if not file_path.exists():
             return None
 
