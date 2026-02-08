@@ -443,7 +443,7 @@ features_domain = [
         "emoji": "🔮",
         "description": "Advanced module for predictive analysis and scenario planning. Uses your Beliefs and Desires to simulate possible future outcomes.",
         "page": "pages/5_Cuma.py",
-        "status": "dev",
+        "status": "active",
     }
 ]
 
@@ -453,7 +453,7 @@ features_live = [
         "emoji": "⚡",
         "description": "Intelligent optimization system that analyzes your complete BDI framework and suggests improvements and innovative strategies.",
         "page": "pages/6_Genius.py",
-        "status": "dev",
+        "status": "active",
     }
 ]
 
