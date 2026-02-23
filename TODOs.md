@@ -13,7 +13,7 @@
 
 - [X] Rivedere la generazione della Knowledge Base in modo da generare i belief direttamente mettendo insieme i documenti e i Desire, senza passare dai Belief di Base che potrebbero aggiungere solo rumore. E' una modalit àda inserire nel Believer
 - [ ]  Modificare la generazione dei Belief, in modo che oper ogni belief ci sia un criteri odi valutazione legato ad una membership function che provvede a determinare il grado di soddisfacimento Alto, Medio o Basso
-- [ ] Approfondire in cosa consistono i belief fuzzy (Lorena) per capire come evolvere il modello e la valutazione dei Belief
+- [X] Approfondire in cosa consistono i belief fuzzy (Lorena) per capire come evolvere il modello e la valutazione dei Belief
 
 ### Alì
 
@@ -21,7 +21,7 @@
 
 ### Cuma
 
-- [ ] Aggiungere l'Auditor sull'agente delle Intentions
+- [X] Aggiungere l'Auditor sull'agente delle Intentions
 - [X] Verificare i collegamenti tra Intention e Belief in modo da capire se ci sono collegamenti che non erano previsti prima tra desire collegato all'intention e i relativi belief.
 
 ### Genius

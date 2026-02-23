@@ -60,6 +60,7 @@ def get_prompt(agent_name: str, use_cache: bool = True, prompt_suffix: str = "sy
         'auditor',
         'desires_auditor',
         'belief_auditor',
+        'intention_auditor',
     ]
 
     if agent_name_lower not in available_agents:
@@ -109,6 +110,7 @@ def get_all_prompts(use_cache: bool = True) -> dict:
         'auditor',
         'desires_auditor',
         'belief_auditor',
+        'intention_auditor',
     ]
     prompts = {}
 

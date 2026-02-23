@@ -34,40 +34,58 @@ FINALIZATION_KEYWORDS = [
     "final checkpoint",
     "checkpoint ready for report",
     "generate the json summary",
+    "formalize the intention",
+    "formalize intentions",
+    "generate intentions report",
+    "generate intentions json",
+    "generate the intentions report",
+    "generate the intentions json",
+    "final intentions report",
+    "finalize intentions",
+    "finalize the intentions report",
 ]
 
-FINALIZATION_VERBS = [
+FINALIZATION_COMMITMENT_VERBS = [
     "formalize",
     "formalizing",
     "finalize",
     "finalizing",
+    "proceed",
+    "let's proceed",
+    "let's move",
+    "conclude",
+    "let's conclude",
+    "close",
+    "let's close",
+]
+
+FINALIZATION_GENERATION_VERBS = [
     "generate",
     "generating",
     "produce",
     "producing",
     "prepare",
     "preparing",
-    "proceed",
-    "let's proceed",
-    "let's move",
-    "conclude",
-    "let's conclude",
     "give me",
     "send me",
     "release",
-    "close",
-    "let's close",
     "complete",
 ]
 
-FINALIZATION_OBJECTS = [
+FINALIZATION_REPORT_OBJECTS = [
     "report",
     "json",
+    "summary",
+    "output",
+]
+
+FINALIZATION_ENTITY_OBJECTS = [
     "desire",
     "desires",
     "belief",
     "beliefs",
-    "output",
+    "intention",
+    "intentions",
 ]
 
 EXPECTED_FINALIZATION_KEYWORDS = [
@@ -80,6 +98,9 @@ EXPECTED_FINALIZATION_KEYWORDS = [
     "finalize to json",
     "close with the report",
     "complete the report",
+    "intentions report",
+    "final intentions report",
+    "intentions json",
 ]
 
 MODULE_FINALIZATION_LABELS = {
@@ -90,6 +111,10 @@ MODULE_FINALIZATION_LABELS = {
     "believer": {
         "object": "belief",
         "json_label": "JSON report of beliefs",
+    },
+    "cuma": {
+        "object": "intention",
+        "json_label": "JSON report of intentions",
     },
     "default": {
         "object": "output",
@@ -116,12 +141,24 @@ MODULE_STRUCTURED_MARKERS = {
         "relevance_level:",
         "importance:",
         "confidence:",
+    ],
+    "cuma": [
+        "\"intentions\"",
+        "\"intention\"",
+        "linked_desire_id",
+        "linked_beliefs",
+        "action_plan",
+        "required_beliefs",
+        "plan_id",
+        "expected_outcome",
+        "estimated_effort",
     ]
 }
 
 MODULE_STRUCTURED_THRESHOLDS = {
     "ali": 2,
     "believer": 2,
+    "cuma": 3,
 }
 
 
@@ -291,7 +328,7 @@ class ConversationAuditor:
             )
         else:
             summary = (
-                f"You declared a formalization (e.g., Desire/Motivation/Success) without providing the {json_label}. "
+                f"You declared a structured formalization of the {labels['object']} without providing the {json_label}. "
                 "The content cannot be saved until you send the complete JSON."
             )
 
@@ -301,7 +338,10 @@ class ConversationAuditor:
                 f"When the user asks to formalize or generate the {json_label}, immediately provide the complete JSON before changing topics."
             ]
         else:
-            issue_message = f"You indicated Desire/Motivation/Success but did not produce the {json_label}; without JSON it's not possible to save the formalization."
+            issue_message = (
+                f"You indicated a structured formalization of the {labels['object']} "
+                f"but did not produce the {json_label}; without JSON it's not possible to save the formalization."
+            )
             improvements = [
                 f"When you declare having formalized the {labels['object']}, immediately provide the {json_label}."
             ]
@@ -369,8 +409,15 @@ class ConversationAuditor:
             if phrase in text:
                 return True
 
-        if any(verb in text for verb in FINALIZATION_VERBS):
-            if any(obj in text for obj in FINALIZATION_OBJECTS):
+        has_report_object = any(obj in text for obj in FINALIZATION_REPORT_OBJECTS)
+        has_entity_object = any(obj in text for obj in FINALIZATION_ENTITY_OBJECTS)
+
+        if any(verb in text for verb in FINALIZATION_COMMITMENT_VERBS):
+            if has_report_object or has_entity_object:
+                return True
+
+        if any(verb in text for verb in FINALIZATION_GENERATION_VERBS):
+            if has_report_object:
                 return True
 
         return False
@@ -385,8 +432,15 @@ class ConversationAuditor:
             if phrase in text:
                 return True
 
-        if any(verb in text for verb in FINALIZATION_VERBS):
-            if any(obj in text for obj in FINALIZATION_OBJECTS):
+        has_report_object = any(obj in text for obj in FINALIZATION_REPORT_OBJECTS)
+        has_entity_object = any(obj in text for obj in FINALIZATION_ENTITY_OBJECTS)
+
+        if any(verb in text for verb in FINALIZATION_COMMITMENT_VERBS):
+            if has_report_object or has_entity_object:
+                return True
+
+        if any(verb in text for verb in FINALIZATION_GENERATION_VERBS):
+            if has_report_object:
                 return True
 
         return False
