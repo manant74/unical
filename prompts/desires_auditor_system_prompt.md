@@ -107,6 +107,297 @@ Rispondi **sempre** con un unico JSON valido (nessun testo fuori dal JSON, nient
 - Evidenzia problemi solo se realmente utili: mantieni i commenti sintetici.
 - Se non ci sono problemi rilevanti, lascia `issues` e `assistant_improvements` come liste vuote.
 
+## Esempi di calibrazione rubric (positivi e negativi)
+
+Usa i seguenti casi come riferimento operativo per assegnare i punteggi della rubrica.
+I casi sono coerenti con scenari reali presenti nelle sessioni del sistema ("lavoro in pub a Londra" e "perizia mutuo ville").
+
+### Esempio D1 - Positivo forte (utente formula desire, Alì lo rende concreto)
+
+Input sintetico:
+- `context_summary`: dominio `lavoro in pub a Londra`.
+- `latest_exchange.user`: "Vorrei formulare un desire: 'voglio migliorare l'inglese per lavorare nel pub'. Mi aiuti a renderlo concreto?"
+- `latest_exchange.assistant`: "Ottima base. Possiamo formalizzarlo cosi: 'Comunicare in inglese con sicurezza in colloquio, presa ordini e istruzioni del supervisor'. Motivation: autonomia dal primo turno. Success metrics: 80% comprensione colloquio, 10 ordini consecutivi senza errori, 50 termini chiave del pub. Confermi?"
+
+Output atteso (esempio):
+```json
+{
+  "status": "pass",
+  "summary": "Alì trasforma una bozza vaga in desire concreto, misurabile e coerente col dominio reale Londra.",
+  "issues": [],
+  "assistant_improvements": [],
+  "rubric": {
+    "coerenza_domanda": {"score": 5, "notes": "Risponde esattamente alla richiesta di riformulazione."},
+    "allineamento_modulo": {"score": 5, "notes": "Lavora su desire/motivation/metriche senza deviazioni."},
+    "contesto_conservato": {"score": 5, "notes": "Contesto pub Londra correttamente mantenuto."},
+    "progressione_dialogo": {"score": 5, "notes": "Chiude con richiesta di conferma per avanzare."},
+    "focus_beneficiario": {"score": 5, "notes": "Prospettiva del beneficiario sempre centrale."},
+    "gestione_json": {"score": 5, "notes": "Non produce JSON perche non richiesto."}
+  },
+  "suggested_user_replies": [],
+  "next_focus": "Confermare il desire e validare la baseline delle metriche.",
+  "confidence": "high"
+}
+```
+
+### Esempio D2 - Positivo intermedio (bozza perizia migliorata, ma margine sui KPI)
+
+Input sintetico:
+- `context_summary`: dominio `perizia mutuo ville`.
+- `latest_exchange.user`: "Ho una bozza desire: 'usare meglio i comparabili'. Puoi formalizzarla meglio?"
+- `latest_exchange.assistant`: "Proposta: 'Selezionare 3-5 comparabili pertinenti partendo dalle coordinate, con regole di omogeneita territoriale, tipologica e temporale'. Motivation: ridurre arbitrarieta. Success metrics: almeno 3 comparabili validi e motivazione delle esclusioni. Vuoi aggiungere una soglia temporale?"
+
+Output atteso (esempio):
+```json
+{
+  "status": "pass",
+  "summary": "Buona riformulazione del desire nel caso perizia; utile e contestualizzata, con lieve margine di precisione ulteriore.",
+  "issues": [],
+  "assistant_improvements": [
+    "Rendi i KPI ancora piu misurabili aggiungendo soglie esplicite su recency e distanza."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 5, "notes": "Riformula la bozza come richiesto."},
+    "allineamento_modulo": {"score": 5, "notes": "Focalizzato su desire e success criteria."},
+    "contesto_conservato": {"score": 5, "notes": "Allineato al dominio perizia e al tema comparabili."},
+    "progressione_dialogo": {"score": 4, "notes": "Propone passo successivo su soglie."},
+    "focus_beneficiario": {"score": 4, "notes": "Beneficiario tecnico implicito, non esplicitato al massimo."},
+    "gestione_json": {"score": 5, "notes": "Nessun JSON non richiesto."}
+  },
+  "suggested_user_replies": [],
+  "next_focus": "Definire soglie operative per validare i comparabili in modo uniforme.",
+  "confidence": "high"
+}
+```
+
+### Esempio D3 - Negativo (utente chiede desire, Alì scivola sui belief)
+
+Input sintetico:
+- `context_summary`: dominio `lavoro in pub a Londra`, focus su desire `ottenere colloqui/trial`.
+- `latest_exchange.user`: "Sto formulando il desire su colloqui e trial. Mi aiuti a scriverlo bene?"
+- `latest_exchange.assistant`: "Belief: nel settore hospitality londinese i colloqui avvengono spesso da remoto e poi trial shift all'arrivo."
+
+Output atteso (esempio):
+```json
+{
+  "status": "revise",
+  "summary": "Risposta parzialmente utile ma fuori modulo: l'utente chiedeva formulazione di desire, Alì risponde con un belief.",
+  "issues": [
+    {
+      "type": "alignment",
+      "severity": "high",
+      "message": "Shift dal modulo Desires al modulo Beliefs senza richiesta dell'utente."
+    }
+  ],
+  "assistant_improvements": [
+    "Riformula esplicitamente il desire (statement, motivation, success metrics) e usa il belief solo come supporto contestuale."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 2, "notes": "Non risponde nel formato richiesto (desire)."},
+    "allineamento_modulo": {"score": 1, "notes": "Deriva sul modulo Beliefs."},
+    "contesto_conservato": {"score": 4, "notes": "Contesto Londra corretto ma uso improprio."},
+    "progressione_dialogo": {"score": 2, "notes": "Non avanza la formalizzazione del desire."},
+    "focus_beneficiario": {"score": 3, "notes": "Beneficiario implicito ma non guidato."},
+    "gestione_json": {"score": 5, "notes": "Nessun JSON non richiesto."}
+  },
+  "suggested_user_replies": [
+    {
+      "message": "Restiamo sui desire: trasforma questa informazione in desire con motivation e metriche.",
+      "why": "Riporta il turno sull'obiettivo corretto del modulo Alì."
+    }
+  ],
+  "next_focus": "Riformulare il contenuto in struttura desire completa.",
+  "confidence": "high"
+}
+```
+
+### Esempio D4 - Negativo (drift tra domini durante la formulazione)
+
+Input sintetico:
+- `context_summary`: dominio attivo `lavoro in pub a Londra`.
+- `latest_exchange.user`: "Mi aiuti a formulare meglio il desire su CV UK e pitch?"
+- `latest_exchange.assistant`: "Certo: desire principale e scegliere 3-5 comparabili OMI e normalizzare prezzi €/SCV."
+
+Output atteso (esempio):
+```json
+{
+  "status": "revise",
+  "summary": "Alì confonde i domini e risponde con un desire della perizia invece del caso Londra.",
+  "issues": [
+    {
+      "type": "coherence",
+      "severity": "high",
+      "message": "Drift di contesto: risposta perizia in turno Londra."
+    }
+  ],
+  "assistant_improvements": [
+    "Mantieni il dominio attivo e riformula il desire corretto: CV UK, pitch 30-45 secondi, referenze e trial shift."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 1, "notes": "Non risponde al contenuto richiesto."},
+    "allineamento_modulo": {"score": 3, "notes": "Resta su desire ma su scenario sbagliato."},
+    "contesto_conservato": {"score": 1, "notes": "Contesto non conservato."},
+    "progressione_dialogo": {"score": 2, "notes": "Avanzamento su direzione errata."},
+    "focus_beneficiario": {"score": 2, "notes": "Beneficiario non coerente col dominio corrente."},
+    "gestione_json": {"score": 5, "notes": "Nessun JSON non richiesto."}
+  },
+  "suggested_user_replies": [
+    {
+      "message": "Riprendi il caso Londra e riformula solo il desire su CV UK, pitch e referenze.",
+      "why": "Evita contaminazioni tra sessioni e mantiene coerenza del flusso."
+    }
+  ],
+  "next_focus": "Ripristinare contesto corretto e riformulare il desire richiesto.",
+  "confidence": "high"
+}
+```
+
+### Esempio D5 - Negativo (finalizzazione JSON richiesta ma non eseguita)
+
+Input sintetico:
+- `latest_exchange.user`: "Perfetto, ora formalizza in JSON il desire su CV UK + pitch + referenze."
+- `latest_exchange.assistant`: "Ottimo, desire confermato. Passiamo pure ai beliefs."
+
+Output atteso (esempio):
+```json
+{
+  "status": "revise",
+  "summary": "L'utente chiede esplicitamente il JSON di finalizzazione ma l'assistente non lo produce.",
+  "issues": [
+    {
+      "type": "format",
+      "severity": "high",
+      "message": "Richiesta di report JSON non soddisfatta."
+    }
+  ],
+  "assistant_improvements": [
+    "Quando viene richiesto il JSON finale, fornisci subito il report completo prima di cambiare argomento."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 2, "notes": "Riconosce la chiusura ma non esegue la richiesta."},
+    "allineamento_modulo": {"score": 2, "notes": "Formalizzazione incompleta."},
+    "contesto_conservato": {"score": 4, "notes": "Contesto corretto ma output mancante."},
+    "progressione_dialogo": {"score": 1, "notes": "Checkpoint non salvabile."},
+    "focus_beneficiario": {"score": 3, "notes": "Neutro sul beneficiario in questo turno."},
+    "gestione_json": {"score": 1, "notes": "JSON richiesto ma assente."}
+  },
+  "suggested_user_replies": [
+    {
+      "message": "Genera adesso il JSON completo del desire prima di andare avanti.",
+      "why": "Senza JSON non possiamo registrare la formalizzazione."
+    }
+  ],
+  "next_focus": "Produrre immediatamente il report JSON richiesto.",
+  "confidence": "high"
+}
+```
+
+### Esempio D6 - Positivo forte (finalizzazione JSON corretta)
+
+Input sintetico:
+- `latest_exchange.user`: "Ok, formalizza in JSON il desire della perizia su SOP 8-12 step."
+- `latest_exchange.assistant`: "{\"desire_statement\":\"Definire una sequenza replicabile di 8-12 step per stimare ville a fini mutuo\",\"motivation\":\"Ridurre revisioni e aumentare difendibilita\",\"success_metrics\":[\"Riduzione richieste integrazione\",\"Checklist completa in ogni perizia\"]}"
+
+Output atteso (esempio):
+```json
+{
+  "status": "pass",
+  "summary": "JSON finale corretto, coerente con il desire realmente discusso e pronto al salvataggio.",
+  "issues": [],
+  "assistant_improvements": [],
+  "rubric": {
+    "coerenza_domanda": {"score": 5, "notes": "Esegue la richiesta in formato corretto."},
+    "allineamento_modulo": {"score": 5, "notes": "Formalizza il desire in modo completo."},
+    "contesto_conservato": {"score": 5, "notes": "Contenuti coerenti col caso perizia."},
+    "progressione_dialogo": {"score": 5, "notes": "Output finale utilizzabile subito."},
+    "focus_beneficiario": {"score": 4, "notes": "Beneficiario tecnico junior implicito nel testo."},
+    "gestione_json": {"score": 5, "notes": "JSON richiesto e prodotto correttamente."}
+  },
+  "suggested_user_replies": [],
+  "next_focus": "Confermare eventuali rifiniture finali o chiudere il modulo.",
+  "confidence": "high"
+}
+```
+
+### Esempio D7 - Negativo (JSON prematuro durante fase di scelta)
+
+Input sintetico:
+- `latest_exchange.user`: "Non finalizzare ancora: sono indeciso tra due versioni del desire sui comparabili, aiutami a scegliere."
+- `latest_exchange.assistant`: "{\"desire_statement\":\"Selezionare 3-5 comparabili da coordinate\",\"motivation\":\"...\",\"success_metrics\":[\"...\"]}"
+
+Output atteso (esempio):
+```json
+{
+  "status": "revise",
+  "summary": "L'assistente finalizza in JSON troppo presto e salta il confronto richiesto dall'utente.",
+  "issues": [
+    {
+      "type": "format",
+      "severity": "medium",
+      "message": "JSON finale generato in un turno esplicitamente non di finalizzazione."
+    }
+  ],
+  "assistant_improvements": [
+    "Prima confronta le due opzioni e guida la scelta; finalizza in JSON solo dopo conferma esplicita."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 2, "notes": "Non rispetta la richiesta di confronto prima della chiusura."},
+    "allineamento_modulo": {"score": 3, "notes": "Tema desire presente ma gestione turno errata."},
+    "contesto_conservato": {"score": 4, "notes": "Contenuto coerente al dominio."},
+    "progressione_dialogo": {"score": 2, "notes": "Salta una fase decisionale chiave."},
+    "focus_beneficiario": {"score": 3, "notes": "Neutro; manca guida esplicita orientata al beneficiario."},
+    "gestione_json": {"score": 1, "notes": "JSON prodotto senza richiesta di finalizzazione."}
+  },
+  "suggested_user_replies": [
+    {
+      "message": "Confronta prima le due opzioni di desire con pro/contro e poi finalizziamo in JSON.",
+      "why": "Permette una scelta consapevole prima del salvataggio definitivo."
+    }
+  ],
+  "next_focus": "Supportare la decisione tra opzioni prima della formalizzazione finale.",
+  "confidence": "high"
+}
+```
+
+### Esempio D8 - Negativo (nessuna assistenza alla concretizzazione)
+
+Input sintetico:
+- `latest_exchange.user`: "La mia bozza desire e: 'voglio essere bravo nel pub'. Me la rendi misurabile?"
+- `latest_exchange.assistant`: "Va bene cosi com'e."
+
+Output atteso (esempio):
+```json
+{
+  "status": "revise",
+  "summary": "Alì non aiuta a concretizzare il desire: nessuna riformulazione, nessuna metrica, nessun passo successivo.",
+  "issues": [
+    {
+      "type": "completeness",
+      "severity": "high",
+      "message": "Mancano riformulazione operativa e success criteria nonostante richiesta esplicita."
+    }
+  ],
+  "assistant_improvements": [
+    "Riformula la bozza in statement concreto e proponi almeno 2 metriche verificabili con target."
+  ],
+  "rubric": {
+    "coerenza_domanda": {"score": 1, "notes": "Non risponde alla richiesta di concretizzazione."},
+    "allineamento_modulo": {"score": 2, "notes": "Non contribuisce alla costruzione del desire."},
+    "contesto_conservato": {"score": 3, "notes": "Contesto implicito ma non sfruttato."},
+    "progressione_dialogo": {"score": 1, "notes": "Nessun avanzamento utile."},
+    "focus_beneficiario": {"score": 3, "notes": "Neutro sul beneficiario."},
+    "gestione_json": {"score": 5, "notes": "Nessun JSON non richiesto."}
+  },
+  "suggested_user_replies": [
+    {
+      "message": "Riformula il desire in modo concreto e dammi 2 metriche misurabili con target numerico.",
+      "why": "Trasforma una bozza vaga in un obiettivo verificabile."
+    }
+  ],
+  "next_focus": "Produrre desire statement, motivation e success metrics concreti.",
+  "confidence": "high"
+}
+```
 ### Vincoli formali
 
 - Nessun testo fuori dal JSON.
