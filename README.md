@@ -1,905 +1,513 @@
-# ✨ LUMIA Studio
+# LUMIA Studio
 
-**LUMIA Studio** è una piattaforma innovativa basata su intelligenza artificiale per la progettazione strategica centrata sull'utente. Attraverso agenti conversazionali specializzati, LUMIA Studio trasforma la conoscenza in azione strutturata seguendo il framework BDI (Belief-Desire-Intention).
+**LUMIA Studio** is an AI-powered knowledge engineering platform that transforms unstructured documents into structured strategic insights using the BDI (Belief-Desire-Intention) cognitive framework. It's a multi-page Streamlit app with a RAG pipeline and a multi-agent conversational system.
 
 > **LUMIA** = **L**earning **U**nified **M**odel for **I**ntelligent **A**gents
 
-## 🎯 Cos'è LUMIA Studio?
+---
 
-LUMIA Studio è uno strumento di **knowledge engineering** e **strategic planning** che aiuta i responsabili di dominio a:
+## What is LUMIA Studio?
 
-1. **Strutturare la conoscenza**: Trasforma documenti non strutturati (PDF, web, testo) in una base di conoscenza interrogabile tramite RAG (Retrieval Augmented Generation)
-2. **Identificare obiettivi strategici (Desires)**: Attraverso conversazioni guidate con agenti AI, identifica e formalizza i bisogni e gli obiettivi degli utenti finali del tuo dominio
-3. **Estrarre conoscenza rilevante (Beliefs)**: Analizza automaticamente la base di conoscenza per estrarre solo i fatti pertinenti agli obiettivi identificati, con classificazione prioritaria
-4. **Validare e strutturare**: Permette la revisione e validazione del framework BDI generato in formato JSON strutturato
+LUMIA Studio is a **knowledge engineering** and **strategic planning** tool that helps domain experts:
 
-### Il Framework BDI
+1. **Structure knowledge** — Transforms unstructured documents (PDF, web, text) into a queryable knowledge base via RAG (Retrieval Augmented Generation)
+2. **Identify strategic objectives (Desires)** — Through guided conversations with AI agents, identifies and formalizes the needs and goals of your domain's end users
+3. **Extract relevant knowledge (Beliefs)** — Automatically analyzes the knowledge base to extract only the facts pertinent to identified objectives, with priority classification
+4. **Plan and execute (Intentions)** — Transforms the BDI framework into concrete, trackable action plans
 
-Il framework **Belief-Desire-Intention** è un modello per agenti intelligenti che separa:
+### The BDI Framework
 
-- **Beliefs (Credenze)**: Fatti, principi e assunzioni sul dominio - "cosa so del mondo"
-- **Desires (Desideri)**: Obiettivi e stati desiderati - "cosa voglio ottenere"
-- **Intentions (Intenzioni)**: Piani d'azione per raggiungere i desires - "come lo ottengo"
+The **Belief-Desire-Intention** model separates cognition into three layers:
 
-LUMIA Studio si concentra sulle prime due fasi, costruendo una rappresentazione strutturata e semanticamente ricca del dominio attraverso l'interazione con agenti conversazionali.
+- **Beliefs** — Facts, principles, and assumptions about the domain: *"what I know about the world"*
+- **Desires** — Goals and desired states: *"what I want to achieve"*
+- **Intentions** — Action plans to reach desires: *"how I get there"*
 
-## 🔍 Esempio Pratico
+---
 
-**Scenario**: Stai progettando un servizio di e-commerce per piante
+## Agents
 
-### Input (Knol)
+LUMIA Studio is organized around six specialized agents, each accessible as a Streamlit page:
 
-Carichi documentazione sul mercato delle piante, guide di giardinaggio, report di ricerca utenti, competitor analysis.
+| Agent | Page | Role |
+| ----- | ---- | ---- |
+| **Compass** | `0_Compass.py` | Session management, BDI dashboard, and analytics |
+| **Knol** | `1_Knol.py` | Knowledge base builder (document upload + RAG indexing) |
+| **Alì** | `2_Ali.py` | Desires extraction via Socratic conversation |
+| **Believer** | `3_Believer.py` | Beliefs extraction with desire-correlation |
+| **Cuma** | `4_Cuma.py` | Intentions planning — Beta |
+| **Genius** | `6_Genius.py` | BDI-powered execution coach |
 
-### Desires (Alì)
+### Compass — Session & BDI Management
 
-Attraverso conversazione guidata, emergono obiettivi come:
+Central control panel and mandatory starting point for every LUMIA project.
 
-- **Beneficiario "Principiante"**: "Sentirsi sicuro e guidato, sapendo di poter mantenere in vita la pianta acquistata"
-- **Beneficiario "Esperto"**: "Trovare e acquistare rapidamente varietà di piante rare con informazioni tecniche dettagliate"
+**Session management:**
 
-### Beliefs (Believer)
+- Create sessions with name, description, and tags
+- Select the knowledge context to use (or "None" for blank projects)
+- Configure LLM provider (Gemini / OpenAI) and model
+- Tune model-specific parameters: temperature (0.0–2.0), max output tokens (up to 65,536), top-p, and reasoning effort (`none` / `low` / `medium` / `high` for GPT-5 series)
+- Test the LLM connection before starting
+- Load, switch, or delete recent sessions
+- **Export as Framework** — exports the session BDI to `data/bdi_frameworks/` for use in Genius
 
-L'AI estrae automaticamente dalla KB solo i fatti pertinenti:
+**BDI data management (tabbed UI):**
 
-- "Le piante d'appartamento richiedono cure specifiche basate su luce e umidità" → 🔴 CRITICO per desire "Principiante"
-- "Il 70% dei principianti abbandona dopo la prima pianta morta" → 🔴 CRITICO per strategia prodotto
-- "Gli esperti cercano informazioni su pH del terreno e cicli di crescita" → 🟡 ALTO per desire "Esperto"
+- **Desires tab** — view, edit, and delete desires extracted by Alì
+- **Beliefs tab** — view, edit, and delete beliefs extracted by Believer
+- **Intentions tab** — view and manage intentions from Cuma
+- **BDI Graph tab** — interactive desire-belief graph with dynamic node sizing by graph weight; switchable layouts: BarnesHut, ForceAtlas2, Hierarchical, Repulsion, Circular, Radial
+- JSON editor with syntax highlighting, real-time validation, and safe save
 
-### Output
+**Context & belief base:**
 
-Un file JSON strutturato che mappa desires degli utenti con fatti rilevanti della knowledge base, pronto per guidare decisioni di product design, feature prioritization e content strategy.
+- Import beliefs from the selected context's belief base
+- Expandable/collapsible editor for large JSON payloads
+- Backward-compatible with legacy `personas` format
 
-## 🎨 Moduli e Funzionalità
+---
 
-LUMIA Studio è organizzato in moduli specializzati, ciascuno con un agente AI dedicato o funzionalità specifiche. La homepage (`app.py`) presenta i moduli come card cliccabili raggruppati in tre sezioni (Configuration, Domain Definition, Live Sessions) e include un **toggle Dark/Light mode** (`🌙`/`☀️`) nell'angolo superiore destro.
+### Knol — Knowledge Base Builder
 
-### 🧭 Compass - Session Configuration & BDI Management
+Manages all knowledge contexts and feeds the RAG pipeline used by downstream agents.
 
-**Compass** è il modulo centrale per la gestione delle sessioni di lavoro e del framework BDI. Rappresenta il **punto di partenza** di ogni progetto LUMIA.
+**Context management:**
 
-**Funzionalità principali:**
+- Create and switch between multiple named contexts
+- Per-context statistics: document count, belief count, last updated
+- ZIP export and import for full context portability
 
-- **Gestione Sessioni**:
-  - Creazione sessioni con nome, descrizione e tag
-  - Selezione del contesto (knowledge base) da utilizzare
-  - Configurazione provider LLM (Gemini, OpenAI) e modello
-  - **Parametri LLM avanzati**: model-specific (vedi sezione Provider LLM)
-  - Test connessione LLM con sessione attiva
-  - Gestione sessioni recenti (carica, elimina, switch)
-  - **📤 Export as Framework**: esporta il BDI della sessione in `data/bdi_frameworks/` per l'uso in Genius
+**Document ingestion:**
 
-- **Gestione BDI Data**:
-  - **Tab Desires**: Visualizzazione e gestione desires della sessione
-  - **Tab Beliefs**: Visualizzazione e gestione beliefs della sessione
-  - **Tab Intentions**: Visualizzazione e gestione intentions della sessione
-  - **Tab Grafo BDI**: Grafo interattivo delle relazioni Desire-Belief con dimensionamento dinamico dei nodi in base al peso nel grafo (layout selezionabile: BarnesHut, ForceAtlas2, Hierarchical, Repulsion, Circular, Radial)
-  - Editor JSON con syntax highlighting per belief base
-  - Import/export belief base dal contesto
-  - Validazione JSON in tempo reale
-  - Salvataggio persistente in sessione
+- Supported formats: PDF, web URLs (scraped via BeautifulSoup), `.txt`, `.md`
+- Chunking: RecursiveCharacterTextSplitter — 1,000-char chunks, 200-char overlap
+- Embedding: `paraphrase-multilingual-MiniLM-L12-v2` (384-dim, multilingual)
+- Storage: ChromaDB persistent vector store, one collection per context
 
-- **Context & Beliefs Base**:
-  - Opzione "Nessuno" per progetti senza contesto specifico
-  - Import automatico beliefs da contesto selezionato
-  - Editor espandibile/collassabile per grandi JSON
-  - Gestione belief_base e beliefs (compatibilità retroattiva)
+**Belief base extraction:**
 
-**Architettura**:
+- **Extract Belief Base** button — generates a structured belief base from the indexed documents using the LLM
+- Auto-generates a 20-word context description if none exists
+- Saves to `belief_base.json` in the context directory
 
-- Persistenza in `./data/sessions/{session_id}/`
-- SessionManager utility per CRUD completo
-- Isolamento completo tra sessioni diverse
-- Auto-recovery sessione attiva in Alì e Believer
+**Testing & maintenance:**
 
-**Output**: Sessione configurata e attiva per l'intero workflow LUMIA
+- **Test KB** — send a free-text query and inspect the retrieved chunks with similarity scores
+- **Clear KB** — wipe the ChromaDB index while keeping the context
+- **Delete context** — remove the context and all associated data
+- **Belief Base editor** — modal JSON editor with syntax highlighting for manual corrections
 
-### 📚 Knol - Knowledge Base Builder
+---
 
-**Knol** è il modulo di gestione della knowledge base. Trasforma documenti non strutturati in contesti interrogabili e genera belief base.
+### Alì — Desires Agent
 
-**Funzionalità:**
+Socratic conversational agent specialized in product strategy, user research, and design thinking.
 
-- **Gestione Contesti**:
-  - Creazione e selezione contesti multipli
-  - Context Manager per isolamento knowledge base
-  - Statistiche per contesto (documenti, beliefs, data)
-  - Switch rapido tra contesti diversi
-
-- **Upload Documenti**:
-  - **Multi-format support**: PDF, URL (web scraping), file di testo (.txt), Markdown (.md)
-  - **Chunking intelligente**: RecursiveCharacterTextSplitter (1000 caratteri, overlap 200)
-  - **Embeddings multilingua**: `paraphrase-multilingual-MiniLM-L12-v2`
-  - **Database vettoriale**: ChromaDB persistente per contesto
-
-- **Estrazione Belief Base**:
-  - Pulsante "🧠 Estrai Belief" per generazione automatica belief base
-  - **Generazione descrizione contesto**: Se mancante, genera automaticamente descrizione (20 parole) analizzando i documenti
-  - Salvataggio in `belief_base.json` nel contesto
-  - Update automatico metadata contesto
-
-- **Test KB**: Interfaccia query interattiva sulla KB — invia una query testuale e visualizza i chunk recuperati con i relativi punteggi di similarità, per verificare qualità e rilevanza dell'indicizzazione
-- **Gestione contesti**:
-  - Reset KB (`🗑️ Clear KB`)
-  - Eliminazione contesto completo
-  - **📦 Export contesto (ZIP)**: esporta chroma_db, metadata e belief_base in un archivio ZIP
-  - **📥 Import contesto (ZIP)**: ripristina un contesto precedentemente esportato
-- **📝 Editor Beliefs**: editor JSON modale con syntax highlighting per modificare la belief base estratta
-
-**Tecnologia RAG**: Implementa Retrieval Augmented Generation per accesso contestuale agli agenti.
-
-### 🎯 Alì - Agent for Desires
-
-**Alì** è un agente conversazionale esperto in product strategy, user research e design thinking. Il suo scopo è guidare l'utente nell'identificazione dei **Desires** (obiettivi strategici) del beneficiario primario dedotto automaticamente durante la conversazione, senza chiedere di elencare beneficiari.
-
-**Approccio metodologico:**
-
-1. **Identificazione del dominio**: Esplora e definisce il contesto di lavoro
-2. **Segnali sull'utente reale**: Raccoglie esempi, comportamenti e motivazioni per poter inferire la categoria corretta senza domande esplicite
-3. **Formalizzazione del beneficiario primario**: Formula un'etichetta descrittiva dedotta dal dialogo e la mantiene allineata lungo tutta la sessione
-4. **Esplorazione desires**: Usa domande strategiche per far emergere bisogni profondi del beneficiario dedotto con:
-   - **Desire statement**: Formulazione chiara dal punto di vista del beneficiario
-   - **Motivation**: Motivazione profonda (perché è importante)
-   - **Success metrics**: Indicatori concreti di successo
-5. **Validazione Auditor**: Sistema rubric-based (scoring 0-5) valida desires su:
-   - Coerenza con la domanda
-   - Allineamento al modulo
-   - Contesto conservato
-   - Progressione dialogo
-   - Focus sul beneficiario
-   - Gestione finalizzazione / JSON
-6. **Report finale JSON**: Genera un documento strutturato con il beneficiario dedotto e tutti i suoi desires
-
-**Caratteristiche tecniche:**
-
-- **Sessione obbligatoria**: Richiede sessione attiva configurata in Compass
-- **Auto-recovery**: Carica automaticamente ultima sessione attiva se session state vuoto
-- Supporto multi-LLM con **parametri configurabili dalla sessione** (temperature, max_tokens, top_p)
-- Accesso RAG alla knowledge base del contesto selezionato
-- **Saluto contestualizzato**: Legge descrizione del contesto dal metadata (generata da Knol)
-- Parsing automatico report JSON per estrazione desires strutturati
-- **Auditor Dedicato**: Validazione specializzata con `prompts/desires_auditor_system_prompt.md`
-- **Salvataggio automatico**: Desires salvati in BDI data della sessione in tempo reale
-- **Aggiunta manuale desires**: Form sidebar con metadati completi
-- **UI ottimizzata**: Chat pulita, session badge, link rapido a Compass
-
-**Output**: Desires salvati automaticamente in `session BDI data` + visualizzabili in Compass
-
-### 💡 Believer - Agent for Beliefs
-
-**Believer** è un sistema di knowledge engineering specializzato nell'estrazione di conoscenza strutturata. Analizza la knowledge base per identificare solo i **Beliefs** (fatti) pertinenti ai Desires precedentemente definiti.
-
-**Processo di estrazione:**
-
-1. **Caricamento desires**: Legge automaticamente i desires da Alì (supporta entrambi i formati JSON)
-2. **Esplorazione interattiva**: Chiede all'utente informazioni aggiuntive per contestualizzare l'estrazione
-3. **Query RAG contestuale**: Interroga la KB con contesto che include sia documenti che desires
-4. **Estrazione strutturata**: Identifica fatti atomici con:
-   - **Subject-Relation-Object**: Formato base per ogni belief
-   - **Definition completa**: WHAT (cosa è), WHY (perché è importante), HOW (come funziona)
-   - **Semantic Relations**: Array di relazioni strutturate con altri concetti
-5. **Classificazione prioritaria**: Assegna livelli di rilevanza (CRITICO/ALTO/MEDIO/BASSO) per ogni belief rispetto ai desires correlati
-6. **Validazione Auditor**: Sistema rubric-based (scoring 0-5) valida beliefs estratti su:
-   - Coerenza con la domanda
-   - Contesto conservato
-   - Specificità del belief
-   - Struttura del belief
-   - Evidenza / sorgente
-   - Gestione finalizzazione / JSON
-7. **Report finale**: Genera JSON completo con beliefs correlati ai desires
-
-**Modalità di generazione:**
-
-- **Interattiva** (default): conversazione guidata con Believer, estrazione belief per belief con RAG
-- **Da belief base**: genera beliefs a partire dalla belief base pre-estratta del contesto, correlando con i desires
-- **Mix beliefs**: combina beliefs della base con nuovi estratti tramite RAG
-- **Da zero** (`believer_from_scratch_prompt.md`): genera beliefs direttamente dai chunk della KB e dai desires, senza passare dalla belief base — utile quando la belief base è assente o rumorosa
-
-**Livelli di rilevanza (v2.2):**
-
-- 🔴 **CRITICO**: Risponde direttamente al desire, dati quantitativi o vincoli assoluti
-- 🟡 **ALTO**: Supporta significativamente il desire, informazioni essenziali
-- 🟢 **MEDIO**: Fornisce contesto utile, background information
-- 🔵 **BASSO**: Marginalmente rilevante, connessione indiretta
-
-**Caratteristiche tecniche:**
-
-- **Sessione obbligatoria**: Richiede sessione attiva con desires disponibili
-- **Auto-recovery**: Carica automaticamente ultima sessione attiva
-- **Caricamento automatico desires**: Legge desires dalla sessione BDI data
-- Supporto multi-LLM con **parametri configurabili dalla sessione**
-- Estrazione guidata dal "Principio di Rilevanza": solo fatti pertinenti
-- Metadati arricchiti (tipo entità, fonte, correlazione desire, semantic relations)
-- **Auditor Dedicato**: Validazione specializzata con `prompts/belief_auditor_system_prompt.md`
-- **Salvataggio automatico**: Beliefs salvati in BDI data in tempo reale
-- **Aggiunta manuale beliefs**: Form sidebar con multi-select desires correlati
-- **UI ottimizzata**: Session badge, desires disponibili visualizzati, link Compass
-
-**Output**: Beliefs salvati automaticamente in `session BDI data` + visualizzabili in Compass
-
-**Funzionalità:**
-
-- **Editor JSON**: Text area con font monospazio per modifiche dirette
-- **Preview con line numbers**: Visualizzazione formattata del JSON per navigazione facile
-- **Validazione**: Controllo sintattico JSON prima del salvataggio
-- **Salvataggio sicuro**: Aggiornamento del file `current_bdi.json` solo dopo validazione
-
-**Uso**: Permette correzioni manuali, aggiustamenti e pulizia del JSON prima di procedere con moduli downstream (Cuma, Genius).
-
-### 🔮 Cuma - Intentions Planning Agent (Beta)
-
-**Cuma** è l'agente responsabile della generazione delle **Intentions** (intenzioni), il terzo pilastro del framework BDI. Trasforma desires e beliefs in piani d'azione concreti e strutturati.
-
-**Funzionalità Attuali (Beta):**
-
-- **Generazione Intentions**: Crea piani d'azione basati su desires e beliefs esistenti
-- **Due modalità di invio**:
-  - `🗺️ Map multiple Intentions for the domain` — genera più intentions coprendo il dominio
-  - `🔍 Deep dive into a specific aspect` — esplorazione in profondità di un singolo aspetto
-- **Tracciamento Relazioni**: Collegamenti espliciti tra intentions, desires e beliefs
-- **Action Steps Strutturati**: Decomposizione in passi concreti con:
-  - Effort estimates
-  - Dependencies tra steps
-  - Risorse necessarie
-  - Expected outcomes
-- **Risk Assessment**: Identificazione rischi e strategie di mitigazione
-- **Salvataggio automatico**: Intentions salvate nel BDI della sessione
-
-**Formato JSON Intentions:**
-
-```json
-{
-  "intention_id": "I1",
-  "intention_statement": "Piano d'azione per raggiungere desire",
-  "linked_desire_id": "D1",
-  "linked_beliefs": ["B1", "B3", "B5"],
-  "action_steps": [
-    {
-      "step_id": "S1",
-      "description": "Descrizione step",
-      "estimated_effort": "2 weeks",
-      "dependencies": [],
-      "resources_needed": ["Risorsa 1"]
-    }
-  ],
-  "expected_outcomes": ["Outcome 1"],
-  "risks": [
-    {
-      "risk": "Rischio potenziale",
-      "mitigation": "Strategia di mitigazione"
-    }
-  ]
-}
+**Conversation flow:**
+
+1. Greets the user with a context-aware welcome (reads context description from Knol metadata)
+2. Explores the domain without asking the user to list beneficiaries explicitly
+3. Infers the primary beneficiary category from signals, examples, and behaviors in the conversation
+4. Elicits desires through strategic questions, capturing: desire statement, deep motivation, and success metrics
+5. Generates a structured JSON report with the inferred beneficiary and all desires on request
+
+**Quality assurance:**
+
+- Dedicated rubric-based auditor (`desires_auditor_system_prompt.md`) scores every response on 6 dimensions (0–5): query coherence, module alignment, context preservation, dialogue progression, beneficiary focus, finalization/JSON handling
+- Auditor provides issues, improvement suggestions, and quick replies
+
+**UX & persistence:**
+
+- Session badge in sidebar; quick link to Compass
+- LLM parameters inherited from the active session (temporary override available)
+- Desires auto-saved to the session BDI in real time
+- **Add desire manually** — sidebar form with full metadata: statement, priority, context, success criteria
+- **New conversation** button to reset chat without losing saved desires
+
+---
+
+### Believer — Beliefs Agent
+
+Knowledge engineering agent that extracts structured, desire-correlated facts from the RAG knowledge base.
+
+**Extraction modes:**
+
+- **Interactive** (default) — guided conversation; Believer queries the KB per topic and extracts beliefs one by one
+- **From belief base** — generates beliefs from the context's pre-extracted belief base, correlating with desires
+- **Mixed** — combines belief base entries with new RAG-retrieved chunks
+- **From scratch** — ignores the belief base entirely and derives beliefs directly from KB chunks and desires; useful when the belief base is absent or noisy
+
+**Belief structure per entry:**
+
+- `subject` / `definition` (WHAT it is, WHY it matters, HOW it works)
+- `semantic_relations` — typed, annotated relations to other concepts
+- `source` — exact source citation
+- `importance` and `confidence` scores
+- `related_desires` — relevance level per desire: **CRITICO** / **ALTO** / **MEDIO** / **BASSO**
+
+**Quality assurance:**
+
+- Dedicated rubric-based auditor (`belief_auditor_system_prompt.md`) scores every response on 6 dimensions: query coherence, context preservation, belief specificity, belief structure, evidence/source, finalization/JSON handling
+
+**UX & persistence:**
+
+- Desires from the active session displayed in the sidebar
+- Beliefs auto-saved to the session BDI in real time
+- **Add belief manually** — sidebar form with type, confidence, multi-select correlated desires, and evidence
+- LLM parameters inherited from the session (temporary override available)
+
+---
+
+### Cuma — Intentions Agent *(Beta)*
+
+Converts the session's desires and beliefs into structured, executable action plans.
+
+**Features:**
+
+- Two conversation modes: **Map multiple Intentions** (broad domain coverage) and **Deep dive** (focused exploration of a single aspect)
+- Each intention includes: linked desire ID, linked belief IDs, action steps with effort estimates and dependencies, expected outcomes, and risk/mitigation pairs
+- Intentions auto-saved to the session BDI
+
+**Status:** functional; Auditor integration pending.
+
+---
+
+### Genius — Execution Coach
+
+Personal execution coach that works on exported BDI frameworks, independent of the active session.
+
+**Workflow:**
+
+1. Load a BDI framework from `data/bdi_frameworks/` (exported from Compass) or restore a previously saved plan
+2. Select the target desire via conversation (by ID or description)
+3. Answer discovery questions: role, timeline, current situation, constraints
+4. Genius generates a phased action plan, prioritizing beliefs with CRITICO and ALTO relevance
+5. Optionally enrich each step with practical tips and tools
+6. Track step completion via sidebar checkboxes; progress persisted to disk
+
+**Features:**
+
+- Dedicated engine (`genius_engine.py`) for BDI loading, belief filtering, plan generation, and persistence
+- Plans saved in `data/genius_plans/` with active plan marker (`.active_plan`)
+- **Export Markdown** — download the full plan as a `.md` file
+- Sidebar progress bar and per-phase status
+- Same BDI framework reusable for multiple plans targeting different desires
+
+---
+
+## Workflow
+
+```text
+Compass (configure session)
+    → Knol (build knowledge base)
+    → Alì (extract desires)
+    → Believer (extract beliefs)
+    → Compass (review & validate BDI)
+    → Cuma (optional: plan intentions)
+    → Genius (generate & track action plan)
 ```
 
-**Status**: In fase Beta - Sistema funzionale in attesa di integrazione con Auditor
+---
 
-### ⚡ Genius - BDI Execution Coach
+## Deploy
 
-**Genius** è un agente di coaching esecutivo che trasforma i Desires in piani d'azione personalizzati, sfruttando i Beliefs già estratti nel framework BDI. Non richiede una sessione attiva: opera direttamente su BDI framework esportati da Compass.
+### Local
 
-**Flusso operativo:**
-
-1. **Selezione BDI**: Carica un framework BDI dalla directory `data/bdi_frameworks/` (esportati da Compass) o ripristina un piano precedentemente salvato
-2. **Customizzazione del Desire**: Seleziona il desire target tramite conversazione (per ID o descrizione)
-3. **Raccolta contesto utente**: Il discovery prompt raccoglie ruolo, timeline, situazione attuale e vincoli
-4. **Generazione piano**: L'LLM genera un piano strutturato in fasi e step, correlando i Beliefs con relevance CRITICO e ALTO
-5. **Arricchimento con tips**: Funzione opzionale che genera consigli pratici e strumenti per ogni step
-6. **Tracking progetto**: Checkbox per completamento step con aggiornamento progressivo persistito su disco
-
-**Caratteristiche tecniche:**
-
-- **Engine dedicato**: `utils/genius_engine.py` gestisce loading BDI, filtering beliefs, generazione e persistenza piani
-- **Prompt specializzati**: `genius_discovery_prompt.md` (discovery), `genius_plan_generation_prompt.md` (generazione piano), `genius_step_tips_prompt.md` (tips per step), `genius_coach_template.md` (coaching)
-- **Persistenza piani**: Piani salvati in `data/genius_plans/` con supporto piano attivo (`.active_plan`)
-- **Export Markdown**: Esporta il piano completo in formato Markdown scaricabile
-- **Progress tracking**: Sidebar con progress bar, checkboxe per step e stato per fase
-- **Riutilizzo BDI**: Stesso framework BDI usabile per generare piani diversi targeting desires diversi
-
-**Output**: Piano d'azione strutturato salvato in `data/genius_plans/`, esportabile in Markdown
-
-## Installazione
-
-### Prerequisiti
-
-- Python 3.9 o superiore
-- pip
-
-### Setup
-
-#### Clona il repository
+**Prerequisites:** Python 3.9+, pip
 
 ```bash
+# 1. Clone the repository
 git clone <repository-url>
 cd unical
-```
 
-#### Crea un ambiente virtuale
-
-```bash
+# 2. Create a virtual environment
 python -m venv venv
 
 # Windows
 venv\Scripts\activate
-
-# Linux/Mac
+# Linux / macOS
 source venv/bin/activate
-```
 
-#### Installa le dipendenze
-
-```bash
+# 3. Install dependencies
 pip install -r requirements.txt
-```
 
-#### Configura le API keys
+# 4. Pre-download the embedding model (~120 MB, one-time)
+python setup_models.py
 
-```bash
-# Copia il file di esempio
+# 5. Configure API keys
 cp .env.example .env
+# Edit .env — set at least one of GOOGLE_API_KEY or OPENAI_API_KEY
 
-# Modifica .env con le tue API keys
-# Configura almeno una delle seguenti:
-# - GOOGLE_API_KEY (per Gemini)
-# - OPENAI_API_KEY (per OpenAI)
-```
-
-## 🚀 Guida Rapida all'Utilizzo
-
-### Avvio dell'Applicazione
-
-#### Avvia l'applicazione
-
-```bash
+# 6. Run
 streamlit run app.py
 ```
 
-#### L'applicazione si aprirà nel browser all'indirizzo `http://localhost:8501`
+The app opens at `http://localhost:8501`. To use a different port:
 
-### Workflow Completo
+```bash
+streamlit run app.py --server.port 8502
+```
 
-LUMIA Studio segue un workflow sequenziale ben definito:
+---
 
-#### Passo 0: 🧭 Configurazione Sessione (Compass)
+### Streamlit Community Cloud
 
-> **NUOVO** - Punto di partenza obbligatorio
+1. Push the repository to GitHub (ensure `.env` is in `.gitignore`).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and click **New app**.
+3. Select the repository, branch, and set **Main file path** to `app.py`.
+4. Under **Advanced settings → Secrets**, add your API keys in TOML format:
 
-1. Accedi al modulo **Compass**
-2. **Crea una nuova sessione**:
-   - Nome descrittivo (es: "Analisi E-commerce Piante")
-   - Descrizione opzionale
-   - Tag per organizzazione
-3. **Configura la sessione**:
-   - Seleziona il **contesto** (knowledge base) da utilizzare (o "Nessuno" se nuovo progetto)
-   - Scegli **Provider LLM** (Gemini, OpenAI)
-   - Scegli **Modello** (es: gemini-2.5-pro, gpt-5.2)
-   - **Configura parametri LLM** (opzionale, model-specific):
-     - Modelli Gemini: Temperature (0.0-2.0), Max Output Tokens (fino a 65536), Top P (0.0-1.0)
-     - Modelli GPT-5/5.1/5.2: Reasoning Effort (none/low/medium/high)
-     - Checkbox **Use Default Parameters** per usare i valori predefiniti del modello
-4. **Test connessione** LLM (opzionale ma consigliato)
-5. **Attiva sessione** - Rende la sessione disponibile per Alì e Believer
+```toml
+GOOGLE_API_KEY = "your_google_api_key_here"
+OPENAI_API_KEY = "your_openai_api_key_here"
+```
 
-**Output**: Sessione attiva pronta per l'intero workflow
+1. Click **Deploy**.
 
-#### Passo 1: 📚 Costruzione della Knowledge Base (Knol)
+> **Note:** The embedding model (~120 MB) is downloaded on first run. Streamlit Cloud instances are ephemeral — the `data/` directory (sessions, contexts, plans) is not persisted between restarts. For production use, mount external storage or use a persistent database.
 
-1. Accedi al modulo **Knol**
-2. **Seleziona o crea un contesto** (se non l'hai già fatto in Compass)
-3. **Carica documenti** nel contesto:
-   - **PDF**: Documenti tecnici, report, white paper
-   - **Pagine Web**: URL di documentazione online, articoli, siti
-   - **File di Testo**: File .txt con informazioni sul dominio
-   - **Markdown**: Documentazione strutturata in formato .md
-4. **Estrai Belief Base** (pulsante "🧠 Estrai Belief"):
-   - Genera automaticamente belief base dal contesto
-   - Se la descrizione contesto è vuota, la genera automaticamente (20 parole)
-   - Salva in `belief_base.json` nel contesto
-5. **Test della KB**: Verifica qualità indicizzazione con query test
+---
 
-**Output**: Contesto con documenti indicizzati, belief base generata, descrizione disponibile
+### Docker
 
-#### Passo 2: 🎯 Identificazione dei Desires (Alì)
+Create a `Dockerfile` in the project root:
 
-1. Accedi al modulo **Alì**
-2. **Verifica sessione attiva** (badge in sidebar mostra la sessione corrente)
-   - Se non c'è sessione, viene caricata automaticamente l'ultima attiva
-   - Altrimenti vai in Compass ad attivarla
-3. **Nota**: Provider/modello LLM sono quelli configurati nella sessione (ma puoi cambiarli temporaneamente)
-4. **Conversazione con Alì**:
-   - Alì ti saluta con descrizione del contesto (letta dal metadata)
-   - Rispondi alle domande guidate
-   - Fai emergere il beneficiario primario (Alì lo deduce) e i suoi desires
-5. Valida checkpoint intermedi
-6. Chiedi: **"Genera il report finale"**
-7. I desires vengono **salvati automaticamente** nella sessione BDI data
-8. (Opzionale) Clicca **"✅ Completa Sessione"** per finalizzare
+```dockerfile
+FROM python:3.11-slim
 
-**Output**: Desires salvati automaticamente in `session BDI data`, visualizzabili in Compass
+WORKDIR /app
 
-#### Passo 3: 💡 Estrazione dei Beliefs (Believer)
+# Install system dependencies for ChromaDB and PDF processing
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-1. Accedi al modulo **Believer**
-2. **Verifica sessione attiva** e **desires caricati** (mostrati in sidebar)
-   - I desires vengono caricati automaticamente dalla sessione BDI data
-   - Se non ci sono desires, vai prima su Alì
-3. **Nota**: Provider/modello LLM dalla sessione (override temporaneo possibile)
-4. **Conversazione con Believer**:
-   - Believer mostra i desires disponibili
-   - Interroga la KB per estrarre beliefs pertinenti ai desires
-   - Valida, correggi e integra i beliefs proposti
-5. Chiedi: **"Genera il report finale"**
-6. I beliefs vengono **salvati automaticamente** nella sessione BDI data
-7. (Opzionale) Clicca **"✅ Completa Sessione"** per finalizzare
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-**Output**: Beliefs salvati automaticamente in `session BDI data`, visualizzabili in Compass
+COPY . .
 
-#### Passo 4: 🧭 Gestione BDI nella Sessione (Compass)
+# Pre-download the embedding model at build time
+RUN python setup_models.py
 
-1. Accedi al modulo **Compass**
-2. Seleziona la tua sessione attiva
-3. Usa le tab "💭 Desires" e "🧠 Beliefs" per gestire i dati BDI
-4. Modifica, valida e salva i dati direttamente nella sessione:
-   - Correggi errori di estrazione
-   - Affina le correlazioni belief-desire
-   - Aggiusta i livelli di rilevanza
-5. Clicca **"✔️ Valida JSON"** per verificare la sintassi
-6. Clicca **"💾 Salva Modifiche"** per aggiornare il file
+EXPOSE 8501
 
-**Pronto per l'uso**: Il framework BDI è ora strutturato, validato e pronto per essere utilizzato in applicazioni downstream o per analisi strategiche.
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
 
-#### Passo 5: ⚡ Generazione Piano d'Azione (Genius)
+ENTRYPOINT ["streamlit", "run", "app.py", \
+    "--server.port=8501", \
+    "--server.address=0.0.0.0", \
+    "--server.headless=true"]
+```
 
-1. Prima di accedere a Genius, clicca **📤 Export as Framework** nel sidebar di Compass per esportare il BDI della sessione in `data/bdi_frameworks/`
-2. Accedi al modulo **Genius**
-3. **Seleziona il BDI framework** dalla lista dei disponibili (o carica un piano precedente)
-4. **Seleziona il Desire target** tramite conversazione
-5. Rispondi alle domande di discovery (ruolo, timeline, vincoli)
-6. Genius **genera il piano** strutturato in fasi e step, correlando i beliefs più rilevanti
-7. (Opzionale) Clicca **"💡 Enrich with Tips and Tools"** per arricchire ogni step con consigli pratici
-8. Usa i **checkbox nel sidebar** per tracciare il progresso degli step
-9. (Opzionale) Clicca **"📄 Export Markdown"** per scaricare il piano
+Build and run:
 
-**Output**: Piano d'azione personalizzato salvato in `data/genius_plans/`, esportabile in Markdown
+```bash
+# Build the image
+docker build -t lumia-studio .
 
-### Funzionalità Avanzate
+# Run with API keys passed as environment variables
+docker run -p 8501:8501 \
+  -e GOOGLE_API_KEY=your_google_api_key \
+  -e OPENAI_API_KEY=your_openai_api_key \
+  -v $(pwd)/data:/app/data \
+  lumia-studio
+```
 
-#### Saluto Contestualizzato (Alì)
+The `-v $(pwd)/data:/app/data` mount persists sessions, contexts, and plans across container restarts.
 
-Al primo accesso ad Alì, l'agente:
+With **Docker Compose** (`docker-compose.yml`):
 
-- Legge automaticamente il file `current_context.json` generato da Knol
-- Personalizza il messaggio di benvenuto includendo la descrizione del contesto
-- Se il file non esiste, lo genera analizzando i titoli dei documenti nella KB usando l'LLM
+```yaml
+services:
+  lumia-studio:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+```
 
-Questo permette ad Alì di avere immediatamente il contesto del dominio su cui lavorare.
+```bash
+# Start
+docker compose up -d
 
-#### Aggiunta Manuale di Desires (Alì)
+# Stop
+docker compose down
+```
 
-Nella sidebar di Alì, espandi "➕ Aggiungi Desire Manualmente" e compila:
+---
 
-- Descrizione del desire
-- Priorità (high/medium/low)
-- Contesto specifico
-- Criteri di successo
+## Architecture
 
-#### Aggiunta Manuale di Beliefs (Believer)
+### Layered structure
 
-Nella sidebar di Believer, espandi "➕ Aggiungi Belief Manualmente" e compila:
+- **`pages/`** — Streamlit pages (presentation layer). Each page is a self-contained agent UI.
+- **`utils/`** — Business logic managers (no Streamlit imports).
+- **`prompts/`** — Agent system prompts as Markdown files, loaded with LRU cache via `utils/prompts.py`.
+- **`data/`** — Filesystem-based persistence (JSON + ChromaDB vector stores).
 
-- Descrizione del belief
-- Tipo (fact/assumption/principle/constraint)
-- Livello di confidenza
-- Desires correlati (multi-select)
-- Evidenze/fonte
+### Core utilities
 
-#### Reset e Nuove Sessioni
+| Module | Role |
+| ------ | ---- |
+| `llm_manager.py` | Multi-provider LLM interface (Gemini + OpenAI). `LLMManager.chat()` is the single entry point for all LLM calls |
+| `llm_manager_config.py` | Per-model parameter configuration (used for dynamic UI in Compass) |
+| `session_manager.py` | Session CRUD. Active session tracked via `data/sessions/.active_session` |
+| `context_manager.py` | ChromaDB lifecycle management with lazy initialization. Always call `release_chroma_client()` after use |
+| `document_processor.py` | RAG pipeline: PDF/URL/text → chunk (1000 chars, 200 overlap) → embed → ChromaDB |
+| `auditor.py` | Quality validation meta-agent. Separate prompts for Desires and Beliefs auditors |
+| `genius_engine.py` | Plan generation and persistence for Genius |
+| `prompts.py` | Loads system prompts from `prompts/` with LRU cache |
+| `ui_messages.py` | Dynamic spinner messages during LLM calls |
 
-- **Reset Knowledge Base**: Knol → Pulsante "🗑️ Cancella Contesto"
-- **Nuova conversazione**: Sidebar di Alì/Believer → "🔄 Nuova Conversazione"
-- **Storico sessioni**: Tutte le sessioni completate sono salvate in `data/sessions/` con timestamp
+### Data flow
 
-## Struttura del Progetto
+1. Documents uploaded via Knol → chunked → embedded (`paraphrase-multilingual-MiniLM-L12-v2`, 384-dim) → ChromaDB
+2. Alì converses → extracts **desires** → saved to `data/sessions/{id}/current_bdi.json`
+3. Believer retrieves chunks via RAG → extracts **beliefs** with desire-correlation → saved to same BDI file
+4. Compass exports BDI to `data/bdi_frameworks/`
+5. Genius loads BDI → generates action plan → saves to `data/genius_plans/`
+
+### Project structure
 
 ```text
 unical/
-├── app.py                     # Pagina principale con tiles
+├── app.py                          # Homepage with agent cards + dark/light toggle
 ├── pages/
-│   ├── 0_Compass.py          # Gestione sessioni, BDI e analytics
-│   ├── 1_Knol.py             # Gestione contesti e KB
-│   ├── 2_Ali.py              # Agente per Desires
-│   ├── 3_Believer.py         # Agente per Beliefs
-│   ├── 4_Cuma.py             # Agente per Intentions (Beta)
-│   └── 6_Genius.py           # Agente Execution Coach
+│   ├── 0_Compass.py               # Session management, BDI dashboard
+│   ├── 1_Knol.py                  # Knowledge base builder
+│   ├── 2_Ali.py                   # Desires agent
+│   ├── 3_Believer.py              # Beliefs agent
+│   ├── 4_Cuma.py                  # Intentions agent (Beta)
+│   └── 6_Genius.py                # Execution coach
 ├── prompts/
-│   ├── ali_system_prompt.md                # System prompt per Alì
-│   ├── believer_system_prompt.md           # System prompt per Believer
-│   ├── believer_from_scratch_prompt.md     # Generazione beliefs da zero (senza belief base)
-│   ├── belief_base_prompt.md               # Prompt per generazione belief base
-│   ├── believer_mix_beliefs_prompt.md      # Prompt per mix beliefs base+RAG
-│   ├── cuma_system_prompt.md               # System prompt per Cuma
-│   ├── desires_auditor_system_prompt.md    # Auditor dedicato per Desires (Alì)
-│   ├── belief_auditor_system_prompt.md     # Auditor dedicato per Beliefs (Believer)
-│   ├── genius_discovery_prompt.md          # Genius: fase discovery e profilo utente
-│   ├── genius_plan_generation_prompt.md    # Genius: generazione struttura piano
-│   ├── genius_step_tips_prompt.md          # Genius: tips pratici per step
-│   └── genius_coach_template.md            # Genius: template coaching
+│   ├── ali_system_prompt.md
+│   ├── believer_system_prompt.md
+│   ├── believer_from_scratch_prompt.md
+│   ├── believer_mix_beliefs_prompt.md
+│   ├── belief_base_prompt.md
+│   ├── cuma_system_prompt.md
+│   ├── desires_auditor_system_prompt.md
+│   ├── belief_auditor_system_prompt.md
+│   ├── genius_discovery_prompt.md
+│   ├── genius_plan_generation_prompt.md
+│   ├── genius_step_tips_prompt.md
+│   └── genius_coach_template.md
 ├── utils/
-│   ├── __init__.py
-│   ├── document_processor.py    # Elaborazione documenti e RAG
-│   ├── llm_manager.py           # Gestione LLM multi-provider
-│   ├── llm_manager_config.py    # Configurazione parametri per modello
-│   ├── session_manager.py       # Gestione sessioni
-│   ├── context_manager.py       # Gestione contesti multipli
-│   ├── auditor.py               # Quality assurance rubric-based
-│   ├── genius_engine.py         # Engine Genius: piani, persistenza, progress
-│   ├── prompts.py               # Caricamento system prompts
-│   └── ui_messages.py           # Messaggi di loading dinamici
+│   ├── llm_manager.py
+│   ├── llm_manager_config.py
+│   ├── session_manager.py
+│   ├── context_manager.py
+│   ├── document_processor.py
+│   ├── auditor.py
+│   ├── genius_engine.py
+│   ├── prompts.py
+│   └── ui_messages.py
 ├── data/
-│   ├── contexts/                # Contesti multipli (knowledge base)
-│   │   └── {context_name}/
-│   │       ├── chroma_db/       # DB vettoriale per contesto
-│   │       ├── context_metadata.json  # Metadata contesto
-│   │       └── belief_base.json       # Belief base contesto
-│   ├── sessions/                # Sessioni di lavoro
-│   │   └── {session_id}/
-│   │       ├── metadata.json    # Nome, descrizione, timestamp
-│   │       ├── config.json      # Context, LLM provider/model/settings
-│   │       ├── current_bdi.json # Desires e beliefs della sessione
-│   │       └── belief_base.json # Belief base (opzionale)
-│   ├── bdi_frameworks/          # BDI esportati da Compass per Genius
-│   │   └── {domain}_bdi.json
-│   └── genius_plans/            # Piani generati da Genius
-│       ├── plan_{id}.json       # Piano completo
-│       └── .active_plan         # Marker piano attivo
-├── docs/                        # Documentazione tecnica
+│   ├── contexts/{name}/           # ChromaDB + metadata + belief_base.json
+│   ├── sessions/{id}/             # metadata, config, current_bdi.json
+│   ├── bdi_frameworks/            # Exported BDI for Genius
+│   └── genius_plans/              # Generated action plans
+├── docs/
 ├── requirements.txt
+├── setup_models.py                 # One-time embedding model download
 ├── .env.example
-├── .gitignore
 └── README.md
 ```
 
-### Struttura del Framework BDI
+---
 
-Il sistema utilizza un framework BDI (Beliefs, Desires, Intentions) in formato single-beneficiario: ogni sessione è legata a un'unica categoria utente dedotta da Alì.
+## BDI Data Model
+
+Core JSON structure in `data/sessions/{id}/current_bdi.json`:
 
 ```json
 {
-  "domain_summary": "Sintesi del dominio o progetto (1-2 frasi)",
+  "domain_summary": "...",
   "beneficiario": {
-    "beneficiario_name": "Nome del beneficiario primario",
-    "beneficiario_description": "Breve descrizione del ruolo/contesto",
-    "beneficiario_inference_notes": ["Segnale 1", "Segnale 2"]
+    "beneficiario_name": "...",
+    "beneficiario_description": "...",
+    "beneficiario_inference_notes": []
   },
   "desires": [
     {
       "desire_id": "D1",
-      "desire_statement": "Descrizione del desire",
-      "priority": "medium",
-      "success_metrics": ["Metrica 1", "Metrica 2"]
+      "desire_statement": "...",
+      "priority": "high|medium|low",
+      "motivation": "...",
+      "success_metrics": [],
+      "context": "..."
     }
   ],
   "beliefs": [
     {
-      "subject": "Entità soggetto",
-      "definition": "Descrizione breve: WHAT it is, WHY it matters, HOW it works",
-      "semantic_relations": "tipo_di_relazione",
-      "object": "Entità oggetto",
-      "source": "Fonte testuale",
-      "importance": 0.85,
+      "subject": "...",
+      "definition": "WHAT it is. WHY it matters. HOW it works.",
+      "semantic_relations": [
+        { "relation": "...", "object": "...", "description": "..." }
+      ],
+      "source": "...",
+      "importance": 0.9,
       "confidence": 0.9,
-      "prerequisites": ["Concetto prerequisito"],
-      "related_concepts": ["Concetto correlato"],
-      "enables": ["Concetto abilitato"],
-      "part_of": ["Concetto padre"],
-      "sub_concepts": ["Sottoconcetto"],
-      "tags": ["tag1", "tag2"],
-      "metadata": {"subject_type": "Tipo di entità", "object_type": "Tipo di entità"},
-      "related_desires": [{"desire_id": "D1", "relevance_level": "CRITICO", "definition": "Spiegazione della correlazione"}]
+      "related_desires": [
+        { "desire_id": "D1", "relevance_level": "CRITICO|ALTO|MEDIO|BASSO", "definition": "..." }
+      ]
     }
   ],
   "intentions": []
 }
 ```
 
-### Personalizzazione dei System Prompts
+Belief relevance levels:
 
-I system prompts degli agenti sono memorizzati in file Markdown separati nella directory [prompts/](prompts/). Questo permette di:
-
-- Modificare facilmente il comportamento degli agenti
-- Versionare i prompts separatamente dal codice
-- Testare diverse versioni dei prompts senza modificare il codice
-
-Per modificare un prompt:
-
-1. Apri il file corrispondente in `prompts/` (es. [prompts/ali_system_prompt.md](prompts/ali_system_prompt.md))
-2. Modifica il contenuto
-3. Riavvia l'applicazione (o usa `clear_cache()` da `utils.prompts` per ricaricare)
-
-## 🆕 Nuove Funzionalità (v2.7 - Gennaio 2026)
-
-### Sistema di Auditing Rubric-Based
-
-Implementazione di un sistema di validazione avanzato con criteri oggettivi:
-
-- **Auditor Separati**: Due auditor dedicati per Alì (desires) e Believer (beliefs)
-- **Valutazione Rubric**: Sistema di scoring 0-5 su dimensioni specifiche:
-  - **Desires Auditor** (6 dimensioni): coerenza con domanda, allineamento al modulo, contesto conservato, progressione dialogo, focus sul beneficiario, gestione finalizzazione/JSON
-  - **Beliefs Auditor** (6 dimensioni): coerenza con domanda, contesto conservato, specificità belief, struttura belief, evidenza/sorgente, gestione finalizzazione/JSON
-- **Feedback Oggettivo**: Issues, improvements e quick replies basati su criteri espliciti
-- **Prompt Specializzati**:
-  - `prompts/desires_auditor_system_prompt.md` per validazione desires
-  - `prompts/belief_auditor_system_prompt.md` per validazione beliefs
-
-### Miglioramenti Strutturali BDI
-
-**Nuovi Standard JSON:**
-
-**Desires** (formato aggiornato):
-
-```json
-{
-  "desire_id": "D1",
-  "desire_statement": "Formulazione chiara dal punto di vista del beneficiario",
-  "motivation": "Motivazione profonda (perché questo desire è importante)",
-  "success_metrics": ["Indicatore #1", "Indicatore #2"]
-}
-```
-
-**Beliefs** (formato arricchito):
-
-```json
-{
-  "subject": "Entità soggetto",
-  "definition": "Descrizione: WHAT it is, WHY it matters, HOW it works",
-  "semantic_relations": [
-    {
-      "relation": "tipo_di_relazione",
-      "object": "Entità oggetto",
-      "description": "Spiegazione"
-    }
-  ],
-  "prerequisites": ["Prerequisito"],
-  "related_concepts": ["Concetto correlato"],
-  "enables": ["Cosa abilita"],
-  "related_desires": [
-    {
-      "desire_id": "D1",
-      "relevance_level": "CRITICO",
-      "definition": "Spiegazione correlazione"
-    }
-  ]
-}
-```
-
-### Cuma - Agent for Intentions (Beta)
-
-Primo rilascio dell'agente per la pianificazione strategica:
-
-- **Generazione Intentions**: Crea piani d'azione basati su desires e beliefs
-- **Tracciamento Relazioni**: Collegamento esplicito tra intentions, desires e beliefs
-- **Formato JSON Strutturato**:
-  - `linked_desire_id`: Riferimento univoco al desire
-  - `linked_beliefs`: Array di beliefs necessari per l'esecuzione
-  - `action_steps`: Passi concreti con effort estimates e dependencies
-
-### Messaggi di Attesa Dinamici
-
-Sistema di messaggi per migliorare l'UX durante l'elaborazione LLM:
-
-- **25 messaggi unici** con riferimenti a fantascienza e knowledge management
-- **Selezione casuale** ad ogni elaborazione
-- **Nuovo modulo**: `utils/ui_messages.py`
+- **CRITICO** — Directly answers the desire; quantitative data or absolute constraints
+- **ALTO** — Significantly supports the desire; essential information
+- **MEDIO** — Useful context and background information
+- **BASSO** — Marginally relevant; indirect connection
 
 ---
 
-## Nuove Funzionalità (v2.6 - Dicembre 2025)
-
-### Sistema di Gestione Sessioni Enterprise
-
-- **Compass Module**: Punto di controllo centrale per configurazione e gestione
-- **Sessioni Multiple**: Crea e gestisci progetti diversi in parallelo
-- **Isolamento Completo**: Ogni sessione ha propri desires, beliefs e configurazioni
-- **Auto-Recovery**: Caricamento automatico ultima sessione attiva in Alì/Believer
-- **BDI Management**: Visualizzazione e editing desires/beliefs direttamente in Compass
-
-### Parametri LLM Avanzati
-
-- **Temperature Control** (0.0-2.0): Regola creatività vs determinismo delle risposte
-- **Max Tokens** (100-8000): Controlla lunghezza risposte
-- **Top P Sampling** (0.0-1.0): Nucleus sampling per varietà output
-- **Stop Sequences** (max 4): Sequenze custom per interrompere generazione
-- **Configurazione Centralizzata**: Parametri configurati una volta in Compass, usati automaticamente da Alì/Believer
-- **Cross-Provider**: Funziona con Gemini e OpenAI
-
-### Gestione Contesti Multipli
-
-- **Context Manager**: Organizza knowledge base in contesti separati
-- **Generazione Automatica Descrizione**: Knol genera descrizione contesto (20 parole) se mancante
-- **Belief Base per Contesto**: Ogni contesto ha propria belief base
-- **Metadata Completi**: Tracking documenti, beliefs, timestamp per contesto
-
-### Miglioramenti UX
-
-- **Session Badge**: Visibilità sessione attiva in ogni pagina
-- **Link Rapidi**: Navigazione veloce tra moduli correlati
-- **Salvataggio Automatico**: Desires e beliefs salvati in tempo reale nella sessione
-- **Fallback Intelligenti**: Gestione robusta campi mancanti (desires senza 'id')
-
-Per dettagli completi sulle implementazioni, vedi [docs/SESSION_SUMMARY_2025-10-20.md](docs/SESSION_SUMMARY_2025-10-20.md)
-
-## Provider LLM Supportati
+## LLM Providers
 
 ### Google Gemini
 
-**Modelli di Produzione:**
+- `gemini-2.5-pro` — Maximum quality, complex reasoning
+- `gemini-2.5-flash` — Balanced speed/quality (recommended)
+- `gemini-2.5-flash-lite` — Maximum speed, simple tasks
 
-- gemini-2.5-pro - Massima qualità, ragionamento complesso
-- gemini-2.5-flash - Bilanciamento velocità/qualità (raccomandato)
-- gemini-2.5-flash-lite - Velocità massima, task semplici
-
-**Modelli Preview:**
-
-- gemini-3-pro-preview - Next-gen con capacità avanzate (Beta)
+Parameters: `temperature` (0.0–2.0), `max_output_tokens` (up to 65536), `top_p` (0.0–1.0)
 
 ### OpenAI
 
-**Modelli con Reasoning (GPT-5 Series):**
+- `gpt-5`, `gpt-5-nano`, `gpt-5-mini`
+- `gpt-5.1`, `gpt-5.1-chat-latest`
+- `gpt-5.2`, `gpt-5.2-pro`, `gpt-5.2-chat-latest`
 
-- gpt-5 - Base reasoning model
-- gpt-5-nano - Lightweight reasoning
-- gpt-5-mini - Compact reasoning
+GPT-5/5.1/5.2 models use `reasoning_effort` (`none` / `low` / `medium` / `high`) and do not support `temperature` or `top_p`.
 
-**GPT-5.1 Series (Novembre 2025+):**
+---
 
-- gpt-5.1 - Enhanced reasoning (Thinking)
-- gpt-5.1-chat-latest - Instant, default reasoning_effort "none"
+## Tech Stack
 
-**GPT-5.2 Series (Dicembre 2025+):**
+| Layer | Technology |
+| ----- | ---------- |
+| Frontend/Backend | Streamlit 1.x |
+| LLMs | Google Gemini, OpenAI GPT-5 series |
+| Embeddings | `sentence-transformers` — `paraphrase-multilingual-MiniLM-L12-v2` (384-dim) |
+| Vector DB | ChromaDB (persistent client) |
+| Document processing | PyPDF2, BeautifulSoup4, LangChain text splitters |
+| Visualization | Plotly, PyVis |
+| Persistence | JSON files |
+| Config | python-dotenv |
 
-- gpt-5.2 - Advanced reasoning
-- gpt-5.2-pro - Versione Pro, default reasoning_effort "high" per massima accuratezza
-- gpt-5.2-chat-latest - Instant, default reasoning_effort "none"
+---
 
-**Supporto Reasoning Effort:**
+## Contributing
 
-Tutti i modelli GPT-5/5.1/5.2 supportano il parametro `reasoning_effort`:
-
-- `"none"`: Disabilita reasoning (latenza bassa, comportamento standard)
-- `"low"`: Ragionamento minimo
-- `"medium"`: Ragionamento bilanciato (default)
-- `"high"`: Ragionamento profondo (latenza più alta, migliore qualità)
-
-**Nota**: I modelli reasoning non supportano `temperature` e `top_p`
-
-## Formati di Output
-
-### Desire JSON Structure (v2.7)
-
-```json
-{
-  "desire_id": "D1",
-  "desire_statement": "Formulazione chiara dal punto di vista del beneficiario",
-  "priority": "high|medium|low",
-  "motivation": "Motivazione profonda (perché questo desire è importante)",
-  "success_metrics": ["Indicatore #1", "Indicatore #2"],
-  "context": "Contesto aggiuntivo o vincoli (opzionale)"
-}
-```
-
-### Belief JSON Structure (v2.7)
-
-```json
-{
-  "subject": "Entità principale del fatto",
-  "definition": "Descrizione completa: WHAT it is, WHY it matters, HOW it works",
-  "semantic_relations": [
-    {
-      "relation": "tipo_di_relazione",
-      "object": "Entità o valore collegato",
-      "description": "Spiegazione della relazione"
-    }
-  ],
-  "source": "Citazione esatta della sorgente",
-  "importance": 0.85,
-  "confidence": 0.9,
-  "prerequisites": ["Concetto prerequisito"],
-  "related_concepts": ["Concetto correlato"],
-  "enables": ["Concetto abilitato"],
-  "part_of": ["Concetto padre"],
-  "sub_concepts": ["Sottoconcetto"],
-  "tags": ["tag1", "tag2"],
-  "metadata": {
-    "subject_type": "Tipo dell'entità soggetto",
-    "object_type": "Tipo dell'entità oggetto",
-    "extraction_method": "rag_retrieval|llm_generation|manual",
-    "source_type": "base|mixed|manual"
-  },
-  "related_desires": [
-    {
-      "desire_id": "D1",
-      "relevance_level": "CRITICO|ALTO|MEDIO|BASSO",
-      "definition": "Spiegazione di perché questo belief è rilevante per il desire"
-    }
-  ]
-}
-```
-
-**Livelli di Rilevanza**:
-
-- 🔴 **CRITICO**: Risponde direttamente al desire, dati quantitativi o vincoli assoluti
-- 🟡 **ALTO**: Supporta significativamente il desire, informazioni essenziali
-- 🟢 **MEDIO**: Fornisce contesto utile, background information
-- 🔵 **BASSO**: Marginalmente rilevante, connessione indiretta
-
-> Per dettagli completi sul sistema di priorità, vedi [docs/UPDATES_v2.2.md](docs/UPDATES_v2.2.md)
-
-### BDI Complete JSON
-
-```json
-{
-  "timestamp": "2025-01-01T12:00:00",
-  "desires": [...],
-  "beliefs": [...],
-  "chat_history": [...]
-}
-```
-
-## 🎓 Vantaggi dell'Approccio BDI con AI
-
-### Separazione delle Concerns
-
-- **Modularità**: Beliefs, Desires e Intentions sono gestiti separatamente
-- **Traceability**: Ogni belief è esplicitamente correlato ai desires rilevanti
-- **Manutenibilità**: Facile aggiornamento di singole componenti senza impatto sul resto
-
-### AI-Augmented Knowledge Engineering
-
-- **Scalabilità**: Elaborazione rapida di grandi volumi di documentazione
-- **Qualità**: Estrazione guidata da principi (rilevanza, atomicità, fattualità)
-- **Human-in-the-Loop**: L'AI propone, l'umano valida e raffina
-
-### Output Strutturato e Riusabile
-
-- **JSON Standard**: Format interoperabile per integrazione con altri sistemi
-- **Semantic Richness**: Metadati, correlazioni e livelli di rilevanza espliciti
-- **API-Ready**: Pronto per essere consumato da applicazioni downstream
-
-## 🛠️ Tecnologie Utilizzate
-
-### Core Framework
-
-- **Frontend/Backend**: Streamlit 1.x
-- **Python**: 3.9+
-
-### AI e Machine Learning
-
-- **LLM Integration**:
-  - Google Gemini (2.5 Pro/Flash/Flash-Lite, 3 Pro Preview)
-  - OpenAI (GPT-5/5.1/5.2 series con reasoning)
-- **Embeddings**: sentence-transformers (`paraphrase-multilingual-MiniLM-L12-v2`)
-- **RAG Framework**: Custom implementation con ChromaDB
-- **Quality Assurance**: Sistema rubric-based auditing con auditor specializzati per desires e beliefs
-
-### Data Storage e Processing
-
-- **Vector Database**: ChromaDB (persistent client)
-- **Document Processing**: PyPDF2 (PDF), BeautifulSoup4 (web scraping), requests
-- **Text Chunking**: LangChain RecursiveCharacterTextSplitter
-
-### Configuration
-
-- **Environment Management**: python-dotenv per gestione API keys
-- **Data Format**: JSON per persistenza e interoperabilità
-
-## Documentazione Aggiuntiva
-
-### Guide Tecniche
-
-- **[docs/AGENTS_GUIDE.md](docs/AGENTS_GUIDE.md)** - Guida agli agenti
-- **[docs/PROMPT_ANALYSIS.md](docs/PROMPT_ANALYSIS.md)** - Analisi dei system prompts
-- **[NewFeatures.md](NewFeatures.md)** - Proposte di nuove funzionalità
-
-## Contribuire
-
-Contributi, issue e feature request sono benvenuti!
+Contributions, issues, and feature requests are welcome.
