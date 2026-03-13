@@ -22,10 +22,10 @@ Il progetto LUMIA Studio è stato sviluppato nell'ambito di una collaborazione d
 
 | Nome | Ruolo | Affiliazione |
 |------|-------|--------------|
-| **Prof. Marco Esposito** | Responsabile Scientifico (Principal Investigator) | Dipartimento di Informatica, Unical |
-| **Dott.ssa Laura Ferretti** | Ricercatrice — Modellazione BDI e Architettura del Sistema | Dipartimento di Informatica, Unical |
-| **Ing. Davide Russo** | Sviluppatore Senior — Pipeline RAG e Sistema Multi-Agente | Partner Tecnologico |
-| **Dott. Simone Caruso** | Sviluppatore — Integrazione LLM e Interfaccia Utente | Partner Tecnologico |
+| **Prof. Francesco Scarcello** | Responsabile Scientifico  | Dipartimento DIMES, Unical |
+| **Dott Davide xxxx** | Ricercatore | Dipartimento DIMES , Unical |
+| **Ing. Antonio Mantuano** | AI Engineer | Partner Tecnologico |
+| **Ing. Simone ** | AI Engineer | Partner Tecnologico |
 
 ---
 
