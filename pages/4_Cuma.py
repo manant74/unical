@@ -10,6 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.prompts import get_prompt
 from utils.session_manager import SessionManager
+from utils.auditor import ConversationAuditor
 from utils.ui_messages import get_random_thinking_message
 
 CUMA_MODULE_GOAL = (
@@ -45,6 +46,15 @@ if 'loaded_beliefs' not in st.session_state:
 if 'loaded_desires' not in st.session_state:
     st.session_state.loaded_desires = []
 
+if 'cuma_audit_trail' not in st.session_state:
+    st.session_state.cuma_audit_trail = []
+
+if 'cuma_suggestions' not in st.session_state:
+    st.session_state.cuma_suggestions = []
+
+if 'cuma_pending_prompt' not in st.session_state:
+    st.session_state.cuma_pending_prompt = None
+
 # CSS per nascondere menu Streamlit e styling
 st.markdown("""
 <style>
@@ -73,6 +83,34 @@ st.markdown("""
 
 # Carica il system prompt da file
 CUMA_SYSTEM_PROMPT = get_prompt('cuma')
+
+
+def render_quick_replies(placeholder, suggestions, pending_state_key, button_prefix):
+    """Renderizza i suggerimenti rapidi dell'Auditor in un container dedicato."""
+    placeholder.empty()
+
+    if not suggestions:
+        return
+
+    with placeholder:
+        st.markdown("**Auditor quick suggestions**")
+
+        for i in range(0, len(suggestions), 3):
+            row = suggestions[i:i + 3]
+            cols = st.columns(len(row))
+
+            for col_idx, col in enumerate(cols):
+                suggestion = row[col_idx]
+                message_text = suggestion.get("message", "").strip()
+                label = suggestion.get("label") or message_text or f"Option {i + col_idx + 1}"
+                reason = suggestion.get("why")
+
+                with col:
+                    if st.button(label, key=f"{button_prefix}_suggestion_{i + col_idx}", width='stretch'):
+                        if message_text:
+                            st.session_state[pending_state_key] = message_text
+                    if reason:
+                        st.caption(reason)
 
 def load_bdi_data():
     """Loads and normalises Beliefs and Desires from the active session.
@@ -296,10 +334,16 @@ with st.sidebar:
     # Configurazione
     st.header("⚙️ CUMA Configuration")
 
-    # Lazy load LLMManager e conversation_auditor quando serve
+    # Lazy load LLMManager e intention_auditor quando serve
     if 'llm_manager' not in st.session_state:
         from utils.llm_manager import LLMManager
         st.session_state.llm_manager = LLMManager()
+
+    if 'intention_auditor' not in st.session_state:
+        st.session_state.intention_auditor = ConversationAuditor(
+            st.session_state.llm_manager,
+            auditor_agent_name="intention_auditor"
+        )
 
     # Selezione provider e modello (default dalla sessione)
     available_providers = st.session_state.llm_manager.get_available_providers()
@@ -357,6 +401,9 @@ with st.sidebar:
             st.session_state.cuma_chat_history = []
             st.session_state.cuma_greeted = False
             st.session_state.intentions_list = []
+            st.session_state.cuma_audit_trail = []
+            st.session_state.cuma_suggestions = []
+            st.session_state.cuma_pending_prompt = None
             st.rerun()
 
     with col_complete:
@@ -432,9 +479,69 @@ if not st.session_state.cuma_greeted:
 
 
 # Display chat history
+cuma_audit_map = {
+    item["message_index"]: item.get("result", {})
+    for item in st.session_state.cuma_audit_trail
+    if isinstance(item, dict) and "message_index" in item
+}
+
 for idx, message in enumerate(st.session_state.cuma_chat_history):
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+
+    if message.get("role") == "assistant" and idx in cuma_audit_map:
+        audit_payload = cuma_audit_map[idx] or {}
+        with st.chat_message("system"):
+            status = audit_payload.get("status", "pass")
+            icon = "✅" if status == "pass" else "⚠️"
+            summary = audit_payload.get("summary")
+
+            st.markdown(f"**Auditor {icon}**")
+            if summary:
+                st.markdown(summary)
+
+            rubric = audit_payload.get("rubric") or {}
+            if isinstance(rubric, dict) and rubric:
+                rubric_labels = [
+                    ("coerenza_domanda", "Question coherence"),
+                    ("copertura_varieta", "Strategic coverage and variety"),
+                    ("qualita_struttura_intention", "Intention structure quality"),
+                    ("qualita_action_plan", "Action plan quality"),
+                    ("tracciabilita_bdi", "BDI traceability"),
+                ]
+                st.markdown("**Rubric scores:**")
+                for key, label in rubric_labels:
+                    item = rubric.get(key) or {}
+                    score = item.get("score")
+                    notes = (item.get("notes") or "").strip()
+                    score_text = f"{score}/5" if isinstance(score, int) else "N/A"
+                    if notes:
+                        st.write(f"- {label}: {score_text} - {notes}")
+                    else:
+                        st.write(f"- {label}: {score_text}")
+
+            issues = audit_payload.get("issues") or []
+            if issues:
+                st.markdown("**Detected issues:**")
+                for issue in issues:
+                    issue_type = issue.get("type", "issue")
+                    severity = issue.get("severity", "low")
+                    message_text = issue.get("message", "")
+                    st.write(f"- ({severity.upper()} · {issue_type}) {message_text}")
+
+            improvements = audit_payload.get("assistant_improvements") or []
+            if improvements:
+                st.markdown("**Suggestions for the agent:**")
+                for idea in improvements:
+                    st.write(f"- {idea}")
+
+            next_focus = audit_payload.get("next_focus")
+            if next_focus:
+                st.caption(f"Next focus: {next_focus}")
+
+            confidence = audit_payload.get("confidence")
+            if confidence:
+                st.caption(f"Assessment confidence: {confidence}")
 
 # Funzione per gestire la risposta dell'AI
 def get_ai_system_context():
@@ -533,10 +640,62 @@ def handle_ai_response(user_message):
                 system_prompt=system_with_context
             )
 
-            if process_ai_response(response):
+            processed = process_ai_response(response)
+
+            if processed:
+                auditor_result = None
+                auditor = st.session_state.get("intention_auditor")
+                if auditor and provider and model:
+                    context_summary = {
+                        "session_name": active_session_data['metadata'].get('name'),
+                        "context_name": active_session_data['config'].get('context'),
+                        "desire_count": len(st.session_state.loaded_desires),
+                        "belief_count": len(st.session_state.loaded_beliefs),
+                        "intention_count": len(st.session_state.intentions_list),
+                    }
+                    try:
+                        auditor_result = auditor.review(
+                            provider=provider,
+                            model=model,
+                            conversation=[msg.copy() for msg in st.session_state.cuma_chat_history],
+                            module_name="cuma",
+                            module_goal=CUMA_MODULE_GOAL,
+                            expected_outcome=CUMA_EXPECTED_OUTCOME,
+                            context_summary=context_summary,
+                            last_user_message=user_message,
+                            assistant_message=response,
+                        )
+                    except Exception as audit_exc:  # pylint: disable=broad-except
+                        auditor_result = {"error": str(audit_exc)}
+
+                if auditor_result and "error" not in auditor_result:
+                    message_index = len(st.session_state.cuma_chat_history) - 1
+                    existing_entry = next(
+                        (item for item in st.session_state.cuma_audit_trail if item.get("message_index") == message_index),
+                        None
+                    )
+                    audit_record = {
+                        "message_index": message_index,
+                        "result": auditor_result,
+                        "timestamp": datetime.now().isoformat()
+                    }
+
+                    if existing_entry:
+                        existing_entry.update(audit_record)
+                    else:
+                        st.session_state.cuma_audit_trail.append(audit_record)
+
+                    st.session_state.cuma_suggestions = (auditor_result.get("suggested_user_replies") or [])[:3]
+                elif auditor_result and "error" in auditor_result:
+                    st.session_state.cuma_suggestions = []
+                    st.warning(f"Auditor not available: {auditor_result['error']}")
+                else:
+                    st.session_state.cuma_suggestions = []
+
                 st.rerun()
-            else:
-                st.rerun()
+
+            st.session_state.cuma_suggestions = []
+            st.rerun()
 
         except Exception as e:
             st.error(f"❌ Error communicating with AI: {e}")
@@ -570,8 +729,22 @@ if st.session_state.cuma_greeted and len(st.session_state.cuma_chat_history) == 
 
     st.divider()
 
-# Chat input
-user_input = st.chat_input("Write your message for Cuma...")
+cuma_suggestions_placeholder = st.empty()
+render_quick_replies(
+    placeholder=cuma_suggestions_placeholder,
+    suggestions=st.session_state.cuma_suggestions,
+    pending_state_key="cuma_pending_prompt",
+    button_prefix="cuma_active"
+)
 
-if user_input:
-    handle_ai_response(user_input)
+# Chat input (supports Auditor quick replies)
+auto_prompt = None
+if isinstance(st.session_state.cuma_pending_prompt, str):
+    auto_prompt = st.session_state.cuma_pending_prompt.strip()
+    st.session_state.cuma_pending_prompt = None
+
+user_input = st.chat_input("Write your message for Cuma...")
+prompt = auto_prompt or user_input
+
+if prompt:
+    handle_ai_response(prompt)
