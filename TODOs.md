@@ -31,7 +31,7 @@
 
 ### Tutti
 
-- [ ] Rivedere i prompt per l'Auditor, aggiungendo esempi positivi e negativi per migliorare la valutazione di Rubric
+- [X] Rivedere i prompt per l'Auditor, aggiungendo esempi positivi e negativi per migliorare la valutazione di Rubric
 - [ ] Aggiungere la gestione di un log complessivo nella sessione, con tutte le conversazioni effettuate
 
 ## 🎨 UI/UX Improvements
